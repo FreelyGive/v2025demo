@@ -1,4 +1,4 @@
-NOTE: There’s a whole lot of guesswork; this is intended as an idea to spark conversion and corrections. It’s draft by Aidan based on discussions with Emma,Aidan, and Christine. There are all kinds of work on the go I’m not aware of that may impact this. 
+NOTE: There’s a whole lot of guesswork; this is intended as an idea to spark conversion and corrections. It’s draft by Aidan based on discussions with Emma, Aidan, and Cristina. There are all kinds of work on the go I’m not aware of that may impact this. 
 
 # **Project Brief: Drupal AI Canvas Demo Video**
 
