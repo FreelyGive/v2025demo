@@ -4,15 +4,10 @@
 ## Usage: demo-setup
 ## Example: "ddev demo-setup"
 
+# If its running confirm delete
 if [ "$(ddev list | grep v2025demo | grep OK)" ]; then
-  read -p "v2025demo is running, do you want to delete it and re-setup? (y/n) " -n 1 -r
-  echo    # (optional) move to a new line
-  if [[ $REPLY =~ ^[Yy]$ ]]; then
-    echo "Deleting v2025demo"
-  else
-    echo "Exiting setup-demo"
-    exit 1
-  fi
+  echo "The v2025demo is running. It will be deleted and recreated. Press ENTER to continue or CTRL-C to abort."
+  read
 fi
 
 # Delete garbage
