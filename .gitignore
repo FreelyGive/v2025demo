@@ -99,4 +99,4 @@ patches.lock.json
 /.gitattributes
 .DS_Store
 eca.model.*.yml
-.ddev/milvus
+/.ddev/milvus

@@ -8,11 +8,13 @@ A demo Drupal 11 for the V 2025 project. This will install:
 * Canvas
 * Mercury Theme
 * Canvas AI with OpenAI provider configured
-* pgvector configured
+* pgvector configured (coming)
 
 ## Requirements
 * DDEV 1.24+
-* Git
 
 ## To install
 `ddev setup-demo`
+
+## Keep in sync with origin
+We should later use create-project, but that is failing for now, so t
