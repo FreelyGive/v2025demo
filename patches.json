@@ -1,0 +1,13 @@
+{
+    "patches": {
+        "drupal/core": {
+            "#3495988: Add redirect for incomplete install": "https://git.drupalcode.org/project/drupal/-/merge_requests/10680.patch",
+            "#3499225: Fix recipe command ignoring dependencies": "https://git.drupalcode.org/project/drupal/-/merge_requests/10886.patch",
+            "#3510966: Fix extra slash in redirect for install profiles that define finish_url": "https://git.drupalcode.org/project/drupal/-/merge_requests/11373.patch",
+            "#3531174: Add configuration for additional known files in project root": "https://git.drupalcode.org/project/drupal/-/merge_requests/12432.patch"
+        },
+        "drupal/recipe_installer_kit": {
+            "#3497485: Fix remaining duplication of batch jobs": "https://git.drupalcode.org/project/recipe_installer_kit/-/merge_requests/4.patch"
+        }
+    }
+}
