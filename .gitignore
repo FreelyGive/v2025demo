@@ -76,13 +76,12 @@
 /packages.json
 /patches.lock.json
 /private/
-/README.md
 /vendor/
 /web/
 /.ddev/.env
 
 LICENSE
-README.md
+
 .pnpm-store
 
 /.cache
