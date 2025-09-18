@@ -8,6 +8,9 @@
         },
         "drupal/recipe_installer_kit": {
             "#3497485: Fix remaining duplication of batch jobs": "https://git.drupalcode.org/project/recipe_installer_kit/-/merge_requests/4.patch"
+        },
+        "drupal/canvas": {
+            "#3533079: Introduce AI Agents and tools to create entire page templates": "https://git.drupalcode.org/project/canvas/-/merge_requests/18/diffs.patch"
         }
     }
 }

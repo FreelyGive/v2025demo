@@ -17,7 +17,7 @@ hooks:
         # Set up debugging.
         - exec: 'test -f .vscode/launch.json || mkdir -p .vscode && cp .ddev/launch.json .vscode/'
         # Run initial setup tasks.
-        - exec: '.devpanel/init.sh'
+        #- exec: '.devpanel/init.sh'
         # Install pnpm
         - exec: 'wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.bashrc" SHELL="$(which bash)" bash -'
         - exec: 'source "$HOME/.bashrc"'

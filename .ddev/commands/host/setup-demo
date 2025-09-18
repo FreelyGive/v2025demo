@@ -23,7 +23,7 @@ rm -rf .vscode config private recipes vendor web composer.* patches.lock.json
 
 # Drupal CMS
 ddev start
-ddev drush si -y --account-pass=admin --site-name="Driesnote 2025 Demo"
+ddev drush si -y --account-pass=admin --site-name="2025 Demo"
 
 # Mercury
 ddev composer require drupal/twig_tweak drupal/twig_field_value
@@ -34,16 +34,12 @@ ddev exec "cd web/themes/contrib/mercury && nvm install && $HOME/.local/share/pn
 ddev drush theme:en -y mercury
 ddev drush config-set system.theme default mercury -y
 
-# Uninstall the demo themes
-ddev drush theme:un starshot_demo
-ddev drush theme:un civictheme
-
-# Remove the demo pages
-ddev drush entity:delete -y canvas_page
-
-# Install the new demoe page
-ddev drush recipe ../custom_recipes/new_canvas_page
+# Canvas
+ddev composer require justinrainbow/json-schema
+git clone git@git.drupal.org:project/canvas.git web/modules/contrib/canvas
+ddev drush pm:en -y canvas
+ddev exec "cd web/modules/contrib/canvas/ui && nvm install && npm install && npm run build"
 
 ddev drush cr
 
-echo "Visit https://v2025demo.ddev.site/canvas/canvas_page/2/editor, login with admin/admin and create your first page!"
+echo "Visit https://v2025demo.ddev.site/canvas, login with admin/admin and create your first page!"
