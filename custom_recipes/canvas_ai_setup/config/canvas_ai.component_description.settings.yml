@@ -1,0 +1,1203 @@
+component_context:
+  block:
+    enabled: 1
+    data: |
+      block.announce_block:
+        id: block.announce_block
+        name: 'Announcements Feed'
+        description: 'Announcements Feed'
+      block.help_block:
+        id: block.help_block
+        name: Help
+        description: Help
+      block.local_actions_block:
+        id: block.local_actions_block
+        name: 'Primary admin actions'
+        description: 'Primary admin actions'
+      block.local_tasks_block:
+        id: block.local_tasks_block
+        name: Tabs
+        description: Tabs
+      block.page_title_block:
+        id: block.page_title_block
+        name: 'Page title'
+        description: 'Page title'
+      block.search_form_block:
+        id: block.search_form_block
+        name: 'Search form'
+        description: 'Search form'
+      block.shortcuts:
+        id: block.shortcuts
+        name: Shortcuts
+        description: Shortcuts
+      block.system_branding_block:
+        id: block.system_branding_block
+        name: 'Site branding'
+        description: 'Site branding'
+      block.system_breadcrumb_block:
+        id: block.system_breadcrumb_block
+        name: Breadcrumbs
+        description: Breadcrumbs
+      block.system_clear_cache_block:
+        id: block.system_clear_cache_block
+        name: 'Clear cache'
+        description: 'Clear cache'
+      block.system_menu_block.account:
+        id: block.system_menu_block.account
+        name: 'User account menu'
+        description: 'User account menu'
+      block.system_menu_block.admin:
+        id: block.system_menu_block.admin
+        name: Administration
+        description: Administration
+      block.system_menu_block.footer:
+        id: block.system_menu_block.footer
+        name: Footer
+        description: Footer
+      block.system_menu_block.main:
+        id: block.system_menu_block.main
+        name: 'Main navigation'
+        description: 'Main navigation'
+      block.system_menu_block.tools:
+        id: block.system_menu_block.tools
+        name: Tools
+        description: Tools
+      block.system_messages_block:
+        id: block.system_messages_block
+        name: Messages
+        description: Messages
+      block.system_powered_by_block:
+        id: block.system_powered_by_block
+        name: 'Powered by Drupal'
+        description: 'Powered by Drupal'
+      block.user_login_block:
+        id: block.user_login_block
+        name: 'User login'
+        description: 'User login'
+      block.views_block.comments_recent-block_1:
+        id: block.views_block.comments_recent-block_1
+        name: 'Recent comments'
+        description: 'Recent comments'
+      block.views_block.content_recent-block_1:
+        id: block.views_block.content_recent-block_1
+        name: 'Recent content'
+        description: 'Recent content'
+      block.views_block.who_s_new-block_1:
+        id: block.views_block.who_s_new-block_1
+        name: "Who's new"
+        description: "Who's new"
+      block.views_block.who_s_online-who_s_online_block:
+        id: block.views_block.who_s_online-who_s_online_block
+        name: "Who's online"
+        description: "Who's online"
+  sdc:
+    enabled: 1
+    data: |
+      sdc.mercury.accordion-container:
+        id: sdc.mercury.accordion-container
+        name: 'Accordion Container'
+        description: 'A container for any content, only one of whose Collapsible Sections may be open at at time.'
+        group: Components/Widgets
+        props: 'No props'
+        slots:
+          accordion_content:
+            name: 'Accordion Content'
+            description: 'Child content, only one of whose Collapsible Sections can be open at a time.'
+      sdc.mercury.badge:
+        id: sdc.mercury.badge
+        name: Badge
+        description: Badge
+        group: Base
+        props:
+          label:
+            name: 'Link Text'
+            description: 'The text for the link.'
+            type: string
+            default: 'New Release'
+          url:
+            name: URL
+            description: 'The URL to link to. If provided, the badge will be rendered as a link.'
+            type: string
+            default: 'https://www.drupal.org'
+          style:
+            name: Style
+            description: 'Define badge style.'
+            type: string
+            default: primary
+            enum:
+              - primary
+              - secondary
+          icon:
+            name: Icon
+            description: 'Select an Icon.'
+            type: string
+            default: ph-newspaper-clipping
+            enum:
+              - ph-newspaper-clipping
+              - ph-alien
+              - ph-robot
+              - ph-rocket
+          icon_first:
+            name: 'Icon First'
+            description: 'Icon can display before or after label.'
+            type: boolean
+            default: true
+        slots:
+          badge_content:
+            name: Content
+            description: 'Content of the badge'
+      sdc.mercury.blockquote:
+        id: sdc.mercury.blockquote
+        name: Blockquote
+        description: Blockquote
+        group: Base
+        props:
+          text:
+            name: 'Blockquote text'
+            description: 'The blockquote text.'
+            type: string
+            default: '“To confine our attention to terrestrial matters would be to limit the human spirit.”'
+          cite_name:
+            name: 'Cite name'
+            description: 'The cite name.'
+            type: string
+            default: 'Isiah Julio'
+          cite_text:
+            name: 'Cite text'
+            description: 'The cite text.'
+            type: string
+            default: 'Engineer, Technical Services'
+          cite_url:
+            name: 'Cite URL'
+            description: 'The cite url.'
+            type: string
+            default: 'No URL'
+        slots: 'No slots'
+      sdc.mercury.branding:
+        id: sdc.mercury.branding
+        name: Branding
+        description: 'Basic card with image, title, teaser, tags'
+        group: Base
+        props:
+          color_mode:
+            name: 'Color Mode'
+            description: 'No description available'
+            type: string
+            default: light
+            enum:
+              - light
+              - dark
+        slots: 'No slots'
+      sdc.mercury.button:
+        id: sdc.mercury.button
+        name: Button
+        description: 'A versatile button component that can be rendered as a button or link with various styles and sizes.'
+        group: Base
+        props:
+          variant:
+            name: Variant
+            description: 'The style of button.'
+            type: string
+            default: primary
+            enum:
+              - primary
+              - primary-accent
+              - secondary
+              - secondary-accent
+              - negative
+          disabled:
+            name: Disabled
+            description: 'Whether the button is disabled.'
+            type: boolean
+            default: false
+          label:
+            name: 'Button text'
+            description: 'The text content of the button.'
+            type: string
+            default: 'Button Label'
+          size:
+            name: Size
+            description: 'Set Button Size.'
+            type: string
+            default: medium
+            enum:
+              - small
+              - medium
+              - large
+          icon:
+            name: Icon
+            description: 'Select an Icon.'
+            type: string
+            default: ph-arrow-right
+            enum:
+              - ph-arrow-right
+              - ph-arrow-left
+              - ph-carrot-right
+              - ph-carrot-left
+              - ph-download
+              - ph-user-plus
+          icon_first:
+            name: 'Display Icon First'
+            description: 'By default, the icon is displayed after the label. If you want to display the icon first, set this to true.'
+            type: boolean
+            default: false
+          href:
+            name: href
+            description: 'The URL to link to. If provided, the button will be rendered as a link.'
+            type: string
+            default: 'https://example.com'
+        slots: 'No slots'
+      sdc.mercury.card:
+        id: sdc.mercury.card
+        name: Card
+        description: 'This component is a versatile content container used to display a snapshot of information in a visually distinct block. It typically includes an image, a heading, and some descriptive text, often linking to a more detailed page. Its appearance can be customized with different styles and layouts, making it suitable for lists of articles, products, or features. Dont use it as a standalone component. Always add it inside grid component'
+        group: Components/Cards
+        props:
+          heading_text:
+            name: 'Heading Text'
+            description: 'No description available'
+            type: string
+            default: 'This is my title eu torquent suscipit'
+          level:
+            name: 'Heading Level'
+            description: 'No description available'
+            type: number
+            default: 3
+            enum:
+              - 2
+              - 3
+              - 4
+          url:
+            name: 'Add optional url'
+            description: 'No description available'
+            type: string
+            default: 'https://www.example.com'
+          media:
+            name: 'Card Media'
+            description: 'Media and Alt for the card.'
+            type: object
+            default:
+              src: assets/277628-911758.jpg
+              alt: 'Photo by gdtography: https://www.pexels.com/photo/long-exposure-photography-white-dome-building-interior-911758/'
+          text:
+            name: Text
+            description: 'Teaser text'
+            type: string
+            default: 'Quaerat laborum rerum dolores dolores dolor qui. Laudantium itaque sint aut culpa omnis eius pariatur. Quia laborum commodi excepturi neque tempore. Fuga dolor dolores perspiciatis.'
+          style:
+            name: 'Card Style'
+            description: 'No description available'
+            type: string
+            default: framed
+            enum:
+              - default
+              - framed
+              - featured
+          orientation:
+            name: Orientation
+            description: 'Set card to horz or vert.'
+            type: string
+            default: stacked
+            enum:
+              - stacked
+              - landscape
+        slots: 'No slots'
+      sdc.mercury.card-events:
+        id: sdc.mercury.card-events
+        name: Event
+        description: "This component is designed to display information about a specific event in a compact card format. It neatly presents essential details like the event's title, date, location, and a brief description. Use this component to create listings for conferences, webinars, meetups, or any time-based occasion. Dont use it as a standalone component. Always add it inside grid component"
+        group: Components/Cards
+        props:
+          title:
+            name: 'Heading Text'
+            description: 'No description available'
+            type: string
+            default: 'Enter name of event'
+          event_date:
+            name: 'Event Date'
+            description: 'No description available'
+            type: string
+            default: '2026-01-01'
+          description:
+            name: Description
+            description: 'No description available'
+            type: string
+            default: 'Atque libero fuga blanditiis quo qui impedit debitis. Aut ut nam unde velit.'
+          place:
+            name: Place
+            description: 'Place of the event'
+            type: string
+            default: 'Add location'
+        slots: 'No slots'
+      sdc.mercury.card-pricing:
+        id: sdc.mercury.card-pricing
+        name: Pricing
+        description: "This component is designed to display a single pricing tier or subscription plan in a card format. It effectively communicates the plan's name, description, price, and a list of features, guiding the user with a clear call-to-action button. Use this component, typically repeated within a grid, to construct a pricing comparison table for products or services. Dont use it as a standalone component. Always add it inside grid component"
+        group: Components/Cards
+        props:
+          heading_text:
+            name: 'Heading Text'
+            description: 'No description available'
+            type: string
+            default: 'Gold Plan'
+          description:
+            name: Description
+            description: 'No description available'
+            type: string
+            default: 'Curabitur nascetur non potenti pede luctus vivamus'
+          price:
+            name: Price
+            description: Price
+            type: string
+            default: '159.00'
+          currency_code:
+            name: 'Currency Code'
+            description: 'No description available'
+            type: string
+            default: USD
+          currency_symbol:
+            name: 'Currency Symbol'
+            description: 'No description available'
+            type: string
+            default: $
+          symbol_position:
+            name: 'Symbol Position'
+            description: 'No description available'
+            type: string
+            default:
+              - before
+            enum:
+              - before
+              - after
+          text:
+            name: Text
+            description: 'Rich Text'
+            type: string
+            default: '<ul> <li>Enter rich text</li> <li>Facilisis dictumst letius in</li> <li>Diam mus est faucibus ornare ut consectetuer metus</li> </ul>'
+          button_url:
+            name: 'Button URL'
+            description: 'CTA link the card'
+            type: string
+            default: 'https://example.com'
+          button_label:
+            name: 'Button Label'
+            description: 'CTA label for the card'
+            type: string
+            default: 'Choose this plan'
+          promote:
+            name: 'Promote card'
+            description: 'Visually feature card.'
+            type: boolean
+            default: false
+        slots: 'No slots'
+      sdc.mercury.card-profile:
+        id: sdc.mercury.card-profile
+        name: Profile
+        description: "This component is a card designed to display a person's profile information. It combines a photo, name, and job title into a compact, visually appealing format, often linking to a more detailed biography. It is ideal for use in 'meet the team' sections, author bios, or lists of event speakers. Dont use it as a standalone component. Always add it inside grid component"
+        group: Components/Cards
+        props:
+          name:
+            name: "Person's name"
+            description: 'No description available'
+            type: string
+            default: 'Chloe Bennett'
+          job_title:
+            name: Text
+            description: "The person's job title"
+            type: string
+            default: 'Operations Manager'
+          url:
+            name: 'Add optional url'
+            description: 'No description available'
+            type: string
+            default: 'https://example.com'
+          media:
+            name: 'Card Media'
+            description: 'Media and Alt for the card.'
+            type: object
+            default:
+              src: assets/christina-wocintechchat-com-0Zx1bDv5BNY-unsplash.jpg
+              alt: 'Photo by Christina @ wocintechchat.com on Unsplash'
+        slots: 'No slots'
+      sdc.mercury.card-project:
+        id: sdc.mercury.card-project
+        name: Project
+        description: "This component is a card designed to display a person's profile information. It combines a photo, name, and job title into a compact, visually appealing format, often linking to a more detailed biography. It is ideal for use in 'meet the team' sections, author bios, or lists of event speakers. Dont use it as a standalone component. Always add it inside grid component"
+        group: Components/Cards
+        props:
+          heading_text:
+            name: 'Heading Text'
+            description: 'No description available'
+            type: string
+            default: 'Stillhouse Spirits Co.'
+          level:
+            name: 'Heading Level'
+            description: 'The heading level (h2-h6) for the component title.'
+            type: number
+            default: 3
+            enum:
+              - 2
+              - 3
+              - 4
+              - 5
+              - 6
+          url:
+            name: 'Add optional url'
+            description: 'No description available'
+            type: string
+            default: 'https://www.example.com'
+          media:
+            name: 'Media Image'
+            description: 'Media image for the card.'
+            type: object
+            default:
+              src: assets/stillhouse.png
+              alt: 'A picture of the sea shore.'
+          text:
+            name: Text
+            description: 'Teaser text'
+            type: string
+            default: 'Lorem ipsum dolor sit amet suspendisse consectetur sociosqu dapibus ridiculus etiam malesuada. Luctus inceptos dictumst pede commodo donec bibendum blandit. Egestas molestie litora pulvinar justo quam porta pede bibendum consectetur. Efficitur suspendisse cubilia nibh turpis egestas montes sed.'
+          layout:
+            name: Layout
+            description: 'Set hero layout'
+            type: string
+            default: media-first
+            enum:
+              - media-first
+              - media-last
+        slots: 'No slots'
+      sdc.mercury.card-service:
+        id: sdc.mercury.card-service
+        name: 'Service Card'
+        description: 'This component is designed to showcase an individual project, case study, or portfolio item. It presents a visual element alongside a descriptive text block, including a heading and a summary, which can be linked to a more detailed page. The layout flexibility allows the image and text to be arranged side-by-side in either order, making it ideal for portfolio galleries or feature lists. Dont use it as a standalone component. Always add it inside grid component'
+        group: Components/Cards
+        props:
+          heading_text:
+            name: 'Heading Text'
+            description: 'No description available'
+            type: string
+            default: Service
+          level:
+            name: 'Heading Level'
+            description: 'No description available'
+            type: number
+            default: 3
+            enum:
+              - 2
+              - 3
+              - 4
+              - 5
+              - 6
+          url:
+            name: 'Add optional url'
+            description: 'No description available'
+            type: string
+            default: 'https://www.example.com'
+          media:
+            name: 'Card Media'
+            description: 'Media and Alt for the card.'
+            type: object
+            default:
+              src: assets/277628-911758.jpg
+              alt: 'Photo by gdtography: https://www.pexels.com/photo/long-exposure-photography-white-dome-building-interior-911758/'
+          text:
+            name: Text
+            description: 'Teaser text'
+            type: string
+            default: 'Quaerat laborum rerum dolores dolores dolor qui. Laudantium itaque sint aut culpa omnis eius pariatur.'
+          aspect_ratio:
+            name: 'Image Aspect Ratio'
+            description: 'Set card to horz or vert.'
+            type: string
+            default: narrow
+            enum:
+              - narrow
+              - rectangle
+          alignment:
+            name: 'Text Alignment'
+            description: 'Set card to horz or vert.'
+            type: string
+            default: center
+            enum:
+              - left
+              - center
+          color_mode:
+            name: 'Color Mode'
+            description: 'No description available'
+            type: string
+            default: dark
+            enum:
+              - light
+              - dark
+        slots: 'No slots'
+      sdc.mercury.card-testimonial:
+        id: sdc.mercury.card-testimonial
+        name: Testimonial
+        description: 'A testimonial card component with quote, author information, and optional media.'
+        group: Components/Cards
+        props:
+          text:
+            name: 'Blockquote text'
+            description: 'The blockquote text.'
+            type: string
+            default: 'My career’s guidance was crucial in helping me understand the tech industry landscape and ultimately secure my role.'
+          cite_name:
+            name: 'Cite name'
+            description: 'The cite name.'
+            type: string
+            default: 'Isiah Julio'
+          cite_text:
+            name: 'Cite text'
+            description: 'The cite text.'
+            type: string
+            default: 'Engineer, Technical Services'
+          cite_url:
+            name: 'Cite URL'
+            description: 'The cite url.'
+            type: string
+            default: 'No URL'
+          align:
+            name: 'Text alignment'
+            description: 'Set alignment of text.'
+            type: string
+            default: center
+            enum:
+              - center
+              - left
+          media:
+            name: 'Card Media'
+            description: 'Media and Alt for the card.'
+            type: object
+            default:
+              src: assets/portrait.png
+              alt: Placeholder
+        slots: 'No slots'
+      sdc.mercury.collapsible-section:
+        id: sdc.mercury.collapsible-section
+        name: 'Collapsible Section'
+        description: 'A single section of content than can be collapsed and expanded. Put several of these in an Accordion Container to prevent more than one from being opened at a time.'
+        group: Components/Widgets
+        props:
+          title:
+            name: 'Section Title'
+            description: 'No description available'
+            type: string
+            default: 'Collapsible Section'
+          heading_level:
+            name: 'Heading level for title'
+            description: 'No description available'
+            type: number
+            default: 3
+            enum:
+              - 2
+              - 3
+              - 4
+              - 5
+              - 6
+          open_by_default:
+            name: 'Open by default?'
+            description: 'No description available'
+            type: boolean
+            default: false
+        slots:
+          collapsible_content:
+            name: 'Collapsible Content'
+            description: 'Elements to collapse away.'
+      sdc.mercury.cta:
+        id: sdc.mercury.cta
+        name: CTA
+        description: 'This component creates a Call to Action (CTA) section, designed to prompt users to perform a specific action. It combines a heading and descriptive text, which can be aligned as needed, over an optional background image. Use this component to drive user engagement towards key conversions or important navigation paths.'
+        group: Layouts/CTA
+        props:
+          heading_text:
+            name: Heading
+            description: 'The main heading of the cta'
+            type: string
+            default: 'Lorem ipsum dolor sit amet finibus aliquam pharetra'
+          level:
+            name: 'Heading Level'
+            description: 'No description available'
+            type: number
+            default: 2
+            enum:
+              - 1
+              - 2
+              - 3
+              - 4
+              - 5
+              - 6
+          text:
+            name: Text
+            description: 'No description available'
+            type: string
+            default: 'Lorem ipsum dolor sit amet finibus aliquam pharetra mauris aenean pellentesque enim mus.'
+          text_align:
+            name: 'Text alignment'
+            description: 'Set alignment of text'
+            type: string
+            default: center
+            enum:
+              - center
+              - left
+              - right
+          media:
+            name: 'Background Image'
+            description: 'The background image for the cta.'
+            type: object
+            default:
+              src: assets/256381.jpg
+              alt: 'Photo by pixabay'
+          has_background_image:
+            name: 'Show Background image'
+            description: 'Set if the background image is used.'
+            type: boolean
+            default: false
+        slots:
+          actions:
+            name: Buttons
+            description: "place one or more 'Button' components within this slot to provide clear next steps for the user"
+      sdc.mercury.footer:
+        id: sdc.mercury.footer
+        name: Footer
+        description: 'The site footer assembled'
+        group: Layouts
+        props:
+          align:
+            name: 'Display links in row?'
+            description: 'Align links in row or stack'
+            type: boolean
+            default: true
+        slots:
+          footer_first:
+            name: 'Branding & Social'
+            description: 'Add the site branding block  or Branding component in this slot'
+          footer_last:
+            name: 'Call to action'
+            description: 'Add the newsletter component here'
+          footer_utility_first:
+            name: 'Utility links'
+            description: 'Place the footer block in this slot which already contains footer navigation links'
+          footer_utility_last:
+            name: 'Copyright text'
+            description: "Add a text component with legal/copyright text in the format '<p>Copyright ©2025 Starshot. All rights reserved.</p>'"
+      sdc.mercury.grid-container:
+        id: sdc.mercury.grid-container
+        name: 'Grid Container'
+        description: 'This component is a flexible layout tool for organizing content into a multi-column grid. It offers a wide range of predefined column structures, along with optional header and footer regions for comprehensive sectioning. Use this component to build the primary structure of a page or to group related content into visually distinct blocks.'
+        group: Layouts
+        props:
+          columns:
+            name: 'Column Layout'
+            description: 'No description available'
+            type: string
+            default:
+              - 50-50
+            enum:
+              - '100'
+              - 50-50
+              - 33-33-33
+              - 75-25
+              - 25-75
+              - 67-33
+              - 33-67
+              - 50-25-25
+              - 25-25-50
+              - 25-25-25-25
+          grid_header:
+            name: 'Show Header Region'
+            description: 'No description available'
+            type: boolean
+            default:
+              - true
+          grid_footer:
+            name: 'Show Footer Region'
+            description: 'No description available'
+            type: boolean
+            default:
+              - true
+          margin_before:
+            name: 'Space Before'
+            description: 'No description available'
+            type: string
+            default: normal
+            enum:
+              - none
+              - tight
+              - normal
+              - extra
+          margin_after:
+            name: 'Space After'
+            description: 'No description available'
+            type: string
+            default: normal
+            enum:
+              - none
+              - tight
+              - normal
+              - extra
+          width:
+            name: 'Container Width'
+            description: 'No description available'
+            type: string
+            default: full
+            enum:
+              - full
+              - 9/10
+              - 8/10
+              - 3/4
+              - 1/2
+          color_mode:
+            name: 'Color Mode'
+            description: 'No description available'
+            type: string
+            default: light
+            enum:
+              - light
+              - dark
+        slots:
+          header_region:
+            name: 'Grid Container: Header'
+            description: 'Slot for placing a heading'
+          container_region:
+            name: 'Grid Container: Columns'
+            description: 'This is the main area where you should place the components that will be arranged into the specified grid columns. Use images or any cards'
+          footer_region:
+            name: 'Grid Container: Footer'
+            description: 'Add text component with suitable content'
+      sdc.mercury.heading:
+        id: sdc.mercury.heading
+        name: Heading
+        description: 'Text wrapped in a heading tag'
+        group: Base
+        props:
+          heading_text:
+            name: 'Heading Text'
+            description: 'The heading text.'
+            type: string
+            default: 'Enter title'
+          level:
+            name: 'Heading Level'
+            description: 'The heading level (h1-h6).'
+            type: number
+            default: 2
+            enum:
+              - 1
+              - 2
+              - 3
+              - 4
+              - 5
+              - 6
+          styles:
+            name: 'Heading Styles'
+            description: 'The heading styles.'
+            type: string
+            default: default
+            enum:
+              - default
+              - alt
+          align:
+            name: 'Text Alignment'
+            description: 'The heading alignment.'
+            type: string
+            default: left
+            enum:
+              - left
+              - center
+              - right
+          url:
+            name: 'Add optional url'
+            description: 'The url for the heading.'
+            type: string
+            default: 'No URL'
+        slots: 'No slots'
+      sdc.mercury.hero-1:
+        id: sdc.mercury.hero-1
+        name: 'Hero - Full overlay'
+        description: 'This component creates a full-width hero section by overlaying text content, including a heading and a paragraph, on top of a background image. It is ideal for making a strong visual statement at the top of a landing page or as a section header. The positioning of the background image can be controlled to ensure optimal focus.'
+        group: Layouts/Heroes
+        props:
+          media:
+            name: 'Media Image'
+            description: 'Media image for the hero.'
+            type: object
+            default:
+              src: assets/8474492.jpg
+              alt: 'Photo by RDNE Stock project: https://www.pexels.com/photo/an-astronaut-standing-in-a-desolate-environment-8474492/'
+          heading_text:
+            name: 'Heading Text'
+            description: 'No description available'
+            type: string
+            default: 'One Giant Leap for Drupal'
+          text:
+            name: Text
+            description: 'No description available'
+            type: string
+            default: 'Lorem ipsum dolor sit amet himenaeos letius praesent mollis tempor nunc aliquam pede si eros habitant eleifend ac gravida.'
+          level:
+            name: 'Heading Level'
+            description: 'No description available'
+            type: number
+            default: 1
+            enum:
+              - 1
+              - 2
+              - 3
+          background_position:
+            name: 'Hero background image position'
+            description: 'No description available'
+            type: string
+            default: center
+            enum:
+              - center
+              - top
+              - bottom
+        slots: 'No slots'
+      sdc.mercury.hero-2:
+        id: sdc.mercury.hero-2
+        name: 'Hero - Side-by-side'
+        description: 'This component creates a hero section with a two-column layout, placing a media element alongside a text block containing a heading and a paragraph. It is highly versatile for introductions or feature showcases on various pages. The arrangement of media and text can be easily swapped to best suit the page design'
+        group: Layouts/Heroes
+        props:
+          layout:
+            name: Layout
+            description: 'Set hero layout'
+            type: string
+            default: 'media-first (default)'
+            enum:
+              - 'media-first (default)'
+              - media-last
+          heading_text:
+            name: 'Heading Text'
+            description: 'No description available'
+            type: string
+            default: 'Launching What Comes Next'
+          level:
+            name: 'Heading Level'
+            description: 'No description available'
+            type: number
+            default: 1
+            enum:
+              - 1
+              - 2
+              - 3
+          text:
+            name: 'Heading Text'
+            description: 'No description available'
+            type: string
+            default: 'Lorem ipsum dolor sit amet himenaeos letius praesent mollis tempor nunc aliquam pede si eros habitant eleifend ac gravida.'
+          media:
+            name: 'Media Image'
+            description: 'Media image for the hero.'
+            type: object
+            default:
+              src: assets/8474492.jpg
+              alt: 'Photo by RDNE Stock project: https://www.pexels.com/photo/an-astronaut-standing-in-a-desolate-environment-8474492/'
+        slots: 'No slots'
+      sdc.mercury.hero-3:
+        id: sdc.mercury.hero-3
+        name: 'Hero - Full width'
+        description: 'This component creates a full-width hero section that pairs a large media element with a prominent heading. It is designed for high-impact page introductions or section headers where a strong visual is key. The layout allows for the media to be placed either before or after the heading.'
+        group: Layouts/Heroes
+        props:
+          layout:
+            name: Layout
+            description: 'Set hero layout'
+            type: string
+            default: 'media-first (default)'
+            enum:
+              - 'media-first (default)'
+              - media-last
+          heading_text:
+            name: 'Heading Text'
+            description: 'No description available'
+            type: string
+            default: 'From One Small Push to a Bold New Orbit'
+          level:
+            name: 'Heading Level'
+            description: 'No description available'
+            type: number
+            default: 1
+            enum:
+              - 1
+              - 2
+              - 3
+          styles:
+            name: 'Heading Styles'
+            description: 'No description available'
+            type: string
+            default: alt
+            enum:
+              - default
+              - alt
+          media:
+            name: 'Media Image'
+            description: 'Media image for the hero.'
+            type: object
+            default:
+              src: assets/8474492.jpg
+              alt: 'Photo by RDNE Stock project: https://www.pexels.com/photo/an-astronaut-standing-in-a-desolate-environment-8474492/'
+        slots: 'No slots'
+      sdc.mercury.hero-blog:
+        id: sdc.mercury.hero-blog
+        name: 'Hero - Blog'
+        description: 'This component is designed as a prominent header for article or blog post pages. It combines a main heading, publication date, and author information with a large visual media element. Use this component at the top of a page to create an engaging and informative introduction for readers.'
+        group: Layouts/Heroes
+        props:
+          heading_text:
+            name: 'Heading Text'
+            description: 'No description available'
+            type: string
+            default: 'Enter the title'
+          level:
+            name: 'Heading Level'
+            description: 'No description available'
+            type: integer
+            default: 1
+            enum:
+              - 1
+              - 2
+              - 3
+              - 4
+              - 5
+              - 6
+          date:
+            name: 'Published Date'
+            description: 'No description available'
+            type: string
+            default: '2026-02-12'
+          author:
+            name: Author
+            description: 'No description available'
+            type: string
+            default: 'John Smith'
+          author_url:
+            name: 'Author Link'
+            description: 'No description available'
+            type: string
+            default: ''
+          media:
+            name: 'Media Image'
+            description: 'Media image for the hero.'
+            type: object
+            default:
+              src: assets/starshot.png
+              alt: 'Photo by RDNE Stock project: https://www.pexels.com/photo/an-astronaut-standing-in-a-desolate-environment-8474492/'
+        slots:
+          blog_media:
+            name: 'Place Image'
+            description: "This slot is intended to hold the primary visual for the hero section. You should place an 'Image' component or a similar media-rendering component in this slot to serve as the feature image for the blog post"
+      sdc.mercury.image:
+        id: sdc.mercury.image
+        name: Image
+        description: 'An image component.'
+        group: Base
+        props:
+          media:
+            name: Image
+            description: 'Media and Alt for the card.'
+            type: object
+            default:
+              src: assets/957040.jpg
+              alt: 'Placeholder text.'
+          size:
+            name: Aspect-ratio
+            description: 'Set the aspect-ratio of the image container'
+            type: string
+            default: 4/3
+            enum:
+              - 4/3
+              - 3/2
+              - 2/1
+              - 1/1
+              - 16/9
+          caption:
+            name: Caption
+            description: 'Set optional caption'
+            type: string
+            default: 'This is a caption example'
+        slots: 'No slots'
+      sdc.mercury.logo-grid:
+        id: sdc.mercury.logo-grid
+        name: 'Logo Grid'
+        description: 'A component showing its children in a grid on desktop and (optionally) in a horizontally-scrolling line on mobile.'
+        group: Layouts
+        props:
+          behavior_desktop:
+            name: 'Desktop behavior'
+            description: 'How to display the grid on desktop'
+            type: string
+            default: '4'
+            enum:
+              - '1'
+              - '2'
+              - '3'
+              - '4'
+              - '5'
+              - '6'
+              - scroll
+          behavior_tablet:
+            name: 'Tablet behavior'
+            description: 'No description available'
+            type: string
+            default: '2'
+            enum:
+              - scroll
+              - '1'
+              - '2'
+              - '3'
+              - '4'
+              - '5'
+              - '6'
+          behavior_mobile:
+            name: 'Mobile behavior'
+            description: 'No description available'
+            type: string
+            default: scroll
+            enum:
+              - scroll
+              - '1'
+              - '2'
+              - '3'
+              - '4'
+        slots:
+          logos:
+            name: 'Logo components'
+            description: 'Components to arrange in a grid or horizontal scroller.'
+      sdc.mercury.navbar:
+        id: sdc.mercury.navbar
+        name: Navbar
+        description: "This component serves as the primary navigation bar for a website, typically positioned at the top of the page. It structures the header by providing distinct areas for the site's logo, the main navigation menu, and other miscellaneous links or call-to-action buttons. The alignment of the menu can be customized for different visual layouts."
+        group: Layouts
+        props:
+          menu_align:
+            name: 'Menu alignment'
+            description: 'No description available'
+            type: string
+            default: center
+            enum:
+              - left
+              - center
+              - right
+        slots:
+          logo:
+            name: 'Site Logo'
+            description: 'Add the site branding block  or Branding component in this slot'
+          navigation:
+            name: 'Navigation menu'
+            description: 'Add main navigation menu here which already contains main navigation links.'
+          links:
+            name: 'Misc. CTAs'
+            description: 'Add 2 Buttons with suitable CTA text.'
+      sdc.mercury.navbar-search:
+        id: sdc.mercury.navbar-search
+        name: 'Search Block'
+        description: 'A search form component for the navbar, styled for Drupal search integration.'
+        group: Components/Search
+        props:
+          action:
+            name: 'Form Action'
+            description: 'The form action URL.'
+            type: string
+            default: /search/node
+          method:
+            name: 'Form Method'
+            description: 'The form method.'
+            type: string
+            default: get
+          label:
+            name: 'Input Label'
+            description: 'The label for the search input.'
+            type: string
+            default: Search
+          buttonLabel:
+            name: 'Button Label'
+            description: 'The label for the submit button.'
+            type: string
+            default: Search
+        slots: 'No slots'
+      sdc.mercury.pager:
+        id: sdc.mercury.pager
+        name: Pager
+        description: 'A pagination component for navigating through multiple pages of content'
+        group: Navigation
+        props: 'No props'
+        slots: 'No slots'
+      sdc.mercury.text:
+        id: sdc.mercury.text
+        name: Text
+        description: 'This component serves as a flexible container for rendering blocks of rich text content. It accepts HTML, allowing for formatted content such as headings (eg: `<h3>`), paragraphs (`<p>`), lists (`<ul>`, `<li>`), and links (`<a>`). Use this component for any section of a page that requires structured textual information, like an article body or a detailed description.'
+        group: Components
+        props:
+          text:
+            name: 'Rich Text'
+            description: 'The rich text.'
+            type: string
+            default: '<h3>Welcome to Our Services</h3> <p> We offer a range of solutions to help your business grow. Learn more about our  <a href="/consulting">consulting services</a> or explore our  <a href="/case-studies">case studies</a> to see results in action. </p> <ul> <li> Custom strategy planning with a  <a href="/team">dedicated team</a> </li> <li> Hands-on workshops to guide your implementation </li> <li> Ongoing support and optimization recommendations </li> </ul> <p> Ready to get started? <a href="/contact">Contact us</a> today for a free consultation. </p>'
+        slots: 'No slots'
+      sdc.mercury.tile-icon:
+        id: sdc.mercury.tile-icon
+        name: Icon
+        description: 'A component showing its children in a grid on desktop and in a horizontally-scrolling line on mobile.'
+        group: Components/Tiles
+        props:
+          text:
+            name: Text
+            description: 'No description available'
+            type: string
+            default: BRAND
+            required: true
+          description:
+            name: Text
+            description: 'No description available'
+            type: string
+            default: 'Lorem ipsum dolor sit amet luctus rutrum'
+          icon:
+            name: 'Phosphor icon slug'
+            description: 'No description available'
+            type: string
+            default: ph-rocket
+          icon_position:
+            name: 'Icon left/right'
+            description: 'No description available'
+            type: string
+            default: right
+            enum:
+              - left
+              - right
+          url:
+            name: 'Link URL'
+            description: 'No description available'
+            type: string
+            default: 'https://drupal.org'
+        slots: 'No slots'
+      sdc.mercury.tile-logo:
+        id: sdc.mercury.tile-logo
+        name: Logo
+        description: 'A single logo that can be placed in the Logo grid. Dont use as standalone component. Dont use it in Navbar'
+        group: Components/Tiles
+        props:
+          media:
+            name: Logo
+            description: 'No description available'
+            type: object
+            default:
+              src: assets/byte-light.png
+              alt: 'Placeholder brand logo'
+          color_mode:
+            name: 'Color Mode'
+            description: 'No description available'
+            type: string
+            default: light
+            enum:
+              - light
+              - dark
+              - inherit
+        slots: 'No slots'
+      sdc.mercury.webform-newsletter:
+        id: sdc.mercury.webform-newsletter
+        name: Newsletter
+        description: 'Not an actual component.'
+        group: Components/Newsletter
+        props: 'No props'
+        slots: 'No slots'
