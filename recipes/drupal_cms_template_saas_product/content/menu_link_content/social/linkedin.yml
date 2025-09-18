@@ -1,0 +1,44 @@
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: LinkedIn
+  menu_name:
+    -
+      value: social
+  link:
+    -
+      uri: 'https://www.linkedin.com'
+      title: ''
+      options:
+        icon:
+          target_id: 'social:linkedin'
+          settings:
+            social:
+              size: '32'
+              color: '#000000'
+              alt: ''
+        icon_display: icon_only
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: 0
+  expanded:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 65d35fff-d98f-4f3b-92e2-87928d0e5dd2
+  bundle: menu_link_content
+  default_langcode: en

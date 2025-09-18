@@ -1,0 +1,27 @@
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: medium_card_1_dark.png
+  uri:
+    -
+      value: 'public://2025-07/medium_card_1_dark.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 403616
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1752174998
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 67809446-8b4e-4cf3-b89a-7274689bc40a
+  default_langcode: en

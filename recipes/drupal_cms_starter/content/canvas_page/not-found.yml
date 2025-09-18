@@ -1,0 +1,33 @@
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Page not found'
+  components:
+    -
+      uuid: 7f55c0d0-7f40-4bba-85cc-abfa617336ec
+      component_id: sdc.mercury.text
+      inputs: '{"text":{"value":"\u003Cp\u003EThe page you\u0027re trying to find doesn\u0027t exist.\u003C\/p\u003E"}}'
+  path:
+    -
+      langcode: en
+      alias: '/404'
+  created:
+    -
+      value: 1754486944
+  revision_translation_affected:
+    -
+      value: true
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: c5b0a0f8-b958-49ad-b2ca-81930195f7b8
+  default_langcode: en

@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 25f3e852-7179-441c-8177-97bb1697757d
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: 'hero image dark.png'
+  uri:
+    -
+      value: 'public://2025-06/hero image dark.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 1303171
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1750964642

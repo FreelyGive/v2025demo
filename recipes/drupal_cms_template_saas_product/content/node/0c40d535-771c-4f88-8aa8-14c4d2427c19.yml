@@ -1,0 +1,53 @@
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Enhancing Security and Efficiency with User-Centric AI Tools'
+  created:
+    -
+      value: 1750997548
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /blog/2025-07/enhancing-security-and-efficiency-user-centric-ai-tools
+      langcode: en
+  field_content:
+    -
+      value: "<p>We believe that advanced technology should be accessible, intuitive, and purposeful. That’s why our AI-powered tools are designed not only to simplify workflows but to strengthen security and operational resilience across the board. In an era of increasing complexity, we’re making it easier for teams to stay proactive, informed, and secure—without adding unnecessary friction.</p><p>Our AI models continuously monitor patterns, flag anomalies, and automate routine checks, reducing human error and accelerating response times. Whether it’s auto-classifying sensitive data or preemptively identifying access risks, our tools enable smarter decisions and faster resolutions—all from within a streamlined, user-friendly interface.</p><p>By integrating intelligent automation with clear, actionable insights, we're helping organizations reduce downtime, improve compliance adherence, and ensure consistent policy enforcement at scale. All without requiring deep technical expertise or steep learning curves.</p><p>Security and efficiency aren’t tradeoffs—they’re complementary goals. With our AI-driven platform, customers can achieve both, while freeing up internal resources to focus on strategic growth initiatives. It's technology that works with you, not around you.</p>"
+      format: content_format
+  field_description:
+    -
+      value: 'Our AI models continuously monitor patterns, flag anomalies, and automate routine checks, reducing human error and accelerating response times.'
+  field_featured_image:
+    -
+      entity: e7b47d4e-3b48-44d1-acaf-ed8aa2de7e91
+  field_blog__byline:
+    -
+      value: 'Aleksander Johnson'
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 0c40d535-771c-4f88-8aa8-14c4d2427c19
+  bundle: blog
+  default_langcode: en
+  depends:
+    e7b47d4e-3b48-44d1-acaf-ed8aa2de7e91: media

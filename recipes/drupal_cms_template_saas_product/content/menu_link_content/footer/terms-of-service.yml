@@ -1,0 +1,38 @@
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: 'Terms of Service'
+  menu_name:
+    -
+      value: footer
+  link:
+    -
+      title: null
+      options: {  }
+      target_uuid: e595ab08-2c3a-4875-8d51-07b89836610d
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: 0
+  expanded:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 2a121d9e-70dd-440a-8563-be2a565a13c2
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    e595ab08-2c3a-4875-8d51-07b89836610d: node

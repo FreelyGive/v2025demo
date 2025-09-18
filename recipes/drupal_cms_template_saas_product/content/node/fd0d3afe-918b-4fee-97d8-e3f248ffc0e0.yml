@@ -1,0 +1,53 @@
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Secure, Compliant, and Built to Scale'
+  created:
+    -
+      value: 1755581234
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /blog/2025-07/secure-compliant-and-built-scale
+      langcode: en
+  field_content:
+    -
+      value: "<p>As regulatory requirements tighten and digital footprints expand, organizations need solutions that are not only secure—but also scalable and compliant by design. We’ve built our AI-enabled platform on a robust cloud-native architecture that helps businesses meet today’s demands while preparing for tomorrow’s growth.</p><p>Our infrastructure supports rapid scaling without compromising performance or security. Whether you're onboarding ten users or ten thousand, our cloud environment adapts seamlessly—ensuring consistent uptime, encrypted data handling, and optimized performance across geographies.</p><p>Compliance is embedded into every layer of our platform. With support for industry standards such as SOC 2, HIPAA, and GDPR, our tools make it easier to maintain audit readiness and enforce governance policies organization-wide. Automated reporting, real-time monitoring, and policy enforcement reduce compliance overhead while improving visibility.</p><p>By combining intelligent automation with enterprise-grade security and scalable architecture, enables teams to operate confidently in complex, regulated environments. It's not just about meeting standards—it's about exceeding them, efficiently and at scale.</p>"
+      format: content_format
+  field_description:
+    -
+      value: 'Our infrastructure supports rapid scaling without compromising performance or security.'
+  field_featured_image:
+    -
+      entity: 4d48928a-cd65-4f32-aa27-dd9ff703208f
+  field_blog__byline:
+    -
+      value: 'Trystan Leach'
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: fd0d3afe-918b-4fee-97d8-e3f248ffc0e0
+  bundle: blog
+  default_langcode: en
+  depends:
+    4d48928a-cd65-4f32-aa27-dd9ff703208f: media

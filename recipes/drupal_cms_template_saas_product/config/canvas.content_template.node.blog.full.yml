@@ -1,0 +1,125 @@
+id: node.blog.full
+status: true
+content_entity_type_id: node
+content_entity_type_bundle: blog
+content_entity_type_view_mode: full
+dependencies:
+  module:
+    - node
+  config:
+    - node.type.blog
+    - canvas.component.sdc.mercury.image
+    - core.entity_view_mode.node.full
+    - field.field.node.blog.field_blog__byline
+component_tree:
+  - uuid: 92e68054-9f78-4420-8752-96ec693d2fa9
+    component_id: block.system_breadcrumb_block
+    component_version: cec23aa503e2a02f
+    inputs:
+      label: Breadcrumbs
+      label_display: '0'
+  - uuid: 4e32407b-d45c-4b49-bfa6-33716f9bd4d2
+    component_id: sdc.mercury.hero-blog
+    component_version: 7eb8d71e894ba201
+    inputs:
+      heading_text:
+        sourceType: dynamic
+        expression: 'ℹ︎␜entity:node:blog␝title␞␟value'
+      level: 1
+      date:
+        sourceType: 'dynamic'
+        expression: 'ℹ︎␜entity:node:blog␝created␞␟value'
+      author:
+        sourceType: dynamic
+        expression: 'ℹ︎␜entity:node:blog␝field_blog__byline␞␟value'
+  - parent_uuid: 4e32407b-d45c-4b49-bfa6-33716f9bd4d2
+    slot: blog_media
+    uuid: 59a40305-ae72-4f38-b1fd-19e1513faf13
+    component_id: sdc.mercury.image
+    component_version: ad3d3789cf0d02e5
+    inputs:
+      media:
+        sourceType: dynamic
+        expression: 'ℹ︎␜entity:node:blog␝field_featured_image␞␟{src↝entity␜␜entity:media:image␝field_media_image␞␟entity␜␜entity:file␝uri␞␟url,alt↝entity␜␜entity:media:image␝field_media_image␞␟alt}'
+      size: 16/9
+  - uuid: ea40592d-2c03-45e8-9c19-a66a96a59ec9
+    component_id: sdc.mercury.grid-container
+    component_version: a86fae4588f7eab0
+    inputs:
+      columns: '100'
+      grid_header: false
+      grid_footer: false
+      margin_before: normal
+      margin_after: normal
+      width: 3/4
+      color_mode: light
+  - parent_uuid: ea40592d-2c03-45e8-9c19-a66a96a59ec9
+    slot: container_region
+    uuid: caa1e4b2-d58b-4140-b99b-ab3e1ce55ad5
+    component_id: sdc.mercury.text
+    component_version: bbc797b76ac62b14
+    inputs:
+      text:
+        sourceType: dynamic
+        expression: 'ℹ︎␜entity:node:blog␝field_content␞␟processed'
+  - uuid: 0ab08fa6-8f5f-40f5-a662-cb824f8893f2
+    component_id: block.views_block.blog-related
+    component_version: 56386b57a9006241
+    inputs:
+      label: 'Blog: Related blog posts'
+      label_display: '0'
+      views_label: ''
+      items_per_page: null
+  - uuid: 4305752c-db60-48dc-837b-c7a12dd656fe
+    component_id: sdc.mercury.cta
+    component_version: 9ce538831167d86c
+    inputs:
+      heading_text: 'Lorem ipsum dolor sit amet finibus aliquam pharetra'
+      level: 2
+      text: 'Turn this into a pattern'
+      media:
+        sourceType: default-relative-url
+        value:
+          src: assets/256381.jpg
+          alt: 'Photo by pixabay'
+        jsonSchema:
+          type: object
+          properties:
+            src:
+              type: string
+              format: uri-reference
+              pattern: '^(/|https?://)?.*\.([Pp][Nn][Gg]|[Gg][Ii][Ff]|[Jj][Pp][Gg]|[Jj][Pp][Ee][Gg]|[Ww][Ee][Bb][Pp]|[Aa][Vv][Ii][Ff])(\?.*)?(#.*)?$'
+            alt:
+              type: string
+            width:
+              type: integer
+            height:
+              type: integer
+          required:
+            - src
+        componentId: sdc.mercury.cta
+      text_align: center
+  - parent_uuid: 4305752c-db60-48dc-837b-c7a12dd656fe
+    slot: actions
+    uuid: 766d0781-cae3-471f-8d43-0f5f27659fbb
+    component_id: sdc.mercury.button
+    component_version: 6a9923be0f81dde6
+    inputs:
+      variant: primary
+      disabled: false
+      label: 'Button Label'
+      icon: ph-arrow-left
+      icon_first: false
+      href: false
+  - parent_uuid: 4305752c-db60-48dc-837b-c7a12dd656fe
+    slot: actions
+    uuid: f61ffe08-6016-458e-b19f-7bef09f26382
+    component_id: sdc.mercury.button
+    component_version: 6a9923be0f81dde6
+    inputs:
+      variant: secondary
+      disabled: false
+      label: 'Button Label'
+      icon: ph-arrow-left
+      icon_first: false
+      href: false

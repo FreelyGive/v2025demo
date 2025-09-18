@@ -1,0 +1,48 @@
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Contact
+  components:
+    -
+      uuid: 50ba3d8e-43f7-476f-b4a7-7444268f18c7
+      component_id: sdc.mercury.heading
+      inputs:
+        heading_text: 'Contact Us'
+        level: 1
+        styles: default
+        align: left
+        url: 'No URL'
+    -
+      uuid: 77fedeec-9696-42d0-9be5-1599059bdb34
+      component_id: block.webform_block
+      inputs:
+        label: Webform
+        label_display: '0'
+        webform_id: contact_form
+        default_data: ''
+        redirect: false
+        lazy: false
+  path:
+    -
+      alias: /contact
+      langcode: en
+  created:
+    -
+      value: 1735191284
+  revision_translation_affected:
+    -
+      value: true
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: dc12fc4d-5d38-47f9-9f55-143e7299d7f7
+  default_langcode: en

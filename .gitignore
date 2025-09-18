@@ -77,7 +77,6 @@
 /patches.lock.json
 /private/
 /README.md
-/recipes/
 /vendor/
 /web/
 /.ddev/.env

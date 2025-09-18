@@ -1,0 +1,27 @@
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: sample_thumb_3.png
+  uri:
+    -
+      value: 'public://2025-07/sample_thumb_3.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 148043
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1752175100
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 7a2b0e7f-be1c-49bf-ab27-4a8ec84d417b
+  default_langcode: en

@@ -1,0 +1,45 @@
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Terms of Service'
+  created:
+    -
+      value: 1755631022
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /terms-service
+      langcode: en
+  field_content:
+    -
+      value: '<p>Put your terms of service here.</p>'
+      format: content_format
+  field_description:
+    -
+      value: 'The terms of service for site and product.'
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: e595ab08-2c3a-4875-8d51-07b89836610d
+  bundle: page
+  default_langcode: en

@@ -1,0 +1,35 @@
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: blog_thumb_1.png
+  created:
+    -
+      value: 1752177685
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  field_media_image:
+    -
+      alt: 'A futuristic-looking pattern reminiscent of numbers on a screen.'
+      title: ''
+      width: 454
+      height: 340
+      entity: ddfa1e5d-a256-4f91-b74c-3c8e9cf862e7
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: dec03bb0-2670-45bc-969e-24153cff9146
+  bundle: image
+  default_langcode: en
+  depends:
+    ddfa1e5d-a256-4f91-b74c-3c8e9cf862e7: file

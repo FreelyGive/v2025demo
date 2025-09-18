@@ -1,0 +1,27 @@
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: person_3.png
+  uri:
+    -
+      value: 'public://2025-07/person_3.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 12150
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1752173962
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 27f037b6-f7ef-4cff-84f4-dc957dcaa9b8
+  default_langcode: en

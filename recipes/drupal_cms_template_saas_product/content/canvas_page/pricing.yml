@@ -1,0 +1,225 @@
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Pricing
+  components:
+    -
+      uuid: 69e8db89-269e-4561-bd73-efb825352224
+      component_id: sdc.mercury.grid-container
+      inputs:
+        columns: 25-25-25-25
+        grid_header: true
+        grid_footer: true
+        margin_before: normal
+        margin_after: normal
+        width: full
+        color_mode: light
+    -
+      parent_uuid: 69e8db89-269e-4561-bd73-efb825352224
+      slot: header_region
+      uuid: a766814e-ed80-470b-852f-e32fb637bd9c
+      component_id: sdc.mercury.cta
+      inputs:
+        heading_text: 'Lorem ipsum dolor sit amet finibus aliquam pharetra'
+        level: '2'
+        text: 'Lorem ipsum dolor sit amet finibus aliquam pharetra mauris aenean pellentesque enim mus.'
+        media:
+          sourceType: default-relative-url
+          value:
+            src: assets/256381.jpg
+            alt: 'Photo by pixabay'
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                format: uri-reference
+                pattern: '^(/|https?://)?.*\.([Pp][Nn][Gg]|[Gg][Ii][Ff]|[Jj][Pp][Gg]|[Jj][Pp][Ee][Gg]|[Ww][Ee][Bb][Pp]|[Aa][Vv][Ii][Ff])(\?.*)?(#.*)?$'
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.mercury.cta
+        text_align: center
+    -
+      parent_uuid: 69e8db89-269e-4561-bd73-efb825352224
+      slot: container_region
+      uuid: f9eaab81-933a-4328-9fab-98d0413ddd49
+      component_id: sdc.mercury.card-pricing
+      inputs:
+        heading_text: Free
+        description: 'Curabitur nascetur non potenti pede luctus vivamus'
+        price: '0.00'
+        currency_code: USD
+        currency_symbol: $
+        symbol_position: before
+        text:
+          value: '<ul> <li>Example item 1</li> <li>Example item 2</li> </ul>'
+        button_url: 'https://example.com'
+        button_label: 'Choose this plan'
+        promote: false
+    -
+      parent_uuid: 69e8db89-269e-4561-bd73-efb825352224
+      slot: container_region
+      uuid: 07056895-b9fa-4297-a957-9207f1cee35f
+      component_id: sdc.mercury.card-pricing
+      inputs:
+        heading_text: Personal
+        description: 'Curabitur nascetur non potenti pede luctus vivamus'
+        price: '9.99'
+        currency_code: USD
+        currency_symbol: $
+        symbol_position: before
+        text:
+          value: '<ul> <li>Example item 1</li> <li>Example item 2</li> </ul>'
+        button_url: 'https://example.com'
+        button_label: 'Choose this plan'
+        promote: true
+    -
+      parent_uuid: 69e8db89-269e-4561-bd73-efb825352224
+      slot: container_region
+      uuid: a85b3529-1fb5-46c7-b396-8c814f28c228
+      component_id: sdc.mercury.card-pricing
+      inputs:
+        heading_text: Professional
+        description: 'Curabitur nascetur non potenti pede luctus vivamus'
+        price: '49.99'
+        currency_code: USD
+        currency_symbol: $
+        symbol_position: before
+        text:
+          value: '<ul> <li>Example item 1</li> <li>Example item 2</li> </ul>'
+        button_url: 'https://example.com'
+        button_label: 'Choose this plan'
+        promote: false
+    -
+      parent_uuid: 69e8db89-269e-4561-bd73-efb825352224
+      slot: container_region
+      uuid: d9b9e7a4-85c2-49c7-b845-80f54a2b451a
+      component_id: sdc.mercury.card-pricing
+      inputs:
+        heading_text: Enterprise
+        description: 'Curabitur nascetur non potenti pede luctus vivamus'
+        currency_code: USD
+        symbol_position: before
+        text:
+          value: '<ul> <li>Example item 1</li> <li>Example item 2</li> </ul>'
+        button_url: 'https://example.com'
+        button_label: 'Contact us'
+        promote: false
+    -
+      uuid: 55398477-06b9-4fc8-95bf-e8173a1602ec
+      component_id: sdc.mercury.grid-container
+      inputs:
+        columns: 25-25-25-25
+        grid_header: true
+        margin_before: normal
+        margin_after: normal
+        width: full
+        color_mode: dark
+    -
+      parent_uuid: 55398477-06b9-4fc8-95bf-e8173a1602ec
+      slot: header_region
+      uuid: 2baff9cc-d1a2-43b1-8c59-a3fe04d2344d
+      component_id: sdc.mercury.heading
+      inputs:
+        heading_text: 'See what people are saying about our technology'
+        level:
+          sourceType: 'static:field_item:list_float'
+          value: 2
+          expression: ℹ︎list_float␟value
+          sourceTypeSettings:
+            storage:
+              allowed_values:
+                -
+                  value: 1
+                  label: '1'
+                -
+                  value: 2
+                  label: '2'
+                -
+                  value: 3
+                  label: '3'
+                -
+                  value: 4
+                  label: '4'
+                -
+                  value: 5
+                  label: '5'
+                -
+                  value: 6
+                  label: '6'
+        styles: default
+    -
+      parent_uuid: 55398477-06b9-4fc8-95bf-e8173a1602ec
+      slot: container_region
+      uuid: 67330eb0-b4e1-48d3-ac08-4df514234b0a
+      component_id: sdc.mercury.card-testimonial
+      inputs:
+        text: '“My career coach’s guidance was crucial in helping me understand the tech industry landscape and ultimately secure my role.”'
+        media:
+          target_uuid: f27e8623-bbc7-43c1-8223-809648bfd188
+        align: left
+    -
+      parent_uuid: 55398477-06b9-4fc8-95bf-e8173a1602ec
+      slot: container_region
+      uuid: 38a5ffb9-4396-424e-8b30-754c72412ef8
+      component_id: sdc.mercury.card-testimonial
+      inputs:
+        text: '“My career coach’s guidance was crucial in helping me understand the tech industry landscape and ultimately secure my role.”'
+        media:
+          target_uuid: b3cfd8ef-fdf8-496e-b7a6-a113ecd5a907
+        align: left
+    -
+      parent_uuid: 55398477-06b9-4fc8-95bf-e8173a1602ec
+      slot: container_region
+      uuid: d7ce6c6a-151d-4a1c-b744-5f3c57caa1d1
+      component_id: sdc.mercury.card-testimonial
+      inputs:
+        text: '“My career coach’s guidance was crucial in helping me understand the tech industry landscape and ultimately secure my role.”'
+        media:
+          target_uuid: 0f40c577-d3b2-4f5d-8609-9ffacbc39a91
+        align: left
+    -
+      parent_uuid: 55398477-06b9-4fc8-95bf-e8173a1602ec
+      slot: container_region
+      uuid: 5f34f253-71e5-4c10-a0e6-bcc20199941a
+      component_id: sdc.mercury.card-testimonial
+      inputs:
+        text: '“My career coach’s guidance was crucial in helping me understand the tech industry landscape and ultimately secure my role.”'
+        media:
+          target_uuid: 68b83394-2582-4c2b-a25e-dbe1ba370dc9
+        align: left
+  path:
+    -
+      alias: /pricing
+      langcode: en
+  created:
+    -
+      value: 1735191284
+  revision_translation_affected:
+    -
+      value: true
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: ae1dee6e-ca38-49c5-aa37-9f2a8ec9af15
+  default_langcode: en
+  depends:
+    f27e8623-bbc7-43c1-8223-809648bfd188: media
+    b3cfd8ef-fdf8-496e-b7a6-a113ecd5a907: media
+    0f40c577-d3b2-4f5d-8609-9ffacbc39a91: media
+    68b83394-2582-4c2b-a25e-dbe1ba370dc9: media

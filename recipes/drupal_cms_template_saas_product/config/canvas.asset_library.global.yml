@@ -1,0 +1,117 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - canvas
+id: global
+label: 'Global CSS'
+css:
+  original: |
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
+
+    :root {
+      --hgc-color-gray-lightest: #f3f4f6;
+      --hgc-color-gray-light:    #d1d5db;
+      --hgc-color-gray:          #6b7280;
+      --hgc-color-gray-dark:     #1f2937;
+      --hgc-color-gray-darkest:  #030712;
+
+      --hgc-color-brand-light:   #bae6fd;
+      --hgc-color-brand:         #1d4ed8;
+      --hgc-color-brand-dark:    #172554;
+
+      --hgc-color-accent-light:  #fce7f3;
+      --hgc-color-accent:        #ec4899;
+      --hgc-color-accent-dark:   #9d174d;
+
+      --hgc-color-info:          #01a8e4;
+      --hgc-color-positive:      #00cc41;
+      --hgc-color-warning:       #ffbf00;
+      --hgc-color-negative:      #e60032;
+      --hgc-color-body:          #ffffff;
+
+      --hgc-font-weight-light:    300;
+      --hgc-font-weight-normal:   400;
+      --hgc-font-weight-medium:   500;
+      --hgc-font-weight-semibold: 600;
+      --hgc-font-weight-bold:     700;
+
+      --hgc-font-weight-p:  400;
+      --hgc-font-weight-h1: 600;
+      --hgc-font-weight-h2: 600;
+      --hgc-font-weight-h3: 600;
+      --hgc-font-weight-h4: 500;
+      --hgc-font-weight-h5: 500;
+      --hgc-font-weight-h6: 500;
+
+      --hgc-menu-link-color:       #1f2937;
+      --hgc-menu-link-color-hover: #1d4ed8;
+
+      --hgc-hyperlink-color:       #1d4ed8;
+      --hgc-hyperlink-color-hover: #172554;
+
+      --hgc-radius-sm: 0;
+
+      --hgc-font-sans:    'Outfit', 'Segoe UI', 'Roboto', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+      --hgc-font-body:    'Outfit', 'Segoe UI', 'Roboto', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+      --hgc-font-mono:    'Fira Mono', 'Menlo', 'Consolas', 'Liberation Mono', monospace;
+      --hgc-font-display: 'Outfit', 'Segoe UI', 'Roboto', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    }
+  compiled: |
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
+
+    :root {
+      --hgc-color-gray-lightest: #f3f4f6;
+      --hgc-color-gray-light:    #d1d5db;
+      --hgc-color-gray:          #6b7280;
+      --hgc-color-gray-dark:     #1f2937;
+      --hgc-color-gray-darkest:  #030712;
+
+      --hgc-color-brand-light:   #bae6fd;
+      --hgc-color-brand:         #1d4ed8;
+      --hgc-color-brand-dark:    #172554;
+
+      --hgc-color-accent-light:  #fce7f3;
+      --hgc-color-accent:        #ec4899;
+      --hgc-color-accent-dark:   #9d174d;
+
+      --hgc-color-info:          #01a8e4;
+      --hgc-color-positive:      #00cc41;
+      --hgc-color-warning:       #ffbf00;
+      --hgc-color-negative:      #e60032;
+      --hgc-color-body:          #ffffff;
+
+      --hgc-font-weight-light:    300;
+      --hgc-font-weight-normal:   400;
+      --hgc-font-weight-medium:   500;
+      --hgc-font-weight-semibold: 600;
+      --hgc-font-weight-bold:     700;
+
+      --hgc-font-weight-p:  400;
+      --hgc-font-weight-h1: 600;
+      --hgc-font-weight-h2: 600;
+      --hgc-font-weight-h3: 600;
+      --hgc-font-weight-h4: 500;
+      --hgc-font-weight-h5: 500;
+      --hgc-font-weight-h6: 500;
+
+      --hgc-menu-link-color:       #1f2937;
+      --hgc-menu-link-color-hover: #1d4ed8;
+
+      --hgc-hyperlink-color:       #1d4ed8;
+      --hgc-hyperlink-color-hover: #172554;
+
+      --hgc-radius-sm: 0;
+
+      --hgc-font-sans:    'Outfit', 'Segoe UI', 'Roboto', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+      --hgc-font-body:    'Outfit', 'Segoe UI', 'Roboto', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+      --hgc-font-mono:    'Fira Mono', 'Menlo', 'Consolas', 'Liberation Mono', monospace;
+      --hgc-font-display: 'Outfit', 'Segoe UI', 'Roboto', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    }
+js:
+  original: |
+    // @classNameCandidates {"global_css":["const","GlobalCss","return","div","export","default","/div","GlobalCss;"]}
+  compiled: ''

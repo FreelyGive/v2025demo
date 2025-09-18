@@ -1,0 +1,35 @@
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: sample_thumb_1.png
+  created:
+    -
+      value: 1752175040
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  field_media_image:
+    -
+      alt: 'A couple of computer screens in a darkened room, with a keyboard in front.'
+      title: ''
+      width: 350
+      height: 196
+      entity: d2dc010f-99d2-4350-93b3-2b0f660fd5b1
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 2f5a9129-21b9-410b-b197-2fac4a9ab4b3
+  bundle: image
+  default_langcode: en
+  depends:
+    d2dc010f-99d2-4350-93b3-2b0f660fd5b1: file

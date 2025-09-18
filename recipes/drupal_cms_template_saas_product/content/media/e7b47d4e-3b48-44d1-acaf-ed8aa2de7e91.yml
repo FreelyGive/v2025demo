@@ -1,0 +1,35 @@
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: blog_thumb_3.png
+  created:
+    -
+      value: 1752178107
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  field_media_image:
+    -
+      alt: 'A silhouette of a person against a blue and pink background.'
+      title: ''
+      width: 454
+      height: 340
+      entity: 34c8d2b7-ce58-4ea5-b367-4fb9587010be
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: e7b47d4e-3b48-44d1-acaf-ed8aa2de7e91
+  bundle: image
+  default_langcode: en
+  depends:
+    34c8d2b7-ce58-4ea5-b367-4fb9587010be: file

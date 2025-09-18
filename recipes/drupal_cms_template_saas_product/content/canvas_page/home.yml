@@ -1,0 +1,632 @@
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Home
+  components:
+    -
+      uuid: 687e03ec-dbc6-4238-b663-427ee91c69a9
+      component_id: sdc.mercury.cta
+      inputs:
+        heading_text: 'Powerful solutions to scale your business'
+        text: 'Discover how our innovative AI tools can transform operations, enhance efficiency, and drive growth.'
+        text_align: center
+    -
+      parent_uuid: 687e03ec-dbc6-4238-b663-427ee91c69a9
+      slot: actions
+      uuid: 753d4a8e-5df0-4727-8388-26f05295b154
+      component_id: sdc.mercury.button
+      inputs:
+        variant: primary
+        label: "Let's get started"
+        disabled: false
+        icon_first: false
+        href: /pricing
+    -
+      uuid: ff7d1c90-d6f5-49a0-9e28-14e665ff571a
+      component_id: sdc.mercury.image
+      inputs:
+        media:
+          target_uuid: fbff512d-9dc6-49ba-8321-2a826ca84e10
+        size: 2/1
+        caption: ''
+    -
+      uuid: b04a754a-6a6c-44a9-b7ec-cf3df6c98ca1
+      component_id: sdc.mercury.grid-container
+      inputs:
+        columns: 33-33-33
+        grid_header: true
+        margin_after: normal
+        width: full
+        color_mode: dark
+        grid_footer: false
+        margin_before: extra
+    -
+      parent_uuid: b04a754a-6a6c-44a9-b7ec-cf3df6c98ca1
+      slot: header_region
+      uuid: b524d6a4-2ce8-4ba4-8fcd-4e38f8d98dea
+      component_id: sdc.mercury.heading
+      inputs:
+        heading_text: 'Discover endless possibilities in technology'
+        level:
+          sourceType: 'static:field_item:list_float'
+          value: 2
+          expression: ℹ︎list_float␟value
+          sourceTypeSettings:
+            storage:
+              allowed_values:
+                -
+                  value: 1
+                  label: '1'
+                -
+                  value: 2
+                  label: '2'
+                -
+                  value: 3
+                  label: '3'
+                -
+                  value: 4
+                  label: '4'
+                -
+                  value: 5
+                  label: '5'
+                -
+                  value: 6
+                  label: '6'
+        styles: default
+        align: center
+    -
+      parent_uuid: b04a754a-6a6c-44a9-b7ec-cf3df6c98ca1
+      slot: container_region
+      uuid: 4ffb03cc-c318-4d86-9e92-5fca9e897428
+      component_id: sdc.mercury.card
+      inputs:
+        heading_text: 'Advanced tools'
+        level: 3
+        url: 'https://www.example.com'
+        media:
+          target_uuid: 2f5a9129-21b9-410b-b197-2fac4a9ab4b3
+        style: featured
+        orientation: stacked
+    -
+      parent_uuid: b04a754a-6a6c-44a9-b7ec-cf3df6c98ca1
+      slot: container_region
+      uuid: e6fe596f-d8b0-43e2-8e09-da7b76a1e171
+      component_id: sdc.mercury.card
+      inputs:
+        heading_text: 'Scalable solutions'
+        level: 3
+        url: 'https://www.example.com'
+        media:
+          target_uuid: 8247692c-5c63-4e79-bf9b-734189b56e1e
+        style: featured
+        orientation: stacked
+    -
+      parent_uuid: b04a754a-6a6c-44a9-b7ec-cf3df6c98ca1
+      slot: container_region
+      uuid: 1f5966a2-d6cc-48d9-8b84-a6ae9f73310b
+      component_id: sdc.mercury.card
+      inputs:
+        heading_text: 'Reliable solutions'
+        level: 3
+        url: 'https://www.example.com'
+        media:
+          target_uuid: 640d837b-b682-4503-aa95-2b7583e3b08a
+        style: featured
+        orientation: stacked
+    -
+      uuid: 9d2257b5-8da9-45c5-bbb5-46418c664574
+      component_id: sdc.mercury.grid-container
+      inputs:
+        columns: '100'
+        grid_header: true
+        grid_footer: true
+        margin_before: normal
+        margin_after: normal
+        width: full
+        color_mode: light
+    -
+      parent_uuid: 9d2257b5-8da9-45c5-bbb5-46418c664574
+      slot: header_region
+      uuid: 17e57cc1-8374-4ff5-8c26-23f7c6ada238
+      component_id: sdc.mercury.heading
+      inputs:
+        heading_text: 'Trusted by world-class experts'
+        level: 3
+        styles: default
+        align: center
+    -
+      parent_uuid: 9d2257b5-8da9-45c5-bbb5-46418c664574
+      slot: container_region
+      uuid: 934987c9-6410-4b0a-be9e-f66b41c4cb16
+      component_id: sdc.mercury.logo-grid
+      inputs:
+        behavior_desktop: '5'
+        behavior_tablet: scroll
+        behavior_mobile: scroll
+    -
+      parent_uuid: 934987c9-6410-4b0a-be9e-f66b41c4cb16
+      slot: logos
+      uuid: f4c1ac46-6901-43c8-9d50-1857f070325c
+      component_id: sdc.mercury.tile-logo
+      inputs:
+        media:
+          sourceType: default-relative-url
+          value:
+            src: assets/dark.png
+            alt: 'Placeholder brand logo'
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                pattern: '^(/|https?://)?(?!.*\://)[^\s]+$'
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.mercury.tile-logo
+        color_mode: dark
+    -
+      parent_uuid: 934987c9-6410-4b0a-be9e-f66b41c4cb16
+      slot: logos
+      uuid: baf7e219-f928-4c8f-983b-63aebab40574
+      component_id: sdc.mercury.tile-logo
+      inputs:
+        media:
+          sourceType: default-relative-url
+          value:
+            src: assets/dark.png
+            alt: 'Placeholder brand logo'
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                pattern: '^(/|https?://)?(?!.*\://)[^\s]+$'
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.mercury.tile-logo
+        color_mode: dark
+    -
+      parent_uuid: 934987c9-6410-4b0a-be9e-f66b41c4cb16
+      slot: logos
+      uuid: d8be2045-43ff-4d1c-9b25-d0dade44195a
+      component_id: sdc.mercury.tile-logo
+      inputs:
+        media:
+          sourceType: default-relative-url
+          value:
+            src: assets/dark.png
+            alt: 'Placeholder brand logo'
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                pattern: '^(/|https?://)?(?!.*\://)[^\s]+$'
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.mercury.tile-logo
+        color_mode: dark
+    -
+      parent_uuid: 934987c9-6410-4b0a-be9e-f66b41c4cb16
+      slot: logos
+      uuid: 77e0d133-8220-42dc-b18a-5bf7bc3b206e
+      component_id: sdc.mercury.tile-logo
+      inputs:
+        media:
+          sourceType: default-relative-url
+          value:
+            src: assets/dark.png
+            alt: 'Placeholder brand logo'
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                pattern: '^(/|https?://)?(?!.*\://)[^\s]+$'
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.mercury.tile-logo
+        color_mode: light
+    -
+      parent_uuid: 934987c9-6410-4b0a-be9e-f66b41c4cb16
+      slot: logos
+      uuid: ffd36ee2-573d-41fc-8b95-9234579320de
+      component_id: sdc.mercury.tile-logo
+      inputs:
+        media:
+          sourceType: default-relative-url
+          value:
+            src: assets/dark.png
+            alt: 'Placeholder brand logo'
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                pattern: '^(/|https?://)?(?!.*\://)[^\s]+$'
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.mercury.tile-logo
+        color_mode: light
+    -
+      uuid: a8b085d4-21e4-4c32-8671-90cc769fbe5b
+      component_id: sdc.mercury.grid-container
+      inputs:
+        columns: 50-50
+        grid_header: true
+        margin_before: normal
+        margin_after: normal
+        width: full
+        color_mode: dark
+        grid_footer: true
+    -
+      parent_uuid: a8b085d4-21e4-4c32-8671-90cc769fbe5b
+      slot: header_region
+      uuid: e3136585-c1ce-4f15-ab51-e1e7d4002d46
+      component_id: sdc.mercury.heading
+      inputs:
+        heading_text: 'Innovative solutions for you'
+        level:
+          sourceType: 'static:field_item:list_float'
+          value: 2
+          expression: ℹ︎list_float␟value
+          sourceTypeSettings:
+            storage:
+              allowed_values:
+                -
+                  value: 1
+                  label: '1'
+                -
+                  value: 2
+                  label: '2'
+                -
+                  value: 3
+                  label: '3'
+                -
+                  value: 4
+                  label: '4'
+                -
+                  value: 5
+                  label: '5'
+                -
+                  value: 6
+                  label: '6'
+        styles: default
+        align: center
+        url: 'No URL'
+    -
+      parent_uuid: a8b085d4-21e4-4c32-8671-90cc769fbe5b
+      slot: container_region
+      uuid: 48a4228e-9b70-4000-a599-7c44776b4de9
+      component_id: sdc.mercury.card
+      inputs:
+        heading_text: 'Service automation'
+        level: 3
+        url: 'https://www.example.com'
+        media:
+          sourceType: default-relative-url
+          value:
+            src: assets/277628-911758.jpg
+            alt: 'Photo by gdtography: https://www.pexels.com/photo/long-exposure-photography-white-dome-building-interior-911758/'
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                pattern: '^(/|https?://)?(?!.*\://)[^\s]+$'
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.mercury.card
+        style: featured
+        orientation: stacked
+    -
+      parent_uuid: a8b085d4-21e4-4c32-8671-90cc769fbe5b
+      slot: container_region
+      uuid: 2fcd7b86-4d7c-4ac4-9476-555d35b5782a
+      component_id: sdc.mercury.card
+      inputs:
+        heading_text: 'User-centric solutionizing'
+        level: 3
+        url: 'https://www.example.com'
+        media:
+          sourceType: default-relative-url
+          value:
+            src: assets/277628-911758.jpg
+            alt: 'Photo by gdtography: https://www.pexels.com/photo/long-exposure-photography-white-dome-building-interior-911758/'
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                pattern: '^(/|https?://)?(?!.*\://)[^\s]+$'
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.mercury.card
+        style: featured
+        orientation: stacked
+    -
+      uuid: 200da8bd-0f11-4396-9b4b-1a56cdc12d97
+      component_id: sdc.mercury.grid-container
+      inputs:
+        columns: 25-25-25-25
+        grid_header: true
+        margin_before: normal
+        margin_after: normal
+        width: full
+        color_mode: dark
+    -
+      parent_uuid: 200da8bd-0f11-4396-9b4b-1a56cdc12d97
+      slot: header_region
+      uuid: 4b2aef0c-ee2c-4ecb-b9c8-b51d4e5c78e5
+      component_id: sdc.mercury.heading
+      inputs:
+        heading_text: 'See what people are saying about our technology'
+        level:
+          sourceType: 'static:field_item:list_float'
+          value: 2
+          expression: ℹ︎list_float␟value
+          sourceTypeSettings:
+            storage:
+              allowed_values:
+                -
+                  value: 1
+                  label: '1'
+                -
+                  value: 2
+                  label: '2'
+                -
+                  value: 3
+                  label: '3'
+                -
+                  value: 4
+                  label: '4'
+                -
+                  value: 5
+                  label: '5'
+                -
+                  value: 6
+                  label: '6'
+        styles: default
+        align: center
+        url: 'No URL'
+    -
+      parent_uuid: 200da8bd-0f11-4396-9b4b-1a56cdc12d97
+      slot: container_region
+      uuid: 150602aa-8639-4b8a-8f67-e334f495d657
+      component_id: sdc.mercury.card-testimonial
+      inputs:
+        text: '“My career coach’s guidance was crucial in helping me understand the tech industry landscape and ultimately secure my role.”'
+        media:
+          target_uuid: f27e8623-bbc7-43c1-8223-809648bfd188
+        align: left
+    -
+      parent_uuid: 200da8bd-0f11-4396-9b4b-1a56cdc12d97
+      slot: container_region
+      uuid: 3e0883f7-7c4a-4f20-a135-fb42b146e0b8
+      component_id: sdc.mercury.card-testimonial
+      inputs:
+        text: '“My career coach’s guidance was crucial in helping me understand the tech industry landscape and ultimately secure my role.”'
+        media:
+          target_uuid: b3cfd8ef-fdf8-496e-b7a6-a113ecd5a907
+        align: left
+    -
+      parent_uuid: 200da8bd-0f11-4396-9b4b-1a56cdc12d97
+      slot: container_region
+      uuid: d67d3348-b3ab-4a62-92ca-1ab871663979
+      component_id: sdc.mercury.card-testimonial
+      inputs:
+        text: '“My career coach’s guidance was crucial in helping me understand the tech industry landscape and ultimately secure my role.”'
+        media:
+          target_uuid: 0f40c577-d3b2-4f5d-8609-9ffacbc39a91
+        align: left
+    -
+      parent_uuid: 200da8bd-0f11-4396-9b4b-1a56cdc12d97
+      slot: container_region
+      uuid: b9b974cf-e992-4bf1-9c98-a998ca14145d
+      component_id: sdc.mercury.card-testimonial
+      inputs:
+        text: '“My career coach’s guidance was crucial in helping me understand the tech industry landscape and ultimately secure my role.”'
+        media:
+          target_uuid: 68b83394-2582-4c2b-a25e-dbe1ba370dc9
+        align: left
+    -
+      uuid: da67c79d-cd2f-46c5-a926-3f28fdfef477
+      component_id: sdc.mercury.grid-container
+      inputs:
+        columns: '100'
+        grid_header: true
+        grid_footer: true
+        margin_before: normal
+        margin_after: normal
+        width: full
+        color_mode: light
+    -
+      parent_uuid: da67c79d-cd2f-46c5-a926-3f28fdfef477
+      slot: header_region
+      uuid: fb7b4197-5686-4f9a-99ce-ca2d326f69c5
+      component_id: sdc.mercury.heading
+      inputs:
+        heading_text: 'Explore our blog posts'
+        level: 2
+        styles: default
+        url: /blog
+        align: center
+    -
+      parent_uuid: da67c79d-cd2f-46c5-a926-3f28fdfef477
+      slot: container_region
+      uuid: 0752d4c3-6e64-4ce1-8979-86e741889d3c
+      component_id: block.views_block.blog-latest
+      inputs:
+        label: 'Blog: Latest blog posts'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+    -
+      uuid: 71f11827-ac09-4360-b6e7-a5625eefeefe
+      component_id: sdc.mercury.cta
+      inputs:
+        heading_text: 'Get ready to transform your operations'
+        level:
+          sourceType: 'static:field_item:list_float'
+          value: 2
+          expression: ℹ︎list_float␟value
+          sourceTypeSettings:
+            storage:
+              allowed_values:
+                -
+                  value: 1
+                  label: '1'
+                -
+                  value: 2
+                  label: '2'
+                -
+                  value: 3
+                  label: '3'
+                -
+                  value: 4
+                  label: '4'
+                -
+                  value: 5
+                  label: '5'
+                -
+                  value: 6
+                  label: '6'
+        text: 'Sign up for a free trial and discover a world of possibilities to elevate your outreach and engagement strategies'
+        media:
+          sourceType: default-relative-url
+          value:
+            src: assets/256381.jpg
+            alt: 'Photo by pixabay'
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                pattern: '^(/|https?://)?(?!.*\://)[^\s]+$'
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.mercury.cta
+        text_align: center
+    -
+      parent_uuid: 71f11827-ac09-4360-b6e7-a5625eefeefe
+      slot: actions
+      uuid: fa5db13d-4cf8-4dcd-b06d-58d395620ac6
+      component_id: sdc.mercury.button
+      inputs:
+        variant: primary
+        disabled: false
+        label: 'Get started'
+        size: medium
+        icon: ph-arrow-right
+        icon_first: false
+        href: /pricing
+    -
+      parent_uuid: 71f11827-ac09-4360-b6e7-a5625eefeefe
+      slot: actions
+      uuid: 03f05df0-e510-45cf-8e3c-61d119c6de66
+      component_id: sdc.mercury.button
+      inputs:
+        variant: secondary
+        disabled: false
+        label: 'Learn more'
+        size: medium
+        icon: ph-arrow-right
+        icon_first: false
+        href: /features
+  path:
+    -
+      alias: /home
+      langcode: en
+  created:
+    -
+      value: 1735191284
+  revision_translation_affected:
+    -
+      value: true
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 20354d7a-e4fe-47af-8ff6-187bca92f3f7
+  default_langcode: en
+  depends:
+    fbff512d-9dc6-49ba-8321-2a826ca84e10: media
+    2f5a9129-21b9-410b-b197-2fac4a9ab4b3: media
+    8247692c-5c63-4e79-bf9b-734189b56e1e: media
+    640d837b-b682-4503-aa95-2b7583e3b08a: media
+    f27e8623-bbc7-43c1-8223-809648bfd188: media
+    b3cfd8ef-fdf8-496e-b7a6-a113ecd5a907: media
+    0f40c577-d3b2-4f5d-8609-9ffacbc39a91: media
+    68b83394-2582-4c2b-a25e-dbe1ba370dc9: media

@@ -1,0 +1,46 @@
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Blog
+  components:
+    -
+      uuid: f08be9dc-e328-4cb7-9499-df6db9bd8900
+      component_id: sdc.mercury.heading
+      inputs:
+        heading_text: Blog
+        level: 1
+        styles: default
+        align: left
+        url: 'No URL'
+    -
+      uuid: 4522dd81-b1fc-4f58-a384-7d07b289db7c
+      component_id: block.views_block.blog-all
+      inputs:
+        label: 'Blog: All blog posts'
+        label_display: '0'
+        views_label: ''
+        items_per_page: null
+  path:
+    -
+      alias: /blog
+      langcode: en
+  created:
+    -
+      value: 1735191284
+  revision_translation_affected:
+    -
+      value: true
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 30ff6149-af31-4818-be29-07148e06bf47
+  default_langcode: en

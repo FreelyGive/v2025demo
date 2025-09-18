@@ -1,0 +1,89 @@
+name: Byte
+type: Site
+description: 'Designed for a SaaS product website, this template includes landing pages, a blog, newsletter sign up and other features.'
+recipes:
+  - drupal_cms_blog
+  - drupal_cms_forms
+  - drupal_cms_seo_tools
+  - drupal_cms_starter
+install:
+  - gin_login
+  - ui_icons_menu
+config:
+  strict: false
+  import:
+    system:
+      - system.menu.footer
+  actions:
+    # Blog posts cannot render properly without a featured image, so
+    # make the field required.
+    field.field.node.blog.field_featured_image:
+      setRequired: true
+    # Allow Canvas to render all content types.
+    field.storage.node.field_component_tree:
+      addToAllBundles:
+        label: Components
+        description: Stores a component tree for Canvas.
+    # Use Mercury's dark color scheme by default.
+    mercury.settings:
+      simpleConfigUpdate:
+        scheme: byte-dark
+    # Only show basic metatag fields on Canvas pages.
+    metatag.settings:
+      simpleConfigUpdate:
+        entity_type_groups:
+          canvas_page:
+            canvas_page:
+              basic: basic
+    # Allow basic pages to go into the main menu, or the footer.
+    node.type.page:
+      setThirdPartySettings:
+        -
+          module: menu_ui
+          key: available_menus
+          value:
+            - main
+            - footer
+            - utility
+        -
+          module: menu_ui
+          key: parent
+          value: 'main:'
+    system.site:
+      simpleConfigUpdate:
+        # The Home page, built in Canvas.
+        page.front: '/home'
+    views.view.blog:
+      setProperties:
+        # Opt this view into the grid-snap styling that Mercury offers.
+        tag: 'snap'
+        # The default display should show 6 items per page, with a full pager.
+        display.default.display_options.pager:
+          type: full
+          options:
+            offset: 0
+            pagination_heading_level: h4
+            items_per_page: 6
+            total_pages: null
+            id: 0
+            tags:
+              next: ››
+              previous: ‹‹
+              first: '« First'
+              last: 'Last »'
+            expose:
+              items_per_page: false
+              items_per_page_label: 'Items per page'
+              items_per_page_options: '5, 10, 25, 50'
+              items_per_page_options_all: false
+              items_per_page_options_all_label: '- All -'
+              offset: false
+              offset_label: Offset
+            quantity: 9
+        # Remove header text.
+        display.latest.display_options.header: []
+        # Hide the tags filter.
+        display.all.display_options.filters.field_tags_target_id.exposed: false
+    webform.webform.contact_form:
+      setProperties:
+        settings.confirmation_type: modal

@@ -1,0 +1,35 @@
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: blog_thumb_4.png
+  created:
+    -
+      value: 1752178333
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  field_media_image:
+    -
+      alt: "A laptop with a person's hand on the keyboard, and the other hand holding a phone."
+      title: ''
+      width: 408
+      height: 306
+      entity: 7fc6f0c6-a2d2-4c50-b47a-ccbd9ddeae28
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 917307b6-d823-42f5-b58e-66594030bc37
+  bundle: image
+  default_langcode: en
+  depends:
+    7fc6f0c6-a2d2-4c50-b47a-ccbd9ddeae28: file

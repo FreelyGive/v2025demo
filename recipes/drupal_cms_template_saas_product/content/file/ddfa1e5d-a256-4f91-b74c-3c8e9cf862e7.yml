@@ -1,0 +1,27 @@
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: blog_thumb_1.png
+  uri:
+    -
+      value: 'public://2025-07/blog_thumb_1.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 370643
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1752177685
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: ddfa1e5d-a256-4f91-b74c-3c8e9cf862e7
+  default_langcode: en

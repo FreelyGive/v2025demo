@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_blog__byline
+    - node.type.blog
+id: node.blog.field_blog__byline
+field_name: field_blog__byline
+entity_type: node
+bundle: blog
+label: Byline
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
