@@ -1,0 +1,144 @@
+{
+    "_info": [
+        "This file contains internal development dependencies and patches for Drupal CMS.",
+        "Do NOT use it to build a real site!"
+    ],
+    "repositories": {
+        "accessibility_tools": {
+            "type": "path",
+            "url": "recipes/drupal_cms_accessibility_tools"
+        },
+        "admin_ui": {
+            "type": "path",
+            "url": "recipes/drupal_cms_admin_ui"
+        },
+        "ai": {
+            "type": "path",
+            "url": "recipes/drupal_cms_ai"
+        },
+        "anti_spam": {
+            "type": "path",
+            "url": "recipes/drupal_cms_anti_spam"
+        },
+        "authentication": {
+            "type": "path",
+            "url": "recipes/drupal_cms_authentication"
+        },
+        "blog": {
+            "type": "path",
+            "url": "recipes/drupal_cms_blog"
+        },
+        "case_study": {
+            "type": "path",
+            "url": "recipes/drupal_cms_case_study"
+        },
+        "content_type_base": {
+            "type": "path",
+            "url": "recipes/drupal_cms_content_type_base"
+        },
+        "events": {
+            "type": "path",
+            "url": "recipes/drupal_cms_events"
+        },
+        "forms": {
+            "type": "path",
+            "url": "recipes/drupal_cms_forms"
+        },
+        "google_analytics": {
+            "type": "path",
+            "url": "recipes/drupal_cms_google_analytics"
+        },
+        "helper": {
+            "type": "path",
+            "url": "drupal_cms_helper"
+        },
+        "image": {
+            "type": "path",
+            "url": "recipes/drupal_cms_image"
+        },
+        "news": {
+            "type": "path",
+            "url": "recipes/drupal_cms_news"
+        },
+        "page": {
+            "type": "path",
+            "url": "recipes/drupal_cms_page"
+        },
+        "person": {
+            "type": "path",
+            "url": "recipes/drupal_cms_person"
+        },
+        "privacy_basic": {
+            "type": "path",
+            "url": "recipes/drupal_cms_privacy_basic"
+        },
+        "project": {
+            "type": "path",
+            "url": "recipes/drupal_cms_project"
+        },
+        "remote_video": {
+            "type": "path",
+            "url": "recipes/drupal_cms_remote_video"
+        },
+        "search": {
+            "type": "path",
+            "url": "recipes/drupal_cms_search"
+        },
+        "seo_basic": {
+            "type": "path",
+            "url": "recipes/drupal_cms_seo_basic"
+        },
+        "seo_tools": {
+            "type": "path",
+            "url": "recipes/drupal_cms_seo_tools"
+        },
+        "starter": {
+            "type": "path",
+            "url": "recipes/drupal_cms_starter"
+        },
+        "template_saas_product": {
+            "type": "path",
+            "url": "recipes/drupal_cms_template_saas_product"
+        }
+    },
+    "require-dev": {
+        "cweagans/composer-patches": "^2",
+        "drupal/core-dev": "^11.2.4",
+        "drupal/drupal_cms_blog": "^2",
+        "drupal/drupal_cms_case_study": "^2",
+        "drupal/drupal_cms_events": "^2",
+        "drupal/drupal_cms_news": "^2",
+        "drupal/drupal_cms_page": "^2",
+        "drupal/drupal_cms_person": "^2",
+        "drupal/drupal_cms_project": "^2",
+        "drupal/drupal_cms_template_saas_product": "^1"
+    },
+    "autoload-dev": {
+        "classmap": [
+            "Scripts.php"
+        ]
+    },
+    "scripts": {
+        "dev:recommend": "Scripts::recommend"
+    },
+    "scripts-descriptions": {
+        "dev:recommend": "Adds an installed package to the curated list of recommended projects."
+    },
+    "config": {
+        "allow-plugins": {
+            "cweagans/composer-patches": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "phpstan/extension-installer": true,
+            "tbachert/spi": true
+        }
+    },
+    "extra": {
+        "patches": {
+            "drupal/core": {
+                "#3530597: There is no config schema for the `value` property of `datetime` fields": "./patches/core/date-field-default-value.patch",
+                "Add content export": "./patches/core/content-export.patch"
+            }
+        }
+    },
+    "minimum-stability": "dev"
+}

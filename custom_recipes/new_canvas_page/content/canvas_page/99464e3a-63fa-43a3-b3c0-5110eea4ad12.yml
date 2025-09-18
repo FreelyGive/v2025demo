@@ -30,14 +30,3 @@ default:
   revision_translation_affected:
     -
       value: true
-  metatag:
-    -
-      tag: meta
-      attributes:
-        name: title
-        content: 'Awesome Drupal Canvas Demo'
-    -
-      tag: link
-      attributes:
-        rel: canonical
-        href: /page/2

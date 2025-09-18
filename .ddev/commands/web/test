@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+## Description: Runs PHPUnit and Cypress tests.
+## Usage: test [RECIPE_NAME]
+## Example: "ddev test"
+## Example: "ddev test recipes/drupal_cms_starter"
+
+# Abort this script if any step of it fails.
+set -e
+
+TEST_DIRECTORIES=$1
+if [ -z "$TEST_DIRECTORIES" ]; then
+  TEST_DIRECTORIES="recipes project_template drupal_cms_olivero"
+fi
+phpunit --configuration=$DDEV_DOCROOT/core $TEST_DIRECTORIES
+
+if [ -z "$1" ]; then
+  npm test
+elif [ -d "$1/tests/e2e" ]; then
+  npm test -- --spec="$1/tests/e2e/*.cy.js"
+fi

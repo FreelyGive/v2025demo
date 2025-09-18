@@ -1,5 +1,0 @@
-command:
-  site:
-    install:
-      options:
-        account-pass: admin

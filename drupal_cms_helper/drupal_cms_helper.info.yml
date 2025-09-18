@@ -1,0 +1,7 @@
+name: Drupal CMS Helper
+type: module
+package: Drupal CMS
+core_version_requirement: ^11.2.4
+description: 'Provides functionality for Drupal CMS that is not yet in Drupal core or dependencies. Should not be uninstalled.'
+dependencies:
+  - drupal:path_alias

@@ -1,0 +1,7 @@
+{
+    "name": "drupal/cms_cpanel",
+    "version": "2.x-dev",
+    "description": "Drupal CMS is a ready-to-use platform built on Drupal core, offering smart defaults to get started quickly and enterprise-grade tools for marketers, designers, and content creators.",
+    "type": "project",
+    "license": "GPL-2.0-or-later"
+}

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+## Description: Clears the cache of reasons why certain components are incompatible with XB.
+## Usage: xb-audit
+## Example: "ddev xb-audit"
+
+drush php:eval 'Drupal::service("keyvalue")->get("experience_builder:component:reasons")->deleteAll();'

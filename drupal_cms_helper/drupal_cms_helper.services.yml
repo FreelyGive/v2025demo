@@ -1,0 +1,6 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+  Drupal\drupal_cms_helper\EventSubscriber\RecipeSubscriber: ~
+  Drupal\drupal_cms_helper\EventSubscriber\DefaultContentSubscriber: ~

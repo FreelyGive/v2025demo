@@ -1,0 +1,41 @@
+# The current committers own anything that's not explicitly assigned.
+* @phenaproxima @tim.plunkett @thejimbirch @penyaskito
+
+[analytics track] @dharizza
+/recipes/drupal_cms_google_analytics/
+
+[base recipes] @pameeela
+/recipes/drupal_cms_admin_theme/
+/recipes/drupal_cms_content_type_base/
+/recipes/drupal_cms_starter/
+
+[blog track] @L_VanDamme
+/recipes/drupal_cms_blog/
+/recipes/drupal_cms_case_study/
+/recipes/drupal_cms_news/
+/recipes/drupal_cms_person/
+/recipes/drupal_cms_project/
+
+[media track] @tonypaulbarker
+/recipes/drupal_cms_image/
+/recipes/drupal_cms_remote_video/
+
+[events track] @mandclu
+/recipes/drupal_cms_events/
+/recipes/drupal_cms_locations/
+
+[dashboard track] @penyaskito @mtift @plopesc
+/recipes/drupal_cms_dashboard/
+
+[accessibility track] @the_g_bomb
+/recipes/drupal_cms_accessibility_tools/
+
+[contact form track] @artinruins
+/recipes/drupal_cms_forms/
+
+[SEO track] @thejimbirch @doylejd
+/recipes/drupal_cms_seo_basic/
+/recipes/drupal_cms_seo_tools/
+
+[documentation] @amberhimesmatz @eojthebrave
+/docs/

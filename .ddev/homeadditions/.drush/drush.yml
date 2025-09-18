@@ -1,0 +1,9 @@
+# Contains system-wide, user-specific configuration for Drush. These options are
+# only used for local development.
+# @see https://drush.org/latest/using-drush-configuration
+command:
+  site:
+    install:
+      options:
+        account-pass: admin
+        site-name: Drupal CMS

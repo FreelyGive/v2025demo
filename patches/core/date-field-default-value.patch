@@ -1,0 +1,23 @@
+diff --git a/core/modules/datetime/config/schema/datetime.schema.yml b/core/modules/datetime/config/schema/datetime.schema.yml
+index a6047ee4e1bd1dc45f121e00aee5a2ab4e30441e..fe99a25dd0201b09edf6623f74be4e90f71f0105 100644
+--- a/core/modules/datetime/config/schema/datetime.schema.yml
++++ b/core/modules/datetime/config/schema/datetime.schema.yml
+@@ -10,6 +10,8 @@ field.storage_settings.datetime:
+       type: string
+       label: 'Date type'
+
++# @todo Add constraints to this structure and mark it as fully validatable
++# in https://www.drupal.org/i/3530599.
+ field.value.datetime:
+   type: mapping
+   label: 'Default value'
+@@ -20,6 +22,9 @@ field.value.datetime:
+     default_date:
+       type: string
+       label: 'Default date value'
++    value:
++      type: ignore
++      label: 'Default value'
+
+ field.formatter.settings.datetime_base:
+   type: mapping

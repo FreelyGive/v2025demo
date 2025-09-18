@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+## Description: Drops your database and installs drupal_cms_template_saas_product.
+## Usage: install-byte
+## Example: "ddev install-byte"
+
+drush si drupal_cms_installer installer_site_template_form.add_ons=drupal_cms_template_saas_product --yes

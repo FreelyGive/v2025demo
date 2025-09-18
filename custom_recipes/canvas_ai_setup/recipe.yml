@@ -1,0 +1,14 @@
+name: Canvas AI Setup
+type: Demo
+description: Setup AI stuff for Canvas
+install:
+  - key
+  - ai
+  - ai_agents
+  - ai_provider_openai
+  - canvas_ai
+config:
+  import:
+    ai_agents: '*'
+    canvas_ai: '*'
+    key: '*'
