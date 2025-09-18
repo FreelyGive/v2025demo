@@ -17,7 +17,7 @@ A demo Drupal 11 for the V 2025 project. This will install:
 
 ## To install
 * `cp .ddev/.env.template .ddev/.env` and set your OpenAI key in the file.
-* `ddev setup-demo`
+* `ddev demo-setup`
 
 ## Keep in sync with origin
 We should later use create-project, but that is failing for now due to dependency issues.
