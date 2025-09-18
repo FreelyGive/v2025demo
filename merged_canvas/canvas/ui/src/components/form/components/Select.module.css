@@ -1,0 +1,45 @@
+.select {
+  display: inline-flex;
+  align-items: center;
+  min-width: 50%;
+  max-width: 100%;
+  min-height: 32px;
+  border: none;
+  border-radius: 4px;
+  background-color: #F0F0F3;
+  font-size: 14px;
+  appearance: base-select;
+  padding-inline: 12px;
+  &::picker-icon {
+    width: 8px;
+    height: 8px;
+    color: transparent;
+    border: none;
+    background-image: url('../../../../assets/icons/select-chevron.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 120%;
+  }
+  option {
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 20px;
+
+    &:hover, &:focus-visible {
+      color: #FFF;
+      background-color: #0190ff;
+    }
+  }
+  &::picker(select) {
+    top: -40px;
+    left: -10px;
+    min-width: calc(anchor-size(width) * 1.1);
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    background-color: #FFF;
+    box-shadow: 0 0 0 1px color-mix(in oklab, color(display-p3 0 0 0 / 0.063), color(display-p3 0.939 0.939 0.939) 25%), 0 12px 60px color(display-p3 0 0 0 / 0.15), 0 12px 32px -16px color(display-p3 0 0 0 / 0.122);
+    appearance: base-select;
+  }
+}
+

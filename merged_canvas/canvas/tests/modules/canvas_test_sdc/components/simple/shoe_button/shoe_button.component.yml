@@ -1,0 +1,147 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json'
+name: Shoe Button
+status: stable
+group: Atom
+description: https://shoelace.style/components/button
+libraryOverrides:
+  dependencies:
+    - canvas/shoelace
+props:
+  type: object
+  required:
+    - variant
+  properties:
+    label:
+      type: string
+      title: Label
+      description: The button label
+      examples: ['A button label']
+    variant:
+      type: string
+      title: Variant
+      description: The button’s theme variant.
+      default: primary
+      enum:
+        - 'default'
+        - 'primary'
+        - 'success'
+        - 'neutral'
+        - 'warning'
+        - 'danger'
+        - 'text'
+      meta:enum:
+        default: Default
+        primary: Primary
+        success: Success
+        neutral: Neutral
+        warning: Warning
+        danger: Danger
+        text: Text
+      examples:
+        [
+          'default',
+          'primary',
+          'success',
+          'neutral',
+          'warning',
+          'danger',
+          'text',
+        ]
+    size:
+      type: string
+      title: Size
+      description: The button’s size.
+      default: medium
+      enum:
+        - 'small'
+        - 'medium'
+        - 'large'
+      meta:enum:
+        small: Small
+        medium: Medium
+        large: Large
+      examples: ['small', 'medium', 'large']
+    disabled:
+      type: boolean
+      title: Disabled
+      description: Disables the button
+      default: false
+      examples: [false, true]
+    loading:
+      type: boolean
+      title: Loading
+      description: Draws the button in a loading state.
+      default: false
+      examples: [false, true]
+    outline:
+      type: boolean
+      title: Outline
+      description: Draws an outlined button.
+      default: false
+      examples: [false, true]
+    pill:
+      type: boolean
+      title: Pill
+      description: Draws a pill-style button with rounded edges.
+      default: false
+      examples: [false, true]
+    circle:
+      type: boolean
+      title: Circle
+      description: Draws a circular icon button. When this attribute is present, the button expects a single <sl-icon> in the default slot.
+      default: false
+      examples: [false, true]
+    href:
+      type: string
+      title: Link
+      description: When set, the underlying button will be rendered as an <a> with this href instead of a <button>.
+      examples: ['https://google.com', '']
+      # @todo this should be exposed as a Drupal link field in the form
+    target:
+      type: string
+      title: Target
+      description: Tells the browser where to open the link. Only used when href is present.
+      default: _blank
+      enum:
+        - '_blank'
+        - '_parent'
+        - '_self'
+        - '_top'
+      meta:enum:
+        _blank: Blank
+        _parent: Parent
+        _self: Self
+        _top: Top
+      examples: ['_blank', '_parent', '_self', '_top']
+      # @todo this prop should only show in the form when href has a value
+    rel:
+      type: string
+      title: Rel
+      description: When using href, this attribute will map to the underlying link’s rel attribute. Unlike regular links, the default is noreferrer noopener to prevent security exploits. However, if you’re using target to point to a specific tab/window, this will prevent that from working correctly. You can remove or change the default value by setting the attribute to an empty string or a value of your choice, respectively.
+      default: 'noreferrer noopener'
+      examples: ['noreferrer noopener']
+      # @todo this prop should only show in the form when href has a value
+    download:
+      type: string
+      title: Download file name
+      description: Tells the browser to download the linked file as this filename. Only used when href is present.
+      default: ''
+      examples: ['test.txt']
+      # @todo this prop should only show in the form when href has a value
+    icon:
+      title: Icon
+      $ref: json-schema-definitions://canvas.module/shoe-icon
+      type: object
+    icon_position:
+      type: string
+      title: Icon position
+      description: Place the icon before or after the label
+      default: 'prefix'
+      enum:
+        - 'prefix'
+        - 'suffix'
+      meta:enum:
+        prefix: Prefix
+        suffix: Suffix
+      examples: ['prefix', 'suffix']
+      # @todo this prop should only show in the form when href has a value

@@ -1,0 +1,6 @@
+type: module
+name: Drupal Canvas Vite Integration
+description: "Enables Hot Module Replacement (HMR) for Drupal Canvas via the Vite development server."
+core_version_requirement: ^10 || ^11
+dependencies:
+  - canvas:canvas

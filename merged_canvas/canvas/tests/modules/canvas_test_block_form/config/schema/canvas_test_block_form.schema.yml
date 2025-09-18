@@ -1,0 +1,13 @@
+block.settings.canvas_test_block_form:
+  type: block_settings
+  label: 'Canvas Test block settings'
+  constraints:
+    FullyValidatable: ~
+  mapping:
+    canvas_page:
+      type: integer
+      label: 'Referenced entity ID'
+    multiplier:
+      type: integer
+      label: 'Multiplier'
+

@@ -1,0 +1,31 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json'
+name: Shoe Tab Panel
+status: stable
+group: Atom/Tabs
+description: https://shoelace.style/components/tab-panel
+libraryOverrides:
+  dependencies:
+    - canvas/shoelace
+props:
+  type: object
+  required:
+    - name
+  properties:
+    name:
+      type: string
+      title: Name
+      description: The tab panel&#039;s name.
+      examples: ['tab_name']
+    active:
+      type: boolean
+      title: Active
+      description: When true, the tab panel will be shown.
+      default: false
+      examples: []
+slots:
+  content:
+    title: Tab Content
+    description: The contents of the tab.
+    # @todo can_be_dropzone: true
+    examples:
+      - <p>This is tab content</p>

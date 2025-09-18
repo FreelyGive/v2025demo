@@ -1,0 +1,81 @@
+<?php
+
+declare(strict_types=1);
+
+use Drupal\canvas\Entity\Pattern;
+use Drupal\canvas\Entity\Component;
+
+/**
+ * Creates multiple Patterns for testing Folder functionality.
+ *
+ * 💡 Does not use exported config to avoid chasing evolving active versions.
+ */
+function canvas_test_patterns_install(): void {
+  $component_tree = [
+    0 => [
+      'uuid' => '60cb8b4c-3753-4838-8b56-314626395eb7',
+      'component_id' => 'sdc.canvas_test_sdc.grid-container',
+      'component_version' => Component::load('sdc.canvas_test_sdc.grid-container')?->getActiveVersion(),
+      'inputs' => [
+        'direction' => 'horizontal',
+      ],
+    ],
+    '0:content:0' => [
+      'parent_uuid' => '60cb8b4c-3753-4838-8b56-314626395eb7',
+      'slot' => 'content',
+      'uuid' => '53533adf-0540-495c-9e40-95a610555ab3',
+      'component_id' => 'sdc.canvas_test_sdc.druplicon',
+      'component_version' => Component::load('sdc.canvas_test_sdc.druplicon')?->getActiveVersion(),
+      'inputs' => [],
+    ],
+    '0:content:1' => [
+      'parent_uuid' => '60cb8b4c-3753-4838-8b56-314626395eb7',
+      'slot' => 'content',
+      'uuid' => 'af6a314a-41e3-4aba-8682-8479b42bb077',
+      'component_id' => 'sdc.canvas_test_sdc.my-hero',
+      'component_version' => Component::load('sdc.canvas_test_sdc.my-hero')?->getActiveVersion(),
+      'inputs' => [
+        'heading' => 'There goes my hero',
+        'subheading' => 'Watch him as he goes!',
+        'cta1' => 'View',
+        'cta1href' => [
+          'uri' => 'https://example.com',
+          'options' => [],
+        ],
+        'cta2' => 'Click',
+      ],
+    ],
+  ];
+
+  Pattern::create([
+    'id' => 'grid_container_using_pattern',
+    'label' => 'Grid Container using pattern',
+    'status' => TRUE,
+    'component_tree' => $component_tree,
+  ])->save();
+  Pattern::create([
+    'id' => 'red_pattern',
+    'label' => 'Red pattern',
+    'status' => TRUE,
+    'component_tree' => $component_tree,
+  ])->save();
+  Pattern::create([
+    'id' => 'yellow_pattern',
+    'label' => 'Yellow pattern',
+    'status' => TRUE,
+    'component_tree' => $component_tree,
+  ])->save();
+  Pattern::create([
+    'id' => 'dog_pattern',
+    'label' => 'Dog pattern',
+    'status' => TRUE,
+    'component_tree' => $component_tree,
+  ])->save();
+  Pattern::create([
+    'id' => 'cat_pattern',
+    'label' => 'Cat pattern',
+    'status' => TRUE,
+    'component_tree' => $component_tree,
+  ])->save();
+}
+

@@ -1,0 +1,6 @@
+name: Drupal Canvas AI test
+type: module
+description: 'Support module for testing Drupal Canvas AI.'
+package: Testing
+dependencies:
+  - canvas_ai:canvas_ai

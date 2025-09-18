@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: f33106ad-0145-44e4-8382-73ec61ffa6af
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Page without a path'
+  description:
+    -
+      value: 'This is a page without a path'
+  path:
+    -
+      alias: ''
+      langcode: en
+  created:
+    -
+      value: 1748379794
+  revision_translation_affected:
+    -
+      value: true

@@ -1,0 +1,6 @@
+# @todo Delete this module in https://www.drupal.org/project/canvas/issues/3543533
+name: 'Test Internal Code Components'
+type: module
+dependencies:
+  - canvas:canvas
+package: Testing

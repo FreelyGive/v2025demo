@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies: {}
+id: halloween
+label: Halloween
+description: 'Halloween campaign'
+rules:
+  utm_parameters:
+    id: utm_parameters
+    negate: false
+    all: true
+    parameters:
+      -
+        key: utm_campaign
+        value: HALLOWEEN
+        matching: exact

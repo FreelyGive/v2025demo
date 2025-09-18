@@ -1,0 +1,262 @@
+- tabpanel "Components":
+  - button "Add new folder":
+    - img
+  - img
+  - button "@todo"
+  - button "Collapse @todo folder" [expanded]:
+    - img
+  - list:
+    - listitem:
+      - img
+      - text: Captioned video
+      - button "Open contextual menu"
+    - listitem:
+      - img
+      - text: Component using imports
+      - button "Open contextual menu"
+    - listitem:
+      - img
+      - text: Interactive
+      - button "Open contextual menu"
+    - listitem:
+      - img
+      - text: My Code Component Link
+      - button "Open contextual menu"
+    - listitem:
+      - img
+      - text: Using drupalSettings getSiteData
+      - button "Open contextual menu"
+    - listitem:
+      - img
+      - text: Vanilla Image
+      - button "Open contextual menu"
+    - listitem:
+      - img
+      - text: With enums
+      - button "Open contextual menu"
+    - listitem:
+      - img
+      - text: With no props
+      - button "Open contextual menu"
+    - listitem:
+      - img
+      - text: With props
+      - button "Open contextual menu"
+    - listitem:
+      - img
+      - text: With slot
+      - button "Open contextual menu"
+  - img
+  - button "Atom/Media"
+  - button "Collapse Atom/Media folder" [expanded]:
+    - img
+  - list:
+    - listitem:
+      - img
+      - text: Video
+  - img
+  - button "Atom/Tabs"
+  - button "Collapse Atom/Tabs folder" [expanded]:
+    - img
+  - list:
+    - listitem:
+      - img
+      - text: Shoe Tab
+    - listitem:
+      - img
+      - text: Shoe Tab Panel
+  - img
+  - button "Atom/Text"
+  - button "Collapse Atom/Text folder" [expanded]:
+    - img
+  - list:
+    - listitem:
+      - img
+      - text: Heading
+    - listitem:
+      - img
+      - text: Shoe Badge
+  - img
+  - button "Container"
+  - button "Collapse Container folder" [expanded]:
+    - img
+  - list:
+    - listitem:
+      - img
+      - text: Grid Container
+    - listitem:
+      - img
+      - text: One Column
+    - listitem:
+      - img
+      - text: Two Column
+  - img
+  - button "Container/Special"
+  - button "Collapse Container/Special folder" [expanded]:
+    - img
+  - list:
+    - listitem:
+      - img
+      - text: Shoe Tab Group
+  - img
+  - button "core"
+  - button "Collapse core folder" [expanded]:
+    - img
+  - list:
+    - listitem:
+      - img
+      - text: Page title
+    - listitem:
+      - img
+      - text: Primary admin actions
+    - listitem:
+      - img
+      - text: Tabs
+  - img
+  - button "Empty Components"
+  - button "Collapse Empty Components folder" [expanded]:
+    - img
+  - list
+  - img
+  - button "Forms"
+  - button "Collapse Forms folder" [expanded]:
+    - img
+  - list:
+    - listitem:
+      - img
+      - text: User login
+  - img
+  - button "Lists (Views)"
+  - button "Collapse Lists (Views) folder" [expanded]:
+    - img
+  - list:
+    - listitem:
+      - img
+      - text: Recent content
+    - listitem:
+      - img
+      - text: Who's online
+  - img
+  - button "Menus"
+  - button "Collapse Menus folder" [expanded]:
+    - img
+  - list:
+    - listitem:
+      - img
+      - text: Administration
+    - listitem:
+      - img
+      - text: Footer
+    - listitem:
+      - img
+      - text: Main navigation
+    - listitem:
+      - img
+      - text: Tools
+    - listitem:
+      - img
+      - text: User account menu
+  - img
+  - button "Other"
+  - button "Collapse Other folder" [expanded]:
+    - img
+  - list:
+    - listitem:
+      - img
+      - text: Call to Absolute Action
+    - listitem:
+      - img
+      - text: Canvas test SDC for image gallery (>1 image)
+    - listitem:
+      - img
+      - text: /Canvas test SDC for sparkline \(>1 integers between -\d+ and \d+\)/
+    - listitem:
+      - img
+      - text: "Canvas test SDC for testing type: `Drupal\\Core\\Template\\Attribute` special casing"
+    - listitem:
+      - img
+      - text: Canvas test SDC that crashes when 'crash' prop is TRUE
+    - listitem:
+      - img
+      - text: Canvas test SDC with optional image and heading
+    - listitem:
+      - img
+      - text: Canvas test SDC with optional image, with example
+    - listitem:
+      - img
+      - text: Canvas test SDC with optional image, without example
+    - listitem:
+      - img
+      - text: Canvas test SDC with props and slots
+    - listitem:
+      - img
+      - text: Canvas test SDC with props but no slots
+    - listitem:
+      - img
+      - text: Canvas test SDC with required image, with example
+    - listitem:
+      - img
+      - text: Card
+    - listitem:
+      - img
+      - text: Card with local image
+    - listitem:
+      - img
+      - text: Card with remote image
+    - listitem:
+      - img
+      - text: Card with stream wrapper image
+    - listitem:
+      - img
+      - text: Component no meta:enum
+    - listitem:
+      - img
+      - text: Druplicon
+    - listitem:
+      - img
+      - text: Hero
+    - listitem:
+      - img
+      - text: Section
+    - listitem:
+      - img
+      - text: Test SDC Image
+  - img
+  - button "Status"
+  - button "Collapse Status folder" [expanded]:
+    - img
+  - list:
+    - listitem:
+      - img
+      - text: Deprecated SDC
+    - listitem:
+      - img
+      - text: Experimental SDC
+  - img
+  - button "System"
+  - button "Collapse System folder" [expanded]:
+    - img
+  - list:
+    - listitem:
+      - img
+      - text: Breadcrumbs
+    - listitem:
+      - img
+      - text: Clear cache
+    - listitem:
+      - img
+      - text: Messages
+    - listitem:
+      - img
+      - text: Powered by Drupal
+    - listitem:
+      - img
+      - text: Site branding
+  - img
+  - button "User"
+  - button "Collapse User folder" [expanded]:
+    - img
+  - list:
+    - listitem:
+      - img
+      - text: Who's new

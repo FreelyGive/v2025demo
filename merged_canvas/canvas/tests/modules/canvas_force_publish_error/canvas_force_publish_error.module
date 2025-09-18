@@ -1,0 +1,17 @@
+<?php
+
+declare(strict_types=1);
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityStorageException;
+
+/**
+ * Implements hook_entity_presave().
+ */
+function canvas_force_publish_error_entity_presave(EntityInterface $entity): void {
+  // Check if entity has a title/label and it contains "cause exception".
+  $label = $entity->label();
+  if ($label && stripos((string) $label, 'cause exception') !== FALSE) {
+    throw new EntityStorageException('Forced exception for testing purposes.');
+  }
+}

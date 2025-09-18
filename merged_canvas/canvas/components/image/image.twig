@@ -1,0 +1,24 @@
+{% set width = width ?? src|getWidth %}
+{% set height = height ?? src|getHeight %}
+{% set srcset = src|toSrcSet(width) %}
+{# Convert any stream wrapper image URL to a public, browser-resolvable URL. (No-op if not stream wrapper image URL. #}
+{% set src = file_url(src) %}
+<img
+   class="{{ class ?? 'image' }}"
+   src="{{ src }}"
+   {% if srcset and srcset is not empty %}
+     srcset="{{ srcset }}"
+     sizes="{{ sizes ?? 'auto 100vw' }}"
+   {% endif %}
+   {% if alt %}
+     alt="{{ alt }}"
+   {% endif %}
+   {% if width %}
+     width="{{ width }}"
+   {% endif %}
+   {% if height %}
+     height="{{ height }}"
+   {% endif %}
+   loading="{{ loading ?? 'lazy' }}"
+   {{ attributes }}
+/>

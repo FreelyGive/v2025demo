@@ -1,0 +1,6 @@
+name: Test Canvas Patterns
+type: module
+dependencies:
+  - canvas:canvas
+  - canvas:canvas_test_sdc
+package: Testing

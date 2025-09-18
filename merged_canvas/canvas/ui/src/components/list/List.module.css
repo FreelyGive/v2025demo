@@ -1,0 +1,49 @@
+.listContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.componentPreviewTooltipContent {
+  transform-origin: var(--radix-tooltip-content-transform-origin);
+  animation: slide-from-left-and-fade-in 200ms ease-out;
+}
+
+@keyframes slide-from-left-and-fade-in {
+  from {
+    transform: translateX(-24px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.folderTrigger {
+  width: 100%;
+  border-radius: var(--radius-2);
+  .chevron {
+    cursor: pointer;
+    &:hover {
+        color: var(--blue-9);
+    }
+  }
+  .folderCount {
+    background-color: var(--gray-3);
+  }
+}
+
+.folderIcon {
+  color: var(--slate-a9);
+}
+
+.chevron {
+  transition: transform 300ms ease-in-out;
+  color: var(--slate-12);
+ &.isOpen {
+    transform: rotate(90deg);
+  }
+}

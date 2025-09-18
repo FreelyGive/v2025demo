@@ -1,0 +1,63 @@
+uuid: 2145a500-2893-4434-9770-513b8e36b245
+langcode: en
+status: true
+dependencies: {  }
+machineName: code_video_required
+name: CodeVideoRequired
+required:
+  - theVideo
+props:
+  theVideo:
+    title: theVideo
+    type: object
+    examples:
+      -
+        src: /ui/assets/videos/bird_vertical.mp4
+        poster: 'https://placehold.co/1080x1920.png?text=Vertical'
+    $ref: 'json-schema-definitions://canvas.module/video'
+  theText:
+    title: theText
+    type: string
+    examples:
+      - 'Some text that serves as an example'
+slots: {  }
+js:
+  original: |+
+    const CodeVideoRequired = ({
+      title = "<h3>Code Video</h3>",
+      theVideo,
+      theText,
+    }) => {
+        const {src, poster} = theVideo;
+        return (
+            <>
+          <video controls src={src} poster={poster}></video>
+          <p>{theText}</p>
+        </>
+        );
+    };
+
+    export default CodeVideoRequired;
+
+  compiled: |
+    import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
+    const CodeVideoRequired = ({ title = "<h3>Code Video</h3>", theVideo, theText })=>{
+        const { src, poster } = theVideo;
+        return /*#__PURE__*/ _jsxs(_Fragment, {
+            children: [
+                /*#__PURE__*/ _jsx("video", {
+                    controls: true,
+                    src: src,
+                    poster: poster
+                }),
+                /*#__PURE__*/ _jsx("p", {
+                    children: theText
+                })
+            ]
+        });
+    };
+    export default CodeVideoRequired;
+css:
+  original: ''
+  compiled: ''
+dataDependencies: []

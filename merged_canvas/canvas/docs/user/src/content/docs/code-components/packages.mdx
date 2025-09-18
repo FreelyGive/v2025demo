@@ -1,0 +1,223 @@
+---
+title: Code components - Using packages
+---
+
+import { LinkButton } from '@astrojs/starlight/components';
+
+## Importing packages
+
+Although a number of useful built-in and bundled packages are provided, you can also import
+any npm package through the web.
+
+```js
+import { motion } from 'https://esm.sh/motion/react?external=react,react-dom';
+```
+
+[esm.sh](https://esm.sh) unwraps all dependencies of the package you import as
+additional import statements. When importing packages that would normally import
+e.g. `react` or `react-dom` themselves, esm.sh can skip returning import
+statements for those packages by appending the URL with `?external`. This is
+important to avoid running multiple versions of React.
+
+## Built-in custom packages
+
+### FormattedText
+
+<LinkButton
+  href="https://git.drupalcode.org/project/canvas/-/blob/0.x/ui/lib/astro-hydration/src/lib/FormattedText.tsx"
+  variant="minimal"
+  icon="external"
+>
+  Source Code
+</LinkButton>
+
+A built-in component to render text with trusted HTML using [`dangerouslySetInnerHTML`](https://react.dev/reference/react-dom/components/common#dangerously-setting-the-inner-html).
+
+The content is safe when processed through Drupal's filter system that is
+[correctly configured](https://www.drupal.org/docs/administering-a-drupal-site/security-in-drupal/configuring-text-formats-aka-input-formats-for-security).
+
+```jsx
+import FormattedText from '@/lib/FormattedText';
+
+export default function Example() {
+  return (
+    <FormattedText>
+      <em>Hello, world!</em>
+    </FormattedText>
+  );
+}
+```
+
+### cn
+
+<LinkButton
+  href="https://git.drupalcode.org/project/canvas/-/blob/1.x/ui/lib/astro-hydration/src/lib/utils.ts"
+  variant="minimal"
+  icon="external"
+>
+  Source Code
+</LinkButton>
+
+Utility for combining Tailwind CSS classes.
+
+```jsx
+import { cn } from '@/lib/utils';
+
+export default function Example() {
+  return <ControlDots className="top-4 left-4 stroke-white absolute" />;
+}
+
+const ControlDots = ({ className }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 31 9"
+    fill="none"
+    strokeWidth="2"
+    className={cn('w-12', className)}
+  >
+    <ellipse cx="4.13" cy="4.97" rx="3.13" ry="2.97" />
+    <ellipse cx="15.16" cy="4.97" rx="3.13" ry="2.97" />
+    <ellipse cx="26.19" cy="4.97" rx="3.13" ry="2.97" />
+  </svg>
+);
+```
+
+### drupal-utils
+
+<LinkButton
+  href={`${import.meta.env.BASE_URL}code-components/data-fetching`}
+  variant="secondary"
+  icon="right-arrow"
+>
+  See data fetching
+</LinkButton>
+
+### jsonapi-utils
+
+<LinkButton
+  href={`${import.meta.env.BASE_URL}code-components/data-fetching`}
+  variant="secondary"
+  icon="right-arrow"
+>
+  See data fetching
+</LinkButton>
+
+## Bundled npm packages
+
+### Tailwind
+
+<LinkButton href="https://tailwindcss.com" variant="minimal" icon="external">
+  tailwindcss.com
+</LinkButton>
+
+Tailwind 4 is available to all components by default. The global CSS is added
+to all pages with a `@theme` directive.
+
+**Do not include `@import "tailwindcss"`** as it is included automatically.
+
+### clsx
+
+<LinkButton
+  href="https://github.com/lukeed/clsx"
+  variant="minimal"
+  icon="external"
+>
+  GitHub Project Page
+</LinkButton>
+
+A tiny utility for constructing `className` strings conditionally.
+Also serves as a faster & smaller drop-in replacement for the `classnames` module.
+
+```jsx
+import { clsx } from 'clsx'
+
+export default function Example() {
+  return (
+    <div className={clsx('foo', true && 'bar', 'baz');} />
+    // => 'foo bar baz'
+  );
+};
+```
+
+### class-variance-authority
+
+<LinkButton
+  href="https://github.com/joe-bell/cva"
+  variant="minimal"
+  icon="external"
+>
+  GitHub Project Page
+</LinkButton>
+
+CVA helps you define components with multiple visual variants (like size, color,
+state) in a clean, type-safe way. Instead of manually concatenating CSS classes
+or writing complex conditional logic, you define variants upfront and let CVA
+handle the class composition.
+
+```js
+import { cva } from 'class-variance-authority';
+
+const button = cva(
+  'font-semibold border rounded', // base classes
+  {
+    variants: {
+      intent: {
+        primary: 'bg-blue-500 text-white border-blue-500',
+        secondary: 'bg-gray-200 text-gray-900 border-gray-200',
+      },
+      size: {
+        small: 'text-sm py-1 px-2',
+        medium: 'text-base py-2 px-4',
+      },
+    },
+    defaultVariants: {
+      intent: 'primary',
+      size: 'medium',
+    },
+  },
+);
+
+// Usage
+button({ intent: 'secondary', size: 'small' });
+// Returns: "font-semibold border rounded bg-gray-200 text-gray-900 border-gray-200 text-sm py-1 px-2"
+```
+
+### @drupal-api-client/json-api-client and drupal-jsonapi-params
+
+<LinkButton
+  href={`${import.meta.env.BASE_URL}code-components/data-fetching`}
+  variant="secondary"
+  icon="right-arrow"
+>
+  See data fetching
+</LinkButton>
+
+### swr
+
+<LinkButton
+  href={`${import.meta.env.BASE_URL}code-components/data-fetching`}
+  variant="secondary"
+  icon="right-arrow"
+>
+  See data fetching
+</LinkButton>
+
+### tailwind-merge
+
+<LinkButton
+  href="https://github.com/dcastil/tailwind-merge"
+  variant="minimal"
+  icon="external"
+>
+  GitHub Project Page
+</LinkButton>
+
+A utility function to efficiently merge Tailwind CSS classes in JS without style
+conflicts.
+
+```js
+import { twMerge } from 'tailwind-merge';
+
+twMerge('px-2 py-1 bg-red hover:bg-dark-red', 'p-3 bg-[#B91C1C]');
+// → 'hover:bg-dark-red p-3 bg-[#B91C1C]'
+```

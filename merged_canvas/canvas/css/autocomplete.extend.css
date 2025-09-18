@@ -1,0 +1,65 @@
+/*
+  Although the autocomplete is triggered by elements rendered in React, the
+  suggestions use the Drupal autocomplete library which appends the suggestions
+  directly to the <body> tag in a temporary element. Because of this, we use
+  traditional CSS styling instead of CSS modules.
+*/
+ul.ui-autocomplete {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  border: 1px solid #E0E1E6;
+  border-radius: 4px;
+}
+
+ul.ui-autocomplete .ui-menu-item {
+  position: relative;
+}
+
+ul.ui-autocomplete .ui-menu-item + .ui-menu-item a:not(:hover, :focus, :focus-visible, .ui-state-active)::before {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 8px;
+  width: calc(100% - 16px);
+  height: 1px;
+  content: "";
+  border-top: 1px solid #E0E1E6;
+}
+
+ul.ui-autocomplete .ui-menu-item + .ui-menu-item a:hover::before,
+ul.ui-autocomplete .ui-menu-item + .ui-menu-item a:focus::before,
+ul.ui-autocomplete .ui-menu-item + .ui-menu-item a:focus-visible::before {
+  width: 0;
+  height: 0;
+  border-top-color: transparent;
+}
+
+ul.ui-autocomplete .ui-menu-item a {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  padding: 8px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+ul.ui-autocomplete .ui-menu-item a:hover,
+ul.ui-autocomplete .ui-menu-item a:focus,
+ul.ui-autocomplete .ui-menu-item a:focus-visible,
+ul.ui-autocomplete .ui-menu-item a.ui-state-active {
+  color: #FFF;
+  outline: none;
+  background-color: #0190ff;
+}
+
+
+
+
+ul.ui-autocomplete .ui-menu-item:first-child a {
+  border-radius: 4px 4px 0 0;
+}
+
+ul.ui-autocomplete .ui-menu-item:last-child a {
+  border-radius: 0 0 4px 4px;
+}

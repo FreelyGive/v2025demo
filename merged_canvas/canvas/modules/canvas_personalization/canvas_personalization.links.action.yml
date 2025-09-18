@@ -1,0 +1,5 @@
+entity.segment.add_form:
+  route_name: 'entity.segment.add_form'
+  title: 'Add Personalization Segment'
+  appears_on:
+    - entity.segment.collection

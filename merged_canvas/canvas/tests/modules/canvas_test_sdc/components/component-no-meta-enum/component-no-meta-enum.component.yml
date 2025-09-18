@@ -1,0 +1,12 @@
+$schema: https://git.drupalcode.org/project/sdc/-/raw/1.x/src/metadata.schema.json
+name: Component no meta:enum
+props:
+  type: object
+  properties:
+    style:
+      type: string
+      title: Style
+      description: The name to show.
+      enum: [ 'small', 'big' ,'huge' ]
+      # No meta:enum present for testing purposes.
+      examples: [ 'small' ]

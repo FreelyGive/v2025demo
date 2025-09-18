@@ -1,0 +1,584 @@
+<?php
+
+/**
+ * @file
+ * Adds fields to the article content type.
+ */
+
+/* cspell:ignore cvt */
+
+declare(strict_types=1);
+
+use Drupal\Core\Entity\Entity\EntityFormDisplay;
+use Drupal\Core\Language\LanguageInterface;
+use Drupal\datetime\Plugin\Field\FieldType\DateTimeItemInterface;
+use Drupal\editor\Entity\Editor;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\filter\Entity\FilterFormat;
+use Drupal\node\NodeInterface;
+use Drupal\Tests\content_moderation\Traits\ContentModerationTestTrait;
+use Drupal\taxonomy\Entity\Term;
+use Drupal\taxonomy\Entity\Vocabulary;
+use Drupal\user\Entity\Role;
+use Drupal\user\RoleInterface;
+
+/**
+ * Implements hook_install().
+ */
+function canvas_test_article_fields_install(): void {
+  // The time chosen here is during daylight savings for the timezone that core
+  // uses for testing (Australia/Sydney). This is by design so that we can test
+  // oddities like daylight savings. We also pick a time that is dramatically
+  // different between UTC and the test timezone. With an offset of +10, this
+  // date will be in a different month and on a different day in UTC to the
+  // reference timezone.
+  // @see bootstrap.php
+  $date = \DateTimeImmutable::createFromFormat('Y-m-d\TH:i:s', '2025-04-01T04:15:00');
+  \assert($date instanceof \DateTimeImmutable);
+  $date_range_default_value = [
+    [
+      'default_date_type' => 'relative',
+      'default_date' => $date->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT),
+      'default_end_date_type' => 'relative',
+      'default_end_date' => $date->modify('+2 hours')
+        ->format(DateTimeItemInterface::DATETIME_STORAGE_FORMAT),
+    ],
+  ];
+  $vocabulary = Vocabulary::create([
+    'vid' => 'artists',
+    'name' => 'Artists',
+  ]);
+  $vocabulary->save();
+  foreach ([
+    'Air-Sea Dolphin',
+    'The Apples in Stereo',
+    'Beulah',
+    'Black Swan Network',
+    'Chocolate USA',
+  ] as $artist) {
+    Term::create([
+      'vid' => 'artists',
+      'name' => $artist,
+    ])->save();
+  }
+  $fields = [
+    'field_cvt_comment' => [
+      'type' => 'comment',
+      'label' => 'Canvas Comments',
+      'settings' => [
+        'comment_type' => 'comment',
+      ],
+      'widget' => [
+        'type' => 'comment_default',
+        'settings' => [],
+      ],
+    ],
+    'field_cvt_int' => [
+      'type' => 'integer',
+      'label' => 'Canvas Integer',
+      'settings' => [],
+      'widget' => [
+        'type' => 'number',
+        'settings' => [],
+      ],
+      // Default to zero.
+      'default_value' => [['value' => 0]],
+    ],
+    'field_cvt_daterange_datelist' => [
+      'type' => 'daterange',
+      'label' => 'Canvas Date Range (Datelist)',
+      'settings' => [
+        'datetime_type' => 'datetime',
+      ],
+      'widget' => [
+        'type' => 'daterange_datelist',
+        'settings' => [
+          'increment' => 15,
+          'date_order' => 'YMD',
+          'time_type' => '24',
+        ],
+      ],
+      'default_value' => $date_range_default_value,
+    ],
+    'field_cvt_daterange_default' => [
+      'type' => 'daterange',
+      'label' => 'Canvas Date Range (Default)',
+      'settings' => [
+        'datetime_type' => 'datetime',
+      ],
+      'widget' => [
+        'type' => 'daterange_default',
+        'settings' => [],
+      ],
+      'default_value' => $date_range_default_value,
+    ],
+    'field_cvt_datetime_datelist' => [
+      'type' => 'datetime',
+      'label' => 'Canvas DateTime (Datelist)',
+      'settings' => [
+        'datetime_type' => 'datetime',
+      ],
+      'widget' => [
+        'type' => 'datetime_datelist',
+        'settings' => [
+          'increment' => 15,
+          'date_order' => 'YMD',
+          'time_type' => '24',
+        ],
+      ],
+      'default_value' => [
+        \array_intersect_key($date_range_default_value[0], \array_flip([
+          'default_date_type',
+          'default_date',
+        ])),
+      ],
+    ],
+    'field_cvt_datetime_timestamp' => [
+      'type' => 'datetime',
+      'label' => 'Canvas DateTime (Timestamp)',
+      'settings' => [
+        'datetime_type' => 'datetime',
+      ],
+      'widget' => [
+        'type' => 'datetime_timestamp',
+        'settings' => [],
+      ],
+      'default_value' => [
+        \array_intersect_key($date_range_default_value[0], \array_flip([
+          'default_date_type',
+          'default_date',
+        ])),
+      ],
+    ],
+    'field_cvt_entity_ref_auto' => [
+      'type' => 'entity_reference',
+      'label' => 'Canvas Entity Reference (Autocomplete)',
+      'settings' => [
+        'target_type' => 'node',
+        'handler' => 'default',
+      ],
+      'widget' => [
+        'type' => 'entity_reference_autocomplete',
+        'settings' => [
+          'match_operator' => 'CONTAINS',
+          'match_limit' => 10,
+          'size' => 60,
+          'placeholder' => '',
+        ],
+      ],
+      'default_value' => [
+        ['target_id' => 3],
+      ],
+    ],
+    'field_cvt_entity_ref_tags' => [
+      'type' => 'entity_reference',
+      'label' => 'Canvas Entity Reference (Tags)',
+      'cardinality' => 3,
+      'settings' => [
+        'target_type' => 'taxonomy_term',
+        'handler' => 'default',
+      ],
+      'widget' => [
+        'type' => 'entity_reference_autocomplete_tags',
+        'settings' => [
+          'match_operator' => 'CONTAINS',
+          'match_limit' => 10,
+          'size' => 60,
+          'placeholder' => '',
+        ],
+      ],
+      'default_value' => [
+        ['target_id' => 1],
+        ['target_id' => 2],
+      ],
+    ],
+    'field_cvt_file' => [
+      'type' => 'file',
+      'label' => 'Canvas File',
+      'settings' => [
+        'file_directory' => 'canvas_files',
+      ],
+      'widget' => [
+        'type' => 'file_generic',
+        'settings' => [
+          'progress_indicator' => 'throbber',
+        ],
+      ],
+    ],
+    'field_cvt_language' => [
+      'type' => 'language',
+      'label' => 'Canvas Language',
+      'settings' => [],
+      'widget' => [
+        'type' => 'language_select',
+        'settings' => [],
+      ],
+      'default_value' => [
+        ['value' => LanguageInterface::LANGCODE_NOT_SPECIFIED],
+      ],
+    ],
+    // Note that there is no oembed_textfield here because that widget can only
+    // be used on Media entities. Once https://drupal.org/i/3498525 is resolved
+    // we can add a test for using Canvas with a media entity and the oembed widget.
+    // @see \Drupal\media\Plugin\Field\FieldWidget\OEmbedWidget::isApplicable
+
+    // Note that moderation_state_default cannot be used on a field other than
+    // the moderation state computed field added by content_moderation.
+    // We make use of ContentModerationTestTrait below to setup content
+    // moderation for the article content type.
+    'field_cvt_options_buttons' => [
+      'type' => 'list_string',
+      'label' => 'Canvas Options (Buttons)',
+      'settings' => [
+        'allowed_values' => [
+          'option1' => 'Option 1',
+          'option2' => 'Option 2',
+          'option3' => 'Option 3',
+        ],
+      ],
+      'default_value' => [
+        ['value' => 'option2'],
+      ],
+      'widget' => [
+        'type' => 'options_buttons',
+        'settings' => [],
+      ],
+    ],
+    // Note we don't have a path widget here because one of those is added
+    // by default as the 'URL alias' field and because PathItem is a computed
+    // field it only makes sense to have one path item field on an entity.
+    // @see \Drupal\path\Hook\PathHooks::entityBaseFieldInfo()
+    'field_cvt_telephone' => [
+      'type' => 'telephone',
+      'label' => 'Canvas Telephone',
+      'settings' => [],
+      'widget' => [
+        'type' => 'telephone_default',
+        'settings' => [
+          'placeholder' => '',
+        ],
+      ],
+    ],
+    'field_cvt_textarea' => [
+      'type' => 'text_long',
+      'label' => 'Canvas Text Area',
+      'settings' => [],
+      'widget' => [
+        'type' => 'text_textarea',
+        'settings' => [
+          'rows' => 5,
+          'placeholder' => '',
+        ],
+      ],
+    ],
+    'field_cvt_textarea_summary' => [
+      'type' => 'text_with_summary',
+      'label' => 'Canvas Text Area with Summary',
+      'settings' => [
+        'display_summary' => TRUE,
+      ],
+      'widget' => [
+        'type' => 'text_textarea_with_summary',
+        'settings' => [
+          'rows' => 9,
+          'summary_rows' => 3,
+          'placeholder' => '',
+        ],
+      ],
+      'default_value' => [
+        [
+          'format' => 'basic_html',
+          'value' => 'Melting in a pot of thieves',
+          'summary' => 'Wild card up my sleeve',
+        ],
+      ],
+    ],
+    'field_cvt_textfield' => [
+      'type' => 'string',
+      'label' => 'Canvas Text Field',
+      'settings' => [],
+      'widget' => [
+        'type' => 'text_textfield',
+        'settings' => [
+          'size' => 60,
+          'placeholder' => '',
+        ],
+      ],
+    ],
+    'field_cvt_uri' => [
+      'type' => 'uri',
+      'label' => 'Canvas URI',
+      'settings' => [],
+      'widget' => [
+        'type' => 'uri',
+        'settings' => [
+          'size' => 60,
+          'placeholder' => '',
+        ],
+      ],
+      'default_value' => [
+        ['value' => 'http://drupal.org'],
+      ],
+    ],
+    'field_cvt_unlimited_text' => [
+      'type' => 'string',
+      'label' => 'Canvas Unlimited Text',
+      'settings' => [],
+      'cardinality' => -1,
+      'widget' => [
+        'type' => 'text_textfield',
+        // Ensure this is at the top of the form to increase drag and drop reliability in e2e test.
+        'weight' => -1000,
+        'settings' => [
+          // For drag and drop to work in e2e tests this can't require scrolling
+          // the page data pane.
+          'size' => 60,
+          'placeholder' => '',
+        ],
+      ],
+      'default_value' => [
+        ['value' => 'Marshmallow Coast'],
+      ],
+    ],
+    'field_cvt_boolean_checkbox' => [
+      'type' => 'boolean',
+      'label' => 'Canvas Boolean Checkbox (default true)',
+      'settings' => [
+        'on_label' => 'Yes',
+        'off_label' => 'No',
+      ],
+      'widget' => [
+        'type' => 'boolean_checkbox',
+        'settings' => [],
+      ],
+      'default_value' => [
+        ['value' => TRUE],
+      ],
+    ],
+    'field_cvt_boolean_checkbox2' => [
+      'type' => 'boolean',
+      'label' => 'Canvas Boolean Checkbox (default false)',
+      'settings' => [
+        'on_label' => 'Yes',
+        'off_label' => 'No',
+      ],
+      'widget' => [
+        'type' => 'boolean_checkbox',
+        'settings' => [],
+      ],
+      'default_value' => [
+        ['value' => FALSE],
+      ],
+    ],
+  ];
+
+  // Setup content moderation for article node type.
+  (new ContentModerationHelper())->enableForArticleNodes();
+
+  $form_display = EntityFormDisplay::load('node.article.default');
+  if (!$form_display) {
+    $form_display = EntityFormDisplay::create([
+      'targetEntityType' => 'node',
+      'bundle' => 'article',
+      'mode' => 'default',
+      'status' => TRUE,
+    ]);
+  }
+
+  $default_values_to_update = [];
+
+  foreach ($fields as $field_name => $field_info) {
+    if (!FieldStorageConfig::loadByName('node', $field_name)) {
+      FieldStorageConfig::create([
+        'field_name' => $field_name,
+        'entity_type' => 'node',
+        'type' => $field_info['type'],
+        'settings' => $field_info['settings'],
+        'cardinality' => $field_info['cardinality'] ?? 1,
+      ])->save();
+    }
+
+    if (!FieldConfig::loadByName('node', 'article', $field_name)) {
+      $field_config = [
+        'field_name' => $field_name,
+        'entity_type' => 'node',
+        'bundle' => 'article',
+        'label' => $field_info['label'],
+        'settings' => $field_info['settings'],
+      ];
+
+      // Only add default_value if it's explicitly set
+      if (isset($field_info['default_value'])) {
+        $field_config['default_value'] = $field_info['default_value'];
+        $default_values_to_update[] = $field_name;
+      }
+
+      FieldConfig::create($field_config)->save();
+    }
+
+    $form_display->setComponent($field_name, [
+      'type' => $field_info['widget']['type'],
+      'settings' => $field_info['widget']['settings'],
+      'weight' => $field_info['widget']['weight'] ?? 0,
+    ]);
+  }
+
+  // Remove the default comment field.
+  $form_display->removeComponent('comment');
+  $form_display->save();
+
+  $formats = [
+    'restricted_html' => 'Restricted HTML',
+    'basic_html' => 'Basic HTML',
+  ];
+
+  // Add some filter formats so we can test the textarea widget.
+  foreach ($formats as $id => $name) {
+    // Allow enabling the module on the Standard install profile.
+    if (FilterFormat::load($id) !== NULL) {
+      continue;
+    }
+    FilterFormat::create([
+      'format' => $id,
+      'name' => $name,
+      'filters' => [
+        'filter_html' => [
+          'module' => 'filter',
+          'status' => TRUE,
+          'weight' => 10,
+          'settings' => [
+            'allowed_html' => '<p>',
+          ],
+        ],
+      ],
+    ])->save();
+  }
+
+  $name = 'minimal_html';
+  FilterFormat::create([
+    'format' => $name,
+    'roles' => [RoleInterface::AUTHENTICATED_ID],
+    'name' => $name,
+    'filters' => [
+      'filter_html' => [
+        'status' => TRUE,
+        'settings' => [
+          'allowed_html' => '<br> <p> <strong> <em> <drupal-media data-entity-type data-entity-uuid data-align data-caption alt>',
+        ],
+      ],
+      'media_embed' => [
+        'status' => TRUE,
+        'settings' => [
+          'default_view_mode' => 'default',
+          'allowed_view_modes' => [
+            'default' => 'default',
+          ],
+          'allowed_media_types' => [],
+        ],
+      ],
+    ],
+  ])->save();
+
+  Editor::create([
+    'editor' => 'ckeditor5',
+    'format' => $name,
+    'image_upload' => [
+      'status' => FALSE,
+    ],
+    'settings' => [
+      'toolbar' => [
+        'items' => ['bold', 'italic', 'sourceEditing', 'drupalMedia'],
+      ],
+      'plugins' => [
+        'ckeditor5_sourceEditing' => [
+          'allowed_tags' => [],
+        ],
+        'ckeditor5_alignment' => [
+          'enabled_alignments' => [
+            'center',
+            'justify',
+            'left',
+            'right',
+          ],
+        ],
+        'media_media' => [
+          'allow_view_mode_override' => FALSE,
+        ],
+      ],
+    ],
+  ])->save();
+
+  // Grant some permissions.
+  $role = Role::load('canvas');
+  if ($role !== NULL) {
+    $role->grantPermission('administer comments');
+    $role->grantPermission('post comments');
+    $role->grantPermission('use text format restricted_html');
+    $role->grantPermission('use text format basic_html');
+    $role->grantPermission('use text format minimal_html');
+    // Needed to make the Content Moderation widget visible on the node edit
+    // form. The user needs to be able to use at least two moderation states for
+    // the widget to be visible. The first transition allows them to move from
+    // Published (the current state) to Draft. The second transition lets them
+    // keep the content in the Published state.
+    $role->grantPermission('use editorial transition create_new_draft');
+    $role->grantPermission('use editorial transition publish');
+    // Needed to view the latest revision in JSON:API. JSON:API module checks the
+    // 'view all revisions' permission first and then if Content Moderation is
+    // enabled, defers to its revision access check which checks the 'view any
+    // unpublished content' permission and the 'view latest version'
+    // permissions.
+    $role->grantPermission('view all revisions');
+    $role->grantPermission('view any unpublished content');
+    $role->grantPermission('view latest version');
+    $role->save();
+  }
+
+  // Update default values in already created nodes.
+  foreach (\Drupal::entityTypeManager()->getStorage('node')->loadByProperties(['type' => 'article']) as $node) {
+    \assert($node instanceof NodeInterface);
+    foreach ($default_values_to_update as $field_name) {
+      // Set the default value by calling ::getDefaultValue which takes care of
+      // processing.
+      $default_value = $node->getFieldDefinition($field_name)?->getDefaultValue($node);
+      if ($default_value === NULL) {
+        continue;
+      }
+      $node->set($field_name, $default_value);
+    }
+    $node->save();
+  }
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function canvas_test_article_fields_uninstall(): void {
+  $field_storages = \Drupal::entityTypeManager()
+    ->getStorage('field_storage_config')
+    ->loadByProperties(['entity_type' => 'node']);
+
+  // Delete fields that start with 'field_cvt_'.
+  foreach ($field_storages as $field_storage) {
+    if (strpos($field_storage->getName(), 'field_cvt_') === 0) {
+      $field_storage->delete();
+    }
+  }
+}
+
+// Ensure that the test trait can be autoloaded. This trait is in a test
+// namespace. We don't have autoloading of test namespaces in production code,
+// only in tests via bootstrap.php. This module is useful to install for working
+// on debugging widgets in the page data form so by including the file we ensure
+// this module can be installed in non-test environments.
+include_once sprintf('%s/core/modules/content_moderation/tests/src/Traits/ContentModerationTestTrait.php', \DRUPAL_ROOT);
+
+class ContentModerationHelper {
+  use ContentModerationTestTrait;
+
+  public function enableForArticleNodes(): void {
+    $this->addEntityTypeAndBundleToWorkflow($this->createEditorialWorkflow(), 'node', 'article');
+  }
+
+}

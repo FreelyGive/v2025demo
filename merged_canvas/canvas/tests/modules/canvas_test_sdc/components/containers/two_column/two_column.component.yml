@@ -1,0 +1,26 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json'
+name: Two Column
+status: stable
+group: Container
+props:
+  type: object
+  required:
+    - width
+  properties:
+    width:
+      $ref: json-schema-definitions://canvas.module/column-width
+      type: integer
+      title: Column Width
+      description: The width of the first column.
+      examples: [25, 33, 50, 66, 75]
+slots:
+  column_one:
+    title: Column One
+    description: The contents of the first column.
+    examples:
+      - <p>This is column 1 content</p>
+  column_two:
+    title: Column Two
+    description: The contents of the second column.
+    examples:
+      - <p>This is column 2 content</p>

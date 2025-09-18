@@ -1,0 +1,5 @@
+/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
+.root :global(.ck-toolbar__items) {
+  /* Allow CKEditor toolbar items to wrap to separate lines. */
+  flex-wrap: wrap !important;
+}

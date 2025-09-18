@@ -1,0 +1,23 @@
+.contextualPanel {
+  flex-shrink: 0;
+  width: var(--sidebar-right-width);
+  background: #fff;
+  &.hidePanel {
+    display: none;
+  }
+}
+
+.segmentedControlRoot {
+  margin-bottom: 24px;
+  margin-inline-start: 15px;
+  margin-inline-end: 15px;
+}
+.tabRoot {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.scrollArea [data-radix-scroll-area-viewport] > * {
+  max-width: 100%;
+}
+

@@ -1,0 +1,7 @@
+<sl-tab-panel {{ attributes }}
+  {% if name %}name="{{ name }}"{% endif %}
+  {% if active %}active{% endif %}>
+
+  {%- block content %}
+  {% endblock %}
+</sl-tab-panel>

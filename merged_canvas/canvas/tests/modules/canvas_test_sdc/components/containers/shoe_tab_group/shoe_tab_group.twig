@@ -1,0 +1,14 @@
+<sl-tab-group {{ attributes }}
+placement="{{ placement }}"
+{% if activation %}activation="{{ activation }}"{% endif %}
+{% if no_scroll %}noScrollControls{% endif %}
+>
+  <div slot="nav">
+    {% block tabs %}
+    {% endblock %}
+  </div>
+
+  {% block tab_panels %}
+  {% endblock%}
+
+</sl-tab-group>

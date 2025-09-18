@@ -1,0 +1,24 @@
+uuid: a8dbfb57-e893-4571-b770-3da2b2ef0faa
+langcode: en
+status: true
+dependencies:
+  enforced: {  }
+machineName: canvas_test_code_components_with_no_props
+name: 'With no props'
+required: {  }
+props: {  }
+slots: {  }
+js:
+  original: |-
+    const WithNoProps = ({}) => (<div>No props</div>);
+    export default WithNoProps;
+  compiled: |
+    import { jsx as _jsx } from "react/jsx-runtime";
+    const WithNoProps = ({})=>/*#__PURE__*/ _jsx("div", {
+            children: "No props"
+        });
+    export default WithNoProps;
+css:
+  original: ''
+  compiled: ''
+dataDependencies: []

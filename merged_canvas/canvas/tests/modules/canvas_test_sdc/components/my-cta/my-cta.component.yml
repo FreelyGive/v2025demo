@@ -1,0 +1,36 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Call to Absolute Action
+description: Call to action link (absolute URL, so no internal relative links possible).
+props:
+  type: object
+  required:
+    - text
+    - href
+  properties:
+    text:
+      type: string
+      title: Title
+      description: The title for the cta
+      examples:
+        - Press
+        - Submit now
+    # ℹ️ For an example of a CTA that also supports relative URLs, see the my-hero SDC.
+    href:
+      type: string
+      title: URL
+      format: uri
+      examples:
+        - https://www.drupal.org
+    target:
+      type: string
+      title: Target
+      enum:
+        - _self
+        - _blank
+      meta:enum:
+        _self: 'Open in same window'
+        _blank: 'Open in a new window'
+      x-translation-context: 'CTA Target'
+    attributes:
+      type: Drupal\Core\Template\Attribute
+      name: Attributes

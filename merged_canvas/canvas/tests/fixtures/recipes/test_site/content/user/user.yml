@@ -1,0 +1,44 @@
+_meta:
+  version: '1.0'
+  entity_type: user
+  uuid: fae086c8-e4fb-4110-a988-ed5c6e66d9f4
+  default_langcode: en
+default:
+  preferred_langcode:
+    -
+      value: en
+  preferred_admin_langcode:
+    -
+      value: en
+  name:
+    -
+      value: canvasUser
+  pass:
+    -
+      value: $2y$10$juvdK/pIcmq7GEhYbZ.gaeeqVY6NSlUDuM39agBlsIPlo.RtZ4t3e
+      existing: ''
+      pre_hashed: false
+  mail:
+    -
+      value: canvas@test.com
+  timezone:
+    -
+      value: Europe/London
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1747820922
+  access:
+    -
+      value: 0
+  login:
+    -
+      value: 0
+  init:
+    -
+      value: canvas@test.com
+  roles:
+    -
+      target_id: canvas

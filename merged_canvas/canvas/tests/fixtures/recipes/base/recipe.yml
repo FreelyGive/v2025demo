@@ -1,0 +1,53 @@
+name: 'Base'
+description: 'Provides a base site'
+type: 'Canvas'
+
+recipes:
+  - ./core/recipes/basic_block_type
+  - ./core/recipes/article_content_type
+  # @todo using the core recipe consistently throws throws a schema error for
+  # core.base_field_override.node.page.promote for the default value being an integer
+  # but expecting a boolean. This is currently using a copy of that recipe with
+  # core.base_field_override.node.page.promote.yml omitted.
+  #- ./core/recipes/page_content_type
+  - page_content_type
+  - ./core/recipes/core_recommended_admin_theme
+  - ./core/recipes/image_media_type
+
+config:
+  strict: true
+  actions:
+    system.logging:
+      simpleConfigUpdate:
+        error_level: verbose
+    system.performance:
+      simpleConfigUpdate:
+        js.preprocess: false
+    system.theme:
+      simpleConfigUpdate:
+        admin: 'claro'
+        default: 'stark'
+    node.settings:
+      simpleConfigUpdate:
+        use_admin_theme: true
+    system.site:
+      simpleConfigUpdate:
+        page.front: /node
+    core.entity_form_display.node.article.default:
+      setComponents:
+        - name: field_media_image
+          options:
+            type: media_library_widget
+            weight: 1
+            region: content
+    core.entity_view_display.node.article.default:
+      setComponents:
+        - name: field_media_image
+          options:
+            type: entity_reference_entity_view
+            label: above
+            settings:
+              view_mode: default
+              link: false
+            weight: 1
+            region: content

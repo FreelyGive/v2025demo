@@ -1,0 +1,68 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming in the Canvas Stark theme.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\canvas_stark\PreRender;
+
+function canvas_stark_library_info_alter(array &$libraries, string $extension): void {
+  if ($extension === 'core' && isset($libraries['drupal.autocomplete'])) {
+    $libraries['drupal.autocomplete']['dependencies'][] = 'canvas/autocomplete.extended';
+  }
+}
+
+function canvas_stark_element_info_alter(array &$type): void {
+  if (isset($type['vertical_tabs'])) {
+    $type['vertical_tabs']['#pre_render'][] = [PreRender::class, 'verticalTabs'];
+  }
+  if (isset($type['table'])) {
+    $type['table']['#pre_render'][] = [PreRender::class, 'table'];
+  }
+}
+
+function canvas_stark_form_node_form_alter(array &$form, FormStateInterface $form_state): void {
+  // Inspired by Claro to render the sidebar details as accordions.
+  $form['#theme'] = ['node_edit_form'];
+  $form['advanced']['#accordion'] = TRUE;
+  $form['meta']['#type'] = 'container';
+  $form['meta']['#access'] = TRUE;
+  $form['revision_information']['#type'] = 'container';
+  $form['revision_information']['#group'] = 'meta';
+}
+
+function canvas_stark_preprocess_field_multiple_value_form(array &$variables): void {
+  $variables['attributes']['data-canvas-multiple-values'] = 'true';
+}
+
+/**
+ * Implements hook_preprocess_hook().
+ */
+function canvas_stark_preprocess_radios(array &$vars): void {
+  // In inputBehaviors.tsx we expect form elements to have a name attributes
+  // however a radio group is unique in that we want to manage a single value
+  // for the entire group of radios. For a radio group, all the individual radio
+  // elements have the same name, but there is no name attribute on the outer
+  // wrapper as this attribute is not valid for this HTML element (typically a
+  // div or a fieldset). In the special case of the radio group we make use of a
+  // data-name attribute instead. The code in inputBehaviors.tsx looks for this
+  // attribute when the name attribute does not exist.
+  // Similarly, the front-end needs to be able to treat radios differently. To
+  // support this we expose a data-type attribute so the front-end can correctly
+  // detect the element type.
+  // Finally, we also need to hoist the data-form-id attribute to the outer
+  // attributes so that the front-end can ascertain which form state to update
+  // when the radio group's value changes.
+  $vars['attributes']['data-canvas-name'] = $vars['element']['#name'];
+  $vars['attributes']['data-canvas-type'] = 'radios';
+  // @todo Rename to canvas-data-form-id in https://drupal.org/i//3517029.
+  $vars['attributes']['data-form-id'] = $vars['element']['#attributes']['data-form-id'] ?? '';
+}
+
+function canvas_stark_preprocess_form_element(array &$variables): void {
+  if (isset($variables['element']['#theme']) && $variables['element']['#theme'] === 'input__number__media_library_item_weight') {
+    $variables['attributes']['data-canvas-media-library-item-weight-wrapper'] = 'true';
+  }
+}

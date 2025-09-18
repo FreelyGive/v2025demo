@@ -1,0 +1,16 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Section
+description: A text/image section with inline styles for testing purposes
+props:
+  type: object
+  required:
+    - text
+  properties:
+    text:
+      type: string
+      title: Heading
+      description: The text on the left
+      minLength: 2
+      examples:
+        - Our mission is to deliver the best products and services to our customers. We strive to exceed expectations and continuously improve our offerings.
+        - Join us on our journey to innovation and excellence. Your satisfaction is our priority.

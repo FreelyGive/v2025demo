@@ -1,0 +1,38 @@
+{
+  "printWidth": 80,
+  "proseWrap": "always",
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "overrides": [
+    {
+      "files": ["*.css"],
+      "options": {
+        "parser": "css",
+        "printWidth": 10000,
+        "singleQuote": false
+      }
+    }
+  ],
+  "plugins": ["@ianvs/prettier-plugin-sort-imports"],
+  "importOrder": [
+    "<BUILTIN_MODULES>",
+    "^react$",
+    "^(?![.@])(?!.*[.]css$)",
+    "^@(?!/)(?!.*[.]css$)",
+    "",
+    "<THIRD_PARTY_MODULES>",
+    "",
+    "^(?!.*[.]css$)[./]@/.*$",
+    "^(?!.*[.]css$)[./].*$",
+    "",
+    "<TYPES>^(node:)",
+    "<TYPES>^(react)",
+    "<TYPES>",
+    "<TYPES>^@/",
+    "<TYPES>^[.]",
+    "",
+    "^@/.*[.]css$",
+    ".css$"
+  ]
+}

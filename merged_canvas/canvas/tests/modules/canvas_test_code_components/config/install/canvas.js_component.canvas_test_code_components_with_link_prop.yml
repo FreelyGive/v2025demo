@@ -1,0 +1,56 @@
+uuid: acc5e829-8e59-47f5-8ac2-5e63d11a6e24
+langcode: en
+status: true
+dependencies: {  }
+machineName: canvas_test_code_components_with_link_prop
+name: My Code Component Link
+required: {  }
+props:
+  text:
+    title: Text
+    type: string
+    examples:
+      - 'This is my link'
+  link:
+    title: Link
+    type: string
+    format: uri-reference
+    examples:
+      - /llamas
+slots: {  }
+js:
+  original: |
+    // See https://project.pages.drupalcode.org/canvas/ for documentation on how to build a code component
+
+    const Component = ({
+      text = "Default text",
+      link = 'https://drupal.org',
+    }) => {
+      return (
+        <span class="my-component-link">
+          <a href={link}>{text}</a>
+        </span>
+      );
+    };
+
+    export default Component;
+  compiled: |
+    // See https://project.pages.drupalcode.org/canvas/ for documentation on how to build a code component
+    import { jsx as _jsx } from "react/jsx-runtime";
+    const Component = ({ text = "Default text", link = 'https://drupal.org' })=>{
+        return /*#__PURE__*/ _jsx("span", {
+            class: "my-component-link",
+            children: /*#__PURE__*/ _jsx("a", {
+                href: link,
+                children: text
+            })
+        });
+    };
+    export default Component;
+css:
+  original: |-
+    span.my-component-link {
+      color: #0000aa;
+      text-decoration: underline;
+    }
+  compiled: 'span.my-component-link{color:#00a;text-decoration:underline}'

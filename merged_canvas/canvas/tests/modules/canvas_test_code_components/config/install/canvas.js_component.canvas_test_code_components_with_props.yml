@@ -1,0 +1,44 @@
+uuid: a36685eb-c415-4f7c-9c03-79eea9bc7f78
+langcode: en
+status: true
+dependencies:
+  enforced: {  }
+machineName: canvas_test_code_components_with_props
+name: 'With props'
+required:
+  - name
+props:
+  name:
+    title: name
+    type: string
+    examples:
+      - Canvas
+  age:
+    title: age
+    type: integer
+    examples:
+      - 40
+slots: {  }
+js:
+  original: |-
+    const WithProps = ({title = "With props", name, age}) =>
+      (<div>Component {title}, Hello {name}, {age} years old.</div>);
+    export default WithProps;
+  compiled: |
+    import { jsxs as _jsxs } from "react/jsx-runtime";
+    const WithProps = ({ title = "With props", name, age })=>/*#__PURE__*/ _jsxs("div", {
+            children: [
+                "Component ",
+                title,
+                ", Hello ",
+                name,
+                ", ",
+                age,
+                " years old."
+            ]
+        });
+    export default WithProps;
+css:
+  original: 'div { font-weight: bold; }'
+  compiled: 'div{font-weight:bold;}'
+dataDependencies: []

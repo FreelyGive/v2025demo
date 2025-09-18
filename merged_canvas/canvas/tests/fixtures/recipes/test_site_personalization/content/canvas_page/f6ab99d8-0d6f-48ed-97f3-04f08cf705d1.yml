@@ -1,0 +1,95 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: f6ab99d8-0d6f-48ed-97f3-04f08cf705d1
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'Personalization demo'
+  components:
+    -
+      uuid: 4c3482ac-4635-4ba9-aaf4-eb86892d77a1
+      component_id: sdc.canvas_test_sdc.heading
+      component_version: 8dd7b865998f53b0
+      inputs: '{"text":"This Header is common for every personalization","style":"secondary","element":"h3"}'
+    # 💡 This is the `switch` being tested here — note it knows about its variants:
+    # - `default`: always defined. Note this is the ID of a _variant_, NOT the ID of a `Segment`! (The `default` `Segment` always exists, so one might think that.) It _does_ use the same naming reasoning as `modules/canvas_personalization/config/install/canvas_personalization.segment.default.yml`, though.
+    # `halloween`: the variant the Content Creator chose to create.
+    -
+      uuid: 8e28dfca-c1b1-4aa2-8c19-b8a0c13e9bf4
+      component_id: p13n.switch
+      component_version: 9e50a118dd93207f
+      inputs: '{"variants":["halloween", "default"]}'
+    # ℹ️ This is the `halloween` variant (a `case` component instance of the Personalization `ComponentSource`) being tested here — note it stores:
+    # - its `variant_id` — which MUST correspond to one of the `variants` in the `switch` component instance
+    # - the `segments` it applies to (`Segment` config entity IDs)
+    -
+      parent_uuid: 8e28dfca-c1b1-4aa2-8c19-b8a0c13e9bf4
+      slot: content
+      uuid: 5e9d5b61-595c-4785-8af6-b78317e52c64
+      component_id: p13n.case
+      component_version: 76bede8677d946cd
+      inputs: '{"variant_id":"halloween","segments":["halloween"]}'
+      label: 'Halloween'
+    # ℹ️ This is the only component instance with `parent_uuid: 5e9d5b61-595c-4785-8af6-b78317e52c64` (the component instance of the `halloween` variant), so this (and all children etc.) defines what gets shown for the `halloween` variant. 
+    -
+      parent_uuid: 5e9d5b61-595c-4785-8af6-b78317e52c64
+      slot: content
+      uuid: 2fd4d69a-bd8d-4824-bfc7-6623ea7bb077
+      component_id: sdc.canvas_test_sdc.two_column
+      component_version: b1ae1e286c75438e
+      inputs: '{"width":"33"}'
+    -
+      parent_uuid: 2fd4d69a-bd8d-4824-bfc7-6623ea7bb077
+      slot: column_two
+      uuid: bfdae82e-3366-4c2c-99e6-c259aee145b4
+      component_id: sdc.canvas_test_sdc.my-hero
+      component_version: 888412021fbcc837
+      inputs: '{"heading":"Halloween season is here","subheading":"Best candy in the market","cta1":"Buy now","cta1href":{"sourceType":"static:field_item:link","value":{"uri":"https:\/\/example.com","options":[]},"expression":"\u2139\ufe0elink\u241furi","sourceTypeSettings":{"instance":{"title":"0"}}},"cta2":"boo!"}'
+    # ℹ️ This is the `default` variant (a `case` component instance of the Personalization `ComponentSource`) being tested here — note it stores:
+    # - its `variant_id` — which MUST correspond to one of the `variants` in the `switch` component instance
+    # - the `segments` it applies to (`Segment` config entity IDs)
+    -
+      parent_uuid: 8e28dfca-c1b1-4aa2-8c19-b8a0c13e9bf4
+      slot: content
+      uuid: 1c29b6e6-02c5-4bfc-99e0-88894609390e
+      component_id: p13n.case
+      component_version: 76bede8677d946cd
+      inputs: '{"variant_id":"default","segments":["default"]}'
+      label: 'Default'
+    -
+      parent_uuid: 1c29b6e6-02c5-4bfc-99e0-88894609390e
+      slot: content
+      uuid: 82289dd5-b638-4b80-85f4-17266641995a
+      component_id: sdc.canvas_test_sdc.two_column
+      component_version: b1ae1e286c75438e
+      inputs: '{"width":"33"}'
+    -
+      parent_uuid: 82289dd5-b638-4b80-85f4-17266641995a
+      slot: column_two
+      uuid: 2b169e45-1910-49e3-8923-f19e4e1f2832
+      component_id: sdc.canvas_test_sdc.my-hero
+      component_version: 888412021fbcc837
+      inputs: '{"heading":"Best bikes in the market","subheading":"last deals!","cta1":"Buy now","cta1href":{"sourceType":"static:field_item:link","value":{"uri":"https:\/\/example.com","options":[]},"expression":"\u2139\ufe0elink\u241furi","sourceTypeSettings":{"instance":{"title":"0"}}},"cta2":"See specs"}'
+    -
+      uuid: 59451905-1edc-4f11-bf10-ef8b0d774b1c
+      component_id: sdc.canvas_test_sdc.heading
+      component_version: 8dd7b865998f53b0
+      inputs: '{"text":"This text is common to every personalization","style":"primary","element":"h4"}'
+  path:
+    -
+      alias: /personalization-test
+      langcode: en
+  created:
+    -
+      value: 1755741558
+  revision_translation_affected:
+    -
+      value: true

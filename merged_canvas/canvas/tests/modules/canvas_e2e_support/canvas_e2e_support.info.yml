@@ -1,0 +1,6 @@
+name: Support module for E2E tests
+type: module
+description: 'Support module for E2E tests.'
+package: Testing
+dependencies:
+  - canvas:canvas

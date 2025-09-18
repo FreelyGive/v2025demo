@@ -1,0 +1,7 @@
+.noContentNotice {
+  height: 100vh;
+  width: 100%;
+  padding: var(--space-4);
+  background-color: var(--blue-2);
+  color: var(--blue-11);
+}

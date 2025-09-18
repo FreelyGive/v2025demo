@@ -1,0 +1,543 @@
+canvas.api.auto-save.delete:
+  path: '/canvas/api/v0/auto-saves/{entity_type}/{entity}'
+  defaults:
+    _controller: 'Drupal\canvas\Controller\ApiAutoSaveController::delete'
+  requirements:
+    _canvas_authentication_required: TRUE
+    _permission: 'publish auto-saves'
+  methods: [DELETE]
+  options:
+    parameters:
+      entity:
+        type: entity:{entity_type}
+    _format: 'json'
+
+canvas.api.auto-save.get:
+  path: '/canvas/api/v0/auto-saves/pending'
+  defaults:
+    _controller: 'Drupal\canvas\Controller\ApiAutoSaveController::get'
+  requirements:
+    _canvas_authentication_required: TRUE
+    _canvas_ui_access: 'TRUE'
+  methods: ['GET']
+  options:
+    _format: 'json'
+
+canvas.api.auto-save.post:
+  path: '/canvas/api/v0/auto-saves/publish'
+  defaults:
+    _controller: 'Drupal\canvas\Controller\ApiAutoSaveController::post'
+  requirements:
+    _canvas_authentication_required: TRUE
+    _permission: 'publish auto-saves'
+  methods: [POST]
+  options:
+    _format: 'json'
+
+canvas.api.config.auto-save.get:
+  path: '/canvas/api/v0/config/auto-save/{canvas_config_entity_type_id}/{canvas_config_entity}'
+  defaults:
+    _controller: 'Drupal\canvas\Controller\ApiConfigAutoSaveControllers::get'
+  requirements:
+    _canvas_authentication_required: TRUE
+    _canvas_http_eligible_config_entity: 'TRUE'
+    _entity_access: 'canvas_config_entity.update'
+    # Allow a subset: `Component` config entities are read-only via the internal HTTP API, `Pattern` config entities do
+    # not (yet) support auto-save.
+    canvas_config_entity_type_id: '(js_component|asset_library|staged_config_update)'
+  options:
+    parameters:
+      canvas_config_entity:
+        type: entity:{canvas_config_entity_type_id}
+    _format: 'json'
+  methods: [GET]
+
+canvas.api.config.auto-save.get.css:
+  path: '/canvas/api/v0/auto-saves/css/{canvas_config_entity_type_id}/{canvas_config_entity}'
+  defaults:
+    _controller: 'Drupal\canvas\Controller\ApiConfigAutoSaveControllers::getCss'
+  requirements:
+    _canvas_authentication_required: TRUE
+    _canvas_http_eligible_config_entity: 'TRUE'
+    # Allow a subset: those config entity types that implement CanvasAssetInterface.
+    canvas_config_entity_type_id: '(js_component|asset_library)'
+    # Must be visible to anybody who can:
+    # - create/edit auto-saved ("draft") code components
+    # - see auto-saved ("draft") code components, i.e. anybody who can see any preview in the Canvas UI.
+    # @see \Drupal\canvas\Hook\ComponentSourceHooks::pageAttachments()
+    _canvas_ui_access: 'TRUE'
+  methods: ['GET']
+  options:
+    parameters:
+      canvas_config_entity:
+        type: entity:{canvas_config_entity_type_id}
+    _format: 'json'
+
+canvas.api.config.auto-save.get.js:
+  path: '/canvas/api/v0/auto-saves/js/{canvas_config_entity_type_id}/{canvas_config_entity}'
+  defaults:
+    _controller: 'Drupal\canvas\Controller\ApiConfigAutoSaveControllers::getJs'
+  requirements:
+    _canvas_authentication_required: TRUE
+    _canvas_http_eligible_config_entity: 'TRUE'
+    # Allow a subset: those config entity types that implement CanvasAssetInterface.
+    canvas_config_entity_type_id: '(js_component|asset_library)'
+    # Must be visible to anybody who can:
+    # - create/edit auto-saved ("draft") code components
+    # - see auto-saved ("draft") code components, i.e. anybody who can see any preview in the Canvas UI.
+    # @see \Drupal\canvas\Hook\ComponentSourceHooks::pageAttachments()
+    _canvas_ui_access: 'TRUE'
+  methods: ['GET']
+  options:
+    parameters:
+      canvas_config_entity:
+        type: entity:{canvas_config_entity_type_id}
+    _format: 'json'
+
+canvas.api.config.auto-save.patch:
+  path: '/canvas/api/v0/config/auto-save/{canvas_config_entity_type_id}/{canvas_config_entity}'
+  defaults:
+    _controller: 'Drupal\canvas\Controller\ApiConfigAutoSaveControllers::patch'
+  requirements:
+    _canvas_authentication_required: TRUE
+    _canvas_http_eligible_config_entity: 'TRUE'
+    _entity_access: 'canvas_config_entity.update'
+    # Allow a subset: `Component` config entities are read-only via the internal HTTP API, `Pattern` config entities do
+    # not (yet) support auto-save.
+    canvas_config_entity_type_id: '(js_component|asset_library)'
+  options:
+    parameters:
+      canvas_config_entity:
+        type: entity:{canvas_config_entity_type_id}
+    _format: 'json'
+  methods: [PATCH]
+
+canvas.api.config.delete:
+  path: '/canvas/api/v0/config/{canvas_config_entity_type_id}/{canvas_config_entity}'
+  defaults:
+    _controller: 'Drupal\canvas\Controller\ApiConfigControllers::delete'
+  requirements:
+    _canvas_authentication_required: TRUE
+    _entity_access: 'canvas_config_entity.delete'
+    _canvas_http_eligible_config_entity: 'TRUE'
+    # Allow a subset: `Component` config entities are read-only via the internal HTTP API.
+    canvas_config_entity_type_id: '(content_template|folder|pattern|js_component|asset_library)'
+  options:
+    parameters:
+      canvas_config_entity:
+        type: entity:{canvas_config_entity_type_id}
+    _format: 'json'
+    # Indicate that external applications may use this route. For authentication, see `modules/canvas_oauth/README.md`.
+    canvas_external_api: true
+  methods: [DELETE]
+
+canvas.api.config.get:
+  path: '/canvas/api/v0/config/{canvas_config_entity_type_id}/{canvas_config_entity}'
+  defaults:
+    _controller: 'Drupal\canvas\Controller\ApiConfigControllers::get'
+  requirements:
+    _canvas_authentication_required: TRUE
+    _canvas_http_eligible_config_entity: 'TRUE'
+    _entity_access: 'canvas_config_entity.view'
+    # Allow a subset: `Component` config entities are read-only via the internal HTTP API.
+    canvas_config_entity_type_id: '(content_template|folder|pattern|js_component|asset_library)'
+    # The UI client can fetch all the components the current user has access too, regardless of which kind of Canvas-enabled
+    # entity you're editing.
+    _canvas_ui_access: 'TRUE'
+  options:
+    parameters:
+      canvas_config_entity:
+        type: entity:{canvas_config_entity_type_id}
+    _format: 'json'
+    # Indicate that external applications may use this route. For authentication, see `modules/canvas_oauth/README.md`.
+    canvas_external_api: true
+  methods: [GET]
+
+canvas.api.config.list: &config_list_route
+  path: '/canvas/api/v0/config/{canvas_config_entity_type_id}'
+  defaults: &config_list_route_defaults
+    _controller: 'Drupal\canvas\Controller\ApiConfigControllers::list'
+  requirements: &config_list_route_requirements
+    _canvas_authentication_required: TRUE
+    # Any internal HTTP API-eligible Canvas config entity type.
+    _canvas_http_eligible_config_entity: 'TRUE'
+    # But deter users from trying to access other config entities via this route: this ensures 404 responses rather than
+    # 403.
+    # @see \Drupal\Tests\canvas\Functional\CanvasConfigEntityHttpApiTest::testNonCanvasConfigEntity()
+    canvas_config_entity_type_id: '(folder|content_template|component|pattern|js_component|asset_library)'
+    # The UI client can fetch all the components the current user has access too, regardless of which kind of Canvas-enabled
+    # entity you're editing.
+    _canvas_ui_access: 'TRUE'
+  options: &config_list_route_options
+    # Indicate that external applications may use this route. For authentication, see `modules/canvas_oauth/README.md`.
+    canvas_external_api: true
+  methods: [GET]
+
+# Specialized version of the `canvas.api.config.list` for ContentTemplates.
+canvas.api.config.list.content_template:
+  <<: *config_list_route
+  path: '/canvas/api/v0/config/content_template'
+  defaults:
+    <<: *config_list_route_defaults
+    _controller: 'Drupal\canvas\Controller\ApiConfigControllers::listContentTemplatesAsHierarchy'
+    canvas_config_entity_type_id: 'content_template'
+  requirements:
+    <<: *config_list_route_requirements
+  options:
+    <<: *config_list_route_options
+  methods: [GET]
+
+canvas.api.config.patch:
+  path: '/canvas/api/v0/config/{canvas_config_entity_type_id}/{canvas_config_entity}'
+  defaults:
+    _controller: 'Drupal\canvas\Controller\ApiConfigControllers::patch'
+  requirements:
+    _canvas_authentication_required: TRUE
+    _canvas_http_eligible_config_entity: 'TRUE'
+    _entity_access: 'canvas_config_entity.update'
+    # Allow a subset: `Component` config entities are read-only via the internal HTTP API.
+    canvas_config_entity_type_id: '(folder|pattern|js_component|asset_library)'
+  options:
+    parameters:
+      canvas_config_entity:
+        type: entity:{canvas_config_entity_type_id}
+    _format: 'json'
+    # Indicate that external applications may use this route. For authentication, see `modules/canvas_oauth/README.md`.
+    canvas_external_api: true
+  methods: [PATCH]
+
+canvas.api.config.post:
+  path: '/canvas/api/v0/config/{canvas_config_entity_type_id}'
+  defaults:
+    _controller: 'Drupal\canvas\Controller\ApiConfigControllers::post'
+  requirements:
+    _canvas_authentication_required: TRUE
+    _canvas_http_eligible_config_entity: 'TRUE'
+    # @todo: Use _entity_create_access once dynamic entity types are supported. See https://www.drupal.org/project/drupal/issues/3516775
+    _canvas_entity_create_access: 'canvas_config_entity_type_id'
+    # Allow a subset: `Component` config entities are read-only via the internal HTTP API.
+    canvas_config_entity_type_id: '(content_template|folder|pattern|js_component|asset_library)'
+  options:
+    # Indicate that external applications may use this route. For authentication, see `modules/canvas_oauth/README.md`.
+    canvas_external_api: true
+  methods: [POST]
+
+# @todo https://www.drupal.org/i/3498525 should generalize this to all eligible content entity types by using a route callback
+canvas.api.content.create:
+  path: '/canvas/api/v0/content/{entity_type}'
+  defaults:
+    _controller: 'Drupal\canvas\Controller\ApiContentControllers::post'
+  requirements:
+    _canvas_authentication_required: TRUE
+    _entity_create_access: 'canvas_page:canvas_page'
+  methods: ['POST']
+# @todo https://www.drupal.org/i/3498525 should generalize this to all eligible content entity types by using a route callback
+canvas.api.content.delete:
+  path: '/canvas/api/v0/content/canvas_page/{canvas_page}'
+  defaults:
+    _controller: 'Drupal\canvas\Controller\ApiContentControllers::delete'
+  requirements:
+    _canvas_authentication_required: TRUE
+    _entity_access: 'canvas_page.delete'
+  options:
+    parameters:
+      canvas_page:
+        type: entity:canvas_page
+    _format: 'json'
+  methods: ['DELETE']
+# @todo https://www.drupal.org/i/3498525 should generalize this to all eligible content entity types by using a route callback
+canvas.api.content.list:
+  path: '/canvas/api/v0/content/{entity_type}'
+  defaults:
+    _controller: 'Drupal\canvas\Controller\ApiContentControllers::list'
+  requirements:
+    _canvas_authentication_required: TRUE
+    _permission: 'edit canvas_page'
+  methods: [GET]
+  options:
+    _format: 'json'
+
+# Forms: component instance and content entity.
+# @see \Drupal\canvas\Theme\CanvasThemeNegotiator::applies()
+canvas.api.form.component_instance: &component_instance_form_route
+  path: '/canvas/api/v0/form/component-instance/{entity_type}/{entity}'
+  defaults:
+    _form: 'Drupal\canvas\Form\ComponentInstanceForm'
+    _title: 'Component Instance Form'
+  requirements: &component_instance_form_route_requirements
+    _canvas_authentication_required: TRUE
+    _canvas_component_tree_edit_access: TRUE
+    _entity_access: 'entity.update'
+  options: &component_instance_form_route_options
+    # The Canvas equivalent of requesting an AJAX response using `?_wrapper_format`.
+    # @see Drupal.Ajax.AJAX_REQUEST_PARAMETER
+    # @see \Drupal\Core\Ajax\AjaxResponse
+    # @see \Drupal\canvas\Render\MainContent\CanvasTemplateRenderer
+    _wrapper_format: 'canvas_template'
+    parameters:
+      entity:
+        type: entity:{entity_type}
+    _format: 'json'
+  methods:
+    # Used by Canvas UI to generate this form.
+    - PATCH
+    # Used by Drupal's AJAX system.
+    - POST
+
+# Specialized version of the `canvas.api.form.component_instance` route, with one additional route parameter.
+canvas.api.form.component_instance.content_template:
+  <<: *component_instance_form_route
+  path: '/canvas/api/v0/form/component-instance/content_template/{entity}/{preview_entity}'
+  requirements:
+    <<: *component_instance_form_route_requirements
+    _canvas_preview_entity_view_access: TRUE
+  options:
+    <<: *component_instance_form_route_options
+    parameters:
+      entity:
+        type: entity:content_template
+      preview_entity:
+        # @see \Drupal\canvas\Routing\ContentTemplatePreviewEntityConverter
+        type: canvas_content_template_preview_entity
+
+canvas.api.form.content_entity:
+  path: '/canvas/api/v0/form/content-entity/{entity_type}/{entity}/{entity_form_mode}'
+  defaults:
+    # It is not possible to use '_entity_form' as a default because form mode is not taken into account.
+    # When '_entity_form' is used as a default with 2 parts, for example 'node.default', the 2nd part is the form
+    # operation, not form mode.
+    # @see \Drupal\Core\Entity\Enhancer\EntityRouteEnhancer::enhanceEntityForm
+    # @see \Drupal\Core\Entity\HtmlEntityFormController::getFormObject
+    _controller: 'Drupal\canvas\Controller\EntityFormController::form'
+    _title: 'Entity Form'
+    entity_form_mode: default
+  requirements:
+    _canvas_authentication_required: TRUE
+    _canvas_component_tree_edit_access: TRUE
+    _entity_access: 'entity.update'
+  options:
+    # The Canvas equivalent of requesting an AJAX response using `?_wrapper_format`.
+    # @see Drupal.Ajax.AJAX_REQUEST_PARAMETER
+    # @see \Drupal\Core\Ajax\AjaxResponse
+    # @see \Drupal\canvas\Render\MainContent\CanvasTemplateRenderer
+    _wrapper_format: 'canvas_template'
+    parameters:
+      entity:
+        type: entity:{entity_type}
+    _format: 'json'
+  methods:
+    # Used by Canvas UI to generate this form.
+    - GET
+    # Used by Drupal's AJAX system.
+    - POST
+
+canvas.api.layout.get: &layout_get_route
+  path: '/canvas/api/v0/layout/{entity_type}/{entity}'
+  defaults:
+    _controller: 'Drupal\canvas\Controller\ApiLayoutController::get'
+    # We need a title callback because we use the HTML renderer to generate the preview.
+    _title_callback: 'Drupal\canvas\Controller\ApiLayoutController::getLabel'
+  requirements: &layout_get_route_requirements
+    _canvas_authentication_required: TRUE
+    _canvas_component_tree_edit_access: TRUE
+    _entity_access: 'entity.update'
+    _format: 'json'
+  options: &layout_get_route_options
+    _canvas_use_template_draft: TRUE
+    parameters:
+      entity:
+        type: entity:{entity_type}
+  methods: [GET]
+
+# Specialized version of the `canvas.api.layout.get` route, with one additional route parameter.
+canvas.api.layout.get.content_template:
+  <<: *layout_get_route
+  path: '/canvas/api/v0/layout-content-template/{entity}/{preview_entity}'
+  requirements:
+    <<: *layout_get_route_requirements
+    _canvas_preview_entity_view_access: TRUE
+  options:
+    <<: *layout_get_route_options
+    parameters: &layout_get_route_content_template_parameters
+      # Specialized, so locked to ContentTemplate config entities.
+      entity:
+        type: entity:content_template
+      preview_entity:
+        # @see \Drupal\canvas\Routing\ContentTemplatePreviewEntityConverter
+        type: canvas_content_template_preview_entity
+
+canvas.api.layout.patch: &layout_patch_route
+  path: '/canvas/api/v0/layout/{entity_type}/{entity}'
+  defaults:
+    _controller: 'Drupal\canvas\Controller\ApiLayoutController::patch'
+    # We need a title callback because we use the HTML renderer to generate the preview.
+    _title_callback: 'Drupal\canvas\Controller\ApiLayoutController::getLabel'
+  requirements:
+    <<: *layout_get_route_requirements
+  options:
+    _canvas_use_template_draft: TRUE
+    parameters:
+      entity:
+        type: entity:{entity_type}
+  methods: [PATCH]
+
+# Specialized version of the `canvas.api.layout.patch` route, with one additional route parameter.
+canvas.api.layout.patch.content_template:
+  <<: *layout_patch_route
+  path: '/canvas/api/v0/layout-content-template/{entity}/{preview_entity}'
+  requirements:
+    <<: *layout_get_route_requirements
+    _canvas_preview_entity_view_access: TRUE
+  options:
+    _canvas_use_template_draft: TRUE
+    parameters:
+      <<: *layout_get_route_content_template_parameters
+
+canvas.api.layout.post: &layout_post_route
+  path: '/canvas/api/v0/layout/{entity_type}/{entity}'
+  defaults:
+    _controller: 'Drupal\canvas\Controller\ApiLayoutController::post'
+    # We need a title callback because we use the HTML renderer to generate the preview.
+    _title_callback: 'Drupal\canvas\Controller\ApiLayoutController::getLabel'
+  requirements:
+    _canvas_authentication_required: TRUE
+    _canvas_component_tree_edit_access: TRUE
+    _entity_access: 'entity.update'
+  options:
+    _canvas_use_template_draft: TRUE
+    parameters:
+      entity:
+        type: entity:{entity_type}
+  methods: [POST]
+
+# Specialized version of the `canvas.api.layout.post` route, with one additional route parameter.
+canvas.api.layout.post.content_template:
+  <<: *layout_post_route
+  path: '/canvas/api/v0/layout-content-template/{entity}/{preview_entity}'
+  options:
+    requirements:
+      <<: *layout_get_route_requirements
+      _canvas_preview_entity_view_access: TRUE
+    parameters:
+      <<: *layout_get_route_content_template_parameters
+
+canvas.api.log_error:
+  path: '/canvas/api/v0/log-error'
+  defaults:
+    _controller: 'Drupal\canvas\Controller\ApiLogController'
+  requirements:
+    _canvas_authentication_required: TRUE
+    _canvas_ui_access: 'TRUE'
+  methods: ['POST']
+  options:
+    _format: 'json'
+
+canvas.api.staged-update.auto-save.post:
+  path: '/canvas/api/v0/staged-update/auto-save'
+  defaults:
+    _controller: 'Drupal\canvas\Controller\ApiStagedConfigUpdateAutoSaveController::post'
+  requirements:
+    _canvas_authentication_required: TRUE
+    _canvas_entity_create_access: 'staged_config_update'
+  methods: [POST]
+
+canvas.api.ui.content_template.suggestions.preview_content_entities:
+  path: '/canvas/api/v0/ui/content_template/suggestions/preview/{entity_type_id}/{bundle}'
+  defaults:
+    _controller: 'Drupal\canvas\Controller\ApiUiContentTemplateControllers::suggestPreviewContentEntities'
+  requirements:
+    _canvas_authentication_required: TRUE
+    _canvas_entity_create_access: 'content_template'
+    _format: 'json'
+  methods: [GET]
+
+canvas.api.ui.content_template.suggestions.structured_data_for_prop_shapes:
+  path: '/canvas/api/v0/ui/content_template/suggestions/structured-data-for-prop_shapes/{content_entity_type_id}/{bundle}/{component_config_entity_id}'
+  defaults:
+    _controller: 'Drupal\canvas\Controller\ApiUiContentTemplateControllers::suggestStructuredDataForPropShapes'
+  requirements:
+    _canvas_authentication_required: TRUE
+    _canvas_entity_create_access: 'content_template'
+  methods: [GET]
+  options:
+    _format: 'json'
+
+canvas.api.ui.content_template.view_modes.list:
+  path: '/canvas/api/v0/ui/content_template/view_modes/node'
+  defaults:
+    _controller: 'Drupal\canvas\Controller\ApiUiContentTemplateControllers::listViewModes'
+  requirements:
+    _canvas_authentication_required: TRUE
+    _canvas_entity_create_access: 'content_template'
+  methods: [GET]
+  options:
+    _format: 'json'
+
+canvas.boot.empty:
+  path: '/canvas'
+  defaults:
+    _controller: 'Drupal\canvas\Controller\CanvasController'
+    _title: 'Drupal Canvas'
+    entity_type: NULL
+    entity: NULL
+  requirements:
+    _canvas_ui_access: 'TRUE'
+  options:
+    _format: 'json'
+
+canvas.boot.entity:
+  path: '/canvas/editor/{entity_type}/{entity}'
+  defaults:
+    _controller: 'Drupal\canvas\Controller\CanvasController'
+    _title: 'Drupal Canvas'
+  requirements:
+    _canvas_authentication_required: TRUE
+    _canvas_component_tree_edit_access: TRUE
+    _entity_access: 'entity.update'
+  options:
+    parameters:
+      entity:
+        type: entity:{entity_type}
+    _format: 'json'
+
+canvas.component.status:
+  path: '/admin/appearance/component/status'
+  defaults:
+    _controller: 'Drupal\canvas\Controller\ComponentStatusController'
+    _title: 'Components status'
+  requirements:
+    _permission: 'administer themes'
+
+entity.component.audit:
+  path: '/admin/appearance/component/{component}/audit'
+  defaults:
+    _controller: 'Drupal\canvas\Controller\ComponentAuditController::audit'
+    _title_callback: 'Drupal\canvas\Controller\ComponentAuditController::auditTitle'
+  requirements:
+    _canvas_authentication_required: TRUE
+    _entity_access: 'component.audit'
+entity.component.delete_form:
+  path: '/admin/appearance/component/delete/{component}'
+  defaults:
+    _entity_form: 'component.delete'
+    _title: 'Delete component'
+  requirements:
+    _entity_access: 'component.delete'
+entity.component.disable:
+  path: '/admin/appearance/component/{component}/disable'
+  defaults:
+    _controller: 'Drupal\canvas\Controller\ComponentStatusController::performOperation'
+    op: disable
+  requirements:
+    _canvas_authentication_required: TRUE
+    _entity_access: 'component.disable'
+    _csrf_token: 'TRUE'
+entity.component.enable:
+  path: '/admin/appearance/component/{component}/enable'
+  defaults:
+    _controller: 'Drupal\canvas\Controller\ComponentStatusController::performOperation'
+    op: enable
+  requirements:
+    _canvas_authentication_required: TRUE
+    _entity_access: 'component.enable'
+    _csrf_token: 'TRUE'

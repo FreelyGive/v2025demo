@@ -7,7 +7,7 @@
 # If its running confirm delete
 if [ "$(ddev list | grep v2025demo | grep OK)" ]; then
   echo "The v2025demo is running. It will be deleted and recreated. Press ENTER to continue or CTRL-C to abort."
-  read
+  read x
 fi
 
 # Delete garbage
@@ -16,6 +16,10 @@ rm -rf vendor web composer.* patches.lock.json
 
 # Drupal CMS
 ddev start
+
+# Overwrite canvas with our version
+rm -rf web/modules/contrib/canvas
+cp -r merged_canvas/canvas web/modules/contrib/canvas
 
 # Install
 ddev drush si -y --account-pass=admin --site-name="2025 Demo"

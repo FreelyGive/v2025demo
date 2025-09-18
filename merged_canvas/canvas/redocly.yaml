@@ -1,0 +1,22 @@
+extends:
+  # @see https://redocly.com/docs/cli/v1/rules/recommended
+  - recommended
+
+rules:
+  # Makes no sense for Canvas, because Drupal sites can be hosted in arbitrary
+  # locations.
+  # @see https://redocly.com/docs/cli/v1/rules/oas/no-empty-servers
+  no-empty-servers: off
+
+  # All of Drupal is GPL2+. Avoid duplicating this information.
+  # @see https://redocly.com/docs/cli/rules/oas/info-license
+  info-license: off
+
+  # All of Drupal's API responses might return 403 if unauthorized. Repeating
+  # this for every operation is pointless. This rule is too coarse for Canvas'
+  # needs: it should be possible to omit 403 and only require 404, 409, 422.
+  operation-4xx-response: off
+
+  # Overkill for Canvas' needs.
+  # @see https://redocly.com/docs/cli/rules/oas/operation-operationId
+  operation-operationId: off

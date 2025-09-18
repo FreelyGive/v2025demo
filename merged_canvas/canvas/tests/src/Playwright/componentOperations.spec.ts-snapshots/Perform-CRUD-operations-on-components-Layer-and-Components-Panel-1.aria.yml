@@ -1,0 +1,170 @@
+- heading "Library" [level=4]
+- button:
+  - img
+- tablist:
+  - tab "Components" [selected]
+  - tab "Patterns"
+- tabpanel "Components":
+  - button "Create code component":
+    - img
+  - img
+  - button "Atom/Media"
+  - button "Collapse Atom/Media folder" [expanded]:
+    - img
+  - list:
+    - button "Video":
+      - img
+  - img
+  - button "Atom/Tabs"
+  - button "Collapse Atom/Tabs folder" [expanded]:
+    - img
+  - list:
+    - button "Shoe Tab":
+      - img
+    - button "Shoe Tab Panel":
+      - img
+  - img
+  - button "Atom/Text"
+  - button "Collapse Atom/Text folder" [expanded]:
+    - img
+  - list:
+    - button "Heading":
+      - img
+    - button "Shoe Badge":
+      - img
+  - img
+  - button "Container"
+  - button "Collapse Container folder" [expanded]:
+    - img
+  - list:
+    - button "Grid Container":
+      - img
+    - button "One Column":
+      - img
+    - button "Two Column":
+      - img
+  - img
+  - button "Container/Special"
+  - button "Collapse Container/Special folder" [expanded]:
+    - img
+  - list:
+    - button "Shoe Tab Group":
+      - img
+  - img
+  - button "core"
+  - button "Collapse core folder" [expanded]:
+    - img
+  - list:
+    - button "Page title":
+      - img
+    - button "Primary admin actions":
+      - img
+    - button "Tabs":
+      - img
+  - img
+  - button "Forms"
+  - button "Collapse Forms folder" [expanded]:
+    - img
+  - list:
+    - button "User login":
+      - img
+  - img
+  - button "Lists (Views)"
+  - button "Collapse Lists (Views) folder" [expanded]:
+    - img
+  - list:
+    - button "Recent content":
+      - img
+    - button "Who's online":
+      - img
+  - img
+  - button "Menus"
+  - button "Collapse Menus folder" [expanded]:
+    - img
+  - list:
+    - button "Administration":
+      - img
+    - button "Footer":
+      - img
+    - button "Main navigation":
+      - img
+    - button "Tools":
+      - img
+    - button "User account menu":
+      - img
+  - img
+  - button "Other"
+  - button "Collapse Other folder" [expanded]:
+    - img
+  - list:
+    - button "Call to Absolute Action":
+      - img
+    - button "Canvas test SDC for image gallery (>1 image)":
+      - img
+    - button /Canvas test SDC for sparkline \(>1 integers between -\d+ and \d+\)/:
+      - img
+    - 'button "Canvas test SDC for testing type: `Drupal\\Core\\Template\\Attribute` special casing"':
+      - img
+    - button "Canvas test SDC that crashes when 'crash' prop is TRUE":
+      - img
+    - button "Canvas test SDC with optional image and heading":
+      - img
+    - button "Canvas test SDC with optional image, with example":
+      - img
+    - button "Canvas test SDC with optional image, without example":
+      - img
+    - button "Canvas test SDC with props and slots":
+      - img
+    - button "Canvas test SDC with props but no slots":
+      - img
+    - button "Canvas test SDC with required image, with example":
+      - img
+    - button "Card":
+      - img
+    - button "Card with local image":
+      - img
+    - button "Card with remote image":
+      - img
+    - button "Card with stream wrapper image":
+      - img
+    - button "Component no meta:enum":
+      - img
+    - button "Druplicon":
+      - img
+    - button "Hero":
+      - img
+    - button "Section":
+      - img
+    - button "Test SDC Image":
+      - img
+  - img
+  - button "Status"
+  - button "Collapse Status folder" [expanded]:
+    - img
+  - list:
+    - button "Deprecated SDC":
+      - img
+    - button "Experimental SDC":
+      - img
+  - img
+  - button "System"
+  - button "Collapse System folder" [expanded]:
+    - img
+  - list:
+    - button "Breadcrumbs":
+      - img
+    - button "Clear cache":
+      - img
+    - button "Messages":
+      - img
+    - button "Powered by Drupal":
+      - img
+    - button "Site branding":
+      - img
+  - img
+  - button "User"
+  - button "Collapse User folder" [expanded]:
+    - img
+  - list:
+    - button "Who's new":
+      - img

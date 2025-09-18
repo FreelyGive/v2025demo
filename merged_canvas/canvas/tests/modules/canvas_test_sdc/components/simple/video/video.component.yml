@@ -1,0 +1,22 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json'
+name: Video
+status: stable
+group: Atom/Media
+description: A video element
+props:
+  type: object
+  required:
+    - video
+  properties:
+    video:
+      title: Video
+      type: object
+      $ref: json-schema-definitions://canvas.module/video
+      description: The video object.
+      examples:
+        - src: https://media.istockphoto.com/id/1340051874/video/aerial-top-down-view-of-a-container-cargo-ship.mp4?s=mp4-640x640-is&k=20&c=5qPpYI7TOJiOYzKq9V2myBvUno6Fq2XM3ITPGFE8Cd8=
+          poster: https://example.com/600x400.png
+    display_width:
+      title: Display width
+      type: integer
+      minimum: 1

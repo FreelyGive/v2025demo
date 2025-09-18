@@ -1,0 +1,19 @@
+.canvas-page .toolbar-title svg {
+  display: none;
+}
+.canvas-page .toolbar-title::before {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+  content: "";
+  color: currentColor;
+  background-color: currentColor;
+  inline-size: var(--admin-toolbar-space-16);
+  block-size: var(--admin-toolbar-space-16);
+  mask-repeat: no-repeat;
+  mask-position: center center;
+  mask-size: 100% auto;
+  mask-image: url(../assets/icons/page.svg);
+}

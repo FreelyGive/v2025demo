@@ -1,0 +1,23 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Image
+props:
+  type: object
+  required:
+    - image
+  properties:
+    image:
+      title: 'Image'
+      $ref: json-schema-definitions://canvas.module/image
+      # @todo `type: object` should not be necessary, it's because \Drupal\sdc\Component\ComponentValidator::getClassProps() does not yet support $ref
+      type: object
+      examples:
+        - src: 600x400.png
+          alt: 'Boring placeholder'
+          width: 600
+          height: 400
+    srcSetCandidateTemplate:
+      type: string
+      title: "Image candidate string URL template for <img srcset>"
+      format: "uri-template"
+      x-required-variables:
+        - width

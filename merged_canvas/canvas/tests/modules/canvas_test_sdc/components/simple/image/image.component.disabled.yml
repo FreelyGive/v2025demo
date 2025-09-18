@@ -1,0 +1,22 @@
+# @todo Evaluate updating all tests + config from using components/image/image.component.yml to use this implementation in https://www.drupal.org/project/canvas/issues/3468944
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json'
+name: Image
+status: stable
+group: Atom/Media
+description: An image element
+props:
+  type: object
+  required:
+    - src
+    - alt
+  properties:
+    src:
+      type: string
+      title: URI
+      description: The image url.
+      examples: ['https://picsum.photos/600/600']
+    alt:
+      type: string
+      title: Alt Text
+      description: The alt text.
+      examples: ['A random placeholder image']

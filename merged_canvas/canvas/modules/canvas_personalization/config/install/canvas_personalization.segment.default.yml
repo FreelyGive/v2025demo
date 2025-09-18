@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - canvas_personalization
+id: default
+label: 'Default segment'
+description: 'The negotiation fallback locked segment for personalization.'
+rules: {  }
+# The default segment should be evaluated after every other segment, as it always applies.
+# @see PHP_INT_MAX (32-bit)
+weight: 2147483647

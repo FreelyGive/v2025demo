@@ -1,0 +1,5 @@
+entity.segment.overview:
+  title: Personalization Segments
+  parent: system.admin_structure
+  description: 'List of Personalization Segments to personalize Drupal Canvas pages.'
+  route_name: entity.segment.collection

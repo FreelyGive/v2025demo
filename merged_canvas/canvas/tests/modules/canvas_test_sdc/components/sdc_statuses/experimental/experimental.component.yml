@@ -1,0 +1,13 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json'
+name: Experimental SDC
+status: experimental
+group: Status
+description: A experimental SDC component.
+props:
+  type: object
+  properties:
+    text:
+      type: string
+      title: Text
+      description: A text field.
+      examples: ['A text field']

@@ -1,0 +1,58 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json'
+name: Shoe Tab Group
+status: stable
+group: Container/Special
+description: https://shoelace.style/components/tab-group
+libraryOverrides:
+  dependencies:
+    - canvas/shoelace
+props:
+  type: object
+  required:
+    - placement
+  properties:
+    placement:
+      type: string
+      title: Placement
+      description: The placement of the tabs.
+      default: top
+      enum:
+        - 'top'
+        - 'bottom'
+        - 'start'
+        - 'end'
+      meta:enum:
+        top: Top
+        bottom: Bottom
+        start: Start
+        end: End
+      examples: ['top', 'bottom', 'start', 'end']
+    activation:
+      type: string
+      title: Activation
+      description: When set to auto, navigating tabs with the arrow keys will instantly show the corresponding tab panel. When set to manual, the tab will receive focus but will not show until the user presses space bar or enter.
+      default: auto
+      enum:
+        - auto
+        - manual
+      meta:enum:
+        auto: Auto
+        manual: Manual
+      examples: ['auto', 'manual']
+    no_scroll:
+      type: boolean
+      title: No Scroll
+      description: Disables the scroll arrows that appear when tabs overflow.
+      default: false
+      examples: [false, true]
+slots:
+  tabs:
+    title: Tab Nav
+    description: The tabs.
+    # @todo restrict this to only shoe_tab SDC
+    # @todo can_be_dropzone: true
+  tab_panels:
+    title: Tab Panels
+    description: The tab panels.
+    # @todo restrict this to only shoe_tab_panel SDC
+    # @todo can_be_dropzone: true

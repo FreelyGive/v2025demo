@@ -1,0 +1,31 @@
+name: Hello World
+machineName: hello_world
+status: false
+required: []
+props:
+  properties:
+    greeting:
+      type: string
+      title: Greeting
+      description: The greeting to display
+      examples:
+        - Hello World
+    cta:
+      type: string
+      title: CTA display text
+      description: The text for the call to action button
+      examples:
+        - Click me!
+    ctaHref:
+      type: string
+      format: uri
+      title: CTA link
+      examples:
+        - https://example.com
+slots:
+  content:
+    title: Content
+    description: Content to display below the greeting
+    examples:
+      - <div>Example slot content</div>
+dataDependencies: []

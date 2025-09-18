@@ -1,0 +1,4 @@
+name: Canvas Force Publish Error
+type: module
+description: 'Forces publish errors'
+package: Testing

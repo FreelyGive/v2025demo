@@ -1,0 +1,10 @@
+/* Style overrides for code mirror in Canvas. */
+
+.canvas-code-mirror-editor {
+  padding-bottom: var(--space-2);
+  font-size: var(--font-size-1);
+}
+
+.canvas-code-mirror-editor .cm-gutters {
+  background-color: var(--slate-2);
+}

@@ -1,0 +1,39 @@
+- tabpanel "Code":
+  - button "Add new folder":
+    - img
+  - img
+  - button "Active Users of Using"
+  - button "Collapse Active Users of Using folder" [expanded]:
+    - img
+  - img
+  - text: Using drupalSettings getSiteData (Internal)
+  - button "Open contextual menu"
+  - img
+  - text: Component using imports (Internal)
+  - button "Open contextual menu"
+  - img
+  - button "Empty Code"
+  - button "Collapse Empty Code folder" [expanded]:
+    - img
+  - img
+  - button "Proclaimers of With"
+  - button "Collapse Proclaimers of With folder" [expanded]:
+    - img
+  - img
+  - text: My Code Component Link (Internal)
+  - button "Open contextual menu"
+  - img
+  - text: With no props (Internal)
+  - button "Open contextual menu"
+  - img
+  - text: Captioned video (Internal)
+  - button "Open contextual menu"
+  - img
+  - text: Vanilla Image (Internal)
+  - button "Open contextual menu"
+  - img
+  - text: With enums (Internal)
+  - button "Open contextual menu"
+  - img
+  - text: With props (Internal)
+  - button "Open contextual menu"

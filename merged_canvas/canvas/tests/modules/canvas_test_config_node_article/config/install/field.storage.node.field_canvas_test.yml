@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - canvas
+    - canvas_test_config_node_article
+    - node
+id: node.field_canvas_test
+field_name: field_canvas_test
+entity_type: node
+type: component_tree
+settings: {}
+module: canvas
+locked: false
+cardinality: -1
+translatable: true
+indexes: {}
+persist_with_no_fields: false
+custom_storage: false

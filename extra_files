@@ -1,5 +1,0 @@
-# Just to keep track, so its easy to sync with origin later
-.ddev/commands/host/demo-setup
-.ddev/docker-composer.milvus.yaml
-custom_recipes
-README

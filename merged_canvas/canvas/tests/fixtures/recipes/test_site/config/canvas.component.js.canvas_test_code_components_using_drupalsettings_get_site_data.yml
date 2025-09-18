@@ -1,0 +1,19 @@
+uuid: 5f4502d8-5bc4-42b9-a661-e80af0d9731d
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.js_component.canvas_test_code_components_using_drupalsettings_get_site_data
+active_version: 8fe3be948e0194e1
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions: {  }
+    fallback_metadata:
+      slot_definitions: {  }
+label: 'Using drupalSettings getSiteData'
+id: js.canvas_test_code_components_using_drupalsettings_get_site_data
+provider: null
+source: js
+source_local_id: canvas_test_code_components_using_drupalsettings_get_site_data
+category: '@todo'

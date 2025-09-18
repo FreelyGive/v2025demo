@@ -1,0 +1,21 @@
+<sl-details {{ attributes }}
+{% if open %}open{% endif %}
+{% if disabled %}disabled{% endif %}>
+  <div slot="summary">
+    {{ summary|raw }}
+  </div>
+
+  {% block content %}
+  {% endblock %}
+
+  {% if expand_icon %}
+    {% set expand_icon = expand_icon|merge({slot: 'expand-icon'}) %}
+    {{ include('canvas:shoe_icon', expand_icon, with_context = false) }}
+  {% endif %}
+
+  {% if collapse_icon %}
+    {% set expand_icon = collapse_icon|merge({slot: 'collapse-icon'}) %}
+    {{ include('canvas:shoe_icon', collapse_icon, with_context = false) }}
+  {% endif %}
+
+</sl-details>

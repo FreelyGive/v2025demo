@@ -1,0 +1,25 @@
+/* Warning - the CSS in this file is loaded INSIDE the preview iFrame which means that
+care must be taken when adding classes in here. All classes should be very specific and
+contain some mention of Canvas to mitigate against pollution from other CSS loaded in the
+iFrame and to avoid polluting user styles.
+
+Also note, the HMR does not watch this file so you must refresh your page manually to see changes in here.
+
+This file is included as an attached Drupal library and as such is subject to CSS aggregation.
+ */
+
+:root {
+  --canvas--sortable-empty-slot-height: 40px;
+  --canvas--sortable-empty-region-height: 320px;
+}
+
+.canvas--slot-empty-placeholder, .canvas--region-empty-placeholder {
+  grid-column: 1 / -1;
+  width: 100%;
+  height: 100%;
+  min-height: var(--canvas--sortable-empty-slot-height);
+}
+
+.canvas--region-empty-placeholder {
+  min-height: var(--canvas--sortable-empty-region-height);
+}

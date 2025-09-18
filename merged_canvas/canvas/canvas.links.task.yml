@@ -1,0 +1,25 @@
+entity.component.collection:
+  title: 'Components'
+  route_name: entity.component.collection
+  base_route: system.themes_page
+  weight: 200
+
+canvas.component.status:
+  title: 'Enabled components'
+  route_name: entity.component.collection
+  parent_id: entity.component.collection
+
+canvas.component.status.disabled:
+  title: 'Disabled components'
+  route_name: canvas.component.status
+  parent_id: entity.component.collection
+
+entity.canvas_page.canonical:
+  title: 'View'
+  route_name: entity.canvas_page.canonical
+  base_route: entity.canvas_page.canonical
+
+entity.canvas_page.edit_form:
+  title: 'Edit'
+  base_route: entity.canvas_page.canonical
+  route_name: entity.canvas_page.edit_form

@@ -1,0 +1,48 @@
+.close {
+  cursor: pointer;
+}
+
+.triggerButton[disabled]:not(.noChanges) {
+  color: white !important;
+  background-color: var(--blue-9) !important;
+}
+
+.disableClick {
+  cursor: wait !important;
+  pointer-events: none;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+  a, .time {
+    color: var(--gray-10);
+  }
+}
+
+.buttonBlue {
+  color: white !important;
+  background-color: var(--blue-9) !important;
+}
+
+.selectAll {
+  color: var(--blue-9);
+}
+
+.loading {
+  padding-right: 10px;
+}
+
+.loading::after {
+  position: absolute;
+  overflow: hidden;
+  width: 0;
+  content: "\2026";
+  animation: ellipsis steps(4, end) 900ms infinite;
+}
+
+@keyframes ellipsis {
+  to {
+    width: 1.25em;
+  }
+}

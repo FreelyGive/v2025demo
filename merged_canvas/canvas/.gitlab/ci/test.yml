@@ -1,0 +1,47 @@
+.test_runner: &test_runner
+  - |
+      set +e
+      passed_tests=()
+      failed_tests=()
+
+      run_test() {
+        local test_name="$1"
+        shift
+        local command="$@"
+
+        echo "Running $test_name..."
+        eval "$command"
+        if [ $? -eq 0 ]; then
+          passed_tests+=("$test_name")
+          echo "✅ $test_name passed"
+        else
+          failed_tests+=("$test_name")
+          echo "❌ $test_name failed"
+        fi
+        echo ""
+      }
+
+.test_summary: &test_summary
+  - | # Print summary
+      echo "========================================="
+      echo "TEST EXECUTION SUMMARY"
+      echo "========================================="
+
+      if [ ${#passed_tests[@]} -gt 0 ]; then
+        echo "✅ PASSED (${#passed_tests[@]}):"
+        printf '   • %s\n' "${passed_tests[@]}"
+      fi
+      echo ""
+
+      if [ ${#failed_tests[@]} -gt 0 ]; then
+        echo "❌ FAILED (${#failed_tests[@]}):"
+        printf '   • %s\n' "${failed_tests[@]}"
+      fi
+      echo ""
+
+      total=$((${#passed_tests[@]} + ${#failed_tests[@]}))
+      echo "📊 RESULT: ${#passed_tests[@]}/$total tests passed"
+      echo "========================================="
+
+      set -e
+      [ ${#failed_tests[@]} -eq 0 ] || exit 1

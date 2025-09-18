@@ -1,0 +1,13 @@
+<?php
+
+declare(strict_types=1);
+
+use Drupal\Core\Form\FormStateInterface;
+
+function canvas_test_autocomplete_form_component_instance_form_alter(array &$form, FormStateInterface $form_state): void {
+  $form['test_autocomplete'] = [
+    '#type' => 'textfield',
+    '#title' => 'Autocomplete Field',
+    '#autocomplete_route_name' => 'some.autocomplete.results',
+  ];
+}

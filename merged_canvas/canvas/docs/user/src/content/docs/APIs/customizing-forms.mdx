@@ -1,0 +1,31 @@
+---
+title: APIs - Enhancing component forms
+---
+
+In [Props](./props.mdx), we explored how Canvas automatically generates forms for
+each SDC based on prop settings like type, format, and $ref. If you need more
+control, you can customize these forms using the
+`hook__form_component_instance_form_alter` hook. This hook allows you to
+enhance the user experience in advanced use cases.
+
+For example, you can:
+
+- Organize your props by grouping them within `<details>` or `<fieldset>`
+elements, making complex forms easier to navigate.
+- Add autocomplete functionality to string type props, as demonstrated in the
+`canvas_test_autocomplete submodule`.
+- Implement conditional fields to show, hide, or prefill other props based on
+user input, which you can see in action in the canvas_test_state_api submodule.
+
+The `canvas_test_autocomplete` test module provides a practical example of these
+capabilities.
+
+```php
+function canvas_test_autocomplete_form_component_instance_form_alter(array &$form, FormStateInterface $form_state): void {
+  $form['test_autocomplete'] = [
+    '#type' => 'textfield',
+    '#title' => 'Autocomplete Field',
+    '#autocomplete_route_name' => 'some.autocomplete.results',
+  ];
+}
+```

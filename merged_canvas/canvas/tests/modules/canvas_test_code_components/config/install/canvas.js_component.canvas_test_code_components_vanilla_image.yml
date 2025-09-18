@@ -1,0 +1,26 @@
+uuid: 3066d9d2-75f8-444d-a733-644698b43ad4
+langcode: en
+status: true
+dependencies: {  }
+machineName: canvas_test_code_components_vanilla_image
+name: Vanilla Image
+required: {  }
+props:
+  image:
+    title: image
+    type: object
+    examples:
+      -
+        src: 'https://placehold.co/1200x900@2x.png'
+        width: 1200
+        height: 900
+        alt: 'Example image placeholder'
+    $ref: 'json-schema-definitions://canvas.module/image'
+slots: {  }
+js:
+  original: "const Image = ({\n  image\n}) => {\n  return (\n    <img {...image} />\n  );\n};\n\n\nexport default Image;\n"
+  compiled: "function _define_property(obj, key, value) {\n    if (key in obj) {\n        Object.defineProperty(obj, key, {\n            value: value,\n            enumerable: true,\n            configurable: true,\n            writable: true\n        });\n    } else {\n        obj[key] = value;\n    }\n    return obj;\n}\nfunction _object_spread(target) {\n    for(var i = 1; i < arguments.length; i++){\n        var source = arguments[i] != null ? arguments[i] : {};\n        var ownKeys = Object.keys(source);\n        if (typeof Object.getOwnPropertySymbols === \"function\") {\n            ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function(sym) {\n                return Object.getOwnPropertyDescriptor(source, sym).enumerable;\n            }));\n        }\n        ownKeys.forEach(function(key) {\n            _define_property(target, key, source[key]);\n        });\n    }\n    return target;\n}\nimport { jsx as _jsx } from \"react/jsx-runtime\";\nconst Image = ({ image })=>{\n    return /*#__PURE__*/ _jsx(\"img\", _object_spread({}, image));\n};\nexport default Image;\n"
+css:
+  original: ''
+  compiled: ''
+dataDependencies: []

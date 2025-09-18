@@ -1,0 +1,54 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json'
+name: Card with stream wrapper image
+description: A card element with a stream wrapper image
+props:
+  type: object
+  required:
+    - src
+    - alt
+  properties:
+    heading:
+      type: string
+      title: Heading
+      description: The heading text.
+      examples:
+        - 'Card with stream wrapper'
+    content:
+      type: string
+      title: Content
+      description: The main text.
+      examples:
+        - 'In a curious work, published in Paris in 1863 by Delaville Dedreux, there is a suggestion for reaching the North Pole by an aerostat.'
+    footer:
+      type: string
+      title: Footer
+      description: The footer text.
+      examples:
+        - 'I have a footer!'
+    src:
+      title: Stream wrapper image path
+      type: string
+      # Note: the canvas_test_sdc:card SDC uses `json-schema-definitions://canvas.module/image`, and that shape
+      # does NOT accept stream wrapper URIs. Hence this SDC's implementation can NOT reuse canvas_test_sdc:card.
+      $ref: json-schema-definitions://canvas.module/stream-wrapper-image-uri
+      description: Stream wrapper image path e.g. public://
+      examples:
+        # This is created in the module installer.
+        # @see canvas_test_sdc_install()
+        - public://balloons.png
+    alt:
+      title: Alternative text
+      type: string
+      examples:
+        - Hot air balloons
+    loading:
+      title: Loading
+      type: string
+      enum:
+        - lazy
+        - eager
+      meta:enum:
+        lazy: Lazy
+        eager: Eager
+      examples:
+        - lazy

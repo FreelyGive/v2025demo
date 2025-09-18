@@ -1,0 +1,39 @@
+uuid: 15c27aae-5e37-4727-96ba-4b0b3d84f114
+langcode: en
+status: true
+dependencies:
+  enforced: {  }
+machineName: canvas_test_code_components_using_drupalsettings_get_site_data
+name: 'Using drupalSettings getSiteData'
+required: {  }
+props: {  }
+slots: {  }
+js:
+  original: |-
+    import { getSiteData } from '@/lib/drupal-utils';
+
+    const WithDrupalSettingsSiteData = () => {
+     const {homeUrl} = getSiteData().branding;
+     return (
+      <div>{homeUrl}</div>
+     );
+    };
+
+    export default WithDrupalSettingsSiteData;
+  compiled: |
+    import { jsx as _jsx } from "react/jsx-runtime";
+    import { getSiteData } from '@/lib/drupal-utils';
+    const WithDrupalSettingsSiteData = ()=>{
+        const { homeUrl } = getSiteData().branding;
+        return /*#__PURE__*/ _jsx("div", {
+            children: homeUrl
+        });
+    };
+    export default WithDrupalSettingsSiteData;
+css:
+  original: ''
+  compiled: ''
+dataDependencies:
+  drupalSettings:
+    - v0.baseUrl
+    - v0.branding

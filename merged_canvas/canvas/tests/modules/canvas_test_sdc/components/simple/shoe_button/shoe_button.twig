@@ -1,0 +1,21 @@
+<sl-button
+  {{ attributes }}
+  variant="{{ variant }}"
+  size="{{ size }}"
+  {% if disabled %} disabled {% endif %}
+  {% if loading %} loading {% endif %}
+  {% if outline %} outline {% endif %}
+  {% if pill %} pill {% endif %}
+  {% if circle %} circle {% endif %}
+  {% if href %} href="{{ href }}" {% endif %}
+  {% if target %} target="{{ target }}" {% endif %}
+  {% if rel %} rel="{{ rel }}" {% endif %}
+  {% if download %} download="{{ download }}" {% endif %}
+>
+
+  {% if icon %}
+    {{ include('canvas:shoe_icon', icon, with_context = false) }}
+  {% endif %}
+
+  {{ label }}
+</sl-button>

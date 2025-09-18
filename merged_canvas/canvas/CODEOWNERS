@@ -1,0 +1,164 @@
+# @see https://docs.gitlab.com/ee/user/project/codeowners/reference.html
+
+[project metadata][3] @balintbrews @bnjmnm @f.mazeikis @hooroomoo @jessebaker @lauriii @tedbow @wimleers @larowlan @justafish
+/*.info.yml
+/composer.json
+/docs/user/
+
+
+#
+# Client side.
+#
+
+[UI] @balintbrews @bnjmnm @jessebaker @hooroomoo @larowlan
+/ui/
+
+[UI utils] @balintbrews @bnjmnm @jessebaker @hooroomoo @effulgentsia
+/ui/src/utils/
+
+#
+# Hybrid side: the bridges connecting client & server sides.
+#
+
+# Issues: https://www.drupal.org/project/issues/search/canvas?issue_tags=openapi
+[OpenAPI] @traviscarden @larowlan @wimleers
+/openapi.yml
+# For whatever reason, it MUST be `.yaml`, not `.yml`.
+/redocly.yaml
+/.redocly.lint-ignore.yaml
+/src/EventSubscriber/ApiMessageValidatorBase.php
+/src/EventSubscriber/ApiRequestValidator.php
+/src/EventSubscriber/ApiResponseValidator.php
+/tests/src/Traits/OpenApiSpecTrait.php
+/tests/src/Unit/OpenApiSpecValidationTest.php
+/tests/src/Unit/UiFixturesValidationTest.php
+
+# Issues: https://www.drupal.org/project/issues/canvas?component=Semi-Coupled+theme+engine
+[Semi-Coupled theme engine] @bnjmnm @hooroomoo @effulgentsia
+/src/Hook/SemiCoupledThemeEngineHooks.php
+/src/Hook/SemiCoupledThemeEngineForceTwigHooks.php
+/src/Theme/CanvasThemeNegotiator.php
+/themes/engines/semi_coupled/
+/ui/src/components/form/*.tsx
+/ui/src/components/form/twig-to-jsx-component-map.js
+
+# Issues: https://www.drupal.org/project/issues/canvas?component=Redux-integrated+field+widgets
+[Redux-integrated field widgets] @bnjmnm @effulgentsia @balintbrews @larowlan
+/src/Hook/ReduxIntegratedFieldWidgetHooks.php
+/src/MediaLibraryCanvasPropOpener.php
+/ui/src/components/form/inputBehaviors.tsx
+/tests/src/Cypress/cypress/e2e/media-library.cy.js
+/tests/src/Cypress/cypress/e2e/prop-types.cy.js
+/tests/src/Kernel/LibraryInfoAlterTest.php
+/templates/form/
+/ui/src/components/form/inputBehaviors.tsx
+
+#
+# Server side.
+#
+
+# The default for the back-end, with more specific code owners for specific areas.
+[Page Builder back-end] @wimleers @f.mazeikis @tedbow @effulgentsia @larowlan @penyaskito
+/src/
+
+# Issues: https://www.drupal.org/project/issues/canvas?component=Component+sources
+[Component sources] @f.mazeikis @longwave @larowlan @wimleers
+/src/ComponentSource/
+/src/Hook/ComponentSourceHooks.php
+/tests/src/Kernel/Plugin/Canvas/ComponentSource/
+
+# Issues: https://www.drupal.org/project/issues/canvas?component=Config+management
+[Config management] @f.mazeikis @wimleers @larowlan
+/docs/config-management.md
+/docs/diagrams/config-management.md
+/config/schema/
+# TRICKY: files for content entities should be explicitly listed in their own sections, see `[Page]` for an example.
+/src/Entity/
+/src/Hook/ContentTemplateHooks.php
+/src/Hook/PageRegionHooks.php
+/tests/src/Kernel/Config/
+/tests/src/Functional/Config/
+
+# Issues: https://www.drupal.org/project/issues/canvas?component=Data+model
+[Data model] @effulgentsia @tedbow @wimleers @larowlan
+/docs/data-model.md
+/docs/diagrams/data-model.md
+# data type
+/src/Plugin/DataType/
+/tests/src/Kernel/DataType/
+# field type
+/src/Plugin/Field/FieldType/
+/tests/src/Kernel/Plugin/Field/FieldType/
+
+# Issues: https://www.drupal.org/project/issues/canvas?component=Page
+[Page] @mglaman
+/src/Entity/Routing/
+/src/Entity/Page.php
+/src/Entity/PageAccessControlHandler.php
+/src/Entity/PageViewBuilder.php
+/src/Hook/PageHooks.php
+/tests/modules/canvas_test_page/
+/tests/src/Kernel/Entity/
+/tests/src/Kernel/Traits/Page*
+
+# Issues: https://www.drupal.org/project/issues/canvas?component=Auto-save
+[Auto-save] @tedbow @larowlan
+/src/AutoSaveData.php
+/src/AutoSave/
+/src/Hook/AutoSaveHooks.php
+/tests/**/*AutoSave*
+/tests/Kernel/AutoSave/
+
+# ⚠️
+# ⚠️ Highly experimental new concepts ⚠️
+# ⚠️
+
+# To become part of `[Data model]`, but likely to change significantly
+[Data model: highly experimental new concepts] @effulgentsia @tedbow @wimleers
+# data descriptions
+/src/PropExpressions/
+# the JSONable-PHP-objects representing the different sources to retrieve a prop value
+/src/PropSource/
+
+# Issues: https://www.drupal.org/project/issues/canvas?component=Shape+matching
+# @see https://en.wikipedia.org/wiki/Schema_matching
+[Shape matching] @wimleers @tedbow
+/src/Hook/ShapeMatchingHooks.php
+/src/JsonSchemaInterpreter/
+/src/PropShape/
+/src/ShapeMatcher/
+/src/Plugin/DataTypeOverride/
+/src/Plugin/Field/FieldTypeOverride/
+/src/Plugin/Validation/Constraint/StringSemanticsConstraint.php
+
+
+#
+# Tests
+#
+
+[tests] @balintbrews @bnjmnm @f.mazeikis @jessebaker @larowlan @lauriii @tedbow @wimleers @hooroomoo @penyaskito
+/tests/
+
+
+#
+# DX
+#
+
+[DX: CI] @wimleers @bnjmnm @larowlan @longwave
+/.gitlab-ci.yml
+
+[DX: JS] @balintbrews @bnjmnm @jessebaker @hooroomoo
+/ui/*.json
+/ui/*.config.ts
+
+[DX: hot reload] @hooroomoo @balintbrews
+/modules/canvas_vite/
+
+[DX: PHP] @effulgentsia @wimleers @larowlan
+/phpcs.xml
+/phpstan.neon
+/tests/src/Unit/DxRouteConsistencyTest.php
+
+[Personalization] @penyaskito @effulgentsia
+/modules/canvas_personalization
+/docs/personalization.md

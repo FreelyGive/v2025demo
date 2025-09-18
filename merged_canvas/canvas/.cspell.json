@@ -1,0 +1,87 @@
+{
+    "description": "This default cspell configuration for contrib projects is based on core/.cspell.json. See https://project.pages.drupalcode.org/gitlab_templates/jobs/cspell/ for more details.",
+    "language": "en-US",
+    "allowCompoundWords": false,
+    "globRoot": ".",
+    "minWordLength": 4,
+    "ignorePaths": [
+      "_cspell_unrecognized_words.txt",
+      ".*ignore",
+      "./cli/LICENSE.md",
+      "./composer.json",
+      ".git",
+      "*_ignore_*",
+      "*.patch",
+      "*.svg",
+      "**/.*.json",
+      "**/node_modules/**",
+      "build.env",
+      "cli/dist/**",
+      "CODEOWNERS",
+      "dictionary.txt",
+      "docs/diagrams/**",
+      "js/assets/**",
+      "js/astro-bundles/**",
+      "modules/same_page_preview/**",
+      "modules/canvas_vite/**",
+      "node_modules",
+      "node_modules/**",
+      "package.json",
+      "phpstan*",
+      "playwright-report/**",
+      "scripts/tag-release.sh",
+      "test-results/**",
+      "tests/fixtures/recipes/**/content/**/**",
+      "tests/modules/canvas_test_extension/ui/dist/**",
+      "tests/modules/canvas_test_semi_coupled/semicoupled_app/dist/**",
+      "ui/dist/**",
+      "ui/lib/astro-hydration/**",
+      "ui/src/local_packages/**",
+      "ui/tests/fixtures/layout-default.json",
+      "vendor",
+      "web",
+      "yarn.lock"
+    ],
+    "ignoreRegExpList": [
+        "\u2139\ufe0e.*"
+    ],
+    "dictionaries": [
+        "drupal",
+        "companies",
+        "core-dictionary",
+        "fonts",
+        "html",
+        "php",
+        "softwareTerms",
+        "canvas",
+        "misc",
+        "typescript",
+        "node",
+        "css",
+        "bash",
+        "filetypes",
+        "npm",
+        "lorem-ipsum",
+        "sql",
+        "fullstack"
+    ],
+    "dictionaryDefinitions": [
+      {
+        "name": "drupal",
+        "path": "https://git.drupalcode.org/project/drupal/-/raw/11.x/core/misc/cspell/drupal-dictionary.txt"
+      },
+      {
+        "name": "core-dictionary",
+        "path": "https://git.drupalcode.org/project/drupal/-/raw/11.x/core/misc/cspell/dictionary.txt"
+      },
+      {
+          "name": "canvas",
+          "path": "./dictionary.txt"
+      }
+    ],
+    "flagWords": [
+        "e-mail",
+        "grey",
+        "queuing"
+    ]
+}

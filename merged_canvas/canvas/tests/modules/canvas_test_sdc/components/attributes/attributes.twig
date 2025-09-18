@@ -1,0 +1,11 @@
+{#
+/**
+ * ⚠️ Attributes named anything other than `attributes`, need to be manually initialized!
+ */
+#}
+{% set other_attributes = other_attributes ?? create_attribute() %}
+<div{{ attributes.addClass('sdc-standardized-attributes') }}>
+  <div{{ other_attributes.addClass('additional-attributes-for-this-sdc') }}>
+    {{ not_attributes }}
+  </div>
+</div>

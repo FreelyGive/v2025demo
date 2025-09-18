@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: f7e35fba-14ba-47f1-b2e1-16d2c6d70dd0
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: cats-1.jpg
+  uri:
+    -
+      value: 'public://2025-05/cats-1.jpg'
+      url: /sites/default/files/2025-05/cats-1.jpg
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 41397
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1747737480

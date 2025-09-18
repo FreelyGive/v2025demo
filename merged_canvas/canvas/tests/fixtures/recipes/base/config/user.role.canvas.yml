@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.article
+    - node.type.page
+  module:
+    - media
+    - node
+    - path
+    - system
+id: canvas
+label: canvas
+weight: 2
+is_admin: false
+permissions:
+  - 'access content'
+  - 'access media overview'
+  - 'administer media'
+  - 'administer permissions'
+  - 'administer themes'
+  - 'administer url aliases'
+  - 'create article content'
+  - 'create media'
+  - 'create page content'
+  - 'delete article revisions'
+  - 'delete own article content'
+  - 'delete own page content'
+  - 'delete page revisions'
+  - 'edit any article content'
+  - 'edit own article content'
+  - 'edit own page content'
+  - 'view media'

@@ -1,0 +1,63 @@
+langcode: en
+status: true
+dependencies: {  }
+machineName: code_video
+name: 'Code Video'
+required: {  }
+props:
+  theVideo:
+    title: theVideo
+    type: object
+    examples:
+      -
+        src: /ui/assets/videos/mountain_wide.mp4
+        poster: 'https://placehold.co/1920x1080.png?text=Widescreen'
+    $ref: 'json-schema-definitions://canvas.module/video'
+  theText:
+    title: theText
+    type: string
+    examples:
+      - 'Example Text'
+slots: {  }
+js:
+  original: |
+    const CodeVideo = ({
+      title = "<h3>Code Video</h3>",
+      theVideo = {src: null, poster: null},
+      theText,
+    }) => {
+      const {src, poster} = theVideo;
+      return (
+        <>
+          {src && <video controls src={src} poster={poster}></video>}
+          <p>{theText}</p>
+        </>
+      );
+    };
+
+    export default CodeVideo;
+  compiled: |
+    import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
+    const CodeVideo = ({ title = "<h3>Code Video</h3>", theVideo = {
+        src: null,
+        poster: null
+    }, theText })=>{
+        const { src, poster } = theVideo;
+        return /*#__PURE__*/ _jsxs(_Fragment, {
+            children: [
+                src && /*#__PURE__*/ _jsx("video", {
+                    controls: true,
+                    src: src,
+                    poster: poster
+                }),
+                /*#__PURE__*/ _jsx("p", {
+                    children: theText
+                })
+            ]
+        });
+    };
+    export default CodeVideo;
+css:
+  original: ''
+  compiled: ''
+dataDependencies: []

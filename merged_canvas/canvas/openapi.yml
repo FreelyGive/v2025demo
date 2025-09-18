@@ -1,0 +1,3083 @@
+#file: noinspection YAMLSchemaValidation
+# ^ To suppress false positive validation errors in PhpStorm.
+
+# For readability and to prevent needless merge conflicts, follow all possible
+# conventions in the official OpenAPI specification and documentation, including
+# the order of fixed fields like paths and components, spacing, and quoting of
+# strings. Pay attention to the rest of the file for any other conventions. Use
+# one of the automated formatters in the resources below.
+#
+# Tip: Use https://editor-next.swagger.io/ for real-time, in-browser feedback.
+#
+# Resources:
+# - https://spec.openapis.org/oas/v3.1.0.html - Official specification.
+# - https://learn.openapis.org/specification/ - Official documentation.
+# - https://swagger.io/docs/specification/ - Alternative documentation.
+# - https://www.jetbrains.com/help/idea/openapi.html - PhpStorm features.
+# - https://codifyformatter.org/yaml-formatter,
+#   https://onlineyamltools.com/prettify-yaml - YAML formatters that follow the
+#   official OpenAPI conventions. They are functionally identical. Warning: They
+#   also strip comments and blank lines. Review diffs carefully to avoid losing
+#   any.
+
+openapi: 3.1.0
+
+info:
+  title: Drupal Canvas
+  description: API Spec for Drupal Canvas
+  version: 0.x
+
+# - Drupal's session auth (cookies) for all routes.
+# - OAuth2 for some routes when the `canvas_oauth` submodule is installed.
+# @see \Drupal\canvas_oauth\Routing\CanvasOauthRouteSubscriber:ROUTE_OPTION_EXTERNAL_API
+security: []
+
+# @see https://spec.openapis.org/oas/v3.1.0.html#paths-object
+# @see https://spec.openapis.org/oas/v3.1.0.html#path-item-object
+paths:
+  /canvas/api/v0/auto-saves/css/asset_library/{configEntityId}:
+    description: Get draft CSS for given asset library
+    get:
+      summary: Get draft CSS for given asset library
+      parameters:
+        - $ref: '#/components/parameters/configEntityId'
+      responses:
+        '200':
+          description: Draft CSS for the library
+          content:
+            text/css:
+              example: '.large {font-size: 3rem;}'
+  /canvas/api/v0/auto-saves/css/js_component/{configEntityId}:
+    description: Get draft CSS for a given component
+    get:
+      summary: Get draft CSS for a given component
+      parameters:
+        - $ref: '#/components/parameters/configEntityId'
+      responses:
+        '200':
+          description: Draft CSS for the component
+          content:
+            text/css:
+              example: '.large {font-size: 3rem;}'
+  /canvas/api/v0/auto-saves/js/asset_library/{configEntityId}:
+    description: Get draft JS for given asset library
+    get:
+      summary: Get draft JS for given asset library
+      parameters:
+        - $ref: '#/components/parameters/configEntityId'
+      responses:
+        '200':
+          description: Draft JS for the asset library
+          content:
+            text/javascript:
+              example: 'console.log("hey");'
+  /canvas/api/v0/auto-saves/js/js_component/{configEntityId}:
+    description: Get draft JS for a given component
+    get:
+      summary: Get draft JS for a given component
+      parameters:
+        - $ref: '#/components/parameters/configEntityId'
+      responses:
+        '200':
+          description: 'The auto-saved JavaScript code for the code component.'
+          content:
+            text/javascript:
+              example: 'console.log("hey");'
+  /canvas/api/v0/auto-saves/pending:
+    description: TODO
+    get:
+      summary: All current auto-save entries
+      responses:
+        '200':
+          description: 'Could be 0, 1 or many.'
+          content:
+            application/json:
+              examples:
+                multipleEntries:
+                  value:
+                    node:1:en:
+                      owner:
+                        name: Garrett Bobby Ferguson, Jr
+                        avatar: /sites/default/files/user-pictures/garrett.jpg
+                        uri: /user/12
+                        id: 12
+                      updated: 1732763679
+                      entity_type: node
+                      langcode: en
+                      data_hash: 4711efecf75d2d1a
+                      entity_id: 1
+                      label: Home page
+                    asset_library:global:
+                      owner:
+                        name: Gracie Dog
+                        avatar: /sites/default/files/user-pictures/good-dog.jpg
+                        uri: /user/13
+                        id: 13
+                      updated: 1732763680
+                      entity_type: asset_library
+                      langcode: NULL
+                      data_hash: 4711efecf75d2d1b
+                      entity_id: global
+                      label: Global asset library
+                    js_component:hero:
+                      owner:
+                        name: Mark Scout
+                        avatar: /sites/default/files/user-pictures/severed.jpg
+                        uri: /user/16
+                        id: 16
+                      updated: 1732763680
+                      entity_type: js_component
+                      langcode: NULL
+                      data_hash: 4711efecf75d2d1b
+                      entity_id: hero
+                      label: Hero component
+                    segment:test_segment:
+                      owner:
+                        name: Mark Scout
+                        avatar: /sites/default/files/user-pictures/severed.jpg
+                        uri: /user/16
+                        id: 16
+                      updated: 1732763680
+                      entity_type: test_segment
+                      langcode: NULL
+                      data_hash: a95cf01fd2e9c59e
+                      entity_id: test_segment
+                      label: Test segment
+
+              schema:
+                $ref: '#/components/schemas/AutoSaveCollection'
+  /canvas/api/v0/auto-saves/publish:
+    description: TODO
+    post:
+      summary: Publish the specified auto-save entries
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublishAllRequest'
+      responses:
+        '200':
+          description: Successful publish
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    title: Success message
+                    examples:
+                      - Successfully published 3 items
+        '204':
+          description: No items to publish
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    title: Status message
+                    examples:
+                      - No items to publish
+        '422':
+          $ref: '#/components/responses/ClientErrorResponse'
+        '500':
+          $ref: '#/components/responses/ClientErrorResponse'
+  /canvas/api/v0/auto-saves/{entityTypeId}/{entityId}:
+    description:  Interact with an auto-save entry for a particular entity
+    parameters:
+      - $ref: '#/components/parameters/entityTypeId'
+      - name: entityId
+        in: path
+        required: true
+        description: The entity ID
+        schema:
+          oneOf:
+            - type: string
+            - type: integer
+        examples:
+          contentEntity:
+            value: 42
+          configEntity:
+            value: my-super-component
+    delete:
+      summary: Deletes an auto-save entry
+      responses:
+        '204':
+          description: Auto-save entry deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    title: Status message
+                    examples:
+                      - Auto-save data deleted successfully.
+        '404':
+          description: Auto-save entry not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    title: Error message
+                    examples:
+                      - No auto-save data found for this entity.
+  /canvas/api/v0/config/asset_library:
+    description: Endpoint for managing asset libraries.
+    get:
+      summary: Retrieves all available asset libraries.
+      responses:
+        '200':
+          description: All available asset libraries
+          content:
+            application/json:
+              schema:
+                type: object
+                minProperties: 0
+                # @todo Validate the property keys match the '^\\[a-zA-Z0-9_-]$'
+                #  pattern in https://drupal.org/i/3506543.
+                additionalProperties:
+                  type: object
+                  additionalProperties: false
+                  properties:
+                    id:
+                      type: string
+                      description: Asset library ID
+                    label:
+                      type: string
+                      description: Human-readable label
+                    css:
+                      type: [object, "null"]
+                      description: CSS
+                      properties:
+                        original:
+                          type: string
+                          description: Original CSS as entered by the human author
+                        compiled:
+                          type: string
+                          description: Compiled CSS code, compiled from the original
+                    js:
+                      type: [object, "null"]
+                      description: JS
+                      properties:
+                        original:
+                          type: string
+                          description: Original JS as entered by the human author
+                        compiled:
+                          type: string
+                          description: Compiled JS code, compiled from the original
+              examples:
+                global_asset_library:
+                  summary: "Only one library exists by default: the global one."
+                  value:
+                    global:
+                      id: "global"
+                      label: "Global Asset Library"
+                      css:
+                        original: "body { background-color: #fff; }"
+                        compiled: "body{background-color:#fff}"
+                      js:
+                        original: "console.log('Hello, world!');"
+                        compiled: "console.log('Hello, world!');"
+    post:
+      summary: Creates a new Asset Library.
+      requestBody:
+        description: Creates a new Asset Library.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewAssetLibrary'
+            examples:
+              example of a global library:
+                id: "global"
+                label: "Global Asset Library"
+                css:
+                  original: "body { background-color: #fff; }"
+                  compiled: "body{background-color:#fff}"
+                js:
+                  original: "console.log('Hello, world!');"
+                  compiled: "console.log('Hello, world!');"
+      responses:
+        '201':
+          description: Created entity successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetLibrary'
+              examples:
+                singleAssetLibrary:
+                  value:
+                    id: "global"
+                    label: "Global Asset Library"
+                    css:
+                      original: "body { background-color: #fff; }"
+                      compiled: "body{background-color:#fff}"
+                    js:
+                      original: "console.log('Hello, world!');"
+                      compiled: "console.log('Hello, world!');"
+        '409':
+          description: Asset Library with same ID already exists.
+          $ref: '#/components/responses/ClientErrorResponse'
+        '422':
+          description: Validation errors exist
+          $ref: '#/components/responses/ClientErrorResponse'
+  '/canvas/api/v0/config/asset_library/{configEntityId}':
+    description: Endpoint for managing a specific asset library.
+    get:
+      summary: Retrieves details of a specific asset library.
+      parameters:
+        - $ref: '#/components/parameters/configEntityId'
+      responses:
+        '200':
+          description: Individual Asset Library
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetLibrary'
+              examples:
+                singleAssetLibrary:
+                  value:
+                    id: "global"
+                    label: "Global Asset Library"
+                    css:
+                      original: "body { background-color: #fff; }"
+                      compiled: "body{background-color:#fff}"
+                    js:
+                      original: "console.log('Hello, world!');"
+                      compiled: "console.log('Hello, world!');"
+    patch:
+      summary: Updates a specific Asset Library.
+      requestBody:
+        description: Update specific Asset Library.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssetLibrary'
+      parameters:
+        - $ref: '#/components/parameters/configEntityId'
+      responses:
+        '200':
+          description: Individual Asset Library
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetLibrary'
+    delete:
+      summary: Deletes an Asset Library.
+      parameters:
+        - $ref: '#/components/parameters/configEntityId'
+      responses:
+        '204':
+          description: Deleted individual Asset Library
+  /canvas/api/v0/config/auto-save/{entityTypeId}/{configEntityId}:
+    description: Auto-save endpoints
+    get:
+      summary: Gets an auto-save state
+      parameters:
+        - $ref: '#/components/parameters/configEntityId'
+      responses:
+        '200':
+          description: Individual auto-save state
+          content:
+            application/json:
+              schema:
+                type: object
+    patch:
+      summary: Updates an auto-save state
+      parameters:
+        - $ref: '#/components/parameters/configEntityId'
+      requestBody:
+        description: Updates individual auto-save state
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '400':
+          description: Empty auto-save state.
+        '422':
+          description: Invalid auto-save state.
+        '200':
+          description: Auto-save state updated successfully.
+        '409':
+          description: >
+            The layout could not be updated because the entity
+            was modified by another user since the last time
+            it was loaded.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message indicating the conflict.
+  /canvas/api/v0/config/component:
+    description: TODO
+    get:
+      summary: Gets all Components available to instantiate.
+      responses:
+        '200':
+          description: All available components
+          content:
+            application/json:
+              examples:
+                singleAvailableComponent:
+                  summary: Only a single Component (without slots) available.
+                  value:
+                    'sdc_test:my-cta':
+                      id: 'sdc_test:my-cta'
+                      name: Call to Action
+                      source: Module component
+                      category: Buttons
+                      library: extension_components
+                      version: 53ed322c96bee384
+                      metadata:
+                        slots: {}
+                      default_markup: "\u003C!-- canvas-start-9f8719d6-d32d-4012-b48b-c7eddee8aea0 --\u003E\u003Ca  data-component-id=\"canvas_test_sdc:my-cta\" href=\"https://www.drupal.org\"\u003E\n  \u003C!-- canvas-prop-start-9f8719d6-d32d-4012-b48b-c7eddee8aea0/text --\u003EPress\u003C!-- canvas-prop-end-9f8719d6-d32d-4012-b48b-c7eddee8aea0/text --\u003E\n\u003C/a\u003E\n\u003C!-- canvas-end-9f8719d6-d32d-4012-b48b-c7eddee8aea0 --\u003E"
+                      css: "\u003Clink rel=\"stylesheet\" media=\"all\" href=\"/sites/default/files/css/css_xeBEV2TNeHyWToTeiA5k4v0zjcPmOd_Qpomr5aKDOlY.css?delta=0&amp;language=en&amp;theme=olivero&amp;include=eJxLzi9K1U_Ozy3Iz0vNKynWS07MK0ssji9JLS6JL05J1tXNrdRNLkkEADTcDyY\" /\u003E\n"
+                      js_header: ""
+                      js_footer: ""
+              schema:
+                type: object
+                minProperties: 0
+                # @todo Validate the property keys match the
+                #   '^\\[a-zA-Z0-9_-]:[a-zA-Z0-9_-]$' pattern in
+                #    https://drupal.org/i/3506543.
+                # @see \Drupal\Core\Plugin\Component::$machineName
+                additionalProperties:
+                  $ref: '#/components/schemas/Component'
+  /canvas/api/v0/config/content_template:
+    description: Provides a list of Templates
+    get:
+      summary: Gets a list of Templates
+      responses:
+        '200':
+          description: List of Templates
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContentTemplateList'
+              examples:
+                no content templates, multiple node bundles available:
+                  value:
+                    node:
+                      label: Content types
+                      bundles:
+                        article:
+                          label: Article
+                          viewModes: {}
+                          editFieldsUrl: null
+                          deleteUrl: null
+                        page:
+                          label: Basic page
+                          viewModes: {}
+                          editFieldsUrl: null
+                          deleteUrl: null
+                multiple content entity types, previews available:
+                  value:
+                    node:
+                      label: Content types
+                      bundles:
+                        article:
+                          label: Article
+                          viewModes:
+                            full:
+                              entityType: node
+                              bundle: article
+                              viewMode: full
+                              viewModeLabel: Full content
+                              label: Article content items — Full content view
+                              status: true
+                              id: node.article.full
+                              suggestedPreviewEntityId: 1
+                          editFieldsUrl: null
+                          deleteUrl: null
+                        page:
+                          label: Basic page
+                          viewModes:
+                            full:
+                              entityType: node
+                              bundle: page
+                              viewMode: full
+                              viewModeLabel: Full content
+                              label: Basic page content items — Full content view
+                              status: false
+                              id: node.page.full
+                              suggestedPreviewEntityId: 4
+                          editFieldsUrl: null
+                          deleteUrl: null
+                single content entity type, no preview available:
+                  summary: Single content entity type with no preview entity available
+                  value:
+                    node:
+                      label: Content types
+                      bundles:
+                        article:
+                          label: Article
+                          viewModes:
+                            full:
+                              entityType: 'node'
+                              bundle: 'article'
+                              viewMode: 'full'
+                              status: false
+                              id: 'node.article.full'
+                              suggestedPreviewEntityId: null
+                              viewModeLabel: 'Full content'
+                              label: 'article content items — Full content view'
+                          editFieldsUrl: null
+                          deleteUrl: null
+    post:
+      summary: Creates new Content Template.
+      requestBody:
+        description: Creates new Content Template.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewContentTemplate'
+            examples:
+              new content template:
+                entityType: 'node'
+                bundle: 'article'
+                viewMode: 'full'
+      responses:
+        '201':
+          description: Created entity successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContentTemplate'
+              examples:
+                newly created content template:
+                  entityType: 'node'
+                  bundle: 'article'
+                  viewMode: 'full'
+                  status: false
+                  id: 'node.article.full'
+                  suggestedPreviewEntityId: NULL
+                  viewModeLabel: 'Full content'
+                  label: 'article content items — Full content view'
+  /canvas/api/v0/config/content_template/{configEntityId}:
+    description: Specific ContentTemplate endpoints.
+    get:
+      summary: Gets a single ContentTemplate.
+      parameters:
+        - $ref: '#/components/parameters/configEntityId'
+      responses:
+        '200':
+          description: Individual ContentTemplate
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContentTemplate'
+    delete:
+      summary: Deletes a ContentTemplate.
+      parameters:
+        - $ref: '#/components/parameters/configEntityId'
+      responses:
+        '204':
+          description: Deleted individual ContentTemplate entity.
+  /canvas/api/v0/config/folder:
+    description: TODO
+    get:
+      summary: Gets the list of Folders
+      responses:
+        '200':
+          description: Collection of Folders
+          content:
+            application/json:
+              schema:
+                type: object
+                minProperties: 0
+                additionalProperties:
+                  $ref: '#/components/schemas/ExistingFolder'
+    post:
+      summary: Creates a new Folder
+      requestBody:
+        description: Create new Folder.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewFolder'
+            examples:
+              example with one folder:
+                name: Test folder
+                type: component
+                weight: 0
+                items: [ ]
+      responses:
+        '201':
+          description: Successful save of Folder
+          content:
+            application/json:
+              examples:
+                example with one component type folder:
+                  id: 75144f9b-1bfc-4874-b848-b5889f066222
+                  name: Test Folder
+                  type: component
+                  weight: 0
+                  items: [ ]
+              schema:
+                $ref: '#/components/schemas/ExistingFolder'
+        '409':
+          description: Folder with same ID already exists.
+          $ref: '#/components/responses/ClientErrorResponse'
+        '422':
+          description: Validation errors exist
+          $ref: '#/components/responses/ClientErrorResponse'
+  '/canvas/api/v0/config/folder/{configEntityId}':
+    description: TODO
+    get:
+      summary: Gets a Folder
+      parameters:
+        - $ref: '#/components/parameters/configEntityId'
+      responses:
+        '200':
+          description: Individual Folder
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExistingFolder'
+    patch:
+      summary: Updates a Folder
+      requestBody:
+        description: Update specific Folder.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              allOf:
+                - required:
+                    - name
+                    - weight
+                    - items
+                - $ref: '#/components/schemas/Folder'
+      parameters:
+        - $ref: '#/components/parameters/configEntityId'
+      responses:
+        '200':
+          description: Individual Folder
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExistingFolder'
+    delete:
+      summary: Deletes a Folder.
+      parameters:
+        - $ref: '#/components/parameters/configEntityId'
+      responses:
+        '204':
+          description: Deleted individual Folder.
+  /canvas/api/v0/config/js_component:
+    get:
+      summary: Gets list of Code Components
+      responses:
+        '200':
+          description: Collection of Code Components
+          content:
+            application/json:
+              schema:
+                type: object
+                minProperties: 0
+                # @todo Validate the property keys match the '^\\[a-zA-Z0-9_-]$'
+                #   pattern in https://drupal.org/i/3506543.
+                additionalProperties:
+                  $ref: '#/components/schemas/CodeComponent'
+    post:
+      summary: Creates a new Code Component
+      requestBody:
+        description: Create new Code Component
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewCodeComponent'
+            examples:
+              a simple js component with no slots or props, and no imports:
+                machineName: test_component
+                name: Test Component
+                status: FALSE
+                props: []
+                slots: []
+                sourceCodeJs: 'console.log("Test");'
+                sourceCodeCss: '.test{ display:none; }'
+                compiledJs: 'console.log("Test");'
+                compiledCss: '.test{display:none;}'
+                importedJsComponents: []
+                dataDependencies: []
+      responses:
+        '201':
+          description: Successful creation of individual Code Component
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CodeComponent'
+        '401':
+          description: Unauthorized (unauthenticated) response.
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '403':
+          description: Access denied response.
+          $ref: '#/components/responses/AuthenticationErrorResponse'
+        '409':
+          description: Code Component with same ID already exists.
+          $ref: '#/components/responses/ClientErrorResponse'
+        '422':
+          description: Validation errors exist
+          $ref: '#/components/responses/ClientErrorResponse'
+  /canvas/api/v0/config/js_component/{configEntityId}:
+    description: Code Component endpoints
+    delete:
+      summary: Deletes Code Component
+      parameters:
+        - $ref: '#/components/parameters/configEntityId'
+      responses:
+        '204':
+          description: Deleted individual Code Component
+        '401':
+          description: Unauthorized (unauthenticated) response.
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '403':
+          description: Access denied response.
+          $ref: '#/components/responses/AuthenticationErrorResponse'
+    get:
+      summary: Gets Code Component
+      parameters:
+        - $ref: '#/components/parameters/configEntityId'
+      responses:
+        '200':
+          description: Individual Code Component
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CodeComponent'
+        '401':
+          description: Unauthorized (unauthenticated) response.
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '403':
+          description: Access denied response.
+          $ref: '#/components/responses/AuthenticationErrorResponse'
+    patch:
+      summary: Updates Code Component
+      parameters:
+        - $ref: '#/components/parameters/configEntityId'
+      requestBody:
+        description: Updates individual Code Component
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CodeComponent'
+      responses:
+        '200':
+          description: Updated individual Code Component
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CodeComponent'
+        '401':
+          description: Unauthorized (unauthenticated) response.
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '403':
+          description: Access denied response.
+          $ref: '#/components/responses/AuthenticationErrorResponse'
+  /canvas/api/v0/config/pattern:
+    description: TODO
+    get:
+      summary: Gets list of Patterns
+      responses:
+        '200':
+          description: Collection of Patterns
+          content:
+            application/json:
+              schema:
+                type: object
+                minProperties: 0
+                # @todo Validate the property keys match the '^\\[a-zA-Z0-9_-]$'
+                #  pattern in https://drupal.org/i/3506543.
+                additionalProperties:
+                  $ref: '#/components/schemas/PatternPreview'
+    post:
+      summary: Creates a new Pattern
+      requestBody:
+        description: Create new Pattern.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewPattern'
+            examples:
+              example with one pattern:
+                name: Pattern
+                layout:
+                  -
+                    uuid: 0b755464-281c-4487-82a0-ece34a9b1121
+                    nodeType: component
+                    type: sdc.canvas_test_sdc.my-section@05bd00d2c481f924
+                    slots: [ ]
+                model:
+                  0b755464-281c-4487-82a0-ece34a9b1121:
+                    resolved:
+                      text:
+                        value: >-
+                          Our mission is to deliver the best products and
+                          services to our customers. We strive to exceed
+                          expectations and continuously improve our offerings.
+                    source:
+                      text:
+                        sourceType: static:field_item:string,
+                        expression: 'ℹ︎string␟value'
+      responses:
+        '201':
+          description: Successful save of Pattern
+          content:
+            application/json:
+              examples:
+                myPattern:
+                  value:
+                    layoutModel:
+                      layout:
+                        - uuid: 0b755464-281c-4487-82a0-ece34a9b1121
+                          nodeType: component
+                          type: sdc.canvas_test_sdc.my-section
+                          slots: []
+                      model:
+                        0b755464-281c-4487-82a0-ece34a9b1121:
+                          text: >-
+                            Our mission is to deliver the best products and
+                            services to our customers. We strive to exceed
+                            expectations and continuously improve our offerings.
+                    name: Pattern
+                    id: pattern
+                    default_markup: >-
+                      <!-- canvas-start-0b755464-281c-4487-82a0-ece34a9b1121 --><div
+                      class="my-section__wrapper">
+                        <div class="my-section__content-wrapper">
+                          <h2 class="my-section__h2">Our Mission</h2>
+                          <p class="my-section__paragraph">
+                            <!-- canvas-prop-start-text -->Our mission is to deliver the best products and services to our customers. We strive to exceed expectations and continuously improve our offerings.<!-- canvas-prop-end-text -->
+                          </p>
+                          <p class="my-section__paragraph">
+                            Join us on our journey to innovation and excellence. Your satisfaction is our priority.
+                          </p>
+                        </div>
+                        <div class="my-section__image-wrapper">
+                          <img alt="Placeholder Image" class="my-section__img" width="500" height="500">
+                        </div>
+                      </div> <!-- canvas-end-0b755464-281c-4487-82a0-ece34a9b1121
+                      -->
+                    css: >
+                      <link rel="stylesheet" media="all"
+                      href="/sites/default/files/css/css.css" />
+                    js_header: ''
+                    js_footer: ''
+              schema:
+                $ref: '#/components/schemas/PatternPreview'
+        '409':
+          description: Pattern with same ID already exists.
+          $ref: '#/components/responses/ClientErrorResponse'
+        '422':
+          description: Validation errors exist
+          $ref: '#/components/responses/ClientErrorResponse'
+  '/canvas/api/v0/config/pattern/{configEntityId}':
+    description: TODO
+    get:
+      summary: Gets a Pattern
+      parameters:
+        - $ref: '#/components/parameters/configEntityId'
+      responses:
+        '200':
+          description: Individual Pattern
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatternPreview'
+    patch:
+      summary: Updates a Pattern
+      requestBody:
+        description: Update specific Pattern.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pattern'
+      parameters:
+        - $ref: '#/components/parameters/configEntityId'
+      responses:
+        '200':
+          description: Individual Pattern
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatternPreview'
+    delete:
+      summary: Deletes a Pattern.
+      parameters:
+        - $ref: '#/components/parameters/configEntityId'
+      responses:
+        '204':
+          description: Deleted individual Pattern.
+  /canvas/api/v0/config/segment:
+    description: Endpoint for managing Personalization Segments.
+    get:
+      summary: Retrieves all available Personalization Segments.
+      responses:
+        '200':
+          description: All available Personalization Segments
+          content:
+            application/json:
+              schema:
+                type: object
+                minProperties: 0
+                # @todo Validate the property keys match the '^\\[a-zA-Z0-9_-]$'
+                #  pattern in https://drupal.org/i/3506543.
+                additionalProperties:
+                  $ref: '#/components/schemas/Segment'
+              examples:
+                default_segment:
+                  value:
+                    default_segment:
+                      id: "default_segment"
+                      label: "Default Segment"
+                      rules:
+                        utm_parameters:
+                          id: "utm_parameters"
+                          parameters:
+                            -
+                              "key": "utm_source"
+                              "value": "my-source-id"
+                              "matching": "exact"
+                            -
+                              "key": "utm_campaign"
+                              "value": "HALLOWEEN"
+                              "matching": "starts_with"
+                          negate: false
+                          all: true
+                      weight: 0
+    post:
+      summary: Creates a new Personalization Segment.
+      requestBody:
+        description: Creates a new Personalization Segment.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Segment'
+            examples:
+              new_segment:
+                id: "new_segment"
+                label: "My new Segment"
+                description: "<p>My new Segment description</p>"
+                rules:
+                  utm_parameters:
+                    id: "utm_parameters"
+                    parameters:
+                      -
+                        "key": "utm_source"
+                        "value": "my-source-id"
+                        "matching": "exact"
+                      -
+                        "key": "utm_campaign"
+                        "value": "HALLOWEEN"
+                        "matching": "starts_with"
+                    negate: false
+                    all: true
+                weight: 0
+      responses:
+        '201':
+          description: Created entity successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Segment'
+              examples:
+                new_segment:
+                  value:
+                    id: "new_segment"
+                    label: "My new Segment"
+                    rules:
+                      utm_parameters:
+                        id: "utm_parameters"
+                        parameters:
+                          -
+                            "key": "utm_source"
+                            "value": "my-source-id"
+                            "matching": "exact"
+                          -
+                            "key": "utm_campaign"
+                            "value": "HALLOWEEN"
+                            "matching": "starts_with"
+                        negate: false
+                        all: true
+                    weight: 0
+        '409':
+          description: Personalization Segment with same ID already exists.
+          $ref: '#/components/responses/ClientErrorResponse'
+        '422':
+          description: Validation errors exist
+          $ref: '#/components/responses/ClientErrorResponse'
+  '/canvas/api/v0/config/segment/{configEntityId}':
+    description: Endpoint for managing a specific Personalization Segment.
+    get:
+      summary: Gets details of a specific Personalization Segment.
+      parameters:
+        - $ref: '#/components/parameters/configEntityId'
+      responses:
+        '200':
+          description: Individual Personalization Segment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Segment'
+              examples:
+                example:
+                  id: "new_segment"
+                  label: "My new Segment"
+                  rules:
+                    utm_parameters:
+                      id: "utm_parameters"
+                      parameters:
+                        -
+                          "key": "utm_source"
+                          "value": "my-source-id"
+                          "matching": "exact"
+                        -
+                          "key": "utm_campaign"
+                          "value": "HALLOWEEN"
+                          "matching": "starts_with"
+                      negate: false
+                      all: true
+                  weight: 0
+    patch:
+      summary: Updates a specific Asset Library.
+      requestBody:
+        description: Update specific Asset Library.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Segment'
+      parameters:
+        - $ref: '#/components/parameters/configEntityId'
+      responses:
+        '200':
+          description: Individual Personalization Segment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Segment'
+    delete:
+      summary: Deletes a Personalization Segment.
+      parameters:
+        - $ref: '#/components/parameters/configEntityId'
+      responses:
+        '204':
+          description: Deleted individual Personalization Segment
+  '/canvas/api/v0/content/canvas_page/{entityId}':
+    description: Endpoint for deleting content entities.
+    delete:
+      summary: Deletes a content entity.
+      parameters:
+        - $ref: '#/components/parameters/entityId'
+      responses:
+        '204':
+          description: Content deleted successfully
+  '/canvas/api/v0/content/{entity_type}':
+    get:
+      summary: Provides api for page listing.
+      parameters:
+        - in: query
+          name: search
+          required: false
+          description: Search term to filter content by title
+          schema:
+            type: string
+          examples:
+            Find content with title 'My page':
+              value: 'My page'
+            Search for marketing update content:
+              value: 'Marketing update'
+      responses:
+        200:
+          description: Page list generated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                minProperties: 0
+                # @todo Validate the property keys match the '^[0-9]$' pattern
+                #   in https://drupal.org/i/3506543.
+                additionalProperties:
+                  type: object
+                  required:
+                    - id
+                    - title
+                    - status
+                    - path
+                    - autoSaveLabel
+                    - autoSavePath
+                    - internalPath
+                    - links
+                  properties:
+                    id:
+                      type: integer
+                      description: The page ID.
+                    title:
+                      type: string
+                      description: The page title.
+                    status:
+                      type: boolean
+                      description: The page status.
+                    autoSaveLabel:
+                      type: [string, "null"]
+                      description: The auto-save title.
+                    autoSavePath:
+                      type: [string, "null"]
+                      format: uri-reference
+                      description: The auto-save path.
+                    internalPath:
+                      type: string
+                      format: uri-reference
+                      description: The internal (unprocessed) path
+                    path:
+                      type: string
+                      format: uri-reference
+                      title: The processed path
+                    links:
+                      type: object
+                      description: The operation links.
+                      additionalProperties:
+                        type: string
+                      examples:
+                        edit-form: /canvas/editor/canvas_page/3
+              examples:
+                pageList:
+                  value:
+                    '1':
+                      id: 1
+                      title: Home
+                      status: true
+                      path: /home
+                      autoSaveLabel: Homer
+                      autoSavePath: /updated-path
+                      internalPath: /page/1
+                      links:
+                        edit-form: /canvas/editor/canvas_page/1
+                    '2':
+                      id: 2
+                      title: About
+                      status: false
+                      path: /about
+                      autoSaveLabel: About who?
+                      autoSavePath: /page/1
+                      internalPath: /page/2
+                      links:
+                        edit-form: /canvas/editor/canvas_page/2
+    post:
+      summary: Creates content for a specific entity type
+      parameters:
+        - name: entity_type
+          in: path
+          required: true
+          description: The entity type
+          schema:
+            type: string
+      requestBody:
+        description: Optional entity ID for duplication
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                entity_id:
+                  type: string
+                  description: The ID of the entity to duplicate (optional)
+      responses:
+        '201':
+          description: Created entity successfully
+          content:
+            application/json:
+              examples:
+                newContentEntity:
+                  value:
+                    entity_type: canvas_page
+                    entity_id: '123'
+              schema:
+                type: object
+                required:
+                  - entity_type
+                  - entity_id
+                additionalProperties: false
+                properties:
+                  entity_type:
+                    type: string
+                    description: The entity type ID
+                    # @todo https://www.drupal.org/i/3498525 should generalize this to all eligible content entity types
+                    enum:
+                      - canvas_page
+                    examples:
+                      - canvas_page
+                  entity_id:
+                    # @todo This is a bug https://www.drupal.org/i/3510925 introduced, fix it in https://www.drupal.org/i/3498525
+                    type: string
+                    description: The id of created content entity
+                    examples:
+                      - '42'
+        '404':
+          description: Entity not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: Cannot find entity to duplicate.
+  '/canvas/api/v0/form/component-instance/content_template/{configEntityId}/{entityId}':
+    description: TODO
+    parameters:
+      - $ref: '#/components/parameters/configEntityId'
+      # The preview entity to use. (Used for verifying all DynamicPropSources can be evaluated.)
+      - $ref: '#/components/parameters/entityId'
+    patch:
+      summary: Generates a component instance form for a content template.
+      responses:
+        '200':
+          $ref: '#/components/responses/ComponentInstanceFormResponse'
+    post:
+      summary: AJAX updates for this form.
+      parameters:
+        - $ref: '#/components/parameters/queryAjaxForm'
+        - $ref: '#/components/parameters/queryWrapperFormat'
+      responses:
+        '200':
+          $ref: '#/components/responses/DrupalAjaxResponse'
+  '/canvas/api/v0/form/component-instance/{entityTypeId}/{entityId}':
+    description: TODO
+    parameters:
+      - $ref: '#/components/parameters/entityTypeId'
+      - $ref: '#/components/parameters/entityId'
+    patch:
+      summary: Generates a component instance form.
+      responses:
+        '200':
+          $ref: '#/components/responses/ComponentInstanceFormResponse'
+    post:
+      summary: AJAX updates for this form.
+      parameters:
+        - $ref: '#/components/parameters/queryAjaxForm'
+        - $ref: '#/components/parameters/queryWrapperFormat'
+      responses:
+        '200':
+          $ref: '#/components/responses/DrupalAjaxResponse'
+  '/canvas/api/v0/form/content-entity/{entityTypeId}/{entityId}':
+    description: TODO
+    get:
+      summary: Gets the entity form with the "default" form mode
+      parameters:
+        - $ref: '#/components/parameters/entityTypeId'
+        - $ref: '#/components/parameters/entityId'
+      responses:
+        '200':
+          $ref: '#/components/responses/FormResponse'
+    post:
+      summary: AJAX updates for this form.
+      parameters:
+        - $ref: '#/components/parameters/queryAjaxForm'
+        - $ref: '#/components/parameters/queryWrapperFormat'
+      responses:
+        '200':
+          description: AJAX updates
+          content:
+            application/json:
+              schema:
+                type: object
+                description: A Drupal AJAX response.
+  '/canvas/api/v0/form/content-entity/{entityTypeId}/{entityId}/{entityFormMode}':
+    description: The form for editing a content entity.
+    get:
+      summary: Gets the entity form with the specified form mode
+      parameters:
+        - $ref: '#/components/parameters/entityTypeId'
+        - $ref: '#/components/parameters/entityId'
+        - name: entityFormMode
+          in: path
+          required: true
+          description: The entity form mode of the form to retrieve
+          schema:
+            type: string
+          example: default
+      responses:
+        '200':
+          $ref: '#/components/responses/FormResponse'
+    post:
+      summary: AJAX updates for this form.
+      parameters:
+        - $ref: '#/components/parameters/queryAjaxForm'
+        - $ref: '#/components/parameters/queryWrapperFormat'
+      responses:
+        '200':
+          description: AJAX updates
+          content:
+            application/json:
+              schema:
+                type: object
+                description: A Drupal AJAX response.
+  '/canvas/api/v0/layout-content-template/{configEntityId}/{entityId}':
+    description: Layout content template endpoints for managing layout components with preview entity context
+    parameters:
+      - $ref: '#/components/parameters/configEntityId'
+      - $ref: '#/components/parameters/entityId'
+    get:
+      summary: Gets the layout for a content template with preview entity context
+      responses:
+        '200':
+          description: "The layout that the current user is allowed to edit: regions not editable by the current user are omitted."
+          content:
+            application/json:
+              examples:
+                emptyComponentTree:
+                  value:
+                    html: '<html>The preview would be here</html>'
+                    layout:
+                      - nodeType: region
+                        name: content
+                        components: []
+                    model: {}
+                    isNew: true
+                componentTreeWithRootLevelOnly:
+                  value:
+                    html: '<html>The preview would be here</html>'
+                    layout:
+                      - nodeType: region
+                        name: header
+                        components: []
+                      - nodeType: region
+                        name: content
+                        components:
+                          - nodeType: component
+                            uuid: f0f03e3b-08e6-4f57-9f06-8f68d347d98f
+                            type: 'canvas:druplicon'
+                            name: null
+                          - nodeType: component
+                            uuid: bce8d97e-8d44-4609-adc3-5e1015342b49
+                            type: 'sdc_test:my-cta'
+                            name: 'Content Creator-provided optional label for this component instance'
+                    model:
+                      bce8d97e-8d44-4609-adc3-5e1015342b49:
+                        resolved:
+                          text: 'My first article node!'
+                          href: 'https://drupal.org'
+                        name: My Test CTA Component
+                        source:
+                          text:
+                            sourceType: dynamic
+                            expression: 'ℹ︎␜entity:node:article␝title␞␟value'
+                          href:
+                            sourceType: static:field_item:uri,
+                            expression: 'ℹ︎uri␟value'
+                    isNew: false
+              schema:
+                type: object
+                required:
+                  - layout
+                  - model
+                  - isNew
+                  - html
+                properties:
+                  html:
+                    type: string
+                    description: HTML preview of the layout
+                  layout:
+                    type: array
+                    description: Layout regions
+                    items:
+                      type: object
+                      schema:
+                        $ref: '#/components/schemas/LayoutSlot'
+                  model:
+                    $ref: '#/components/schemas/Model'
+                  isNew:
+                    type: boolean
+                    # @see \Drupal\canvas\Controller\ApiLayoutController::contentEntityIsConsideredNew()
+                    # @see https://www.drupal.org/project/canvas/issues/3505118#comment-15982801
+                    description: Whether the edited content entity is considered new.
+        '401':
+          description: Unauthorized (unauthenticated) response.
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '403':
+          description: Access denied response.
+          $ref: '#/components/responses/AuthenticationErrorResponse'
+    patch:
+      summary: >
+        Updates a single component in the content template and returns a preview as well
+        as the updated model and layout. The new layout is stored as an auto-save entry
+        (until such time as it is published)
+      requestBody:
+        $ref: '#/components/requestBodies/PatchLayout'
+      responses:
+        '200':
+          description: Stored new values and generated preview successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - html
+                  - model
+                  - layout
+                  - autoSaves
+                properties:
+                  html:
+                    type: string
+                    description: The HTML preview.
+                  layout:
+                    type: array
+                    description: Layout regions
+                    items:
+                      type: object
+                      schema:
+                        $ref: '#/components/schemas/LayoutSlot'
+                  model:
+                    $ref: '#/components/schemas/Model'
+                  autoSaves:
+                    $ref: '#/components/schemas/AutoSaveConcurrencyControl'
+        '401':
+          description: Unauthorized (unauthenticated) response.
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '403':
+          description: Access denied response.
+          $ref: '#/components/responses/AuthenticationErrorResponse'
+        '409':
+          description: >
+            The layout could not be updated because the entity
+            was modified by another user since the last time
+            it was loaded.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message indicating the conflict.
+    post:
+      summary: >
+        Updates the layout or model field values in the content template and returns a preview as well.
+        The new layout is stored as an auto-save entry (until such time as it is published)
+      requestBody:
+        $ref: '#/components/requestBodies/Layout'
+      responses:
+        '200':
+          description: Stored new values and generated preview successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - html
+                  - autoSaves
+                properties:
+                  html:
+                    type: string
+                    description: The HTML preview.
+                  autoSaves:
+                    $ref: '#/components/schemas/AutoSaveConcurrencyControl'
+        '401':
+          description: Unauthorized (unauthenticated) response.
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '403':
+          description: Access denied response.
+          $ref: '#/components/responses/AuthenticationErrorResponse'
+        '409':
+          description: >
+            The layout could not be updated because the entity
+            was modified by another user since the last time
+            it was loaded.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message indicating the conflict.
+  '/canvas/api/v0/layout/{entityTypeId}/{entityId}':
+    description: TODO
+    get:
+      summary: TODO
+      parameters:
+        - $ref: '#/components/parameters/entityTypeId'
+        - $ref: '#/components/parameters/entityId'
+      responses:
+        '200':
+          description: "The layout that the current user is allowed to edit: regions not editable by the current user are omitted."
+          content:
+            application/json:
+              examples:
+                emptyComponentTree:
+                  value:
+                    html: '<html>The preview would be here</html>'
+                    layout:
+                      - nodeType: region
+                        name: content
+                        components: []
+                    model: {}
+                    entity_form_fields: {}
+                    isNew: true
+                    isPublished: false
+                componentTreeWithRootLevelOnly:
+                  value:
+                    html: '<html>The preview would be here</html>'
+                    layout:
+                      - nodeType: region
+                        name: header
+                        components: []
+                      - nodeType: region
+                        name: content
+                        components:
+                          - nodeType: component
+                            uuid: f0f03e3b-08e6-4f57-9f06-8f68d347d98f
+                            type: 'canvas:druplicon'
+                            name: null
+                          - nodeType: component
+                            uuid: bce8d97e-8d44-4609-adc3-5e1015342b49
+                            type: 'sdc_test:my-cta'
+                            name: 'Content Creator-provided optional label for this component instance'
+                    model:
+                      bce8d97e-8d44-4609-adc3-5e1015342b49:
+                        resolved:
+                          text: 'hello, world!'
+                          href: 'https://drupal.org'
+                        name: My Test CTA Component
+                        source:
+                          text:
+                            sourceType: static:field_item:string,
+                            expression: 'ℹ︎string␟value'
+                          href:
+                            sourceType: static:field_item:uri,
+                            expression: 'ℹ︎uri␟value'
+                    entity_form_fields:
+                      changed: '1734481105'
+                      'body[0][summary]': ''
+                      'body[0][value]': ''
+                      'body[0][format]': basic_html
+                      'comment[0][status]': '2'
+                      'created[0][value][date]': '2024-12-18'
+                      'created[0][value][time]': '00:18:25'
+                      'field_hero[0][target_id]': '1'
+                      'field_hero[0][alt]': A man walks a border collie along a beach.
+                      'field_hero[0][title]': ''
+                      'field_hero[0][width]': '207'
+                      'field_hero[0][height]': '475'
+                      'field_hero[0][fids][0]': '1'
+                      'field_hero[0][display]': '0'
+                      'field_hero[0][description]': ''
+                      'field_hero[0][upload]': ''
+                      'field_image[0][display]': '0'
+                      'field_image[0][description]': ''
+                      'field_image[0][upload]': ''
+                      'field_image[0][alt]': ''
+                      'field_image[0][title]': ''
+                      'path[0][alias]': ''
+                      'path[0][source]': /node/1
+                      'path[0][langcode]': en
+                      'promote[value]': '1'
+                      'status[value]': '1'
+                      'sticky[value]': '0'
+                      'title[0][value]': Canvas Needs This For The Time Being
+                      'uid[0][target_id]': Anonymous (0)
+                      'langcode[0][value]': en
+                      'revision_log[0][value]': ''
+                    isNew: false
+                    isPublished: true
+              schema:
+                type: object
+                required:
+                  - layout
+                  - model
+                  - entity_form_fields
+                  - isNew
+                  - isPublished
+                  - html
+                properties:
+                  html:
+                    type: string
+                    description: HTML preview of the layout
+                  layout:
+                    type: array
+                    description: Layout regions
+                    items:
+                      type: object
+                      schema:
+                        $ref: '#/components/schemas/LayoutSlot'
+                  model:
+                    $ref: '#/components/schemas/Model'
+                  entity_form_fields:
+                    type: object
+                    description: Entity field values that the user has edit access to.
+                  isNew:
+                    type: boolean
+                    # @see \Drupal\canvas\Controller\ApiLayoutController::contentEntityIsConsideredNew()
+                    # @see https://www.drupal.org/project/canvas/issues/3505118#comment-15982801
+                    description: Whether the edited content entity is considered new.
+                  isPublished:
+                    type: boolean
+                    # @see \Drupal\Core\Entity\EntityPublishedInterface
+                    # @see https://www.drupal.org/project/canvas/issues/3505118#comment-15982801
+                    description: Whether the edited content entity is marked as published.
+        '401':
+          description: Unauthorized (unauthenticated) response.
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '403':
+          description: Access denied response.
+          $ref: '#/components/responses/AuthenticationErrorResponse'
+    patch:
+      summary: >
+        Updates a single component and returns a preview as well
+        as the updated model, entity_fields and layout. The
+        new layout is stored as an auto-save entry (until such
+        time as it is published)
+      parameters:
+        - $ref: '#/components/parameters/entityTypeId'
+        - $ref: '#/components/parameters/entityId'
+      requestBody:
+        $ref: '#/components/requestBodies/PatchLayout'
+      responses:
+        '200':
+          description: Stored new values and generated preview successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - html
+                  - entity_form_fields
+                  - model
+                  - layout
+                  - autoSaves
+                properties:
+                  html:
+                    type: string
+                    description: The HTML preview.
+                  layout:
+                    type: array
+                    description: Layout regions
+                    items:
+                      type: object
+                      schema:
+                        $ref: '#/components/schemas/LayoutSlot'
+                  model:
+                    $ref: '#/components/schemas/Model'
+                  entity_form_fields:
+                    type: object
+                    description: The full entity data.
+                  autoSaves:
+                    $ref: '#/components/schemas/AutoSaveConcurrencyControl'
+        '401':
+          description: Unauthorized (unauthenticated) response.
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '403':
+          description: Access denied response.
+          $ref: '#/components/responses/AuthenticationErrorResponse'
+        '409':
+          description: >
+            The layout could not be updated because the entity
+            was modified by another user since the last time
+            it was loaded.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message indicating the conflict.
+    post:
+      summary: >
+        Updates the layout, model or entity field values
+        and returns a preview as well. The new layout is
+        stored as an auto-save entry (until such time as
+        it is published)
+      parameters:
+        - $ref: '#/components/parameters/entityTypeId'
+        - $ref: '#/components/parameters/entityId'
+      requestBody:
+        $ref: '#/components/requestBodies/Layout'
+      responses:
+        '200':
+          description: Stored new values and generated preview successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - html
+                  - autoSaves
+                properties:
+                  html:
+                    type: string
+                    description: The HTML preview.
+                  autoSaves:
+                    $ref: '#/components/schemas/AutoSaveConcurrencyControl'
+        '401':
+          description: Unauthorized (unauthenticated) response.
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '403':
+          description: Access denied response.
+          $ref: '#/components/responses/AuthenticationErrorResponse'
+        '409':
+          description: >
+            The layout could not be updated because the entity
+            was modified by another user since the last time
+            it was loaded.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message indicating the conflict.
+  /canvas/api/v0/log-error:
+    description: TODO
+    post:
+      summary: TODO
+      requestBody:
+        description: Log an error message with a specified log level.
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - message
+                - level
+              properties:
+                message:
+                  type: string
+                  description: The error message to log.
+                level:
+                  type: string
+                  description: The severity level of the log.
+                  enum:
+                    - emergency
+                    - alert
+                    - critical
+                    - error
+                    - warning
+                    - notice
+                    - info
+                    - debug
+      responses:
+        '200':
+          description: Error logged successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    examples:
+                      - Error logged successfully
+                    description: The success message returned after logging the error.
+        '400':
+          description: Invalid request payload
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error description
+  /canvas/api/v0/staged-update/auto-save:
+    description: Auto-save endpoints for staged config updates.
+    post:
+      summary: Creates an auto-save entry for a staged config update.
+      requestBody:
+        description: Creates auto-save entry for config entity
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - data
+              properties:
+                data:
+                  $ref: '#/components/schemas/StagedConfigUpdate'
+                clientInstanceId:
+                  type: string
+                  description: Client instance ID for the auto-save entry
+            examples:
+              stagedConfigUpdate:
+                value:
+                  data:
+                    id: "canvas_set_homepage"
+                    label: "Change the site name"
+                    target: "system.site"
+                    actions:
+                      - name: "simpleConfigUpdate"
+                        input:
+                          name: "My awesome site"
+      responses:
+        '201':
+          description: Auto-save entry created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad request - missing data or clientInstanceId
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    examples:
+                      - Missing data
+                      - Missing clientInstanceId
+  /canvas/api/v0/ui/content_template/suggestions/preview/{entityTypeId}/{bundle}:
+    description: Provides content that can be used for previewing content template targeting the specified entity type and bundle.
+    get:
+      summary: Provides content that can be used for previewing content template targeting the specified entity type and bundle.
+      parameters:
+        - $ref: '#/components/parameters/entityTypeId'
+        - $ref: '#/components/parameters/bundle'
+      responses:
+        '200':
+          description: Provides content that can be used for previewing content template targeting the specified entity type and bundle.
+          content:
+            application/json:
+              schema:
+                type: object
+                # There may be 0 content suggestions for this content template.
+                minProperties: 0
+                additionalProperties:
+                  type: object
+                properties:
+                  id:
+                    type: integer
+                    examples:
+                      - 24
+                  label:
+                    type: string
+                    examples:
+                      - Black Mamba
+              examples:
+                Suggestions for a node articles:
+                  value:
+                    23:
+                      id: 23
+                      label: "This Article's Title"
+                    42:
+                      id: 42
+                      label: "The answer to everything"
+        # @todo fix in https://www.drupal.org/i/3541366
+        '403':
+          description: Access denied response.
+          $ref: '#/components/responses/AuthenticationErrorResponse'
+        # @todo fix in https://www.drupal.org/i/3541366
+        '400':
+          description: Invalid request from the UI.
+          $ref: '#/components/responses/ClientErrorResponse'
+        # @todo fix in https://www.drupal.org/i/3541366
+        '404':
+          description: Non-existent content entity type or bundle.
+          $ref: '#/components/responses/ClientErrorResponse'
+  /canvas/api/v0/ui/content_template/suggestions/structured-data-for-prop_shapes/{entityTypeId}/{bundle}/{configEntityId}:
+    description: Provides suggestions for populating the props of a given component using structured data of the specified entity type and bundle.
+    get:
+      summary: Gets suggestions for populating the props of a given component using structured data of the specified entity type and bundle.
+      parameters:
+        - $ref: '#/components/parameters/entityTypeId'
+        - $ref: '#/components/parameters/bundle'
+        - $ref: '#/components/parameters/configEntityId'
+      responses:
+        '200':
+          description: suggestions for populating the props of a given component using structured data of the specified entity type and bundle.
+          content:
+            application/json:
+              schema:
+                type: object
+                # There may be 0 props for this component.
+                minProperties: 0
+                additionalProperties:
+                  type: object
+                  # There may be 0 suggestions for this prop for this component.
+                  minProperties: 0
+                  additionalProperties:
+                    $ref: '#/components/schemas/StructuredDataForPropShapeSuggestion'
+              examples:
+                Suggestions for a 'canvas_test_sdc.heading' SDC component instance in the context of an article node:
+                  value:
+                    text:
+                      256dc2b8dcec7355:
+                        label: "This Article's Title"
+                        source:
+                          sourceType: "dynamic"
+                          expression: "ℹ︎␜entity:node:article␝title␞␟value"
+                    style: {}
+                    element: {}
+                Suggestions for a 'canvas_test_sdc.video' SDC component instance in the context of an article node:
+                  value:
+                    video: {}
+                    display_width: {}
+        # @todo fix in https://www.drupal.org/project/canvas/issues/3541366
+        '401':
+          description: Unauthorized (unauthenticated) response.
+          $ref: '#/components/responses/UnauthorizedErrorResponse'
+        '403':
+          description: Access denied response.
+          $ref: '#/components/responses/AuthenticationErrorResponse'
+        # @todo fix in https://www.drupal.org/project/canvas/issues/3541366
+        '400':
+          description: Invalid request from the UI.
+          $ref: '#/components/responses/ClientErrorResponse'
+        # @todo fix in https://www.drupal.org/project/canvas/issues/3541366
+        '404':
+          description: Non-existent content entity type, bundle or Component.
+          $ref: '#/components/responses/ClientErrorResponse'
+  /canvas/api/v0/ui/content_template/view_modes/node:
+    get:
+      summary: Gets the list of view modes for the Node entity type.
+      responses:
+        '200':
+          description: List of Entity View Displays
+          content:
+            application/json:
+              schema:
+                title: List of Entity Types
+                type: object
+                # There may be 0 props for this component.
+                minProperties: 0
+                additionalProperties:
+                  title: List of Entity Bundles
+                  type: object
+                  properties:
+                    label:
+                      type: string
+                    bundles:
+                      type: object
+                      minProperties: 0
+                      additionalProperties:
+                        title: List of Entity View Displays
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                            description: Entity View Display Id
+                          hasTemplate:
+                            type: boolean
+                            description: Boolean flag indicating if ContentTemplate for this Entity View Display exists
+              examples:
+                node:
+                  article:
+                    rss:
+                      label: RSS
+                      hasTemplate: false
+                    search_index:
+                      label: Search index
+                      hasTemplate: false
+                    search_result:
+                      label: Search result highlighting input
+                      hasTemplate: false
+                    full:
+                      label: Full content
+                      hasTemplate: true
+                    teaser:
+                      label: Teaser
+                      hasTemplate: false
+                  page:
+                    rss:
+                      label: RSS
+                      hasTemplate: false
+                    search_index:
+                      label: Search index
+                      hasTemplate: false
+                    search_result:
+                      label: Search result highlighting input
+                      hasTemplate: false
+                    full:
+                      label: Full content
+                      hasTemplate: true
+                    teaser:
+                      label: Teaser
+                      hasTemplate: true
+# @see https://spec.openapis.org/oas/v3.1.0.html#components-object
+components:
+  # @see https://spec.openapis.org/oas/v3.1.0.html#schema-object
+  schemas:
+    # Update ensure required and optional properties are present in
+    #    https://drupal.org/i/3507427.
+    ClientSideTransforms:
+      title: Client-side transforms
+      type: object
+      description: Component transforms keyed by prop name.
+      # Names of Components' inputs, *if* they use field widgets.
+      # @see \Drupal\canvas\Plugin\Canvas\ComponentSource\GeneratedFieldExplicitInputUxComponentSourceBase::getExplicitInputDefinitions()
+      # @see \Drupal\canvas\Plugin\Canvas\ComponentSource\GeneratedFieldExplicitInputUxComponentSourceBase::getClientSideInfo()
+      additionalProperties:
+        type: object
+        # Client-side transforms for those inputs' field widgets.
+        additionalProperties: true
+      example:
+        text:
+          mainPropertyName: { }
+        href:
+          mainPropertyName:
+            name: uri
+    Component:
+      title: Component
+      type: object
+      required:
+        - name
+        - id
+        - category
+        - source
+        - library
+        - version
+        - default_markup
+        - css
+        - js_header
+        - js_footer
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          description: The component name
+        id:
+          type: string
+          description: The component id
+        version:
+          type: string
+          description: Active version ID
+        category:
+          type: string
+          description: The component category
+        source:
+          type: string
+          description: Typically, the component source plugin that provides this Component. But plugins have the freedom to choose to subdivide.
+          # @see \Drupal\canvas\Plugin\Canvas\ComponentSource\SingleDirectoryComponent::getSourceLabel()
+        library:
+          type: string
+          description: Library ID
+          enum:
+            # Provided by Drupal Canvas
+            - elements
+            # Provided by Modules
+            - extension_components
+            # Blocks
+            - dynamic_components
+            # SDCs from the Active Theme + JavaScript Code Components
+            - primary_components
+        # @see \Drupal\Core\Theme\Component\ComponentMetadata
+        metadata:
+          type: object
+          # @todo Improve in https://drupal.org/i/3521041
+          description: Component metadata
+          additionalProperties: false
+          properties:
+            slots:
+              type: object
+              additionalProperties:
+                type: object
+                required:
+                  - title
+                properties:
+                  title:
+                    type: string
+                    title: Title
+                  description:
+                    type: string
+                    title: Description
+                  examples:
+                    type: array
+                    items:
+                      type: string
+        propSources:
+          type: object
+          description: the StaticPropSources to use for each SDC prop
+          # Keys are props for this SDC. Only required SDC props are required here.
+          additionalProperties:
+            type: object
+            required:
+              - sourceType
+              - expression
+              - required
+            properties:
+              sourceType:
+                type: string
+              expression:
+                type: string
+              required:
+                type: boolean
+              default_values:
+                type: object
+                additionalProperties: false
+                required:
+                  - source
+                  - resolved
+                properties:
+                  # The (raw) values for this StaticPropSource. (A Drupal field type data structure.)
+                  # An array of `type: field.value.*` config schema-compliant objects.
+                  source:
+                    type: array
+                    items:
+                      type: object
+                      additionalProperties: true
+                  # The resolved values for this StaticPropSource, ready to be passed in to a component instance.
+                  # - When cardinality = 1, this will be a scalar or an object.
+                  # - When cardinality >1, this will be an array of scalars or objects.
+                  resolved:
+                    type:
+                      - array
+                      - string
+                      - integer
+                      - number
+                      - boolean
+                      - object
+        default_markup:
+          type: string
+          description: "without providing user input, this is what Component's markup would look like — used to preview the Component prior to placing it"
+        css:
+          type: string
+          description: The CSS for default_markup.
+        js_header:
+          type: string
+          description: The header JS for default_markup.
+        js_footer:
+          type: string
+          description: The footer JS for default_markup.
+        transforms:
+          $ref: '#/components/schemas/ClientSideTransforms'
+    CodeComponent:
+      title: Code Component
+      type: object
+      properties:
+        machineName:
+          type: string
+          description: Machine name
+        name:
+          type: string
+          description: Human-readable code component label
+        required:
+          type: array
+          items:
+            type: string
+        props:
+          type: object
+          # @todo Uncomment this in a follow-up MR in https://www.drupal.org/i/3503377
+          # $ref: 'https://json-schema.org/draft-04/schema'
+        slots:
+          type: object
+          additionalProperties:
+            type: object
+            required:
+              - title
+            properties:
+              title:
+                type: string
+                label: Title
+              description:
+                type: string
+                label: Description
+              examples:
+                type: array
+                items:
+                  type: string
+        status:
+          type: boolean
+        sourceCodeJs:
+          type: string
+        sourceCodeCss:
+          type: string
+        compiledJs:
+          type: string
+        compiledCss:
+          type: string
+        dataDependencies:
+          type: object
+          schema:
+            urls:
+              type: array
+              items:
+                type: string
+            drupalSettings:
+              type: array
+              items:
+                type: string
+    NewCodeComponent:
+      type: object
+      allOf:
+        - required:
+            - name
+            - machineName
+            - status
+            - importedJsComponents
+            - dataDependencies
+        - $ref: '#/components/schemas/CodeComponent'
+        - properties:
+            # `importedJsComponents` will be required if `sourceCodeJs` or
+            # `compiledJs` is provided.
+            # @see \Drupal\canvas\Entity\JavaScriptComponent::updateFromClientSide()
+            # OpenAPI 3 does not support conditional requirements.
+            # @see https://github.com/OAI/OpenAPI-Specification/issues/256#issuecomment-1908868607
+            importedJsComponents:
+              type: array
+              items:
+                type: string
+    LayoutComponent:
+      title: LayoutComponent
+      type: object
+      required:
+        - nodeType
+        - uuid
+        - type
+        - slots
+      additionalProperties: false
+      properties:
+        nodeType:
+          type: string
+          enum:
+            - component
+          description: The layout node type
+        uuid:
+          type: string
+          description: The UUID of the component instance
+        type:
+          type: string
+          # @todo Replace the hardcoded list of allowed component types (ComponentSource plugins) with `[a-z_]+` when contrib/custom component sources are supported.
+          pattern: "^(sdc|js|block)+\\.[^:]+$"
+        name:
+          type: [string, "null"]
+          # Either null, or specify a non-empty string.
+          minLength: 1
+          description: The (optional) name of the component instance
+        slots:
+          type: array
+          description: Array of slots
+          items:
+            $ref: '#/components/schemas/LayoutSlot'
+    LayoutSlot:
+      title: LayoutSlot
+      type: object
+      required:
+        - nodeType
+        - name
+        - components
+      additionalProperties: false
+      properties:
+        nodeType:
+          type: string
+          enum:
+            - region
+            - slot
+          description: The layout node type
+        id:
+          type: string
+          description: A unique identifier for the slot
+        name:
+          type: string
+          description: The name of the slot
+        components:
+          type: array
+          description: Array of components
+          items:
+            $ref: '#/components/schemas/LayoutComponent'
+    LayoutPreview:
+      title: LayoutPreview
+      type: object
+      # @todo Require 'entity_form_fields' in https://drupal.org/i/3495752.
+      required:
+        - layout
+        - model
+        - autoSaves
+        - clientInstanceId
+      additionalProperties: false
+      properties:
+        layout:
+          type: array
+          description: Layout regions
+          items:
+            type: object
+            schema:
+              $ref: '#/components/schemas/LayoutSlot'
+        model:
+          $ref: '#/components/schemas/Model'
+        autoSaves:
+          $ref: '#/components/schemas/AutoSaveConcurrencyControl'
+        clientInstanceId:
+          type: string
+          description: Client instance ID for the layout preview
+        entity_form_fields:
+          type: object
+        isNew:
+          type: boolean
+        isPublished:
+          type: boolean
+    AutoSaveConcurrencyControl:
+      title: Auto Save Concurrency Control
+      type: object
+      description: Auto-saved entries with hash values for concurrency control
+      additionalProperties:
+        type: object
+        additionalProperties: false
+        required:
+          - autoSaveStartingPoint
+          - hash
+        properties:
+          autoSaveStartingPoint:
+            type: string
+          # The hash can be null if there was no auto-save entry at the time of the GET request.
+          hash:
+            type: [string, "null"]
+    AutoSaveEntry:
+      title: Auto Save Entry
+      type: object
+      additionalProperties: false
+      required:
+        - owner
+        - updated
+        - langcode
+        - label
+        - entity_type
+        - entity_id
+        - data_hash
+      properties:
+        owner:
+          type: object
+          title: Owner details
+          description: Details of the last user to save the entry
+          additionalProperties: false
+          required:
+            - name
+            - avatar
+            - uri
+            - id
+          examples:
+            - Logged in user:
+                name: 'Garrett Bobby Ferguson, Jr'
+                avatar: /sites/default/files/user-pictures/garrett.jpg
+                uri: /user/12
+                id: 12
+          properties:
+            name:
+              type: string
+              title: User's name
+            avatar:
+              type: [string, "null"]
+              format: uri-reference
+              title: URL to user's avatar picture
+            uri:
+              type: [string, "null"]
+              format: uri-reference
+              title: URL to user's profile page
+            id:
+              type: integer
+              title: User ID
+        updated:
+          type: integer
+          title: Updated timestamp
+          description: Unix timestamp for auto-save entry last updated time
+          examples:
+            - 1732763679
+        entity_type:
+          type: string
+          title: Entity Type ID
+          examples:
+            - node
+        langcode:
+          type: [string, "null"]
+          title: Language code
+          examples:
+            - en
+        data_hash:
+          type: string
+          title: Hash of the item's data
+          examples:
+            - 4711efecf75d2d1a
+        entity_id:
+          type:
+            - string
+            - integer
+          title: Entity ID
+          description: ID of the entity
+          examples:
+            - 3
+        label:
+          type: string
+          title: Entity label
+          description: Label of the entity
+          examples:
+            - Home page
+    AutoSaveCollection:
+      type: object
+      # @todo Add key validation for the format in {entity_type}:{entity_id}:{langcode} https://drupal.org/i/3506543.
+      additionalProperties:
+        $ref: '#/components/schemas/AutoSaveEntry'
+    PublishAllRequest:
+      type: object
+      # @todo Add key validation for the format in {entity_type}:{entity_id}:{langcode} https://drupal.org/i/3506543.
+      additionalProperties:
+        type: object
+        title: Entries to publish
+        description: >
+          The body should be an object with keys that match unpublished
+          entries and a data-hash property for each item.
+        properties:
+          data_hash:
+            type: string
+            title: Expected hash for this item
+    AssetLibrary:
+      title: Asset Library
+      type: object
+      properties:
+        id:
+          type: string
+          description: Asset library ID
+        label:
+          type: string
+          description: Human-readable label
+        css:
+          type: [object, "null"]
+          description: CSS
+          required:
+            - original
+            - compiled
+          additionalProperties: false
+          properties:
+            original:
+              type: string
+              description: Original CSS as entered by the human author
+            compiled:
+              type: string
+              description: Compiled CSS code, compiled from the original
+        js:
+          type: [object, "null"]
+          description: JS
+          properties:
+            original:
+              type: string
+              description: Original JS as entered by the human author
+            compiled:
+              type: string
+              description: Compiled JS code, compiled from the original
+    NewAssetLibrary:
+      type: object
+      allOf:
+        - required:
+            - id
+            - label
+        - $ref: '#/components/schemas/AssetLibrary'
+    SegmentationRule:
+      title: Segmentation Rule
+      type: object
+      # Each rule (condition plugin) may have additional settings; these are the minimum.
+      additionalProperties: true
+      required:
+        - id
+        - negate
+      properties:
+        id:
+          type: string
+          description: The Segmentation Rule plugin ID
+        negate:
+          type: boolean
+          description: Flag if the Segmentation Rule is negated.
+    Segment:
+      title: Segment
+      type: object
+      required:
+        # We only require id, as we want to allow partial updates with PATCH.
+        # Complete constraint-based validation will happen on entity validation.
+        - id
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+          description: Personalization Segment ID
+        label:
+          type: string
+          description: Human-readable label
+        description:
+          type: [string, "null"]
+          description: Human-readable description
+        status:
+          type: boolean
+        rules:
+          type: object
+          description: Segmentation Rules
+          additionalProperties:
+            type: object
+            allOf:
+              - $ref: '#/components/schemas/SegmentationRule'
+        weight:
+          type: integer
+          description: The weight of the segment, used for ordering segments.
+    StructuredDataForPropShapeSuggestion:
+      title: Suggested structured data (DynamicPropSource) for prop shape
+      type: object
+      required:
+        - label
+        - source
+      properties:
+        label:
+          type: string
+          description: Human-readable label
+        source:
+          type: object
+          description: The object representation of the DynamicPropSource that, if selected by the human, the client should use verbatim as the source to populate this component instance's prop.
+    Error:
+      type: object
+      required:
+        - detail
+        - source
+      properties:
+        detail:
+          type: string
+          title: Error description
+          examples:
+            - I can't let you do that Dave
+        source:
+          type: object
+          required:
+            - pointer
+          properties:
+            pointer:
+              type: string
+              title: Pointer/path to source of error
+              examples:
+                - title.0.value
+        code:
+          type: integer
+          title: Error code
+          examples:
+            - 1
+        meta:
+          type: object
+          required:
+            - entity_type
+            - entity_id
+            - label
+            - api_auto_save_key
+          properties:
+            entity_type:
+              type: string
+              examples:
+                - node
+              title: Entity Type ID
+            entity_id:
+              type:
+                - string
+                - integer
+              examples:
+                - 3
+              title: Entity ID
+            label:
+              type: string
+              examples:
+                - Spring sale now on
+              title: Item label
+            api_auto_save_key:
+              type: string
+              examples:
+                - 'node:4:en'
+              title: The corresponding key in the pending changes API
+          additionalProperties: false
+    Model:
+      title: model
+      type: object
+    PatternPreview:
+      title: 'Pattern with generated ID and preview metadata (default markup + CSS + JS)'
+      description: '@see \Drupal\canvas\Controller\ApiConfigControllers::normalizePattern()'
+      type: object
+      required:
+        - layoutModel
+        - name
+        - id
+        - default_markup
+        - css
+        - js_header
+        - js_footer
+      additionalProperties: false
+      properties:
+        layoutModel:
+          type: object
+          properties:
+            layout:
+              type: array
+              items:
+                $ref: '#/components/schemas/LayoutComponent'
+              minItems: 1
+            model:
+              $ref: '#/components/schemas/Model'
+          additionalProperties: false
+        name:
+          type: string
+          description: Human-readable Pattern label
+        id:
+          type: string
+          description: The ID (possibly auto-generated from the given name).
+        default_markup:
+          type: string
+        css:
+          type: string
+        js_header:
+          type: string
+        js_footer:
+          type: string
+    Pattern:
+      title: Pattern
+      description: '@see \Drupal\canvas\Controller\ApiConfigControllers::denormalizePattern()'
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID — if none is provided, this will be auto-generated from the given name.
+        name:
+          type: string
+          description: Human-readable Pattern label
+        layout:
+          type: array
+          items:
+            $ref: '#/components/schemas/LayoutComponent'
+          minItems: 1
+        model:
+          $ref: '#/components/schemas/Model'
+      additionalProperties: false
+    NewPattern:
+      type: object
+      allOf:
+        - required:
+            - name
+            - layout
+            - model
+        - $ref: '#/components/schemas/Pattern'
+    Folder:
+      title: Folder
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID.
+        name:
+          type: string
+          description: Human-readable name.
+        type:
+          $ref: '#/components/schemas/FolderType'
+        weight:
+          type: integer
+          description: Position of the Folder relative to other Folders.
+        items:
+          type: array
+          description: Numbered array of Folder item entity IDs, where numbers refer to items position in a Folder.
+          items:
+            type: string
+            description: Singular Folder item id.
+      additionalProperties: false
+    FolderType:
+      type: string
+      enum:
+        - component
+        - js_component
+        - pattern
+    ExistingFolder:
+      type: object
+      allOf:
+        - required:
+            - id
+            - name
+            - type
+            - weight
+            - items
+        - $ref: '#/components/schemas/Folder'
+    NewFolder:
+      type: object
+      allOf:
+        - required:
+            - name
+            - type
+            - weight
+            - items
+        - $ref: '#/components/schemas/Folder'
+    StagedConfigUpdate:
+      title: Staged Config Update
+      type: object
+      additionalProperties: false
+      required:
+        - id
+        - label
+        - target
+        - actions
+      properties:
+        id:
+          type: string
+          description: The staged config update ID.
+          example: 'canvas_set_homepage'
+        label:
+          type: string
+          description: Human-readable label for the staged config update.
+        target:
+          type: string
+          description: The staged config update target.
+        actions:
+          type: array
+          description: The staged config update actions.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The action name.
+              input:
+                type: object
+                description: The action input.
+    ContentTemplateList:
+      title: List of Content templates grouped by entity type, bundles and view modes.
+      type: object
+      minProperties: 0
+      additionalProperties:
+        type: object
+        required:
+          - label
+          - bundles
+        properties:
+          label:
+            type: string
+          bundles:
+            type: object
+            minProperties: 0
+            additionalProperties:
+              type: object
+              description: Individual bundle.
+              required:
+                - label
+                - viewModes
+                - editFieldsUrl
+                - deleteUrl
+              additionalProperties: false
+              properties:
+                editFieldsUrl:
+                  type: [string, "null"]
+                  description: URL to edit the fields of this bundle.
+                deleteUrl:
+                  type: [string, "null"]
+                  description: URL to delete this bundle. Can be null if user lacks permissions.
+                label:
+                  type: [string, "null"]
+                  description: Label of the bundle. Can be null if the content entity type does not have any bundles.
+                viewModes:
+                  type: object
+                  description: Named array of View Modes keyed by View Mode ID.
+                  minProperties: 0
+                  additionalProperties:
+                    $ref: '#/components/schemas/ContentTemplate'
+    NewContentTemplate:
+      title: ContentTemplate as it is send by the client for creation server side.
+      type: object
+      additionalProperties: false
+      required:
+        - entityType
+        - bundle
+        - viewMode
+      properties:
+        entityType:
+          type: string
+          description: Entity Type
+        bundle:
+          type: string
+          description: Entity Bundle
+        viewMode:
+          type: string
+          description: Drupal View Mode
+    ContentTemplate:
+      title: ContentTemplate as it appears in ContentTemplateList
+      type: object
+      additionalProperties: false
+      required:
+        - entityType
+        - bundle
+        - viewMode
+        - status
+        - id
+        - suggestedPreviewEntityId
+        - label
+        - viewModeLabel
+      properties:
+        entityType:
+          type: string
+          description: Entity Type
+        bundle:
+          type: string
+          description: Entity Bundle
+        viewMode:
+          type: string
+          description: Drupal View Mode
+        status:
+          type: boolean
+          description: ContentTemplate entity status
+        id:
+          type: string
+          description: ContentTemplate id, follows format of `entity_type.bundle.view_mode`.
+        suggestedPreviewEntityId:
+          type: [integer, "null"]
+          description: Suggested content entity ID to use for preview. Can be null if no preview entity is available.
+        label:
+          type: string
+          description: Content Template entity label.
+        viewModeLabel:
+          type: string
+          description: Entity View Mode label.
+  # @see https://spec.openapis.org/oas/v3.1.0.html#response-object
+  responses:
+    DrupalAjaxResponse:
+      description: AJAX updates
+      content:
+        application/json:
+          schema:
+            type: object
+            description: A Drupal AJAX response.
+            additionalProperties: true
+    FormResponse:
+      description: The form
+      content:
+        application/json:
+          examples:
+            arbitraryForm:
+              value:
+                html: <form></form>
+          schema:
+            type: object
+            required:
+              - html
+            properties:
+              html:
+                type: string
+    ComponentInstanceFormResponse:
+      description: Component instance form
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - html
+              - css
+              - js
+              - settings
+              - transforms
+            properties:
+              html:
+                type: string
+                description: HTML originating from a Drupal render array.
+              css:
+                type: array
+                description: >-
+                  Stringified CSS info structured for use by `add_css` AJAX
+                  command
+                items:
+                  type: object
+                  additionalProperties: true
+                  properties:
+                    href:
+                      type: string
+                      format: uri-reference
+                    media:
+                      type: string
+              js:
+                type: object
+                description: >-
+                  Stringified JS info structured for use by `add_js` AJAX
+                  command
+                additionalProperties:
+                  type: object
+                  required:
+                    - src
+                  properties:
+                    src:
+                      type: string
+                      format: uri-reference
+              settings:
+                type: object
+                description: >-
+                  Stringified settings info structured for use by `settings`
+                  AJAX command
+                additionalProperties: true
+              transforms:
+                $ref: '#/components/schemas/ClientSideTransforms'
+    ClientErrorResponse:
+      description: Errors in response to the client's request.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - errors
+            properties:
+              errors:
+                type: array
+                description: Error items
+                items:
+                  $ref: '#/components/schemas/Error'
+    UnauthorizedErrorResponse:
+      description: Error when unauthenticated.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - errors
+            additionalProperties: false
+            properties:
+              errors:
+                type: array
+                description: Error items
+                items:
+                  $ref: '#/components/schemas/Error'
+    AuthenticationErrorResponse:
+      description: Access denied response.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - errors
+            properties:
+              errors:
+                type: array
+                description: Error items
+                items:
+                  $ref: '#/components/schemas/Error'
+  # @see https://spec.openapis.org/oas/v3.1.0.html#parameter-object
+  parameters:
+    entityTypeId:
+      name: entityTypeId
+      in: path
+      required: true
+      description: The entity type ID
+      schema:
+        type: string
+      example: node
+    bundle:
+      name: bundle
+      in: path
+      required: true
+      description: The bundle
+      schema:
+        type: string
+      example: article
+    entityId:
+      name: entityId
+      in: path
+      required: true
+      description: The entity ID
+      schema:
+        type: integer
+      examples:
+        arbitraryEntityId:
+          value: 42
+    configEntityId:
+      name: configEntityId
+      in: path
+      required: true
+      description: Config entity ID
+      schema:
+        type: string
+      examples:
+        arbitraryEntityId:
+          value:
+            - hopefully_meaningful_name
+            - sdc.canvas_test_sdc.my-cta
+    queryAjaxForm:
+      # @see \Drupal\Core\Form\FormBuilderInterface::AJAX_FORM_REQUEST
+      # @see \Drupal\Core\Form\EventSubscriber\FormAjaxSubscriber
+      # @see \Drupal\Core\EventSubscriber\AjaxResponseSubscriber
+      in: query
+      name: ajax_form
+      required: true
+      schema:
+        type: integer
+        enum:
+          - 1
+    # @see \Drupal\canvas\Render\MainContent\CanvasTemplateRenderer
+    queryWrapperFormat:
+      in: query
+      name: _wrapper_format
+      required: true
+      schema:
+        type: string
+        enum:
+          - canvas_template
+          - drupal_ajax
+  # @see https://spec.openapis.org/oas/v3.1.0.html#header-object
+  requestBodies:
+    Layout:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LayoutPreview'
+    PatchLayout:
+      content:
+        application/json:
+          examples:
+            componentWithPropSources:
+              value:
+                componentInstanceUuid: bce8d97e-8d44-4609-adc3-5e1015342b49
+                componentType: 'sdc_test:my-cta'
+                model:
+                  resolved:
+                    text: 'hello, world!'
+                    href: 'https://drupal.org'
+                  source:
+                    text:
+                      sourceType: static:field_item:string,
+                      expression: 'ℹ︎string␟value'
+                    href:
+                      sourceType: static:field_item:uri,
+                      expression: 'ℹ︎uri␟value'
+                autoSaves: {}
+                clientInstanceId: sample-client-instance-id
+          schema:
+            title: Patch layout
+            type: object
+            required:
+              - componentInstanceUuid
+              - componentType
+              - model
+              - autoSaves
+              - clientInstanceId
+            additionalProperties: false
+            properties:
+              model:
+                title: Model
+                description: New model values (client-side terminology) aka inputs (server-side terminology) for the updated component instance
+                type: object
+                required:
+                  - resolved
+                additionalProperties: false
+                properties:
+                  resolved:
+                    type: object
+                    title: Resolved model/input values, keyed by input names
+                    additionalProperties: true
+                  source:
+                    type: object
+                    title: Optional source values in the case of a component type that uses prop sources.
+                    additionalProperties: true
+              componentInstanceUuid:
+                type: string
+                description: The UUID of the component instance to update
+              componentType:
+                type: string
+                description: The component type (Component config entity ID) of the updated component instance
+              autoSaves:
+                $ref: '#/components/schemas/AutoSaveConcurrencyControl'
+              clientInstanceId:
+                type: string
+                description: Client instance ID for the layout preview
+

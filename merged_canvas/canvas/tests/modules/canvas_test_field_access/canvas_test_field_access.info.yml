@@ -1,0 +1,5 @@
+name: Test Canvas Field access
+type: module
+dependencies:
+  - canvas:canvas
+package: Testing

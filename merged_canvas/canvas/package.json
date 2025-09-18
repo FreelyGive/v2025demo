@@ -1,0 +1,45 @@
+{
+  "name": "@drupal-canvas/root",
+  "version": "0.0.0",
+  "description": "The Drupal Canvas module will 1) enable site builders without Drupal experience to easily theme and build their entire website using only their browser, without the need to write code beyond basic HTML, CSS, and templating markup (e.g., Twig) AND 2) it will enable content creators to and compose content on any part of the page without relying on developers.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "workspaces": [
+    "cli",
+    "docs/user"
+  ],
+  "scripts": {
+    "test:playwright": "playwright install && playwright test -x",
+    "lint:eslint": "eslint cli tests/src/Playwright playwright.config.ts eslint.config.mjs",
+    "lint:prettier": "prettier tests/src/Playwright playwright.config.ts cli eslint.config.mjs --check",
+    "lint:prettier-fix": "prettier tests/src/Playwright playwright.config.ts cli eslint.config.mjs --check --write",
+    "lint:cspell": "cspell .",
+    "test": "npx npm-run-all --parallel --continue-on-error test:*",
+    "lint": "npx npm-run-all --parallel --continue-on-error lint:*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.drupal.org:project/canvas.git"
+  },
+  "author": "",
+  "license": "GPL-2.0-or-later",
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.2",
+    "@eslint/compat": "^1.3.1",
+    "@eslint/js": "^9.26.0",
+    "@ianvs/prettier-plugin-sort-imports": "^4.7.0",
+    "@playwright/test": "^1.51.1",
+    "@types/node": "^22.14.0",
+    "cspell": "^9.2.0",
+    "dotenv-defaults": "^5.0.2",
+    "eslint": "^9.26.0",
+    "eslint-config-prettier": "^10.1.5",
+    "globals": "^16.1.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^3.5.3",
+    "typescript-eslint": "^8.32.0"
+  }
+}

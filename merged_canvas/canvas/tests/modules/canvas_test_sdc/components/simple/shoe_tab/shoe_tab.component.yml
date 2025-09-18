@@ -1,0 +1,39 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json'
+name: Shoe Tab
+status: stable
+group: Atom/Tabs
+description: https://shoelace.style/components/tab
+libraryOverrides:
+  dependencies:
+    - canvas/shoelace
+props:
+  type: object
+  required:
+    - label
+    - panel
+  properties:
+    label:
+      type: string
+      title: Label
+      examples: ['Tab 1']
+    panel:
+      type: string
+      title: Panel
+      description: The name of the tab panel this tab is associated with. The panel must be located in the same tab group.
+      # @todo Add examples here.
+      examples: ['tab_1']
+    active:
+      type: boolean
+      title: active
+      description: Draws the tab in an active state.
+      default: false
+    closable:
+      type: boolean
+      title: Closable
+      description: Makes the tab closable and shows a close button.
+      default: false
+    disabled:
+      type: boolean
+      title: Disabled
+      description: Disables the tab and prevents selection.
+      default: false

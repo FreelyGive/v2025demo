@@ -1,0 +1,6 @@
+.canvas-app {
+  --color-outline-component: var(--purple-9);
+  --color-outline-slot: var(--purple-9);
+  --color-outline-root: var(--green-9);
+  --color-outline-page: var(--blue-9);
+}

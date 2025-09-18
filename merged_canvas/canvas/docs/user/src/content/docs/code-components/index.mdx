@@ -1,0 +1,49 @@
+---
+title: Code components
+---
+
+Code components contain your own JavaScript and CSS and they can managed in the
+Canvas UI. They can be reused and incorporate dynamic elements such as page
+data, custom input data, and 3rd party API responses.
+
+Components are rendered using [Preact](https://preactjs.com/) with the
+[React compatibility layer](https://preactjs.com/guide/v10/switching-to-preact/)
+enabled.
+
+## Adding a new component
+
+New code components can be added from the Library panel. Click the `+` icon at
+the top left of the screen and then `+ Add new`. Once the component has been
+given a name, the code editor will appear.
+
+The code editor will contain a simple starter component as an example.
+
+```jsx
+const Component = ({ text = 'Component' }) => {
+  return <div className="text-3xl">{text}</div>;
+};
+
+export default Component;
+```
+
+The name of the component can be anything, but the code must provide a default
+export.
+
+Once the component has been edited, it can be saved and added to the library by
+clicking the `Add to components` button.
+
+## Importing other code components
+
+You can import other components you have created in your code by prefixing them
+with `@/components`.
+
+```js
+import Heading from '@/components/my_heading';
+```
+
+You can also do this through the UI by clicking the "Import components" button
+in the top right of the editor.
+
+![A screenshot blue button with a download icon and a tooltip saying "Import
+components". Below the button is a form with a dropdown menu for selecting
+available code components](../../../assets/images/import-component.webp)

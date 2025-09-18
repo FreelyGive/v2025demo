@@ -1,0 +1,84 @@
+canvas_personalization.segment.*:
+  type: config_entity
+  constraints:
+    FullyValidatable: ~
+  label: Personalization Segment
+  mapping:
+    id:
+      type: machine_name
+      label: ID
+    label:
+      type: required_label
+      label: Label
+    description:
+      requiredKey: false
+      type: text
+      label: Description
+      nullable: true
+    rules:
+      # @todo: We should validate the keys are valid filtered plugins. Fix in https://www.drupal.org/i/3527409
+      type: sequence
+      label: Segment Rules
+      orderby: key
+      sequence:
+        type: condition.plugin.[%key]
+        label: Condition Settings
+    weight:
+      type: weight
+      label: Weight
+
+canvas.component_source_local_id.p13n:
+  type: canvas.component_source_local_id.*
+  label: 'Component ID'
+  constraints:
+    FullyValidatable: ~
+    Choice:
+      - switch
+      - case
+canvas.component_source_settings.p13n:
+  type: canvas.component_source_settings.*
+  label: 'Personalization component settings'
+  constraints:
+    FullyValidatable: ~
+
+condition.plugin.utm_parameters:
+  # @todo For being FullyValidatable, we need https://www.drupal.org/i/3525391 to be
+  # fixed. In the meantime, see
+  # \Drupal\canvas_personalization\Hook\SegmentationRulesHooks::configSchemaInfoAlter
+  type: condition.plugin
+  label: 'UTM Parameters condition'
+  constraints:
+    FullyValidatable: ~
+  mapping:
+    all:
+      # This allows us to implement ALL or ANY, which translates to AND/OR.
+      type: boolean
+      label: All parameters must match
+    parameters:
+      type: sequence
+      label: Parameters
+      orderby: key
+      sequence:
+        type: mapping
+        mapping:
+          key:
+            type: string
+            constraints:
+              NotBlank: ~
+              # todo: Verify this regex is the right one in https://www.drupal.org/i/3527075
+              Regex:
+                pattern: '/^[a-zA-Z0-9_\+%\-]+$/'
+          value:
+            type: string
+            constraints:
+              NotBlank: ~
+              # todo: Verify this regex is the right one in https://www.drupal.org/i/3527075
+              Regex:
+                pattern: '/^[a-zA-Z0-9_\+%\-]+$/'
+          matching:
+            type: string
+            constraints:
+              Choice:
+                choices:
+                  - exact
+                  - starts_with

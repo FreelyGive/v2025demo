@@ -1,0 +1,51 @@
+canvas_ai.settings:
+  type: config_object
+  label: 'Drupal Canvas AI Settings'
+  mapping:
+    http_client_options:
+      type: mapping
+      label: 'HTTP Client Options'
+      mapping:
+        timeout:
+          type: integer
+          label: 'Timeout'
+          description: 'HTTP request timeout in seconds'
+    file_upload_size:
+      type: integer
+      label: 'Maximum image upload size (MB)'
+      description: 'Maximum allowed image upload size in megabytes.'
+
+canvas_ai.component_description.settings:
+  type: config_object
+  label: 'Canvas AI Component Description Settings'
+  mapping:
+    component_context:
+      type: mapping
+      label: 'Component context definitions'
+      mapping:
+        '*':
+          type: component_source_entry
+          label: 'Component source entry'
+
+component_source_entry:
+  type: mapping
+  label: 'Single component source with components'
+  mapping:
+    enabled:
+      type: boolean
+      label: 'Enable components from this source in the context'
+    data:
+      type: text
+      label: 'YAML string of components'
+
+canvas_ai.theme_region.settings:
+  type: config_object
+  label: 'Canvas AI Theme Region Settings'
+  mapping:
+    region_descriptions:
+      type: mapping
+      label: 'Region Descriptions'
+      mapping:
+        '*':
+          type: text
+          label: 'Description'

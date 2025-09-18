@@ -1,0 +1,8 @@
+.oneHundred {
+  background-color: var(--accent-3);
+  font-weight: bold;
+}
+
+.zoomControlSelect {
+  width: 5em;
+}

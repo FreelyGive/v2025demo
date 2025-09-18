@@ -1,0 +1,43 @@
+.aiWizard {
+  width: fit-content;
+  height: 100%;
+  background: white;
+  padding: 16px;
+  font-family: sans-serif;
+
+  h3 {
+    font-weight: 600;
+    margin: 4px 0 16px;
+  }
+
+  .blue-text {
+    color: #007BFF;
+  }
+}
+
+.aiWizardLegalContainer {
+  color: var(--gray-11);
+  font-size: var(--font-size-1);
+  line-height: var(--line-height-1);
+}
+
+.aiWizardTitleContainer {
+  position: relative;
+}
+.aiWizardTitle {
+  font-size: var(--font-size-5);
+  font-weight: var(--font-weight-medium);
+}
+
+.aiWizardBeta {
+  color: var(--blue-9);
+  font-size: var(--font-size-1);
+  font-weight: var(--font-weight-medium);
+  position: absolute;
+  top: -8px;
+}
+
+.aiWizardSubtitle {
+  font-size: var(--font-size-2);
+  color: var(--Colors-Gray-11);
+}

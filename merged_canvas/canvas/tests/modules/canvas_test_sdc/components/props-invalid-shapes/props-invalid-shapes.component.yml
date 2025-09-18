@@ -1,0 +1,15 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Canvas test SDC with invalid shape
+props:
+  type: object
+  required:
+    - heading
+  properties:
+    # "Object" prop-types are not supported by Canvas.
+    invalid_shape:
+      title: Invalid Shape
+      type: object
+    valid_shape:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Valid Shape
+      type: object

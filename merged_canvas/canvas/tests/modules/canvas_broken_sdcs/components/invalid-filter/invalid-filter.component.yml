@@ -1,0 +1,10 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: A simple component with an invalid twig filter
+props:
+  type: object
+  properties:
+    name:
+      type: string
+      title: Name
+      examples:
+        - Canvas

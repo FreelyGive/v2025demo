@@ -1,0 +1,11 @@
+name: 'Canvas Stark'
+type: theme
+description: 'A plain theme by Drupal Canvas using the semi-coupled theme engine. It overrides certain templates to provide a bridge between Drupal-rendered markup and React components.'
+core_version_requirement: ^10.4 || ^11
+engine: semi_coupled
+base theme: false
+hidden: true
+
+libraries-extend:
+  ckeditor5/internal.drupal.ckeditor5:
+    - canvas_stark/canvas.internal.drupal.ckeditor5

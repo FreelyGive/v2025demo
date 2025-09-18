@@ -1,0 +1,3 @@
+http_client_options:
+  timeout: 300
+file_upload_size: 2

@@ -1,0 +1,15 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: No UI SDC
+description: No UI SDC (won't be exposed to editors)
+noUi: true
+props:
+  type: object
+  required:
+    - text
+  properties:
+    text:
+      type: string
+      title: Text
+      description: The text
+      examples:
+        - Playing hide and seek

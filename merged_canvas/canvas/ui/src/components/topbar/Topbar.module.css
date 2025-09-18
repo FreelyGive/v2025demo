@@ -1,0 +1,47 @@
+.topBar {
+  position: fixed;
+  height: var(--topbar-height);
+  transition: opacity 2s ease-out;
+  transition-delay: 0.1s;
+  border-bottom: 1px solid var(--gray-4);
+  background: #fff;
+  inset: var(--topbar-space-above) 0 var(--topbar-space-below) 0;
+
+  &.inPreview {
+    top: 0;
+    right: 0;
+    left: 0;
+    transition-delay: 1s;
+    opacity: 0.2;
+    border-radius: 0;
+
+    &:hover {
+      transition: top 0.1s cubic-bezier(0.4, 0, 0.6, 1),
+      left 0.1s cubic-bezier(0.4, 0, 0.6, 1),
+      right 0.1s cubic-bezier(0.4, 0, 0.6, 1),
+      opacity 0.1s ease-in;
+      transition-delay: 0s;
+      opacity: 1;
+    }
+  }
+}
+
+/* Select the class twice for precedence over the Radix .rt-reset. */
+.topBarButton.topBarButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 4px;
+
+  &.exitButton {
+    margin: 0 -4px 0 4px;
+  }
+}
+
+.verticalDivider {
+  height: 24px;
+  margin-left: -1px;
+  border-right: 1px solid var(--gray-5);
+}
+

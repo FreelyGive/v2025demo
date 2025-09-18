@@ -1,0 +1,46 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json'
+name: Shoe Details
+status: stable
+group: Atom/Details
+description: https://shoelace.style/components/details
+libraryOverrides:
+  dependencies:
+    - canvas/shoelace
+props:
+  type: object
+  required:
+    - summary
+  properties:
+    summary:
+      type: string
+      title: Summary
+      description: The summary to show in the header.
+      # @todo this should be a wysiwyg in the form
+      examples: ['Toggle the details']
+    open:
+      type: boolean
+      title: open
+      description: Indicates whether or not the details is open.
+      default: false
+    disabled:
+      type: boolean
+      title: Disabled
+      description: Disables the details so it can’t be toggled.
+      default: false
+    expand_icon:
+      title: Expand icon
+      $ref: json-schema-definitions://canvas.module/shoe-icon
+      # @todo slot prop on the icon should always be expand-icon
+      type: object
+    collapse_icon:
+      title: Collapse icon
+      $ref: json-schema-definitions://canvas.module/shoe-icon
+      # @todo slot prop on the icon should always be collapse-icon
+      type: object
+slots:
+  content:
+    title: Content
+    description: The contents of the details.
+    # @todo can_be_dropzone: true
+    examples:
+      - This is details content

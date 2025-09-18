@@ -1,0 +1,4 @@
+# @todo Fix d.o GitLab CI template to support relative paths correctly.
+# @see https://www.drupal.org/project/gitlab_templates/issues/3417807#comment-15419921
+**/modules/same_page_preview
+**/modules/canvas_vite

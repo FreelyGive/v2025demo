@@ -1,0 +1,6 @@
+test.dialog:
+  js:
+    js/canvas-test-dialog.js: {}
+  dependencies:
+    - canvas/ui
+    - core/jquery

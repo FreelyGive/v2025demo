@@ -1,0 +1,23 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Canvas test SDC with slots but no title
+description: Incompatible component, the the_footer slot has no title
+props:
+  type: object
+  properties: {}
+slots:
+  the_body:
+    title: The Body
+    description: The contents of the body.
+    # Markup example.
+    examples:
+      - <p>Example value for <strong>the_body</strong> slot in <strong>prop-slots</strong> component.</p>
+  the_footer:
+    description: The contents of the footer.
+    # Plain text example … that inline markup will not be escaped.
+    examples:
+      - Example value for <strong>the_footer</strong>.
+  the_colophon:
+    title: The Colophon
+    description: The contents of the colophon.
+    # No example.
+    examples: []

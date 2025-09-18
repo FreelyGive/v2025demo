@@ -1,0 +1,18 @@
+{%- set column_one_output %}{% block column_one %}
+The contents of the one column.
+{% endblock %}{% endset -%}
+{%- set column_two_output %}{% block column_two %}
+The contents of the two column.
+{% endblock %}{% endset -%}
+<div {{ attributes }}>
+    {% if column_one_output %}
+      <div class="column-one width-{{ width }}">
+        {{ column_one_output }}
+      </div>
+    {% endif %}
+    {% if column_two_output %}
+      <div class="column-two width-{{ 100-width }}">
+        {{ column_two_output }}
+      </div>
+    {% endif %}
+</div>

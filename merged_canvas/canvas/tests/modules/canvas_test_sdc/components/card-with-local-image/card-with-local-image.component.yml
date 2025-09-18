@@ -1,0 +1,53 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json'
+name: Card with local image
+description: A card element with an image that is stored anywhere on the filesystem that is accessible by the browser.
+props:
+  type: object
+  required:
+    - src
+    - alt
+    - loading
+  properties:
+    heading:
+      type: string
+      title: Heading
+      description: The heading text.
+      examples:
+        - 'Card with local image'
+    content:
+      type: string
+      title: Content
+      description: The main text.
+      examples:
+        - 'In a curious work, published in Paris in 1863 by Delaville Dedreux, there is a suggestion for reaching the North Pole by an aerostat.'
+    footer:
+      type: string
+      title: Footer
+      description: The footer text.
+      examples:
+        - 'I have a footer!'
+    src:
+      title: Local image path
+      type: string
+      # Note: the canvas_test_sdc:card SDC uses `json-schema-definitions://canvas.module/image`, and that shape
+      # uses the below for its `src` prop. Hence this SDC's implementation can reuse canvas_test_sdc:card.
+      $ref: json-schema-definitions://canvas.module/image-uri
+      description: Local path starting with "/"
+      examples:
+        - '/core/misc/druplicon.png'
+    alt:
+      title: Alternative text
+      type: string
+      examples:
+        - A classic druplicon
+    loading:
+      title: Loading
+      type: string
+      enum:
+        - lazy
+        - eager
+      meta:enum:
+        lazy: Lazy
+        eager: Eager
+      examples:
+        - lazy

@@ -1,0 +1,17 @@
+.accordionTrigger {
+  width: 100%;
+  cursor: pointer;
+}
+
+.accordionChevron {
+  transform: rotate(-90deg);
+  transition: transform 300ms;
+}
+
+:global([data-state="open"]) .accordionChevron {
+  transform: rotate(0deg);
+}
+
+.errorWrapper {
+  background: #ffffff;
+}

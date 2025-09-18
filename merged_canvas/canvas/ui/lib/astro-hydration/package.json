@@ -1,0 +1,22 @@
+{
+  "name": "@drupal-canvas/astro-hydration",
+  "type": "module",
+  "version": "0.0.0",
+  "license": "GPL-2.0-or-later",
+  "scripts": {
+    "build": "astro build && node extract-hydration-script.js"
+  },
+  "dependencies": {
+    "@astrojs/preact": "^4.0.3",
+    "@drupal-api-client/json-api-client": "^1.3.0",
+    "astro": "^5.2.2",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "drupal-jsonapi-params": "^2.3.2",
+    "jsona": "^1.12.1",
+    "next-image-standalone": "^0.1.3",
+    "preact": "^10.25.4",
+    "swr": "^2.3.3",
+    "tailwind-merge": "^3.0.2"
+  }
+}

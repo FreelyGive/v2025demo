@@ -1,0 +1,16 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Canvas test SDC with required image, without example
+description: INCOMPATIBLE component, the image property is required but has an example with no src
+props:
+  type: object
+  required:
+    - image
+  properties:
+    image:
+      $ref: json-schema-definitions://canvas.module/image
+      type: object
+      title: 'Image'
+      examples:
+        - alt: 'Boring placeholder'
+          width: 600
+          height: 400

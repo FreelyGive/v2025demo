@@ -1,0 +1,24 @@
+.regionSpotlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  grid-template-columns: auto auto 1fr;
+  width: 100%;
+  height: 100%;
+  > div {
+    background: rgba(0,0,0,0.5);
+  }
+  .position {
+    width: 200px;
+    height: 200px;
+  }
+  .highlighted {
+    width: 200px;
+    height: 60px;
+    pointer-events: none;
+    background: transparent;
+  }
+
+}

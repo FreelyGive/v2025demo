@@ -1,0 +1,17 @@
+uuid: 6003b4ef-b034-45a8-a6d3-bbb6e40327f4
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.js_component.canvas_test_code_components_with_no_props
+label: 'With no props'
+id: js.canvas_test_code_components_with_no_props
+provider: null
+source: js
+source_local_id: canvas_test_code_components_with_no_props
+category: '@todo'
+active_version: 8fe3be948e0194e1
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions: {  }

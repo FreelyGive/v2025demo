@@ -1,0 +1,11 @@
+app:
+  version: 1.0
+  header: true
+  js:
+    ui/dist/bundle.js:
+      attributes: { type: module }
+  drupalSettings:
+    canvasExtension:
+      testExtension: { id: 'canvas-test-extension', name: 'Canvas Test Extension', description: 'Demonstrates many things that an Canvas extension can do' }
+  dependencies:
+    - canvas/canvas-ui

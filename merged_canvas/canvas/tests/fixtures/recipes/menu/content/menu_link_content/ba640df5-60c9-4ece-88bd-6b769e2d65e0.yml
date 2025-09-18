@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: ba640df5-60c9-4ece-88bd-6b769e2d65e0
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    d9e6445d-8011-4fb9-8485-8a070c73186b: menu_link_content
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: 'Mega Space Bears'
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      uri: 'route:<nolink>'
+      title: ''
+      options: {  }
+      url: ''
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: -48
+  expanded:
+    -
+      value: false
+  parent:
+    -
+      value: 'menu_link_content:d9e6445d-8011-4fb9-8485-8a070c73186b'
+  revision_translation_affected:
+    -
+      value: true

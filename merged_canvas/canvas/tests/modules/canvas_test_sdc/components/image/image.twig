@@ -1,0 +1,15 @@
+{% set containerSize = containerSize|default('100') %}
+{% set srcset = image.src|toSrcSet(image.width) %}
+
+<img
+  class="image"
+  src="{{ image.src }}"
+  {% if srcset %}
+    srcset="{{ srcset }}"
+    sizes="auto {{ containerSize }}vw"
+  {% endif %}
+  alt="{{ image.alt }}"
+  width="{{ image.width }}"
+  height="{{ image.height }}"
+  loading="lazy"
+/>

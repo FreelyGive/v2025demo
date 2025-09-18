@@ -1,0 +1,6 @@
+name: 'Drupal Canvas Test State API'
+type: module
+description: 'Test module for demonstrating State API functionality'
+package: Testing
+dependencies:
+  - canvas:canvas

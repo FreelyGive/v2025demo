@@ -1,0 +1,32 @@
+langcode: en
+status: false
+dependencies:
+  config:
+    - filter.format.canvas_html_block
+  module:
+    - ckeditor5
+  enforced:
+    module:
+      - canvas
+format: canvas_html_block
+editor: ckeditor5
+settings:
+  toolbar:
+    items:
+      - bold
+      - italic
+      - underline
+      - link
+      - '|'
+      - bulletedList
+      - numberedList
+  plugins:
+    ckeditor5_list:
+      properties:
+        reversed: false
+        startIndex: false
+      # For now, restrict to simple lists.
+      # @see https://ckeditor.com/docs/ckeditor5/latest/features/lists/lists-editing.html#simple-lists
+      multiBlock: false
+image_upload:
+  status: false

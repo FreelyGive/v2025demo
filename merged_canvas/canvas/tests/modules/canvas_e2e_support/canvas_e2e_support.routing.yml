@@ -1,0 +1,16 @@
+canvas_e2e_support.clear_auto_save:
+  path: '/canvas-test/clear-auto-save/{entity_type}/{entity}'
+  defaults:
+    _controller: '\Drupal\canvas_e2e_support\Controller\AutoSaveController::clearAutoSave'
+  options:
+    parameters:
+      entity:
+        type: entity:{entity_type}
+  requirements:
+    _permission: 'access content'
+canvas_e2e_support.set_state:
+  path: '/canvas-test/set-key-value/{collection}'
+  defaults:
+    _controller: '\Drupal\canvas_e2e_support\Controller\KeyValueController::setKeyValue'
+  requirements:
+    _permission: 'access content'

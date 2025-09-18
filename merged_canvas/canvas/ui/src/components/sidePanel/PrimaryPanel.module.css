@@ -1,0 +1,54 @@
+.primaryPanel {
+  flex-shrink: 0;
+  width: var(--sidebar-left-width);
+  border-right: 1px solid var(--gray-5);
+  background: #fff;
+}
+
+.header {
+  height: 40px;
+  border-bottom: 1px solid var(--gray-5);
+}
+.scrollArea {
+  height: calc(100% - 41px);
+  * {
+    max-width: 100%;
+  }
+}
+.segmentedControlRoot {
+  margin-bottom: 24px;
+  margin-inline-start: 31px;
+  margin-inline-end: 31px;
+}
+
+.header {
+  margin: 0;
+  vertical-align: middle;
+  > button {
+    width: 100%;
+    cursor: pointer;
+  }
+}
+
+.chevron {
+  margin-right: 0.5em;
+  transition: transform 250ms cubic-bezier(0.87, 0, 0.13, 1);
+  vertical-align: middle;
+  .trigger[data-state="open"] > span > & {
+    transform: rotate(90deg);
+  }
+}
+
+.primaryPanelContent {
+  height: 100%;
+}
+
+.tabRoot {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.layersTabContent {
+  height: 100%;
+}

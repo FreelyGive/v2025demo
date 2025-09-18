@@ -1,0 +1,19 @@
+.extensionIcon {
+  margin: 0;
+  padding:  var(--space-2);
+  border: 1px solid transparent;
+  border-radius: var(--radius-4);
+  background: none;
+  img {
+    display: block;
+    margin-bottom:  var(--space-2);
+    padding: var(--space-2);
+    border: 1px solid var(--gray-6);
+    border-radius:  var(--radius-3);
+    background: var(--sand-1);
+  }
+  &:hover {
+    border: 1px solid var(--gray-6);
+    background: var(--gray-2);
+  }
+}

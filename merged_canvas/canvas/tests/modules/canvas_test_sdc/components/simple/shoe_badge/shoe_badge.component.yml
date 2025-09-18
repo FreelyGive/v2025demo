@@ -1,0 +1,50 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json'
+name: Shoe Badge
+status: stable
+group: Atom/Text
+description: https://shoelace.style/components/badge
+libraryOverrides:
+  dependencies:
+    - canvas/shoelace
+props:
+  type: object
+  required:
+    - variant
+  properties:
+    variant:
+      type: string
+      title: Variant
+      description: The badge’s theme variant.
+      default: primary
+      enum:
+        - 'primary'
+        - 'success'
+        - 'neutral'
+        - 'warning'
+        - 'danger'
+      meta:enum:
+        primary: Primary
+        success: Success
+        neutral: Neutral
+        warning: Warning
+        danger: Danger
+      examples: ['primary', 'success', 'neutral', 'warning', 'danger']
+    pill:
+      type: boolean
+      title: Pill
+      description: Draws a pill-style badge with rounded edges.
+      default: true
+      examples: [true, false]
+    pulse:
+      type: boolean
+      title: Pulse
+      description: Makes the badge pulsate to draw attention.
+      default: true
+      examples: [true, false]
+slots:
+  content:
+    title: Content
+    description: The contents of the badge.
+    # @todo can_be_dropzone: true
+    examples:
+      - Badge
