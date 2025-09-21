@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 4ce8baa1-b665-45bf-b99c-825fcfd0ad8d
+  bundle: image
+  default_langcode: en
+  depends:
+    8ea7b287-df85-467f-bc5e-dbce7bbc766c: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A young woman working on her laptop, sipping coffee in a bright café setting.'
+  created:
+    -
+      value: 1758433766
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This is a photo depicting a bright café setting with neutral tones and warm lighting. The background features large windows letting in ample natural light, creating an inviting atmosphere. The main colors are soft whites and browns, contributing to the cozy ambiance. The scene shows a young woman, likely in her 20s or 30s, with long hair, working on her laptop at a wooden table. She appears focused yet relaxed, sipping coffee from a white cup, adding a casual and comfortable feel to the image. Around her, there are various items like a laptop, notebooks, and a smartphone, indicating a productive yet relaxed work environment. The overall mood is calm and contemplative, perfect for a setting that encourages creativity and concentration.'
+  field_media_image:
+    -
+      alt: 'A young woman working on her laptop, sipping coffee in a bright café setting.'
+      title: 'Andrew Neel'
+      width: 3644
+      height: 5466
+      entity: 8ea7b287-df85-467f-bc5e-dbce7bbc766c

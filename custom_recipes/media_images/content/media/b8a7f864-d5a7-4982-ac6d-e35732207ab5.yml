@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: b8a7f864-d5a7-4982-ac6d-e35732207ab5
+  bundle: image
+  default_langcode: en
+  depends:
+    87c6629c-2d45-477d-9ff9-e5d83946d42b: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Close-up of a hand signing a legal document with a fountain pen, symbolizing signature and agreement.'
+  created:
+    -
+      value: 1758435773
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This is a photographic image capturing a close-up of a hand signing a legal document with a fountain pen. The background is mostly neutral, featuring a subtle contrast between the white paper and the dark area beneath it. The main colors are the white of the paper, the gold and black of the pen, and the natural skin tone of the hand. The document features printed text and a visible signature line, highlighting the act of agreement. The image conveys a serious and focused mood, emphasizing the importance of the act of signing. The hand appears to be that of an adult, providing a sense of professionalism. The overall composition effectively symbolizes the themes of legality and commitment.'
+  field_media_image:
+    -
+      alt: 'Close-up of a hand signing a legal document with a fountain pen, symbolizing signature and agreement.'
+      title: Pixabay
+      width: 3008
+      height: 2000
+      entity: 87c6629c-2d45-477d-9ff9-e5d83946d42b

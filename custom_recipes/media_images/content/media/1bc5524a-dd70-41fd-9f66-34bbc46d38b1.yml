@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 1bc5524a-dd70-41fd-9f66-34bbc46d38b1
+  bundle: image
+  default_langcode: en
+  depends:
+    3abf7d77-8653-4012-a5e0-14cd724c0e0c: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Bright and stylish office space with contemporary furniture and open shelving.'
+  created:
+    -
+      value: 1758433668
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "The image is a photo showcasing a bright and stylish office space. The scene is dominated by a neutral color palette with soft beige walls and a warm, wooden floor. Contemporary furniture includes a round table surrounded by modern chairs in muted tones of pink, gray, and blue. Open shelving units with a geometric grid pattern create a visually appealing backdrop. A sleek floor lamp and a healthy potted plant add to the room's modern aesthetic. The overall mood is clean, organized, and inviting, suggesting a space conducive to productivity and creativity. There are no people in the image, emphasizing the room's design elements. The natural light streaming through the window enhances the bright atmosphere."
+  field_media_image:
+    -
+      alt: 'Bright and stylish office space with contemporary furniture and open shelving.'
+      title: ATBO
+      width: 3680
+      height: 2456
+      entity: 3abf7d77-8653-4012-a5e0-14cd724c0e0c

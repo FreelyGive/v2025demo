@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: a70d26cb-c501-4bcb-946d-deb33ab1ef6b
+  bundle: image
+  default_langcode: en
+  depends:
+    28a57e12-a260-4e05-a129-143cbecaf20a: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Flatlay of an iPad displaying stock market graph on a wooden desk with a pencil and paper.'
+  created:
+    -
+      value: 1758435626
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "The image is a photo featuring a flatlay composition on a wooden desk, which adds a warm, natural background with various shades of brown. The central object is an iPad displaying a stock market graph, characterized by a grid with dynamic green lines against a black screen. A pencil and a blank sheet of paper accompany the iPad, suggesting a workspace focused on financial analysis or planning. The absence of people creates a serene and focused mood, ideal for highlighting the theme of productivity and concentration. The overall color palette is earthy and minimalist, emphasizing the graph's vivid green lines. The image conveys a professional and organized atmosphere, suited for themes related to business, finance, or strategy."
+  field_media_image:
+    -
+      alt: 'Flatlay of an iPad displaying stock market graph on a wooden desk with a pencil and paper.'
+      title: 'Burak The Weekender'
+      width: 4032
+      height: 3024
+      entity: 28a57e12-a260-4e05-a129-143cbecaf20a

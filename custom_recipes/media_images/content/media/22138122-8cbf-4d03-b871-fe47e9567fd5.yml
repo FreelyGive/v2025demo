@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 22138122-8cbf-4d03-b871-fe47e9567fd5
+  bundle: image
+  default_langcode: en
+  depends:
+    1929f2db-1682-4867-998a-a3c33796596d: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A cheerful woman with a prosthetic arm holds broccoli, symbolizing healthy lifestyle and positivity.'
+  created:
+    -
+      value: 1758433901
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This is a vibrant photo featuring a young woman with multicolored hair, blending striking shades of pink and blue. She exudes happiness and positivity, smiling brightly against a lively light green background. The woman is dressed in a green and white striped shirt, adding to the upbeat and fresh mood of the image. A prosthetic arm is prominently visible, gracefully holding a piece of broccoli above her head, symbolizing strength and a healthy lifestyle. The overall atmosphere is cheerful and empowering, with an emphasis on vitality and wellness. The playful pose and vivid colors contribute to a sense of optimism and joy.'
+  field_media_image:
+    -
+      alt: 'A cheerful woman with a prosthetic arm holds broccoli, symbolizing healthy lifestyle and positivity.'
+      title: 'Anna Shvets'
+      width: 3162
+      height: 4743
+      entity: 1929f2db-1682-4867-998a-a3c33796596d

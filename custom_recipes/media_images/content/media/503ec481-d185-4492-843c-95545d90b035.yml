@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 503ec481-d185-4492-843c-95545d90b035
+  bundle: image
+  default_langcode: en
+  depends:
+    874517f6-00b9-460e-b4ac-d48a4bc4ec1b: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Pile of white envelopes tied with a green string, showcasing a minimalist design.'
+  created:
+    -
+      value: 1758435773
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a minimalist photo showcasing a stack of pristine white envelopes bound together with a dark green string. The background is plain and light, enhancing the simplicity and starkness of the envelopes. No people are present in this image, allowing focus solely on the objects. The mood is calm and organized, evoking a sense of tidiness and order. There is a subtle texture in the envelopes, suggesting a sense of tactility. The green string offers a striking contrast against the white, drawing attention to the bundle. Overall, the composition is clean and uncluttered, emphasizing the minimalist design.'
+  field_media_image:
+    -
+      alt: 'Pile of white envelopes tied with a green string, showcasing a minimalist design.'
+      title: 'Sam J'
+      width: 4032
+      height: 2268
+      entity: 874517f6-00b9-460e-b4ac-d48a4bc4ec1b

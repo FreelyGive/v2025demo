@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 15513c9b-5619-486e-80cd-e995040b9994
+  bundle: image
+  default_langcode: en
+  depends:
+    63f09feb-a6f9-4640-91db-24be0ac0e570: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Confident young professional woman enjoying a coffee break in a modern office environment.'
+  created:
+    -
+      value: 1758433766
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This is a photograph depicting a young professional woman enjoying a coffee break in a modern office environment. The background features neutral tones, with large windows providing natural light and a view of the surroundings. The woman, appearing to be in her 20s or 30s, is smiling confidently, exuding a positive and relaxed mood. She is wearing a black outfit, enhancing the modern aesthetic. The office is equipped with various contemporary devices and decor, suggesting a tech-savvy environment. Her posture is casual yet poised, as she holds her cup of coffee. The overall setting is professional and inviting, reflecting a vibrant work atmosphere.'
+  field_media_image:
+    -
+      alt: 'Confident young professional woman enjoying a coffee break in a modern office environment.'
+      title: ThisIsEngineering
+      width: 5304
+      height: 7952
+      entity: 63f09feb-a6f9-4640-91db-24be0ac0e570

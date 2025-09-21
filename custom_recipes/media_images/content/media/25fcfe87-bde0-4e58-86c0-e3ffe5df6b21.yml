@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 25fcfe87-bde0-4e58-86c0-e3ffe5df6b21
+  bundle: image
+  default_langcode: en
+  depends:
+    5f66c5de-7969-4fd0-b209-8d3f7f9ff5b5: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A happy couple enjoys a relaxing morning in bed, embracing with coffee and a laptop.'
+  created:
+    -
+      value: 1758433901
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This image is a photograph featuring a light and neutral-toned bedroom setting dominated by white and soft beige hues. It portrays a couple enjoying a cozy morning in bed; one person with short blonde hair and the other with dark short hair. Both individuals appear to be young adults and exude a serene and happy mood. The blonde person holds a coffee cup and a laptop, suggesting a relaxed, modern lifestyle. The atmosphere is intimate and peaceful, emphasizing comfort and contentment. A notable detail is the tattoo on the leg of the person with the coffee cup, adding a personal touch to the scene. Overall, the image conveys warmth and a sense of togetherness.'
+  field_media_image:
+    -
+      alt: 'A happy couple enjoys a relaxing morning in bed, embracing with coffee and a laptop.'
+      title: 'Ketut Subiyanto'
+      width: 4480
+      height: 6720
+      entity: 5f66c5de-7969-4fd0-b209-8d3f7f9ff5b5

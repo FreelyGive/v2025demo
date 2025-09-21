@@ -1,0 +1,24 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 51f2249c-9bab-4d85-80f6-e0eef196e285
+  default_langcode: en
+default:
+  filename:
+    -
+      value: pexels-photo-577210.jpeg
+  uri:
+    -
+      value: 'public://2025-09/pexels-photo-577210.jpeg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 1084951
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1758435626

@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: cee5b3ee-2e4a-4512-8c5b-2a3d041fa016
+  bundle: image
+  default_langcode: en
+  depends:
+    ad16e1f0-fe5a-4616-8210-12161830ceba: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A close-up of a hand with a pen analyzing data on colorful bar and line charts on paper.'
+  created:
+    -
+      value: 1758435626
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "The image is a photo featuring a hand holding a pen, poised over colorful bar and line charts on paper. The charts predominantly display shades of blue, red, and yellow, adding vibrancy against the plain white paper. The background is subtly toned with a neutral, light-colored desk surface, lending an air of professionalism. The person's hand appears to belong to an adult, with a focus on the action of writing or analyzing. The mood of the image is analytical and focused, suggesting an environment of meticulous study or business assessment. The pen is blue, and its presence underscores a sense of precision and attention to detail."
+  field_media_image:
+    -
+      alt: 'A close-up of a hand with a pen analyzing data on colorful bar and line charts on paper.'
+      title: Lukas
+      width: 6144
+      height: 4069
+      entity: ad16e1f0-fe5a-4616-8210-12161830ceba

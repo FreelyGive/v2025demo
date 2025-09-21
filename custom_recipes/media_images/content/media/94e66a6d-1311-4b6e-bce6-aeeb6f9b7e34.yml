@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 94e66a6d-1311-4b6e-bce6-aeeb6f9b7e34
+  bundle: image
+  default_langcode: en
+  depends:
+    ef414c35-ddb5-4f83-bcbd-136220254e25: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: pexels-photo-33921648.jpeg
+  created:
+    -
+      value: 1758435924
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "The image is a black and white photo depicting a bustling street scene. In the background, there is a vibrant market stall filled with assorted goods, creating a lively atmosphere. The main colors are shades of gray due to the monochromatic palette. In the foreground, there's a child in a small, toy-like car and an adult on a mobility scooter, adding a playful yet contrasting element to the scene. The adult is dressed in dark clothing with a checkered scarf, while the child's facial expression is not visible. The mood of the image is dynamic and candid, capturing a moment of everyday life. The presence of various objects and people conveys a sense of community and interaction."
+  field_media_image:
+    -
+      alt: 'Pexels Image 33921648'
+      title: 'Duc Nguyen'
+      width: 6296
+      height: 3253
+      entity: ef414c35-ddb5-4f83-bcbd-136220254e25

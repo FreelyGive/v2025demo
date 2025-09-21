@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 06777f25-0df1-4571-bc2e-9c8b268303eb
+  bundle: image
+  default_langcode: en
+  depends:
+    0f889c77-692f-49cb-b386-ccd9a7b2c14f: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Laptop displaying charts and graphs with tablet calendar for data analysis and planning.'
+  created:
+    -
+      value: 1758435626
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo depicting a workspace setting with a laptop and a tablet. The background features soft beige tones, giving a calm and neutral atmosphere. On the laptop screen, there are colorful charts and graphs, including a bar chart and a pie chart, emphasizing data analysis. The tablet, held by a person whose details are not visible, displays a calendar interface, indicating planning and organization. The overall mood is professional and focused, ideal for depicting themes of productivity and planning. Key objects are the laptop and tablet, central to the theme of technology aiding data analysis. The setting conveys a modern and efficient workspace.'
+  field_media_image:
+    -
+      alt: 'Laptop displaying charts and graphs with tablet calendar for data analysis and planning.'
+      title: Pixabay
+      width: 5184
+      height: 3456
+      entity: 0f889c77-692f-49cb-b386-ccd9a7b2c14f

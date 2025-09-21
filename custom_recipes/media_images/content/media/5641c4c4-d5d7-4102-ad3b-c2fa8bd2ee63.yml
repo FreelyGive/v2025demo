@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 5641c4c4-d5d7-4102-ad3b-c2fa8bd2ee63
+  bundle: image
+  default_langcode: en
+  depends:
+    9c05fa26-ed35-4d4f-8ccf-d8f4964cec4e: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Close-up of a tablet displaying stock market analysis with colorful graphs.'
+  created:
+    -
+      value: 1758435626
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photograph of a tablet displaying stock market analysis with colorful graphs. The primary colors are vibrant greens, blues, and reds on the graphs, contrasted against a dark background. The scene has an analytical and focused mood, enhancing the business-oriented context. No people are present in the image. The tablet screen, showing detailed and dynamic graphs, is the central object, indicating fluctuations in stock market data. The background is neutral, emphasizing the bright colors on the screen. The overall tone is professional and data-driven, appealing to those interested in financial analysis.'
+  field_media_image:
+    -
+      alt: 'Close-up of a tablet displaying stock market analysis with colorful graphs.'
+      title: 'Burak The Weekender'
+      width: 5472
+      height: 3648
+      entity: 9c05fa26-ed35-4d4f-8ccf-d8f4964cec4e

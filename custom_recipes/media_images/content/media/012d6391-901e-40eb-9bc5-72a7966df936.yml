@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 012d6391-901e-40eb-9bc5-72a7966df936
+  bundle: image
+  default_langcode: en
+  depends:
+    f957020c-4ffd-4039-b22f-a6f12f472f42: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Warm and joyful couple embracing on a cozy sofa in their modern living room.'
+  created:
+    -
+      value: 1758433901
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This is a warm and inviting photo featuring a joyful couple embracing on a cozy sofa. The scene is bathed in soft, natural light with a neutral color palette, consisting of light beige and cream hues, accentuated by touches of greenery from the potted plants. The couple appears to be in their 20s or 30s, with one individual wearing a turban, suggesting a South Asian heritage. They are both smiling, exuding happiness and a sense of connection. The modern living room has a casual, lived-in feel, enhanced by decorative elements like a shelf with small items and plants. The mood of the image is heartwarming and serene, embodying a sense of home and comfort. The presence of a plush sofa adds to the cozy atmosphere.'
+  field_media_image:
+    -
+      alt: 'Warm and joyful couple embracing on a cozy sofa in their modern living room.'
+      title: 'Ketut Subiyanto'
+      width: 3801
+      height: 5701
+      entity: f957020c-4ffd-4039-b22f-a6f12f472f42

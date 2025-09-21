@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 68f3616d-1958-44fa-a86e-058e65c961ba
+  bundle: image
+  default_langcode: en
+  depends:
+    4627d70b-d532-4cce-ae0f-3ed3c45c5d48: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A diverse group of individuals wearing white shirts in a minimalist studio setting.'
+  created:
+    -
+      value: 1758435924
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "This is a photo featuring a diverse group of individuals in a minimalist studio setting with a neutral gray background. Each person is wearing a plain white shirt, contributing to a cohesive yet simple aesthetic. The group includes a mix of ages, genders, and ethnicities, with expressions ranging from neutral to contemplative. The lighting creates a soft focus on the faces, emphasizing each individual's unique features. The image conveys a calm and introspective mood, spotlighting diversity and unity. There are no additional objects in the image, reinforcing the minimalistic theme."
+  field_media_image:
+    -
+      alt: 'A diverse group of individuals wearing white shirts in a minimalist studio setting.'
+      title: 'cottonbro studio'
+      width: 2987
+      height: 4480
+      entity: 4627d70b-d532-4cce-ae0f-3ed3c45c5d48

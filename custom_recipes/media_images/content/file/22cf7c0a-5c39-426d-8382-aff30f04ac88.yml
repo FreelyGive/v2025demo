@@ -1,0 +1,24 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 22cf7c0a-5c39-426d-8382-aff30f04ac88
+  default_langcode: en
+default:
+  filename:
+    -
+      value: pexels-photo-6972784.jpeg
+  uri:
+    -
+      value: 'public://2025-09/pexels-photo-6972784.jpeg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 1819972
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1758435496

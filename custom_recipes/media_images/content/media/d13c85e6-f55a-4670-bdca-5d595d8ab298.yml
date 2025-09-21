@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: d13c85e6-f55a-4670-bdca-5d595d8ab298
+  bundle: image
+  default_langcode: en
+  depends:
+    595568d6-d87c-470e-a441-807b7c317c8b: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Overhead view of diverse women professionals working in a modern office setting, fostering collaboration and teamwork.'
+  created:
+    -
+      value: 1758433668
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photograph displaying a top-down view of a modern office setting, featuring a diverse group of women professionals engaged in collaborative work. The background is dominated by warm, wooden tones from a polished wooden floor and long desk. The main colors include earthy shades, punctuated by pops of green from indoor plants and colorful floral arrangements on the table. The individuals, presumably women of various ethnic backgrounds and ages, are focused and engaged, working on laptops and taking notes, creating an atmosphere of teamwork and concentration. The mood of the image is vibrant and productive, emphasizing collaboration. The setting includes modern white chairs and essential office supplies, enhancing the contemporary office vibe. The presence of coffee mugs and notepads adds a touch of realism and everyday work-life.'
+  field_media_image:
+    -
+      alt: 'Overhead view of diverse women professionals working in a modern office setting, fostering collaboration and teamwork.'
+      title: CoWomen
+      width: 6000
+      height: 4000
+      entity: 595568d6-d87c-470e-a441-807b7c317c8b

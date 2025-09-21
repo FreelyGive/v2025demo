@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 0d964137-ff1f-4ed2-9b56-f2dea8eb4bb6
+  bundle: image
+  default_langcode: en
+  depends:
+    1fe42dbd-977c-4f84-bc4b-cfa20b25fb42: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Front view of a MacBook Air laptop with a blank screen on a white background.'
+  created:
+    -
+      value: 1758434018
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo of a MacBook Air laptop, prominently displayed against a plain white background. The laptop is shown from the front, with a blank black screen that contrasts sharply with its sleek silver body. There are no people in the image, which gives it a clean, minimalist aesthetic. The overall mood is professional and modern, emphasizing simplicity and elegance. The focus is entirely on the laptop, highlighting its design and functionality. The absence of any additional objects or details creates a streamlined and focused composition.'
+  field_media_image:
+    -
+      alt: 'Front view of a MacBook Air laptop with a blank screen on a white background.'
+      title: 'Tuur  Tisseghem'
+      width: 5996
+      height: 3980
+      entity: 1fe42dbd-977c-4f84-bc4b-cfa20b25fb42

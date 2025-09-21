@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: b2f62b9d-a159-4b5a-8f12-e6cd0b7ce152
+  bundle: image
+  default_langcode: en
+  depends:
+    5319c2a2-df43-47d9-a033-0e437542d2b4: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A woman holds a floral peace sign during a peaceful protest for nonviolence.'
+  created:
+    -
+      value: 1758435924
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo capturing a serene moment during a peaceful protest for nonviolence. The background is dark, creating a contrast that highlights the vibrant colors of the floral peace sign. The peace sign is adorned with white, orange, and yellow flowers, adding a touch of nature and liveliness. A young woman, likely in her twenties, is holding the floral arrangement. Her expression is calm and determined, reflecting the peaceful and hopeful mood of the protest. She has short, dark hair and an Asian ethnicity. The overall mood of the image is one of tranquility and resolve, underscoring the message of nonviolence. The floral peace sign is the focal point, symbolizing unity and harmony.'
+  field_media_image:
+    -
+      alt: 'A woman holds a floral peace sign during a peaceful protest for nonviolence.'
+      title: 'cottonbro studio'
+      width: 6000
+      height: 4000
+      entity: 5319c2a2-df43-47d9-a033-0e437542d2b4

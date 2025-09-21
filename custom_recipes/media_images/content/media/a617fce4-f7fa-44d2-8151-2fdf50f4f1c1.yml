@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: a617fce4-f7fa-44d2-8151-2fdf50f4f1c1
+  bundle: image
+  default_langcode: en
+  depends:
+    0ae3755c-5d6f-4e19-9ba3-c20f95714db0: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Elderly couple sitting on a sofa, using laptops for online activities in a cozy home setting.'
+  created:
+    -
+      value: 1758434018
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo depicting an elderly couple sitting side by side on a comfortable gray sofa in a cozy home environment. The background features a soft, neutral color palette with earthy tones, creating a warm and inviting atmosphere. The couple, a man and a woman, appear to be engaged and content, each focused on their laptops. They display a sense of calm and relaxation, suggesting they are enjoying their online activities. The woman is wearing headphones, adding a layer of personal engagement with her device. A wooden coffee table is placed in front of them, and a softly illuminated lamp and some potted plants add to the homey setting. The overall mood is serene and intimate, emphasizing comfort and technology use in a domestic space.'
+  field_media_image:
+    -
+      alt: 'Elderly couple sitting on a sofa, using laptops for online activities in a cozy home setting.'
+      title: 'Tima Miroshnichenko'
+      width: 3927
+      height: 5890
+      entity: 0ae3755c-5d6f-4e19-9ba3-c20f95714db0

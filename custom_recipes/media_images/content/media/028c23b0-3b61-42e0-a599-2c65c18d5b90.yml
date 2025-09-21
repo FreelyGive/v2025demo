@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 028c23b0-3b61-42e0-a599-2c65c18d5b90
+  bundle: image
+  default_langcode: en
+  depends:
+    0e29ab8f-2cc2-4d83-bba8-93bf6e39c0de: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Person wearing plaid coat explores an antique shop filled with vintage items.'
+  created:
+    -
+      value: 1758435924
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This is a photo featuring an individual wearing a vibrant plaid coat with striking pink and navy blue checks. The person appears to be young with a contemplative expression, exploring an antique shop brimming with vintage items. The background is a warm mix of wooden tones from antique furniture and glass display cases filled with collectibles. The mood of the image is nostalgic and introspective, inviting a sense of exploration and discovery. The antique shop is cluttered yet charming, showcasing an array of vintage treasures such as framed pictures, pottery, and knick-knacks. The lighting is soft and natural, enhancing the cozy and inviting ambiance of the scene.'
+  field_media_image:
+    -
+      alt: 'Person wearing plaid coat explores an antique shop filled with vintage items.'
+      title: 'cottonbro studio'
+      width: 5291
+      height: 3527
+      entity: 0e29ab8f-2cc2-4d83-bba8-93bf6e39c0de

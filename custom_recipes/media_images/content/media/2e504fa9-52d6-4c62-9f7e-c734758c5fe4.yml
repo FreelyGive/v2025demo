@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 2e504fa9-52d6-4c62-9f7e-c734758c5fe4
+  bundle: image
+  default_langcode: en
+  depends:
+    30be4e60-1d29-414f-8fa9-0c48ce92c871: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: "A mother gently combs her daughter's hair on a bed, capturing a tender family moment."
+  created:
+    -
+      value: 1758435496
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "This image captures a tender family moment with a mother gently combing her young daughter's hair as they sit on a bed. The scene is a soft photograph, exuding warmth and intimacy. The background features a white brick wall, creating a serene and cozy ambiance. Both individuals have light skin tones, and they are wearing comfortable, light-colored clothes, enhancing the serene and gentle mood of the image. The expressions are calm and focused, with the mother displaying a nurturing demeanor. The mood conveyed is peaceful and affectionate. The bed and pillow subtly complement the setting, highlighting the quiet domestic scene."
+  field_media_image:
+    -
+      alt: "A mother gently combs her daughter's hair on a bed, capturing a tender family moment."
+      title: 'Artem Podrez'
+      width: 2160
+      height: 3840
+      entity: 30be4e60-1d29-414f-8fa9-0c48ce92c871

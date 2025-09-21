@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 20d214ba-cb52-4a3f-bcf6-c49cfd75ead9
+  bundle: image
+  default_langcode: en
+  depends:
+    ee2e85df-2d01-47a2-93f4-e00cd2f1b73a: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A joyful child with vibrant face paint and hands, expressing happiness and creativity.'
+  created:
+    -
+      value: 1758435496
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This image is a vibrant photo featuring a joyful child with colorful face paint and hands. The main colors include a spectrum of bright hues such as reds, greens, blues, and yellows, radiating a rainbow effect. The child, likely around the age of 8-10, is expressing happiness and creativity, shown through a wide, joyful smile. The mood of the image is playful and cheerful, capturing a moment of pure delight. The background consists of muted, soft colors, possibly a lightly colored brick wall, which contrasts with the vividness of the paint. This lively scene beautifully encapsulates the essence of childhood creativity and joy.'
+  field_media_image:
+    -
+      alt: 'A joyful child with vibrant face paint and hands, expressing happiness and creativity.'
+      title: 'Alexander Grey'
+      width: 5616
+      height: 3744
+      entity: ee2e85df-2d01-47a2-93f4-e00cd2f1b73a

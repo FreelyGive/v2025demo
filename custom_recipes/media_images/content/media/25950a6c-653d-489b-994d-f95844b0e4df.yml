@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 25950a6c-653d-489b-994d-f95844b0e4df
+  bundle: image
+  default_langcode: en
+  depends:
+    34766469-02ff-4cd5-8b8e-d8c7bcb62d48: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Close-up of an elegant pen resting on an open notebook in a stylish office environment.'
+  created:
+    -
+      value: 1758435773
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "The image is a photograph featuring a sleek, black pen resting on the pages of an open notebook. The background is a stylish office environment, blending soft hues of maroon and beige, creating a warm and professional atmosphere. The pen's metallic accents catch the light, adding a touch of elegance and sophistication. The glass-topped table reflects the notebook's pages and pen, enhancing the sense of a modern, polished workspace. The overall mood of the image feels serene, focused, and conducive to productivity. There are no people present, emphasizing the solitude and concentration associated with individual work. The composition suggests a blend of simplicity and refinement, appealing to those who appreciate minimalist office aesthetics."
+  field_media_image:
+    -
+      alt: 'Close-up of an elegant pen resting on an open notebook in a stylish office environment.'
+      title: 'Mohammad Danish'
+      width: 3888
+      height: 2592
+      entity: 34766469-02ff-4cd5-8b8e-d8c7bcb62d48

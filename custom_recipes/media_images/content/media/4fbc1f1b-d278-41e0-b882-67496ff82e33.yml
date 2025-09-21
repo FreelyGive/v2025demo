@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 4fbc1f1b-d278-41e0-b882-67496ff82e33
+  bundle: image
+  default_langcode: en
+  depends:
+    68294f8f-31a4-4a64-9af0-8bf56b6b5ab1: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Laptop partially opened, emitting vibrant multicolored lights in dark setting.'
+  created:
+    -
+      value: 1758434018
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "The image is a photo featuring a partially opened laptop in a dark setting, emitting vibrant, multicolored lights. The background is predominantly black, emphasizing the vivid colors radiating from the laptop screen and keyboard. No person is present in the image. The laptop serves as the central focus, casting a captivating interplay of blues, pinks, oranges, and greens onto the surrounding surface. The overall mood is futuristic and dramatic, suggesting a sense of mystery and technological allure. The light reflections create a dynamic and engaging visual, heightening the laptop's presence in the image."
+  field_media_image:
+    -
+      alt: 'Laptop partially opened, emitting vibrant multicolored lights in dark setting.'
+      title: 'Junior Teixeira'
+      width: 3648
+      height: 5472
+      entity: 68294f8f-31a4-4a64-9af0-8bf56b6b5ab1

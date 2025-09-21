@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: b75ea85b-0e59-47f4-886e-5270af8be164
+  bundle: image
+  default_langcode: en
+  depends:
+    0c3d41ac-75e7-43bf-a196-eb0c26644ee8: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Interracial hands clasped with rainbow body paint symbolizing LGBTQ pride and diversity.'
+  created:
+    -
+      value: 1758435924
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This image is a photograph featuring two clasped hands set against a soft, neutral background. One hand is darker-toned, while the other is lighter, emphasizing the theme of interracial unity. The lighter-toned arm displays a vivid rainbow stripe, signifying LGBTQ pride and diversity. The mood of the image is powerful and uplifting, conveying a message of solidarity and inclusiveness. The focus is entirely on the hands and the symbolic rainbow, with no additional objects present. The simplicity of the image enhances its impactful, expressive message.'
+  field_media_image:
+    -
+      alt: 'Interracial hands clasped with rainbow body paint symbolizing LGBTQ pride and diversity.'
+      title: 'Anna Shvets'
+      width: 4160
+      height: 6240
+      entity: 0c3d41ac-75e7-43bf-a196-eb0c26644ee8

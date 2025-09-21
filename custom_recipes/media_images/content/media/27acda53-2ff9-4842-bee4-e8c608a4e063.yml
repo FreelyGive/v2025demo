@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 27acda53-2ff9-4842-bee4-e8c608a4e063
+  bundle: image
+  default_langcode: en
+  depends:
+    1917b69e-8497-4138-bbb4-5b5c0b292a76: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A fashionable woman holds a vintage camera in a cozy, neon-lit setting.'
+  created:
+    -
+      value: 1758435496
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a vibrant photo featuring a woman with dark hair in a cozy, neon-lit setting. The background is aglow with soft pink and purple hues, complementing the neon sign that adds a trendy, modern touch. She is wearing a textured, bright pink outfit that stands out against the warm, cozy lighting. Her expression is hidden behind a vintage camera, which she holds up as if capturing a moment. The overall mood is stylish and playful, evoking a sense of nostalgia mixed with contemporary flair. The setting includes plush furniture and faint greenery, enhancing the cozy and chic atmosphere.'
+  field_media_image:
+    -
+      alt: 'A fashionable woman holds a vintage camera in a cozy, neon-lit setting.'
+      title: 'RDNE Stock project'
+      width: 4369
+      height: 6553
+      entity: 1917b69e-8497-4138-bbb4-5b5c0b292a76

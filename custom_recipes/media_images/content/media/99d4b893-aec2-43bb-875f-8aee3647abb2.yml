@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 99d4b893-aec2-43bb-875f-8aee3647abb2
+  bundle: image
+  default_langcode: en
+  depends:
+    8e38110e-bdf8-4bee-bb68-5f7fecb85539: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A relaxed businessman enjoying a break in his bright, contemporary office environment.'
+  created:
+    -
+      value: 1758433668
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This is a photograph depicting a businessman in a bright, contemporary office setting. The background features large windows allowing natural light to flood in, with soft, neutral colors like white and beige dominating the space. The man appears to be in his 30s, possibly of European descent, with a cheerful and relaxed expression, suggesting a lighthearted mood. He is casually seated, holding an open book, which emphasizes a moment of leisure amidst work. The office is equipped with modern objects, including computer monitors, a laptop, and an adjustable desk lamp, reflecting a high-tech work environment. The overall mood of the image is bright, relaxed, and professional.'
+  field_media_image:
+    -
+      alt: 'A relaxed businessman enjoying a break in his bright, contemporary office environment.'
+      title: 'Andrea Piacquadio'
+      width: 5760
+      height: 3840
+      entity: 8e38110e-bdf8-4bee-bb68-5f7fecb85539

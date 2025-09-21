@@ -26,12 +26,19 @@ ddev drush si -y --account-pass=admin --site-name="2025 Demo"
 # Install a empty demo page with Canvas
 ddev drush recipe ../custom_recipes/new_canvas_page
 # Composer stuff
-ddev composer require 'drupal/ai:1.2.x-dev@dev' 'drupal/ai_agents:1.2.x-dev@dev' 'drupal/ai_provider_openai:1.2.x-dev@dev' 'drupal/ai_vdb_provider_milvus:1.1.x-dev@dev'
+ddev composer require 'drupal/ai:1.2.x-dev@dev' 'drupal/ai_agents:1.2.x-dev@dev' 'drupal/ai_provider_openai:1.2.x-dev@dev' 'drupal/ai_vdb_provider_milvus:1.1.x-dev@dev' 'drupal/pexels_ai:^1.0@alpha'
+ddev drush cr
 # Install the AI stuff.
 ddev drush recipe ../custom_recipes/canvas_ai_setup
+ddev drush cr
+# Add all images after to make sure they are indexed correctly.
+ddev drush recipe ../custom_recipes/media_images
 
 # Always flush the cache
 ddev drush cr
+
+# Index the AI stuff
+ddev sapi-i
 
 echo "Visit https://v2025demo.ddev.site/canvas/canvas_page/2/editor and login with user 'admin' and password 'admin' to see the demo page."
 echo "After login, you click "New" and "New Page" to create a new page from AI."

@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 2a2c1f19-9748-4fd6-9902-a60d2f089899
+  bundle: image
+  default_langcode: en
+  depends:
+    c22e3f97-b2ef-4fc9-9905-253dcb1786e7: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A woman in a green apron adjusts it, standing against a neutral background indoors.'
+  created:
+    -
+      value: 1758435496
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This image is a photograph featuring a woman in a green apron, standing against a neutral, soft beige background. She appears to be of Caucasian descent with light, wavy blonde hair and is focused on adjusting her apron. Her expression is calm and concentrated, suggesting a mood of preparation or contemplation. The background is plain and slightly textured, enhancing the simplicity and focus on the subject. The green apron is a prominent feature, contrasted against her white top. The overall ambiance of the image is serene and minimalistic, emphasizing the act of readiness. No other objects are present, keeping the focus solely on the woman and her actions.'
+  field_media_image:
+    -
+      alt: 'A woman in a green apron adjusts it, standing against a neutral background indoors.'
+      title: 'Mikhail Nilov'
+      width: 3665
+      height: 5498
+      entity: c22e3f97-b2ef-4fc9-9905-253dcb1786e7

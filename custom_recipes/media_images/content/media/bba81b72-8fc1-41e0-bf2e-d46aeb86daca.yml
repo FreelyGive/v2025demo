@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: bba81b72-8fc1-41e0-bf2e-d46aeb86daca
+  bundle: image
+  default_langcode: en
+  depends:
+    23a12e98-e09b-4616-831f-93f93ba9899d: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Close-up of stacked binders filled with documents for office or educational use.'
+  created:
+    -
+      value: 1758435773
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "The image is a photo showcasing a close-up of stacked binders filled with documents. The background is plain and dark, which emphasizes the binders' prominent presence. The binders themselves are green, contrasting with the stark white of the paper inside. No people are visible in the photo, keeping the focus solely on the organizational tools. The mood is professional and slightly chaotic, hinting at a busy office or educational setting. The binders are well-used, suggesting frequent reference or importance. The overall color scheme and composition give a sense of utility and function."
+  field_media_image:
+    -
+      alt: 'Close-up of stacked binders filled with documents for office or educational use.'
+      title: Pixabay
+      width: 2592
+      height: 1728
+      entity: 23a12e98-e09b-4616-831f-93f93ba9899d

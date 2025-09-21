@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: b7c25f76-9233-4ba0-967f-4a8253aef191
+  bundle: image
+  default_langcode: en
+  depends:
+    c9d5f601-56ef-4294-b505-28a8b4d4c1a4: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A father and son celebrating the vibrant Holi festival in India, surrounded by a cheerful crowd.'
+  created:
+    -
+      value: 1758435924
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "The image is a lively photo capturing the joyous celebration of Holi, with a father and son as the focal point amidst a colorful crowd. The background is awash with vibrant colors, predominantly shades of pink, purple, and orange, enhancing the festive atmosphere. The father, an adult male, looks joyful and is wearing a colorful turban, while his son, a young boy, appears ecstatic, perched on his father's arm with an exuberant expression. Both are covered in Holi colors, embodying the spirit of the festival. The crowd in the background is a diverse mix of people, all engaged in celebration, adding to the dynamic and cheerful mood of the scene. The architecture in the background hints at a traditional outdoor Indian setting, amplifying the cultural context. Overall, the mood of the image is one of pure joy and community, capturing the essence of Holi festivities."
+  field_media_image:
+    -
+      alt: 'A father and son celebrating the vibrant Holi festival in India, surrounded by a cheerful crowd.'
+      title: 'Yogendra  Singh'
+      width: 5184
+      height: 3456
+      entity: c9d5f601-56ef-4294-b505-28a8b4d4c1a4

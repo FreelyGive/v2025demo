@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 77923998-7e7e-4b4d-a81e-03a82f6367bc
+  bundle: image
+  default_langcode: en
+  depends:
+    1a7a90fa-28dd-469e-a8db-693f2fe27d31: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Colorful Holi festival in Nandgaon, India showcasing participants covered in vivid powder.'
+  created:
+    -
+      value: 1758435924
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This photo depicts a vibrant celebration at the Holi festival in Nandgaon, India, filled with participants covered in an array of vivid powders. The scene is dominated by warm hues of orange, yellow, and red, creating a lively and energetic atmosphere. Individuals of varying ages and genders appear cheerful and immersed in the festivities, with expressions of joy and excitement. The mood is exceedingly festive and exuberant, capturing the essence of Holi. Several participants are wearing traditional clothing, adding authenticity and cultural depth to the scene. The image is lively and dynamic, encapsulating the spirit of unity and celebration.'
+  field_media_image:
+    -
+      alt: 'Colorful Holi festival in Nandgaon, India showcasing participants covered in vivid powder.'
+      title: 'Ashwin Sharma'
+      width: 3999
+      height: 5000
+      entity: 1a7a90fa-28dd-469e-a8db-693f2fe27d31

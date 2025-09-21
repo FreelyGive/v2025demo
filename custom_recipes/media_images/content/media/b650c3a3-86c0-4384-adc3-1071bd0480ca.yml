@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: b650c3a3-86c0-4384-adc3-1071bd0480ca
+  bundle: image
+  default_langcode: en
+  depends:
+    4a1a86cf-7de0-47be-94b9-d2aa498bb572: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Confident young woman standing in a modern office atrium with digital symbols.'
+  created:
+    -
+      value: 1758433766
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo set in a modern office atrium dominated by sleek glass and metal architecture, with neutral and cool background colors. A confident young woman stands centrally; she appears to be in her 20s or 30s, with light skin and red hair, exuding a positive and assured demeanor. She is casually dressed, adding to the approachable and professional mood of the scene. Large digital symbols, specifically a blue “@” and “#,” are prominently displayed beside her, highlighting a tech-savvy environment. The image has a vibrant yet professional mood, suggestive of innovation and modernity. The reflective white flooring adds brightness and a sense of spaciousness to the setting.'
+  field_media_image:
+    -
+      alt: 'Confident young woman standing in a modern office atrium with digital symbols.'
+      title: ThisIsEngineering
+      width: 5262
+      height: 7889
+      entity: 4a1a86cf-7de0-47be-94b9-d2aa498bb572

@@ -7,8 +7,137 @@ install:
   - ai_agents
   - ai_provider_openai
   - canvas_ai
+  - search_api
+  - ai_search
+  - ai_automators
+  - ai_vdb_provider_milvus
+  - pexels_ai
+  - ai_agents_explorer
+  - ai_api_explorer
 config:
   import:
     ai_agents: '*'
     canvas_ai: '*'
     key: '*'
+    ai_automators: '*'
+  actions:
+    core.entity_form_display.media.image.default:
+      setComponents:
+        -
+          name: field_image_description
+          options:
+            type: string_textarea
+            weight: 2
+            region: content
+            settings:
+              rows: 5
+              placeholder: ''
+            third_party_settings: {  }
+    search_api.server.media_image_search:
+      setupVdbServerWithDefaults:
+        langcode: en
+        status: true
+        dependencies:
+          module:
+            - ai_search
+        id: media_image_search
+        name: 'Media Image Search'
+        description: ''
+        backend: search_api_ai_search
+        backend_config:
+          chat_model: openai__gpt-3.5-turbo
+          database: milvus
+          database_settings:
+            database_name: default
+            collection: media_image
+            metric: cosine_similarity
+          embedding_strategy: contextual_chunks
+          embedding_strategy_configuration:
+            chunk_size: '3000'
+            chunk_min_overlap: '100'
+            contextual_content_max_percentage: '30'
+          embedding_strategy_details: ''
+    search_api.index.media_image_index_rag:
+      setupVdbIndex:
+        langcode: en
+        status: true
+        dependencies:
+          config:
+            - field.storage.media.field_image_description
+            - field.storage.media.field_media_image
+            - search_api.server.media_image_search
+          module:
+            - file
+            - media
+        id: media_image_index_rag
+        name: 'Media Image Index RAG'
+        description: ''
+        read_only: false
+        field_settings:
+          field_image_description:
+            label: 'Image Description'
+            datasource_id: 'entity:media'
+            property_path: field_image_description
+            type: text
+            dependencies:
+              config:
+                - field.storage.media.field_image_description
+          height:
+            label: 'Image » Height'
+            datasource_id: 'entity:media'
+            property_path: 'field_media_image:height'
+            type: integer
+            dependencies:
+              config:
+                - field.storage.media.field_media_image
+          name:
+            label: Name
+            datasource_id: 'entity:media'
+            property_path: name
+            type: string
+            dependencies:
+              module:
+                - media
+          url:
+            label: 'Image » File » URI » Root-relative file URL'
+            datasource_id: 'entity:media'
+            property_path: 'field_media_image:entity:uri:url'
+            type: string
+            dependencies:
+              config:
+                - field.storage.media.field_media_image
+              module:
+                - file
+          width:
+            label: 'Image » Width'
+            datasource_id: 'entity:media'
+            property_path: 'field_media_image:width'
+            type: integer
+            dependencies:
+              config:
+                - field.storage.media.field_media_image
+        datasource_settings:
+          'entity:media':
+            bundles:
+              default: false
+              selected:
+                - image
+            languages:
+              default: true
+              selected: {  }
+        processor_settings:
+          add_url: {  }
+          aggregated_field: {  }
+          custom_value: {  }
+          entity_type: {  }
+          language_with_fallback: {  }
+          rendered_item: {  }
+        tracker_settings:
+          default:
+            indexing_order: fifo
+        options:
+          cron_limit: 5
+          delete_on_fail: true
+          index_directly: true
+          track_changes_in_references: true
+        server: media_image_search

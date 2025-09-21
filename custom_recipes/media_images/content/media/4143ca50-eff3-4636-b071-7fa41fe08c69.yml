@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 4143ca50-eff3-4636-b071-7fa41fe08c69
+  bundle: image
+  default_langcode: en
+  depends:
+    8d05f344-7ab8-4ee4-b157-d1e95e4ea05a: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Young professional woman in business attire holding a digital tablet and stylus.'
+  created:
+    -
+      value: 1758433766
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo featuring a young professional woman, likely in her 20s or 30s, with a confident expression. She has curly hair and wears glasses, exuding a modern and sophisticated vibe. Dressed in a dark blazer and a white blouse, she holds a digital tablet in one hand and a stylus in the other, indicating her readiness for tech-savvy business activities. The background is simple and neutral, ensuring attention remains on the subject. The overall color palette is a mix of neutral and earthy tones, contributing to a professional yet approachable atmosphere. The mood of the image is focused and poised, reflecting ambition and confidence. The presence of the tablet and stylus emphasizes a connection to digital technology and professionalism.'
+  field_media_image:
+    -
+      alt: 'Young professional woman in business attire holding a digital tablet and stylus.'
+      title: 'wen petit'
+      width: 4284
+      height: 5712
+      entity: 8d05f344-7ab8-4ee4-b157-d1e95e4ea05a

@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: bab5e292-8e23-4f63-b43c-85bfb658ca96
+  bundle: image
+  default_langcode: en
+  depends:
+    20a9bc76-40c6-485a-9edb-e20471d31ddb: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A stylish workspace featuring a laptop, plant, and smartphone on a desk.'
+  created:
+    -
+      value: 1758434018
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photograph featuring a sleek, modern workspace with a minimalist aesthetic. The background showcases soft, neutral colors with sunlight filtering through vertical blinds, exuding a calm and inviting atmosphere. Dominating the scene is a laptop with a vibrant screen displaying a pineapple image, contributing a pop of color. A lush green plant in a red pot adds a touch of nature and freshness to the desk. Nearby, a smartphone and a pair of glasses rest on the polished surface, emphasizing functionality and style. The mood is professional yet relaxed, perfect for creative or productive work. There are no people present in the scene.'
+  field_media_image:
+    -
+      alt: 'A stylish workspace featuring a laptop, plant, and smartphone on a desk.'
+      title: 'Lisa from Pexels'
+      width: 6000
+      height: 4000
+      entity: 20a9bc76-40c6-485a-9edb-e20471d31ddb

@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: d1afa2e6-53b2-4500-aefa-cb2e0e27a893
+  bundle: image
+  default_langcode: en
+  depends:
+    5c8c83de-7ba6-4a9f-a47f-98e6b44bddb7: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Happy black female in casual clothes with shopping bag demonstrating product squatting among grocery shelves while choosing goods in supermarket'
+  created:
+    -
+      value: 1758433901
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a vibrant photo set in a grocery store aisle filled with colorful snack packages. Dominant colors are bright yellows, reds, and blues from the various product packaging. A happy black female, possibly in her 20s or 30s, is squatting between the shelves, exuding joy and enthusiasm. She wears casual attire and holds an orange shopping basket, clearly engaged in selecting goods. Her expression is cheerful, radiating a positive, carefree mood. The background is densely packed with an array of snacks and grocery items, creating a lively and bustling atmosphere. The focus is on her enjoyment and the colorful assortment surrounding her.'
+  field_media_image:
+    -
+      alt: 'Happy black female in casual clothes with shopping bag demonstrating product squatting among grocery shelves while choosing goods in supermarket'
+      title: 'RF._.studio _'
+      width: 3657
+      height: 2612
+      entity: 5c8c83de-7ba6-4a9f-a47f-98e6b44bddb7

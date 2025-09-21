@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 7544e262-0623-4b72-b4a5-9ee2cd90985c
+  bundle: image
+  default_langcode: en
+  depends:
+    5909bb21-99bf-43d8-b8a0-f7a031a1eed3: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Spacious lounge with modern decor and large windows showcasing a snowy Ottawa view.'
+  created:
+    -
+      value: 1758433668
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo capturing a spacious lounge area with a sleek, modern decor. The dominant colors are neutral grays and browns with accent pieces in deep red, providing a warm contrast to the snowy landscape visible through large floor-to-ceiling windows. The scene showcases several people seated on modern furniture, engaged in relaxed conversation or enjoying the view outside. The individuals vary in age and appear to be of diverse backgrounds, creating an inclusive and inviting atmosphere. The lounge features contemporary sofas and chairs arranged around small round tables, enhancing the sense of coziness amidst the expansive space. The mood is tranquil and contemplative, with natural light pouring in, highlighting the modern architectural elements. The snowy view of Ottawa outside the window adds a serene, picturesque backdrop to the inviting interior space.'
+  field_media_image:
+    -
+      alt: 'Spacious lounge with modern decor and large windows showcasing a snowy Ottawa view.'
+      title: 'Jane  T D.'
+      width: 5041
+      height: 3361
+      entity: 5909bb21-99bf-43d8-b8a0-f7a031a1eed3

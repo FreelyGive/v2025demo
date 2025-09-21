@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 607443cd-3a29-4cbf-be41-59d496c9f4b0
+  bundle: image
+  default_langcode: en
+  depends:
+    b1b601b4-f571-445e-8f80-860bc2edfe3d: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A business team reviewing charts and graphs on documents, emphasizing data analysis and teamwork.'
+  created:
+    -
+      value: 1758435773
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photograph featuring a group of business professionals engaged in reviewing documents prominently displaying charts and graphs. The background is a muted, neutral color, likely suggesting an office environment, with a reflective black surface at the center of the scene. The main colors in the scene are the stark whites of the documents and the blacks and grays in the dressed attire. There are several hands visible, belonging to individuals of varying skin tones, suggesting a diverse team. The visible figures appear to be wearing business suits, indicating a professional setting. The mood of the image conveys concentration and teamwork, with hands pointing at various data points on the documents. Pie charts and bar graphs on the papers suggest a focus on data analysis and decision-making. Overall, the image captures a moment of collaborative strategy and analysis.'
+  field_media_image:
+    -
+      alt: 'A business team reviewing charts and graphs on documents, emphasizing data analysis and teamwork.'
+      title: Pixabay
+      width: 1784
+      height: 2304
+      entity: b1b601b4-f571-445e-8f80-860bc2edfe3d

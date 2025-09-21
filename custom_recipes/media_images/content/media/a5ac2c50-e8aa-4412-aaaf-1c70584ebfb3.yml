@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: a5ac2c50-e8aa-4412-aaaf-1c70584ebfb3
+  bundle: image
+  default_langcode: en
+  depends:
+    c3f86b1e-f8a6-49f7-be07-e6d4e53603db: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A minimalist outdoor workstation with laptop, coffee, and tablet on a rustic table.'
+  created:
+    -
+      value: 1758434018
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photograph depicting a minimalist outdoor workstation set atop a rustic wooden table. The dominant colors are natural browns from the table and deck, with muted silver and black from the laptop. The background is comprised of warm, reddish-brown wooden decking, suggesting an inviting outdoor setting. There are no people visible in the image, emphasizing solitude and focus. Key objects include an open laptop with a blank screen, a steaming cup of coffee in a white cup on a saucer, and a slim tablet accompanied by a stylus. A small potted plant adds a touch of greenery and life to the scene. The mood is serene and productive, inviting calm concentration in a simple outdoor environment.'
+  field_media_image:
+    -
+      alt: 'A minimalist outdoor workstation with laptop, coffee, and tablet on a rustic table.'
+      title: Pixabay
+      width: 5168
+      height: 3445
+      entity: c3f86b1e-f8a6-49f7-be07-e6d4e53603db

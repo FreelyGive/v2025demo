@@ -1,0 +1,24 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 28a57e12-a260-4e05-a129-143cbecaf20a
+  default_langcode: en
+default:
+  filename:
+    -
+      value: pexels-photo-187041.jpeg
+  uri:
+    -
+      value: 'public://2025-09/pexels-photo-187041.jpeg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 1098630
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1758435626

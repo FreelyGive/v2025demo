@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 94fa07de-c2e2-4b42-a446-be47c42944b2
+  bundle: image
+  default_langcode: en
+  depends:
+    95ea7140-ec04-4dbc-847e-6a07049f56c1: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Wooden desk with documents, laptop, and coffee cup creating a modern office atmosphere.'
+  created:
+    -
+      value: 1758435773
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo showcasing a modern office setup with a light wooden desk as the background. Prominent colors include the natural beige tones of the wood, along with the vibrant reds, blues, and yellows of the bar graphs on the documents. The scene features a silver laptop partially visible on the right side, hinting at a sleek, professional aesthetic. A white paper cup with coffee on the left adds a touch of casual productivity. There are no people in the image, emphasizing a calm, focused, and organized work environment. The mood is modern and efficient, inviting a sense of productivity and clarity. The documents are crucial, displaying key data visualizations aligning with the atmosphere of a contemporary office.'
+  field_media_image:
+    -
+      alt: 'Wooden desk with documents, laptop, and coffee cup creating a modern office atmosphere.'
+      title: Lukas
+      width: 6144
+      height: 4069
+      entity: 95ea7140-ec04-4dbc-847e-6a07049f56c1

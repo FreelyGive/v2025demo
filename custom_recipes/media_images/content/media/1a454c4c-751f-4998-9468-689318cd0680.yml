@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 1a454c4c-751f-4998-9468-689318cd0680
+  bundle: image
+  default_langcode: en
+  depends:
+    5975632e-1e8b-4623-9249-199019be9e74: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A hand points to colorful business charts and graphs on a paper sheet on a wooden desk.'
+  created:
+    -
+      value: 1758435626
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo showing a hand pointing to colorful business charts on a paper sheet placed on a wooden desk. The background features natural, light brown wood, adding a warm and organic feel to the scene. The charts on the paper use vibrant blues, reds, yellows, and oranges, creating a lively and dynamic contrast against the neutral desk. The hand, which appears to be adult and Caucasian, suggests a focused and analytical mood. The combination of colorful data visualization and the natural wooden texture provides a balanced and engaging composition. The image conveys themes of productivity and business analysis, with the hand and charts as central objects.'
+  field_media_image:
+    -
+      alt: 'A hand points to colorful business charts and graphs on a paper sheet on a wooden desk.'
+      title: Lukas
+      width: 6144
+      height: 4069
+      entity: 5975632e-1e8b-4623-9249-199019be9e74

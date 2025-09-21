@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: cb46e54e-9719-4e9d-8414-7360e7439ad4
+  bundle: image
+  default_langcode: en
+  depends:
+    8dad6a95-3fcd-4d58-af9d-fe65e0f9d294: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Open-plan office with modern decor and natural lighting, ideal for productivity.'
+  created:
+    -
+      value: 1758433668
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This image is a photo of an open-plan office with a modern and natural aesthetic. The background features muted colors like white and light gray, which complement the natural browns of wooden desks. The room is filled with natural lighting streaming through large windows, enhancing the fresh and airy atmosphere. A few green plants add a touch of nature and liveliness to the space. In the scene, there are desks with computers and various office supplies, indicating a work environment. A person is sitting at one of the desks, focusing on their task, which reinforces a mood of productivity and concentration. The overall atmosphere feels calm and efficient, suitable for creative work.'
+  field_media_image:
+    -
+      alt: 'Open-plan office with modern decor and natural lighting, ideal for productivity.'
+      title: 'Marc Mueller'
+      width: 6000
+      height: 3368
+      entity: 8dad6a95-3fcd-4d58-af9d-fe65e0f9d294

@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: d163f89c-b95c-451c-aa09-8b494d07b5ae
+  bundle: image
+  default_langcode: en
+  depends:
+    0edd224f-75a2-4d41-9b39-b02af0a411b7: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Close-up image of a business contract and pen, signed and ready for agreement.'
+  created:
+    -
+      value: 1758435773
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo showcasing a close-up view of a business contract on a table. The background is mostly white, focusing on the text of the contract. A sleek black pen with a gold tip is placed diagonally on the paper, emphasizing the formal and professional aspect of the scene. The contract appears to be signed, adding a sense of completion and readiness for agreement. The mood is serious and businesslike, suggesting an environment of professional commitment. The absence of people directs all attention to the document and pen, which are the crucial elements.'
+  field_media_image:
+    -
+      alt: 'Close-up image of a business contract and pen, signed and ready for agreement.'
+      title: Pixabay
+      width: 4608
+      height: 3456
+      entity: 0edd224f-75a2-4d41-9b39-b02af0a411b7

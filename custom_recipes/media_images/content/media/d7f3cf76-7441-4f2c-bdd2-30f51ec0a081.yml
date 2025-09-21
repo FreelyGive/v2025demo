@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: d7f3cf76-7441-4f2c-bdd2-30f51ec0a081
+  bundle: image
+  default_langcode: en
+  depends:
+    00875df3-4dd3-4f8d-826a-2db1a8d11739: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Young woman in roller skates sits in a colorful room with neon lights, creating a trendy atmosphere.'
+  created:
+    -
+      value: 1758435496
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo featuring a young woman sitting on a plush chair in a vibrant and trendy room. The background is alive with colorful neon lights, prominently in pink and orange tones, casting a warm glow. The woman, likely in her 20s, exudes a confident and relaxed vibe, with a cheerful expression. She wears a bright pink outfit and roller skates, which add a playful element to the scene. The room is decorated with a bold patterned rug and leafy green plant, enhancing the lively atmosphere. A small table holds items like a pineapple and a red bottle, adding to the trendy, tropical feel. The overall mood is upbeat and stylish, capturing a contemporary aesthetic.'
+  field_media_image:
+    -
+      alt: 'Young woman in roller skates sits in a colorful room with neon lights, creating a trendy atmosphere.'
+      title: 'RDNE Stock project'
+      width: 4365
+      height: 6547
+      entity: 00875df3-4dd3-4f8d-826a-2db1a8d11739

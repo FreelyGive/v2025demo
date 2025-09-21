@@ -1,0 +1,24 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 87c6629c-2d45-477d-9ff9-e5d83946d42b
+  default_langcode: en
+default:
+  filename:
+    -
+      value: document-agreement-documents-sign-48148.jpeg
+  uri:
+    -
+      value: 'public://2025-09/document-agreement-documents-sign-48148.jpeg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 227183
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1758435773

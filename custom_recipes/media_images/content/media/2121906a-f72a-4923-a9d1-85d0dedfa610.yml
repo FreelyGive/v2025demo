@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 2121906a-f72a-4923-a9d1-85d0dedfa610
+  bundle: image
+  default_langcode: en
+  depends:
+    e1869f55-e34d-4406-9ebe-889ac8fa983a: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A grandmother and grandson sharing a cozy reading moment on a sofa indoors.'
+  created:
+    -
+      value: 1758435496
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a warm, inviting photo depicting a tender moment between a grandmother and her grandson indoors. The background is soft, featuring neutral beige and cream tones from the sofa, contributing to the cozy atmosphere. The grandmother, an older woman with light skin, exudes warmth and care as she sits closely with her grandson, a young boy with darker skin and curly hair, suggesting a diverse family dynamic. Both appear relaxed and focused, engaged in sharing a story, which enhances the intimate, peaceful mood. The grandson is holding a toy car and leaning in with curiosity, while the grandmother is attentively showing a picture book. This scene captures the essence of familial love and bonding over shared activities.'
+  field_media_image:
+    -
+      alt: 'A grandmother and grandson sharing a cozy reading moment on a sofa indoors.'
+      title: 'Mikhail Nilov'
+      width: 6000
+      height: 4000
+      entity: e1869f55-e34d-4406-9ebe-889ac8fa983a

@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: b731db75-8c64-4c25-b7d6-c5989748617b
+  bundle: image
+  default_langcode: en
+  depends:
+    c8cb0840-a46e-4a63-9b19-a95a63e87baf: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A clean, contemporary workspace featuring a desktop with analytics on the screen and plants for a fresh look.'
+  created:
+    -
+      value: 1758433668
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photograph of a clean, contemporary workspace featuring a large desktop computer displaying an analytics dashboard with a blue line graph. Dominating the background are neutral colors—white walls and a white desk that create a bright, fresh ambiance. There are no people present, focusing entirely on the workspace setup. The mood is professional and calm, encouraging focus and productivity. Key objects include two potted plants adding a touch of greenery, a stack of books, a smartphone, and a coffee cup, all contributing to a modern and organized environment. This setup suggests a blend of technology and nature, reflecting a balanced and efficient workspace.'
+  field_media_image:
+    -
+      alt: 'A clean, contemporary workspace featuring a desktop with analytics on the screen and plants for a fresh look.'
+      title: Serpstat
+      width: 5664
+      height: 3778
+      entity: c8cb0840-a46e-4a63-9b19-a95a63e87baf

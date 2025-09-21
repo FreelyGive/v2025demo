@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 121524a4-d738-4eed-aac9-0e1e16fc875d
+  bundle: image
+  default_langcode: en
+  depends:
+    af7c9bc4-6586-4aa1-bbad-963ff3d19eac: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Smiling children engaged in a group learning activity with a laptop in a classroom setting.'
+  created:
+    -
+      value: 1758434018
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This is a photo depicting a lively classroom scene filled with warm, earthy tones dominated by shades of brown and beige. The photograph captures a group of children, possibly of Southeast Asian descent, gathered around a laptop. The children, both boys and girls who seem to be in the age range of 8-10 years, are smiling and appear to be engaged and enthusiastic. Their expressions suggest curiosity and happiness, reflecting a joyful and collaborative learning environment. The presence of a laptop on a wooden desk indicates a focus on technology-enhanced learning. The background includes more children and desks, adding to the busy classroom atmosphere. Overall, the image conveys a positive, educational mood.'
+  field_media_image:
+    -
+      alt: 'Smiling children engaged in a group learning activity with a laptop in a classroom setting.'
+      title: 'Agung Pandit Wiguna'
+      width: 5364
+      height: 3994
+      entity: af7c9bc4-6586-4aa1-bbad-963ff3d19eac

@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 87509012-1c32-4324-b561-ecddcb133563
+  bundle: image
+  default_langcode: en
+  depends:
+    6a0022bd-3dc9-4df4-bf27-717e0b61921f: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A man playfully interacts with a woman at a reception desk in a lively and modern office setting.'
+  created:
+    -
+      value: 1758433901
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo capturing a lively and modern office setting, characterized by warm, natural lighting and a mix of neutral and soft colors like beige and peach. The scene features a man with short hair and a beard, smiling and playfully interacting with a woman at a reception desk. The woman, seated, has long hair and is smiling while talking on the phone, reflecting a relaxed and cheerful mood. The office environment is enhanced by contemporary decor, including a computer, paperwork, and green plants adding a touch of nature to the scene. The informal and friendly atmosphere suggests a welcoming workplace. The red emergency exit sign on the wall stands out as a bold color contrast. The overall mood is upbeat and collaborative, emphasizing a sense of camaraderie.'
+  field_media_image:
+    -
+      alt: 'A man playfully interacts with a woman at a reception desk in a lively and modern office setting.'
+      title: 'Helena Lopes'
+      width: 5472
+      height: 3648
+      entity: 6a0022bd-3dc9-4df4-bf27-717e0b61921f

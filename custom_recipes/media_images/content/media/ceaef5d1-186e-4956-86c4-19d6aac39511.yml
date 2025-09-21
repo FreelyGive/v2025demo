@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: ceaef5d1-186e-4956-86c4-19d6aac39511
+  bundle: image
+  default_langcode: en
+  depends:
+    42ba3c6d-73d2-4b06-92b9-69c068a8a6f8: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Overhead view of a MacBook laptop on a dark desk, showcasing modern technology and minimalism.'
+  created:
+    -
+      value: 1758434018
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "The image is a photo featuring an overhead view of a MacBook laptop placed on a dark desk. The primary colors are the sleek silver of the MacBook and the deep black of the desk surface, emphasizing a minimalist aesthetic. No people or additional objects are present, ensuring full focus on the laptop. The scene conveys a sense of modernity and simplicity, highlighting the advanced technology of the device. The composition's clean lines and stark contrast create a professional and organized mood. The overall feeling is one of clarity and focus, suitable for a tech-forward environment."
+  field_media_image:
+    -
+      alt: 'Overhead view of a MacBook laptop on a dark desk, showcasing modern technology and minimalism.'
+      title: 'Nao Triponez'
+      width: 6016
+      height: 4016
+      entity: 42ba3c6d-73d2-4b06-92b9-69c068a8a6f8

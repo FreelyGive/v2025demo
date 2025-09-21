@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 048981df-dc1d-4abb-abff-f52aafe2b888
+  bundle: image
+  default_langcode: en
+  depends:
+    5dc9a42e-d8da-4e0e-8515-77e0bfdbd097: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A young man sitting outdoors in Leiden, Netherlands, working on a laptop.'
+  created:
+    -
+      value: 1758433766
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This is a photo of a young man sitting outdoors, likely in Leiden, Netherlands. The background is a mix of muted browns from wooden blinds and soft, blurred greenery, with hints of blue tones suggesting a serene setting. The main colors in the image are the blue of the man’s shirt and jeans, contrasted with the natural wood and green surroundings. The young man, who appears to be in his 20s, has light hair and is focused on working on his laptop, exuding a sense of concentration and productivity. His facial expression is relaxed yet attentive, conveying a studious and calm mood. The laptop is a prominent object in the image, symbolizing technology and work in an outdoor environment. The overall mood of the image is peaceful and studious, blending the tranquility of nature with the focus of remote work.'
+  field_media_image:
+    -
+      alt: 'A young man sitting outdoors in Leiden, Netherlands, working on a laptop.'
+      title: 'Marta Klement'
+      width: 6016
+      height: 4016
+      entity: 5dc9a42e-d8da-4e0e-8515-77e0bfdbd097

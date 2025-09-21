@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: d1877171-0327-40a1-8f2c-9f9204857b21
+  bundle: image
+  default_langcode: en
+  depends:
+    f179a8da-8eab-4620-b3d8-29ec36be651f: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A cheerful woman wearing a hijab poses happily on a grassy hilltop outdoors.'
+  created:
+    -
+      value: 1758433901
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a vibrant photograph featuring a cheerful woman wearing a hijab, posing happily on a grassy hilltop. The background colors are predominantly green from the lush grass and hills, with a slightly overcast sky adding softer hues. The woman appears to be of young to middle age, exuding happiness and positivity with a bright smile. Her attire includes a black hijab and a stylish outfit with a monochrome pattern, complementing the natural setting. The overall mood of the image is joyful and uplifting. The expansive outdoor backdrop enhances the sense of freedom and contentment.'
+  field_media_image:
+    -
+      alt: 'A cheerful woman wearing a hijab poses happily on a grassy hilltop outdoors.'
+      title: 'Padli Pradana'
+      width: 3456
+      height: 5184
+      entity: f179a8da-8eab-4620-b3d8-29ec36be651f

@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 5290584f-170c-4786-98ae-4397c75547fb
+  bundle: image
+  default_langcode: en
+  depends:
+    73e9e97c-465b-447d-895b-873d055e5de2: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Urban street fashion scene with a model posing amidst vibrant city life.'
+  created:
+    -
+      value: 1758435924
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This is a vibrant photo capturing an urban street fashion scene. The background features rich red and deep gray colors, with an overlay of red lanterns hanging from above, contributing to the lively city atmosphere. The center of attention is a young adult male model with a confident expression, exuding a composed and stylish mood. He is wearing a bold, striped shirt with orange and black patterns that stand out against the bustling city backdrop. Around him, people are casually going about their day, enhancing the authenticity of city life. The mood is dynamic and vibrant, reflecting the energy and diversity of urban fashion culture. Large buildings loom in the background, adding depth and a sense of scale to the image.'
+  field_media_image:
+    -
+      alt: 'Urban street fashion scene with a model posing amidst vibrant city life.'
+      title: 'Daniel Lai'
+      width: 3744
+      height: 5616
+      entity: 73e9e97c-465b-447d-895b-873d055e5de2

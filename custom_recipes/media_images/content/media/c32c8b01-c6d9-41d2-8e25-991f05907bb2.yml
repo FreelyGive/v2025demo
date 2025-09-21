@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: c32c8b01-c6d9-41d2-8e25-991f05907bb2
+  bundle: image
+  default_langcode: en
+  depends:
+    648e88b2-e6a3-43a1-a984-2b19d40f660a: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: "Teen girl in a cozy, stylish bedroom with neon 'Never Stop Dreaming' sign."
+  created:
+    -
+      value: 1758435496
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This image is a vibrant photo featuring a teenage girl in a stylish, cozy bedroom setting. The background is predominantly warm pink with a glowing neon sign that reads "Never Stop Dreaming." The girl appears to be a teenager, relaxed and thoughtful, with a joyful and contemplative expression, sitting comfortably on a plush, pastel-themed bed. Her outfit is bright, complementing the playful atmosphere of the room. The room features modern decor with soft lighting from round lamps and a whimsical variety of pillows and blankets. The overall mood is dreamy and inspirational, emphasizing a sense of youthful optimism. Prominent elements include the neon sign and the eclectic assortment of textiles and decor.'
+  field_media_image:
+    -
+      alt: "Teen girl in a cozy, stylish bedroom with neon 'Never Stop Dreaming' sign."
+      title: 'RDNE Stock project'
+      width: 4271
+      height: 6406
+      entity: 648e88b2-e6a3-43a1-a984-2b19d40f660a

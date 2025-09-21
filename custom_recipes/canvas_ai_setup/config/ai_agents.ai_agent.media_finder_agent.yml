@@ -1,0 +1,41 @@
+langcode: en
+status: true
+dependencies: {  }
+id: media_finder_agent
+label: 'Media Finder Agent'
+description: 'This agent/tool can look into a database of different agents and find the best possible image to use for different use cases. It takes and input that is one sentence per image you need to find and gives you back a list of images with their filepath.'
+system_prompt: "You are a looping agent following the ReAct architecture that has the possibility to search in an image database and find the right image representing some issue for a component builder. This means that you might be asked questions like\r\n\r\n\"Find an image that should represent happiness and that is minimum 300 pixels wide and 200 pixel high\"\r\n\r\nor \r\n\r\n\"For a hero section I need an image on the right side of the image section that should be an young adult girl, preferably with a blue t-shirt.\"\r\n\r\nYou will have a RAG search tool that you can use, where you can do different searches until you find something good. On the 5th loop, please just provide the best images you could find.\r\n\r\nI want you to return the response as a YAML, with each of the findings having the filename as it is coming back from the RAG search tool and a rating of 1 to 10 how well it fits what we are looking for, where 1 means that it barely fits at all and 10 means a perfect fit. Make sure the response is sorted with the best rating first.\r\n\r\nExample output is\r\n```yaml\r\n-\r\n  filename: something/something.jpg\r\n  fit_rating: 8"
+secured_system_prompt: '[ai_agent:agent_instructions]'
+tools:
+  'ai_search:rag_search': true
+tool_settings:
+  'ai_search:rag_search':
+    return_directly: 0
+    use_artifacts: 0
+orchestration_agent: false
+triage_agent: false
+max_loops: 10
+default_information_tools: ''
+tool_usage_limits:
+  'ai_search:rag_search':
+    index:
+      action: force_value
+      hide_property: 1
+      values:
+        - media_image_index_rag
+    search_string:
+      action: ''
+      hide_property: 0
+      values: ''
+    amount:
+      action: force_value
+      hide_property: 1
+      values:
+        - '5'
+    min_score:
+      action: force_value
+      hide_property: 1
+      values:
+        - '0.2'
+exclude_users_role: false
+masquerade_roles: {  }

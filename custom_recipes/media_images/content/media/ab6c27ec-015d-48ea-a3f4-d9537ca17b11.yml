@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: ab6c27ec-015d-48ea-a3f4-d9537ca17b11
+  bundle: image
+  default_langcode: en
+  depends:
+    91227a8d-41ea-45eb-8826-6f7c76c7657b: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A vibrant library interior featuring multiple floors, artwork, and browsing visitors.'
+  created:
+    -
+      value: 1758435924
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "This image is a photograph of a vibrant library interior, showcasing a multi-level design with ornate iron railings and warm lighting. The primary colors are earth tones with amber columns, dark green railings, and books of varied hues lining the shelves. On the upper level walls, colorful artwork adorns the space, adding a creative flair. Visitors are present, with one reading a book and others browsing, conveying a serene and studious mood. The people appear diverse in age and attire, indicating a welcoming environment for all. The overall ambiance is both grand and inviting, highlighted by the elegance of its architectural details and the quiet bustle of its patrons. The image captures a harmonious blend of culture, art, and community within the library's walls."
+  field_media_image:
+    -
+      alt: 'A vibrant library interior featuring multiple floors, artwork, and browsing visitors.'
+      title: 'Luciana Sena'
+      width: 3024
+      height: 4032
+      entity: 91227a8d-41ea-45eb-8826-6f7c76c7657b

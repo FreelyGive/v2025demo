@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: f7e2b32a-46fc-4f1b-9cc2-58770beff30b
+  bundle: image
+  default_langcode: en
+  depends:
+    a6f7f890-6661-4940-b713-c2aade1a21dd: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Detailed view of financial trading graphs on a monitor, illustrating stock market trends.'
+  created:
+    -
+      value: 1758435626
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photograph of a computer monitor displaying financial trading graphs, emphasizing stock market trends. The background is predominantly dark, with vibrant lines in blue, yellow, and red depicting the fluctuating stock data. No people are present, keeping the focus on the dynamic movement of the graphs. The mood is analytical and intense, reflecting the fast-paced nature of financial trading. Important objects include the graph lines and numerical indicators on the sides, showcasing intricate details of market performance. The overall ambiance is technical and data-driven, appealing to those interested in finance and stock analysis.'
+  field_media_image:
+    -
+      alt: 'Detailed view of financial trading graphs on a monitor, illustrating stock market trends.'
+      title: energepic.com
+      width: 4608
+      height: 3456
+      entity: a6f7f890-6661-4940-b713-c2aade1a21dd

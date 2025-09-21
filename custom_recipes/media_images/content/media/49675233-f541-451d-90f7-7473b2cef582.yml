@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 49675233-f541-451d-90f7-7473b2cef582
+  bundle: image
+  default_langcode: en
+  depends:
+    fe612bdd-fa01-4f46-b511-6f10b59c4508: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Artistic portrait of a person in vibrant, traditional Vietnamese-inspired attire with ornate crown.'
+  created:
+    -
+      value: 1758435924
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is an artistic portrait featuring a person adorned in vibrant, traditional Vietnamese-inspired attire, complemented by an ornate crown. The background exudes deep red and rich purple hues, enhancing the dramatic and intense mood of the artwork. This artistic piece is characterized by its bold use of color and hyper-realistic details, resembling a highly stylized photo. The central figure appears to be a young adult with striking makeup that emphasizes their eyes, creating an enigmatic and regal expression. The crown is elaborate, embellished with pearls and intricate designs, drawing immediate attention. The mood of the image conveys a sense of mystery, elegance, and cultural richness. The overall composition is rich in symbolism, with the combination of colors and accessories suggesting both modern and traditional influences.'
+  field_media_image:
+    -
+      alt: 'Artistic portrait of a person in vibrant, traditional Vietnamese-inspired attire with ornate crown.'
+      title: 'Hạnh Nguyễn'
+      width: 3543
+      height: 4961
+      entity: fe612bdd-fa01-4f46-b511-6f10b59c4508

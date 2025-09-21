@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 2ad3183e-1380-48fb-928c-c4a65b35f63e
+  bundle: image
+  default_langcode: en
+  depends:
+    d86b20fe-d573-407f-a117-5f379f916ff1: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Two professional women discussing ideas on a whiteboard in a modern office setting.'
+  created:
+    -
+      value: 1758433668
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo depicting two professional women engaged in a discussion at a whiteboard, set in a modern office environment. The background features white and neutral tones, with large windows letting in natural light, creating a bright and open atmosphere. The women appear to be in their late 20s to early 30s, one with light hair and the other with dark hair, both wearing business attire. Their expressions are focused and engaged, indicating a collaborative and lively mood. The whiteboard they are using is central to the scene, covered with markers, suggesting brainstorming or planning. The overall mood is professional, energetic, and innovative. The room is furnished with modern office equipment, adding to the contemporary setting.'
+  field_media_image:
+    -
+      alt: 'Two professional women discussing ideas on a whiteboard in a modern office setting.'
+      title: 'Christina Morillo'
+      width: 6016
+      height: 4016
+      entity: d86b20fe-d573-407f-a117-5f379f916ff1

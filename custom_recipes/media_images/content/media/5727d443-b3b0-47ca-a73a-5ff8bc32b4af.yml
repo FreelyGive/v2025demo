@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 5727d443-b3b0-47ca-a73a-5ff8bc32b4af
+  bundle: image
+  default_langcode: en
+  depends:
+    cb869740-ce3b-43ce-af0c-39aaff42e67a: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A woman writes in a notebook at a café table with a coffee and smartphone nearby.'
+  created:
+    -
+      value: 1758433766
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo depicting a serene café scene. The background features soft, muted tones, creating a cozy and inviting atmosphere, with hints of warm wood and blurred seating areas. In the foreground is a woman of indiscernible age and ethnicity, focused and engaged in writing in her notebook, suggesting a moment of contemplation or creativity. She wears a light-colored top, and her posture conveys a relaxed yet purposeful mood. A cup of coffee sits nearby, adding to the ambiance of a casual café setting. A smartphone lies beside her notebook, hinting at a blend of analog and digital lifestyles. The overall mood of the image is tranquil and introspective, perfect for capturing moments of personal reflection or study.'
+  field_media_image:
+    -
+      alt: 'A woman writes in a notebook at a café table with a coffee and smartphone nearby.'
+      title: 'Tirachard Kumtanom'
+      width: 6016
+      height: 4016
+      entity: cb869740-ce3b-43ce-af0c-39aaff42e67a

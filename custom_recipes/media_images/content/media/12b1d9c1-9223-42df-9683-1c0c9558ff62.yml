@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 12b1d9c1-9223-42df-9683-1c0c9558ff62
+  bundle: image
+  default_langcode: en
+  depends:
+    fff55d85-de4c-423b-9186-119d5f2f3e2f: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Elegant woman celebrating her 20th birthday in a colorful dress with confetti and balloons.'
+  created:
+    -
+      value: 1758433901
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a vibrant photo featuring a woman celebrating her 20th birthday. The background is a soft gray, sprinkled with colorful confetti adding a festive atmosphere. She appears to be in her twenties, exuding joy and elegance, wearing a striking multi-colored dress with layers of turquoise, pink, and red. Silver balloon numbers "20" are prominently placed above her, highlighting the occasion. Her expression is cheerful and jubilant, perfectly capturing the celebratory mood. The colorful dress and confetti create a lively and vibrant scene, complementing the festive theme. Overall, the image conveys a sense of joy, celebration, and youthful exuberance.'
+  field_media_image:
+    -
+      alt: 'Elegant woman celebrating her 20th birthday in a colorful dress with confetti and balloons.'
+      title: 'Yasmine qasem'
+      width: 2627
+      height: 3155
+      entity: fff55d85-de4c-423b-9186-119d5f2f3e2f

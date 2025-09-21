@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: c285157d-deea-48fc-bcfd-327055218028
+  bundle: image
+  default_langcode: en
+  depends:
+    4757d78c-3205-44d9-8013-12943c93f0df: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A colorful stack of spiral-bound notebooks neatly placed on a wooden desk. Ideal for educational themes.'
+  created:
+    -
+      value: 1758435773
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo depicting a vibrant and neatly stacked array of spiral-bound notebooks on a wooden desk. The notebooks feature an assortment of covers in bright hues, including green, blue, orange, and purple, adding a lively touch to the scene. The spiral bindings are prominently white, enhancing the organized and tidy appearance. The smooth wooden desk provides a warm and neutral backdrop, allowing the colors of the notebooks to stand out. The overall mood of the image is organized and educational, evoking a sense of readiness and creativity. There are no people present in the image, which keeps the focus on the stationery. The composition successfully highlights the functional and appealing aspects of the notebooks.'
+  field_media_image:
+    -
+      alt: 'A colorful stack of spiral-bound notebooks neatly placed on a wooden desk. Ideal for educational themes.'
+      title: Pixabay
+      width: 4928
+      height: 3264
+      entity: 4757d78c-3205-44d9-8013-12943c93f0df

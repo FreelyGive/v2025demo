@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 840a75d6-e994-47f2-9ee5-a026f0a7026d
+  bundle: image
+  default_langcode: en
+  depends:
+    ed2bf3e4-c29a-4ec0-be44-d82a5de47f86: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Sleek office space featuring contemporary furniture and city skyline views, ideal for professionals.'
+  created:
+    -
+      value: 1758433668
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This is an image of a modern office space with a professional and sleek atmosphere. The dominant colors in the scene are shades of white and light gray, complemented by the warm tones of the wooden furniture. The office features large windows offering a stunning city skyline view, adding a dynamic backdrop to the room. The furniture is contemporary, with a minimalist desk, plush white chairs, and a uniquely designed shelving unit with soft, curved lines. The mood of the image is calm and sophisticated, ideal for a professional setting. There are no people present in the image, allowing focus on the interior design and architectural elements. Ambient lighting highlights the sleek lines and clean finishes of the space.'
+  field_media_image:
+    -
+      alt: 'Sleek office space featuring contemporary furniture and city skyline views, ideal for professionals.'
+      title: Pixabay
+      width: 5669
+      height: 3785
+      entity: ed2bf3e4-c29a-4ec0-be44-d82a5de47f86

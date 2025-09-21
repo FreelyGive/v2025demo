@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: e26c1ec7-8fec-4e67-aba9-1b2ad3497aba
+  bundle: image
+  default_langcode: en
+  depends:
+    2d367d1f-4716-44a5-bc54-aabd129238de: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Colleagues discussing data and strategy in an office meeting.'
+  created:
+    -
+      value: 1758435626
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This image is a photograph capturing a collaborative meeting scene in an office setting. The background features a light wooden table, adding a neutral and professional tone to the scene. There are multiple hands of diverse skin tones actively engaged, indicating a mix of ages and ethnicities, suggesting a diverse team. The hands are pointing and gesturing at various colorful charts and graphs, highlighting the analytical focus of the meeting. One of the individuals is holding a tablet, which implies a discussion on digital and data-driven strategies. A gray coffee mug is visible, adding a casual and approachable element to the professional atmosphere. The overall mood is focused and collaborative, emphasizing teamwork and strategic planning.'
+  field_media_image:
+    -
+      alt: 'Colleagues discussing data and strategy in an office meeting.'
+      title: fauxels
+      width: 6000
+      height: 3374
+      entity: 2d367d1f-4716-44a5-bc54-aabd129238de

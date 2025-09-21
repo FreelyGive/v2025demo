@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: eed6a592-1b35-465d-bdbb-386d207e3679
+  bundle: image
+  default_langcode: en
+  depends:
+    310f6f14-9b86-4147-afec-9709306dd685: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Joyful bald woman with tattoos relaxing in a bathroom, smiling brightly.'
+  created:
+    -
+      value: 1758433901
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This is a photo featuring a joyful bald woman with visible tattoos, relaxing in a bathroom while smiling brightly. The background is composed of soft, muted colors with light beige tiles and a soft glow coming from a window, adding warmth to the scene. The woman appears to be in her twenties or thirties, exuding a sense of happiness and confidence. Her expression is one of sheer delight and peace, enhancing the uplifting mood of the image. Visible tattoos on her legs add a touch of personal flair and uniqueness. The bathroom setting includes elements like a bathtub and toiletries, grounding the scene in a cozy, everyday context. The overall atmosphere is cheerful and serene, capturing a moment of personal contentment.'
+  field_media_image:
+    -
+      alt: 'Joyful bald woman with tattoos relaxing in a bathroom, smiling brightly.'
+      title: 'Caique Nascimento'
+      width: 5511
+      height: 3098
+      entity: 310f6f14-9b86-4147-afec-9709306dd685
