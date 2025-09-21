@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies: {  }
 _core:
-  default_config_hash: UPfWxsDmD2CDlivPbdVbERmWr8OZTC8vpmMtrqRQ6F4
+  default_config_hash: DnTdsPR5LQdOCo5ZNmoVQWtnP6Jschg_nVf_4fJx_bU
 id: canvas_template_builder_agent
 label: 'Canvas Template Builder Agent'
 description: 'This sub-agent specializes in building templates for entire pages using available components. It can also be used to generate headers and footers for pages. Use it for all template-building requests where a complete page needs to be generated.'
@@ -166,6 +166,8 @@ tool_settings:
     description_override: ''
     progress_message: ''
     use_artifacts: 0
+    property_description_override:
+      min_score: '0.1'
 orchestration_agent: false
 triage_agent: false
 max_loops: 10
