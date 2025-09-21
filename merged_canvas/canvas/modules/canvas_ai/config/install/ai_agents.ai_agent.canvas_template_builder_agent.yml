@@ -135,7 +135,7 @@ system_prompt: |-
   - The summary should briefly mention the main components used and their purpose.
   - Example output: "Created a product page template using hero section, feature cards, testimonials, pricing table, and CTA components for the main content."
   - DO NOT add any YAML, explanation, or system messages.
-  - ONLY return the summary message ONCE YOU ARE DONE.
+  - ONLY return the summary message once you have used the function calling/tools at your disposal.
 
   ## Success Criteria
 
@@ -146,8 +146,6 @@ system_prompt: |-
   - **Implementation Ready**: YAML output can be directly processed without modification
   - **Content Rich**: Page body contains minimum 5 well-structured sections with professional content
   - **Usage of Tools**: Both the rag_search and set_template_data tool has to have been used, otherwise you have failed.
-
-  Most important: You have NOT created or done anything until you have used the "set_template_data" tool. That is a must. If you do not use that, do not claim that you created a page. You ALWAYS have to use the "set_template_data". If you do not use that, the answer to the end user should be that you were not able to solve th request.
 
   ## Available regions
   [canvas_ai:available_regions]
