@@ -1,3 +1,5 @@
+_core:
+  default_config_hash: VosszK2ur_jp6QRnONC40hdOMGr5xsi97Bg39i89ztY
 component_context:
   block:
     enabled: 1
@@ -6,10 +8,10 @@ component_context:
         id: block.announce_block
         name: 'Announcements Feed'
         description: 'Announcements Feed'
-      block.help_block:
-        id: block.help_block
-        name: Help
-        description: Help
+      block.dashboard_site_status:
+        id: block.dashboard_site_status
+        name: 'Site Status'
+        description: 'Site Status'
       block.local_actions_block:
         id: block.local_actions_block
         name: 'Primary admin actions'
@@ -18,18 +20,38 @@ component_context:
         id: block.local_tasks_block
         name: Tabs
         description: Tabs
+      block.navigation_dashboard:
+        id: block.navigation_dashboard
+        name: 'Navigation Dashboard'
+        description: 'Navigation Dashboard'
+      block.navigation_link:
+        id: block.navigation_link
+        name: Link
+        description: Link
+      block.navigation_shortcuts:
+        id: block.navigation_shortcuts
+        name: 'Navigation Shortcuts'
+        description: 'Navigation Shortcuts'
+      block.navigation_user:
+        id: block.navigation_user
+        name: User
+        description: User
       block.page_title_block:
         id: block.page_title_block
         name: 'Page title'
         description: 'Page title'
-      block.search_form_block:
-        id: block.search_form_block
-        name: 'Search form'
-        description: 'Search form'
-      block.shortcuts:
-        id: block.shortcuts
-        name: Shortcuts
-        description: Shortcuts
+      block.project_browser_block.drupalorg_jsonapi:
+        id: block.project_browser_block.drupalorg_jsonapi
+        name: 'Contrib modules'
+        description: 'Contrib modules'
+      block.project_browser_block.recipes:
+        id: block.project_browser_block.recipes
+        name: Recipes
+        description: Recipes
+      block.project_browser_block.recommended:
+        id: block.project_browser_block.recommended
+        name: 'Recommended add-ons'
+        description: 'Recommended add-ons'
       block.system_branding_block:
         id: block.system_branding_block
         name: 'Site branding'
@@ -50,6 +72,10 @@ component_context:
         id: block.system_menu_block.admin
         name: Administration
         description: Administration
+      block.system_menu_block.content:
+        id: block.system_menu_block.content
+        name: Content
+        description: Content
       block.system_menu_block.footer:
         id: block.system_menu_block.footer
         name: Footer
@@ -58,10 +84,18 @@ component_context:
         id: block.system_menu_block.main
         name: 'Main navigation'
         description: 'Main navigation'
+      block.system_menu_block.navigation-user-links:
+        id: block.system_menu_block.navigation-user-links
+        name: 'Navigation user links'
+        description: 'Navigation user links'
       block.system_menu_block.tools:
         id: block.system_menu_block.tools
         name: Tools
         description: Tools
+      block.system_menu_block.top-tasks:
+        id: block.system_menu_block.top-tasks
+        name: 'Top tasks'
+        description: 'Top tasks'
       block.system_messages_block:
         id: block.system_messages_block
         name: Messages
@@ -74,22 +108,26 @@ component_context:
         id: block.user_login_block
         name: 'User login'
         description: 'User login'
-      block.views_block.comments_recent-block_1:
-        id: block.views_block.comments_recent-block_1
-        name: 'Recent comments'
-        description: 'Recent comments'
-      block.views_block.content_recent-block_1:
-        id: block.views_block.content_recent-block_1
+      block.views_block.canvas_pages-block_1:
+        id: block.views_block.canvas_pages-block_1
+        name: Pages
+        description: Pages
+      block.views_block.latest-latest:
+        id: block.views_block.latest-latest
+        name: Latest
+        description: Latest
+      block.views_block.publishing_content-block_drafts:
+        id: block.views_block.publishing_content-block_drafts
+        name: 'My drafts'
+        description: 'My drafts'
+      block.views_block.publishing_content-block_scheduled:
+        id: block.views_block.publishing_content-block_scheduled
+        name: Scheduled
+        description: Scheduled
+      block.views_block.recent_content-block_recent_content:
+        id: block.views_block.recent_content-block_recent_content
         name: 'Recent content'
         description: 'Recent content'
-      block.views_block.who_s_new-block_1:
-        id: block.views_block.who_s_new-block_1
-        name: "Who's new"
-        description: "Who's new"
-      block.views_block.who_s_online-who_s_online_block:
-        id: block.views_block.who_s_online-who_s_online_block
-        name: "Who's online"
-        description: "Who's online"
   sdc:
     enabled: 1
     data: |
@@ -110,15 +148,15 @@ component_context:
         group: Base
         props:
           label:
-            name: 'Link Text'
+            name: 'Link text'
             description: 'The text for the link.'
             type: string
-            default: 'New Release'
+            default: 'Badge text'
           url:
-            name: URL
+            name: Link
             description: 'The URL to link to. If provided, the badge will be rendered as a link.'
             type: string
-            default: 'https://www.drupal.org'
+            default: null
           style:
             name: Style
             description: 'Define badge style.'
@@ -131,14 +169,14 @@ component_context:
             name: Icon
             description: 'Select an Icon.'
             type: string
-            default: ph-newspaper-clipping
+            default: newspaper-clipping
             enum:
-              - ph-newspaper-clipping
-              - ph-alien
-              - ph-robot
-              - ph-rocket
+              - newspaper-clipping
+              - alien
+              - robot
+              - rocket
           icon_first:
-            name: 'Icon First'
+            name: 'Icon first?'
             description: 'Icon can display before or after label.'
             type: boolean
             default: true
@@ -153,25 +191,25 @@ component_context:
         group: Base
         props:
           text:
-            name: 'Blockquote text'
+            name: 'Quotation text'
             description: 'The blockquote text.'
             type: string
             default: '“To confine our attention to terrestrial matters would be to limit the human spirit.”'
           cite_name:
-            name: 'Cite name'
+            name: 'Citation name'
             description: 'The cite name.'
             type: string
             default: 'Isiah Julio'
           cite_text:
-            name: 'Cite text'
+            name: 'Citation text'
             description: 'The cite text.'
             type: string
             default: 'Engineer, Technical Services'
           cite_url:
-            name: 'Cite URL'
+            name: 'Citation link'
             description: 'The cite url.'
             type: string
-            default: 'No URL'
+            default: null
         slots: 'No slots'
       sdc.mercury.branding:
         id: sdc.mercury.branding
@@ -228,24 +266,24 @@ component_context:
             name: Icon
             description: 'Select an Icon.'
             type: string
-            default: ph-arrow-right
+            default: arrow-right
             enum:
-              - ph-arrow-right
-              - ph-arrow-left
-              - ph-carrot-right
-              - ph-carrot-left
-              - ph-download
-              - ph-user-plus
+              - arrow-right
+              - arrow-left
+              - caret-right
+              - caret-left
+              - download
+              - user-plus
           icon_first:
             name: 'Display Icon First'
             description: 'By default, the icon is displayed after the label. If you want to display the icon first, set this to true.'
             type: boolean
             default: false
           href:
-            name: href
+            name: Link
             description: 'The URL to link to. If provided, the button will be rendered as a link.'
             type: string
-            default: 'https://example.com'
+            default: null
         slots: 'No slots'
       sdc.mercury.card:
         id: sdc.mercury.card
@@ -268,7 +306,7 @@ component_context:
               - 3
               - 4
           url:
-            name: 'Add optional url'
+            name: Link
             description: 'No description available'
             type: string
             default: 'https://www.example.com'
@@ -375,10 +413,10 @@ component_context:
             type: string
             default: '<ul> <li>Enter rich text</li> <li>Facilisis dictumst letius in</li> <li>Diam mus est faucibus ornare ut consectetuer metus</li> </ul>'
           button_url:
-            name: 'Button URL'
+            name: Link
             description: 'CTA link the card'
             type: string
-            default: 'https://example.com'
+            default: null
           button_label:
             name: 'Button Label'
             description: 'CTA label for the card'
@@ -397,20 +435,20 @@ component_context:
         group: Components/Cards
         props:
           name:
-            name: "Person's name"
+            name: Name
             description: 'No description available'
             type: string
             default: 'Chloe Bennett'
           job_title:
-            name: Text
+            name: 'Job title'
             description: "The person's job title"
             type: string
             default: 'Operations Manager'
           url:
-            name: 'Add optional url'
+            name: Link
             description: 'No description available'
             type: string
-            default: 'https://example.com'
+            default: null
           media:
             name: 'Card Media'
             description: 'Media and Alt for the card.'
@@ -442,10 +480,10 @@ component_context:
               - 5
               - 6
           url:
-            name: 'Add optional url'
+            name: Link
             description: 'No description available'
             type: string
-            default: 'https://www.example.com'
+            default: null
           media:
             name: 'Media Image'
             description: 'Media image for the card.'
@@ -490,10 +528,10 @@ component_context:
               - 5
               - 6
           url:
-            name: 'Add optional url'
+            name: Link
             description: 'No description available'
             type: string
-            default: 'https://www.example.com'
+            default: null
           media:
             name: 'Card Media'
             description: 'Media and Alt for the card.'
@@ -543,20 +581,20 @@ component_context:
             type: string
             default: 'My career’s guidance was crucial in helping me understand the tech industry landscape and ultimately secure my role.'
           cite_name:
-            name: 'Cite name'
+            name: 'Citation name'
             description: 'The cite name.'
             type: string
             default: 'Isiah Julio'
           cite_text:
-            name: 'Cite text'
+            name: 'Citation text'
             description: 'The cite text.'
             type: string
             default: 'Engineer, Technical Services'
           cite_url:
-            name: 'Cite URL'
+            name: 'Citation link'
             description: 'The cite url.'
             type: string
-            default: 'No URL'
+            default: null
           align:
             name: 'Text alignment'
             description: 'Set alignment of text.'
@@ -607,7 +645,7 @@ component_context:
       sdc.mercury.cta:
         id: sdc.mercury.cta
         name: CTA
-        description: 'This component creates a Call to Action (CTA) section, designed to prompt users to perform a specific action. It combines a heading and descriptive text, which can be aligned as needed, over an optional background image. Use this component to drive user engagement towards key conversions or important navigation paths.'
+        description: 'This component creates a Call to Action (CTA) section, designed to prompt users to perform a specific action. It combines a heading and descriptive text, which can be aligned as needed, over an optional background image. Use this component to drive user engagement towards key conversions or important navigation paths. This works together with one or more button component(s) in the buttons slots and possibly a text slot.'
         group: Layouts/CTA
         props:
           heading_text:
@@ -684,7 +722,7 @@ component_context:
       sdc.mercury.grid-container:
         id: sdc.mercury.grid-container
         name: 'Grid Container'
-        description: 'This component is a flexible layout tool for organizing content into a multi-column grid. It offers a wide range of predefined column structures, along with optional header and footer regions for comprehensive sectioning. Use this component to build the primary structure of a page or to group related content into visually distinct blocks.'
+        description: 'This component is a flexible layout tool for organizing content into a multi-column grid. It offers a wide range of predefined column structures, along with optional header and footer regions for comprehensive sectioning. Use this component to build the primary structure of a page or to group related content into visually distinct blocks. Unless specifically wanting header and footer, the content should always go into the container_region slot.'
         group: Layouts
         props:
           columns:
@@ -806,10 +844,10 @@ component_context:
               - center
               - right
           url:
-            name: 'Add optional url'
+            name: Link
             description: 'The url for the heading.'
             type: string
-            default: 'No URL'
+            default: null
         slots: 'No slots'
       sdc.mercury.hero-1:
         id: sdc.mercury.hero-1
@@ -964,15 +1002,15 @@ component_context:
           date:
             name: 'Published Date'
             description: 'No description available'
-            type: string
-            default: '2026-02-12'
+            type: integer
+            default: 1770856866
           author:
             name: Author
             description: 'No description available'
             type: string
             default: 'John Smith'
           author_url:
-            name: 'Author Link'
+            name: 'Author link'
             description: 'No description available'
             type: string
             default: ''
@@ -1130,7 +1168,7 @@ component_context:
         group: Components
         props:
           text:
-            name: 'Rich Text'
+            name: 'Rich text'
             description: 'The rich text.'
             type: string
             default: '<h3>Welcome to Our Services</h3> <p> We offer a range of solutions to help your business grow. Learn more about our  <a href="/consulting">consulting services</a> or explore our  <a href="/case-studies">case studies</a> to see results in action. </p> <ul> <li> Custom strategy planning with a  <a href="/team">dedicated team</a> </li> <li> Hands-on workshops to guide your implementation </li> <li> Ongoing support and optimization recommendations </li> </ul> <p> Ready to get started? <a href="/contact">Contact us</a> today for a free consultation. </p>'
@@ -1156,7 +1194,7 @@ component_context:
             name: 'Phosphor icon slug'
             description: 'No description available'
             type: string
-            default: ph-rocket
+            default: rocket
           icon_position:
             name: 'Icon left/right'
             description: 'No description available'
@@ -1166,10 +1204,10 @@ component_context:
               - left
               - right
           url:
-            name: 'Link URL'
+            name: Link
             description: 'No description available'
             type: string
-            default: 'https://drupal.org'
+            default: null
         slots: 'No slots'
       sdc.mercury.tile-logo:
         id: sdc.mercury.tile-logo
@@ -1182,7 +1220,7 @@ component_context:
             description: 'No description available'
             type: object
             default:
-              src: assets/byte-light.png
+              src: assets/dark.png
               alt: 'Placeholder brand logo'
           color_mode:
             name: 'Color Mode'
@@ -1201,3 +1239,41 @@ component_context:
         group: Components/Newsletter
         props: 'No props'
         slots: 'No slots'
+      sdc.navigation.title:
+        id: sdc.navigation.title
+        name: Title
+        description: Title
+        group: ''
+        props:
+          modifiers:
+            name: 'Modifier classes.'
+            description: 'Title modifiers. https://en.bem.info/methodology/css/#modifiers'
+            type: array
+            default: null
+          extra_classes:
+            name: 'Extra classes.'
+            description: 'External modifiers added from the placement context. https://en.bem.info/methodology/css/#mixes'
+            type: array
+            default: null
+          html_tag:
+            name: 'HTML tag for title'
+            description: 'No description available'
+            type: string
+            default: h2
+            enum:
+              - h1
+              - h2
+              - h3
+              - h4
+              - h5
+              - h6
+              - span
+          icon:
+            name: Icon
+            description: 'No description available'
+            type: string
+            default: null
+        slots:
+          content:
+            name: Content
+            description: 'Content of title.'

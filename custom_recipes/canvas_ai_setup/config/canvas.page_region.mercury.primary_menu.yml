@@ -1,0 +1,10 @@
+uuid: 61514de2-bdcb-4aae-8088-19fd586b990f
+langcode: en
+status: true
+dependencies:
+  theme:
+    - mercury
+id: mercury.primary_menu
+region: primary_menu
+theme: mercury
+component_tree: {  }

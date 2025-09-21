@@ -38,7 +38,7 @@ ddev drush recipe ../custom_recipes/media_images
 ddev drush cr
 
 # Index the AI stuff
-ddev sapi-i
+ddev drush sapi-i
 
 echo "Visit https://v2025demo.ddev.site/canvas/canvas_page/2/editor and login with user 'admin' and password 'admin' to see the demo page."
 echo "After login, you click "New" and "New Page" to create a new page from AI."
