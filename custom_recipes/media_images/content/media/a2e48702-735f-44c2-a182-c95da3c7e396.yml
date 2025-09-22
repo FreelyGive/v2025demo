@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: a2e48702-735f-44c2-a182-c95da3c7e396
+  bundle: image
+  default_langcode: en
+  depends:
+    e82a3071-f76d-4dc3-8824-ab8709199351: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+      target_uuid: 0
+  name:
+    -
+      value: 'Flat lay of US dollar bills with calculator and notebook for budgeting.'
+  created:
+    -
+      value: 1758523018
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo with a clean, white background, enhancing the focus on financial planning. It features a spread of US dollar bills in varying denominations, prominently displaying shades of green. A black calculator with red and white buttons rests on the money, suggesting calculations and budgeting. Beside it, a small spiral notebook with blank, lined pages, and a sleek silver pen lie, indicating readiness for note-taking or planning. The image lacks any people, emphasizing objects solely associated with financial organization. The overall mood is practical and focused, ideal for themes of budgeting and financial management.'
+  field_media_image:
+    -
+      alt: 'Flat lay of US dollar bills with calculator and notebook for budgeting.'
+      title: 'Photo By: Kaboompics.com'
+      width: 6720
+      height: 4480
+      entity: e82a3071-f76d-4dc3-8824-ab8709199351

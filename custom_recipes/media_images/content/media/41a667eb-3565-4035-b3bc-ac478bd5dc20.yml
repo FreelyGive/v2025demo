@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 41a667eb-3565-4035-b3bc-ac478bd5dc20
+  bundle: image
+  default_langcode: en
+  depends:
+    44936815-e75d-402d-93ad-7ce3ef0eb5eb: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+      target_uuid: 0
+  name:
+    -
+      value: 'A man with afro hair using a credit card for online shopping while sitting indoors with a laptop.'
+  created:
+    -
+      value: 1758522641
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo featuring a man with afro hair using a credit card for online shopping, sitting indoors with a laptop. The background is predominantly a neutral light gray, giving a calm and focused atmosphere. The man appears to be in his mid-20s to mid-30s, and he seems engaged and concentrated, holding a credit card in one hand as he looks at his laptop. He is wearing a casual outfit, with a light denim jacket and distressed jeans, suggesting a relaxed, everyday setting. The laptop and credit card are key objects, highlighting the theme of online shopping. The overall mood of the image is modern and laid-back, with a hint of concentration.'
+  field_media_image:
+    -
+      alt: 'A man with afro hair using a credit card for online shopping while sitting indoors with a laptop.'
+      title: 'Cup of  Couple'
+      width: 6720
+      height: 4480
+      entity: 44936815-e75d-402d-93ad-7ce3ef0eb5eb

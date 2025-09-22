@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 514a798f-5863-4ab8-be7f-70608e1ceff4
+  bundle: image
+  default_langcode: en
+  depends:
+    0990bb92-8bba-44ed-aeb7-37b86a668be0: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+      target_uuid: 0
+  name:
+    -
+      value: 'Smiling woman with smartphone and credit card shopping online while cozy at home.'
+  created:
+    -
+      value: 1758522641
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This image is a photo depicting a woman comfortably lounging at home. The background features soft, neutral colors, with a light gray or beige wall and a cozy sofa with a plaid blanket in shades of gray and white. The woman appears to be in her twenties or thirties, with long dark braided hair, and is displaying a cheerful, content expression as she smiles. Her relaxed demeanor suggests a pleasant and calm mood while engaging in online shopping. She is holding a smartphone to her ear and has a credit card in her hand, positioned in front of an open laptop resting on her lap. The setting conveys a warm, laid-back atmosphere, emphasizing a sense of ease and modern convenience.'
+  field_media_image:
+    -
+      alt: 'Smiling woman with smartphone and credit card shopping online while cozy at home.'
+      title: 'Mikhail Nilov'
+      width: 4000
+      height: 6000
+      entity: 0990bb92-8bba-44ed-aeb7-37b86a668be0

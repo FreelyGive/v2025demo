@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: f013cd3f-3bf5-4dd0-a907-4105cb2c321c
+  bundle: image
+  default_langcode: en
+  depends:
+    7df0734d-18ea-445a-b233-084fe4d827f5: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+      target_uuid: 0
+  name:
+    -
+      value: 'An attentive group of adults seated at an indoor conference, focusing on a presentation.'
+  created:
+    -
+      value: 1758523867
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photograph capturing a group of adults seated indoors, focusing attentively on a presentation. The background is predominantly a deep blue, creating a professional and calm atmosphere. The individuals vary in age, mostly middle-aged, with a mix of genders. Everyone appears engaged and focused, suggesting a serious and concentrated mood. The lighting is subtle, illuminating the figures without harsh contrasts, emphasizing the attentive expressions. There are no identifiable objects besides the seating, which is orderly and typical of a conference setting. The overall scene exudes a sense of professionalism and academic interest.'
+  field_media_image:
+    -
+      alt: 'An attentive group of adults seated at an indoor conference, focusing on a presentation.'
+      title: 'Luis Quintero'
+      width: 6240
+      height: 4160
+      entity: 7df0734d-18ea-445a-b233-084fe4d827f5

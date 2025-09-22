@@ -1,0 +1,24 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 0ef34b8d-bb12-4eea-b53c-be990844fe1f
+  default_langcode: en
+default:
+  filename:
+    -
+      value: pexels-photo-6214134.jpeg
+  uri:
+    -
+      value: 'public://2025-09/pexels-photo-6214134.jpeg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 2796646
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1758522806

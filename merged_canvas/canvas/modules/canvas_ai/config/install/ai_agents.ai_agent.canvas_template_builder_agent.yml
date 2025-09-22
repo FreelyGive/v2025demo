@@ -164,8 +164,6 @@ tool_settings:
     description_override: ''
     progress_message: ''
     use_artifacts: 0
-    property_description_override:
-      min_score: '0.1'
 orchestration_agent: false
 triage_agent: false
 max_loops: 10
@@ -180,6 +178,13 @@ default_information_tools: |
     description: 'These are the Components available to use'
     tool: 'canvas_ai:get_component_context'
     parameters: {  }
+  get_context:
+    label: 'Extra Context'
+    description: 'This is extra context to take into account'
+    tool: 'ai_context:get_relevant_contexts'
+    parameters:
+      agent_id: canvas_template_builder_agent
+      task: 'our company'
 tool_usage_limits:
   'canvas_ai:set_template_data':
     component_structure:
@@ -205,9 +210,10 @@ tool_usage_limits:
       hide_property: 0
       values: ''
     min_score:
-      action: ''
+      action: force_value
       hide_property: 0
-      values: ''
+      values:
+        - '0.1'
 exclude_users_role: false
 masquerade_roles: {  }
 structured_output_enabled: false

@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 20a3e2bd-ffa1-4df1-9ff2-e515ae222c81
+  bundle: image
+  default_langcode: en
+  depends:
+    9690ab1e-ac15-4a73-a0a5-4ba73b6f33c4: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+      target_uuid: 0
+  name:
+    -
+      value: 'Professional presentation on revenue split by quarter and geography during a business conference.'
+  created:
+    -
+      value: 1758523867
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image captures a business conference setting with a focus on a professional woman giving a presentation. The background is neutral with beige walls, and the main colors are earthy tones and the white screen. The image is a photograph featuring a diverse audience and a presenter. The presenter, a woman dressed in business attire, appears confident and engaged, using a microphone to address the attendees. The mood is serious and focused, indicative of a formal business environment. A large projection screen behind her displays a graph or chart related to "Revenue Split by Quarter and Geography." The audience consists of several people sitting in rows, attentively listening. The setting suggests a professional and informative atmosphere.'
+  field_media_image:
+    -
+      alt: 'Professional presentation on revenue split by quarter and geography during a business conference.'
+      title: 'Pavel Danilyuk'
+      width: 5473
+      height: 3654
+      entity: 9690ab1e-ac15-4a73-a0a5-4ba73b6f33c4

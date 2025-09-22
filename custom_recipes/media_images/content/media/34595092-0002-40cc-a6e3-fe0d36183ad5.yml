@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 34595092-0002-40cc-a6e3-fe0d36183ad5
+  bundle: image
+  default_langcode: en
+  depends:
+    cd1c75bc-4b2f-4cea-8748-b0435e709b24: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+      target_uuid: 0
+  name:
+    -
+      value: 'Senior couple shopping online using smartphone and credit card indoors.'
+  created:
+    -
+      value: 1758522641
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo depicting a senior couple indoors, engaged in online shopping. The background features a soft, neutral palette with a window suggesting daylight, infusing the scene with a warm, natural glow. The woman, with light hair and wearing glasses, is dressed in a teal turtleneck, holding a credit card with a focused expression. The man, also in glasses and wearing a red sweater, is beside her looking content and holding a smartphone. Their expressions convey concentration and mutual engagement, suggesting a calm, collaborative mood. The prominent objects in the image, the smartphone, and credit card, highlight the activity of online shopping. The overall atmosphere is one of quiet companionship and modern connectivity.'
+  field_media_image:
+    -
+      alt: 'Senior couple shopping online using smartphone and credit card indoors.'
+      title: 'Kampus Production'
+      width: 3768
+      height: 5645
+      entity: cd1c75bc-4b2f-4cea-8748-b0435e709b24

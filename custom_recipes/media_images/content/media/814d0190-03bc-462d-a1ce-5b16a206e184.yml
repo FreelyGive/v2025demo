@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 814d0190-03bc-462d-a1ce-5b16a206e184
+  bundle: image
+  default_langcode: en
+  depends:
+    00d57010-3291-451c-b45c-8c110013db53: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+      target_uuid: 0
+  name:
+    -
+      value: 'A calendar marked with "Tax Deadline" surrounded by financial documents and eyeglasses.'
+  created:
+    -
+      value: 1758523018
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This is a photo featuring a calendar marked with a yellow sticky note labeled "Tax Deadline." The background is predominantly white and pastel, with financial documents and forms scattered around, adding a sense of busyness. There''s a pair of eyeglasses resting on the open calendar, enhancing a serious and focused atmosphere. Multiple colorful paperclips are also visible, contributing to the organized yet hectic mood of tax preparation. The image embodies a professional and urgent feeling, emphasizing readiness and attention to detail. There are no people present, keeping the emphasis purely on the task at hand.'
+  field_media_image:
+    -
+      alt: 'A calendar marked with "Tax Deadline" surrounded by financial documents and eyeglasses.'
+      title: 'Leeloo The First'
+      width: 6016
+      height: 4016
+      entity: 00d57010-3291-451c-b45c-8c110013db53

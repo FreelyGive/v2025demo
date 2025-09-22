@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: a962677a-617b-43b4-a683-ba33feb91571
+  bundle: image
+  default_langcode: en
+  depends:
+    e627eb62-662e-4300-a64a-49dd1ee495e4: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+      target_uuid: 0
+  name:
+    -
+      value: 'Close-up of hands working with a calculator and notebook on a desk, analyzing documents.'
+  created:
+    -
+      value: 1758523018
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "This image is a photo showcasing a close-up of hands actively engaging in calculations and note-taking. The background features a warm, dark color scheme with a sleek black desk surface, contrasting nicely with a wooden keyboard. The central focus is on the hands of an unknown individual, whose gender, age, and ethnicity are not discernible. The person's left hand operates a scientific calculator while the right hand writes in a notebook, suggesting a focused and analytical mood. The presence of a smartphone and neatly placed documents contributes to an organized, professional setting. A watch adorns the writing wrist, adding a touch of detail to the scene. The image conveys a calm, diligent atmosphere ideal for financial or analytical themes."
+  field_media_image:
+    -
+      alt: 'Close-up of hands working with a calculator and notebook on a desk, analyzing documents.'
+      title: 'Photo By: Kaboompics.com'
+      width: 5472
+      height: 3648
+      entity: e627eb62-662e-4300-a64a-49dd1ee495e4

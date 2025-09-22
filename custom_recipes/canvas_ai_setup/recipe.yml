@@ -14,6 +14,7 @@ install:
   - pexels_ai
   - ai_agents_explorer
   - ai_api_explorer
+  - ai_context
 config:
   import:
     ai_agents: '*'
@@ -108,6 +109,16 @@ config:
                 - field.storage.media.field_media_image
               module:
                 - file
+
+          mid:
+            label: ID
+            datasource_id: 'entity:media'
+            property_path: mid
+            type: integer
+            dependencies:
+              module:
+                - media
+
           width:
             label: 'Image » Width'
             datasource_id: 'entity:media'

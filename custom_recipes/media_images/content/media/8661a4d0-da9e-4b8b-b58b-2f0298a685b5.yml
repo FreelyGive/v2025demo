@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 8661a4d0-da9e-4b8b-b58b-2f0298a685b5
+  bundle: image
+  default_langcode: en
+  depends:
+    5160f124-224b-4018-9130-bb4d9ed6bd9b: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+      target_uuid: 0
+  name:
+    -
+      value: 'Hands holding credit card making online purchase on laptop at wooden desk with various items.'
+  created:
+    -
+      value: 1758522806
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This photo features a person holding a yellow credit card while making an online purchase on a laptop placed on a wooden desk. The background is predominantly warm-toned, with a light wooden texture contributing to a cozy atmosphere. The person, with hands visible, appears focused and engaged, suggesting they are of youthful or middle age. The desk is cluttered with various items including another credit card, a smartphone displaying an app, a notepad, a pair of headphones, a glass of orange juice, and some stacked books, indicating a bustling yet personal workspace. The mood is casual and productive, portraying a typical modern-day online shopping scenario. The overall color palette is a mix of earthy tones, accented by the bright pop of the juice and yellow card.'
+  field_media_image:
+    -
+      alt: 'Hands holding credit card making online purchase on laptop at wooden desk with various items.'
+      title: 'Antoni Shkraba Studio'
+      width: 4000
+      height: 2667
+      entity: 5160f124-224b-4018-9130-bb4d9ed6bd9b

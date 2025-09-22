@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: cea38073-a800-4932-9035-b71c8e089a7f
+  bundle: image
+  default_langcode: en
+  depends:
+    f1718613-36ec-4cc6-8c61-fcd499076238: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+      target_uuid: 0
+  name:
+    -
+      value: 'Close-up view of a person making an online purchase using a laptop and credit card.'
+  created:
+    -
+      value: 1758522806
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo featuring a warm and neutral color palette, with grays and soft lighting in the background. A person is seen from above, holding a yellow credit card in their right hand while typing on a laptop with their left hand. The person has curly hair and is wearing a light-colored shirt. The mood is calm and focused, suggesting a moment of concentration during the online purchase process. The key objects in the image are the laptop, with its sleek silver finish, and the vibrant yellow credit card, which stands out as the focal point.'
+  field_media_image:
+    -
+      alt: 'Close-up view of a person making an online purchase using a laptop and credit card.'
+      title: 'SHVETS production'
+      width: 4000
+      height: 6000
+      entity: f1718613-36ec-4cc6-8c61-fcd499076238

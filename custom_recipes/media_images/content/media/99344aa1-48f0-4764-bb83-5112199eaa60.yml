@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 99344aa1-48f0-4764-bb83-5112199eaa60
+  bundle: image
+  default_langcode: en
+  depends:
+    9e7f3a6e-da77-4db5-8100-a7147b628a39: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+      target_uuid: 0
+  name:
+    -
+      value: pexels-photo-33980630.jpeg
+  created:
+    -
+      value: 1758523867
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a black and white photograph capturing an urban scene viewed through large glass windows. The background consists of reflections of clouds and a modern building facade, providing an architectural vibe. Inside, two individuals, possibly professional men, are seated in a lounge setting, suggesting a business environment. They appear engaged, each with a device, giving a sense of focus and concentration. The mood is calm and introspective, enhanced by the neutral gray tones of the setting. The glass and steel elements contribute to a sleek, contemporary aesthetic. Overall, the image portrays a moment of quiet productivity and reflection.'
+  field_media_image:
+    -
+      alt: 'Pexels Image 33980630'
+      title: 'Loveleen Cherub'
+      width: 2913
+      height: 3884
+      entity: 9e7f3a6e-da77-4db5-8100-a7147b628a39

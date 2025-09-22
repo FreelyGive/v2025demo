@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 13c83503-7f83-451e-9066-315865e9ed19
+  bundle: image
+  default_langcode: en
+  depends:
+    7fc2e67b-8708-4b2f-97a2-5ab2ccd1ee5f: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+      target_uuid: 0
+  name:
+    -
+      value: 'Diverse team engaging in a productive business meeting in a modern office setting.'
+  created:
+    -
+      value: 1758523867
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "The image is a photo of a group of diverse individuals in a modern office setting, engaged in a business meeting. The background features neutral beige walls and a large screen displaying colorful graphics, contributing to a professional atmosphere. The main colors in the scene are earth tones from the furniture, with pops of color from the attendees' clothing and the screen content. The group consists of individuals who appear to be of various ages, ethnicities, and genders, seated around a wooden conference table. They are focused and engaged, suggesting a productive and collaborative mood. Laptops, notebooks, and a coffee mug are visible on the table, emphasizing a work-focused environment. The overall ambiance is one of professionalism and teamwork."
+  field_media_image:
+    -
+      alt: 'Diverse team engaging in a productive business meeting in a modern office setting.'
+      title: 'Christina Morillo'
+      width: 6016
+      height: 4016
+      entity: 7fc2e67b-8708-4b2f-97a2-5ab2ccd1ee5f

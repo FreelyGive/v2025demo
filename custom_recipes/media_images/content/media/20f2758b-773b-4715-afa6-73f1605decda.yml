@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 20f2758b-773b-4715-afa6-73f1605decda
+  bundle: image
+  default_langcode: en
+  depends:
+    da76e07c-51b0-49df-8b76-2cbc7fab516d: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+      target_uuid: 0
+  name:
+    -
+      value: 'Fashionable individual with afro hair using a tablet and credit card for online shopping indoors.'
+  created:
+    -
+      value: 1758522641
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photograph featuring an indoor scene with a light, neutral background that emphasizes the main subject. The individual, possibly male, is holding a tablet and a credit card, focused on what appears to be online shopping. They have prominent afro hair and are wearing a vibrant red and black patterned top, which stands out against the subdued background. The person exudes a sense of modernity and style, perhaps in their 20s or 30s, and they appear concentrated and engaged with their task. The mood is dynamic and contemporary, capturing a moment of everyday life infused with fashion. The tablet and credit card are key elements, highlighting themes of technology and commerce.'
+  field_media_image:
+    -
+      alt: 'Fashionable individual with afro hair using a tablet and credit card for online shopping indoors.'
+      title: 'Cup of  Couple'
+      width: 6720
+      height: 4480
+      entity: da76e07c-51b0-49df-8b76-2cbc7fab516d

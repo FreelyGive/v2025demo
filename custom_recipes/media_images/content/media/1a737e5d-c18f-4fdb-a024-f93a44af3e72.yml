@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 1a737e5d-c18f-4fdb-a024-f93a44af3e72
+  bundle: image
+  default_langcode: en
+  depends:
+    66797c4f-a088-431e-94ed-d19ead101131: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+      target_uuid: 0
+  name:
+    -
+      value: 'A person using a laptop for online shopping with a card on a wooden table.'
+  created:
+    -
+      value: 1758522806
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo showing a person using a laptop for online shopping at a wooden table. The background features muted, earthy tones, with a rough-textured carpet complementing the wooden surface. The person appears to be male, possibly in his twenties or thirties, with a focus on his hands engaging with a laptop and holding a card. He wears a denim shirt, suggesting a casual and relaxed mood. The atmosphere is calm and focused, perfect for an online shopping activity. The laptop is central to the scene, open, and displaying a shopping website. A notebook or folder lies closed on the table, adding to the feeling of productivity and multitasking.'
+  field_media_image:
+    -
+      alt: 'A person using a laptop for online shopping with a card on a wooden table.'
+      title: 'Ivan Samkov'
+      width: 4480
+      height: 6720
+      entity: 66797c4f-a088-431e-94ed-d19ead101131

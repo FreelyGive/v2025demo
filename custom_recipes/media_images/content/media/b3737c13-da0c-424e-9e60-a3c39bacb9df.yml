@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: b3737c13-da0c-424e-9e60-a3c39bacb9df
+  bundle: image
+  default_langcode: en
+  depends:
+    520ec19a-3dea-443e-9f13-af17d968137c: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+      target_uuid: 0
+  name:
+    -
+      value: 'Business professionals engaged in a collaborative meeting in a modern office setting.'
+  created:
+    -
+      value: 1758523867
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a black and white photo capturing a modern office setting. It shows a diverse group of business professionals, both men and women, engaged in an animated meeting around a large conference table. The individuals appear to be a mix of ages and ethnicities, all showing expressions of focus and collaboration. The mood of the image is energetic and professional, suggesting a productive and engaging discussion. Laptops and notebooks are visible on the table, emphasizing a workspace filled with active participation. The office environment is sleek, with minimalistic furniture and glass partitions, enhancing the modern aesthetic. The lighting is bright, contributing to the sense of openness and clarity.'
+  field_media_image:
+    -
+      alt: 'Business professionals engaged in a collaborative meeting in a modern office setting.'
+      title: 'Christina Morillo'
+      width: 6016
+      height: 4016
+      entity: 520ec19a-3dea-443e-9f13-af17d968137c

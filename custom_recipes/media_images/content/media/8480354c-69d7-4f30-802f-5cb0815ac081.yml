@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 8480354c-69d7-4f30-802f-5cb0815ac081
+  bundle: image
+  default_langcode: en
+  depends:
+    e8f23aab-9d48-4d0d-9760-2e1f507bb310: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+      target_uuid: 0
+  name:
+    -
+      value: 'A woman writes financial calculations in a notebook, using a calculator and laptop at a wooden desk.'
+  created:
+    -
+      value: 1758523018
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photograph depicting a woman seated at a wooden desk, immersed in writing financial calculations in a notebook. She is using a pen, with a silver laptop open to her side and a black calculator placed in front of her, signaling a focused and practical mood. The desk and notebook suggest a comfortable working environment, with the natural wood tones contrasting the white paper and metallic laptop. The woman appears to be of a young to middle age adult, dressed in casual attire, reflecting a relaxed but concentrated demeanor. The background is softly blurred, featuring muted colors, enhancing the focus on the foreground activity. The overall scene exudes a sense of diligence and analytical engagement in a workspace setup.'
+  field_media_image:
+    -
+      alt: 'A woman writes financial calculations in a notebook, using a calculator and laptop at a wooden desk.'
+      title: 'Mikhail Nilov'
+      width: 2752
+      height: 2911
+      entity: e8f23aab-9d48-4d0d-9760-2e1f507bb310

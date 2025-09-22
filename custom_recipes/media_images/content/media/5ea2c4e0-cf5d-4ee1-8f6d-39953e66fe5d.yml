@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 5ea2c4e0-cf5d-4ee1-8f6d-39953e66fe5d
+  bundle: image
+  default_langcode: en
+  depends:
+    66eb2dcf-b2d7-4348-ac09-1a841302246f: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+      target_uuid: 0
+  name:
+    -
+      value: 'Close-up of a person counting US dollar bills indoors. Financial concept.'
+  created:
+    -
+      value: 1758523018
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This is a close-up photo of a person counting US dollar bills, predominantly showing their hands holding multiple banknotes, including $20 and $50 bills. The background is a soft, blurred grayish color, providing a neutral and subdued backdrop to emphasize the subject. The person appears to be male, and their shirt is a muted green, contributing to the overall calm and focused mood of the image. The image conveys a sense of careful concentration, possibly related to financial matters or budgeting. No identifiable facial features are visible, as the focus is solely on the hands and currency. The overall composition is balanced, highlighting the action of counting money as a central theme.'
+  field_media_image:
+    -
+      alt: 'Close-up of a person counting US dollar bills indoors. Financial concept.'
+      title: 'Photo By: Kaboompics.com'
+      width: 5839
+      height: 3893
+      entity: 66eb2dcf-b2d7-4348-ac09-1a841302246f

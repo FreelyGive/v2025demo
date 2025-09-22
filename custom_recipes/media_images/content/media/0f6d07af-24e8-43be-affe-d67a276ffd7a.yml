@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 0f6d07af-24e8-43be-affe-d67a276ffd7a
+  bundle: image
+  default_langcode: en
+  depends:
+    e526bcd1-58bb-4c64-b55b-e42c631dcc2d: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+      target_uuid: 0
+  name:
+    -
+      value: 'A diverse team of business professionals collaborating in a modern meeting room.'
+  created:
+    -
+      value: 1758523867
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This image is a photo capturing a modern meeting room filled with a diverse team of business professionals. The background is characterized by large windows allowing natural light to flood the room, contrasted with a neutral palette dominated by whites and light browns. The scene includes both men and women of various ethnicities, dressed in professional attire, suggesting different ages and roles. Their expressions convey engagement and collaboration, fostering an atmosphere of teamwork and productivity. The room is furnished with a long wooden conference table with laptops and water bottles visible, emphasizing a contemporary and tech-driven environment. The overall mood is one of focus and cooperation, indicative of a productive business meeting.'
+  field_media_image:
+    -
+      alt: 'A diverse team of business professionals collaborating in a modern meeting room.'
+      title: 'Christina Morillo'
+      width: 6016
+      height: 4016
+      entity: e526bcd1-58bb-4c64-b55b-e42c631dcc2d

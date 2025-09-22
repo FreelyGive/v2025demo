@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 532a50b6-1807-481b-935a-d6ed6125b109
+  bundle: image
+  default_langcode: en
+  depends:
+    2f9e9f23-af59-4df1-abe5-cc9520834d3f: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+      target_uuid: 0
+  name:
+    -
+      value: 'Three businessmen collaborating during a meeting around a laptop in a bright office.'
+  created:
+    -
+      value: 1758523867
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo of three businessmen collaborating in a bright, professional office setting. The background is dominated by soft white and light gray tones, creating a clean and modern atmosphere. The men appear to be middle-aged, dressed in formal business attire - suits and ties - with varied hair colors and styles. They seem to be engaged in a thoughtful conversation, with expressions of concentration and collaboration. The focal object is a laptop resting on the table, suggesting a meeting focused on digital or business-related tasks. The mood of the image is purposeful and professional, highlighting teamwork and strategic discussion. Bright natural light streaming in from the windows adds an airy and open feel to the scene.'
+  field_media_image:
+    -
+      alt: 'Three businessmen collaborating during a meeting around a laptop in a bright office.'
+      title: 'Kampus Production'
+      width: 5102
+      height: 3406
+      entity: 2f9e9f23-af59-4df1-abe5-cc9520834d3f

@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 9d61f0e6-e4df-47ec-880b-b112c6139020
+  bundle: image
+  default_langcode: en
+  depends:
+    f51a2d1f-141c-4636-b86a-fd999bef6e5c: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+      target_uuid: 0
+  name:
+    -
+      value: 'Professionals networking at a corporate event indoors, discussing and collaborating.'
+  created:
+    -
+      value: 1758523867
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo capturing a group of people networking indoors at a corporate event. The background features neutral beige and white tones, with large windows allowing natural light to fill the space. The attendees, diverse in age, gender, and ethnicity, appear engaged and conversational, reflecting a collaborative mood. Two women and a man are prominently in the foreground, actively discussing something while a small group converses in the background. The participants are dressed in business-casual attire, suggesting a professional yet relaxed atmosphere. Tables and chairs are subtly included, hinting at a conference or seminar setting. The overall vibe is dynamic, fostering interaction and connection among professionals.'
+  field_media_image:
+    -
+      alt: 'Professionals networking at a corporate event indoors, discussing and collaborating.'
+      title: 'Pavel Danilyuk'
+      width: 5473
+      height: 3654
+      entity: f51a2d1f-141c-4636-b86a-fd999bef6e5c

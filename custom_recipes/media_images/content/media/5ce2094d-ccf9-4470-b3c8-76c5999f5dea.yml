@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 5ce2094d-ccf9-4470-b3c8-76c5999f5dea
+  bundle: image
+  default_langcode: en
+  depends:
+    367e036f-3d94-4c57-81a8-58240e3fc210: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+      target_uuid: 0
+  name:
+    -
+      value: 'Close-up of hand using smartphone for contactless payment at a terminal on wooden surface.'
+  created:
+    -
+      value: 1758522806
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "The image is a photo featuring a close-up of a hand using a smartphone for contactless payment. The background consists of neutral tones with a wooden surface, adding warmth to the scene. The hand appears to belong to an adult with nail polish, suggesting a stylish and modern aesthetic. The smartphone is blue, adding a pop of color against the softer background, while the payment terminal is black with a sleek, glossy finish. The scene conveys a futuristic and convenient atmosphere, reflecting the ease of technology in everyday transactions. The image is focused on the interaction between the hand and the device, highlighting the technology's significance. The mood is efficient and modern, suggesting seamless use of innovative payment methods."
+  field_media_image:
+    -
+      alt: 'Close-up of hand using smartphone for contactless payment at a terminal on wooden surface.'
+      title: 'Anna Shvets'
+      width: 5969
+      height: 3979
+      entity: 367e036f-3d94-4c57-81a8-58240e3fc210

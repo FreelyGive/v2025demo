@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: bf1fd8ea-d7c3-4103-aa16-6e7bb8e02e10
+  bundle: image
+  default_langcode: en
+  depends:
+    90fa190f-ab0e-497b-8a6c-9d463b1e0f00: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+      target_uuid: 0
+  name:
+    -
+      value: 'A young adult using a calculator and laptop to manage finances at home, surrounded by papers.'
+  created:
+    -
+      value: 1758523018
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photograph featuring a young adult, likely in their twenties, focused on managing finances at home. The main colors in the scene are muted tones, with a focus on grays and blues, creating a calm and focused atmosphere. Papers and documents are scattered around, while a calculator and laptop are prominently placed, emphasizing the financial theme. The background appears to be a home setting, possibly a living room, adding a sense of everyday life. The overall mood is one of concentration and diligence, suggesting seriousness about financial matters.'
+  field_media_image:
+    -
+      alt: 'A young adult using a calculator and laptop to manage finances at home, surrounded by papers.'
+      title: 'Mikhail Nilov'
+      width: 4104
+      height: 2736
+      entity: 90fa190f-ab0e-497b-8a6c-9d463b1e0f00

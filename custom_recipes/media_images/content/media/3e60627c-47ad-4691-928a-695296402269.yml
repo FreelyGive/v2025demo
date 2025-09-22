@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 3e60627c-47ad-4691-928a-695296402269
+  bundle: image
+  default_langcode: en
+  depends:
+    b6550585-2ab8-4be2-acc1-794a8cc70d74: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+      target_uuid: 0
+  name:
+    -
+      value: 'Father and children using a laptop for online shopping at home, bonding over e-commerce activities.'
+  created:
+    -
+      value: 1758522806
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "The image is a photo showing a warm, homey scene with soft, neutral background colors including whites and grays. It features a father and his two children, a boy and a girl, gathered closely around a laptop. The father, likely in his 30s, appears engaged and focused, while the boy looks intrigued and the girl holds a credit card, suggesting active participation in the online shopping activity. The children's expressions are curious and excited, creating a friendly and bonding mood. A cozy and inviting atmosphere is enhanced by the comfortable furniture and soft lighting. The father's casual attire and the children’s relaxed clothing add to the informal and pleasant ambiance. The laptop and credit card are central objects, highlighting the e-commerce theme of the activity."
+  field_media_image:
+    -
+      alt: 'Father and children using a laptop for online shopping at home, bonding over e-commerce activities.'
+      title: 'Kindel Media'
+      width: 5084
+      height: 2864
+      entity: b6550585-2ab8-4be2-acc1-794a8cc70d74

@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 7a89ded0-d00a-46c4-9732-b857169b12c5
+  bundle: image
+  default_langcode: en
+  depends:
+    e4dba641-8ffc-4afc-8a92-c2be65541b1b: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+      target_uuid: 0
+  name:
+    -
+      value: 'An elderly man sits at a table with a smartphone and credit card, making an online purchase.'
+  created:
+    -
+      value: 1758522806
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "This image is a photograph featuring an elderly man with a light complexion, sitting at a table in a cozy, warmly-lit room. The background has neutral tones, with a hint of warmth added by a standing lamp that casts a soft glow. The mood is calm and focused as the man, who has a bald head and is wearing a blue shirt, concentrates on his smartphone and holds a credit card, evidently making an online purchase. Several potted plants add a natural touch in the background, and a vintage TV is visible, contributing to the nostalgic ambiance. Books and possibly a tablet are also placed on the table, enhancing the scene's homely and intellectual atmosphere. The image captures a serene and everyday moment, blending modern technology with a classic setting."
+  field_media_image:
+    -
+      alt: 'An elderly man sits at a table with a smartphone and credit card, making an online purchase.'
+      title: 'Tima Miroshnichenko'
+      width: 5922
+      height: 3948
+      entity: e4dba641-8ffc-4afc-8a92-c2be65541b1b

@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 4d9a39c3-877e-4273-9d96-24f4e9661b86
+  bundle: image
+  default_langcode: en
+  depends:
+    90826a50-178a-45b6-a99f-fc1933336978: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+      target_uuid: 0
+  name:
+    -
+      value: "Close-up of passenger's hand using payment terminal inside a yellow taxi cab on a city street."
+  created:
+    -
+      value: 1758522641
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "This image is a photo capturing the interior of a yellow taxi cab on a city street. Predominantly, the scene is colored in bright yellow, complemented by the urban grayscale tones of the cityscape visible through the window. A person's hand, possibly a passenger, is interacting with a payment terminal inside the car. The hand appears to belong to an adult; further details about age, ethnicity, or gender are indistinct. The mood of the image is practical and transactional, capturing a moment of everyday urban life. The background reveals blurred street details, enhancing the focus on the payment interaction. The overall atmosphere feels dynamic, embodying the busy pace of city life."
+  field_media_image:
+    -
+      alt: "Close-up of passenger's hand using payment terminal inside a yellow taxi cab on a city street."
+      title: 'Tim  Samuel'
+      width: 6000
+      height: 4000
+      entity: 90826a50-178a-45b6-a99f-fc1933336978

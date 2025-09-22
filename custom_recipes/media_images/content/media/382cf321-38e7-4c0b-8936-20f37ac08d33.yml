@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 382cf321-38e7-4c0b-8936-20f37ac08d33
+  bundle: image
+  default_langcode: en
+  depends:
+    cfabf305-34e9-4388-9f6f-f17e41043707: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+      target_uuid: 0
+  name:
+    -
+      value: 'Close-up of a curly-haired woman resting on US dollar bills, conveying financial contemplation.'
+  created:
+    -
+      value: 1758523018
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "This image is a photo featuring a woman with curly hair resting her head on a pile of US dollar bills. The background is neutral, allowing the focus to remain on the woman's contemplative expression and the scattered money. Her expression suggests a deep, thoughtful mood, possibly reflecting on financial matters. The scene conveys a sense of introspection or contemplation about wealth or financial decisions. The main colors are natural tones of skin and hair, with the green hues of the dollar bills standing out prominently. The image captures a blend of curiosity and seriousness, enhanced by the physical closeness to the currency. Overall, it presents a narrative of financial reflection."
+  field_media_image:
+    -
+      alt: 'Close-up of a curly-haired woman resting on US dollar bills, conveying financial contemplation.'
+      title: 'Photo By: Kaboompics.com'
+      width: 4480
+      height: 6720
+      entity: cfabf305-34e9-4388-9f6f-f17e41043707

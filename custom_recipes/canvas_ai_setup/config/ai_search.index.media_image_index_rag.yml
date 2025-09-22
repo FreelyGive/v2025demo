@@ -1,6 +1,11 @@
+_core:
+  default_config_hash: 6sjeCn8Jy1Cs9RedstD14OuYpSv1nCmnRHDHjK5IS6Y
 control_field_max_length: false
 exclude_chunk_from_metadata: false
 indexing_options:
+  mid:
+    indexing_option: contextual_content
+    max: -1
   field_image_description:
     indexing_option: main_content
     max: -1

@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 14899897-abb2-498d-a7c1-e81f96515812
+  bundle: image
+  default_langcode: en
+  depends:
+    7646cb30-6e5f-459e-97f8-6bad3d26a603: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+      target_uuid: 0
+  name:
+    -
+      value: 'Young woman reviewing paperwork at home, focused and concerned.'
+  created:
+    -
+      value: 1758523018
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "This image is a photo depicting a young woman with long, dark hair, appearing focused and concerned as she reviews paperwork at home. The background features soft blue and neutral tones, creating a calming atmosphere. She is seated at a table, holding a pen, with paperwork and a notebook in front of her, indicating she might be studying or working on something important. The woman's expression suggests concentration, and a hint of worry, reflecting the serious nature of the task at hand. Her attire is casual, aligning with a home environment. The overall mood of the image is thoughtful and introspective, capturing a moment of personal reflection and possibly financial or academic concern. Glasses rest on the table, suggesting attention to detail and precision."
+  field_media_image:
+    -
+      alt: 'Young woman reviewing paperwork at home, focused and concerned.'
+      title: 'Mikhail Nilov'
+      width: 2736
+      height: 3546
+      entity: 7646cb30-6e5f-459e-97f8-6bad3d26a603
