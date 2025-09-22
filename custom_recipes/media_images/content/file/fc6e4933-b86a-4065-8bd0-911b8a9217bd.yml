@@ -7,13 +7,12 @@ default:
   uid:
     -
       target_id: 1
-      target_uuid: 0
   filename:
     -
-      value: 'press-release - virutal fintech summit 2025.pdf'
+      value: 'press-release-virtualfintechsummit2025.pdf'
   uri:
     -
-      value: 'public://2025-09/press-release%20-%20virutal%20fintech%20summit%202025.pdf'
+      value: 'public://2025-09/press-release-virtualfintechsummit2025.pdf'
   filemime:
     -
       value: application/pdf

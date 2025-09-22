@@ -15,6 +15,7 @@ install:
   - ai_agents_explorer
   - ai_api_explorer
   - ai_context
+  - ai_simple_pdf_to_text
 config:
   import:
     ai_agents: '*'

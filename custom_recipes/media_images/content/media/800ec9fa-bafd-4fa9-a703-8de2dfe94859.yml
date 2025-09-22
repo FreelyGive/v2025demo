@@ -10,14 +10,12 @@ default:
   revision_user:
     -
       target_id: 1
-      target_uuid: 0
   status:
     -
       value: true
   uid:
     -
       target_id: 1
-      target_uuid: 0
   name:
     -
       value: 'CV - CEO Bradley George'
@@ -44,21 +42,21 @@ default:
         Email: bradley.george@techflow.omg
         Phone: (555) 222-7788
         Professional Summary
-        Dynamic fintech leader with over 20 years of experience driving innovation in financial services 
-        and technology. Proven track record of scaling B2B SaaS platforms, leading global teams, and 
-        delivering transformative solutions in expense management, corporate payments, and financial 
+        Dynamic fintech leader with over 20 years of experience driving innovation in financial services
+        and technology. Proven track record of scaling B2B SaaS platforms, leading global teams, and
+        delivering transformative solutions in expense management, corporate payments, and financial
         automation. Recognized for combining strategic vision with hands-on operational excellence.
         Professional Experience
         TechFlow – Denver, CO
         Chief Executive Officer
         2019 – Present
-        •Spearheaded the launch of TechFlow’s virtual corporate card platform, achieving 200% 
+        •Spearheaded the launch of TechFlow’s virtual corporate card platform, achieving 200%
         year-over-year revenue growth.
-        •Led product development strategy resulting in an 80% reduction in expense processing time 
+        •Led product development strategy resulting in an 80% reduction in expense processing time
         for clients.
-        •Scaled the company from seed stage to a leading fintech provider with customers across 
+        •Scaled the company from seed stage to a leading fintech provider with customers across
         North America and Europe.
-        •Built and mentored an executive team overseeing finance, operations, technology, and 
+        •Built and mentored an executive team overseeing finance, operations, technology, and
         marketing.
         SpendWave Solutions – San Francisco, CA
         Chief Operating Officer
@@ -79,7 +77,7 @@ default:
         •Advised Fortune 500 companies on financial restructuring and operational strategy.
         •Built financial models supporting M&A transactions worth over $2B.
         Education
-        •MBA, Finance & Strategy – Kellogg School of Management, Northwestern University, 
+        •MBA, Finance & Strategy – Kellogg School of Management, Northwestern University,
         2003
         •B.S., Economics – University of Illinois Urbana-Champaign, 2001
         Board & Advisory Roles

@@ -7,13 +7,12 @@ default:
   uid:
     -
       target_id: 1
-      target_uuid: 0
   filename:
     -
-      value: 'techflow - introduction.pdf'
+      value: 'techflow-introduction.pdf'
   uri:
     -
-      value: 'public://2025-09/techflow%20-%20introduction.pdf'
+      value: 'public://2025-09/techflow-introduction.pdf'
   filemime:
     -
       value: application/pdf

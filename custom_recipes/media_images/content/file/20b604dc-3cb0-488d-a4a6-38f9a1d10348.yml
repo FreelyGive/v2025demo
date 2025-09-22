@@ -9,10 +9,10 @@ default:
       target_id: 1
   filename:
     -
-      value: 'CV - Bradley George.pdf'
+      value: 'CV-BradleyGeorge.pdf'
   uri:
     -
-      value: 'public://2025-09/CV%20-%20Bradley%20George.pdf'
+      value: 'public://2025-09/CV-BradleyGeorge.pdf'
   filemime:
     -
       value: application/pdf
