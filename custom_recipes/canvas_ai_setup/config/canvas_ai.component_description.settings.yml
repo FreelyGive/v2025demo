@@ -1,5 +1,5 @@
 _core:
-  default_config_hash: VosszK2ur_jp6QRnONC40hdOMGr5xsi97Bg39i89ztY
+  default_config_hash: PIFioZuMus86jiDHx-aZloQlfFR1uRFUxntA9NElgqc
 component_context:
   block:
     enabled: 1
@@ -722,7 +722,7 @@ component_context:
       sdc.mercury.grid-container:
         id: sdc.mercury.grid-container
         name: 'Grid Container'
-        description: 'This component is a flexible layout tool for organizing content into a multi-column grid. It offers a wide range of predefined column structures, along with optional header and footer regions for comprehensive sectioning. Use this component to build the primary structure of a page or to group related content into visually distinct blocks. Unless specifically wanting header and footer, the content should always go into the container_region slot.'
+        description: 'This component is a flexible layout tool for organizing content into a multi-column grid. It offers a wide range of predefined column structures, along with optional header and footer regions for comprehensive sectioning. Use this component to build the primary structure of a page or to group related content into visually distinct blocks. Unless specifically wanting header and footer, the content should always go into the container_region slot. VERY IMPORTANT is that the settings of the type of grid only works with the container_region slot, not the header or footer slot. Header slot is for a headline only.'
         group: Layouts
         props:
           columns:
