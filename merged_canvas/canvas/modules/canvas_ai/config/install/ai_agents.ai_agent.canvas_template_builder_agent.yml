@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies: {  }
 _core:
-  default_config_hash: DnTdsPR5LQdOCo5ZNmoVQWtnP6Jschg_nVf_4fJx_bU
+  default_config_hash: S7R_19Lvwd3Eho_QOmfHAgiOmzzAarcX89r23ZJybrs
 id: canvas_template_builder_agent
 label: 'Canvas Template Builder Agent'
 description: 'This sub-agent specializes in building templates for entire pages using available components. It can also be used to generate headers and footers for pages. Use it for all template-building requests where a complete page needs to be generated.'
@@ -13,6 +13,12 @@ system_prompt: |-
   You are a looping agent meaning you can run multiple times till you get enough information to generate the required response and save the page template.
 
   ## Core Responsibilities
+
+  ### Before starting
+  - **Enough content**: Do you have enough context to start, otherwise you might ask the end user questions.
+  - **Information Finder**: If there is a short explanation from the user on what to create, you can use the information finder tool to get more information by giving it semantic search words. You may use this as many times as necessary.
+  - **Placeholder/Mockup Data**: If the user has requested you specifically to make up the text, then do so.
+  - **Text provided**: If there is clear data provided on how to create the texts, you do neither have to do follow up questions or search for context.
 
   ### 1. Component Placement Strategy
   - **Primary Focus**: Place components in the 'content' region as the main page body structure
@@ -153,6 +159,7 @@ secured_system_prompt: '[ai_agent:agent_instructions]'
 tools:
   'canvas_ai:set_template_data': true
   'ai_search:rag_search': true
+  'ai_agents::ai_agent::information_finder': true
 tool_settings:
   'canvas_ai:set_template_data':
     return_directly: 0
@@ -160,6 +167,11 @@ tool_settings:
     progress_message: ''
     use_artifacts: 0
   'ai_search:rag_search':
+    return_directly: 0
+    description_override: ''
+    progress_message: ''
+    use_artifacts: 0
+  'ai_agents::ai_agent::information_finder':
     return_directly: 0
     description_override: ''
     progress_message: ''
@@ -214,6 +226,15 @@ tool_usage_limits:
       hide_property: 0
       values:
         - '0.1'
+  'ai_agents::ai_agent::information_finder':
+    prompt:
+      action: ''
+      hide_property: 0
+      values: ''
+    files:
+      action: ''
+      hide_property: 0
+      values: ''
 exclude_users_role: false
 masquerade_roles: {  }
 structured_output_enabled: false

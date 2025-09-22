@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: fc6e4933-b86a-4065-8bd0-911b8a9217bd
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+      target_uuid: 0
+  filename:
+    -
+      value: 'press-release - virutal fintech summit 2025.pdf'
+  uri:
+    -
+      value: 'public://2025-09/press-release%20-%20virutal%20fintech%20summit%202025.pdf'
+  filemime:
+    -
+      value: application/pdf
+  filesize:
+    -
+      value: 45255
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1758533171

@@ -22,6 +22,9 @@ config:
     key: '*'
     ai_automators: '*'
   actions:
+    mercury.settings:
+      simpleConfigUpdate:
+        scheme: byte-dark
     core.entity_form_display.media.image.default:
       setComponents:
         -
@@ -152,3 +155,103 @@ config:
           index_directly: true
           track_changes_in_references: true
         server: media_image_search
+    search_api.server.media_document_search:
+      setupVdbServerWithDefaults:
+        langcode: en
+        status: true
+        dependencies:
+          module:
+            - ai_search
+        id: media_document_search
+        name: 'Media Document Search'
+        description: ''
+        backend: search_api_ai_search
+        backend_config:
+          chat_model: openai__gpt-3.5-turbo
+          database: milvus
+          database_settings:
+            database_name: default
+            collection: media_document
+            metric: cosine_similarity
+          embedding_strategy: contextual_chunks
+          embedding_strategy_configuration:
+            chunk_size: '5000'
+            chunk_min_overlap: '100'
+            contextual_content_max_percentage: '30'
+          embedding_strategy_details: ''
+    search_api.index.media_document_index_rag:
+      setupVdbIndex:
+        status: true
+        dependencies:
+          config:
+            - field.storage.media.field_document_data
+            - field.storage.media.field_media_document
+            - search_api.server.media_document_search
+          module:
+            - file
+            - media
+        id: media_document_index_rag
+        name: 'Media Document Index RAG'
+        description: ''
+        read_only: false
+        field_settings:
+          field_document_data:
+            label: 'Document Data'
+            datasource_id: 'entity:media'
+            property_path: field_document_data
+            type: text
+            dependencies:
+              config:
+                - field.storage.media.field_document_data
+          mid:
+            label: ID
+            datasource_id: 'entity:media'
+            property_path: mid
+            type: integer
+            dependencies:
+              module:
+                - media
+          name:
+            label: Name
+            datasource_id: 'entity:media'
+            property_path: name
+            type: string
+            dependencies:
+              module:
+                - media
+          url:
+            label: 'Document » File » URI » Root-relative file URL'
+            datasource_id: 'entity:media'
+            property_path: 'field_media_document:entity:uri:url'
+            type: string
+            dependencies:
+              config:
+                - field.storage.media.field_media_document
+              module:
+                - file
+        datasource_settings:
+          'entity:media':
+            bundles:
+              default: false
+              selected:
+                - document
+            languages:
+              default: true
+              selected: {  }
+        processor_settings:
+          add_url: {  }
+          aggregated_field: {  }
+          custom_value: {  }
+          entity_type: {  }
+          language_with_fallback: {  }
+          rendered_item: {  }
+        tracker_settings:
+          default:
+            indexing_order: fifo
+        options:
+          cron_limit: 5
+          delete_on_fail: true
+          index_directly: true
+          track_changes_in_references: true
+        server: media_document_search
+

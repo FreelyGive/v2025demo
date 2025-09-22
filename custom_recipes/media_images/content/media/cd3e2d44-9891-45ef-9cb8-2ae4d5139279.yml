@@ -1,0 +1,98 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: cd3e2d44-9891-45ef-9cb8-2ae4d5139279
+  bundle: document
+  default_langcode: en
+  depends:
+    aeea8be3-8a8a-4096-9783-514d438eb855: file
+default:
+  revision_user:
+    -
+      target_id: 1
+      target_uuid: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+      target_uuid: 0
+  name:
+    -
+      value: 'Techflow Introduction'
+  created:
+    -
+      value: 1758533145
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_document_data:
+    -
+      value: |-
+        TechFlow Virtual Corporate Card Platform
+        Product Overview
+        Introduction
+        TechFlow is a next-generation B2B fintech solution designed to eliminate manual expense 
+        processes, reduce financial overhead, and empower finance teams with real-time visibility. Our 
+        virtual corporate card platform enables businesses to streamline expense management while giving 
+        employees smarter ways to pay for business costs.
+        Key Features
+        1. Instant Virtual Card Issuance
+        •Create unlimited virtual corporate cards on demand.
+        •Assign cards to employees, teams, or projects in seconds.
+        •Set custom spend limits, categories, and expiration dates for better control.
+        2. Real-Time Expense Tracking
+        •Monitor every transaction as it happens.
+        •Automatically categorize expenses for reporting.
+        •Reduce the risk of lost receipts with mobile capture and automatic matching.
+        3. Seamless Accounting Integrations
+        •Connect with leading systems like QuickBooks, Xero, and NetSuite.
+        •Sync transactions instantly to eliminate manual reconciliation.
+        •Ensure compliance with built-in audit-ready reporting.
+        Benefits
+        •Time Savings: Finance teams save 15+ hours per week by automating expense reporting.
+        •Cost Control: Set rules and monitor spend to prevent overspending or misuse.
+        •Employee Empowerment: Staff get the flexibility to make necessary purchases without 
+        bottlenecks.
+        •Scalability: Whether you’re a 20-person startup or a multinational enterprise, TechFlow 
+        adapts to your needs.
+
+        Who Benefits
+        •Controllers & Finance Managers – gain full budget visibility and forecasting accuracy.
+        •Staff Accountants & AP Teams – spend less time chasing receipts and reconciling 
+        statements.
+        •Office Managers – distribute cards quickly for supplies, travel, and events.
+        •Project Managers – track project-specific expenses in real-time.
+        •IT Teams – manage recurring software and subscription payments effortlessly.
+        Security & Compliance
+        •PCI-DSS compliant infrastructure.
+        •Multi-factor authentication and role-based access controls.
+        •Built-in compliance tools for audits, approvals, and policy enforcement.
+        Why TechFlow
+        Unlike legacy corporate cards or manual expense systems, TechFlow combines the flexibility of 
+        virtual payments with automation that reduces friction for both employees and finance teams. 
+        Companies using TechFlow have reported:
+        •80% reduction in expense processing time
+        •40% faster month-end closing
+        •Significant cost savings from reduced overspending and policy violations
+        Availability
+        TechFlow is available to businesses across North America and Europe, with global rollout planned 
+        for 2026. Pricing is subscription-based and scales with company size and transaction volume.
+        Contact Us
+        For more information, demo requests, or partnership opportunities:
+        •Website: www.techflow.omg
+        •Email: sales@techflow.omg
+        •Phone: (555) 987-6543
+  field_media_document:
+    -
+      display: true
+      description: ''
+      entity: aeea8be3-8a8a-4096-9783-514d438eb855

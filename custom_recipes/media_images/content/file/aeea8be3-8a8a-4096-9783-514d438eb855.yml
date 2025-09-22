@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: aeea8be3-8a8a-4096-9783-514d438eb855
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+      target_uuid: 0
+  filename:
+    -
+      value: 'techflow - introduction.pdf'
+  uri:
+    -
+      value: 'public://2025-09/techflow%20-%20introduction.pdf'
+  filemime:
+    -
+      value: application/pdf
+  filesize:
+    -
+      value: 40446
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1758533152

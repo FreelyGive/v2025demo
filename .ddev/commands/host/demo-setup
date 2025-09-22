@@ -31,6 +31,7 @@ ddev composer require 'drupal/ai:1.2.x-dev@dev' \
 'drupal/ai_provider_openai:1.2.x-dev@dev' \
 'drupal/ai_vdb_provider_milvus:1.1.x-dev@dev' \
 'drupal/pexels_ai:^1.0@alpha' \
+'drupal/ai_simple_pdf_to_text:^1.0@alpha'
 
 # AI Context via git.
 git clone git@git.drupal.org:project/ai_context.git web/modules/contrib/ai_context

@@ -20,3 +20,7 @@ agents:
     id: canvas_ai_orchestrator
     contexts: {  }
     always_include: {  }
+  -
+    id: information_finder
+    contexts: {  }
+    always_include: {  }

@@ -1,0 +1,103 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 800ec9fa-bafd-4fa9-a703-8de2dfe94859
+  bundle: document
+  default_langcode: en
+  depends:
+    20b604dc-3cb0-488d-a4a6-38f9a1d10348: file
+default:
+  revision_user:
+    -
+      target_id: 1
+      target_uuid: 0
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+      target_uuid: 0
+  name:
+    -
+      value: 'CV - CEO Bradley George'
+  created:
+    -
+      value: 1758533190
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_document_data:
+    -
+      value: |-
+        Curriculum Vitae
+        Name: Bradley George
+        Title: Chief Executive Officer, TechFlow
+        Location: Denver, CO, USA
+        Email: bradley.george@techflow.omg
+        Phone: (555) 222-7788
+        Professional Summary
+        Dynamic fintech leader with over 20 years of experience driving innovation in financial services 
+        and technology. Proven track record of scaling B2B SaaS platforms, leading global teams, and 
+        delivering transformative solutions in expense management, corporate payments, and financial 
+        automation. Recognized for combining strategic vision with hands-on operational excellence.
+        Professional Experience
+        TechFlow – Denver, CO
+        Chief Executive Officer
+        2019 – Present
+        •Spearheaded the launch of TechFlow’s virtual corporate card platform, achieving 200% 
+        year-over-year revenue growth.
+        •Led product development strategy resulting in an 80% reduction in expense processing time 
+        for clients.
+        •Scaled the company from seed stage to a leading fintech provider with customers across 
+        North America and Europe.
+        •Built and mentored an executive team overseeing finance, operations, technology, and 
+        marketing.
+        SpendWave Solutions – San Francisco, CA
+        Chief Operating Officer
+        2013 – 2019
+        •Directed global operations at a B2B payments platform, expanding into 10 new markets.
+        •Optimized financial processes, reducing operational costs by 35% through automation.
+        •Negotiated strategic partnerships with Visa and Mastercard, fueling product adoption.
+
+        FinTrust Bank – Chicago, IL
+        Vice President, Corporate Payments Innovation
+        2007 – 2013
+        •Launched digital corporate card products for mid-market businesses.
+        •Oversaw a $100M innovation budget, bringing two new payment platforms to market.
+        •Partnered with technology vendors to deliver mobile-first expense tracking capabilities.
+        Midwest Capital Advisors – Chicago, IL
+        Associate, Corporate Strategy
+        2003 – 2007
+        •Advised Fortune 500 companies on financial restructuring and operational strategy.
+        •Built financial models supporting M&A transactions worth over $2B.
+        Education
+        •MBA, Finance & Strategy – Kellogg School of Management, Northwestern University, 
+        2003
+        •B.S., Economics – University of Illinois Urbana-Champaign, 2001
+        Board & Advisory Roles
+        •Board Member – FinTech Alliance USA
+        •Advisor – Startup Accelerator for B2B SaaS (Denver)
+        Skills
+        •Strategic leadership & scaling organizations
+        •Fintech product innovation & payments expertise
+        •M&A and corporate growth strategy
+        •Investor relations & fundraising
+        •Global team management
+        Awards & Recognition
+        •Top 50 FinTech Leaders to Watch – Global FinTech Review, 2024
+
+        •CEO of the Year (Mid-Market Fintech) – Tech Finance Awards, 2023
+        •Innovator of the Year – B2B Payments Forum, 2021
+  field_media_document:
+    -
+      display: true
+      description: ''
+      entity: 20b604dc-3cb0-488d-a4a6-38f9a1d10348

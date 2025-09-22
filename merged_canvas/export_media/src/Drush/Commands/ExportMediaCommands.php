@@ -71,6 +71,36 @@ final class ExportMediaCommands extends DrushCommands {
           }
         }
       }
+      if ($media->bundle() === 'document') {
+        // Run export command.
+        $media_output = shell_exec('php core/scripts/drupal content:export media ' . $media->id());
+        $yaml = Yaml::parse($media_output);
+        $media_uuid = $yaml['_meta']['uuid'];
+        // If that mediea already exists, skip it.
+        if (file_exists('../custom_recipes/media_images/content/media/' . $media_uuid . '.yml')) {
+          $this->logger()->notice('Media ' . $media->id() . ' already exists in the recipes, skipping.');
+          continue;
+        }
+        // Get all the files.
+        foreach ($yaml['default']['field_media_document'] as $item) {
+          // Load file via uuid.
+          $file = \Drupal::entityTypeManager()
+            ->getStorage('file')
+            ->loadByProperties(['uuid' => $item['entity']]);
+          $file_output = shell_exec('php core/scripts/drupal content:export file ' . reset($file)->id());
+          $file_yaml = Yaml::parse($file_output);
+          $file_name = $file_yaml['default']['filename'][0]['value'];
+          $file_path = urldecode($file_yaml['default']['uri'][0]['value']);
+          // Make sure that the file exists.
+          if (file_exists($file_path)) {
+            // Now we can export the whole thing.
+            copy($file_path, '../custom_recipes/media_images/content/file/' . $file_name);
+            file_put_contents('../custom_recipes/media_images/content/media/' . $media_uuid . '.yml', $media_output);
+            file_put_contents('../custom_recipes/media_images/content/file/' . $file_yaml['_meta']['uuid'] . '.yml', $file_output);
+            $this->logger()->notice('Exported media ' . $media->id() . ' and file ' . reset($file)->id() . ' to the recipes.');
+          }
+        }
+      }
     }
   }
 

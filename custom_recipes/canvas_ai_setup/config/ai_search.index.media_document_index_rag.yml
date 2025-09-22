@@ -1,0 +1,15 @@
+control_field_max_length: false
+exclude_chunk_from_metadata: false
+indexing_options:
+  field_document_data:
+    indexing_option: main_content
+    max: -1
+  url:
+    indexing_option: contextual_content
+    max: -1
+  mid:
+    indexing_option: contextual_content
+    max: -1
+  name:
+    indexing_option: contextual_content
+    max: -1

@@ -1,0 +1,28 @@
+uuid: 89a9dcb4-bb7c-4372-b8cc-b3f155ed151b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.document.field_document_data
+id: media.document.field_document_data.default
+label: 'Document Data Default'
+rule: simple_pdf_to_text_string_long
+input_mode: base
+weight: 100
+worker_type: direct
+entity_type: media
+bundle: document
+field_name: field_document_data
+edit_mode: false
+base_field: field_media_document
+prompt: ''
+token: ''
+plugin_config:
+  automator_enabled: 1
+  automator_rule: simple_pdf_to_text_string_long
+  automator_mode: base
+  automator_base_field: field_media_document
+  automator_edit_mode: 0
+  automator_label: 'Document Data Default'
+  automator_weight: '100'
+  automator_worker_type: direct
