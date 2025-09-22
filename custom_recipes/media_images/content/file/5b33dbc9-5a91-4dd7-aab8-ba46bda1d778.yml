@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 5b33dbc9-5a91-4dd7-aab8-ba46bda1d778
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: bradley1.jpg
+  uri:
+    -
+      value: 'public://2025-09/bradley1.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 106610
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1758527735
