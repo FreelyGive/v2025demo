@@ -13,7 +13,6 @@ default:
   uid:
     -
       target_id: 1
-      target_uuid: 0
   name:
     -
       value: 'A couple sitting on a sofa browsing a laptop, showcasing online shopping leisure.'

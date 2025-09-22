@@ -13,7 +13,6 @@ default:
   uid:
     -
       target_id: 1
-      target_uuid: 0
   name:
     -
       value: 'Female speaker presenting at a business conference with an audience member working on a laptop.'

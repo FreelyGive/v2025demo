@@ -13,7 +13,6 @@ default:
   uid:
     -
       target_id: 1
-      target_uuid: 0
   name:
     -
       value: 'Two businesswomen talking during a conference break, showcasing teamwork.'

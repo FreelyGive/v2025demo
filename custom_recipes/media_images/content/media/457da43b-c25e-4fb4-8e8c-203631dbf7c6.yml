@@ -13,7 +13,6 @@ default:
   uid:
     -
       target_id: 1
-      target_uuid: 0
   name:
     -
       value: 'Woman using laptop and credit card for online shopping at home.'

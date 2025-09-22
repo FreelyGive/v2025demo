@@ -13,7 +13,6 @@ default:
   uid:
     -
       target_id: 1
-      target_uuid: 0
   name:
     -
       value: 'Business professionals engaged in a collaborative meeting in a modern office setting.'

@@ -13,7 +13,6 @@ default:
   uid:
     -
       target_id: 1
-      target_uuid: 0
   name:
     -
       value: 'An African American man with afro hair is holding a credit card, making an online purchase indoors.'

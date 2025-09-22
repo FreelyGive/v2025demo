@@ -13,7 +13,6 @@ default:
   uid:
     -
       target_id: 1
-      target_uuid: 0
   name:
     -
       value: 'Woman holding orange credit card while shopping online on laptop from a sofa.'

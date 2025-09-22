@@ -13,7 +13,6 @@ default:
   uid:
     -
       target_id: 1
-      target_uuid: 0
   name:
     -
       value: 'Woman in black sweater stressed with financial paperwork, overwhelmed at white table.'

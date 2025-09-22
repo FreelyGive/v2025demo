@@ -13,7 +13,6 @@ default:
   uid:
     -
       target_id: 1
-      target_uuid: 0
   name:
     -
       value: 'Close-up of a curly-haired woman resting on US dollar bills, conveying financial contemplation.'

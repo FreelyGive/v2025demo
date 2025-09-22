@@ -13,7 +13,6 @@ default:
   uid:
     -
       target_id: 1
-      target_uuid: 0
   name:
     -
       value: 'An elderly man sits at a table with a smartphone and credit card, making an online purchase.'

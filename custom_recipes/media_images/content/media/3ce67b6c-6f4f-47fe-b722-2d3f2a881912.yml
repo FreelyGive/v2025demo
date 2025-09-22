@@ -13,7 +13,6 @@ default:
   uid:
     -
       target_id: 1
-      target_uuid: 0
   name:
     -
       value: 'Young African American woman with braided hair making an online payment using laptop and credit card.'

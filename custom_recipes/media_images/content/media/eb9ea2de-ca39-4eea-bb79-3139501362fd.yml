@@ -13,7 +13,6 @@ default:
   uid:
     -
       target_id: 1
-      target_uuid: 0
   name:
     -
       value: 'Business professionals attending a seminar with a presentation on market share, highlighting diverse participation.'

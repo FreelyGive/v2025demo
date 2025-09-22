@@ -13,7 +13,6 @@ default:
   uid:
     -
       target_id: 1
-      target_uuid: 0
   name:
     -
       value: 'Side view of crop faceless male passenger sitting on backseat and using credit card reader to pay for trip in taxi'

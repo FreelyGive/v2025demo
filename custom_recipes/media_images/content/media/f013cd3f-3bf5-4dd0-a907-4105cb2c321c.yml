@@ -13,7 +13,6 @@ default:
   uid:
     -
       target_id: 1
-      target_uuid: 0
   name:
     -
       value: 'An attentive group of adults seated at an indoor conference, focusing on a presentation.'

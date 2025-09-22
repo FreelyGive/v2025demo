@@ -13,7 +13,6 @@ default:
   uid:
     -
       target_id: 1
-      target_uuid: 0
   name:
     -
       value: 'A passenger makes a payment using a card in a taxi with a handheld payment terminal.'

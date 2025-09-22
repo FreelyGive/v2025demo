@@ -13,7 +13,6 @@ default:
   uid:
     -
       target_id: 1
-      target_uuid: 0
   name:
     -
       value: 'A person making a cashless transaction using a smartphone and credit card on a wooden table.'

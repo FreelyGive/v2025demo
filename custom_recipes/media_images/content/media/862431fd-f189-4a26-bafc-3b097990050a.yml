@@ -13,7 +13,6 @@ default:
   uid:
     -
       target_id: 1
-      target_uuid: 0
   name:
     -
       value: 'Happy woman using smartphone and holding credit card in lush garden setting, enjoying online shopping.'

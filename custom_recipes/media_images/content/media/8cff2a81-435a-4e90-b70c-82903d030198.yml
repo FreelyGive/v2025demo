@@ -13,7 +13,6 @@ default:
   uid:
     -
       target_id: 1
-      target_uuid: 0
   name:
     -
       value: 'Business conference attendees listen to a presentation on revenue split by quarter and geography.'

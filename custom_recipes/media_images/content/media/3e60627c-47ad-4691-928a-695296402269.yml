@@ -13,7 +13,6 @@ default:
   uid:
     -
       target_id: 1
-      target_uuid: 0
   name:
     -
       value: 'Father and children using a laptop for online shopping at home, bonding over e-commerce activities.'

@@ -13,7 +13,6 @@ default:
   uid:
     -
       target_id: 1
-      target_uuid: 0
   name:
     -
       value: 'A young adult using a calculator and laptop to manage finances at home, surrounded by papers.'

@@ -13,7 +13,6 @@ default:
   uid:
     -
       target_id: 1
-      target_uuid: 0
   name:
     -
       value: 'A woman reviews receipts and calculates expenses at a desk with a pink calculator.'
