@@ -7,7 +7,6 @@ default:
   uid:
     -
       target_id: 1
-      target_uuid: 0
   filename:
     -
       value: 'CV - Bradley George.pdf'
