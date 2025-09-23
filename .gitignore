@@ -93,6 +93,7 @@ node_modules
 patches.json
 patches.lock.json
 /vendor
+/web
 /.editorconfig
 /.gitattributes
 .DS_Store
