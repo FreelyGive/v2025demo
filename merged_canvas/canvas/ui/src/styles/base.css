@@ -1,0 +1,38 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  overflow: hidden;
+  margin: 0;
+  background: none;
+  background-color: var(--gray-4);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+button {
+  all: unset;
+}
+
+a.tabledrag-handle .handle.handle {
+  margin: 0 0.5em 0;
+  background-position: 0;
+}
+
+/* Dialogs triggered from CKEditor 5 have the `.ui-dialog--narrow` class
+ hard-coded, so the widths defined there are unset here. */
+.ui-dialog--narrow.ck-canvas-dialog {
+  min-width: unset;
+  max-width: unset;
+}
+
+/* This fragment is used only for wrapping and should not impact layouts. */
+drupal-html-fragment {
+  display: contents;
+}

@@ -1,0 +1,10 @@
+<sl-badge
+  {{ attributes }}
+  variant="{{ variant }}"
+  {% if pulse %} pulse {% endif %}
+  {% if pill %} pill {% endif %}
+>
+  {% block content %}
+    The contents of the example block
+  {% endblock %}
+</sl-badge>

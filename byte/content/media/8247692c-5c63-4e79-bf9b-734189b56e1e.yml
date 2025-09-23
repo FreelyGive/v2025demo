@@ -1,0 +1,35 @@
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: sample_thumb_2.png
+  created:
+    -
+      value: 1752175078
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  field_media_image:
+    -
+      alt: 'A laptop computer displaying charts and graphs.'
+      title: ''
+      width: 350
+      height: 196
+      entity: fad88728-343b-4417-a001-99605650333c
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 8247692c-5c63-4e79-bf9b-734189b56e1e
+  bundle: image
+  default_langcode: en
+  depends:
+    fad88728-343b-4417-a001-99605650333c: file

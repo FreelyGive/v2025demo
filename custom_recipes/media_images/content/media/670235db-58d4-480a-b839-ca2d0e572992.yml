@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 670235db-58d4-480a-b839-ca2d0e572992
+  bundle: image
+  default_langcode: en
+  depends:
+    10354e89-62f3-44c1-8b13-e06cb7158aed: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Modern desk setup with a laptop and analytical charts showcasing data interpretation and business analysis.'
+  created:
+    -
+      value: 1758435626
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photograph featuring a modern desk setup with a laptop in the top left corner and analytical charts on a piece of paper to the right. The background is a sleek, dark, and smooth surface, providing a professional and minimalistic ambiance. The primary colors seen in the charts are vibrant reds, blues, yellows, and greens, which stand out against the white paper. There are no people present, keeping the focus on the objects and their relevance to business analysis. The mood is professional and analytical, conveying a sense of focused productivity. The charts show various data interpretations, such as pie charts, line graphs, and bar graphs, emphasizing analytical work.'
+  field_media_image:
+    -
+      alt: 'Modern desk setup with a laptop and analytical charts showcasing data interpretation and business analysis.'
+      title: Lukas
+      width: 4928
+      height: 3264
+      entity: 10354e89-62f3-44c1-8b13-e06cb7158aed

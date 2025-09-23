@@ -1,0 +1,10 @@
+{
+  "props": {
+    "homeUrl": "/",
+    "logo": "/core/misc/logo/drupal-logo.svg",
+    "siteName": "My awesome website"
+  },
+  "slots": {
+    "siteSlogan": "<p>This website is the best. It's better than all the rest.</p>"
+  }
+}

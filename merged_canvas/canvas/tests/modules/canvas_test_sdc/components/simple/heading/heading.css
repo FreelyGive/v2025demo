@@ -1,0 +1,52 @@
+[data-component-id="canvas_test_sdc:heading"] {
+  &.h1 {
+    letter-spacing: -0.01em;
+    font-size: 1.75rem;
+    line-height: var(--sp2);
+  }
+
+  &.h2 {
+    letter-spacing: -0.01em;
+    font-size: 1.5rem;
+    line-height: var(--sp2);
+  }
+
+  &.h3 {
+    font-size: 1.25rem;
+    line-height: var(--sp1-5);
+  }
+
+  &.h4 {
+    font-size: 1.125rem;
+    line-height: var(--sp1-5);
+  }
+
+  &.h5 {
+    font-size: 1rem;
+    line-height: var(--sp1-5);
+  }
+
+  &.h6 {
+    font-size: 0.875rem;
+    line-height: var(--sp);
+  }
+
+  &.secondary {
+    color: var(--color--primary-50);
+  }
+
+  @media (min-width: 43.75rem) {
+    &.h1 {
+      font-size: 3.75rem;
+      line-height: var(--sp4);
+    }
+    &.h2 {
+      font-size: 2.25rem;
+      line-height: var(--sp3);
+    }
+    &.h3 {
+      font-size: 1.5rem;
+      line-height: var(--sp2);
+    }
+  }
+}

@@ -1,0 +1,12 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Test base
+status: stable
+group: Components
+props:
+  type: object
+  properties:
+    title:
+      title: Title
+      type: string
+      examples:
+        - This is the test base component

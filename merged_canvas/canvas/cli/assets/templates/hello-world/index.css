@@ -1,0 +1,33 @@
+.hello-world-component {
+  padding: 20px;
+  background-color: #ccccff;
+  border-radius: 8px;
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.hello-world-component .greeting {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.hello-world-component .content {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.hello-world-component .cta {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.hello-world-component .cta:hover {
+  background-color: #0056b3;
+}

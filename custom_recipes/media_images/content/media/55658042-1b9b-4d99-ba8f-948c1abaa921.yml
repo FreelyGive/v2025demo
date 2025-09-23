@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 55658042-1b9b-4d99-ba8f-948c1abaa921
+  bundle: image
+  default_langcode: en
+  depends:
+    4bcbce58-18cb-4c1e-9e40-9262f3e8e1ef: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Business professionals attending a meeting in a modern conference room.'
+  created:
+    -
+      value: 1758523867
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "The image is a photograph depicting a group of business professionals in a modern conference room. The overall color scheme is neutral, with light gray walls and a wooden floor, complemented by natural light streaming through large windows. Several individuals of diverse backgrounds and ages are seated around a table, appearing engaged and attentive, while a female presenter stands confidently, possibly explaining a point. The mood is professional and focused, with an atmosphere of collaborative discussion. Notable objects in the scene include a large screen displaying graphs and charts, a whiteboard, and several water bottles on the table, contributing to the business setting. The room's decor is sleek and contemporary, enhancing the professional ambiance of the meeting."
+  field_media_image:
+    -
+      alt: 'Business professionals attending a meeting in a modern conference room.'
+      title: 'RDNE Stock project'
+      width: 6637
+      height: 4425
+      entity: 4bcbce58-18cb-4c1e-9e40-9262f3e8e1ef

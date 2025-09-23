@@ -1,0 +1,88 @@
+uuid: 82d79d93-c4b8-4413-9b76-f89ffe432bc1
+langcode: en
+status: true
+dependencies:
+  enforced:
+    config:
+      - canvas.js_component.canvas_test_code_components_with_no_props
+      - canvas.js_component.canvas_test_code_components_with_props
+machineName: canvas_test_code_components_using_imports
+name: 'Component using imports'
+required: {  }
+props: {  }
+slots: {  }
+js:
+  original: |
+    import WithNoProps from '@/components/canvas_test_code_components_with_no_props';
+    import WithProps from '@/components/canvas_test_code_components_with_props';
+    import FormattedText from "@/lib/FormattedText";
+    import { cn } from "@/lib/utils";
+
+    const UsingImports = ({
+      title = "<h3>Component using imports</h3>",
+    }) => {
+      return (
+        <div className="test-component-using-specific-imports">
+          <h2>This component imports specific components</h2>
+          <div className="imported-components">
+            <div className="no-props-component">
+              <h3>Component with no props:</h3>
+              <WithNoProps />
+            </div>
+            <div className="props-component">
+              <h3>Component with props:</h3>
+              <WithProps name="Imported Name" age={25} />
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    export default UsingImports;
+  compiled: |
+    import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+    import WithNoProps from '@/components/canvas_test_code_components_with_no_props';
+    import WithProps from '@/components/canvas_test_code_components_with_props';
+    import FormattedText from "@/lib/FormattedText";
+    import { cn } from "@/lib/utils";
+    const UsingImports = ({ title = "<h3>Component using imports</h3>" })=>{
+        return /*#__PURE__*/ _jsxs("div", {
+            className: "test-component-using-specific-imports",
+            children: [
+                /*#__PURE__*/ _jsx("h2", {
+                    children: "This component imports specific components"
+                }),
+                /*#__PURE__*/ _jsxs("div", {
+                    className: "imported-components",
+                    children: [
+                        /*#__PURE__*/ _jsxs("div", {
+                            className: "no-props-component",
+                            children: [
+                                /*#__PURE__*/ _jsx("h3", {
+                                    children: "Component with no props:"
+                                }),
+                                /*#__PURE__*/ _jsx(WithNoProps, {})
+                            ]
+                        }),
+                        /*#__PURE__*/ _jsxs("div", {
+                            className: "props-component",
+                            children: [
+                                /*#__PURE__*/ _jsx("h3", {
+                                    children: "Component with props:"
+                                }),
+                                /*#__PURE__*/ _jsx(WithProps, {
+                                    name: "Imported Name",
+                                    age: 25
+                                })
+                            ]
+                        })
+                    ]
+                })
+            ]
+        });
+    };
+    export default UsingImports;
+css:
+  original: ''
+  compiled: ''
+dataDependencies: []

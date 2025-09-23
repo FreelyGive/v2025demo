@@ -1,0 +1,61 @@
+parameters:
+  level: 8
+  fileExtensions:
+    - php
+    - module
+    - inc
+    - install
+    - theme
+    - profile
+  excludePaths:
+    - '**/vendor/**'
+    # Sometimes npm packages include PHP files
+    - '**/node_modules/**'
+    # These are 1:1 copies from Drupal core, with trivial additions that cannot have significant PHPStan impact. PHPStan compliance should happen upstream.
+    - src/Plugin/Field/FieldTypeOverride
+    - src/TypedData/BetterEntityDataDefinition.php
+    # This trait decorates core's \Drupal\Core\Test\FunctionalTestSetupTrait::prepareSettings(), which itself triggers a PHPStan warning that core ignores. Match that.
+    - tests/src/Traits/ContribStrictConfigSchemaTestTrait.php
+    - scripts/src/ConverterCommand.php
+  treatPhpDocTypesAsCertain: false
+  drupal:
+    entityMapping:
+      asset_library:
+        class: Drupal\canvas\Entity\AssetLibrary
+      component:
+        class: Drupal\canvas\Entity\Component
+      js_component:
+        class: Drupal\canvas\Entity\JavaScriptComponent
+      canvas_page:
+        class: Drupal\canvas\Entity\Page
+      page_region:
+        class: Drupal\canvas\Entity\PageRegion
+      pattern:
+        class: Drupal\canvas\Entity\Pattern
+      staged_config_update:
+        class: Drupal\canvas\Entity\StagedConfigUpdate
+  ignoreErrors:
+    - identifier: missingType.iterableValue
+    - identifier: missingType.generics
+    # Ignore invalid phpunit methods/covers
+    # @todo Remove in https://drupal.org/i/3533845
+    - identifier: phpunit.coversMethod
+    - identifier: phpunit.covers
+    -
+      message: "#^Class .* extends @internal class#"
+      count: 1
+      path: src/MediaLibraryCanvasPropOpener.php
+    -
+      message: "#^Access to an undefined property#"
+      count: 1
+      path: src/PropSource/StaticPropSource.php
+    -
+      messages:
+        - "#^Missing cache backend declaration for performance\\.$#"
+      paths:
+        - src/Plugin/BlockManager.php
+        - src/Plugin/ComponentPluginManager.php
+    -
+      message: "#^Method Drupal\\\\canvas\\\\Entity\\\\Pattern\\:\\:preCreate\\(\\) has no return type specified\\.$#"
+      count: 1
+      path: src/Entity/Pattern.php

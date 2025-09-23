@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 535bd951-5611-406c-adea-e477074bbf2c
+  bundle: image
+  default_langcode: en
+  depends:
+    746a7f64-a662-454c-b168-c35eb91f33f1: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A woman in hijab focused on her laptop in a cozy home office setting.'
+  created:
+    -
+      value: 1758434018
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo depicting a woman in a hijab, deeply focused on her laptop in a cozy home office setting. The color palette is warm, with soft beige and brown tones dominating the background, illuminated by a gentle lamp glow. The woman appears to be in her twenties or thirties, exuding a calm and concentrated demeanor. Her expression is one of intent focus, reflecting a dedicated mood. She is seated at a wooden desk, which adds to the cozy and warm atmosphere. A glass of water and a small lamp are notable objects, contributing to the homely feel of the scene. The overall atmosphere is serene and studious.'
+  field_media_image:
+    -
+      alt: 'A woman in hijab focused on her laptop in a cozy home office setting.'
+      title: 'Tima Miroshnichenko'
+      width: 5676
+      height: 3784
+      entity: 746a7f64-a662-454c-b168-c35eb91f33f1

@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: c6387ccf-86d7-4385-8748-5b23020659be
+  bundle: image
+  default_langcode: en
+  depends:
+    23e0f744-95bb-4423-953f-872bac83c071: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A tranquil modern home office featuring a wooden desk, ergonomic chair, and soft natural light.'
+  created:
+    -
+      value: 1758433668
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo of a tranquil modern home office. It features a warm wooden desk paired with an ergonomic chair in a soft gray tone, set against a backdrop of creamy white vertical blinds. The natural light filters softly through the blinds, creating a serene and inviting atmosphere. There’s no person visible in the image, enhancing the peaceful solitude. The desk holds a sleek laptop, a collection of colorful pens, a small plant, and a decorative item, suggesting a tidy and organized workspace. This setting evokes a calm, focused mood ideal for productivity.'
+  field_media_image:
+    -
+      alt: 'A tranquil modern home office featuring a wooden desk, ergonomic chair, and soft natural light.'
+      title: 'Lisa from Pexels'
+      width: 3064
+      height: 4400
+      entity: 23e0f744-95bb-4423-953f-872bac83c071

@@ -1,0 +1,33 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Test Value Update
+props:
+  type: object
+  properties:
+    textValue:
+      type: string
+      title: Heading
+      examples:
+        - "The Default!"
+    selectValue:
+      type: string
+      title: Select Value
+      enum:
+        - foo
+        - bar
+        - baz
+      meta:enum:
+        foo: Foo
+        bar: Bar
+        baz: Baz
+      examples:
+        - foo
+    numberValue:
+      type: number
+      title: Number Value
+      examples:
+        - 999
+    boolValue:
+      title: Bool Value
+      type: boolean
+      examples:
+        - true

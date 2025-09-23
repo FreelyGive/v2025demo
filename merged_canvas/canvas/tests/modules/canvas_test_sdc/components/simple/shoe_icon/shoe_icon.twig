@@ -1,0 +1,7 @@
+<sl-icon
+  {{ attributes.addClass('color-'~color, 'size-'~size) }}
+  name="{{ name }}"
+  label="{{ label }}"
+  {% if slot %}slot="{{ slot }}"{% endif %}
+
+></sl-icon>

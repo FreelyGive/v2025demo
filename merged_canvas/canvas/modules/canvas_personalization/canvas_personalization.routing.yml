@@ -1,0 +1,54 @@
+# ⚠️ This is highly experimental and *will* be refactored or even removed.
+# @todo Revisit in https://www.drupal.org/i/3527086
+
+entity.segment.collection:
+  path: '/admin/structure/segment'
+  defaults:
+    _entity_list: 'segment'
+    _title: 'Personalization Segment configuration'
+  requirements:
+    _permission: 'administer personalization segments'
+
+entity.segment.add_form:
+  path: '/admin/structure/segment/add'
+  defaults:
+    _entity_form: 'segment.add'
+    _title: 'Add a personalization segment'
+  requirements:
+    _entity_create_access: 'segment'
+
+entity.segment.edit_form:
+  path: '/admin/structure/segment/{segment}'
+  defaults:
+    _entity_form: 'segment.edit'
+    _title: 'Edit a personalization segment'
+  requirements:
+    _entity_access: 'segment.edit'
+
+entity.segment.add_rule_form:
+  path: '/admin/structure/segment/{segment}/rule'
+  defaults:
+    _entity_form: 'segment.add_rule_form'
+    _title: 'Add a personalization segment rule'
+  requirements:
+    _entity_access: 'segment.edit'
+
+entity.segment.delete_segment_rule:
+  path: '/admin/structure/segment/{segment}/rule-delete/{rule}'
+  defaults:
+    _controller: '\Drupal\canvas_personalization\Controller\SegmentationRuleController::delete'
+    _title: 'Delete a personalization segment rule'
+  parameters:
+    rule:
+      type: string
+  requirements:
+    _entity_access: 'segment.edit'
+    _csrf_token: 'TRUE'
+
+entity.segment.delete_form:
+  path: '/admin/structure/segment/{segment}/delete'
+  defaults:
+    _entity_form: 'segment.delete'
+    _title: 'Delete a personalization segment'
+  requirements:
+    _entity_access: 'segment.delete'

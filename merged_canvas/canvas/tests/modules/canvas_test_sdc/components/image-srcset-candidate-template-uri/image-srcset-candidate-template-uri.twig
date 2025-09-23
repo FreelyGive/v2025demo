@@ -1,0 +1,18 @@
+{#
+@todo: Stop hardcoding these widths in https://www.drupal.org/i/3533563
+#}
+{% set widths = [640, 750, 828, 1080, 1200, 1920, 2048, 3840]|filter(v => v <= image.width) %}
+{% set containerSize = containerSize|default('100') %}
+
+<img
+  class="image"
+  src="{{ image.src }}"
+  alt="{{ image.alt }}"
+  width="{{ image.width }}"
+  height="{{ image.height }}"
+  {% if widths and srcSetCandidateTemplate %}
+    srcset="{% for width in widths %}{{ srcSetCandidateTemplate|replace({'{width}': width}) }} {{width}}w{% if not loop.last %}, {% endif %}{% endfor %}"
+    sizes="auto {{ containerSize }}vw"
+  {% endif %}
+  loading="lazy"
+/>

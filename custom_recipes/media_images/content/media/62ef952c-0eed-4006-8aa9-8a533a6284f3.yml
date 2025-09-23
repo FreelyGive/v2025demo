@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 62ef952c-0eed-4006-8aa9-8a533a6284f3
+  bundle: image
+  default_langcode: en
+  depends:
+    0ef34b8d-bb12-4eea-b53c-be990844fe1f: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Young woman enjoying online shopping with a laptop and colorful bags on a sofa.'
+  created:
+    -
+      value: 1758522806
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This is a photo featuring a young woman sitting on a light-colored sofa, enjoying online shopping with a laptop. She appears to be in her twenties, with a relaxed and content expression, dressed casually in a lavender top and gray pants. The background is minimalist with soft, neutral tones, emphasizing the vibrant, colorful shopping bags beside her. The bags are a mix of pink, orange, white, and other vivid colors, adding a lively contrast to the scene. She is holding a credit card in one hand, indicating a shopping activity. The overall mood of the image is cheerful and relaxed, capturing the pleasure of retail therapy at home. The setting seems comfortable and cozy, enhancing the enjoyment of online shopping.'
+  field_media_image:
+    -
+      alt: 'Young woman enjoying online shopping with a laptop and colorful bags on a sofa.'
+      title: 'Nataliya Vaitkevich'
+      width: 6240
+      height: 4160
+      entity: 0ef34b8d-bb12-4eea-b53c-be990844fe1f

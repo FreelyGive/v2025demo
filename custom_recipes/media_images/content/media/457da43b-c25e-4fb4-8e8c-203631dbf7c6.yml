@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 457da43b-c25e-4fb4-8e8c-203631dbf7c6
+  bundle: image
+  default_langcode: en
+  depends:
+    4e75c44f-5e34-444f-96ea-53e248acbae6: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Woman using laptop and credit card for online shopping at home.'
+  created:
+    -
+      value: 1758522641
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo featuring a woman in a relaxed home setting, using a laptop and holding a credit card, consistent with an online shopping theme. The background is soft and neutral, with pale walls and cushions in muted colors, creating a cozy atmosphere. The woman appears to be in her 20s or 30s, with long braided hair, exuding a content and engaged mood. She is casually dressed in comfortable home attire, suggesting a laid-back environment. The main colors in the scene include soft whites and grays, with earthy tones from the furniture. Her expression is cheerful as she focuses on her laptop, conveying a sense of satisfaction and ease. The neutral color palette and relaxed setting contribute to the overall inviting and calm mood of the image.'
+  field_media_image:
+    -
+      alt: 'Woman using laptop and credit card for online shopping at home.'
+      title: 'Mikhail Nilov'
+      width: 4000
+      height: 6000
+      entity: 4e75c44f-5e34-444f-96ea-53e248acbae6

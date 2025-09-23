@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 6a8893ab-fd2c-4e97-b8c8-9f6be81b592d
+  bundle: image
+  default_langcode: en
+  depends:
+    66c0c75b-9e47-4536-b0b1-377cf26da7c4: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A joyful grandfather and grandson sharing a playful moment on the couch, indoors.'
+  created:
+    -
+      value: 1758435496
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This image is a photo capturing a joyful moment between a grandfather and his grandson indoors. The background features warm, neutral colors with beige curtains and a matching couch, creating a cozy atmosphere. The grandfather appears to be an older man with a beard, wearing glasses, and exudes happiness and warmth as he interacts with the child. The grandson, likely around preschool age, has a playful smile and an energetic posture, showing a lively and cheerful expression. They are both holding a blue toy, indicating shared play and bonding. The mood of the image is joyful and heartwarming, highlighting the affectionate relationship between the two. The focus on their expressions and interaction emphasizes the emotional connection and playful dynamic.'
+  field_media_image:
+    -
+      alt: 'A joyful grandfather and grandson sharing a playful moment on the couch, indoors.'
+      title: 'Mikhail Nilov'
+      width: 6000
+      height: 4000
+      entity: 66c0c75b-9e47-4536-b0b1-377cf26da7c4

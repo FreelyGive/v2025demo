@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: ae7347ce-2bcc-4fe4-80b0-2772b3879146
+  bundle: image
+  default_langcode: en
+  depends:
+    afff9cf9-a15f-48e9-abb1-edfbd602fcc6: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A monochrome portrait of a surprised young boy with wide eyes and open mouth.'
+  created:
+    -
+      value: 1758435496
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "This image is a monochrome photograph featuring a young boy with wide eyes and an open mouth, indicating a surprised expression. The grayscale tones create a striking contrast, emphasizing the boy's facial features. The background is a smooth, dark shade, which enhances the focus on the subject. The boy appears to be around 6-8 years old, with curly hair, and the image suggests a playful or candid moment captured spontaneously. The mood is one of astonishment or excitement, conveyed through his animated expression. There are no additional objects in the image; the focus remains solely on the boy and his vivid expression."
+  field_media_image:
+    -
+      alt: 'A monochrome portrait of a surprised young boy with wide eyes and open mouth.'
+      title: 'mohamed abdelghaffar'
+      width: 4016
+      height: 6016
+      entity: afff9cf9-a15f-48e9-abb1-edfbd602fcc6

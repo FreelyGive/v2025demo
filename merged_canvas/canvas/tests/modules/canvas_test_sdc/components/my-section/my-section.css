@@ -1,0 +1,41 @@
+.my-section__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 20px;
+  background-color: #fff;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.my-section__content-wrapper {
+  flex: 1;
+  padding: 20px;
+}
+
+.my-section__image-wrapper {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.my-section__paragraph {
+  margin: 0.5em 0;
+  color: #666;
+  font-size: 1.2em;
+}
+
+.my-section__h2 {
+  margin: 0.5em 0;
+  color: #333;
+  font-size: 2.5em;
+}
+
+.my-section__img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}

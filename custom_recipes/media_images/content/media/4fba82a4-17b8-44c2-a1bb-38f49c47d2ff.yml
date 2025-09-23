@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 4fba82a4-17b8-44c2-a1bb-38f49c47d2ff
+  bundle: image
+  default_langcode: en
+  depends:
+    feecb242-ed3c-46b9-b0c8-869ee7928521: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Two people pointing at financial details on a document, highlighting invoice analysis.'
+  created:
+    -
+      value: 1758523018
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo showing two hands pointing at a financial document with a focus on invoice analysis. The background is softly blurred, with warm, neutral tones that create a professional and focused atmosphere. One hand appears to belong to a person with a medium skin tone, while the other has a lighter skin tone. Both individuals seem engaged and intent on analyzing the details of the document. The document is primarily white with a blue highlighted section, suggesting emphasis on specific financial data. The image conveys a feeling of collaboration and concentration, characteristic of a business or office setting. Overall, it captures a moment of detailed financial discussion and teamwork.'
+  field_media_image:
+    -
+      alt: 'Two people pointing at financial details on a document, highlighting invoice analysis.'
+      title: 'Kindel Media'
+      width: 5184
+      height: 3888
+      entity: feecb242-ed3c-46b9-b0c8-869ee7928521

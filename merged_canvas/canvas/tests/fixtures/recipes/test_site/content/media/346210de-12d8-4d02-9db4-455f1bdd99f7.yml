@@ -1,0 +1,38 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 346210de-12d8-4d02-9db4-455f1bdd99f7
+  bundle: image
+  default_langcode: en
+  depends:
+    f7e35fba-14ba-47f1-b2e1-16d2c6d70dd0: file
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: cats-1.jpg
+  created:
+    -
+      value: 1747737475
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: en
+  field_media_image:
+    -
+      entity: f7e35fba-14ba-47f1-b2e1-16d2c6d70dd0
+      alt: 'A cat on top of a cat tree trying to reach a Christmas tree'
+      title: ''
+      width: 450
+      height: 800

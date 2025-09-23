@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 044f661d-01a5-4300-9608-6176c7a5ded5
+  bundle: image
+  default_langcode: en
+  depends:
+    4506736e-fc73-4d92-8b5d-35cc2e735f3c: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'African American man shopping online using a laptop and credit card at home.'
+  created:
+    -
+      value: 1758522641
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This is a photo depicting an African American man using a laptop and holding a credit card, suggesting online shopping. He appears to be in his 30s or 40s, with a focused expression, sitting comfortably on a modern gray couch. The room is well-lit with natural light, creating a comfortable and relaxed atmosphere. Earthy tones dominate the scene, with gray sofas and a wooden coffee table. A vase of white flowers is an eye-catching element, adding a touch of freshness and elegance. Decorative pillows with vivid patterns and oranges brighten the space subtly. The overall mood is calm and homey, suggesting a moment of peaceful activity in a modern living room.'
+  field_media_image:
+    -
+      alt: 'African American man shopping online using a laptop and credit card at home.'
+      title: 'Kindel Media'
+      width: 5184
+      height: 2920
+      entity: 4506736e-fc73-4d92-8b5d-35cc2e735f3c

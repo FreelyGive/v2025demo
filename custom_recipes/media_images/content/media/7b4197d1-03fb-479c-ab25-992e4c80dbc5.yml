@@ -1,0 +1,89 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 7b4197d1-03fb-479c-ab25-992e4c80dbc5
+  bundle: document
+  default_langcode: en
+  depends:
+    fc6e4933-b86a-4065-8bd0-911b8a9217bd: file
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Press Release Virtual Fintech Summit 2025'
+  created:
+    -
+      value: 1758533165
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_document_data:
+    -
+      value: |-
+        Press Release
+        FOR IMMEDIATE RELEASE
+        TechFlow to Reveal Expense Management Breakthroughs at Virtual FinTech Summit 2025
+        Denver, September 22, 2025 – TechFlow, a leading innovator in financial technology solutions,
+        announced today its participation in the upcoming Virtual FinTech Summit 2025, where the
+        company’s CEO, Bradle George, will unveil how TechFlow reduced expense processing times by
+        80% through the use of virtual corporate cards.
+        As organizations face mounting challenges in controlling spend and eliminating manual financial
+        workflows, TechFlow’s virtual corporate card platform is helping finance teams replace outdated
+        processes with automation and real-time insights.
+        “Accounting teams spend countless hours chasing receipts and reconciling statements,”
+        said Bradley George, CEO of TechFlow. “We built TechFlow to solve that problem at
+        scale. Our solution gives finance leaders visibility, control, and time back — while
+        empowering employees with smarter ways to manage expenses.”
+        During the Summit, Bradley George will host an exclusive webinar attended by over 200 finance
+        leaders, controllers, and operations managers. The session will highlight how businesses can
+        leverage automation to save 15+ hours per week on expense management and boost overall
+        financial efficiency.
+        Event Details
+        •Session Title: Expense Management Secrets from TechFlow’s CEO
+        •Date & Time: Tuesday, November 18, 2025 at 2:00 PM EST
+        •Format: Virtual (registration required)
+        •Audience: Controllers, finance managers, accountants, operations leaders, and IT
+        professionals
+        Why It Matters
+        TechFlow’s virtual corporate cards offer:
+        •Instant card creation with customizable spend controls.
+        •Real-time tracking to monitor and categorize expenses instantly.
+        •Seamless integrations with popular accounting platforms like QuickBooks.
+        By modernizing expense management, TechFlow helps finance teams focus less on administrative
+        burdens and more on strategic decision-making.
+        Registration
+        Attendance is limited to 200 participants. Interested finance leaders can [reserve their spot here] to
+        access the live webinar or receive on-demand access afterward, including exclusive case study
+        materials.
+
+        About TechFlow
+        TechFlow is a B2B fintech company dedicated to transforming how businesses manage spend.
+        Through its innovative virtual corporate card platform, TechFlow empowers finance teams to
+        control budgets, automate reconciliation, and eliminate manual reporting. TechFlow serves
+        organizations across industries, enabling smarter, faster, and more transparent financial operations.
+        Media Contact
+        Janey Jones
+        Head of Marketing
+        TechFlow
+        j.jones@techflow.omg
+        (555) 123-9876
+  field_media_document:
+    -
+      display: true
+      description: ''
+      entity: fc6e4933-b86a-4065-8bd0-911b8a9217bd

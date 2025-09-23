@@ -1,0 +1,56 @@
+services:
+  php:
+    image: tugboatqa/php:8.3-apache
+    default: true
+    depends:
+      - db
+    commands:
+      init:
+        - docker-php-ext-install opcache
+        - a2enmod headers rewrite
+      update:
+        # Clean up from any previous build.
+        - rm -Rf $TUGBOAT_ROOT/project
+        # Create the project.
+        - composer create-project drupal/cms $TUGBOAT_ROOT/project --stability=dev --repository="{\"type\":\"path\",\"url\":\"$TUGBOAT_ROOT/project_template\"}" --no-install
+        # Ensure all components are loaded from local path repositories.
+        - find $TUGBOAT_ROOT -maxdepth 2 -type d -name 'drupal_cms_*' -exec composer config repositories.{} path {} --working-dir=$TUGBOAT_ROOT/project ';'
+        # Allow development versions of components.
+        - composer config minimum-stability dev --working-dir=$TUGBOAT_ROOT/project
+        # Add Tugboat-specific settings.
+        - composer config --merge --json extra.drupal-scaffold.file-mapping "{\"[web-root]/sites/default/default.settings.php\":{\"append\":\"../.tugboat/append.settings.txt\"}}" --working-dir=$TUGBOAT_ROOT/project
+        # Install all dependencies.
+        - composer install --working-dir=$TUGBOAT_ROOT/project
+        # Symlink the Drupal root to the Apache web root.
+        - ln -snf $TUGBOAT_ROOT/project/web $DOCROOT
+        # Create the files directory and settings.php files with appropriate perms.
+        - mkdir -p $DOCROOT/sites/default/files
+        - chown -R www-data:www-data $DOCROOT/sites/default
+        - chmod 2775 $DOCROOT/sites/default/files
+        - cp $DOCROOT/sites/default/default.settings.php $DOCROOT/sites/default/settings.php
+        # Project Browser needs the filesystem to be writable by the webserver.
+        - chmod 2775 $TUGBOAT_ROOT/project
+        - chgrp -R www-data $TUGBOAT_ROOT/project
+        - chmod g+w $TUGBOAT_ROOT/project/web
+        - chmod g+w $TUGBOAT_ROOT/project/vendor
+        # Install Drupal using Drush.
+        - |
+          set -e
+          cd $TUGBOAT_ROOT/project
+          vendor/bin/drush si \
+            --yes \
+            --db-url=mysql://tugboat:tugboat@db/tugboat \
+            --account-pass=admin \
+            --site-name="Drupal CMS Demo"
+      build:
+        # Run composer install and perform database updates
+        - |
+          set -e
+          cd $TUGBOAT_ROOT/project
+          composer install --optimize-autoloader
+          vendor/bin/drush updatedb
+          vendor/bin/drush cache:rebuild
+        # Warm the caches
+        - 'curl --silent -H "Host: $TUGBOAT_DEFAULT_SERVICE_URL_HOST" http://localhost > /dev/null'
+  db:
+    image: tugboatqa/mariadb

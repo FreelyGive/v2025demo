@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 8cff2a81-435a-4e90-b70c-82903d030198
+  bundle: image
+  default_langcode: en
+  depends:
+    2d3d2f9a-da6c-4e0d-8b42-68df4e56dc8c: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Business conference attendees listen to a presentation on revenue split by quarter and geography.'
+  created:
+    -
+      value: 1758523867
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo set in a modern conference room, featuring a predominantly neutral color palette with soft beige walls and a dark carpeted floor. It captures a business meeting with attendees attentively listening to a presentation; the focus is on the projection screen at the front displaying graphs and charts about revenue split by quarter and geography. The audience includes diverse men and women, appearing to be in their 20s to 50s, dressed in business attire, conveying a professional and focused mood. In the foreground, rows of chairs are arranged neatly, adding to the organized atmosphere. The speakers, a man and a woman, stand confidently at the front, emphasizing the informative and professional nature of the gathering. The overall mood of the image is serious and engaged, indicative of a productive business environment.'
+  field_media_image:
+    -
+      alt: 'Business conference attendees listen to a presentation on revenue split by quarter and geography.'
+      title: 'Pavel Danilyuk'
+      width: 5473
+      height: 3654
+      entity: 2d3d2f9a-da6c-4e0d-8b42-68df4e56dc8c

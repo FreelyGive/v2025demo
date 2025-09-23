@@ -1,0 +1,35 @@
+{
+  "$defs": {
+    "pony-ballast": {
+      "title": "Pony ballast",
+      "type":  "string"
+    },
+    "chip-nozzle": {
+      "title": "Chip nozzle",
+      "type":  "object",
+      "required": ["tempo"],
+      "properties": {
+        "tempo": {
+          "title": "Tempo",
+          "type": "string",
+          "pattern": "\\d+ km per hour"
+        },
+        "special": {
+          "title": "Special",
+          "type": "bonanza"
+        }
+      }
+    },
+    "escape-goat": {
+      "title": "Escape goat",
+      "type":  "object",
+      "required": ["nesting"],
+      "properties": {
+        "nesting": {
+          "$ref": "json-schema-definitions://canvas_config_schema_test.module/chip-nozzle",
+          "title": "Nest"
+        }
+      }
+    }
+  }
+}

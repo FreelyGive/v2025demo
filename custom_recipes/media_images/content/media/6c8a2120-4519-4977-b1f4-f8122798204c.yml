@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 6c8a2120-4519-4977-b1f4-f8122798204c
+  bundle: image
+  default_langcode: en
+  depends:
+    2a7b1fa6-548d-41af-9bb0-065884849261: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Smiling man with dreadlocks holding flower beside a vase indoors.'
+  created:
+    -
+      value: 1758433901
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This is a photograph featuring a smiling man with dreadlocks, holding a flower beside a vase indoors. The background is a warm, muted beige, creating a calm and neutral setting. The man appears to be of African descent and is likely in his twenties or thirties. He exudes a joyful and relaxed mood, with a broad smile as he admires the flower. He is wearing a greenish-gray shirt, which complements the natural tones of the scene. The vase on the table is filled with a lush arrangement of white and green flowers, enhancing the fresh and serene atmosphere. This image captures a moment of simple pleasure and connection with nature indoors.'
+  field_media_image:
+    -
+      alt: 'Smiling man with dreadlocks holding flower beside a vase indoors.'
+      title: 'cottonbro studio'
+      width: 2333
+      height: 3500
+      entity: 2a7b1fa6-548d-41af-9bb0-065884849261

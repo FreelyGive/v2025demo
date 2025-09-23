@@ -1,0 +1,62 @@
+uuid: 76a6b38a-c369-4973-bb42-a8d149ede493
+langcode: en
+status: true
+dependencies:
+  enforced: {  }
+machineName: canvas_test_code_components_interactive
+name: 'Interactive'
+required:
+  - name
+props:
+  name:
+    title: Name
+    type: string
+    examples:
+      - Count
+slots:
+  description:
+    title: Description
+    examples:
+      - '<p>Example description</p>'
+js:
+  original: |-
+    import { useState } from "preact/hooks";
+
+    const Interactive = ({ name, description }) => {
+      const [count, setCount] = useState(0);
+      return (
+        <>
+          {name}: {count}<br/>
+          <button onClick={() => setCount(count + 1)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Increment
+          </button>
+          { description }
+          </>
+      );
+    };
+
+    export default Interactive;
+  compiled: |
+    import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
+    import { useState } from "preact/hooks";
+    const Interactive = ({ name, description })=>{
+        const [count, setCount] = useState(0);
+        return /*#__PURE__*/ _jsxs(_Fragment, {
+            children: [
+                name,
+                ": ",
+                count,
+                /*#__PURE__*/ _jsx("br", {}),
+                /*#__PURE__*/ _jsx("button", {
+                    onClick: ()=>setCount(count + 1),
+                    className: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded",
+                    children: "Increment"
+                }),
+                description
+            ]
+        });
+    };
+    export default Interactive;
+css:
+  original: ''
+  compiled: ''

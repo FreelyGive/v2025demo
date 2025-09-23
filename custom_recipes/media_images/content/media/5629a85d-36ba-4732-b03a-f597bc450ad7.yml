@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 5629a85d-36ba-4732-b03a-f597bc450ad7
+  bundle: image
+  default_langcode: en
+  depends:
+    4278f342-bc59-4a70-b16e-0368b77ce253: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A person making a cashless transaction using a smartphone and credit card on a wooden table.'
+  created:
+    -
+      value: 1758522641
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "The image is a photograph capturing a person engaged in a cashless transaction on a light wooden table. The background features smooth, natural wood textures in warm beige and light brown tones. The focal point is a pair of adult hands, one holding a smartphone displaying a keypad, the other holding a sleek, modern credit card. The individual's gender, age, or ethnicity isn't discernible. The mood is calm and focused, suggesting a routine activity. The image conveys a contemporary, tech-savvy atmosphere through the presence of the digital device and card, highlighting ease and modernity in financial transactions."
+  field_media_image:
+    -
+      alt: 'A person making a cashless transaction using a smartphone and credit card on a wooden table.'
+      title: 'Mikhail Nilov'
+      width: 4000
+      height: 6000
+      entity: 4278f342-bc59-4a70-b16e-0368b77ce253

@@ -1,0 +1,11 @@
+<?php
+
+use Drupal\Core\Cache\Cache;
+
+/**
+ * Implements hook_install().
+ */
+function canvas_vite_install(): void {
+  // canvas_vite_library_info_alter() has no effect without this 🤷‍️.
+  Cache::invalidateTags(['library_info']);
+}

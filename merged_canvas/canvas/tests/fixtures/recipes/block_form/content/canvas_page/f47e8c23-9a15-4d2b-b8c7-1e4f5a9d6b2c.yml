@@ -1,0 +1,37 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: f47e8c23-9a15-4d2b-b8c7-1e4f5a9d6b2c
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 0
+  title:
+    -
+      value: Branding Block
+  description:
+    -
+      value: 'This is a page with the branding block'
+  components:
+    -
+      parent_uuid: null
+      slot: null
+      uuid: 78c73c1d-4988-4f9b-ad17-f7e337d40c29
+      component_id: block.system_branding_block
+      component_version: 247a23298360adb2
+      inputs: '{"label":"","label_display":false,"use_site_logo":true,"use_site_name":true,"use_site_slogan":true}'
+
+  path:
+    -
+      alias: /branding-block
+      langcode: en
+  created:
+    -
+      value: 1747999992
+  revision_translation_affected:
+    -
+      value: true

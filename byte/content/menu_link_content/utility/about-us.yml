@@ -1,0 +1,38 @@
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: 'About Us'
+  menu_name:
+    -
+      value: utility
+  link:
+    -
+      title: null
+      options: {  }
+      target_uuid: 66025d34-24a4-4ab9-89a3-b1654b875505
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: 0
+  expanded:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: a36bb709-8a37-4286-a5c2-620f76adf3ad
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    66025d34-24a4-4ab9-89a3-b1654b875505: canvas_page

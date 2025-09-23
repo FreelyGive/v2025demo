@@ -1,0 +1,16 @@
+<?php
+
+declare(strict_types=1);
+
+use Drupal\Core\Form\FormStateInterface;
+
+function canvas_test_dialog_style_form_component_instance_form_alter(array &$form, FormStateInterface $form_state): void {
+  $form['test_a_dialog'] = [
+    '#type' => 'button',
+    '#value' => 'Trigger Drupal.dialog dialog',
+    '#attributes' => [
+      'test-drupal-dialog' => 'true',
+    ],
+  ];
+  $form['#attached']['library'][] = 'canvas_test_dialog_style/test.dialog';
+}

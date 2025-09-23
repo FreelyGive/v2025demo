@@ -1,0 +1,12 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: HTML with invalid formatting context
+props:
+  type: object
+  properties:
+    content:
+      title: 'Content'
+      type: string
+      contentMediaType: text/html
+      x-formatting-context: invalid
+      examples:
+        - '<p>This is content with an invalid formatting context.</p>'

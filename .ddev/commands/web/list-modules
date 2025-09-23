@@ -1,0 +1,75 @@
+#!/usr/bin/env php
+<?php
+
+## Description: Generates a list of all modules used by Drupal CMS.
+## Usage: list-modules
+## Example: "ddev list-modules"
+
+use Composer\Factory;
+use Composer\InstalledVersions;
+use Composer\IO\NullIO;
+use Drupal\Component\Serialization\Yaml;
+use Drupal\Core\Recipe\Recipe;
+
+require_once 'vendor/autoload.php';
+
+$repository = Factory::create(new NullIO())
+  ->getRepositoryManager()
+  ->getLocalRepository();
+
+// Get a list of all installed Drupal CMS recipes.
+$installed_recipes = array_column(
+  $repository->search('drupal/drupal_cms_.+', $repository::SEARCH_NAME, Recipe::COMPOSER_PROJECT_TYPE),
+  'name',
+);
+natcasesort($installed_recipes);
+
+$get_name = function (string $file): string {
+  $data = file_get_contents($file);
+  $data = Yaml::decode($data);
+  return $data['name'];
+};
+$output = [
+  '# Drupal CMS Modules',
+];
+
+// Loop through the direct dependencies of all installed recipes.
+foreach ($installed_recipes as $package_name) {
+  $dependencies = $repository->findPackage($package_name, '*')->getRequires();
+  $dependencies = array_keys($dependencies);
+
+  // If the recipe doesn't depend on anything but core or other Drupal CMS
+  // recipes, skip it.
+  $dependencies = preg_grep('/^drupal\/(core|drupal_cms_.+)$/', $dependencies, PREG_GREP_INVERT);
+  if (empty($dependencies)) {
+    continue;
+  }
+
+  $dir = InstalledVersions::getInstallPath($package_name);
+  $output[] = '## ' . $get_name($dir . '/recipe.yml');
+
+  foreach ($dependencies as $dependency) {
+    $dir = InstalledVersions::getInstallPath($dependency);
+
+    /** @var \Composer\Package\CompletePackageInterface $dependency */
+    $dependency = $repository->findPackage($dependency, '*');
+
+    switch ($dependency->getType()) {
+      case Recipe::COMPOSER_PROJECT_TYPE:
+        $name_file = $dir . '/recipe.yml';
+        break;
+
+      case 'drupal-module':
+      case 'drupal-theme':
+        $name_file = $dir . '/' . basename($dependency->getName()) . '.info.yml';
+        break;
+
+      default:
+        // This dependency isn't a recipe, module, or theme; skip it.
+        continue 2;
+    }
+    $output[] = '* [' . $get_name($name_file) . '](' . $dependency->getHomepage() . ')';
+  }
+}
+
+echo implode("\n", $output);

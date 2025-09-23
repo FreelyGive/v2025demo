@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: b18d67e5-fa80-47ef-b98e-c2ec274055dc
+  bundle: image
+  default_langcode: en
+  depends:
+    b11ebe4d-94fa-41cc-9b3b-9abf7f4fe4fd: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Corporate conference scene with women presenting and engaging audience involvement.'
+  created:
+    -
+      value: 1758523867
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "The image is a photograph depicting a corporate conference scene. The background features neutral tones with a large screen displaying a presentation, suggesting a professional setting. Three women are prominently interacting, each engaged in the discussion, adding energy and focus to the scene; they appear to be of diverse ethnic backgrounds. The women seem to be in their late twenties to early forties, exuding confidence and professionalism. The audience, though partially blurred, is attentive, indicating an atmosphere of engagement and interest. The primary colors in the scene are muted greys and whites, with subtle elements of color from the women's attire. The image captures a collaborative and inclusive mood, illustrating active participation and exchange of ideas."
+  field_media_image:
+    -
+      alt: 'Corporate conference scene with women presenting and engaging audience involvement.'
+      title: 'Pavel Danilyuk'
+      width: 5473
+      height: 3654
+      entity: b11ebe4d-94fa-41cc-9b3b-9abf7f4fe4fd

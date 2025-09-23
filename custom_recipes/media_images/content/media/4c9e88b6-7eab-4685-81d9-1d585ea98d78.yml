@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 4c9e88b6-7eab-4685-81d9-1d585ea98d78
+  bundle: image
+  default_langcode: en
+  depends:
+    7077c974-7fbc-4a26-a172-89f5343f5900: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'An organized desk with tax documents, checklist, and gadgets for tax preparation.'
+  created:
+    -
+      value: 1758523018
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photograph showing an organized desk setup for tax preparation. The background is a soft, muted gray that complements the primary colors of white and black present in the documents and gadgets. No person is visible in the image, maintaining focus on the objects. The mood is calm and professional, conveying a sense of order and readiness. Key objects include tax documents like an income statement, a checklist, a smartphone displaying a calculator app, colorful paperclips, a pen, and a magnifying glass. The combination of these elements suggests efficiency and meticulous attention to detail, essential for sorting through financial paperwork.'
+  field_media_image:
+    -
+      alt: 'An organized desk with tax documents, checklist, and gadgets for tax preparation.'
+      title: 'Leeloo The First'
+      width: 6016
+      height: 4016
+      entity: 7077c974-7fbc-4a26-a172-89f5343f5900

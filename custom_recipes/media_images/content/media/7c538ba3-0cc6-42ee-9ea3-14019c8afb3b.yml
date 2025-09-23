@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 7c538ba3-0cc6-42ee-9ea3-14019c8afb3b
+  bundle: image
+  default_langcode: en
+  depends:
+    f10218fb-86b0-4754-ad32-b51e9268fc35: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Confident young man in a stylish suit outdoors, exuding charm and elegance.'
+  created:
+    -
+      value: 1758433766
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "The image is a photo depicting a young man outdoors, wearing a stylish suit without the jacket, which he carries over his shoulder. The background features lush greenery, with soft natural tones of green and brown, suggesting a serene outdoor setting. With sunglasses adding to his confident demeanor, the man appears to be in his mid-20s to early 30s, exuding charm and elegance. He is Caucasian and has a casual yet polished appearance, with a smile that conveys a cheerful and self-assured mood. The overall tone of the image is vibrant and sophisticated, with a focus on the subject's relaxed confidence."
+  field_media_image:
+    -
+      alt: 'Confident young man in a stylish suit outdoors, exuding charm and elegance.'
+      title: Chloe
+      width: 4000
+      height: 5688
+      entity: f10218fb-86b0-4754-ad32-b51e9268fc35

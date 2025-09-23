@@ -1,0 +1,25 @@
+<div class="test-value-update-wrapper">
+  <div class="test-value-update-content">
+    <h2 class="test-value-update-title">{{ heading }}</h2>
+
+    <div class="test-value-update-text">
+      <p>Text input value: <span class="text-value" data-testid="text-value">{{ textValue }}</span></p>
+    </div>
+
+    <div class="test-value-update-select">
+      <p>Selected option: <span class="select-value" data-testid="select-value">{{ selectValue }}</span></p>
+    </div>
+
+    <div class="test-value-update-number">
+      <p>Number input value: <span class="number-value" data-testid="number-value">{{ numberValue }}</span></p>
+    </div>
+    <div class="test-value-update-bool">
+      <p>Bool:</p>
+      {% if boolValue %}
+        <code>true</code>
+      {% else %}
+        <code>false</code>
+      {% endif %}
+    </div>
+  </div>
+</div>

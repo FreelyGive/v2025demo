@@ -1,0 +1,112 @@
+---
+title: SDC components - Images
+---
+
+Canvas provides the `canvas:image` component for consistent image handling
+across SDC components. This component is designed for developers creating SDCs and
+handles responsive images, lazy loading, and modern image optimization automatically.
+
+## Using the image component
+
+The `canvas:image` component is included in other SDC components using
+Twig's `include` function. It provides a standardized way to render images with
+proper attributes and performance optimizations.
+
+### Basic usage
+
+```twig
+{% include 'canvas:image' with {
+  src: 'https://example.com/image.jpg',
+  alt: 'Example image',
+  width: 600,
+  height: 400,
+} only %}
+```
+
+### Usage with prop values
+
+```twig
+{% include 'canvas:image' with image|merge({
+  loading: 'lazy',
+  sizes: '(max-width: 768px) 100vw, 50vw',
+  class: 'card--image',
+  attributes: create_attribute({
+    'data-testid': 'card-component-image',
+  }),
+} only %}
+```
+
+## Component properties
+
+The `canvas:image` component accepts the following properties:
+
+### Required properties
+
+- **src**: Image source URL. Can be relative, absolute, local, remote, or stream wrapper URI
+  - Examples: `https://placehold.co/600x400`, `/sites/default/files/llama.jpg`, `public://llama.jpg`
+
+### Optional properties
+
+- **alt**: Alternative text for accessibility
+- **width**: Image width in pixels (integer)
+- **height**: Image height in pixels (integer)
+- **sizes**: Responsive image sizes attribute (e.g., `auto 100vw`)
+- **loading**: HTML loading attribute (`lazy` or `eager`, defaults to `lazy`)
+- **class**: Additional CSS classes
+- **attributes**: Drupal attributes object for additional HTML attributes
+
+## Defining image props in your SDC
+
+When creating your own SDC component that uses images, define the image properties
+in your component metadata:
+
+```yaml
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Card
+props:
+  type: object
+  properties:
+    image:
+      $ref: json-schema-definitions://canvas.module/image
+      type: object
+      title: Card image
+      examples:
+        - src: https://placehold.co/400x300
+          alt: Card placeholder image
+          width: 400
+          height: 300
+```
+
+## Responsive image settings
+
+The `canvas:image` component automatically handles responsive behavior
+and performance optimizations. You can enhance this with additional properties:
+
+### Lazy loading
+
+The component defaults to lazy loading. For above-the-fold images, use eager loading:
+
+```twig
+{% include 'canvas:image' with image|merge({
+  loading: 'eager',  {# For hero images or critical content #}
+}) only %}
+```
+
+### Responsive sizing
+
+Use the `sizes` attribute to optimize image loading for different viewport sizes:
+
+```twig
+{% include 'canvas:image' with image|merge({
+  sizes: '(max-width: 480px) 100vw, (max-width: 768px) 50vw, 33vw',
+  loading: 'lazy',
+}) only %}
+```
+
+## Best practices
+
+- Always provide meaningful `alt` text for accessibility
+- Use `eager` loading only for above-the-fold images
+- Specify appropriate `sizes` for responsive images
+- Include `width` and `height` to prevent layout shifts
+

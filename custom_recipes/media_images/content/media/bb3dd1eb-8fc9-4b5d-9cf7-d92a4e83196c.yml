@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: bb3dd1eb-8fc9-4b5d-9cf7-d92a4e83196c
+  bundle: image
+  default_langcode: en
+  depends:
+    d907a0df-aeae-4a0c-b36f-fba219676755: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A close-up view of a business document with charts and graphs on a wooden desk.'
+  created:
+    -
+      value: 1758435626
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photograph showcasing a close-up view of a business document featuring colorful charts and graphs. The primary colors in the charts and graphs include shades of blue, red, orange, and yellow, set against a clean white paper background. The document is resting on a light wooden desk, which adds a natural and warm tone to the scene. There are no people visible in the image, allowing the focus to remain entirely on the document. The mood of the image is professional and analytical, emphasizing data analysis and business insights. The overall composition suggests an organized and focused workspace.'
+  field_media_image:
+    -
+      alt: 'A close-up view of a business document with charts and graphs on a wooden desk.'
+      title: Lukas
+      width: 6144
+      height: 4069
+      entity: d907a0df-aeae-4a0c-b36f-fba219676755

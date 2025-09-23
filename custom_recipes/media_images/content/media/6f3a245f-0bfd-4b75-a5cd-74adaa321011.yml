@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 6f3a245f-0bfd-4b75-a5cd-74adaa321011
+  bundle: image
+  default_langcode: en
+  depends:
+    22cf7c0a-5c39-426d-8382-aff30f04ac88: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A heartwarming moment between grandfather and grandson laughing and playing on a cozy sofa indoors.'
+  created:
+    -
+      value: 1758435496
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a warm, intimate photograph featuring a grandfather and grandson sharing a joyful moment on a cozy sofa indoors. The background is filled with soft, neutral colors, with beige curtains filtering gentle sunlight. The grandfather, appearing as an older Caucasian male with a gray beard, is wearing a light blue shirt and khaki pants, exuding a sense of warmth and kindness. The young boy, likely of mixed ethnicity, is dressed comfortably in a gray top and patterned pants, displaying an expression of pure delight and laughter. Their interaction is energetic, suggesting play and connection, with the grandfather handing a toy controller to the child. The overall mood is heartwarming and joyful, capturing the essence of familial love and playful bonding. The sofa serves as a cozy centerpiece, adding to the inviting atmosphere of the scene.'
+  field_media_image:
+    -
+      alt: 'A heartwarming moment between grandfather and grandson laughing and playing on a cozy sofa indoors.'
+      title: 'Mikhail Nilov'
+      width: 6000
+      height: 4000
+      entity: 22cf7c0a-5c39-426d-8382-aff30f04ac88

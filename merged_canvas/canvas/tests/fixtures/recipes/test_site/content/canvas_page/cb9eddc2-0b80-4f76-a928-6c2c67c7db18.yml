@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: cb9eddc2-0b80-4f76-a928-6c2c67c7db18
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 0
+  title:
+    -
+      value: 'Empty Page'
+  description:
+    -
+      value: 'This is an empty page'
+  path:
+    -
+      alias: /test-page
+      langcode: en
+  created:
+    -
+      value: 1747999992
+  revision_translation_affected:
+    -
+      value: true

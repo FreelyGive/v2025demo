@@ -1,0 +1,24 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 1fe42dbd-977c-4f84-bc4b-cfa20b25fb42
+  default_langcode: en
+default:
+  filename:
+    -
+      value: pexels-photo-812264.jpeg
+  uri:
+    -
+      value: 'public://2025-09/pexels-photo-812264.jpeg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 728257
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1758434018

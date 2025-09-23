@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies: {  }
+machineName: canvas_test_e2e_code_components_req_image
+name: CC Required Image
+required:
+  - image
+props:
+  image:
+    title: image
+    type: object
+    examples:
+      -
+        src: 'https://placehold.co/1200x900@2x.png'
+        width: 1200
+        height: 900
+        alt: 'Example image placeholder'
+    $ref: 'json-schema-definitions://canvas.module/image'
+  text:
+    title: text
+    type: string
+    examples:
+      - 'Some Text'
+slots: { }
+js:
+  original: "const Image = ({\n        image,\n        text,\n      }) => {\n        return ( <div>   <img {...image} \/>   <p>{text}<\/p> <\/div>\n        );\n      };\n\n\n      export default Image;"
+  compiled: "function _define_property(obj, key, value) { if (key in obj) {     Object.defineProperty(obj, key, {         value: value,         enumerable: true,         configurable: true,         writable: true     }); } else {     obj[key] = value; } return obj;\n      }\n      function _object_spread(target) { for(var i = 1; i < arguments.length; i++){     var source = arguments[i] != null ? arguments[i] : {};     var ownKeys = Object.keys(source);     if (typeof Object.getOwnPropertySymbols === \"function\") {         ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function(sym) {             return Object.getOwnPropertyDescriptor(source, sym).enumerable;         }));     }     ownKeys.forEach(function(key) {         _define_property(target, key, source[key]);     }); } return target;\n      }\n      import { jsx as _jsx, jsxs as _jsxs } from \"react\/jsx-runtime\";\n      const Image = ({ image, text })=>{ return \/*#__PURE__*\/ _jsxs(\"div\", {     children: [         \/*#__PURE__*\/ _jsx(\"img\", _object_spread({}, image)),         \/*#__PURE__*\/ _jsx(\"p\", {             children: text         })     ] });\n      };\n      export default Image;"
+css:
+  original: ''
+  compiled: ''
+dataDependencies: []

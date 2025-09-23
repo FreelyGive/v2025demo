@@ -1,0 +1,32 @@
+{
+  "props": {
+    "id": "a-unique-html-id",
+    "links": [
+      {
+        "key": "front_page",
+        "title": "Home",
+        "url": "/",
+        "isExpanded": false,
+        "isCollapsed": false,
+        "inActiveTrail": false
+      },
+      {
+        "key": "news",
+        "title": "News",
+        "url": "/news",
+        "isExpanded": false,
+        "isCollapsed": false,
+        "inActiveTrail": false
+      },
+      {
+        "key": "blog",
+        "title": "Blog",
+        "url": "/blog",
+        "isExpanded": false,
+        "isCollapsed": false,
+        "inActiveTrail": false
+      }
+    ],
+    "label": "Main navigation"
+  }
+}

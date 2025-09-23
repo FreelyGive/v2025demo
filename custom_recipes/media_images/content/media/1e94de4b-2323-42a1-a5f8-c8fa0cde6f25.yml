@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 1e94de4b-2323-42a1-a5f8-c8fa0cde6f25
+  bundle: image
+  default_langcode: en
+  depends:
+    e775d4fd-0f0e-4d56-af8d-333e92367f87: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A woman with a prosthetic arm uses a laptop indoors for online shopping.'
+  created:
+    -
+      value: 1758434018
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photograph featuring a woman with long dark hair and a prosthetic arm. She appears to be in her twenties or thirties and is engaged in online shopping, as suggested by her focus on the laptop and the credit card in her prosthetic hand. The background features large windows with a view outside, and provides a sense of natural light, while the setting is indoors with soft, warm colors—yellows and neutrals dominating. She is casually dressed in a light purple shirt and blue jeans, which adds to a relaxed and comfortable mood. The overall atmosphere of the image is positive and focused, with an emphasis on technology and accessibility. The laptop is prominently positioned as a central object, symbolizing connectivity and empowerment.'
+  field_media_image:
+    -
+      alt: 'A woman with a prosthetic arm uses a laptop indoors for online shopping.'
+      title: 'Anna Shvets'
+      width: 3719
+      height: 5579
+      entity: e775d4fd-0f0e-4d56-af8d-333e92367f87

@@ -1,0 +1,175 @@
+services:
+  _defaults:
+    autoconfigure: true
+    autowire: true
+  Drupal\canvas\Audit\ComponentAudit:
+    public: true
+  Drupal\canvas\ShapeMatcher\JsonSchemaFieldInstanceMatcher:
+    public: true
+    arguments:
+      $constraintManager: '@validation.constraint'
+      $cache: '@cache.static'
+      $extensionMimeTypeGuesser: '@file.mime_type.guesser.extension'
+  Drupal\canvas\ShapeMatcher\FieldForComponentSuggester:
+    public: true
+  Drupal\canvas\ComponentIncompatibilityReasonRepository: {}
+  Drupal\canvas\JsonSchemaDefinitionsStreamwrapper:
+    public: true
+    tags:
+      - { name: stream_wrapper, scheme: json-schema-definitions }
+  Drupal\canvas\Plugin\AdapterManager:
+    parent: default_plugin_manager
+  Drupal\canvas\ComponentDependencyUninstallValidator:
+    public: true
+    tags:
+      - { name: module_install.uninstall_validator }
+  canvas_template_renderer:
+    class: Drupal\canvas\Render\MainContent\CanvasTemplateRenderer
+    arguments:
+      $cssCollectionRenderer: '@asset.css.collection_renderer'
+      $jsCollectionRenderer: '@asset.js.collection_renderer'
+    tags:
+      - { name: render.main_content_renderer, format: canvas_template }
+  Drupal\canvas\Render\MainContent\CanvasPreviewRenderer: { }
+  Drupal\canvas\Plugin\ComponentPluginManager:
+    decorates: plugin.manager.sdc
+    parent: Drupal\Core\Theme\ComponentPluginManager
+    arguments: ['@entity_type.manager', '@Drupal\canvas\ComponentIncompatibilityReasonRepository']
+    tags:
+      - { name: canvas.component_source }
+  Drupal\canvas\Plugin\BlockManager:
+    decorates: plugin.manager.block
+    parent: Drupal\Core\Block\BlockManagerInterface
+    arguments: ['@config.typed', '@Drupal\canvas\ComponentIncompatibilityReasonRepository', '@Drupal\canvas\ComponentSource\ComponentSourceManager']
+    tags:
+      - { name: canvas.component_source }
+  Drupal\canvas\ComponentSource\ComponentSourceManager:
+    parent: default_plugin_manager
+    public: true
+  # Utilities.
+  Drupal\canvas\AssetRenderer: {}
+  logger.channel.canvas:
+    parent: logger.channel_base
+    arguments: ['canvas']
+  asset.resolver.canvas:
+    public: false
+    class: \Drupal\canvas\Asset\AssetResolver
+    decorates: asset.resolver
+    arguments: ['@asset.resolver.canvas.inner', '@library.discovery', '@library.dependency_resolver', '@module_handler', '@theme.manager', '@language_manager', '@cache.data', '@theme_handler']
+  Drupal\canvas\ClientDataToEntityConverter: {}
+  Drupal\canvas\AutoSave\AutoSaveManager: {}
+  Drupal\canvas\AutoSave\AutoSaveTempStoreFactory:
+    parent: tempstore.shared
+  Drupal\canvas\Storage\ComponentTreeLoader: {}
+  Drupal\canvas\CodeComponentDataProvider: {}
+  Drupal\canvas\Version: {}
+  Drupal\canvas\CanvasConfigUpdater: ~
+
+  # Event subscribers.
+  canvas.openapi.http_request_validator.subscriber:
+    class: Drupal\canvas\EventSubscriber\ApiRequestValidator
+    arguments:
+      $logger: '@logger.channel.canvas'
+      $appRoot: '%app.root%'
+    calls:
+      - [setValidatorBuilder, []]
+    tags:
+      - { name: event_subscriber }
+  canvas.openapi.http_response_validator.subscriber:
+    class: Drupal\canvas\EventSubscriber\ApiResponseValidator
+    arguments:
+      $logger: '@logger.channel.canvas'
+      $appRoot: '%app.root%'
+    calls:
+      - [setValidatorBuilder, []]
+    tags:
+      - { name: event_subscriber }
+  canvas.route_options.subscriber:
+    class: Drupal\canvas\EventSubscriber\CanvasRouteOptionsEventSubscriber
+    tags:
+      - { name: 'event_subscriber' }
+  canvas.image_style.route_alter:
+    class: Drupal\canvas\EventSubscriber\ImageStyleRoutesEventSubscriber
+    tags:
+      - { name: event_subscriber }
+  Drupal\canvas\EventSubscriber\PreviewEnvelopeViewSubscriber: {}
+  canvas.theme_negotiator.canvas:
+    class: Drupal\canvas\Theme\CanvasThemeNegotiator
+    tags:
+      # Set priority to 1001 so it is above AjaxBasePageNegotiator (1000).
+      - { name: theme_negotiator, priority: 1001 }
+  Drupal\canvas\EventSubscriber\PageVariantSelectorSubscriber: ~
+  Drupal\canvas\EventSubscriber\ApiExceptionSubscriber: ~
+  Drupal\canvas\PathProcessor\CanvasPathProcessor:
+    tags:
+      - { name: path_processor_inbound, priority: 200 }
+  Drupal\canvas\Controller\CanvasBlockListController: ~
+  Drupal\canvas\EventSubscriber\RecipeSubscriber:
+    tags:
+      - { name: service_collector, call: addComponentSource, tag: canvas.component_source }
+
+  # Routing.
+  Drupal\canvas\Entity\Routing\CanvasHtmlRouteEnhancer:
+    tags:
+      - { name: route_enhancer }
+  Drupal\canvas\Routing\ContentTemplatePreviewEntityConverter:
+    tags:
+      - { name: paramconverter }
+  Drupal\canvas\Routing\ParametrizedImageStyleConverter:
+    tags:
+      - { name: paramconverter }
+
+  # Access.
+  Drupal\canvas\Access\CanvasHttpApiEligibleConfigEntityAccessCheck:
+    tags:
+      - { name: access_check, applies_to: _canvas_http_eligible_config_entity }
+  Drupal\canvas\Access\CanvasEntityCreateAccessCheck:
+    tags:
+      - { name: access_check, applies_to: _canvas_entity_create_access }
+  Drupal\canvas\Access\ComponentTreeEditAccessCheck:
+    tags:
+      - { name: access_check, applies_to: _canvas_component_tree_edit_access }
+  Drupal\canvas\Access\PreviewEntityViewAccessCheck:
+    tags:
+      - { name: access_check, applies_to: _canvas_preview_entity_view_access }
+  Drupal\canvas\Access\CanvasUiAccessCheck:
+    tags:
+      - { name: access_check, applies_to: _canvas_ui_access }
+  Drupal\canvas\Access\AuthenticationAccessChecker:
+    tags:
+      - { name: access_check, applies_to: _canvas_authentication_required }
+
+  # Twig.
+  Drupal\canvas\Extension\CanvasTwigExtension:
+    tags:
+      - { name: twig.extension }
+
+  # Controllers.
+  Drupal\canvas\Controller\ApiConfigControllers: ~
+  Drupal\canvas\Controller\ApiConfigAutoSaveControllers: ~
+  Drupal\canvas\Controller\ApiLayoutController: {}
+  Drupal\canvas\Controller\ApiLogController: {}
+  Drupal\canvas\Controller\ApiContentUpdateForDemoController: {}
+  Drupal\canvas\Controller\ApiContentControllers: {}
+  Drupal\canvas\Controller\ApiStagedConfigUpdateAutoSaveController: {}
+  Drupal\canvas\Controller\ComponentStatusController: {}
+  Drupal\canvas\Controller\ComponentAuditController: {}
+  Drupal\canvas\Controller\CanvasController: {}
+  Drupal\canvas\Controller\ApiAutoSaveController: {}
+  Drupal\canvas\Controller\ApiUiContentTemplateControllers: {}
+
+  # Decorators.
+  Drupal\canvas\Render\ImportMapResponseAttachmentsProcessor:
+    public: false
+    decorates: html_response.attachments_processor
+    # We want to go before any other decorators (e.g. bigpipe) so we can
+    # remove 'import_maps' as this is not supported by other attachment
+    # processors
+    decoration_priority: -100
+    arguments: ['@.inner']
+  Drupal\canvas\Messenger:
+    public: true
+    decorates: messenger
+    # We don't want any other module to display messages
+    decoration_priority: -100
+    arguments: ['@.inner']

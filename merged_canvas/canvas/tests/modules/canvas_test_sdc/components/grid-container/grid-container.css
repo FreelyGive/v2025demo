@@ -1,0 +1,19 @@
+
+.grid-container {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  .empty-slot {
+    min-height: 40px;
+    color: #0d0d0d;
+    background-color: #0e8d8b;
+    background-repeat: repeat;
+    background-position: -5px -5px;
+    background-size: 29px 30px;
+    box-shadow: inset 0 0 10px rgba(53, 129, 158, 0.3);
+  }
+}
+
+.grid-container.direction-vertical {
+  grid-template-columns: 1fr; /* This makes the grid stack vertically */
+}

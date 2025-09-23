@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: f8f8956b-e4be-4a19-8228-eb524db2898c
+  bundle: image
+  default_langcode: en
+  depends:
+    5c2bd78b-8178-45c6-8682-de1b5cdc55e5: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A happy couple and their dog enjoying a moment of affection and joy on the floor indoors.'
+  created:
+    -
+      value: 1758433901
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photograph featuring a joyful couple and their dog sharing a tender moment on the floor indoors. Warm, earthy tones dominate the background, with patches of sunlight creating a cozy, intimate atmosphere. The couple appears to be in their twenties or thirties, exuding happiness and affection with broad smiles and relaxed expressions. Their casual and carefree demeanor suggests a deep sense of companionship and contentment. The dog is centrally positioned, basking in the warmth and attention, adding to the lighthearted and serene mood. The setting appears simple yet inviting, emphasizing the genuine emotional connection among the subjects. Overall, the scene is heartwarming and exudes a sense of playful joy and togetherness.'
+  field_media_image:
+    -
+      alt: 'A happy couple and their dog enjoying a moment of affection and joy on the floor indoors.'
+      title: 'Leeloo The First'
+      width: 5739
+      height: 3831
+      entity: 5c2bd78b-8178-45c6-8682-de1b5cdc55e5

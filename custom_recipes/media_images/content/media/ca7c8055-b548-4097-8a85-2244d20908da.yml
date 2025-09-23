@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: ca7c8055-b548-4097-8a85-2244d20908da
+  bundle: image
+  default_langcode: en
+  depends:
+    e030c306-0482-4de4-96c3-9a10df2f086e: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Top view of a laptop, charts, and resume on a wooden desk, showcasing business analysis and job application.'
+  created:
+    -
+      value: 1758435626
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo with a top-down view of a wooden desk that has a natural light brown color. On the desk, there is a silver laptop, a vibrant chart with blue, red, and yellow bars, and a resume featuring a professional blue and white layout. The scene does not include any people, giving it a focused and task-oriented mood. The use of bright colors in the charts and clean design in the resume conveys a sense of clarity and professionalism. The overall setting suggests a workspace involved in business analysis and job application processes. The minimalistic design and neutral tones create a clean, unhurried atmosphere.'
+  field_media_image:
+    -
+      alt: 'Top view of a laptop, charts, and resume on a wooden desk, showcasing business analysis and job application.'
+      title: Lukas
+      width: 6144
+      height: 4069
+      entity: e030c306-0482-4de4-96c3-9a10df2f086e

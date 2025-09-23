@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 51eb6be7-583f-4ae9-b818-b0a8b777e968
+  bundle: image
+  default_langcode: en
+  depends:
+    6e740005-5bd1-43c5-a27a-a3b497bd5f0f: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A minimalist workspace featuring a laptop, smartphone, and an apple on a clean white desk.'
+  created:
+    -
+      value: 1758434018
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This image is a photo of a minimalist workspace featuring a sleek silver laptop with a black screen, a smartphone, and a ripe red apple placed on a pristine white desk. The background is a clean, unobtrusive white, enhancing the simplicity and focus of the scene. No people are present, emphasizing the solitary and peaceful nature of the workspace. The mood is calm and organized, suggesting productivity and focus. The contrasting colors of red and silver against the white background add a touch of elegance and modernity to the image. Overall, the scene conveys a sense of minimalism and clarity, ideal for a focused work environment.'
+  field_media_image:
+    -
+      alt: 'A minimalist workspace featuring a laptop, smartphone, and an apple on a clean white desk.'
+      title: 'karsten madsen'
+      width: 5184
+      height: 3456
+      entity: 6e740005-5bd1-43c5-a27a-a3b497bd5f0f

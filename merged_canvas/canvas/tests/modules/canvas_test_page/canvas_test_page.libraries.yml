@@ -1,0 +1,7 @@
+# https://en.wikipedia.org/wiki/Diaclone
+canvas.transform.diaclone:
+  js:
+    js/diaclone.js: {}
+  dependencies:
+    # Each transform must be added to the global `Drupal.canvasTransforms`.
+    - core/drupal

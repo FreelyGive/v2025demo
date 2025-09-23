@@ -1,0 +1,20 @@
+.wrapper {
+  visibility: hidden;
+  overflow: hidden;
+  box-sizing: content-box;
+  padding: 8px;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: var(--shadow-3);
+}
+
+.scaled {
+  transform-origin: 0 0;
+  will-change: transform, opacity;
+}
+
+.iframe {
+  min-height: 100%;
+  pointer-events: none;
+  border: 0;
+}

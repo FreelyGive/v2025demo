@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 85feb469-6881-4a55-8fdd-3a99af8dbe0b
+  bundle: image
+  default_langcode: en
+  depends:
+    03d406d2-e41d-40cc-93b7-7c89aa42fe03: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A group of young adults working on a laptop at an outdoor coffee shop, enjoying teamwork and collaboration.'
+  created:
+    -
+      value: 1758433766
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo capturing a lively outdoor coffee shop scene, filled with lush greenery in the background. Predominant colors are the natural green of the surroundings, warm browns of the furniture, and the neutral tones of the individuals’ clothing. The photo features three young adults gathered around a wooden table, all focused on a laptop. They appear to be of diverse ethnic backgrounds and are casually dressed, suggesting a relaxed, friendly atmosphere. Their expressions convey engagement and collaboration, indicating a positive and productive mood. Important objects in the scene include the laptop, a smartphone, and a few notebooks, symbolizing teamwork and connectivity. The overall vibe is vibrant, youthful, and collaborative, evoking a sense of community and cooperation.'
+  field_media_image:
+    -
+      alt: 'A group of young adults working on a laptop at an outdoor coffee shop, enjoying teamwork and collaboration.'
+      title: 'Helena Lopes'
+      width: 4813
+      height: 3209
+      entity: 03d406d2-e41d-40cc-93b7-7c89aa42fe03

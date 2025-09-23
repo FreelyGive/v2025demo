@@ -1,0 +1,24 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: c2728eec-4cc0-4ce4-8eae-d8fe8d7202c6
+  default_langcode: en
+default:
+  filename:
+    -
+      value: pexels-photo-1035677.jpeg
+  uri:
+    -
+      value: 'public://2025-09/pexels-photo-1035677.jpeg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 448766
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1758433901

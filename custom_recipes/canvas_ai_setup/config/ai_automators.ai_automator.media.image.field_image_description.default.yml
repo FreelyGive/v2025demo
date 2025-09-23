@@ -1,0 +1,36 @@
+uuid: 1bd69b64-b66a-4926-9a86-03a2348f507d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.image.field_image_description
+_core:
+  default_config_hash: HPXHYafxWVsbWF6-XVz2u1-MyYwazNbZzQPruibP8dk
+id: media.image.field_image_description.default
+label: 'Image Description Default'
+rule: llm_simple_string_long
+input_mode: token
+weight: 100
+worker_type: direct
+entity_type: media
+bundle: image
+field_name: field_image_description
+edit_mode: false
+base_field: revision_log_message
+prompt: ''
+token: "Look at the image and provide descriptions of how it looks, that will be used in a RAG search to determine which image to use. Be expressive and declarative.\r\n\r\nTo give some context the title is \"[media:name]\"\r\n\r\nThe following information is important to take into account:\r\n\r\n* Describe background colors and main colors in the scene.\r\n* Describe if the image is a photo, graphics, animation, art, infographics etc. - even if the default is a photo, please mention it.\r\n* Describe any person in the image. If you can recognize the person or you can deduct from the title, mention that. Make sure to be expressive and describe age, ethnicity, gender, mood, expressions.\r\n* Describe the mood of the image.\r\n* Describe any object in the image that is of important to the image.\r\n\r\nMake sure to keep it under eight sentences long."
+plugin_config:
+  automator_enabled: 1
+  automator_rule: llm_simple_string_long
+  automator_mode: token
+  automator_base_field: revision_log_message
+  automator_prompt: ''
+  automator_token: "Look at the image and provide descriptions of how it looks, that will be used in a RAG search to determine which image to use. Be expressive and declarative.\r\n\r\nTo give some context the title is \"[media:name]\"\r\n\r\nThe following information is important to take into account:\r\n\r\n* Describe background colors and main colors in the scene.\r\n* Describe if the image is a photo, graphics, animation, art, infographics etc. - even if the default is a photo, please mention it.\r\n* Describe any person in the image. If you can recognize the person or you can deduct from the title, mention that. Make sure to be expressive and describe age, ethnicity, gender, mood, expressions.\r\n* Describe the mood of the image.\r\n* Describe any object in the image that is of important to the image.\r\n\r\nMake sure to keep it under eight sentences long."
+  automator_edit_mode: 0
+  automator_label: 'Image Description Default'
+  automator_weight: '100'
+  automator_worker_type: direct
+  automator_ai_provider: default_vision
+  automator_configuration_image_field: field_media_image
+  automator_configuration_image_style: scale_for_ai_vision
+  automator_code_block_type: ''

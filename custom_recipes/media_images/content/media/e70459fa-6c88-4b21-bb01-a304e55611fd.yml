@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: e70459fa-6c88-4b21-bb01-a304e55611fd
+  bundle: image
+  default_langcode: en
+  depends:
+    35de0447-13a0-41bf-823c-4c21047eb8b9: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'An African American man with afro hair is holding a credit card, making an online purchase indoors.'
+  created:
+    -
+      value: 1758522641
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "The image is a photo featuring an African American man with afro hair, and he appears to be indoors, engaging in an online purchase. His expression conveys focus, as he holds a credit card prominently in hand. He's dressed in a casual outfit, suggesting a relaxed yet attentive mood. The background is minimalistic with soft, neutral colors, mainly whites and beiges, which accentuates the subject. There's a blurred backdrop with objects like a bag and perhaps other household items, indicating a domestic setting. The key colors in the image are the man's darker clothing, his light brown hair, and the white background, creating a harmonious yet contrasting visual. Overall, the scene feels modern and everyday, capturing a moment of online interaction."
+  field_media_image:
+    -
+      alt: 'An African American man with afro hair is holding a credit card, making an online purchase indoors.'
+      title: 'Cup of  Couple'
+      width: 6720
+      height: 4480
+      entity: 35de0447-13a0-41bf-823c-4c21047eb8b9

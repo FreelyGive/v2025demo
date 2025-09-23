@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 2bc9c904-8936-4b53-a8f3-680b4bbf80cc
+  bundle: image
+  default_langcode: en
+  depends:
+    7b892aee-3c0e-45aa-938e-845b466bac29: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Stylish woman wearing a turban stands before a vibrant graffiti wall, showcasing modern urban fashion.'
+  created:
+    -
+      value: 1758435924
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a vibrant photograph capturing a stylish woman wearing a navy blue turban. She stands confidently before a colorful graffiti wall, which features a mix of pastel pink, blue, and green hues, accented with bold black abstract shapes. The woman appears to be young, with a peaceful and contemplative expression, embodying a modern urban fashion vibe. She is dressed in a light pink jacket over a white shirt, exuding a sense of relaxed elegance. The overall mood of the image is artistic and trendy, merging the realms of fashion and street art seamlessly.'
+  field_media_image:
+    -
+      alt: 'Stylish woman wearing a turban stands before a vibrant graffiti wall, showcasing modern urban fashion.'
+      title: 'The Lazy Artist Gallery'
+      width: 4896
+      height: 3264
+      entity: 7b892aee-3c0e-45aa-938e-845b466bac29

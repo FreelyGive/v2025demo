@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 3ce67b6c-6f4f-47fe-b722-2d3f2a881912
+  bundle: image
+  default_langcode: en
+  depends:
+    bebfcc97-33a0-40ab-bea8-4f0b5e35375d: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Young African American woman with braided hair making an online payment using laptop and credit card.'
+  created:
+    -
+      value: 1758522806
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "This image is a photo depicting a young African American woman with long braided hair. She is sitting at a table, focused and calm, making an online payment with a laptop and holding a credit card. The background features a soft color palette, with neutral tones and a hint of natural light filtering through a window with curtains. The scene has a modern and cozy feel, enhanced by the visible elements of a home or office environment with subtle textures. The woman's expression is concentrated, suggesting she is engaged and mindful in her task. The overall mood is serene and professional, highlighting the theme of technology and online transactions. A laptop and credit card are central objects in the image, emphasizing the subject's activity."
+  field_media_image:
+    -
+      alt: 'Young African American woman with braided hair making an online payment using laptop and credit card.'
+      title: 'Mikhail Nilov'
+      width: 6000
+      height: 4000
+      entity: bebfcc97-33a0-40ab-bea8-4f0b5e35375d

@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: ce675afd-02b7-4f39-889c-25a554557e38
+  bundle: image
+  default_langcode: en
+  depends:
+    8f2312ef-4cb9-4630-9925-49098b43447c: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Female speaker presenting at a business conference with an audience member working on a laptop.'
+  created:
+    -
+      value: 1758523867
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo depicting a business conference setting. A female speaker, appearing to be of middle age, is actively presenting with a microphone in hand; she has a focused and professional demeanor. She is dressed in a white shirt and dark pants, standing in front of a projected chart or presentation. The background is composed of neutral tones, primarily beige, adding to the formal atmosphere. To the right, an audience member, a younger female, of potentially Asian descent, is engaged with a laptop, indicating attentiveness and participation. The overall mood is professional and serious, conveying a sense of business purpose and active engagement. The room is minimally decorated, maintaining a clean, corporate environment with the emphasis on the presentation and interaction.'
+  field_media_image:
+    -
+      alt: 'Female speaker presenting at a business conference with an audience member working on a laptop.'
+      title: 'Pavel Danilyuk'
+      width: 5473
+      height: 3654
+      entity: 8f2312ef-4cb9-4630-9925-49098b43447c

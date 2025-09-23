@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 5d1db12d-8979-4030-bd41-6de48711da0c
+  bundle: image
+  default_langcode: en
+  depends:
+    ad7bcd78-e0cb-4b3f-ba35-bb749b4487b5: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Woman holding orange credit card while shopping online on laptop from a sofa.'
+  created:
+    -
+      value: 1758522806
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo showing a woman sitting on a light-colored sofa, engaging in online shopping with a laptop on her lap. The background predominantly features soft, neutral tones, giving a relaxed and cozy ambiance. She holds an orange credit card in her right hand, which stands out vividly against the more muted background. The woman, captured from a high angle, appears to be in a calm and focused mood. She wears a white top and light blue jeans, and her posture suggests comfort and ease. Her hair is pulled back, and she is casually reclining, perhaps mid-shopping session. This scene creates a serene and modern atmosphere, highlighting convenience and technology. The bright orange credit card provides a pop of color and is a central focus of the image.'
+  field_media_image:
+    -
+      alt: 'Woman holding orange credit card while shopping online on laptop from a sofa.'
+      title: 'Darina Belonogova'
+      width: 2333
+      height: 3500
+      entity: ad7bcd78-e0cb-4b3f-ba35-bb749b4487b5

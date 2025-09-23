@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: bd71e586-d3d5-4f2a-8ea8-0764ba5eafde
+  bundle: image
+  default_langcode: en
+  depends:
+    86d0e3d7-e64c-4a61-b6fe-c9bca824a58a: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Smiling woman in festive dress with drink, celebrating in a retro kitchen.'
+  created:
+    -
+      value: 1758435496
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo featuring a woman in a festive, intricately designed dress, exuding a joyful and celebratory mood. She appears to be in her 20s or 30s, smiling warmly while holding a drink, embodying a lively and spirited atmosphere. The background showcases a retro kitchen with vibrant red and green hues, with a prominent red refrigerator enhancing the nostalgic feel. The wall has a distinctive, vintage green and brown circular pattern, adding to the retro theme. There is a "Merry Christmas" box in her hand, emphasizing the festive context. The lighting is warm, reflecting an inviting and cheerful mood. This scene beautifully captures the essence of a joyful celebration in a nostalgic setting.'
+  field_media_image:
+    -
+      alt: 'Smiling woman in festive dress with drink, celebrating in a retro kitchen.'
+      title: 'RDNE Stock project'
+      width: 3883
+      height: 5825
+      entity: 86d0e3d7-e64c-4a61-b6fe-c9bca824a58a

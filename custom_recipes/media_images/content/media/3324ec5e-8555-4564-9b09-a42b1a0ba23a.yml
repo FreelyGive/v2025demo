@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 3324ec5e-8555-4564-9b09-a42b1a0ba23a
+  bundle: image
+  default_langcode: en
+  depends:
+    ec903590-a5d1-4b9c-93c3-d64187464baa: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A diverse group of adults attending a presentation in a conference room setting.'
+  created:
+    -
+      value: 1758523867
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo set in a conference room with neutral beige walls and a dark gray carpet. At the front, a diverse group of adults is seated, focused on a presentation. The presenter, a man in a suit, stands beside a projector screen displaying slides. A woman sits at a table with a laptop, assisting with the presentation. The attendees, of varying ethnicities and genders, are attentive and engaged, suggesting a professional and collaborative atmosphere. The overall mood is serious and focused, with a sense of anticipation and learning. Objects like a whiteboard and chairs are visible, adding to the businesslike setting.'
+  field_media_image:
+    -
+      alt: 'A diverse group of adults attending a presentation in a conference room setting.'
+      title: 'Pavel Danilyuk'
+      width: 5474
+      height: 3654
+      entity: ec903590-a5d1-4b9c-93c3-d64187464baa

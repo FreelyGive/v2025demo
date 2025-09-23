@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: a4908130-ebd0-448b-af10-996bb698bfc8
+  bundle: image
+  default_langcode: en
+  depends:
+    56ffd93a-4edc-4cdb-967c-4644ddd200b0: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Close-up of a hand holding euro banknotes of different denominations, taken from a black wallet.'
+  created:
+    -
+      value: 1758523018
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "This image is a close-up photo featuring a hand holding euro banknotes of different denominations, extracted from a black wallet. The background is a clean, soft white, enhancing the vibrant colors of the banknotes, which include red, blue, green, and orange hues. The hand appears to be of an adult, with fair skin, and it's depicted in a neutral, purposeful manner. The image conveys a practical, everyday mood, emphasizing financial themes. The black wallet contrasts sharply with the colorful banknotes, drawing attention to the monetary focus of the scene. No identifiable features of the person are visible, maintaining a generic, relatable representation. Overall, it is a crisp, illustrative depiction of handling money."
+  field_media_image:
+    -
+      alt: 'Close-up of a hand holding euro banknotes of different denominations, taken from a black wallet.'
+      title: 'cottonbro studio'
+      width: 4000
+      height: 6000
+      entity: 56ffd93a-4edc-4cdb-967c-4644ddd200b0

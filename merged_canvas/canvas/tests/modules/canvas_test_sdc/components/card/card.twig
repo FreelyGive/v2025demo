@@ -1,0 +1,19 @@
+<article class="{{ class ?? 'card' }}">
+  <header>
+    <h2>{{ heading }}</h2>
+  </header>
+
+  {% include 'canvas:image' with image|merge({
+    loading,
+    sizes,
+    class: 'card--image',
+    attributes: create_attribute({
+      'data-testid': 'card-component-image',
+    })
+  }|filter((value) => value is not null)) only %}
+
+  <div class="content">
+    <p>{{ content }}</p>
+  </div>
+  <footer>{{ footer }}</footer>
+</article>

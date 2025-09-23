@@ -1,0 +1,14 @@
+services:
+  _defaults:
+    autoconfigure: true
+    autowire: true
+  canvas_ai.page_builder_helper:
+    class: Drupal\canvas_ai\CanvasAiPageBuilderHelper
+  canvas_ai.tempstore:
+    class: Drupal\canvas_ai\CanvasAiTempStore
+  Drupal\Core\Cache\CacheBackendInterface: '@cache.default'
+  canvas_ai.response_validator:
+    class: Drupal\canvas_ai\AiResponseValidator
+    arguments:
+      - '@Drupal\Core\Validation\BasicRecursiveValidatorFactory'
+      - '@uuid'

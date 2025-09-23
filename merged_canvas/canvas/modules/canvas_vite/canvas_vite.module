@@ -1,0 +1,27 @@
+<?php
+
+/**
+* Implements hook_library_info_alter().
+*/
+function canvas_vite_library_info_alter(array &$libraries, string $extension): void {
+  $base = [
+    'attributes' => ['type' => 'module'],
+    // Disabling preprocessing ensures these files are not aggregated, which
+    // avoids the need for clearing Drupal caches during `npm run drupaldev`.
+    'preprocess' => FALSE,
+  ];
+
+  $vite_server_origin = getenv('VITE_SERVER_ORIGIN') ?: 'http://localhost:5173';
+
+  $libraries['canvas-ui']['drupalSettings']['canvas_vite'] = [
+    'serverOrigin' => $vite_server_origin
+  ];
+
+  // @see https://vitejs.dev/guide/backend-integration.html
+  $libraries['canvas-ui']['js'] = [
+    'modules/canvas_vite/window.js' => $base,
+    $vite_server_origin . '/@vite/client' => ['type' => 'external'] + $base,
+    $vite_server_origin . '/src/main.tsx' => ['type' => 'external'] + $base,
+  ];
+  $libraries['canvas-ui']['css'] = [];
+}

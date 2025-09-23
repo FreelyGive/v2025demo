@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.canvas_html_block
+  module:
+    - text
+  theme:
+    - mercury
+active_version: bbc797b76ac62b14
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        text:
+          field_type: text_long
+          field_storage_settings: {  }
+          field_instance_settings:
+            allowed_formats:
+              - canvas_html_block
+          field_widget: text_textarea
+          default_value:
+            -
+              value: '<h3>Welcome to Our Services</h3> <p> We offer a range of solutions to help your business grow. Learn more about our  <a href="/consulting">consulting services</a> or explore our  <a href="/case-studies">case studies</a> to see results in action. </p> <ul> <li> Custom strategy planning with a  <a href="/team">dedicated team</a> </li> <li> Hands-on workshops to guide your implementation </li> <li> Ongoing support and optimization recommendations </li> </ul> <p> Ready to get started? <a href="/contact">Contact us</a> today for a free consultation. </p>'
+          expression: ℹ︎text_long␟value
+    fallback_metadata:
+      slot_definitions: {  }
+label: Text
+id: sdc.mercury.text
+provider: mercury
+source: sdc
+source_local_id: 'mercury:text'
+category: Components

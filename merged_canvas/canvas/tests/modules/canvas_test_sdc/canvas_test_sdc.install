@@ -1,0 +1,35 @@
+<?php
+
+declare(strict_types=1);
+
+use Drupal\Core\Extension\ExtensionPathResolver;
+use Drupal\Core\File\FileExists;
+use Drupal\Core\File\FileSystemInterface;
+use Drupal\file\Entity\File;
+
+/**
+ * Implements hook_install().
+ */
+function canvas_test_sdc_install(): void {
+  // Creates a file entity for testing whether using stream wrappers as an image
+  // src functions correctly.
+  // @see tests/modules/canvas_test_sdc/components/card-with-stream-wrapper-image/card-with-stream-wrapper-image.component.yml
+  $file_system = \Drupal::service(FileSystemInterface::class);
+  $extension_path_resolver = \Drupal::service(ExtensionPathResolver::class);
+  $module_path = $extension_path_resolver->getPath('module', 'canvas_test_sdc');
+  $source = $module_path . '/components/card/balloons.png';
+  $destination = 'public://balloons.png';
+  $directory = 'public://';
+  $file_system->prepareDirectory($directory, FileSystemInterface::CREATE_DIRECTORY);
+  $copied_file = $file_system->copy($source, $destination, FileExists::Replace);
+  if ($copied_file) {
+    // Create a managed file entity.
+    $file = File::create([
+      'filename' => 'balloons',
+      'uri' => $destination,
+      'status' => 1,
+      'uid' => 1,
+    ]);
+    $file->save();
+  }
+}

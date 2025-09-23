@@ -1,0 +1,25 @@
+.panel {
+  position: relative;
+  flex-shrink: 0;
+  border: 1px solid var(--gray-5);
+  border-radius: var(--radius-4);
+  background-color: white;
+}
+
+.moveRemoveControls {
+  --button-ghost-padding-x: var(--space-1) !important;
+}
+
+.moveControl:hover {
+  cursor: grab;
+}
+
+.moveControl:active {
+  cursor: grabbing;
+}
+
+.dragging {
+  z-index: 1;
+  opacity: 0.5;
+  border: 1px dashed var(--gray-7);
+}

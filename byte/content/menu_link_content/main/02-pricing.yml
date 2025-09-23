@@ -1,0 +1,38 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: a46bbd2b-96ab-4c8a-b5ce-e19797d8f9b0
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    ae1dee6e-ca38-49c5-aa37-9f2a8ec9af15: canvas_page
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: 'Pricing'
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      target_uuid: ae1dee6e-ca38-49c5-aa37-9f2a8ec9af15
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: true
+  weight:
+    -
+      value: -8
+  expanded:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true

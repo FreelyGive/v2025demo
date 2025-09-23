@@ -1,0 +1,12 @@
+.divider {
+  margin: 0;
+  padding: 0;
+  border-width: 0.5px;
+  border-style: solid;
+  border-color: var(--slate-a6);
+}
+
+.error {
+  border: 1px solid var(--red-a9) !important;
+  background-color: var(--red-2) !important;
+}

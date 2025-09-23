@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 09ffe9cf-b306-42ad-8f5a-58e5ff9a6b4c
+  bundle: image
+  default_langcode: en
+  depends:
+    6ea6e068-9beb-42f1-9869-e019d8eb9f45: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Woman stressed over financial receipts at a desk, dealing with expenses and calculations.'
+  created:
+    -
+      value: 1758523018
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "This image is a photo depicting a woman seated at a desk, surrounded by financial receipts. The predominant colors are natural and earthy tones, with a bright, sunlit ambiance created by white curtains and green plants in the background. The woman appears to be in her 30s or 40s, with light-colored hair tied back, and she is holding her head in her hands, conveying stress and concern. The scene is filled with a sense of tension and worry, capturing the emotional burden of managing finances. The desk is cluttered with receipts, a laptop, and a notebook, emphasizing the financial task at hand. The image's mood is heavy yet realistic, highlighting everyday financial struggles. Overall, it is expressive and relatable, focusing on personal finance challenges."
+  field_media_image:
+    -
+      alt: 'Woman stressed over financial receipts at a desk, dealing with expenses and calculations.'
+      title: 'Photo By: Kaboompics.com'
+      width: 6720
+      height: 4480
+      entity: 6ea6e068-9beb-42f1-9869-e019d8eb9f45

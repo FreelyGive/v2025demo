@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: dd91f7b4-3a0e-4048-a9b3-8a3dc5eebd28
+  bundle: image
+  default_langcode: en
+  depends:
+    30eb0857-eba4-4364-9c8d-becb317e9820: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A smiling young professional in an acoustic room, showcasing engineering precision.'
+  created:
+    -
+      value: 1758433766
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photograph featuring a young adult female standing in an acoustic room. The background is characterized by deep blue, angular foam structures, commonly seen in soundproof or sound testing environments. The woman, who appears to be Caucasian, has long brown hair and is wearing glasses, radiating a confident and content smile. She is dressed in a light gray button-up shirt and darker trousers, exuding a professional and approachable demeanor. The lighting is soft, with a warm tone adding to the inviting and precise atmosphere. The setting exudes a sense of technical sophistication, with the geometric patterns in the room highlighting engineering precision. Overall, the image has a professional, positive, and focused mood.'
+  field_media_image:
+    -
+      alt: 'A smiling young professional in an acoustic room, showcasing engineering precision.'
+      title: ThisIsEngineering
+      width: 7945
+      height: 5299
+      entity: 30eb0857-eba4-4364-9c8d-becb317e9820

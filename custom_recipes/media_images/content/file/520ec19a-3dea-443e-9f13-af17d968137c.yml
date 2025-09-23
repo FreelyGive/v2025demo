@@ -1,0 +1,24 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 520ec19a-3dea-443e-9f13-af17d968137c
+  default_langcode: en
+default:
+  filename:
+    -
+      value: pexels-photo-1181400.jpeg
+  uri:
+    -
+      value: 'public://2025-09/pexels-photo-1181400.jpeg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 2887994
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1758523867

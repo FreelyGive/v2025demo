@@ -1,0 +1,44 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 6995dff0-1a78-47b4-bfd6-ee137470b632
+  bundle: image
+  default_langcode: en
+  depends:
+    5b33dbc9-5a91-4dd7-aab8-ba46bda1d778: file
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Bradley George, CEO of Techflow'
+  created:
+    -
+      value: 1758527735
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo featuring a mature, professional man standing at a podium against a deep blue curtain backdrop. He is dressed in a dark suit with a light blue shirt and a dark tie, exuding a formal and authoritative presence. The individual, whose identity is not known, appears to be speaking or making an announcement, captured in a moment of articulate expression. The podium has a sign with the name "Bradley George, CEO Techflow," but the person''s identity cannot be confirmed or assumed. The scene conveys a mood of professionalism and leadership, enhanced by the neutral, corporate color scheme. The lighting is even and focused, emphasizing the speaker and creating a sense of importance. A microphone is visibly attached to the podium, indicating a formal presentation or speech setting.'
+  field_media_image:
+    -
+      alt: 'Bradley George, CEO of Techflow'
+      title: ''
+      width: 1536
+      height: 1024
+      entity: 5b33dbc9-5a91-4dd7-aab8-ba46bda1d778

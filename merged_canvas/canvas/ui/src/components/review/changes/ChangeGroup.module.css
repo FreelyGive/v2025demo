@@ -1,0 +1,5 @@
+.changeList {
+  margin: var(--space-1) 0 var(--space-2) var(--space-2);
+  padding-left: var(--space-2);
+  list-style: none;
+}

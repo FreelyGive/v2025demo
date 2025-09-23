@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 71802def-bf13-46e9-b01c-c25cb3b9e523
+  bundle: image
+  default_langcode: en
+  depends:
+    435be398-4150-466a-91d1-e59d071fe6bf: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A woman enjoying a serene moment outdoors amidst soft lighting and foliage.'
+  created:
+    -
+      value: 1758433901
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photograph capturing a serene, outdoor moment. The background features soft lighting with hues of green and red, thanks to abundant foliage and flowering plants. The main colors in the scene are earthy greens and deep reds, creating a peaceful and natural atmosphere. A young woman, likely of South Asian descent, is present, exuding joy as she smiles with her eyes closed. Her relaxed expression conveys contentment and tranquility. Her long, dark hair cascades down her back, and the lighting accentuates her radiant complexion. The mood is warm, inviting, and serene, perfectly reflecting a moment of outdoor peace.'
+  field_media_image:
+    -
+      alt: 'A woman enjoying a serene moment outdoors amidst soft lighting and foliage.'
+      title: 'Lola Russian'
+      width: 4000
+      height: 6000
+      entity: 435be398-4150-466a-91d1-e59d071fe6bf

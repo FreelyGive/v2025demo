@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 0aa29e06-4f23-4411-b3a8-b6a54eb450d7
+  bundle: image
+  default_langcode: en
+  depends:
+    e8abc931-72b9-47fa-8c7b-0a68e55424ed: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Top view of a desk with resume, coffee cup, and laptop on a wooden surface, ideal for business concepts.'
+  created:
+    -
+      value: 1758435773
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "The image is a photo taken from a top-down perspective, featuring a wooden desk surface. The color palette predominantly consists of natural wood tones, with accents of white, blue, and gray. On the left side, there is a neatly organized resume with sections highlighted in blue. To the right, a steaming cup of coffee sits beside a sleek, modern laptop. The setting conveys a professional and organized atmosphere, suitable for business or work-related themes. No people are present, focusing the viewer's attention solely on the objects and arrangement. The overall mood is efficient and productive, ideal for conveying concepts of job hunting or entrepreneurship."
+  field_media_image:
+    -
+      alt: 'Top view of a desk with resume, coffee cup, and laptop on a wooden surface, ideal for business concepts.'
+      title: Lukas
+      width: 6144
+      height: 4069
+      entity: e8abc931-72b9-47fa-8c7b-0a68e55424ed

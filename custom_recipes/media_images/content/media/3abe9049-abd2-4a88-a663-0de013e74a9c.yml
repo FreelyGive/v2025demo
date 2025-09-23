@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 3abe9049-abd2-4a88-a663-0de013e74a9c
+  bundle: image
+  default_langcode: en
+  depends:
+    e4873bac-d8e0-4b58-9028-981f137e3e6e: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A couple sitting on a sofa browsing a laptop, showcasing online shopping leisure.'
+  created:
+    -
+      value: 1758522806
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo featuring a couple casually sitting on a sofa, with the focus on leisurely online shopping. The background is a soft beige, complementing the neutral tones of the sofa, while a soft pastel green coffee table is in the foreground. The man, appearing to be in his late 20s to early 30s, has curly hair and is wearing a gray T-shirt and white pants, exuding a relaxed demeanor as he looks at the laptop. The woman, also in her late 20s to early 30s, is in a blue camisole and appears focused and content as she navigates the laptop. The overall mood is cozy and laid-back, emphasizing comfort and togetherness in a home setting. A few objects are visible, including a green apple and a mug, adding to the domestic atmosphere.'
+  field_media_image:
+    -
+      alt: 'A couple sitting on a sofa browsing a laptop, showcasing online shopping leisure.'
+      title: 'Nataliya Vaitkevich'
+      width: 4160
+      height: 6240
+      entity: e4873bac-d8e0-4b58-9028-981f137e3e6e

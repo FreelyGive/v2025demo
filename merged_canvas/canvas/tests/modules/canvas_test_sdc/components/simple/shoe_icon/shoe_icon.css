@@ -1,0 +1,53 @@
+[data-component-id="canvas:shoe_icon"] {
+  &.size-base {
+    font-size: var(--font-size-base);
+  }
+  &.size-l {
+    font-size: var(--font-size-l);
+  }
+  &.size-s {
+    font-size: var(--font-size-s);
+  }
+  &.size-xs {
+    font-size: var(--font-size-xs);
+  }
+  &.size-xxs {
+    font-size: var(--font-size-xxs);
+  }
+  &.color-gray {
+    color: var(--color--gray-70);
+  }
+  &.color-primary {
+    color: var(--color--primary-80);
+  }
+  &.color-neutral-soft {
+    color: var(--color-text-neutral-soft);
+  }
+  &.color-neutral-medium {
+    color: var(--color-text-neutral-medium);
+  }
+  &.color-neutral-loud {
+    color: var(--color-text-neutral-loud);
+  }
+  &.color-primary-medium {
+    color: var(--color-text-primary-medium);
+  }
+  &.color-primary-loud {
+    color: var(--color-text-primary-loud);
+  }
+  &.color-black {
+    color: var(--color--black);
+  }
+  &.color-white {
+    color: var(--color--white);
+  }
+  &.color-red {
+    color: var(--color--red);
+  }
+  &.color-gold {
+    color: var(--color--gold);
+  }
+  &.color-green {
+    color: var(--color--green);
+  }
+}

@@ -1,0 +1,68 @@
+<?php
+
+declare(strict_types=1);
+
+use Drupal\file\Entity\File;
+use Drupal\file\FileInterface;
+use Drupal\media\Entity\Media;
+use Drupal\media\Entity\MediaType;
+
+/**
+ * Implements hook_install().
+ */
+function canvas_test_video_fixture_install(): void {
+  $media_type = MediaType::load('video');
+  if ($media_type === NULL) {
+    $media_type = MediaType::create([
+      'id' => 'video',
+      'label' => 'Video',
+      'source' => 'video_file',
+    ]);
+    $media_type->save();
+    $source_field = $media_type->getSource()->createSourceField($media_type);
+    // @phpstan-ignore-next-line
+    $source_field->getFieldStorageDefinition()->save();
+    $source_field->save();
+    $media_type
+      ->set('source_configuration', [
+        'source_field' => $source_field->getName(),
+      ])
+      ->save();
+  }
+
+  $module_path = \Drupal::service('extension.list.module')->getPath('canvas_test_video_fixture');
+  \Drupal::service('file_system')->copy($module_path . '/videos/duck.mp4', 'public://duck.mp4');
+
+  $file_1 = File::create([
+    'uri' => 'public://duck.mp4',
+    'status' => FileInterface::STATUS_PERMANENT,
+  ]);
+  $file_1->save();
+
+  \Drupal::service('file_system')->copy($module_path . '/videos/waterfall.mp4', 'public://waterfall.mp4');
+
+  $file_2 = File::create([
+    'uri' => 'public://waterfall.mp4',
+    'status' => FileInterface::STATUS_PERMANENT,
+  ]);
+  $file_2->save();
+
+  // Create two video media entities.
+  $media_1 = Media::create([
+    'bundle' => 'video',
+    'name' => 'Duck Landscape',
+    'field_media_video_file' => [
+      'target_id' => $file_1->id(),
+    ],
+  ]);
+  $media_1->save();
+
+  $media_2 = Media::create([
+    'bundle' => 'video',
+    'name' => 'Waterfall Portrait',
+    'field_media_video_file' => [
+      'target_id' => $file_2->id(),
+    ],
+  ]);
+  $media_2->save();
+}

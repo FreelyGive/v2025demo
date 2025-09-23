@@ -1,0 +1,9 @@
+.code {
+  display: block;
+  padding: var(--space-2) !important;
+  white-space: pre;
+  & pre {
+    margin: 0;
+    line-height: 1.2;
+  }
+}

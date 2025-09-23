@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: ada81ef0-4b0a-4581-9f08-c3f951433aa5
+  bundle: image
+  default_langcode: en
+  depends:
+    a5f519ef-d059-4427-8f50-4856f949d11d: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A passenger makes a payment using a card in a taxi with a handheld payment terminal.'
+  created:
+    -
+      value: 1758522641
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo capturing an interior scene of a taxi, with muted tones and dim lighting, creating a subdued and practical mood. A person, possibly an adult, extends their arm to make a payment, their gender and other characteristics not clearly visible. The main colors are dark greys and blacks, with some soft reflections on surfaces, giving a modern urban feel. A handheld payment terminal is prominently in view, attached to a divider, signifying a cashless transaction. Background elements are slightly blurred, suggesting city movement outside the taxi. The atmosphere appears calm and efficient, focusing on the ease of digital payments in transit.'
+  field_media_image:
+    -
+      alt: 'A passenger makes a payment using a card in a taxi with a handheld payment terminal.'
+      title: 'Tim  Samuel'
+      width: 5880
+      height: 3798
+      entity: a5f519ef-d059-4427-8f50-4856f949d11d

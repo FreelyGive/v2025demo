@@ -1,0 +1,33 @@
+name: v2025demo
+type: drupal11
+docroot: web
+php_version: "8.3"
+webserver_type: nginx-fpm
+xdebug_enabled: false
+additional_hostnames: []
+additional_fqdns: []
+database:
+    type: mariadb
+    version: "10.11"
+use_dns_when_possible: true
+composer_version: "2"
+corepack_enable: false
+ddev_version_constraint: '>= 1.24.0'
+hooks:
+  post-start:
+    # If needed, regenerate `composer.json` and install dependencies.
+    # @see homeadditions/bin/generate-composer-json
+    - exec: 'test -f composer.lock || (generate-composer-json > composer.json && composer install)'
+    # The installer is part of the project template, so symlink it into the web root.
+    # It needs to be a relative symlink, or it will break Package Manager.
+    - exec: 'ln -s -f $(realpath -s --relative-to=$DDEV_DOCROOT/profiles project_template/$DDEV_DOCROOT/profiles/drupal_cms_installer) $DDEV_DOCROOT/profiles'
+web_environment:
+  # If CANARY is set, Composer will install dev branches of all dependencies (be sure to
+  # run `ddev rebuild` if you change this).
+  # @see homeadditions/bin/generate-composer-json
+  # - CANARY=1
+  # For faster performance, don't audit dependencies automatically.
+  - COMPOSER_NO_AUDIT=1
+  # Use the DDEV-provided database to run PHPUnit tests.
+  - SIMPLETEST_DB=$DDEV_DATABASE_FAMILY://db:db@db/db
+  - SIMPLETEST_BASE_URL=$DDEV_PRIMARY_URL

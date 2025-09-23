@@ -1,0 +1,34 @@
+- tabpanel "Patterns":
+  - button "Add new folder":
+    - img
+  - img
+  - button "Animal Pats"
+  - button "Collapse Animal Pats folder" [expanded]:
+    - img
+  - list:
+    - listitem:
+      - img
+      - text: Cat pattern
+    - listitem:
+      - img
+      - text: Dog pattern
+  - img
+  - button "Color Patterns"
+  - button "Collapse Color Patterns folder" [expanded]:
+    - img
+  - list:
+    - listitem:
+      - img
+      - text: Red pattern
+    - listitem:
+      - img
+      - text: Yellow pattern
+  - img
+  - button "Empty Patterns"
+  - button "Collapse Empty Patterns folder" [expanded]:
+    - img
+  - list
+  - list:
+    - listitem:
+      - img
+      - text: Grid Container using pattern

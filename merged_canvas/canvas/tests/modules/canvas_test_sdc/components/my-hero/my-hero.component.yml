@@ -1,0 +1,44 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Hero
+description: A Hero section with inline styles for testing purposes
+props:
+  type: object
+  required:
+    - heading
+    - cta1href
+  properties:
+    heading:
+      type: string
+      title: Heading
+      description: The main heading of the hero
+      examples:
+        - There goes my hero
+        - Submit now
+    subheading:
+      type: string
+      title: Sub-heading
+      examples:
+        - Watch him as he goes!
+    cta1:
+      type: string
+      title: CTA 1 text
+      examples:
+        - View
+    # ℹ️ For an example of a CTA that supports only absolute URLs, see the my-cta SDC.
+    cta1href:
+      type: string
+      format: uri-reference
+      title: CTA 1 link
+      examples:
+        - https://example.com
+        - /node/1
+    cta2:
+      type: string
+      title: CTA 2 text
+      examples:
+        - Click
+    # @see \Drupal\Core\Template\ComponentsTwigExtension::mergeAdditionalRenderContext()
+    attributes:
+      type: Drupal\Core\Template\Attribute
+      name: Attributes
+      title: Attributes

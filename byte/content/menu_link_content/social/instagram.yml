@@ -1,0 +1,44 @@
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: Instagram
+  menu_name:
+    -
+      value: social
+  link:
+    -
+      uri: 'https://www.instagram.com'
+      title: ''
+      options:
+        icon:
+          target_id: 'social:instagram'
+          settings:
+            social:
+              size: '32'
+              color: '#000000'
+              alt: ''
+        icon_display: icon_only
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: false
+  weight:
+    -
+      value: 0
+  expanded:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 2461ddc6-ea78-40aa-b25d-2ebc01f1f9d4
+  bundle: menu_link_content
+  default_langcode: en

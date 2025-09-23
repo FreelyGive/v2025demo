@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 0a4a9313-674a-48d9-ae2c-afd7988f5748
+  bundle: image
+  default_langcode: en
+  depends:
+    f4703ba8-2b4b-402f-a1a3-fa6add705895: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Vivid artistic portrayal of a Catrina for Dia de los Muertos in Mexico City.'
+  created:
+    -
+      value: 1758435924
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This is an artistic portrayal illustrating a Catrina for Dia de los Muertos, set against a muted, dark background adorned with softly glowing candles. The artwork features a woman personifying a traditional Mexican Catrina, with her face painted in intricate skull makeup symbolizing Dia de los Muertos. Her expression is calm and contemplative, with a hint of elegance, and she wears a black embroidered dress with vivid floral designs in orange, pink, and purple. Her hair is styled in long braids, adorned with bright marigold and orange flowers, accented with a striking gold crown composed of radiating spikes. The image, rich in cultural symbolism and vivid color contrasts, evokes a reverent and ceremonial mood. It is a blend of photography and artistic editing, capturing the essence of this significant Mexican celebration.'
+  field_media_image:
+    -
+      alt: 'Vivid artistic portrayal of a Catrina for Dia de los Muertos in Mexico City.'
+      title: 'Israel Torres'
+      width: 5464
+      height: 6830
+      entity: f4703ba8-2b4b-402f-a1a3-fa6add705895

@@ -1,0 +1,26 @@
+_core:
+  default_config_hash: x6RSyMWd1iQYhYS3zBLWYbRgqKfghEjz5rbA025_uJo
+agents:
+  -
+    id: canvas_component_agent
+    contexts: {  }
+    always_include:
+      - our_company
+  -
+    id: canvas_template_builder_agent
+    contexts:
+      - our_company
+    always_include:
+      - our_company
+  -
+    id: pexels_agent
+    contexts: {  }
+    always_include: {  }
+  -
+    id: canvas_ai_orchestrator
+    contexts: {  }
+    always_include: {  }
+  -
+    id: information_finder
+    contexts: {  }
+    always_include: {  }

@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 06639974-716e-491e-87cd-5488fb36b360
+  bundle: image
+  default_langcode: en
+  depends:
+    911e3c1b-bed9-42b0-95ce-086b79e4c059: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Young man using smartphone and credit card for online shopping indoors.'
+  created:
+    -
+      value: 1758522641
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "The image is a photograph featuring a young man, likely in his twenties, with short dark hair. He appears relaxed, sitting on a beige or light-colored couch, and is holding a smartphone in one hand and a credit card in the other. He is wearing a casual white t-shirt and plaid pants. The background is softly blurred and appears to be a warm and cozy indoor setting, possibly a living room, with neutral tones and a touch of gold or wooden hues. The mood is calm and focused, suggesting a moment of concentration on online shopping. The man's slight smile and engaged expression convey a positive, comfortable atmosphere."
+  field_media_image:
+    -
+      alt: 'Young man using smartphone and credit card for online shopping indoors.'
+      title: 'Mikhail Nilov'
+      width: 4000
+      height: 6000
+      entity: 911e3c1b-bed9-42b0-95ce-086b79e4c059

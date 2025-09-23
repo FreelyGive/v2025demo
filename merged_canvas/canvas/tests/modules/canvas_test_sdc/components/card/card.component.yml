@@ -1,0 +1,57 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json'
+name: Card
+description: A card element, used for testing responsive images.
+props:
+  type: object
+  required:
+    - image
+    - loading
+  properties:
+    heading:
+      type: string
+      title: Heading
+      description: The heading text.
+      examples:
+        - 'Card'
+    content:
+      type: string
+      title: Content
+      description: The main text.
+      examples:
+        - 'In a curious work, published in Paris in 1863 by Delaville Dedreux, there is a suggestion for reaching the North Pole by an aerostat.'
+    footer:
+      type: string
+      title: Footer
+      description: The footer text.
+      examples:
+        - 'I have a footer!'
+    image:
+      $ref: json-schema-definitions://canvas.module/image
+      type: object
+      title: Image
+      description: The image to use.
+      examples:
+        - src: balloons.png
+          alt: 'Hot air balloons'
+          width: 640
+          height: 427
+    # The SDC doesn't know what context it's being placed, so we allow sizes to
+    # be modified, e.g. if it's being used in a row of 4 as opposed to full width.
+    # In reality sizes would likely be hidden from content authors as it requires
+    # some HTML knowledge to use correctly, but shown here for testing purposes.
+    sizes:
+      title: Sizes
+      type: string
+      examples:
+        - auto 50vw
+    loading:
+      title: Loading
+      type: string
+      enum:
+        - lazy
+        - eager
+      meta:enum:
+        lazy: Lazy
+        eager: Eager
+      examples:
+        - eager

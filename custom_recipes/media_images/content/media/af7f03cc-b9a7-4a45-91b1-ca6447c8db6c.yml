@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: af7f03cc-b9a7-4a45-91b1-ca6447c8db6c
+  bundle: image
+  default_langcode: en
+  depends:
+    6857b9f6-12c3-480a-956b-79023c94d077: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A clean, minimalist workspace featuring a smartphone, open notepad, pen, and potted succulents.'
+  created:
+    -
+      value: 1758433668
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photograph showcasing a clean and minimalist workspace setting. The background is a subtle, light grey or off-white, enhancing the simplicity of the scene. The main colors are neutral, with the white of the notepad and the pots, the black pen, and the green of the succulents standing out. There are no people present, emphasizing the focus on the workspace environment. A sleek smartphone rests on the left, next to an open notepad with a pen placed on top, indicating readiness and organization. Three small, potted succulents in a row add a touch of nature and freshness. The overall mood is calm and organized, reflecting an efficient and serene workspace.'
+  field_media_image:
+    -
+      alt: 'A clean, minimalist workspace featuring a smartphone, open notepad, pen, and potted succulents.'
+      title: 'Ylanite Koppens'
+      width: 5304
+      height: 3531
+      entity: 6857b9f6-12c3-480a-956b-79023c94d077

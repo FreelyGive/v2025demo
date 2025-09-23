@@ -1,0 +1,225 @@
+{
+  "layout": [
+    {
+      "nodeType": "region",
+      "id": "header",
+      "name": "Header",
+      "components": [
+        {
+          "nodeType": "component",
+          "uuid": "13ea974f-cf74-406a-9171-dad5f96e805f",
+          "type": "block.system_branding_block",
+          "slots": []
+        }
+      ]
+    },
+    {
+      "nodeType": "region",
+      "id": "hero",
+      "name": "Hero (full width)",
+      "components": []
+    },
+    {
+      "nodeType": "region",
+      "id": "highlighted",
+      "name": "Highlighted",
+      "components": [
+        {
+          "nodeType": "component",
+          "uuid": "70812c33-8706-4754-b0d4-3467a869bd69",
+          "type": "block.system_messages_block",
+          "slots": []
+        },
+        {
+          "nodeType": "component",
+          "uuid": "cb3078d3-7295-401a-8623-a838b3ae3350",
+          "type": "block.local_actions_block",
+          "slots": []
+        },
+        {
+          "nodeType": "component",
+          "uuid": "167aa265-2bb0-45f7-91bb-dedb64dabb3b",
+          "type": "block.local_tasks_block",
+          "slots": []
+        },
+        {
+          "nodeType": "component",
+          "uuid": "3f768e50-9338-43e8-99f9-562b2338e6e6",
+          "type": "block.local_tasks_block",
+          "slots": []
+        }
+      ]
+    },
+    {
+      "nodeType": "region",
+      "id": "content_above",
+      "name": "Content Above",
+      "components": [
+        {
+          "nodeType": "component",
+          "uuid": "0f5ca597-1807-4482-baa5-b82bdea48d00",
+          "type": "block.help_block",
+          "slots": []
+        },
+        {
+          "nodeType": "component",
+          "uuid": "5f89a937-9929-49b9-a3e1-630e44881b53",
+          "type": "block.page_title_block",
+          "slots": []
+        },
+        {
+          "nodeType": "component",
+          "uuid": "4a3708f4-3080-47ac-8e37-30abdf550bfa",
+          "type": "block.system_breadcrumb_block",
+          "slots": []
+        }
+      ]
+    },
+    {
+      "nodeType": "region",
+      "id": "content",
+      "name": "Content",
+      "components": [
+        {
+          "slots": [
+            {
+              "id": "ad3eff8e-2180-4be1-a60f-df3f2c5ac393\/column_one",
+              "name": "column_one",
+              "nodeType": "slot",
+              "components": [
+                {
+                  "slots": [],
+                  "nodeType": "component",
+                  "type": "sdc.canvas_test_sdc.heading",
+                  "uuid": "9bee944d-a92d-42b9-a0ae-abae0080cdfa"
+                },
+                {
+                  "slots": [],
+                  "nodeType": "component",
+                  "type": "sdc.canvas_test_sdc.image",
+                  "uuid": "8afbb203-ae72-4155-8319-8c7b1915787a"
+                }
+              ]
+            },
+            {
+              "id": "ad3eff8e-2180-4be1-a60f-df3f2c5ac393\/column_two",
+              "name": "column_two",
+              "nodeType": "slot",
+              "components": []
+            }
+          ],
+          "nodeType": "component",
+          "type": "sdc.canvas_test_sdc.two_column",
+          "uuid": "ad3eff8e-2180-4be1-a60f-df3f2c5ac393"
+        },
+        {
+          "slots": [
+            {
+              "id": "49132256-b0c2-4753-9800-fdc147fafae8\/content",
+              "name": "content",
+              "nodeType": "slot",
+              "components": []
+            }
+          ],
+          "nodeType": "component",
+          "type": "sdc.canvas_test_sdc.one_column",
+          "uuid": "49132256-b0c2-4753-9800-fdc147fafae8"
+        }
+      ]
+    },
+    {
+      "nodeType": "region",
+      "id": "footer_bottom",
+      "name": "Footer Bottom",
+      "components": [
+        {
+          "nodeType": "component",
+          "uuid": "f6cef0ac-17e7-4e9b-b7e4-84bdbbd0bb6b",
+          "type": "block.system_powered_by_block",
+          "slots": []
+        }
+      ]
+    }
+  ],
+  "model": {
+    "4a3708f4-3080-47ac-8e37-30abdf550bfa": {
+      "label": "Breadcrumbs",
+      "label_display": "0",
+      "provider": "system"
+    },
+    "0f5ca597-1807-4482-baa5-b82bdea48d00": {
+      "label": "Help",
+      "label_display": "0",
+      "provider": "help"
+    },
+    "5f89a937-9929-49b9-a3e1-630e44881b53": {
+      "label": "Page title",
+      "label_display": "0",
+      "provider": "core"
+    },
+    "f6cef0ac-17e7-4e9b-b7e4-84bdbbd0bb6b": {
+      "label": "Powered by Drupal",
+      "label_display": "0",
+      "provider": "system"
+    },
+    "13ea974f-cf74-406a-9171-dad5f96e805f": {
+      "label": "Site branding",
+      "label_display": "0",
+      "provider": "system",
+      "block_branding": {
+        "use_site_logo": true,
+        "use_site_name": true,
+        "use_site_slogan": false
+      }
+    },
+    "70812c33-8706-4754-b0d4-3467a869bd69": {
+      "label": "Status messages",
+      "label_display": "0",
+      "provider": "system"
+    },
+    "cb3078d3-7295-401a-8623-a838b3ae3350": {
+      "label": "Primary admin actions",
+      "label_display": "0",
+      "provider": "core"
+    },
+    "167aa265-2bb0-45f7-91bb-dedb64dabb3b": {
+      "label": "Primary tabs",
+      "label_display": "0",
+      "provider": "core",
+      "primary": true,
+      "secondary": false
+    },
+    "3f768e50-9338-43e8-99f9-562b2338e6e6": {
+      "label": "Secondary tabs",
+      "label_display": "0",
+      "provider": "core",
+      "primary": false,
+      "secondary": true
+    },
+    "6d08c965-0e8d-45aa-a45d-f08a9d7b7ecd": {
+      "width": "full"
+    },
+    "35c566a6-9672-4e0f-bd09-9fc01d88c9f0": {
+      "width": "full"
+    },
+    "9bee944d-a92d-42b9-a0ae-abae0080cdfa": {
+      "text": "A heading element",
+      "style": "primary",
+      "element": "h1"
+    },
+    "49132256-b0c2-4753-9800-fdc147fafae8": {
+      "width": "full"
+    },
+    "ad3eff8e-2180-4be1-a60f-df3f2c5ac393": {
+      "width": 25
+    },
+    "8afbb203-ae72-4155-8319-8c7b1915787a": {
+      "image": {
+        "src": "https:\/\/images.placeholders.dev\/600x400",
+        "alt": "Boring placeholder",
+        "width": 600,
+        "height": 400
+      }
+    }
+  }
+}

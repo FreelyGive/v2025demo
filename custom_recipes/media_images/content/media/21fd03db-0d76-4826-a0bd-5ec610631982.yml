@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 21fd03db-0d76-4826-a0bd-5ec610631982
+  bundle: image
+  default_langcode: en
+  depends:
+    e6a25f89-66bd-4e00-af7c-ff7949d7897c: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Stylish Afro American man in sunglasses making an online purchase using credit card outdoors.'
+  created:
+    -
+      value: 1758522641
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo featuring a stylish Afro-American man, likely in his 20s or 30s, with a confident expression. He is wearing sunglasses and a striking afro hairstyle, as well as a bold, red and black patterned shirt. The background is a light, muted tone, providing a clean and minimalist setting. The mood of the image is modern and upbeat, capturing a sense of style and sophistication. He is holding a credit card in one hand, indicating an online purchase, and his other hand holds a wallet. The composition focuses on his relaxed, yet focused demeanor. This combination of elements creates an engaging and fashionable urban scene.'
+  field_media_image:
+    -
+      alt: 'Stylish Afro American man in sunglasses making an online purchase using credit card outdoors.'
+      title: 'Cup of  Couple'
+      width: 4480
+      height: 6720
+      entity: e6a25f89-66bd-4e00-af7c-ff7949d7897c

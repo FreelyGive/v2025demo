@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 9fb4cb70-cac8-49f1-bfe6-ceae25dc8762
+  bundle: image
+  default_langcode: en
+  depends:
+    1ecd0e7d-a939-4f59-8b47-19fa306273a7: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Hand analyzing business graphs on a wooden desk, focusing on data results and growth analysis.'
+  created:
+    -
+      value: 1758435626
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "The image is a photo showcasing a hand analyzing business graphs on a wooden desk, with a focus on data results and growth analysis. The background is dominated by a natural wood grain texture in light brown tones, providing a warm and professional ambiance. The main colors in the scene include vibrant hues of blue, red, and yellow found in the bar and line graphs on the paper. A person's hand, possibly Caucasian, is pointing at the line graph, suggesting a male adult, though no specific identity can be determined. The mood is focused and analytical, reflecting an engagement with the data. The key object is the sheet of paper containing colorful graphs, indicating elements of business growth and analysis."
+  field_media_image:
+    -
+      alt: 'Hand analyzing business graphs on a wooden desk, focusing on data results and growth analysis.'
+      title: Lukas
+      width: 6144
+      height: 4069
+      entity: 1ecd0e7d-a939-4f59-8b47-19fa306273a7

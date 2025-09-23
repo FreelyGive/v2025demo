@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: a7c1274c-8093-4929-a056-183accf0f26b
+  bundle: image
+  default_langcode: en
+  depends:
+    544e5a40-96b7-453e-ba3c-b13189157bdd: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A hand signs a formal contract with a pen on a wooden desk.'
+  created:
+    -
+      value: 1758435773
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a close-up photo capturing a formal and business-like atmosphere. The background features a wooden desk, providing a warm brown contrast to the mostly white document that forms the main focus. A hand, appearing adult and ambiguous in age and ethnicity, is depicted in the act of signing, holding a black pen with intent and precision. The scene conveys a sense of formality and importance, suggestive of a significant transaction or agreement being completed. The composition is straightforward, with a clear focal point on the signature line of the contract. The overall mood is professional, precise, and serious, emphasizing the weight of the moment.'
+  field_media_image:
+    -
+      alt: 'A hand signs a formal contract with a pen on a wooden desk.'
+      title: Pixabay
+      width: 4608
+      height: 3456
+      entity: 544e5a40-96b7-453e-ba3c-b13189157bdd

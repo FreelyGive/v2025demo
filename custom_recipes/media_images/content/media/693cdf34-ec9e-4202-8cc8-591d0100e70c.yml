@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 693cdf34-ec9e-4202-8cc8-591d0100e70c
+  bundle: image
+  default_langcode: en
+  depends:
+    0378b04e-5421-473f-8c6e-6ab69f2b10f1: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Young afro-haired man holding a credit card, symbolizing online shopping.'
+  created:
+    -
+      value: 1758522641
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo featuring a young man with afro-textured hair, suggesting a vibrant and lively personality. He appears to be of African descent, dressed casually in a denim jacket and a black shirt, creating a modern and stylish look. He is holding a credit card, symbolizing the concept of online shopping or digital transactions. The background is a soft, neutral gray, which emphasizes the subject in the foreground. The overall mood of the image is practical yet chic, projecting an air of confidence and ease. The credit card is central to the image, highlighting its significance in relation to the theme of e-commerce.'
+  field_media_image:
+    -
+      alt: 'Young afro-haired man holding a credit card, symbolizing online shopping.'
+      title: 'Cup of  Couple'
+      width: 4480
+      height: 6720
+      entity: 0378b04e-5421-473f-8c6e-6ab69f2b10f1

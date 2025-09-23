@@ -1,0 +1,74 @@
+uuid: 3deb2c1e-2bfc-40af-a86b-650caca71b18
+langcode: en
+status: true
+dependencies: {  }
+machineName: canvas_test_code_components_captioned_video
+name: Captioned video
+required:
+  - video
+  - caption
+props:
+  video:
+    title: Video
+    type: object
+    examples:
+      -
+        src: /ui/assets/videos/bird_vertical.mp4
+        poster: 'https://placehold.co/1080x1920.png?text=Vertical'
+    $ref: 'json-schema-definitions://canvas.module/video'
+  displayWidth:
+    title: 'Display width'
+    type: integer
+    examples:
+      - 400
+    enum:
+      - 200
+      - 300
+      - 400
+      - 500
+    'meta:enum':
+      200: '200'
+      300: '300'
+      400: '400'
+      500: '500'
+  caption:
+    title: Caption
+    type: string
+    examples:
+      - 'A video'
+slots: {  }
+js:
+  original: |-
+    const Video = ({video, caption, displayWidth = 400}) => {
+      return (<figure><video controls poster={video.poster ?? ''} width={displayWidth}>
+        <source src={video.src}/>
+      </video>
+        <caption>{caption}</caption>
+      </figure>)
+    }
+    export default Video;
+  compiled: |
+    import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+    const Video = ({ video, caption, displayWidth = 400 })=>{
+        var _video_poster;
+        return /*#__PURE__*/ _jsxs("figure", {
+            children: [
+                /*#__PURE__*/ _jsx("video", {
+                    controls: true,
+                    poster: (_video_poster = video.poster) !== null && _video_poster !== void 0 ? _video_poster : '',
+                    width: displayWidth,
+                    children: /*#__PURE__*/ _jsx("source", {
+                        src: video.src
+                    })
+                }),
+                /*#__PURE__*/ _jsx("caption", {
+                    children: caption
+                })
+            ]
+        });
+    };
+    export default Video;
+css:
+  original: ''
+  compiled: ''
+dataDependencies: []

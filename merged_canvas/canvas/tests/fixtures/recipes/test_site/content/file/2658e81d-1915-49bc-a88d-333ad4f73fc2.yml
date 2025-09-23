@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 2658e81d-1915-49bc-a88d-333ad4f73fc2
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: PrincesHead.jpg
+  uri:
+    -
+      value: 'public://2025-05/PrincesHead.jpg'
+      url: /sites/default/files/2025-05/PrincesHead.jpg
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 101974
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1747824139

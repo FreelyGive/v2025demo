@@ -1,0 +1,192 @@
+# This file instructs Redocly's linter to ignore the rules contained for specific parts of your API.
+# See https://redocly.com/docs/cli/ for more information.
+openapi.yml:
+  no-required-schema-properties-undefined:
+    - '#/components/schemas/NewAssetLibrary/allOf/0/required/0'
+    - '#/components/schemas/NewAssetLibrary/allOf/0/required/1'
+    - '#/components/schemas/ExistingFolder/allOf/0/required/0'
+    - '#/components/schemas/ExistingFolder/allOf/0/required/1'
+    - '#/components/schemas/ExistingFolder/allOf/0/required/2'
+    - '#/components/schemas/ExistingFolder/allOf/0/required/3'
+    - '#/components/schemas/ExistingFolder/allOf/0/required/4'
+    - '#/components/schemas/NewFolder/allOf/0/required/0'
+    - '#/components/schemas/NewFolder/allOf/0/required/1'
+    - '#/components/schemas/NewFolder/allOf/0/required/2'
+    - '#/components/schemas/NewFolder/allOf/0/required/3'
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1folder~1{configEntityId}/patch/requestBody/content/application~1json/schema/allOf/0/required/0
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1folder~1{configEntityId}/patch/requestBody/content/application~1json/schema/allOf/0/required/1
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1folder~1{configEntityId}/patch/requestBody/content/application~1json/schema/allOf/0/required/2
+    - '#/components/schemas/NewCodeComponent/allOf/0/required/0'
+    - '#/components/schemas/NewCodeComponent/allOf/0/required/1'
+    - '#/components/schemas/NewCodeComponent/allOf/0/required/2'
+    - '#/components/schemas/NewCodeComponent/allOf/0/required/3'
+    - '#/components/schemas/NewCodeComponent/allOf/0/required/4'
+    - '#/components/schemas/NewPattern/allOf/0/required/0'
+    - '#/components/schemas/NewPattern/allOf/0/required/1'
+    - '#/components/schemas/NewPattern/allOf/0/required/2'
+  struct:
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1asset_library/post/requestBody/content/application~1json/examples/example
+      of a global library/id
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1asset_library/post/requestBody/content/application~1json/examples/example
+      of a global library/label
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1asset_library/post/requestBody/content/application~1json/examples/example
+      of a global library/css
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1asset_library/post/requestBody/content/application~1json/examples/example
+      of a global library/js
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1content_template/post/requestBody/content/application~1json/examples/new
+      content template/entityType
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1content_template/post/requestBody/content/application~1json/examples/new
+      content template/bundle
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1content_template/post/requestBody/content/application~1json/examples/new
+      content template/viewMode
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1content_template/post/responses/201/content/application~1json/examples/newly
+      created content template/entityType
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1content_template/post/responses/201/content/application~1json/examples/newly
+      created content template/bundle
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1content_template/post/responses/201/content/application~1json/examples/newly
+      created content template/viewMode
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1content_template/post/responses/201/content/application~1json/examples/newly
+      created content template/status
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1content_template/post/responses/201/content/application~1json/examples/newly
+      created content template/id
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1content_template/post/responses/201/content/application~1json/examples/newly
+      created content template/suggestedPreviewEntityId
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1content_template/post/responses/201/content/application~1json/examples/newly
+      created content template/viewModeLabel
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1content_template/post/responses/201/content/application~1json/examples/newly
+      created content template/label
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1folder/post/requestBody/content/application~1json/examples/example
+      with one folder/name
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1folder/post/requestBody/content/application~1json/examples/example
+      with one folder/type
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1folder/post/requestBody/content/application~1json/examples/example
+      with one folder/weight
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1folder/post/requestBody/content/application~1json/examples/example
+      with one folder/items
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1folder/post/responses/201/content/application~1json/examples/example
+      with one component type folder/id
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1folder/post/responses/201/content/application~1json/examples/example
+      with one component type folder/name
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1folder/post/responses/201/content/application~1json/examples/example
+      with one component type folder/type
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1folder/post/responses/201/content/application~1json/examples/example
+      with one component type folder/weight
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1folder/post/responses/201/content/application~1json/examples/example
+      with one component type folder/items
+    - >-
+      #/components/schemas/CodeComponent/properties/slots/additionalProperties/properties/title/label
+    - >-
+      #/components/schemas/CodeComponent/properties/slots/additionalProperties/properties/description/label
+    - '#/components/schemas/CodeComponent/properties/dataDependencies/schema'
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1js_component/post/requestBody/content/application~1json/examples/a
+      simple js component with no slots or props, and no imports/machineName
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1js_component/post/requestBody/content/application~1json/examples/a
+      simple js component with no slots or props, and no imports/name
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1js_component/post/requestBody/content/application~1json/examples/a
+      simple js component with no slots or props, and no imports/status
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1js_component/post/requestBody/content/application~1json/examples/a
+      simple js component with no slots or props, and no imports/props
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1js_component/post/requestBody/content/application~1json/examples/a
+      simple js component with no slots or props, and no imports/slots
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1js_component/post/requestBody/content/application~1json/examples/a
+      simple js component with no slots or props, and no imports/sourceCodeJs
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1js_component/post/requestBody/content/application~1json/examples/a
+      simple js component with no slots or props, and no imports/sourceCodeCss
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1js_component/post/requestBody/content/application~1json/examples/a
+      simple js component with no slots or props, and no imports/compiledJs
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1js_component/post/requestBody/content/application~1json/examples/a
+      simple js component with no slots or props, and no imports/compiledCss
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1js_component/post/requestBody/content/application~1json/examples/a
+      simple js component with no slots or props, and no
+      imports/importedJsComponents
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1js_component/post/requestBody/content/application~1json/examples/a
+      simple js component with no slots or props, and no
+      imports/dataDependencies
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1pattern/post/requestBody/content/application~1json/examples/example
+      with one pattern/name
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1pattern/post/requestBody/content/application~1json/examples/example
+      with one pattern/layout
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1pattern/post/requestBody/content/application~1json/examples/example
+      with one pattern/model
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1segment/post/requestBody/content/application~1json/examples/new_segment/id
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1segment/post/requestBody/content/application~1json/examples/new_segment/label
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1segment/post/requestBody/content/application~1json/examples/new_segment/rules
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1segment/post/requestBody/content/application~1json/examples/new_segment/weight
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1segment~1{configEntityId}/get/responses/200/content/application~1json/examples/example/id
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1segment~1{configEntityId}/get/responses/200/content/application~1json/examples/example/label
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1segment~1{configEntityId}/get/responses/200/content/application~1json/examples/example/rules
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1segment~1{configEntityId}/get/responses/200/content/application~1json/examples/example/weight
+    - >-
+      #/paths/~1canvas~1api~1v0~1content~1{entity_type}/get/responses/200/content/application~1json/schema/additionalProperties/properties/links/examples
+    - >-
+      #/paths/~1canvas~1api~1v0~1layout-content-template~1{configEntityId}~1{entityId}/get/responses/200/content/application~1json/schema/properties/layout/items/schema
+    - '#/components/schemas/LayoutPreview/properties/layout/items/schema'
+    - >-
+      #/paths/~1canvas~1api~1v0~1layout-content-template~1{configEntityId}~1{entityId}/patch/responses/200/content/application~1json/schema/properties/layout/items/schema
+    - >-
+      #/paths/~1canvas~1api~1v0~1layout~1{entityTypeId}~1{entityId}/get/responses/200/content/application~1json/schema/properties/layout/items/schema
+    - >-
+      #/paths/~1canvas~1api~1v0~1layout~1{entityTypeId}~1{entityId}/patch/responses/200/content/application~1json/schema/properties/layout/items/schema
+    - >-
+      #/paths/~1canvas~1api~1v0~1ui~1content_template~1view_modes~1node/get/responses/200/content/application~1json/examples/node/article
+    - >-
+      #/paths/~1canvas~1api~1v0~1ui~1content_template~1view_modes~1node/get/responses/200/content/application~1json/examples/node/page
+  path-parameters-defined:
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1auto-save~1{entityTypeId}~1{configEntityId}/get/parameters
+    - >-
+      #/paths/~1canvas~1api~1v0~1config~1auto-save~1{entityTypeId}~1{configEntityId}/patch/parameters
+    - '#/paths/~1canvas~1api~1v0~1content~1{entity_type}/get/parameters'
+    - >-
+      #/paths/~1canvas~1api~1v0~1form~1content-entity~1{entityTypeId}~1{entityId}/post/parameters
+    - >-
+      #/paths/~1canvas~1api~1v0~1form~1content-entity~1{entityTypeId}~1{entityId}~1{entityFormMode}/post/parameters

@@ -1,0 +1,86 @@
+[
+  {
+    "name": "String with no example value",
+    "type": "string",
+    "example": "",
+    "id": "edd8f3d4-6853-44c7-92db-bbd86d9ba112",
+    "derivedType": "text"
+  },
+  {
+    "name": "Integer with no example value",
+    "type": "integer",
+    "example": "",
+    "id": "962e2deb-078e-4436-a3f7-2a628f39bb8a",
+    "derivedType": "integer"
+  },
+  {
+    "name": "Number with no example value",
+    "type": "number",
+    "example": "",
+    "id": "2cb91003-b280-4f61-bba1-db90d20bb8dc",
+    "derivedType": "number"
+  },
+  {
+    "name": "Boolean with example value (true)",
+    "type": "boolean",
+    "example": true,
+    "id": "5398f61d-5b99-4142-a438-f0e2cec6c567",
+    "derivedType": "boolean"
+  },
+  {
+    "name": "Text list with no example value",
+    "type": "string",
+    "enum": ["Not Started", "In Progress", "Completed"],
+    "example": "",
+    "meta:enum": {
+      "Not Started": "Not Started",
+      "In Progress": "In Progress",
+      "Completed": "Completed"
+    },
+    "id": "aa2e3ece-9431-4db9-a64e-1d2f0699912d",
+    "derivedType": "listText"
+  },
+  {
+    "name": "Integer list with no example value",
+    "type": "integer",
+    "enum": [1, 2, 3],
+    "example": "",
+    "meta:enum": {
+      "1": 1,
+      "2": 2,
+      "3": 3
+    },
+    "id": "a361cca0-6aca-4d55-907d-10275df8c7fa",
+    "derivedType": "listInteger"
+  },
+  {
+    "name": "Formatted text with no example value",
+    "type": "string",
+    "example": "",
+    "id": "fgg0f3d4-6853-44c7-92db-bbd86d9ba112",
+    "derivedType": "formattedText",
+    "contentMediaType": "text/html",
+    "x-formatting-context": "block"
+  },
+  {
+    "name": "Image with example value",
+    "type": "object",
+    "$ref": "json-schema-definitions://canvas.module/image",
+    "example": {
+      "src": "public://2024-07/framer.png",
+      "width": 400,
+      "height": 600,
+      "alt": "Example image placeholder"
+    },
+    "id": "4ea2a14d-7828-467c-a505-063f006f1ebf",
+    "derivedType": "image"
+  },
+  {
+    "name": "Relative path link with no example value",
+    "type": "string",
+    "example": "",
+    "format": "uri-reference",
+    "id": "9c71e89f-608b-49af-b0e6-6b4be58b538e",
+    "derivedType": "link"
+  }
+]

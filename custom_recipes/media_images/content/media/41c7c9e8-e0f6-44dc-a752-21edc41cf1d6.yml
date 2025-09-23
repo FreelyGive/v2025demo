@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 41c7c9e8-e0f6-44dc-a752-21edc41cf1d6
+  bundle: image
+  default_langcode: en
+  depends:
+    d3b467a1-6817-427b-80e6-d4fa06d7c61c: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A diverse group of people standing in a church setting, participating in a religious ceremony.'
+  created:
+    -
+      value: 1758435924
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo depicting a diverse group of people in a church setting, participating in a religious ceremony. The background features soft, neutral colors with white and teal walls, creating a calm and serene atmosphere. The group includes individuals of varying ages, ethnicities, and genders, all engaged in the ceremony with a sense of reverence and focus. A man in the foreground, dressed in a dark suit, appears to be leading a part of the ceremony, possibly passing around a collection plate or similar object. The mood is solemn and respectful, indicative of a shared spiritual or community experience. The lighting is warm and inviting, with strings of lights adding a gentle glow to the scene. The expressions of the participants show concentration and a sense of unity.'
+  field_media_image:
+    -
+      alt: 'A diverse group of people standing in a church setting, participating in a religious ceremony.'
+      title: 'Pavel Danilyuk'
+      width: 5473
+      height: 3654
+      entity: d3b467a1-6817-427b-80e6-d4fa06d7c61c

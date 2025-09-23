@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: a6d66da1-901c-4ed0-ab60-865f477c8be1
+  bundle: image
+  default_langcode: en
+  depends:
+    82cd76f6-799c-4d90-a339-ac01b733b088: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A young woman in a blue suit exhibits confidence with a relaxed pose against a blue background.'
+  created:
+    -
+      value: 1758433766
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This image is a photo featuring a young woman in a light blue suit, standing against a solid, soft blue background. Her pose is relaxed and confident, with one hand gesturing playfully like a finger gun. The woman appears to be in her twenties, with a light skin tone, and her expression exudes self-assuredness and charm. Her hair is neatly tied back, enhancing the professional yet approachable vibe. The overall mood of the image is uplifting and empowering, suggesting a sense of poised confidence. There are no additional objects in the image, allowing focus to remain on her presence and attitude. The soft, monochromatic color scheme creates a harmonious and modern aesthetic.'
+  field_media_image:
+    -
+      alt: 'A young woman in a blue suit exhibits confidence with a relaxed pose against a blue background.'
+      title: 'Moose Photos'
+      width: 6016
+      height: 4016
+      entity: 82cd76f6-799c-4d90-a339-ac01b733b088

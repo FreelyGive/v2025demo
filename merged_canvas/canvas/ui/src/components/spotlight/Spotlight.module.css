@@ -1,0 +1,34 @@
+.spotlight {
+  position: absolute;
+  /* 1px because the preview iframe has a px border. */
+  inset: 1px;
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  grid-template-columns: auto auto 1fr;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+
+  > div {
+    pointer-events: none;
+    background: rgba(0, 5, 29, 0.45);
+  }
+
+  &.blocking > div {
+    pointer-events: all;
+  }
+
+  .position {
+    width: 0;
+    height: 0;
+  }
+
+  .highlighted,
+  &.blocking > .highlighted {
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    background: transparent;
+  }
+
+}

@@ -1,0 +1,35 @@
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: blog_thumb_5.png
+  created:
+    -
+      value: 1752178607
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  field_media_image:
+    -
+      alt: 'An open-plan office with rows of desks and people working at them.'
+      title: ''
+      width: 408
+      height: 306
+      entity: 2d57507a-bf6c-40f6-b4bf-b8a0651ff41b
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 4d48928a-cd65-4f32-aa27-dd9ff703208f
+  bundle: image
+  default_langcode: en
+  depends:
+    2d57507a-bf6c-40f6-b4bf-b8a0651ff41b: file

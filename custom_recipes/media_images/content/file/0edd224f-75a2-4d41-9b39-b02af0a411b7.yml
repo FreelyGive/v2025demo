@@ -1,0 +1,24 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 0edd224f-75a2-4d41-9b39-b02af0a411b7
+  default_langcode: en
+default:
+  filename:
+    -
+      value: pexels-photo-261679.jpeg
+  uri:
+    -
+      value: 'public://2025-09/pexels-photo-261679.jpeg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 1243602
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1758435773

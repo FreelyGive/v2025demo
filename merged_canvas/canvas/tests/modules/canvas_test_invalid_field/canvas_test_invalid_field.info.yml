@@ -1,0 +1,8 @@
+name: Canvas Test Invalid Field
+type: module
+description: 'Test module for field validation in Drupal Canvas.'
+package: Testing
+dependencies:
+  - drupal:node
+  - canvas:canvas_test_article_fields
+core_version_requirement: ^11

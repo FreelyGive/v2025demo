@@ -1,0 +1,9 @@
+.root {
+  display: inline-block;
+  color: var(--slate-11);
+}
+
+:global(.form-required):after { /* stylelint-disable-line */
+  content: '*';
+  color: #FF003D;
+}

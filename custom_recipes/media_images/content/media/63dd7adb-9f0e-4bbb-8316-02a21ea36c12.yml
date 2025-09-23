@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 63dd7adb-9f0e-4bbb-8316-02a21ea36c12
+  bundle: image
+  default_langcode: en
+  depends:
+    0aead7b3-ccde-49c4-af02-9bbff64b9fd9: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Two businesswomen talking during a conference break, showcasing teamwork.'
+  created:
+    -
+      value: 1758523867
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "The image is a photo featuring two businesswomen engaged in conversation, situated in a conference setting. The background is composed of neutral tones, with beige and grey colors dominating the scene, lending a professional and subdued atmosphere. The women, both appearing to be of varying ethnicities, are middle-aged and exhibit a cheerful and engaged demeanor, showcasing expressions of friendly interaction and teamwork. They are dressed in business attire, sitting among a cluster of empty chairs, suggesting a conference break setting. The overall mood of the image is professional yet relaxed, emphasizing interpersonal communication and collaboration. In the background, there are more people conversing in small groups, adding to the networking theme. There's a window on the right side, letting in natural light that softens the scene."
+  field_media_image:
+    -
+      alt: 'Two businesswomen talking during a conference break, showcasing teamwork.'
+      title: 'Pavel Danilyuk'
+      width: 5473
+      height: 3654
+      entity: 0aead7b3-ccde-49c4-af02-9bbff64b9fd9

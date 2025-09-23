@@ -1,0 +1,1221 @@
+diff --git a/core/core.services.yml b/core/core.services.yml
+index 31b7a5b6aa5..0704a1ff8fd 100644
+--- a/core/core.services.yml
++++ b/core/core.services.yml
+@@ -76,6 +76,10 @@ services:
+     arguments: ['@config.manager', '@config.storage', '@config.typed', '@config.factory']
+   Drupal\Core\DefaultContent\Importer:
+     autowire: true
++  Drupal\Core\DefaultContent\Exporter:
++    autowire: true
++    calls:
++      - [setLogger, ['@logger.channel.default_content']]
+   Drupal\Core\DefaultContent\AdminAccountSwitcher:
+     arguments:
+       $isSuperUserAccessEnabled: '%security.enable_super_user%'
+@@ -537,6 +541,9 @@ services:
+   logger.channel.default:
+     parent: logger.channel_base
+     arguments: ['system']
++  logger.channel.default_content:
++    parent: logger.channel_base
++    arguments: ['default_content']
+   logger.channel.php:
+     parent: logger.channel_base
+     arguments: ['php']
+diff --git a/core/lib/Drupal/Core/DefaultContent/ContentExportCommand.php b/core/lib/Drupal/Core/DefaultContent/ContentExportCommand.php
+new file mode 100644
+index 00000000000..bbb7ddde6a4
+--- /dev/null
++++ b/core/lib/Drupal/Core/DefaultContent/ContentExportCommand.php
+@@ -0,0 +1,110 @@
++<?php
++
++declare(strict_types=1);
++
++namespace Drupal\Core\DefaultContent;
++
++use Drupal\Core\Command\BootableCommandTrait;
++use Drupal\Core\Entity\EntityTypeManagerInterface;
++use Drupal\Core\File\FileSystemInterface;
++use Drupal\Core\StringTranslation\StringTranslationTrait;
++use Symfony\Component\Console\Command\Command;
++use Symfony\Component\Console\Exception\RuntimeException;
++use Symfony\Component\Console\Input\InputArgument;
++use Symfony\Component\Console\Input\InputInterface;
++use Symfony\Component\Console\Input\InputOption;
++use Drupal\Core\Entity\ContentEntityInterface;
++use Symfony\Component\Console\Output\OutputInterface;
++use Symfony\Component\Console\Style\SymfonyStyle;
++
++/**
++ * Exports a single content entity in YAML format.
++ *
++ * @internal
++ *    This API is experimental.
++ */
++final class ContentExportCommand extends Command {
++
++  use BootableCommandTrait;
++  use StringTranslationTrait;
++
++  public function __construct(object $class_loader) {
++    parent::__construct('content:export');
++    $this->classLoader = $class_loader;
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  protected function configure(): void {
++    $this
++      ->setDescription('Exports a single content entity in YAML format.')
++      ->addArgument('entity_type_id', InputArgument::REQUIRED, 'The type of entity to export (e.g., node, taxonomy_term).')
++      ->addArgument('entity_id', InputArgument::REQUIRED, 'The ID of the entity to export. Will usually be a number.')
++      ->addOption('with-dependencies', 'W', InputOption::VALUE_NONE, "Recursively export all of the entities referenced by this entity into a directory structure.")
++      ->addOption('dir', 'd', InputOption::VALUE_REQUIRED, 'The path where content should be exported.');
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  protected function execute(InputInterface $input, OutputInterface $output): int {
++    $io = new SymfonyStyle($input, $output);
++    $container = $this->boot()->getContainer();
++
++    $entity_type_id = $input->getArgument('entity_type_id');
++    $entity_id = $input->getArgument('entity_id');
++    $entity_type_manager = $container->get(EntityTypeManagerInterface::class);
++
++    if (!$entity_type_manager->hasDefinition($entity_type_id)) {
++      $io->error("The entity type \"$entity_type_id\" does not exist.");
++      return 1;
++    }
++
++    if (!$entity_type_manager->getDefinition($entity_type_id)->entityClassImplements(ContentEntityInterface::class)) {
++      $io->error("$entity_type_id is not a content entity type.");
++      return 1;
++    }
++
++    $entity = $entity_type_manager
++      ->getStorage($entity_type_id)
++      ->load($entity_id);
++    if (!$entity instanceof ContentEntityInterface) {
++      $io->error("$entity_type_id $entity_id does not exist.");
++      return 1;
++    }
++
++    $exporter = $container->get(Exporter::class);
++
++    $dir = $input->getOption('dir');
++    $with_dependencies = $input->getOption('with-dependencies');
++    if ($with_dependencies && empty($dir)) {
++      throw new RuntimeException('The --dir option is required when exporting with dependencies.');
++    }
++    $file_system = $container->get(FileSystemInterface::class);
++
++    if ($with_dependencies) {
++      $count = $exporter->exportWithDependencies($entity, $dir);
++
++      $message = (string) $this->formatPlural($count, 'One item was exported to @dir.', '@count items were exported to @dir.', [
++        '@dir' => $file_system->realpath($dir),
++      ]);
++      $io->success($message);
++    }
++    elseif ($dir) {
++      $exporter->exportToFile($entity, $dir);
++
++      $message = (string) $this->t('The @type "@label" was exported to @dir.', [
++        '@type' => $entity->getEntityType()->getSingularLabel(),
++        '@label' => $entity->label(),
++        '@dir' => $file_system->realpath($dir),
++      ]);
++      $io->success($message);
++    }
++    else {
++      $io->write((string) $exporter->export($entity));
++    }
++    return 0;
++  }
++
++}
+diff --git a/core/lib/Drupal/Core/DefaultContent/ExportMetadata.php b/core/lib/Drupal/Core/DefaultContent/ExportMetadata.php
+new file mode 100644
+index 00000000000..b47a2008416
+--- /dev/null
++++ b/core/lib/Drupal/Core/DefaultContent/ExportMetadata.php
+@@ -0,0 +1,106 @@
++<?php
++
++declare(strict_types=1);
++
++namespace Drupal\Core\DefaultContent;
++
++use Drupal\Core\Entity\ContentEntityInterface;
++
++/**
++ * Collects metadata about an entity being exported.
++ *
++ * @internal
++ *   This API is experimental.
++ */
++final class ExportMetadata {
++
++  /**
++   * The collected export metadata.
++   */
++  private array $metadata = ['version' => '1.0'];
++
++  /**
++   * Files that should accompany the exported entity.
++   *
++   * @var array<string, string>
++   *
++   * @see ::getAttachments()
++   */
++  private array $attachments = [];
++
++  public function __construct(ContentEntityInterface $entity) {
++    $this->metadata['entity_type'] = $entity->getEntityTypeId();
++    $this->metadata['uuid'] = $entity->uuid();
++
++    $entity_type = $entity->getEntityType();
++    if ($entity_type->hasKey('bundle')) {
++      $this->metadata['bundle'] = $entity->bundle();
++    }
++    if ($entity_type->hasKey('langcode')) {
++      $this->metadata['default_langcode'] = $entity->language()->getId();
++    }
++  }
++
++  /**
++   * Returns the collected metadata as an array.
++   *
++   * @return array
++   *   The collected export metadata.
++   */
++  public function get(): array {
++    return $this->metadata;
++  }
++
++  /**
++   * Adds a dependency on another content entity.
++   *
++   * @param \Drupal\Core\Entity\ContentEntityInterface $entity
++   *   The entity we depend upon.
++   */
++  public function addDependency(ContentEntityInterface $entity): void {
++    $uuid = $entity->uuid();
++    if ($uuid === $this->metadata['uuid']) {
++      throw new \LogicException('An entity cannot depend on itself.');
++    }
++    $this->metadata['depends'][$uuid] = $entity->getEntityTypeId();
++  }
++
++  /**
++   * Returns the dependencies of the exported entity.
++   *
++   * @return string[][]
++   *   An array of dependencies, where each dependency is a tuple with two
++   *   elements: an entity type ID, and a UUID.
++   */
++  public function getDependencies(): array {
++    $dependencies = [];
++    foreach ($this->metadata['depends'] ?? [] as $uuid => $entity_type_id) {
++      $dependencies[] = [$entity_type_id, $uuid];
++    }
++    return $dependencies;
++  }
++
++  /**
++   * Attaches a file to the exported entity.
++   *
++   * @param string $uri
++   *   The URI of the file, which may or may not physically exist.
++   * @param string $name
++   *   The name of the exported file.
++   */
++  public function addAttachment(string $uri, string $name): void {
++    $this->attachments[$uri] = $name;
++  }
++
++  /**
++   * Returns the files attached to this entity.
++   *
++   * @return array<string, string>
++   *   The keys are the files' current URIs, and the values are the names of the
++   *   files when they are exported.
++   */
++  public function getAttachments(): array {
++    return $this->attachments;
++  }
++
++}
+diff --git a/core/lib/Drupal/Core/DefaultContent/ExportResult.php b/core/lib/Drupal/Core/DefaultContent/ExportResult.php
+new file mode 100644
+index 00000000000..0129c86add9
+--- /dev/null
++++ b/core/lib/Drupal/Core/DefaultContent/ExportResult.php
+@@ -0,0 +1,36 @@
++<?php
++
++declare(strict_types=1);
++
++namespace Drupal\Core\DefaultContent;
++
++use Drupal\Core\Serialization\Yaml;
++
++/**
++ * The result of exporting a content entity.
++ *
++ * @internal
++ *   This API is experimental.
++ */
++final readonly class ExportResult {
++
++  public function __construct(
++    public array $data,
++    public ExportMetadata $metadata,
++  ) {}
++
++  /**
++   * Returns the exported entity data as YAML.
++   *
++   * @return string
++   *   The exported entity data in YAML format.
++   */
++  public function __toString(): string {
++    $data = [
++      '_meta' => $this->metadata->get(),
++    ] + $this->data;
++
++    return Yaml::encode($data);
++  }
++
++}
+diff --git a/core/lib/Drupal/Core/DefaultContent/Exporter.php b/core/lib/Drupal/Core/DefaultContent/Exporter.php
+new file mode 100644
+index 00000000000..d12f36bd201
+--- /dev/null
++++ b/core/lib/Drupal/Core/DefaultContent/Exporter.php
+@@ -0,0 +1,319 @@
++<?php
++
++declare(strict_types=1);
++
++namespace Drupal\Core\DefaultContent;
++
++use Drupal\Component\Serialization\Yaml;
++use Drupal\Core\Entity\ContentEntityInterface;
++use Drupal\Core\Entity\EntityRepositoryInterface;
++use Drupal\Core\Entity\EntityTypeManagerInterface;
++use Drupal\Core\Field\FieldItemInterface;
++use Drupal\Core\Field\Plugin\Field\FieldType\EntityReferenceItemInterface;
++use Drupal\Core\Field\Plugin\Field\FieldType\PasswordItem;
++use Drupal\Core\File\Exception\DirectoryNotReadyException;
++use Drupal\Core\File\Exception\FileException;
++use Drupal\Core\File\Exception\FileWriteException;
++use Drupal\Core\File\FileExists;
++use Drupal\Core\File\FileSystemInterface;
++use Drupal\Core\Session\AccountInterface;
++use Drupal\Core\TypedData\PrimitiveInterface;
++use Psr\Log\LoggerAwareInterface;
++use Psr\Log\LoggerAwareTrait;
++use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
++
++/**
++ * Handles exporting content entities.
++ *
++ * @internal
++ *   This API is experimental.
++ */
++final class Exporter implements LoggerAwareInterface {
++
++  use LoggerAwareTrait;
++
++  public function __construct(
++    private readonly EventDispatcherInterface $eventDispatcher,
++    private readonly FileSystemInterface $fileSystem,
++    private readonly EntityRepositoryInterface $entityRepository,
++    private readonly EntityTypeManagerInterface $entityTypeManager,
++  ) {}
++
++  /**
++   * Exports a single content entity as an array.
++   *
++   * @param \Drupal\Core\Entity\ContentEntityInterface $entity
++   *   The entity to export.
++   *
++   * @return \Drupal\Core\DefaultContent\ExportResult
++   *   A read-only value object with the exported entity data, and any metadata
++   *   that was collected while exporting the entity, including dependencies and
++   *   attachments.
++   */
++  public function export(ContentEntityInterface $entity): ExportResult {
++    $metadata = new ExportMetadata($entity);
++    $event = new PreExportEvent($entity, $metadata);
++
++    $field_definitions = $entity->getFieldDefinitions();
++    // Ignore serial (integer) entity IDs by default, along with a number of
++    // other keys that aren't useful for default content.
++    $id_key = $entity->getEntityType()->getKey('id');
++    if ($id_key && $field_definitions[$id_key]->getType() === 'integer') {
++      $event->setEntityKeyExportable('id', FALSE);
++    }
++    $event->setEntityKeyExportable('uuid', FALSE);
++    $event->setEntityKeyExportable('revision', FALSE);
++    $event->setEntityKeyExportable('langcode', FALSE);
++    $event->setEntityKeyExportable('bundle', FALSE);
++    $event->setEntityKeyExportable('default_langcode', FALSE);
++    $event->setEntityKeyExportable('revision_default', FALSE);
++    $event->setEntityKeyExportable('revision_created', FALSE);
++
++    // Default content has no history, so it doesn't make much sense to export
++    // `changed` fields.
++    foreach ($field_definitions as $name => $definition) {
++      if ($definition->getType() === 'changed') {
++        $event->setExportable($name, FALSE);
++      }
++    }
++    // Exported user accounts should include the hashed password.
++    $event->setCallback('field_item:password', function (PasswordItem $item): array {
++      return $item->set('pre_hashed', TRUE)->getValue();
++    });
++    // Ensure that all entity reference fields mark the referenced entity as a
++    // dependency of the entity being exported.
++    $event->setCallback('field_item:entity_reference', $this->exportReference(...));
++    $event->setCallback('field_item:file', $this->exportReference(...));
++    $event->setCallback('field_item:image', $this->exportReference(...));
++
++    // Dispatch the event so modules can add and customize export callbacks, and
++    // mark certain fields as ignored.
++    $this->eventDispatcher->dispatch($event);
++
++    $data = [];
++    foreach ($entity->getTranslationLanguages() as $langcode => $language) {
++      $translation = $entity->getTranslation($langcode);
++      $values = $this->exportTranslation($translation, $metadata, $event->getCallbacks(), $event->getAllowList());
++
++      if ($translation->isDefaultTranslation()) {
++        $data['default'] = $values;
++      }
++      else {
++        $data['translations'][$langcode] = $values;
++      }
++    }
++    return new ExportResult($data, $metadata);
++  }
++
++  /**
++   * Exports an entity to a YAML file in a directory.
++   *
++   * Any attachments to the entity (e.g., physical files) will be copied into
++   * the destination directory, alongside the exported entity.
++   *
++   * @param \Drupal\Core\Entity\ContentEntityInterface $entity
++   *   The entity to export.
++   * @param string $destination
++   *   A destination path or URI; will be created if it does not exist. A
++   *   subdirectory will be created for the entity type that is being exported.
++   *
++   * @return \Drupal\Core\DefaultContent\ExportResult
++   *   The exported entity data and its metadata.
++   */
++  public function exportToFile(ContentEntityInterface $entity, string $destination): ExportResult {
++    $destination .= '/' . $entity->getEntityTypeId();
++
++    // Ensure the destination directory exists and is writable.
++    $this->fileSystem->prepareDirectory(
++      $destination,
++      FileSystemInterface::CREATE_DIRECTORY | FileSystemInterface::MODIFY_PERMISSIONS,
++    ) || throw new DirectoryNotReadyException("Could not create destination directory '$destination'");
++
++    $destination = $this->fileSystem->realpath($destination);
++    if (empty($destination)) {
++      throw new FileException("Could not resolve the destination directory '$destination'");
++    }
++
++    $path = $destination . '/' . $entity->uuid() . '.' . Yaml::getFileExtension();
++    $result = $this->export($entity);
++    file_put_contents($path, (string) $result) || throw new FileWriteException("Could not write file '$path'");
++
++    foreach ($result->metadata->getAttachments() as $from => $to) {
++      $this->fileSystem->copy($from, $destination . '/' . $to, FileExists::Replace);
++    }
++    return $result;
++  }
++
++  /**
++   * Exports an entity and all of its dependencies to a directory.
++   *
++   * @param \Drupal\Core\Entity\ContentEntityInterface $entity
++   *   The entity to export.
++   * @param string $destination
++   *   A destination path or URI; will be created if it does not exist.
++   *   Subdirectories will be created for each entity type that is exported.
++   *
++   * @return int
++   *   The number of entities that were exported.
++   */
++  public function exportWithDependencies(ContentEntityInterface $entity, string $destination): int {
++    $queue = [$entity];
++    $done = [];
++
++    while ($queue) {
++      $entity = array_shift($queue);
++      $uuid = $entity->uuid();
++      // Don't export the same entity twice, both for performance and to prevent
++      // an infinite loop caused by circular dependencies.
++      if (isset($done[$uuid])) {
++        continue;
++      }
++
++      $dependencies = $this->exportToFile($entity, $destination)->metadata->getDependencies();
++      foreach ($dependencies as $dependency) {
++        $dependency = $this->entityRepository->loadEntityByUuid(...$dependency);
++        if ($dependency instanceof ContentEntityInterface) {
++          $queue[] = $dependency;
++        }
++      }
++      $done[$uuid] = TRUE;
++    }
++    return count($done);
++  }
++
++  /**
++   * Exports a single translation of a content entity.
++   *
++   * Any fields that are explicitly marked non-exportable (including computed
++   * properties by default) will not be exported.
++   *
++   * @param \Drupal\Core\Entity\ContentEntityInterface $translation
++   *   The translation to export.
++   * @param \Drupal\Core\DefaultContent\ExportMetadata $metadata
++   *   Any metadata about the entity being exported (e.g., dependencies).
++   * @param callable[] $callbacks
++   *   Custom export functions for specific field types, keyed by field type.
++   * @param array<string, bool> $allow_list
++   *   An array of booleans that indicate whether a specific field should be
++   *   exported or not, even if it is computed. Keyed by field name.
++   *
++   * @return array
++   *   The exported translation.
++   */
++  private function exportTranslation(ContentEntityInterface $translation, ExportMetadata $metadata, array $callbacks, array $allow_list): array {
++    $data = [];
++
++    foreach ($translation->getFields() as $name => $items) {
++      // Skip the field if it's empty, or it was explicitly disallowed, or is a
++      // computed field that wasn't explicitly allowed.
++      $allowed = $allow_list[$name] ?? NULL;
++      if ($allowed === FALSE || ($allowed === NULL && $items->getDataDefinition()->isComputed()) || $items->isEmpty()) {
++        continue;
++      }
++
++      // Try to find a callback for this specific field, then for the field's
++      // data type, and finally fall back to a generic callback.
++      $data_type = $items->getFieldDefinition()
++        ->getItemDefinition()
++        ->getDataType();
++      $callback = $callbacks[$name] ?? $callbacks[$data_type] ?? $this->exportFieldItem(...);
++
++      /** @var \Drupal\Core\Field\FieldItemInterface $item */
++      foreach ($items as $item) {
++        $values = $callback($item, $metadata);
++        // If the callback returns NULL, this item should not be exported.
++        if (is_array($values)) {
++          $data[$name][] = $values;
++        }
++      }
++    }
++    return $data;
++  }
++
++  /**
++   * Exports a single field item generically.
++   *
++   * Any properties of the item that are explicitly marked non-exportable (which
++   * includes computed properties by default) will not be exported.
++   *
++   * Field types that need special handling should provide a custom callback
++   * function to the exporter by subscribing to
++   * \Drupal\Core\DefaultContent\PreExportEvent.
++   *
++   * @param \Drupal\Core\Field\FieldItemInterface $item
++   *   The field item to export.
++   *
++   * @return array
++   *   The exported field values.
++   *
++   * @see \Drupal\Core\DefaultContent\PreExportEvent::setCallback()
++   */
++  private function exportFieldItem(FieldItemInterface $item): array {
++    $custom_serialized = Importer::getCustomSerializedPropertyNames($item);
++
++    $values = [];
++    foreach ($item->getProperties() as $name => $property) {
++      $value = $property instanceof PrimitiveInterface ? $property->getCastedValue() : $property->getValue();
++
++      if (is_string($value) && in_array($name, $custom_serialized, TRUE)) {
++        $value = unserialize($value);
++      }
++      $values[$name] = $value;
++    }
++    return $values;
++  }
++
++  /**
++   * Exports an entity reference field item.
++   *
++   * @param \Drupal\Core\Field\Plugin\Field\FieldType\EntityReferenceItemInterface&\Drupal\Core\Field\FieldItemInterface $item
++   *   The field item to export.
++   * @param \Drupal\Core\DefaultContent\ExportMetadata $metadata
++   *   Any metadata about the entity being exported (e.g., dependencies).
++   *
++   * @return array|null
++   *   The exported field values, or NULL if no entity is referenced and the
++   *   item should not be exported.
++   */
++  private function exportReference(EntityReferenceItemInterface&FieldItemInterface $item, ExportMetadata $metadata): ?array {
++    $entity = $item->get('entity')->getValue();
++    // No entity is referenced, so there's nothing else we can do here.
++    if ($entity === NULL) {
++      $referencer = $item->getEntity();
++      $field_definition = $item->getFieldDefinition();
++      $this->logger?->warning('Failed to export reference to @target_type %missing_id referenced by %field on @entity_type %label because the referenced @target_type does not exist.', [
++        '@target_type' => (string) $this->entityTypeManager->getDefinition($field_definition->getFieldStorageDefinition()->getSetting('target_type'))->getSingularLabel(),
++        '%missing_id' => $item->get('target_id')->getValue(),
++        '%field' => $field_definition->getLabel(),
++        '@entity_type' => (string) $referencer->getEntityType()->getSingularLabel(),
++        '%label' => $referencer->label(),
++      ]);
++      return NULL;
++    }
++    $values = $this->exportFieldItem($item);
++
++    if ($entity instanceof ContentEntityInterface) {
++      // If the referenced entity is user 0 or 1, we can skip further
++      // processing because user 0 is guaranteed to exist, and user 1 is
++      // guaranteed to have existed at some point. Either way, there's no chance
++      // of accidentally referencing the wrong entity on import.
++      if ($entity instanceof AccountInterface && intval($entity->id()) < 2) {
++        return array_map('intval', $values);
++      }
++      // Mark the referenced entity as a dependency of the one we're exporting.
++      $metadata->addDependency($entity);
++
++      $entity_type = $entity->getEntityType();
++      // If the referenced entity ID is numeric, refer to it by UUID, which is
++      // portable. If the ID isn't numeric, assume it's meant to be consistent
++      // (like a config entity ID) and leave the reference as-is. Workspaces
++      // are an example of an entity type that should be treated this way.
++      if ($entity_type->hasKey('id') && $entity->getFieldDefinition($entity_type->getKey('id'))->getType() === 'integer') {
++        $values['entity'] = $entity->uuid();
++        unset($values['target_id']);
++      }
++    }
++    return $values;
++  }
++
++}
+diff --git a/core/lib/Drupal/Core/DefaultContent/Importer.php b/core/lib/Drupal/Core/DefaultContent/Importer.php
+index 586828455fe..2f22134c266 100644
+--- a/core/lib/Drupal/Core/DefaultContent/Importer.php
++++ b/core/lib/Drupal/Core/DefaultContent/Importer.php
+@@ -288,7 +288,7 @@ private function setFieldValues(ContentEntityInterface $entity, string $field_na
+         unset($item_value['target_uuid']);
+       }
+ 
+-      $serialized_property_names = $this->getCustomSerializedPropertyNames($item);
++      $serialized_property_names = self::getCustomSerializedPropertyNames($item);
+       foreach ($item_value as $property_name => $value) {
+         if (\in_array($property_name, $serialized_property_names)) {
+           if (\is_string($value)) {
+@@ -328,7 +328,7 @@ private function setFieldValues(ContentEntityInterface $entity, string $field_na
+    *
+    * @see \Drupal\serialization\Normalizer\SerializedColumnNormalizerTrait::getCustomSerializedPropertyNames
+    */
+-  private function getCustomSerializedPropertyNames(FieldItemInterface $field_item): array {
++  public static function getCustomSerializedPropertyNames(FieldItemInterface $field_item): array {
+     if ($field_item instanceof PluginInspectionInterface) {
+       $definition = $field_item->getPluginDefinition();
+       $serialized_fields = $field_item->getEntity()->getEntityType()->get('serialized_field_property_names');
+diff --git a/core/lib/Drupal/Core/DefaultContent/PreExportEvent.php b/core/lib/Drupal/Core/DefaultContent/PreExportEvent.php
+new file mode 100644
+index 00000000000..44f3699bdde
+--- /dev/null
++++ b/core/lib/Drupal/Core/DefaultContent/PreExportEvent.php
+@@ -0,0 +1,118 @@
++<?php
++
++declare(strict_types=1);
++
++namespace Drupal\Core\DefaultContent;
++
++use Drupal\Core\Entity\ContentEntityInterface;
++use Drupal\Core\Entity\ContentEntityTypeInterface;
++use Symfony\Contracts\EventDispatcher\Event;
++
++/**
++ * Event dispatched before an entity is exported as default content.
++ *
++ * Subscribers to this event can attach callback functions which can be used
++ * to export specific fields or field types. When exporting fields that either
++ * have that name, or match that data type, callback will be called for each
++ * field item with two arguments: the field item, and an object which holds
++ * metadata (e.g., dependencies) about the entity being exported. The callback
++ * should return an array of exported values for that field item, or NULL if the
++ * item should not be exported.
++ *
++ * Subscribers may also mark specific fields as either not exportable, or
++ * as explicitly exportable -- for example, computed fields are not normally
++ * exported, but a subscriber could flag a computed field as exportable if
++ * circumstances require it.
++ */
++final class PreExportEvent extends Event {
++
++  /**
++   * An array of export callbacks, keyed by field type.
++   *
++   * @var array<string, callable>
++   */
++  private array $callbacks = [];
++
++  /**
++   * Whether specific fields (keyed by name) should be exported or not.
++   *
++   * @var array<string, bool>
++   */
++  private array $allowList = [];
++
++  public function __construct(
++    public readonly ContentEntityInterface $entity,
++    public readonly ExportMetadata $metadata,
++  ) {}
++
++  /**
++   * Toggles whether a specific entity key should be exported.
++   *
++   * @param string $key
++   *   An entity key, e.g. `uuid` or `langcode`. Can be a regular entity key, or
++   *   a revision metadata key.
++   * @param bool $export
++   *   Whether to export the entity key, even if it is computed.
++   */
++  public function setEntityKeyExportable(string $key, bool $export = TRUE): void {
++    $entity_type = $this->entity->getEntityType();
++    assert($entity_type instanceof ContentEntityTypeInterface);
++
++    if ($entity_type->hasKey($key)) {
++      $this->setExportable($entity_type->getKey($key), $export);
++    }
++    elseif ($entity_type->hasRevisionMetadataKey($key)) {
++      $this->setExportable($entity_type->getRevisionMetadataKey($key), $export);
++    }
++  }
++
++  /**
++   * Toggles whether a specific field should be exported.
++   *
++   * @param string $name
++   *   The name of the field.
++   * @param bool $export
++   *   Whether to export the field, even if it is computed.
++   */
++  public function setExportable(string $name, bool $export = TRUE): void {
++    $this->allowList[$name] = $export;
++  }
++
++  /**
++   * Returns a map of which fields should be exported.
++   *
++   * @return bool[]
++   *   An array whose keys are field names, and the values are booleans
++   *   indicating whether the field should be exported, even if it is computed.
++   */
++  public function getAllowList(): array {
++    return $this->allowList;
++  }
++
++  /**
++   * Sets the export callback for a specific field name or data type.
++   *
++   * @param string $name_or_data_type
++   *   A field name or field item data type, like `field_item:image`. If the
++   *   callback should run for every field a given type, this should be prefixed
++   *   with `field_item:`, which is the Typed Data prefix for field items. If
++   *   there is no prefix, this is treated as a field name.
++   * @param callable $callback
++   *   The callback which should export items of the specified field type. See
++   *   the class documentation for details.
++   */
++  public function setCallback(string $name_or_data_type, callable $callback): void {
++    $this->callbacks[$name_or_data_type] = $callback;
++  }
++
++  /**
++   * Returns the field export callbacks collected by this event.
++   *
++   * @return callable[]
++   *   The export callbacks, keyed by field type.
++   */
++  public function getCallbacks(): array {
++    return $this->callbacks;
++  }
++
++}
+diff --git a/core/modules/content_moderation/content_moderation.services.yml b/core/modules/content_moderation/content_moderation.services.yml
+index 8977847173c..158a4ba9fa8 100644
+--- a/core/modules/content_moderation/content_moderation.services.yml
++++ b/core/modules/content_moderation/content_moderation.services.yml
+@@ -26,3 +26,5 @@ services:
+   content_moderation.workspace_subscriber:
+     class: Drupal\content_moderation\EventSubscriber\WorkspaceSubscriber
+     arguments: ['@entity_type.manager', '@?workspaces.association']
++  Drupal\content_moderation\EventSubscriber\DefaultContentSubscriber:
++    autowire: true
+diff --git a/core/modules/content_moderation/src/EventSubscriber/DefaultContentSubscriber.php b/core/modules/content_moderation/src/EventSubscriber/DefaultContentSubscriber.php
+new file mode 100644
+index 00000000000..e9c54d4c197
+--- /dev/null
++++ b/core/modules/content_moderation/src/EventSubscriber/DefaultContentSubscriber.php
+@@ -0,0 +1,46 @@
++<?php
++
++declare(strict_types=1);
++
++namespace Drupal\content_moderation\EventSubscriber;
++
++use Drupal\content_moderation\ModerationInformationInterface;
++use Drupal\Core\DefaultContent\PreExportEvent;
++use Symfony\Component\EventDispatcher\EventSubscriberInterface;
++
++/**
++ * Subscribes to default content-related events.
++ *
++ * @internal
++ *   Event subscribers are internal.
++ */
++class DefaultContentSubscriber implements EventSubscriberInterface {
++
++  public function __construct(
++    private readonly ModerationInformationInterface $moderationInfo,
++  ) {}
++
++  /**
++   * {@inheritdoc}
++   */
++  public static function getSubscribedEvents(): array {
++    return [PreExportEvent::class => 'preExport'];
++  }
++
++  /**
++   * Reacts before an entity is exported.
++   *
++   * @param \Drupal\Core\DefaultContent\PreExportEvent $event
++   *   The event object.
++   */
++  public function preExport(PreExportEvent $event): void {
++    $entity = $event->entity;
++    if ($this->moderationInfo->isModeratedEntityType($entity->getEntityType())) {
++      // The moderation_state field is not exported by default, because it is
++      // computed, but for default content, we do want to preserve it.
++      // @see \Drupal\content_moderation\EntityTypeInfo::entityBaseFieldInfo()
++      $event->setExportable('moderation_state', TRUE);
++    }
++  }
++
++}
+diff --git a/core/modules/file/file.services.yml b/core/modules/file/file.services.yml
+index 1812c5f0911..a30bcde2890 100644
+--- a/core/modules/file/file.services.yml
++++ b/core/modules/file/file.services.yml
+@@ -36,3 +36,6 @@ services:
+     class: Drupal\file\Upload\InputStreamFileWriter
+     arguments: ['@file_system']
+   Drupal\file\Upload\InputStreamFileWriterInterface: '@file.input_stream_file_writer'
++  Drupal\file\EventSubscriber\DefaultContentSubscriber:
++    calls:
++      - [setLogger, ['@logger.channel.file']]
+diff --git a/core/modules/file/src/EventSubscriber/DefaultContentSubscriber.php b/core/modules/file/src/EventSubscriber/DefaultContentSubscriber.php
+new file mode 100644
+index 00000000000..4164fd9c19f
+--- /dev/null
++++ b/core/modules/file/src/EventSubscriber/DefaultContentSubscriber.php
+@@ -0,0 +1,56 @@
++<?php
++
++declare(strict_types=1);
++
++namespace Drupal\file\EventSubscriber;
++
++use Drupal\Core\DefaultContent\PreExportEvent;
++use Drupal\file\FileInterface;
++use Psr\Log\LoggerAwareTrait;
++use Symfony\Component\EventDispatcher\EventSubscriberInterface;
++
++/**
++ * Subscribes to default content-related events.
++ *
++ * @internal
++ *   Event subscribers are internal.
++ */
++class DefaultContentSubscriber implements EventSubscriberInterface {
++
++  use LoggerAwareTrait;
++
++  /**
++   * {@inheritdoc}
++   */
++  public static function getSubscribedEvents(): array {
++    return [PreExportEvent::class => 'preExport'];
++  }
++
++  /**
++   * Reacts before an entity is exported.
++   *
++   * @param \Drupal\Core\DefaultContent\PreExportEvent $event
++   *   The event object.
++   */
++  public function preExport(PreExportEvent $event): void {
++    $entity = $event->entity;
++
++    if ($entity instanceof FileInterface) {
++      $uri = $entity->getFileUri();
++      // Ensure the file has a name (`getFilename()` may return NULL).
++      $name = $entity->getFilename() ?? basename($uri);
++      $entity->setFilename($name);
++
++      if (file_exists($uri)) {
++        $event->metadata->addAttachment($uri, $name);
++      }
++      else {
++        $this->logger?->warning('The file (%uri) associated with file entity %name does not exist.', [
++          '%uri' => $uri,
++          '%name' => $entity->label(),
++        ]);
++      }
++    }
++  }
++
++}
+diff --git a/core/modules/layout_builder/layout_builder.services.yml b/core/modules/layout_builder/layout_builder.services.yml
+index 2d0798128db..39c5835de9e 100644
+--- a/core/modules/layout_builder/layout_builder.services.yml
++++ b/core/modules/layout_builder/layout_builder.services.yml
+@@ -61,3 +61,5 @@ services:
+   layout_builder.element.prepare_layout:
+     class: Drupal\layout_builder\EventSubscriber\PrepareLayout
+     arguments: ['@layout_builder.tempstore_repository', '@messenger']
++  Drupal\layout_builder\EventSubscriber\DefaultContentSubscriber:
++    autowire: true
+diff --git a/core/modules/layout_builder/src/EventSubscriber/DefaultContentSubscriber.php b/core/modules/layout_builder/src/EventSubscriber/DefaultContentSubscriber.php
+new file mode 100644
+index 00000000000..b2cb60963e6
+--- /dev/null
++++ b/core/modules/layout_builder/src/EventSubscriber/DefaultContentSubscriber.php
+@@ -0,0 +1,64 @@
++<?php
++
++declare(strict_types=1);
++
++namespace Drupal\layout_builder\EventSubscriber;
++
++use Drupal\Component\Plugin\DerivativeInspectionInterface;
++use Drupal\Core\DefaultContent\ExportMetadata;
++use Drupal\Core\DefaultContent\PreExportEvent;
++use Drupal\Core\Entity\EntityRepositoryInterface;
++use Drupal\layout_builder\Plugin\Field\FieldType\LayoutSectionItem;
++use Drupal\layout_builder\Section;
++use Symfony\Component\EventDispatcher\EventSubscriberInterface;
++
++/**
++ * Subscribes to default content-related events.
++ *
++ * @internal
++ *   Event subscribers are internal.
++ */
++class DefaultContentSubscriber implements EventSubscriberInterface {
++
++  public function __construct(
++    private readonly EntityRepositoryInterface $entityRepository,
++  ) {}
++
++  /**
++   * {@inheritdoc}
++   */
++  public static function getSubscribedEvents(): array {
++    return [PreExportEvent::class => 'preExport'];
++  }
++
++  /**
++   * Reacts before an entity is exported.
++   *
++   * Adds an export callback for `layout_section` field items to ensure that
++   * any referenced block content entities are marked as dependencies of the
++   * entity being exported.
++   *
++   * @param \Drupal\Core\DefaultContent\PreExportEvent $event
++   *   The event object.
++   */
++  public function preExport(PreExportEvent $event): void {
++    $event->setCallback('field_item:layout_section', function (LayoutSectionItem $item, ExportMetadata $metadata): array {
++      $section = $item->get('section')->getValue();
++      assert($section instanceof Section);
++
++      foreach ($section->getComponents() as $component) {
++        $plugin = $component->getPlugin();
++        if ($plugin instanceof DerivativeInspectionInterface && $plugin->getBaseId() === 'block_content') {
++          $block_content = $this->entityRepository->loadEntityByUuid('block_content', $plugin->getDerivativeId());
++          if ($block_content) {
++            $metadata->addDependency($block_content);
++          }
++        }
++      }
++      return [
++        'section' => $section->toArray(),
++      ];
++    });
++  }
++
++}
+diff --git a/core/modules/link/link.services.yml b/core/modules/link/link.services.yml
+index de8f823e8cb..1fbc98cac8b 100644
+--- a/core/modules/link/link.services.yml
++++ b/core/modules/link/link.services.yml
+@@ -1,2 +1,8 @@
+ parameters:
+   link.skip_procedural_hook_scan: false
++
++services:
++  _defaults:
++    autoconfigure: true
++    autowire: true
++  Drupal\link\EventSubscriber\DefaultContentSubscriber: ~
+diff --git a/core/modules/link/src/EventSubscriber/DefaultContentSubscriber.php b/core/modules/link/src/EventSubscriber/DefaultContentSubscriber.php
+new file mode 100644
+index 00000000000..0f8ef3fd37c
+--- /dev/null
++++ b/core/modules/link/src/EventSubscriber/DefaultContentSubscriber.php
+@@ -0,0 +1,74 @@
++<?php
++
++declare(strict_types=1);
++
++namespace Drupal\link\EventSubscriber;
++
++use Drupal\Core\DefaultContent\ExportMetadata;
++use Drupal\Core\DefaultContent\PreExportEvent;
++use Drupal\Core\Entity\ContentEntityInterface;
++use Drupal\Core\Entity\EntityTypeManagerInterface;
++use Drupal\link\LinkItemInterface;
++use Symfony\Component\EventDispatcher\EventSubscriberInterface;
++
++/**
++ * Subscribes to default content-related events.
++ *
++ * @internal
++ *   Event subscribers are internal.
++ */
++class DefaultContentSubscriber implements EventSubscriberInterface {
++
++  public function __construct(
++    protected readonly EntityTypeManagerInterface $entityTypeManager,
++  ) {}
++
++  /**
++   * {@inheritdoc}
++   */
++  public static function getSubscribedEvents(): array {
++    return [PreExportEvent::class => 'preExport'];
++  }
++
++  /**
++   * Reacts before an entity is exported.
++   *
++   * Adds an export callback for `link` field items to ensure that, if the link
++   * points to a content entity, it is marked as a dependency of the entity
++   * being exported.
++   *
++   * @param \Drupal\Core\DefaultContent\PreExportEvent $event
++   *   The event object.
++   */
++  public function preExport(PreExportEvent $event): void {
++    $event->setCallback('field_item:link', function (LinkItemInterface $item, ExportMetadata $metadata): array {
++      $values = $item->getValue();
++
++      $url = $item->getUrl();
++      if (!$url->isRouted()) {
++        // The URL is not routed, so there's nothing else to do.
++        return $values;
++      }
++
++      $route_name = explode('.', $url->getRouteName());
++      // We can rely on this pattern because routed entity URLs are generated
++      // in a consistent way with the `entity` scheme.
++      // @see \Drupal\Core\Url::fromUri()
++      if (count($route_name) === 3 && $route_name[0] === 'entity' && $route_name[2] === 'canonical') {
++        $target_entity_type_id = $route_name[1];
++        $route_parameters = $url->getRouteParameters();
++        $target_id = $route_parameters[$target_entity_type_id];
++        $target = $this->entityTypeManager->getStorage($target_entity_type_id)
++          ->load($target_id);
++
++        if ($target instanceof ContentEntityInterface) {
++          $values['target_uuid'] = $target->uuid();
++          unset($values['uri']);
++          $metadata->addDependency($target);
++        }
++      }
++      return $values;
++    });
++  }
++
++}
+diff --git a/core/modules/media/media.services.yml b/core/modules/media/media.services.yml
+index 0f3aeb6822e..a49d7b6ee59 100644
+--- a/core/modules/media/media.services.yml
++++ b/core/modules/media/media.services.yml
+@@ -26,3 +26,4 @@ services:
+   media.config_subscriber:
+     class: Drupal\media\EventSubscriber\MediaConfigSubscriber
+     arguments: ['@router.builder', '@cache_tags.invalidator', '@entity_type.manager']
++  Drupal\media\EventSubscriber\DefaultContentSubscriber: ~
+diff --git a/core/modules/media/src/EventSubscriber/DefaultContentSubscriber.php b/core/modules/media/src/EventSubscriber/DefaultContentSubscriber.php
+new file mode 100644
+index 00000000000..8449b1e9775
+--- /dev/null
++++ b/core/modules/media/src/EventSubscriber/DefaultContentSubscriber.php
+@@ -0,0 +1,39 @@
++<?php
++
++declare(strict_types=1);
++
++namespace Drupal\media\EventSubscriber;
++
++use Drupal\Core\DefaultContent\PreExportEvent;
++use Drupal\media\MediaInterface;
++use Symfony\Component\EventDispatcher\EventSubscriberInterface;
++
++/**
++ * Subscribes to default content-related events.
++ *
++ * @internal
++ *   Event subscribers are internal.
++ */
++class DefaultContentSubscriber implements EventSubscriberInterface {
++
++  /**
++   * {@inheritdoc}
++   */
++  public static function getSubscribedEvents(): array {
++    return [PreExportEvent::class => 'preExport'];
++  }
++
++  /**
++   * Reacts before a media item is exported.
++   *
++   * @param \Drupal\Core\DefaultContent\PreExportEvent $event
++   *   The event object.
++   */
++  public function preExport(PreExportEvent $event): void {
++    if ($event->entity instanceof MediaInterface) {
++      // Don't export the thumbnail because it is regenerated on import.
++      $event->setExportable('thumbnail', FALSE);
++    }
++  }
++
++}
+diff --git a/core/modules/path/path.services.yml b/core/modules/path/path.services.yml
+index ce638d5e3ed..8840eaaf10d 100644
+--- a/core/modules/path/path.services.yml
++++ b/core/modules/path/path.services.yml
+@@ -1,2 +1,8 @@
+ parameters:
+   path.skip_procedural_hook_scan: true
++
++services:
++  _defaults:
++    autoconfigure: true
++    autowire: true
++  Drupal\path\EventSubscriber\DefaultContentSubscriber: ~
+diff --git a/core/modules/path/src/EventSubscriber/DefaultContentSubscriber.php b/core/modules/path/src/EventSubscriber/DefaultContentSubscriber.php
+new file mode 100644
+index 00000000000..31e4a412c75
+--- /dev/null
++++ b/core/modules/path/src/EventSubscriber/DefaultContentSubscriber.php
+@@ -0,0 +1,55 @@
++<?php
++
++declare(strict_types=1);
++
++namespace Drupal\path\EventSubscriber;
++
++use Drupal\Core\DefaultContent\PreExportEvent;
++use Drupal\Core\Entity\EntityFieldManagerInterface;
++use Drupal\path\Plugin\Field\FieldType\PathItem;
++use Symfony\Component\EventDispatcher\EventSubscriberInterface;
++
++/**
++ * Subscribes to default content-related events.
++ *
++ * @internal
++ *   Event subscribers are internal.
++ */
++class DefaultContentSubscriber implements EventSubscriberInterface {
++
++  public function __construct(
++    protected readonly EntityFieldManagerInterface $entityFieldManager,
++  ) {}
++
++  /**
++   * {@inheritdoc}
++   */
++  public static function getSubscribedEvents(): array {
++    return [PreExportEvent::class => 'preExport'];
++  }
++
++  /**
++   * Reacts before an entity is exported.
++   *
++   * @param \Drupal\Core\DefaultContent\PreExportEvent $event
++   *   The event object.
++   */
++  public function preExport(PreExportEvent $event): void {
++    $event->setCallback('field_item:path', function (PathItem $item): array {
++      $values = $item->getValue();
++      // Never export the path ID; it is recreated on import.
++      unset($values['pid']);
++      return $values;
++    });
++
++    // Despite being computed, export path fields anyway because, even though
++    // they're undergirded by path_alias entities, they're not true entity
++    // references and therefore aren't portable.
++    foreach ($this->entityFieldManager->getFieldMapByFieldType('path') as $path_fields_in_entity_type) {
++      foreach (array_keys($path_fields_in_entity_type) as $name) {
++        $event->setExportable($name, TRUE);
++      }
++    }
++  }
++
++}
+diff --git a/core/scripts/drupal b/core/scripts/drupal
+index 0267e55fe43..b9f6e2dc40b 100644
+--- a/core/scripts/drupal
++++ b/core/scripts/drupal
+@@ -10,6 +10,7 @@ use Drupal\Core\Command\GenerateTheme;
+ use Drupal\Core\Command\QuickStartCommand;
+ use Drupal\Core\Command\InstallCommand;
+ use Drupal\Core\Command\ServerCommand;
++use Drupal\Core\DefaultContent\ContentExportCommand;
+ use Drupal\Core\Recipe\RecipeCommand;
+ use Drupal\Core\Recipe\RecipeInfoCommand;
+ use Symfony\Component\Console\Application;
+@@ -28,5 +29,6 @@ $application->add(new ServerCommand($classloader));
+ $application->add(new GenerateTheme());
+ $application->add(new RecipeCommand($classloader));
+ $application->add(new RecipeInfoCommand($classloader));
++$application->add(new ContentExportCommand($classloader));
+ 
+ $application->run();

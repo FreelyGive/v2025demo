@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 8fad80aa-7e76-4386-8415-55dd4ee7f6af
+  bundle: image
+  default_langcode: en
+  depends:
+    b3606b19-9bf0-4db4-97c5-84f7d679e21c: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A woman reviews receipts and calculates expenses at a desk with a pink calculator.'
+  created:
+    -
+      value: 1758523018
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "The image is a photo showing a woman, likely in her 30s, at a desk, creating a focused and serious atmosphere as she reviews receipts. She is using a bright pink calculator, which stands out against the soft, neutral tones of her light blue shirt and the white desk. The background is minimalistic, emphasizing the task at hand, with a few scattered papers and receipts adding to the scene's realism. The overall mood is one of concentration and attentiveness. In addition to the pink calculator, there are golden binder clips and a black coffee mug on the desk, suggesting a busy but organized workspace. The imagery effectively conveys a routine of financial diligence, capturing a moment of thoughtful calculation and management."
+  field_media_image:
+    -
+      alt: 'A woman reviews receipts and calculates expenses at a desk with a pink calculator.'
+      title: 'Photo By: Kaboompics.com'
+      width: 6720
+      height: 4480
+      entity: b3606b19-9bf0-4db4-97c5-84f7d679e21c

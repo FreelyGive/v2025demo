@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: c5209bc0-eac4-492a-a089-fee92c085142
+  bundle: image
+  default_langcode: en
+  depends:
+    3c9f4327-c5a7-4a60-a09a-ac8f0cc6a6e7: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Close-up of hands exchanging documents in a business setting indoors.'
+  created:
+    -
+      value: 1758435773
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This is a photographic image depicting a close-up of two hands exchanging documents in what appears to be an office setting. The background is softly lit with neutral tones, primarily whites and grays, suggesting a modern business environment. One hand, positioned lower, is in a suit, hinting at a professional, possibly formal context, while the other hand, wearing a long-sleeved shirt, reaches in from the side. The image does not reveal faces or expressions, keeping the focus on the transaction and maintaining an air of professionalism. The mood of the image is serious and businesslike, reflecting a typical professional interaction. The central object of importance is the document being exchanged, which symbolizes communication or agreement in a business setting. The overall composition and color palette lend a clean and efficient feel to the scene.'
+  field_media_image:
+    -
+      alt: 'Close-up of hands exchanging documents in a business setting indoors.'
+      title: 'Andrea Piacquadio'
+      width: 6000
+      height: 4000
+      entity: 3c9f4327-c5a7-4a60-a09a-ac8f0cc6a6e7

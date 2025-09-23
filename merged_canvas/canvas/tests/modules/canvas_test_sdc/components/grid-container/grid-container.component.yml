@@ -1,0 +1,26 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json'
+name: Grid Container
+status: stable
+group: Container
+props:
+  type: object
+  required:
+    - direction
+  properties:
+    direction:
+      type: string
+      title: Direction
+      default: horizontal
+      enum:
+        - 'horizontal'
+        - 'vertical'
+      meta:enum:
+        horizontal: Horizontal
+        vertical: Vertical
+      examples: ['horizontal', 'vertical']
+slots:
+  content:
+    title: Content
+    description: The contents of the grid container.
+    examples:
+      - <div class="empty-slot">Empty grid slot</div>

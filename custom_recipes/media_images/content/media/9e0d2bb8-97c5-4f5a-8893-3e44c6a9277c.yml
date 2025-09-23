@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 9e0d2bb8-97c5-4f5a-8893-3e44c6a9277c
+  bundle: image
+  default_langcode: en
+  depends:
+    fb7d27b6-299b-489b-825d-1e5b67f73710: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A young man with a beard is working on a laptop at a cozy cafe with warm lighting, holding a coffee cup.'
+  created:
+    -
+      value: 1758433766
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This is a photo depicting a young man with a beard, concentrating intently on a laptop while seated in a cozy cafe. The warm lighting casts a golden glow throughout the scene, complemented by soft yellow and orange hues in the background creating a relaxed atmosphere. The man appears to be in his twenties or thirties, holding a cup of coffee, suggesting a moment of both leisure and focus. The cafe setting seems warm and inviting, with blurred lights in the background adding to the cozy ambiance. Reflections in the window enhance the intimate and contemplative mood. The scene exudes a sense of quiet productivity and comfort, ideal for work or study in a casual setting. A candle and some subtle decorative elements on the table contribute to the warmth and serenity of the environment.'
+  field_media_image:
+    -
+      alt: 'A young man with a beard is working on a laptop at a cozy cafe with warm lighting, holding a coffee cup.'
+      title: 'Andrea Piacquadio'
+      width: 5760
+      height: 3840
+      entity: fb7d27b6-299b-489b-825d-1e5b67f73710

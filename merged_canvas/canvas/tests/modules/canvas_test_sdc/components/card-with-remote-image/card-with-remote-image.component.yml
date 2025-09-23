@@ -1,0 +1,64 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json'
+name: Card with remote image
+description: A card element with a remote image
+props:
+  type: object
+  required:
+    - src
+    - alt
+    - width
+    - height
+  properties:
+    heading:
+      type: string
+      title: Heading
+      description: The heading text.
+      examples:
+        - 'Card with remote image'
+    content:
+      type: string
+      title: Content
+      description: The main text.
+      examples:
+        - 'In a curious work, published in Paris in 1863 by Delaville Dedreux, there is a suggestion for reaching the North Pole by an aerostat.'
+    footer:
+      type: string
+      title: Footer
+      description: The footer text.
+      examples:
+        - 'I have a footer!'
+    src:
+      title: Remote image path
+      type: string
+      # Note: the canvas_test_sdc:card SDC uses `json-schema-definitions://canvas.module/image`, and that shape
+      # uses the below for its `src` prop. Hence this SDC's implementation can reuse canvas_test_sdc:card.
+      $ref: json-schema-definitions://canvas.module/image-uri
+      description: Image URL
+      examples:
+        - 'https://mdn.github.io/shared-assets/images/examples/balloons.jpg'
+    alt:
+      title: Alternative text
+      type: string
+      examples:
+        - Hot air balloons
+    width:
+      title: Image width
+      type: integer
+      examples:
+        - 640
+    height:
+      title: Image height
+      type: integer
+      examples:
+        - 427
+    loading:
+      title: Loading
+      type: string
+      enum:
+        - lazy
+        - eager
+      meta:enum:
+        lazy: Lazy
+        eager: Eager
+      examples:
+        - lazy

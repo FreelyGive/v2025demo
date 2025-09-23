@@ -1,0 +1,5 @@
+services:
+  canvas_ai_test.request_interceptor:
+    class: Drupal\canvas_ai_test\EventSubscriber\CanvasAiRequestInterceptor
+    tags:
+      - { name: event_subscriber }

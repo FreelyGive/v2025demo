@@ -1,0 +1,24 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: fe612bdd-fa01-4f46-b511-6f10b59c4508
+  default_langcode: en
+default:
+  filename:
+    -
+      value: pexels-photo-12465237.png
+  uri:
+    -
+      value: 'public://2025-09/pexels-photo-12465237.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 918758
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1758435924

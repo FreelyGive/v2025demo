@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 19dae171-0af4-4acf-9ab4-6fe3a7462a89
+  bundle: menu_link_content
+  default_langcode: en
+  depends:
+    d9e6445d-8011-4fb9-8485-8a070c73186b: menu_link_content
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: 'Space Bear 6'
+  menu_name:
+    -
+      value: main
+  link:
+    -
+      uri: 'internal:/admin'
+      title: ''
+      options: {  }
+      url: /admin
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: true
+  weight:
+    -
+      value: -50
+  expanded:
+    -
+      value: false
+  parent:
+    -
+      value: 'menu_link_content:d9e6445d-8011-4fb9-8485-8a070c73186b'
+  revision_translation_affected:
+    -
+      value: true

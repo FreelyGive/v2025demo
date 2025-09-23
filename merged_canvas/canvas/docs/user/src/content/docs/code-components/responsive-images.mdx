@@ -1,0 +1,17 @@
+---
+title: Code components - Responsive images
+---
+
+A [standalone version](https://www.npmjs.com/package/next-image-standalone) of
+[next/image](https://nextjs.org/docs/app/api-reference/components/image)
+is available to output responsive images.
+
+```jsx
+import Image from 'next-image-standalone';
+
+const Cover = ({ photo }) => {
+  // Add `photo` as an Image prop to have an object which contains the following properties:
+  // src, alt, width, height
+  return <Image {...photo} />;
+};
+```

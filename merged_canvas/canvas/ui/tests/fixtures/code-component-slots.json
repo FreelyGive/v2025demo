@@ -1,0 +1,23 @@
+{
+  "deserialized": [
+    {
+      "name": "Slot with no example value",
+      "example": "",
+      "id": "edd8f3d4-6853-44c7-92db-bbd86d9ba112"
+    },
+    {
+      "name": "Slot with example value",
+      "example": "<div>Drupal Canvas</div>",
+      "id": "1c374686-8c73-4a01-8727-a36ff1cc59eb"
+    }
+  ],
+  "serialized": {
+    "slotWithNoExampleValue": {
+      "title": "Slot with no example value"
+    },
+    "slotWithExampleValue": {
+      "title": "Slot with example value",
+      "examples": ["<div>Drupal Canvas</div>"]
+    }
+  }
+}

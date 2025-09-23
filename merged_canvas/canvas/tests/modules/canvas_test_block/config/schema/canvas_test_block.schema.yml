@@ -1,0 +1,40 @@
+block.settings.canvas_test_block_input_validatable:
+  type: block_settings
+  label: 'Canvas Test Block settings'
+  constraints:
+    FullyValidatable: ~
+  mapping:
+    name:
+      type: string
+      label: 'Name'
+block.settings.canvas_test_block_input_unvalidatable:
+  type: block_settings
+  label: 'Canvas Test Block settings'
+  mapping:
+    name:
+      type: string
+      label: 'Name'
+block.settings.canvas_test_block_input_validatable_crash:
+  type: block_settings
+  label: 'Canvas Test Block settings'
+  constraints:
+    FullyValidatable: ~
+  mapping:
+    name:
+      type: string
+      label: 'Name'
+    crash:
+      type: boolean
+      label: 'Crash'
+block.settings.canvas_test_block_input_schema_change_poc:
+  type: block_settings
+  label: 'Input Schema Change POC settings'
+  constraints:
+    FullyValidatable: ~
+  mapping:
+    foo:
+      type: string
+      label: 'Foo'
+      constraints:
+        Choice:
+          choices: [bar, baz]

@@ -1,0 +1,10 @@
+{
+  "name": "drupal/drupal_cms_helper",
+  "description": "Provides functionality for Drupal CMS that is not yet in Drupal core or dependencies.",
+  "type": "drupal-module",
+  "license": ["GPL-2.0-or-later"],
+  "require": {
+    "drupal/core": "^11.2.4"
+  },
+  "version": "2.x-dev"
+}

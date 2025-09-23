@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: c9a9817e-d3c1-49f2-8705-6276a14bcfc3
+  bundle: image
+  default_langcode: en
+  depends:
+    09b559e1-42a4-4d92-ae1c-8c79fee8992f: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Side view of crop faceless male passenger sitting on backseat and using credit card reader to pay for trip in taxi'
+  created:
+    -
+      value: 1758522641
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photograph capturing an interior scene inside a taxi, with a focus on the backseat area. The main colors in the scene include the neutral tones of the car interior, contrasted with a hint of green from the credit card reader. In the foreground, a faceless male passenger is seated, extending his hand forward to use the payment device. He appears to be young to middle-aged and casually dressed in a light, neutral shirt. The atmosphere is practical and transactional, emphasizing the routine act of paying for a taxi ride. The card reader and accompanying display screen are central objects in the image, highlighting the action of payment. The background is slightly blurred, featuring muted colors, typical of urban street scenes viewed through vehicle windows.'
+  field_media_image:
+    -
+      alt: 'Side view of crop faceless male passenger sitting on backseat and using credit card reader to pay for trip in taxi'
+      title: 'Tim  Samuel'
+      width: 5924
+      height: 3805
+      entity: 09b559e1-42a4-4d92-ae1c-8c79fee8992f

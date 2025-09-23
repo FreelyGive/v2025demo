@@ -1,0 +1,38 @@
+id: node.blog.card
+status: true
+content_entity_type_id: node
+content_entity_type_bundle: blog
+content_entity_type_view_mode: card
+dependencies:
+  enforced:
+    module:
+      # This is needed for the `$node->url` field to work.
+      # @see \Drupal\drupal_cms_helper\Hook\EntityHooks::entityBaseFieldInfo()
+      - drupal_cms_helper
+  module:
+    - node
+  config:
+    - node.type.blog
+    - canvas.component.sdc.mercury.card
+    - core.entity_view_mode.node.card
+    - field.field.node.blog.field_blog__byline
+component_tree:
+  - uuid: c8e8a6d9-6b30-4cf0-a8df-299f290da17d
+    component_id: sdc.mercury.card
+    component_version: 1cc23bba50b15c46
+    inputs:
+      heading_text:
+        sourceType: dynamic
+        expression: 'ℹ︎␜entity:node:blog␝title␞␟value'
+      level: 3
+      url:
+        sourceType: dynamic
+        expression: 'ℹ︎␜entity:node:blog␝url␞␟value'
+      media:
+        sourceType: dynamic
+        expression: 'ℹ︎␜entity:node:blog␝field_featured_image␞␟{src↝entity␜␜entity:media:image␝field_media_image␞␟entity␜␜entity:file␝uri␞␟url,alt↝entity␜␜entity:media:image␝field_media_image␞␟alt}'
+      text:
+        sourceType: dynamic
+        expression: 'ℹ︎␜entity:node:blog␝field_description␞␟value'
+      style: framed
+      orientation: stacked

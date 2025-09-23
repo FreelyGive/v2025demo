@@ -1,0 +1,62 @@
+.trigger {
+  height: var(--space-7);
+  color: var(--slate-12);
+}
+
+.trigger:hover {
+  cursor: pointer;
+  .chevron {
+    color: var(--blue-9);
+  }
+}
+
+.content {
+  overflow: hidden;
+
+  &[data-state="open"] {
+    animation: slide-down 200ms ease-in-out;
+  }
+  &[data-state="closed"] {
+    animation: slide-up 200ms ease-in-out;
+  }
+}
+
+.accordionContent {
+  /* @see https://www.radix-ui.com/primitives/docs/components/accordion#animating-content-size */
+  --content-height: var(--radix-accordion-content-height);
+}
+
+.detailsContent {
+  /* @see https://www.radix-ui.com/primitives/docs/components/collapsible#animating-content-size */
+  --content-height: var(--radix-collapsible-content-height);
+}
+
+.chevron {
+  transition: transform 300ms ease-in-out;
+  color: var(--slate-12);
+  .trigger[data-state="open"] > & {
+    transform: rotate(90deg);
+  }
+}
+
+@keyframes slide-down {
+  from {
+    height: 0;
+    opacity: 0;
+  }
+  to {
+    height: var(--content-height);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    height: var(--content-height);
+    opacity: 1;
+  }
+  to {
+    height: 0;
+    opacity: 0;
+  }
+}

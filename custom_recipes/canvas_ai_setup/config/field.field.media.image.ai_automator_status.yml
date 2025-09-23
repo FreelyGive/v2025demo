@@ -1,0 +1,22 @@
+uuid: 56d58573-035b-4e22-b3cd-99f3dabf4d60
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.ai_automator_status
+    - media.type.image
+  module:
+    - options
+id: media.image.ai_automator_status
+field_name: ai_automator_status
+entity_type: media
+bundle: image
+label: 'AI Automator Status'
+description: ''
+required: true
+translatable: true
+default_value:
+  - pending
+default_value_callback: ''
+settings: {  }
+field_type: list_string

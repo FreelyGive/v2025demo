@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: d3356d15-c802-49a2-9c56-882f491df4c3
+  bundle: image
+  default_langcode: en
+  depends:
+    a117ecb0-bd76-4471-a599-105b77dc6ec0: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Happy couple wearing pastel-colored sweaters, expressing joy and connection.'
+  created:
+    -
+      value: 1758433901
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "The image is a photo featuring a joyful couple, who appear to be young adults of Caucasian descent, displaying a warm connection. Both are wearing pastel-colored sweaters, one in a soft yellow and the other in a gentle green, adding a serene and harmonious tone to the scene. The background is minimalistic, primarily a clean white, which accentuates the colors of their sweaters. They are both smiling, with one person's hand resting affectionately on the other's shoulder, highlighting their bond. The mood of the image is joyful and intimate, capturing a moment of genuine happiness. There are no additional objects in the image, keeping the focus entirely on the couple's expressions and interaction. This composition lends a sense of calm and connection, perfect for conveying themes of love and companionship."
+  field_media_image:
+    -
+      alt: 'Happy couple wearing pastel-colored sweaters, expressing joy and connection.'
+      title: 'Anna Shvets'
+      width: 4160
+      height: 6240
+      entity: a117ecb0-bd76-4471-a599-105b77dc6ec0

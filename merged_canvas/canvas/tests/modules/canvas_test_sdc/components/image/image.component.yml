@@ -1,0 +1,19 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Test SDC Image
+props:
+  type: object
+  required:
+    - image
+  properties:
+    # @todo Consider pulling all these props up a level, and move to components/simple/image: https://www.drupal.org/project/canvas/issues/3468944
+    image:
+      title: 'Image'
+      $ref: json-schema-definitions://canvas.module/image
+      # @todo `type: object` should not be necessary, it's because \Drupal\sdc\Component\ComponentValidator::getClassProps() does not yet support $ref
+      type: object
+      examples:
+        - src: 600x400.png
+          alt: 'Boring placeholder'
+          width: 600
+          height: 400
+    # @todo Consider adding an `attributes` prop in https://www.drupal.org/project/canvas/issues/3468944

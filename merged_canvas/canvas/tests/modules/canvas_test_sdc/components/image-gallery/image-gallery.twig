@@ -1,0 +1,8 @@
+<figure>
+  {% for image in images %}
+    <img src="{{ image.src }}" alt="{{ image.alt }}" />
+  {% endfor %}
+  {% if caption %}
+    <figcaption>{{ caption }}</figcaption>
+  {% endif %}
+</figure>

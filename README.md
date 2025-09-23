@@ -1,2 +1,26 @@
-# v2025demo
-V 2025 Demo
+v2025demo
+
+## Description
+
+A demo Drupal 11 for the V 2025 project. This will install:
+* Drupal CMS
+* Canvas
+* Mercury Theme
+* Canvas AI with OpenAI provider configured
+* Milvus configured (coming)
+* Medias to pick from
+* Changes needed for Canvas AI to work well
+
+## Requirements
+* DDEV 1.24+
+
+## To install
+* `cp .ddev/.env.template .ddev/.env` and set your OpenAI key in the file.
+* `ddev demo-setup`
+
+**Note** Everytime you run `ddev demo-setup` it will delete everything and start from scratch.
+
+## Keep in sync with origin
+We should later use create-project, but that is failing for now due to dependency issues.
+
+For now the `extra_files` is used to keep track of changes in the demo repo and it will be synced with https://git.drupalcode.org/project/drupal_cms from time to time.

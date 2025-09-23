@@ -1,0 +1,42 @@
+# Each config entity type that opts to support versioning SHOULD contain values of its versioned properties for prior
+# (non-active) versions. This allows the rest of the system to gradually adopt newer versions of config entities.
+# @see \Drupal\canvas\Entity\VersionedConfigEntityBase
+# @todo Evaluate moving this into Drupal core in https://www.drupal.org/i/3528134
+versioned_config_entity:
+  type: config_entity
+  mapping:
+    # The active version can be an integer, date, hash, whatever is appropriate. Uses of this type SHOULD add
+    # `constraints`. If an integer is used, they MUST override `type`.
+    active_version:
+      type: string
+      label: 'Active version'
+    versioned_properties:
+      label: 'Version history of versioned config entity properties; keys must be version identifiers.'
+      type: sequence
+      # Sequence keys:
+      # - MUST be version identifiers
+      # - MUST contain the `active_version`.
+      # - the order SHOULD be reverse chronological: the first one is the newest version and is always named `active`,
+      # the last one is the oldest
+      # @see \Drupal\canvas\Entity\VersionedConfigEntityBase::createVersion()
+      # @see \Drupal\canvas\Entity\VersionedConfigEntityBase::ACTIVE_VERSION
+      orderby: ~
+      sequence:
+        label: 'Version-specific properties (keys are versions)'
+        type: mapping
+      constraints:
+        # There must be >=1 version.
+        NotBlank: ~
+        SequenceKeysMatchRegex:
+          pattern: '/^[a-z0-9]{3,}$/'
+          message: "The %value key is not a valid version."
+        # @todo Uncomment this in https://www.drupal.org/project/canvas/issues/3526703
+        #AtLeastOneOf:
+        #  constraints:
+        #    - Choice:
+        #      # @see \Drupal\canvas\Entity\VersionedConfigEntityBase::ACTIVE_VERSION
+        #      choices:
+        #        - active
+        #    - SequenceKeysMatchRegex:
+        #        pattern: '/^[a-z0-9]{3,}$/'
+        #        message: "The %value key is not a valid version."

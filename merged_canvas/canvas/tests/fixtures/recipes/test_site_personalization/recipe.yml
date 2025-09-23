@@ -1,0 +1,26 @@
+name: 'Test site personalization'
+description: 'Provides a base site with personalization features'
+type: 'Canvas'
+
+recipes:
+  - base
+
+install:
+  - stark
+  - canvas
+  - canvas_stark
+  - canvas_test_sdc
+  - canvas_personalization
+  # @todo Remove once ComponentSourceInterface is a public API, i.e. after https://www.drupal.org/i/3520484#stable is done.
+  - canvas_dev_mode
+
+config:
+  strict: true
+  import:
+    canvas: '*'
+    canvas_personalization: '*'
+  actions:
+    system.site:
+      simpleConfigUpdate:
+        page.front: /personalization-test
+        name: 'Drupal'

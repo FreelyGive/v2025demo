@@ -1,0 +1,26 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 20354d7a-e4fe-47af-8ff6-187bca92f3f7
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+  title:
+    -
+      value: Homepage
+  components:
+    - uuid: 16176e0b-8197-40e3-ad49-48f1b6e9a7f9
+      component_id: sdc.canvas_test_sdc.two_column
+      inputs:
+        width: 50
+  created:
+    -
+      value: 1735191284
+  revision_translation_affected:
+    -
+      value: true

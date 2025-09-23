@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: b10df1d8-b76b-4f81-913a-c8392fcb7de5
+  bundle: image
+  default_langcode: en
+  depends:
+    f6114561-f03f-4faf-a533-8cf35acfe8f6: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Woman in black sweater stressed with financial paperwork, overwhelmed at white table.'
+  created:
+    -
+      value: 1758523018
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo depicting a woman sitting at a white table, appearing stressed and overwhelmed. The background is a plain white, which emphasizes the somber mood. The woman, who seems to be an adult, has light hair and is wearing a black sweater, indicating a serious or reflective tone. Her expression is one of frustration or worry as she holds her head with one hand, clearly indicating stress. The table is cluttered with financial paperwork, adding to the chaotic and taxing atmosphere. The overall mood is tense and anxiety-laden, capturing the struggle with overwhelming financial matters.'
+  field_media_image:
+    -
+      alt: 'Woman in black sweater stressed with financial paperwork, overwhelmed at white table.'
+      title: 'Nataliya Vaitkevich'
+      width: 6240
+      height: 4160
+      entity: f6114561-f03f-4faf-a533-8cf35acfe8f6

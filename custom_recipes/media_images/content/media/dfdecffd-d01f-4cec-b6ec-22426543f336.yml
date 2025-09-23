@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: dfdecffd-d01f-4cec-b6ec-22426543f336
+  bundle: image
+  default_langcode: en
+  depends:
+    1f8c82d8-1931-4b43-93e6-8ca573340013: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A person using a smartphone to make a contactless payment with a card reader on a cafe table.'
+  created:
+    -
+      value: 1758522806
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This is a photo depicting a contactless payment scene in a cafe. The background is subtly blurred, with cool, muted tones that create a calm and relaxed atmosphere. The main colors are a mix of soft whites from the table and the darker hues from the saucer and cup. A hand, possibly of a person in their 20s to 30s, is holding a smartphone above a card reader, ready to make a payment. The card reader is placed on the table and features colorful buttons, adding a touch of vibrancy. The mood of the image feels contemporary and casual, indicative of modern convenience. The half-visible cup of coffee suggests a leisurely setting.'
+  field_media_image:
+    -
+      alt: 'A person using a smartphone to make a contactless payment with a card reader on a cafe table.'
+      title: 'cottonbro studio'
+      width: 5773
+      height: 3849
+      entity: 1f8c82d8-1931-4b43-93e6-8ca573340013

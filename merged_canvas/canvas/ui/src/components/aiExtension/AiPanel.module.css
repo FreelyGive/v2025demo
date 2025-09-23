@@ -1,0 +1,29 @@
+.aiPanel {
+  height: 100%;
+
+  & ~ * {
+    transition: margin 0.1s ease-in-out;
+    transition-delay: 0;
+  }
+
+  &[data-open="true"] + * {
+    margin-left: 8px;
+    border-left: 1px solid var(--gray-5);
+    border-top-left-radius: 8px;
+  }
+  &[data-open="true"] ~ * {
+    margin-top: 16px !important;
+    border-top: 1px solid var(--gray-5);
+  }
+}
+
+.aiPanelContent {
+  height: 100%;
+  width: 0;
+  transition: width 0.3s ease-in-out;
+  overflow: hidden;
+
+  &[data-open="true"] {
+    width: 310px;
+  }
+}

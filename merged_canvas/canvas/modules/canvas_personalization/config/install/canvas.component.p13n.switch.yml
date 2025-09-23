@@ -1,0 +1,29 @@
+# 💡This is default config with an enforced dependency because unlike most ComponentSource plugins, the
+# Personalization one does NOT have nor need discovery: it provides only 2 known Components.
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - canvas_personalization
+# 💡The active version can only change due to changes to the logic in the ComponentSource plugin, because it has no
+# settings, only logic-defined explicit inputs.
+# @see ::getExplicitInputDefinitions()
+# @see `type: canvas.component_source_settings.*`
+active_version: 9e50a118dd93207f
+versioned_properties:
+  active:
+    settings: {  }
+    fallback_metadata:
+      slot_definitions:
+        content:
+          title: Content
+          description: 'The variants'
+          examples:
+            - ''
+label: 'Personalization Switch'
+id: p13n.switch
+provider: canvas_personalization
+source: p13n
+source_local_id: switch
+category: Personalization

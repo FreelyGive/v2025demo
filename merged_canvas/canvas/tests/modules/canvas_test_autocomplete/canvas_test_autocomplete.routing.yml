@@ -1,0 +1,6 @@
+some.autocomplete.results:
+  path: '/canvas-test-autocomplete/result'
+  defaults:
+    _controller: '\Drupal\canvas_test_autocomplete\Controller\AutocompleteController::result'
+  requirements:
+    _canvas_ui_access: 'TRUE'

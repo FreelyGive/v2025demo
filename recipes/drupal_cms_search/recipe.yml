@@ -1,0 +1,41 @@
+name: Search
+type: Drupal CMS
+description: Adds a search to help visitors find content.
+install:
+  # Content is indexed during cron, so install automated_cron to ensure that
+  # content gets indexed even if a proper cron job is not set up.
+  - automated_cron
+  - block
+  - drupal_cms_helper
+  # Basic search is for node entity type only at the moment.
+  - node
+  - search_api
+  - search_api_autocomplete
+  - search_api_db
+  - search_api_exclude
+  - simple_search_form
+  - views
+config:
+  strict: false
+  import:
+    # Use core node view mode for indexing.
+    node:
+      - core.entity_view_mode.node.search_index
+  actions:
+    # Enable Search API Exclude for all content types.
+    node.type.*:
+      setThirdPartySetting:
+        module: search_api_exclude
+        key: enabled
+        value: 1
+    # Create view display "Search Index" for all available content types.
+    core.entity_view_display.node.*.default:
+      # Clone the "Default" view display by default.
+      cloneAs: node.%.search_index
+    # If there's any content already in the site, index it.
+    search_api.index.content:
+      reindex: []
+    user.role.anonymous:
+      grantPermission: 'use search_api_autocomplete for content_autocomplete'
+    user.role.authenticated:
+      grantPermission: 'use search_api_autocomplete for content_autocomplete'

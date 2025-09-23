@@ -1,0 +1,46 @@
+{
+  "status": true,
+  "component_structure": {
+    "name": "HeroBanner",
+    "machineName": "herobanner",
+    "status": false,
+    "sourceCodeJs": "import { useState } from \u0027react\u0027;\n\nexport default function HeroBanner({ \n  title = \u0022Welcome to our website\u0022, \n  description = \u0022Learn more about our services and how we can help you achieve your goals.\u0022, \n  buttonText = \u0022Get Started\u0022, \n  buttonLink = \u0022\/contact\u0022 \n}) {\n  return (\n    \u003Cdiv className=\u0022bg-red-600 text-white py-16 px-4 md:px-8 lg:px-16 flex flex-col items-center text-center\u0022\u003E\n      \u003Ch1 className=\u0022text-3xl md:text-4xl lg:text-5xl font-bold mb-4\u0022\u003E{title}\u003C\/h1\u003E\n      \u003Cp className=\u0022text-lg md:text-xl mb-8 max-w-2xl\u0022\u003E{description}\u003C\/p\u003E\n      \u003Ca \n        href={buttonLink} \n        className=\u0022bg-white text-red-600 hover:bg-red-100 px-6 py-3 rounded-lg font-medium transition-colors duration-200\u0022\n      \u003E\n        {buttonText}\n      \u003C\/a\u003E\n    \u003C\/div\u003E\n  );\n}",
+    "sourceCodeCss": "",
+    "compiledJs": "",
+    "compiledCss": "",
+    "importedJsComponents": [],
+    "props": {
+      "title": {
+        "title": "Banner Title",
+        "type": "string",
+        "examples": [
+          "Welcome to our website"
+        ]
+      },
+      "description": {
+        "title": "Banner Description",
+        "type": "string",
+        "examples": [
+          "Learn more about our services and how we can help you achieve your goals."
+        ]
+      },
+      "buttonText": {
+        "title": "Button Text",
+        "type": "string",
+        "examples": [
+          "Get Started"
+        ]
+      },
+      "buttonLink": {
+        "title": "Button Link",
+        "type": "string",
+        "examples": [
+          "\/contact"
+        ],
+        "format": "uri-reference"
+      }
+    },
+    "dataDependencies": []
+  },
+  "message": "Great! I\u0027ve successfully created a \u0022HeroBanner\u0022 component with the features you requested:\n\n1. **Red Background**: The component uses a red background color (bg-red-600) with white text for good contrast.\n\n2. **Text Elements**: \n   - A large, bold title that\u0027s responsive across different screen sizes\n   - A descriptive paragraph that explains the purpose of the section\n\n3. **Call-to-Action Button**: \n   - A white button with red text that links to the specified URL\n   - Hover effect that changes the background color slightly for better user interaction\n\n4. **Customizable Props**:\n   - Banner Title: Controls the main heading text\n   - Banner Description: Controls the paragraph text\n   - Button Text: Sets the text displayed on the button\n   - Button Link: Specifies where the button should link to (accepts relative URLs)\n\nThe component is fully responsive and uses Tailwind CSS for styling. It will adapt to different screen sizes with appropriate spacing and font sizes. The component is now ready to be used in your Drupal Canvas pages!"
+}

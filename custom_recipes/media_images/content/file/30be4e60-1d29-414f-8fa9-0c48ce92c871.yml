@@ -1,0 +1,24 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 30be4e60-1d29-414f-8fa9-0c48ce92c871
+  default_langcode: en
+default:
+  filename:
+    -
+      value: pexels-photo-7505006.jpeg
+  uri:
+    -
+      value: 'public://2025-09/pexels-photo-7505006.jpeg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 487185
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1758435496

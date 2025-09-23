@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 8a146e91-ffcf-4998-aedd-2ff13fd67c47
+  bundle: image
+  default_langcode: en
+  depends:
+    53021e67-5753-44d9-adc2-d41749932c48: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Young Asian woman using a laptop and credit card for online shopping at home.'
+  created:
+    -
+      value: 1758522806
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "The image is a photo depicting a young Asian woman engaged in online shopping from home. The background features soft, neutral tones with light-colored walls, creating a calm and cozy atmosphere. The woman, appearing to be in her 20s, is focused and content, suggesting a positive and relaxed mood. She is using a laptop and holding a credit card in hand, typical tools for online shopping, signaling intention and purpose. Her casual attire and surrounding home setting enhance the everyday, relatable nature of the scene. Off to the side, there's a table with a few items like notebooks, emphasizing a personal and organized workspace. The overall ambiance is serene and modern, ideal for a scene centered on digital convenience and comfort."
+  field_media_image:
+    -
+      alt: 'Young Asian woman using a laptop and credit card for online shopping at home.'
+      title: 'Antoni Shkraba Studio'
+      width: 4000
+      height: 2667
+      entity: 53021e67-5753-44d9-adc2-d41749932c48

@@ -1,0 +1,14 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Canvas test SDC that crashes when 'crash' prop is TRUE
+props:
+  type: object
+  required:
+    - crash
+  properties:
+    crash:
+      type: boolean
+      title: Crash
+      examples:
+        # Do not crash by default 😇
+        # @see \Drupal\Tests\canvas\Kernel\Plugin\Canvas\ComponentSource\ComponentSourceTestBase::testRenderComponentFailure()
+        - false

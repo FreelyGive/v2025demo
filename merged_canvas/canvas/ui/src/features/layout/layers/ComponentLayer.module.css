@@ -1,0 +1,10 @@
+.componentChildrenSelected {
+  border-radius: 0 0 var(--radius-2) var(--radius-2);
+  background-color: var(--purple-3);
+}
+
+.componentChildrenDisabled {
+  pointer-events: none;
+  filter: grayscale(100%);
+  backdrop-filter: grayscale(100%);
+}

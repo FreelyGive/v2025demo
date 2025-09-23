@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 882b95d8-4484-4356-8834-d12f83929a50
+  bundle: image
+  default_langcode: en
+  depends:
+    3e0a3959-b2a3-4bf1-ac31-c9d9aede8225: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Elderly and children sitting on stairs, capturing intergenerational family moment outdoors.'
+  created:
+    -
+      value: 1758435924
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photograph capturing an intergenerational family moment outdoors, set against a background of beige and light brown tiled walls with a simple doorway. An elderly man with white hair is seated on the stairs holding a watermelon, accompanied by an elderly woman wearing a black dress and white headscarf, setting a scene of familial warmth. Surrounding them are six children, likely ranging from toddlers to early teens, dressed in colorful casual clothing, showcasing a lively and cheerful atmosphere. The children display expressions of curiosity and liveliness, adding a playful mood to the gathering. The overall scene conveys a sense of harmony and connection among the family members. The presence of the watermelon serves as a central focal point, symbolizing togetherness and sharing.'
+  field_media_image:
+    -
+      alt: 'Elderly and children sitting on stairs, capturing intergenerational family moment outdoors.'
+      title: 'Leo Arslan'
+      width: 4000
+      height: 6000
+      entity: 3e0a3959-b2a3-4bf1-ac31-c9d9aede8225

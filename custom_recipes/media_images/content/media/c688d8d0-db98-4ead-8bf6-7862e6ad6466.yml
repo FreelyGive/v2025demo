@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: c688d8d0-db98-4ead-8bf6-7862e6ad6466
+  bundle: image
+  default_langcode: en
+  depends:
+    11f0ed69-8ee7-4082-9c62-186235321c65: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Mother and child mixing dough in a bowl, symbolizing family togetherness and home baking.'
+  created:
+    -
+      value: 1758435496
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a warm and inviting photograph depicting a mother and child mixing dough in a bowl, capturing the essence of family togetherness and home baking. The background features a soft, neutral palette with earthy tones, highlighting the central activity. The individuals, likely reflecting a mother-child relationship, are focused on their task, radiating warmth and joy; the child wears a mustard-yellow outfit with delicate floral patterns, indicating a cozy and homely environment. The mother is dressed in a green apron, complementing the overall color harmony of the scene. The mood of the image is nurturing and serene, with an emphasis on bonding and shared experiences. Key objects include a metal mixing bowl, a mixing spoon held by the child, eggs on a plate, and a jar of flour, all illustrating the theme of baking. The entire composition evokes a sense of warmth, familial love, and the simple pleasures of working together in the kitchen.'
+  field_media_image:
+    -
+      alt: 'Mother and child mixing dough in a bowl, symbolizing family togetherness and home baking.'
+      title: 'Mikhail Nilov'
+      width: 3901
+      height: 5851
+      entity: 11f0ed69-8ee7-4082-9c62-186235321c65

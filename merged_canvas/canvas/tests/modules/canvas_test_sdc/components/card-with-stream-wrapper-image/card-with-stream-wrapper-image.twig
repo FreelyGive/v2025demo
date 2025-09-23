@@ -1,0 +1,34 @@
+{#
+/**
+ * ⚠️This duplicates much of the canvas_test_sdc:card component, because that SDC requires a browser-resolvable image URI.
+ *
+ * Stream wrapper URIs cannot be handled by the browser. The JSON Schema for the "card" SDC detects this and a
+ * validation error would be thrown during the rendering: when this SDC includes the "card" SDC.
+ *
+ * @see json-schema-definitions://canvas.module/image-uri
+ * @see json-schema-definitions://canvas.module/stream-wrapper-image-uri
+ * @see \Drupal\Tests\canvas\Unit\SchemaJsonPatternsTest::testImageUriPattern()
+ */
+#}
+{% set image = {}  %}
+<article class="card--with-stream-wrapper-image">
+  <header>
+    <h2>{{ heading }}</h2>
+  </header>
+
+  {% include 'canvas:image' with image|merge({
+    src,
+    alt,
+    loading,
+    sizes,
+    class: 'card--image',
+    attributes: create_attribute({
+      'data-testid': 'card-component-image',
+    })
+  }|filter((value) => value is not null)) only %}
+
+  <div class="content">
+    <p>{{ content }}</p>
+  </div>
+  <footer>{{ footer }}</footer>
+</article>

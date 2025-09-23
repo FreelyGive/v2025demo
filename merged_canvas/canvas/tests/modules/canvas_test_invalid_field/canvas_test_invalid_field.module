@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * @file
+ * Contains canvas_test_invalid_field.module.
+ */
+
+declare(strict_types=1);
+
+use Drupal\Core\Entity\EntityTypeInterface;
+
+/**
+ * Implements hook_entity_bundle_field_info_alter().
+ */
+function canvas_test_invalid_field_entity_bundle_field_info_alter(array &$fields, EntityTypeInterface $entity_type, string $bundle): void {
+  if ($entity_type->id() === 'node' && $bundle === 'article' && isset($fields['field_cvt_textfield'])) {
+    $fields['field_cvt_textfield']->addConstraint('CanvasTestInvalidFieldConstraint', []);
+  }
+}

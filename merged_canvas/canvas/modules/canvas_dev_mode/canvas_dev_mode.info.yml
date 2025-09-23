@@ -1,0 +1,6 @@
+name: Drupal Canvas dev mode
+description: 'Puts Canvas into dev mode - which shows the extensions toolbar and grants access to private APIs'
+core_version_requirement: ^10.4 || ^11.1
+type: module
+dependencies:
+  - canvas:canvas

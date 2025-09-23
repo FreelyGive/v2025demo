@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 9cc463d3-4c50-4c3a-84aa-e65202cbf120
+  bundle: image
+  default_langcode: en
+  depends:
+    2c526773-8783-4118-94c5-453c29e9eeaf: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Flatlay of business report with colorful charts, a notebook, and a laptop for data analysis on a desk.'
+  created:
+    -
+      value: 1758435626
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo with a professional and organized mood, showcasing a flatlay arrangement on a desk. The background is a soft gray, with muted tones complementing the office environment. Central to the image is a colorful business report featuring various charts and graphs in shades of blue, red, yellow, and green. A sleek silver laptop is visible in the corner, adding a modern technological touch. There is also a lined notebook with a spiral binding, suggesting a workspace for note-taking and data analysis. No people are present in the image, keeping the focus on the objects. The overall scene conveys a sense of efficiency and productivity, ideal for business or analytical contexts.'
+  field_media_image:
+    -
+      alt: 'Flatlay of business report with colorful charts, a notebook, and a laptop for data analysis on a desk.'
+      title: Lukas
+      width: 4928
+      height: 3264
+      entity: 2c526773-8783-4118-94c5-453c29e9eeaf

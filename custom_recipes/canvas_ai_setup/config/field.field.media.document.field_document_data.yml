@@ -1,0 +1,19 @@
+uuid: 99225404-0b57-436b-b1c9-bab085652b00
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_document_data
+    - media.type.document
+id: media.document.field_document_data
+field_name: field_document_data
+entity_type: media
+bundle: document
+label: 'Document Data'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

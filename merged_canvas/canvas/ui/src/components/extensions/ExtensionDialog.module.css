@@ -1,0 +1,25 @@
+.DialogContent {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 90vw;
+  max-width: 500px;
+  max-height: 85vh;
+  padding: 25px;
+   animation: content-show 250ms cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 6px;
+  background-color: var(--gray-1);
+  box-shadow: var(--shadow-6);
+}
+.DialogContent:focus {
+  outline: none;
+}
+
+@keyframes content-show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

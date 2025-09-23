@@ -1,0 +1,19 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Canvas test SDC with optional image and heading
+props:
+  type: object
+  properties:
+    heading:
+      type: string
+      title: Heading
+      description: The main and only text
+    image:
+      title: 'Image'
+      $ref: json-schema-definitions://canvas.module/image
+      # @todo `type: object` should not be necessary, it's because \Drupal\sdc\Component\ComponentValidator::getClassProps() does not yet support $ref
+      type: object
+      examples:
+        - src: gracie.jpg
+          alt: 'A good dog'
+          width: 601
+          height: 402

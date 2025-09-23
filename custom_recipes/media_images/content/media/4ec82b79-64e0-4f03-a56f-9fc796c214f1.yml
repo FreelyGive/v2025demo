@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 4ec82b79-64e0-4f03-a56f-9fc796c214f1
+  bundle: image
+  default_langcode: en
+  depends:
+    f8d765a9-9358-4aa3-9fb6-653bf6ff31b7: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Two siblings happily jumping on a bed in a cozy room, enjoying playful fun and laughter.'
+  created:
+    -
+      value: 1758435496
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "The image is a photograph featuring a cozy, softly-lit room with pastel pink and white striped walls, creating a warm and inviting atmosphere. The main colors in the scene are soft neutrals, with accents of pink and white from the background and bedding. Two young children, a boy and a girl, are joyfully jumping on a bed; the girl is holding a stuffed toy. They appear to be of similar age, likely under ten, with light hair and a shared sense of excitement and mirth. The mood is playful and carefree, capturing a moment of happy, spontaneous fun. The bed is adorned with a striped blanket and various decorative pillows, enhancing the room's cozy feel. String lights are subtly draped in the background, adding a touch of whimsy. Overall, the scene emanates a sense of childhood joy and familial bonding."
+  field_media_image:
+    -
+      alt: 'Two siblings happily jumping on a bed in a cozy room, enjoying playful fun and laughter.'
+      title: 'Tima Miroshnichenko'
+      width: 4000
+      height: 6000
+      entity: f8d765a9-9358-4aa3-9fb6-653bf6ff31b7

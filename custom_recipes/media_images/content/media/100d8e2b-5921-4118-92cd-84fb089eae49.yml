@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 100d8e2b-5921-4118-92cd-84fb089eae49
+  bundle: image
+  default_langcode: en
+  depends:
+    1cc45f11-83c7-4406-acc8-b8ab93a064a3: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A man smiling while working at an office desk with a computer and natural daylight streaming in through large windows.'
+  created:
+    -
+      value: 1758433668
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This is a photo of a man sitting at an office desk, smiling while working on a computer. He appears to be in his 30s, and his expression suggests a positive and upbeat mood. The main colors in the scene include neutral tones like beige, white, and grey, with natural daylight streaming in through large windows, creating a bright and airy atmosphere. The desk is cluttered with office essentials, such as a lamp, notepads, and multiple monitors. The background includes large glass windows, hinting at a modern office setting. The overall mood is professional yet relaxed, with a sense of productivity and satisfaction. There is a touch of greenery, likely a plant, adding a natural element to the workspace.'
+  field_media_image:
+    -
+      alt: 'A man smiling while working at an office desk with a computer and natural daylight streaming in through large windows.'
+      title: 'Andrea Piacquadio'
+      width: 6100
+      height: 4067
+      entity: 1cc45f11-83c7-4406-acc8-b8ab93a064a3

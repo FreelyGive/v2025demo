@@ -1,0 +1,74 @@
+# Helper to setup a Drupal installation
+#
+# This should be quite fast with a warm cache, and is only used by one job
+# at the moment, so not currently worth the overhead of saving the output as
+# an artifact and starting a new job based on it.
+#
+# The drupal.org composer template creates a web/ directory and then
+# individually symlinks all the project files into module directory.
+# This causes some very strange behavior and node.js scripts will refuse to
+# run in a lot of cases, so this is an alternative job.
+.drupal-files: &drupal-files
+  # Move everything into a subdirectory
+  - mkdir tmp
+  - find . -maxdepth 1 -type f -not -path "./tmp*" -exec mv {} tmp/ \;
+  - find . -maxdepth 1 -type d -not -path "." -not -path "./tmp" -exec mv {} tmp/ \;
+  - mv tmp $CI_PROJECT_NAME
+  # Get Drupal
+  - composer create-project drupal/recommended-project:$DRUPAL_CORE _drupal
+  - cd _drupal
+  # Add core-dev and Drupal Canvas
+  - |
+    composer config repositories.$CI_PARENT_PROJECT_NAME --json '{"type": "path", "url": "../'$CI_PROJECT_NAME'", "options": { "symlink": false } }'
+  - composer require drupal/core-dev "drupal/$CI_PARENT_PROJECT_NAME @dev" --with-all-dependencies
+  - |
+    PACKAGE_INFO=$(composer info drupal/$CI_PARENT_PROJECT_NAME --all | grep "^dist" | awk -F": " "{print \$2}")
+    EXPECTED_PATH="[path] ../$CI_PROJECT_NAME $CI_COMMIT_SHA"
+    if [ "$PACKAGE_INFO" != "$EXPECTED_PATH" ]; then
+      echo "Unable to link to local $CI_PARENT_PROJECT_NAME package"
+      echo "Expected: $EXPECTED_PATH"
+      echo "Got: $PACKAGE_INFO"
+      exit 1
+    fi
+  # Change to the project directory
+  - cd $CI_PROJECT_DIR/_drupal/web/modules/contrib/$CI_PARENT_PROJECT_NAME
+
+.drupal-webserver: &drupal-webserver
+  # Setup webserver root
+  - rm -rf /var/www/html
+  - ln -s $CI_PROJECT_DIR/_drupal/web /var/www/html
+  - chown -R www-data:www-data /var/www/html
+  - chown -R www-data:www-data $CI_PROJECT_DIR/_drupal
+  # Setup directories
+  - chmod 777 $CI_PROJECT_DIR/_drupal/web/sites
+  - mkdir -p $CI_PROJECT_DIR/_drupal/web/sites/simpletest
+  - chmod 777 $CI_PROJECT_DIR/_drupal/web/sites/simpletest
+  - mkdir -p $CI_PROJECT_DIR/_drupal/web/sites/default/files
+  - chmod 777 $CI_PROJECT_DIR/_drupal/web/sites/default/files
+  # Start the webserver
+  - service apache2 start
+  # Set simpletest environment variables
+  - !reference [ .simpletest-db ]
+  - !reference [ .show-environment-variables ]
+
+.drupal-site: &drupal-site
+  # Ensure that every test site will be able to discover and install test modules.
+  # Anything in settings.testing.php is automatically copied into the settings of
+  # individual test sites. See \Drupal\Core\Test\FunctionalTestSetupTrait::prepareSettings(),
+  # which is called (indirectly) by \Drupal\TestSite\Commands\TestSiteInstallCommand.
+  - cd $CI_PROJECT_DIR/_drupal/web/sites/default
+  - echo '<?php' >> settings.testing.php
+  - echo '$settings["extension_discovery_scan_tests"] = TRUE;' >> settings.testing.php
+  # Change to the project directory
+  - cd $CI_PROJECT_DIR/_drupal/web/modules/contrib/$CI_PARENT_PROJECT_NAME
+  # Install the UI
+  # @todo consolidate this with the UI job?
+  - cd ui
+  - npm ci
+  - npm run build
+  - cd ../
+
+.drupal: &drupal
+  - !reference [ .drupal-files ]
+  - !reference [ .drupal-webserver ]
+  - !reference [ .drupal-site ]

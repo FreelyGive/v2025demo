@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 0e580960-5e70-4e3f-afa1-389c8aec23ff
+  bundle: image
+  default_langcode: en
+  depends:
+    adea50a5-3b06-4567-bf9b-393f5d10431b: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Cheerful businesswoman in glasses working on a laptop, in a bright and modern office setting.'
+  created:
+    -
+      value: 1758433766
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This is a photo depicting a cheerful businesswoman in a bright and modern office setting. She wears glasses and a professional white outfit, conveying a sense of confidence and approachability. The background features soft, natural light with muted tones of green and beige, creating a warm and inviting atmosphere. Her expression is joyful and enthusiastic, capturing a positive and productive mood. The setting includes a sleek laptop on the desk and blurred background elements suggesting an open, airy office space. The overall vibe is energetic and professional, ideal for illustrating a dynamic work environment.'
+  field_media_image:
+    -
+      alt: 'Cheerful businesswoman in glasses working on a laptop, in a bright and modern office setting.'
+      title: 'Andrea Piacquadio'
+      width: 5299
+      height: 3533
+      entity: adea50a5-3b06-4567-bf9b-393f5d10431b

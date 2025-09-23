@@ -1,0 +1,53 @@
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Unlocking Efficiency at Scale with Intelligent Automation'
+  created:
+    -
+      value: 1738548565
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /blog/2025-07/unlocking-efficiency-scale-intelligent-automation
+      langcode: en
+  field_content:
+    -
+      value: "<p>In an environment where agility and responsiveness are key competitive differentiators, organizations are increasingly turning to intelligent automation to streamline operations and reduce manual overhead. We’re building tools that allow teams to automate repetitive workflows and refocus their efforts on high-value, strategic initiatives.</p><p>Our platform leverages dynamic rule engines and customizable triggers to enable automated processes that are not only efficient but also fully auditable. From onboarding sequences to data normalization and alerting, automation capabilities are deeply embedded across the product to deliver consistent outcomes with minimal intervention.</p><p>But automation is only as powerful as the visibility it provides. That’s why our solution includes real-time dashboards, granular performance metrics, and configurable reporting tools designed to give teams the insights they need—when they need them. Whether it's tracking SLA adherence or identifying bottlenecks in a process flow, our metrics framework drives smarter, faster decisions.</p><p>With automation and insights working in concert, we are helping businesses accelerate execution and operate with newfound clarity. As we continue to evolve our platform, our focus remains on enabling customers to do more—with less friction, less guesswork, and more impact.</p>"
+      format: content_format
+  field_description:
+    -
+      value: 'Our platform leverages dynamic rule engines and customizable triggers to enable automated processes that are not only efficient but also fully auditable.'
+  field_featured_image:
+    -
+      entity: 27825763-8d04-4620-8eae-3901c10e306d
+  field_blog__byline:
+    -
+      value: 'Omer Potter'
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: d298a745-72ba-485e-8614-91b30fb30df9
+  bundle: blog
+  default_langcode: en
+  depends:
+    27825763-8d04-4620-8eae-3901c10e306d: media

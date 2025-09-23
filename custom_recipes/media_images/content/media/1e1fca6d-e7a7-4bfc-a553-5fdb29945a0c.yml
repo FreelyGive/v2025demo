@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 1e1fca6d-e7a7-4bfc-a553-5fdb29945a0c
+  bundle: image
+  default_langcode: en
+  depends:
+    7804f98e-b951-41cf-810b-2fe9cb2e7f87: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Woman relaxing and laughing on a sandy beach by the ocean, enjoying a sunny summer day in a swimsuit.'
+  created:
+    -
+      value: 1758433901
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a vibrant photograph of a woman on a sandy beach, basking in the sunlight. The background features soft blue and gray hues of the ocean meeting a pastel sky. The main colors in the scene are the earthy tones of the sand and the bright, cheerful yellow of her swimsuit. The woman appears to be in her twenties or thirties, with light skin and sun-kissed hair, exuding a joyful and carefree demeanor. Her expression is one of relaxed happiness, as she laughs and leans back on her hands, embracing the warmth of the day. The mood is lively and serene, capturing the essence of a perfect summer day. The ocean and beach serve as a tranquil setting, enhancing the overall sense of freedom and bliss.'
+  field_media_image:
+    -
+      alt: 'Woman relaxing and laughing on a sandy beach by the ocean, enjoying a sunny summer day in a swimsuit.'
+      title: 'Andrea Piacquadio'
+      width: 5800
+      height: 3889
+      entity: 7804f98e-b951-41cf-810b-2fe9cb2e7f87

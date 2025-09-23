@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 003e45b3-773e-445b-894b-5b520b8fd6f7
+  bundle: image
+  default_langcode: en
+  depends:
+    6ebf88a0-daf1-44a2-a405-311b8537b35c: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: "Pile of papers with 'Accepted' label in a busy office setting, highlighting information management."
+  created:
+    -
+      value: 1758435773
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This is a photograph featuring a large stack of papers labeled "Accepted" in bold, black letters at the front in a busy office setting. The primary colors are neutral tones, with the paperwork and office interiors highlighted by soft lighting. The image includes blurred figures in the background, likely office workers, dressed in business attire, who appear to be engaged in work, contributing to a sense of bustling productivity. The people are indistinct, adding to a feeling of anonymity and universality in the corporate atmosphere. The mood of the image is efficient and orderly, capturing a moment of successful information management. The focus on the papers suggests a sense of achievement and approval. The overall scene portrays a clean and organized workspace.'
+  field_media_image:
+    -
+      alt: "Pile of papers with 'Accepted' label in a busy office setting, highlighting information management."
+      title: Kelly
+      width: 3744
+      height: 5616
+      entity: 6ebf88a0-daf1-44a2-a405-311b8537b35c

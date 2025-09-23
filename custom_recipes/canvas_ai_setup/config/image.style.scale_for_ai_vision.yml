@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: scale_for_ai_vision
+label: 'Scale for AI Vision'
+effects:
+  9d2df588-41a7-4297-8428-86020fd8ffc4:
+    uuid: 9d2df588-41a7-4297-8428-86020fd8ffc4
+    id: image_scale
+    weight: 1
+    data:
+      width: 400
+      height: null
+      upscale: false

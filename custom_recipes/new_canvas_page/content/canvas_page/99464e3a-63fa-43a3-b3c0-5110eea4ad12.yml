@@ -1,0 +1,32 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 99464e3a-63fa-43a3-b3c0-5110eea4ad12
+  default_langcode: en
+default:
+  revision_user:
+    -
+      target_id: 1
+      target_uuid: ''
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 1
+      target_uuid: ''
+  title:
+    -
+      value: 'Awesome Drupal Canvas Demo'
+  components: []
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  created:
+    -
+      value: 1741713514
+  revision_translation_affected:
+    -
+      value: true

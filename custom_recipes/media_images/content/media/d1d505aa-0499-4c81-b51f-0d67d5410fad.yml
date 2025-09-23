@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: d1d505aa-0499-4c81-b51f-0d67d5410fad
+  bundle: image
+  default_langcode: en
+  depends:
+    21e92614-e791-47a4-a1b2-d524d2cffc48: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Modern office meeting room with designer chairs, table, and large windows.'
+  created:
+    -
+      value: 1758433668
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo of a modern office meeting room with a bright, airy mood. The background features large windows with sheer white blinds that allow natural light to flood in, creating a sense of openness. The main colors in the scene are whites, blacks, and browns, giving it a clean, sophisticated appearance. Central to the image is a long, white rectangular table surrounded by sleek, designer black chairs with chrome accents. The wooden floor adds a touch of warmth and contrast to the otherwise minimalist setting. There are no people present, giving the room an orderly and professional feel. The design suggests a space intended for focus and collaboration.'
+  field_media_image:
+    -
+      alt: 'Modern office meeting room with designer chairs, table, and large windows.'
+      title: Pixabay
+      width: 5184
+      height: 3456
+      entity: 21e92614-e791-47a4-a1b2-d524d2cffc48

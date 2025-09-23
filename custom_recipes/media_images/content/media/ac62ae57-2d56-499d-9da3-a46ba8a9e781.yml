@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: ac62ae57-2d56-499d-9da3-a46ba8a9e781
+  bundle: image
+  default_langcode: en
+  depends:
+    3dd8872f-0c72-4309-9cc9-e6094cc47cfe: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Businesswoman working on a laptop at a cozy indoor setting, reflecting focus and modern work culture.'
+  created:
+    -
+      value: 1758433766
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo featuring a businesswoman in a cozy indoor setting. The background is predominantly light, with sheer white curtains providing a soft and calming atmosphere. The main colors in the scene are whites and neutrals, creating a serene and modern look. The woman appears to be young and engaged in her work, exuding focus and determination. She dons professional attire, including a blazer, which complements the modern work culture theme. Her expression suggests deep thought and concentration as she works on a sleek laptop. The mood of the image is calm and focused, highlighting a blend of professionalism and comfort. A plush, white chair adds to the cozy ambiance, while a small, stylish table makes a subtle appearance.'
+  field_media_image:
+    -
+      alt: 'Businesswoman working on a laptop at a cozy indoor setting, reflecting focus and modern work culture.'
+      title: 'Galina Kolonitskaia'
+      width: 4480
+      height: 6720
+      entity: 3dd8872f-0c72-4309-9cc9-e6094cc47cfe

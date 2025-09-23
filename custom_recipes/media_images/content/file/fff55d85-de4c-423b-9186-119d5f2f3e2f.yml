@@ -1,0 +1,24 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: fff55d85-de4c-423b-9186-119d5f2f3e2f
+  default_langcode: en
+default:
+  filename:
+    -
+      value: pexels-photo-2034435.jpeg
+  uri:
+    -
+      value: 'public://2025-09/pexels-photo-2034435.jpeg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 641405
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1758433901

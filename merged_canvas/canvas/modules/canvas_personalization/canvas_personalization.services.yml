@@ -1,0 +1,5 @@
+services:
+  canvas_personalization.api_config_route_subscriber:
+    class: Drupal\canvas_personalization\EventSubscriber\ApiConfigRouteSubscriber
+    tags:
+      - { name: event_subscriber }

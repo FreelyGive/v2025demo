@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 2e28fe4b-8efa-4370-b500-ce18ba91c600
+  bundle: image
+  default_langcode: en
+  depends:
+    bf65ad9e-faba-4bd7-9d27-18d0010d0fb7: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Young couple shopping online with a credit card, indoor setting, using a laptop.'
+  created:
+    -
+      value: 1758522641
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "The image is a photo set in an indoor setting with soft, neutral tones including whites and creams, creating a cozy atmosphere. It features a young couple, a man and a woman, appearing to be in their twenties. The man, wearing glasses and a casual white shirt, is focused on a laptop, while holding a credit card. The woman, dressed in a black top, leans over his shoulder, showing curiosity and engagement. Their expressions suggest they are absorbed and content, creating a positive and collaborative mood. In the background, there's a minimalist kitchen setup with jars on the counter, enhancing the domestic theme. The overall scene conveys a modern and relaxed lifestyle with an emphasis on technology."
+  field_media_image:
+    -
+      alt: 'Young couple shopping online with a credit card, indoor setting, using a laptop.'
+      title: Thirdman
+      width: 4305
+      height: 6457
+      entity: bf65ad9e-faba-4bd7-9d27-18d0010d0fb7

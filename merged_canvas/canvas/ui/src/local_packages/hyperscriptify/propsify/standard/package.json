@@ -1,0 +1,7 @@
+{
+  "name": "hyperscriptify-propsify-standard",
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "lodash-es": "^4"
+  }
+}

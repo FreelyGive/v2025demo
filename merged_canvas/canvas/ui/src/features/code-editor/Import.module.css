@@ -1,0 +1,15 @@
+/* Override default radix styles with !important */
+.importButton {
+  position: absolute !important;
+  z-index: 100 !important;
+  top: 10px !important;
+  right: 30px !important;
+  box-shadow: 0 4px 12px rgba(5, 136, 240, 0.3), 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+.code {
+  width: 100% !important;
+  padding: var(--space-3) !important;
+  border-radius: var(--radius-4) !important;
+  font-size: var(--font-size-1) !important;
+}

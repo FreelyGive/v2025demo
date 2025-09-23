@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 69fdbc1e-3fb0-47e4-b53d-fd1d3564237c
+  bundle: image
+  default_langcode: en
+  depends:
+    2189befc-0968-4984-8d0f-522c5b868327: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'An African American man engaged in a conversation in a sunlit cafe.'
+  created:
+    -
+      value: 1758435924
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "This image is a photo featuring an African American man engaged in conversation in a sunlit cafe. The background is warmly lit, with shades of beige and brown from the wooden shelves and furniture. The man appears to be in his 20s to 30s, with a focused and engaged expression, hinting at a thoughtful discussion. He's wearing a light-colored, short-sleeved shirt with a dark accent at the collar. The atmosphere is relaxed and intimate, suggesting a candid and meaningful exchange. The cafe's ambiance is enhanced by incidental elements like books and decorative vases in the background, contributing to a cozy and inviting setting. The overall mood of the scene is warm and conversational."
+  field_media_image:
+    -
+      alt: 'An African American man engaged in a conversation in a sunlit cafe.'
+      title: 'Kindel Media'
+      width: 2781
+      height: 4119
+      entity: 2189befc-0968-4984-8d0f-522c5b868327

@@ -1,0 +1,43 @@
+name: 'Drupal Canvas Test Site'
+description: 'Site for running tests against.'
+type: 'Canvas'
+install:
+  - stark
+  - canvas_stark
+  - canvas
+  - canvas_test_code_components
+  - canvas_test_sdc
+config:
+  strict: true
+  import:
+    canvas: '*'
+    system:
+      # This menu must exist so it can be exposed as a block component and used in our
+      # default content.
+      - system.menu.admin
+    # This module provides code component (JavaScriptComponent) config entities used by default content.
+    # TRICKY: just like all other types of components, code components get associated Component config
+    # entities. To provide a stable target for the default content (a predictable component_version), even
+    # after additional modules are installed that affects the Component config entities `prop_field_definitions`,
+    # but this Recipe does control what gets installed, so it is predictable. Installing modules that alter
+    # which field types are used to populate code component props would cause the component versions to change,
+    # but even that shouldn't break the default content included in this Recipe, because it'll just be pointing
+    # to "old" Component config entity versions.
+    canvas_test_code_components: '*'
+  actions:
+    system.site:
+      simpleConfigUpdate:
+        # @see content/canvas_page/bc9ab1d0-dd73-46e0-81b6-36b623ff98c4.yml
+        page.front: /homepage
+        name: 'Drupal'
+    # @see config/field.field.node.article.field_canvas_demo.yml
+    core.entity_view_display.node.article.default:
+      setComponent:
+        name: field_canvas_demo
+        options:
+          type: canvas_naive_render_sdc_tree
+          label: hidden
+          settings: {}
+          third_party_settings: {}
+          weight: -2
+          region: content

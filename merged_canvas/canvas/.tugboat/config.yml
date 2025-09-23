@@ -1,0 +1,97 @@
+services:
+  php:
+    # Specify the version of Drupal you wish to use for Tugboat below.
+    image: tugboatqa/drupal:11
+    default: true
+    http: false
+    depends: mysql
+    commands:
+      update:
+        # Install NodeJS
+        - curl -fsSL https://deb.nodesource.com/setup_$(cat $TUGBOAT_ROOT/ui/.nvmrc).x -o nodesource_setup.sh
+        - bash nodesource_setup.sh
+        - apt-get install -y nodejs
+
+        # Run various commands from the drupal/recommended-project root.
+        - |
+          set -eux
+
+          # This is an environment variable we added in the Dockerfile that
+          # provides the path to Drupal composer root (not the web root).
+          cd $DRUPAL_COMPOSER_ROOT
+
+          # Configure composer to require this module as a symlink.
+          composer config minimum-stability dev
+          composer config repositories.tugboat path $TUGBOAT_ROOT
+          composer require \
+            drupal/canvas \
+            drupal/demo_design_system \
+            drupal/components \
+            drupal/default_content
+
+          # Install Drupal on the site.
+          rm -f $DRUPAL_DOCROOT/sites/default/settings.php
+          php -d memory_limit=-1 \
+            vendor/bin/drush.php \
+            --yes \
+            --db-url=mysql://tugboat:tugboat@mysql:3306/tugboat \
+            --site-name="Live preview for ${TUGBOAT_PREVIEW_NAME}" \
+            --account-pass=admin \
+            site:install standard
+
+          # Require settings.local.php increase CLI memory limit, add trusted
+          # host patterns, and allow for enabling hidden modules.
+          echo "require_once '$TUGBOAT_ROOT/.tugboat/settings.local.php';" >> $DOCROOT/sites/default/settings.php
+
+          # Set up the files directory permissions.
+          mkdir -p $DRUPAL_DOCROOT/sites/default/files
+          chgrp -R www-data $DRUPAL_DOCROOT/sites/default/files
+          chmod 2775 $DRUPAL_DOCROOT/sites/default/files
+          chmod -R g+w $DRUPAL_DOCROOT/sites/default/files
+
+          # Enable the module.
+          vendor/bin/drush --yes pm:install \
+            canvas \
+            media_library \
+            components \
+            default_content
+
+          # Enable starshot_demo theme.
+          vendor/bin/drush --yes theme:enable starshot_demo
+          vendor/bin/drush --yes config:set system.theme default starshot_demo
+
+          # Create node/1
+          vendor/bin/drush scr $TUGBOAT_ROOT/.tugboat/create-article-node.php
+
+      build:
+        # Install node packages and build the UI.
+        - npm --prefix $TUGBOAT_ROOT/ui ci
+        - npm --prefix $TUGBOAT_ROOT/ui run build
+
+        # Update Drupal core composer packages and run any Drupal updates.
+        - |
+          set -eux
+          cd $DRUPAL_COMPOSER_ROOT
+          composer install --optimize-autoloader
+          # Update packages and dependencies.
+          composer update --with-all-dependencies \
+            drupal/canvas \
+            drupal/demo_design_system \
+            drupal/components \
+            drupal/default_content
+          # Run Drupal updates
+          vendor/bin/drush --yes updb
+          vendor/bin/drush cache:rebuild
+
+        # Update DDS components and fix permissions.
+        - npm --prefix $DRUPAL_COMPOSER_ROOT/web/themes/contrib/demo_design_system ci
+        - npm --prefix $DRUPAL_COMPOSER_ROOT/web/themes/contrib/demo_design_system run build
+        - npm --prefix $DRUPAL_COMPOSER_ROOT/web/themes/contrib/demo_design_system/starshot_demo ci
+        - npm --prefix $DRUPAL_COMPOSER_ROOT/web/themes/contrib/demo_design_system/starshot_demo run build
+        - chgrp -R www-data $TUGBOAT_ROOT/ui/dist $DRUPAL_COMPOSER_ROOT/web/themes/contrib/demo_design_system
+
+        # Warm Drupal caches
+        - 'curl --silent --header "Host: $TUGBOAT_DEFAULT_SERVICE_URL_HOST" http://localhost > /dev/null'
+
+  mysql:
+    image: tugboatqa/mariadb

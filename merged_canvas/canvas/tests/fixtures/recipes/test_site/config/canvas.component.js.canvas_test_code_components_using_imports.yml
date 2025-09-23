@@ -1,0 +1,17 @@
+uuid: dd1e8922-118a-4ff7-b83c-bc8543efdc5a
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.js_component.canvas_test_code_components_using_imports
+label: 'Component using imports'
+id: js.canvas_test_code_components_using_imports
+provider: null
+source: js
+source_local_id: canvas_test_code_components_using_imports
+category: '@todo'
+active_version: 8fe3be948e0194e1
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions: {  }

@@ -1,0 +1,23 @@
+<?php
+
+declare(strict_types=1);
+
+use Drupal\Core\Entity\FieldableEntityInterface;
+
+/**
+ * Implements hook_entity_display_build_alter().
+ */
+function canvas_test_rendering_entity_display_build_alter(array &$build, array $context): void {
+  $entity = $context['entity'];
+  assert($entity instanceof FieldableEntityInterface);
+  $view_mode = $context['view_mode'];
+  assert(is_string($view_mode));
+
+  $message = sprintf(
+    'hook_entity_display_build_alter for %s %d in %s view mode',
+    $entity->getEntityTypeId(),
+    $entity->id(),
+    $view_mode,
+  );
+  \Drupal::logger('canvas_test')->debug($message);
+}

@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 94aa3de9-e21c-482f-9dd7-cf826a824e5f
+  bundle: image
+  default_langcode: en
+  depends:
+    9985139c-4d7b-4182-a5d4-8adacd260b16: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Clean minimalist workspace with a laptop, coffee, flowers, and stationery.'
+  created:
+    -
+      value: 1758434018
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "The image is a photo showcasing a clean, minimalist workspace with a dominant white background. It features a silver laptop in the upper left corner, paired with a black coffee cup adjacent to it. In the upper right corner, there is a small bouquet of fresh flowers, adding a touch of natural color with green and white hues. A teal teapot sits near the flowers, providing a soft contrast to the otherwise neutral palette. Stationery items, including a spiral notebook and a couple of binder clips, are neatly arranged on the desk. There's a calm and organized mood conveyed through the simplicity and uncluttered space. No people are present in the image, focusing entirely on the serene workspace setup."
+  field_media_image:
+    -
+      alt: 'Clean minimalist workspace with a laptop, coffee, flowers, and stationery.'
+      title: Pixabay
+      width: 2000
+      height: 1200
+      entity: 9985139c-4d7b-4182-a5d4-8adacd260b16

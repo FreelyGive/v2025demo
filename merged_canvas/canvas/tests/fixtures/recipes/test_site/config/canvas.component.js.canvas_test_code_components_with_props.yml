@@ -1,0 +1,33 @@
+uuid: 5874ee63-1341-4052-ac41-fdae47f61819
+langcode: en
+status: true
+dependencies:
+  config:
+    - canvas.js_component.canvas_test_code_components_with_props
+label: 'With props'
+id: js.canvas_test_code_components_with_props
+provider: null
+source: js
+source_local_id: canvas_test_code_components_with_props
+category: '@todo'
+active_version: cd8b163a8d299fea
+versioned_properties:
+  active:
+    settings:
+      prop_field_definitions:
+        age:
+          field_type: integer
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: number
+          default_value:
+            - value: 40
+          expression: ℹ︎integer␟value
+        name:
+          field_type: string
+          field_storage_settings: {  }
+          field_instance_settings: {  }
+          field_widget: string_textfield
+          default_value:
+            - value: Canvas
+          expression: ℹ︎string␟value

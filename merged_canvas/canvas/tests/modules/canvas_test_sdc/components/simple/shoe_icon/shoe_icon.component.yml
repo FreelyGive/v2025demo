@@ -1,0 +1,132 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json'
+name: Shoe Icon
+status: stable
+group: Atom/Icon
+description: https://shoelace.style/components/icon
+libraryOverrides:
+  dependencies:
+    - canvas/shoelace
+props:
+  type: object
+  required:
+    - name
+  properties:
+    name:
+      type: string
+      title: Name
+      description: The badge’s theme variant.
+      default: primary
+      enum:
+        - 'moon-stars-fill'
+        - 'moon-stars'
+        - 'star-fill'
+        - 'star'
+        - 'stars'
+        - 'rocket-fill'
+        - 'rocket-takeoff-fill'
+        - 'rocket-takeoff'
+        - 'rocket'
+      meta:enum:
+        moon-stars-fill: 'Moon Stars (Filled)'
+        moon-stars: Moon Stars
+        star-fill: 'Star (Filled)'
+        star: Star
+        stars: Stars
+        rocket-fill: 'Rocket (Filled)'
+        rocket-takeoff-fill: 'Rocket Takeoff (Filled)'
+        rocket-takeoff: Rocket Takeoff
+        rocket: Rocket
+      examples:
+        [
+          'moon-stars-fill',
+          'moon-stars',
+          'star-fill',
+          'star',
+          'stars',
+          'rocket-fill',
+          'rocket-takeoff-fill',
+          'rocket-takeoff',
+          'rocket',
+        ]
+    label:
+      type: string
+      title: Label
+      description: An alternate description to use for assistive devices. If omitted, the icon will be considered presentational and ignored by assistive devices.
+      default: 'This is an icon'
+      examples: ['This is an icon']
+    size:
+      type: string
+      title: Size
+      description: The icon size.
+      default: ''
+      enum:
+        - ''
+        - base
+        - l
+        - s
+        - xs
+        - xxs
+      meta:enum:
+        '': None
+        base: Base
+        l: Large
+        s: Small
+        xs: Extra-Small
+        xxs: Extra-Extra-Small
+      examples: ['', 'base', 'l', 's', 'xs', 'xxs']
+    color:
+      type: string
+      title: Color
+      description: The icon color
+      default: ''
+      enum:
+        - ''
+        - gray
+        - primary
+        - neutral-soft
+        - neutral-medium
+        - neutral-loud
+        - primary-medium
+        - primary-loud
+        - black
+        - white
+        - red
+        - gold
+        - green
+      meta:enum:
+        '': None
+        gray: Gray
+        primary: Primary
+        neutral-soft: Neutral Soft
+        neutral-medium: Neutral Medium
+        neutral-loud: Neutral Loud
+        primary-medium: Primary Medium
+        primary-loud: Primary Loud
+        black: Black
+        white: White
+        red: Red
+        gold: Gold
+        green: Green
+      examples:
+        [
+          '',
+          gray,
+          primary,
+          neutral-soft,
+          neutral-medium,
+          neutral-loud,
+          primary-medium,
+          primary-loud,
+          black,
+          white,
+          red,
+          gold,
+          green,
+        ]
+    slot:
+      type: string
+      title: Slot
+      description: The slot the icon should appear in
+      # @todo this should be hidden from the form
+# @todo this should be rendered as an icon picker in the form
+# @todo the size and color props could be a good example of styles/design tokens

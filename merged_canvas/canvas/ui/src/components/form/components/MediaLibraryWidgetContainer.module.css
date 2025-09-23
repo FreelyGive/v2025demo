@@ -1,0 +1,199 @@
+:root {
+  --canvas-media-item-width: 72px;
+  --canvas-media-item-height: 72px;
+}
+
+.container {
+  [data-canvas-media-library-fieldset] {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    border: none;
+    legend {
+      /* The float is intentional, it's the only way a legend element can
+        not consume 100% width within flex. */
+      float: left;
+      margin: 0;
+      color: var(--slate-11);
+    }
+  }
+
+  /* Manage conditional visibility of weight inputs based on toggle status. */
+  :global(.js-media-library-widget-toggle-weight.active) + [data-canvas-media-library-fieldset-wrapper] {
+    [data-canvas-media-library-item-weight-wrapper] {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-end;
+      width: 100%;
+      margin-bottom: 0;
+      label {
+         margin-left: calc(var(--canvas-media-item-width) + var(--space-2));
+      }
+      input {
+        width: 40px;
+      }
+    }
+  }
+
+  [data-canvas-media-library-item-weight-wrapper] {
+    display: none;
+    & > drupal-html-fragment > div[style] {
+      /* Override the display: none; style attribute added (and not easily
+         overridden) by Drupal Behaviors. The visibility condition is applied
+         to data-canvas-media-library-item-weight-wrapper instead. */
+      display: flex!important;
+    }
+  }
+
+  :global(.js-media-library-widget-toggle-weight) {
+    margin-left: auto;
+    color: var(--blue-9);
+    font-size: 0;
+    &::after {
+      width: 100px;
+      height: 12px;
+      content: 'Show weights';
+      font-size: 12px;
+    }
+    &:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+
+  :global(.js-media-library-widget-toggle-weight.active) {
+    &::after {
+      content: 'Hide weights';
+    }
+  }
+
+  [data-canvas-media-library-fieldset-wrapper] {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width: 100%;
+    margin: var(--space-1) 0 var(--space-3);
+    padding: 14px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--gray-5);
+    border-radius: 8px;
+    gap: 9px;
+
+
+    [data-canvas-media-library-open-button] {
+      position: relative;
+      height: 32px;
+      white-space: wrap;
+      color: var(--blue-11);
+      border-width: 1px;
+      border-style: solid;
+      border-color: var(--blue-7);
+      border-radius: var(--radius-2);
+      background-color: var(--blue-2);
+      font-size: 13px;
+      &:hover {
+        cursor: pointer;
+        border-color: var(--blue-9);
+        background-color: var(--blue-3);
+      }
+    }
+
+    /* Prevent interacting with the open button until ajax is ready */
+    [data-canvas-media-library-open-button]:not([data-once="drupal-ajax"]) {
+      pointer-events: none;
+      color: var(--slate-11);
+      border-color: var(--slate-1);
+      background-color: var(--slate-3);
+      cursor: wait;
+    }
+
+    /* Hide this div when there is no selection so it doesn't take up space */
+    [data-canvas-media-library-selection] {
+      display: none;
+    }
+    /* When there is a selection there is a div inside and we can display the selection */
+    [data-canvas-media-library-selection]:has(div) {
+      display: flex;
+      overflow-y: auto;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      width: 100%;
+      max-height: 300px;
+      gap: var(--space-2);
+      [data-media-library-item-delta] {
+        position: relative;
+        width: 100%;
+        height: auto;
+
+        > article {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          width: 100%;
+          gap: var(--space-2)
+        }
+
+        [data-canvas-media-remove-button] {
+          position: absolute;
+          z-index: 1;
+          top: calc((var(--canvas-media-item-height) / 2) - 8px);
+          right: 4px;
+          overflow: hidden;
+          width: 16px;
+          height: 16px;
+          padding: 0;
+          cursor: pointer;
+          border: none;
+          border-radius: 50%;
+          background-color: white;
+          /* cspell:disable-next-line */
+          background-image: url("data:image/svg+xml,%3csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cg clip-path='url(%23clip0_8559_12186)'%3e%3crect width='16' height='16' fill='white' fill-opacity='0.01'/%3e%3cpath fill-rule='evenodd' clip-rule='evenodd' d='M0.933594 7.9999C0.933594 4.09837 4.09641 0.935547 7.99795 0.935547C11.8995 0.935547 15.0623 4.09837 15.0623 7.9999C15.0623 11.9014 11.8995 15.0642 7.99795 15.0642C4.09641 15.0642 0.933594 11.9014 0.933594 7.9999ZM7.99795 1.94887C4.65606 1.94887 1.94693 4.65802 1.94693 7.9999C1.94693 11.3418 4.65606 14.0509 7.99795 14.0509C11.3398 14.0509 14.0489 11.3418 14.0489 7.9999C14.0489 4.65802 11.3398 1.94887 7.99795 1.94887ZM10.5085 5.48957C10.7168 5.69785 10.7168 6.03554 10.5085 6.24382L8.75232 8.00002L10.5085 9.75623C10.7168 9.96451 10.7168 10.3022 10.5085 10.5105C10.3003 10.7188 9.96256 10.7188 9.75428 10.5105L7.99807 8.75427L6.24187 10.5105C6.03359 10.7188 5.69589 10.7188 5.48761 10.5105C5.27934 10.3022 5.27934 9.96451 5.48761 9.75623L7.24383 8.00002L5.48761 6.24382C5.27934 6.03554 5.27934 5.69785 5.48761 5.48957C5.69589 5.28129 6.03359 5.28129 6.24187 5.48957L7.99807 7.24578L9.75428 5.48957C9.96256 5.28129 10.3003 5.28129 10.5085 5.48957Z' fill='%23E5484D'/%3e%3c/g%3e%3cdefs%3e%3cclipPath id='clip0_8559_12186'%3e%3crect width='16' height='16' fill='white'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e");
+          background-repeat: no-repeat;
+          background-position: center;
+          text-shadow: none;
+          font-size: 0;
+          &:hover {
+            outline: 1px solid var(--gray-8);
+          }
+        }
+
+        :global(.ajax-progress--throbber) {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 1.5rem;
+          height: 1.5rem;
+          margin: 0;
+          padding: 0;
+          transform: translate(-50%, -50%);
+          border-radius: 50%;
+          background-color: transparent;
+        }
+        :global(.ajax-progress__message) {
+          display: none;
+        }
+
+        img {
+          display: block;
+          width: var(--canvas-media-item-width);
+          height: var(--canvas-media-item-height);
+          object-fit: cover;
+          border: 1.125px solid #E0E1E6;
+          border-radius: 8px;
+          background: #F0F0F3;
+        }
+      }
+    }
+  }
+  :global(.canvas-media-preview-label) {
+    margin-right: 20px;
+    word-break: break-word;
+    color: var(--slate-11);
+  }
+}

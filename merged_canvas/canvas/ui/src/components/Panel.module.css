@@ -1,0 +1,36 @@
+.panel {
+  border-radius: var(--panel-border-radius) !important;
+  /* Glass effect */
+  background: transparent linear-gradient(173deg, rgba(255, 255, 255, 0.80) 0.02%, rgba(255, 255, 255, 0.90) 100.05%) !important;
+  box-shadow: 0 3px 40px 0 rgba(0, 0, 0, 0.08) !important;
+  backdrop-filter: blur(47.5px);
+}
+
+.animateOff {
+  transition:
+    transform 0.2s cubic-bezier(0.4, 0, 0.6, 1),
+    opacity 0.2s ease-in,
+    width 0.2s cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+.offLeft,
+.offRight {
+  pointer-events: none;
+  opacity: 0;
+}
+
+.offLeft {
+  overflow: hidden;
+  width: 0 !important;
+  transform: translateX(-110%) scaleX(0.8);
+  transform-origin: left center;
+  border: none !important;
+}
+
+.offRight {
+  overflow: hidden;
+  width: 0 !important;
+  transform: translateX(110%) scaleX(0.8);
+  transform-origin: right center;
+  border: none !important;
+}

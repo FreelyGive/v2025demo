@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 20b604dc-3cb0-488d-a4a6-38f9a1d10348
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: 'CV-BradleyGeorge.pdf'
+  uri:
+    -
+      value: 'public://2025-09/CV-BradleyGeorge.pdf'
+  filemime:
+    -
+      value: application/pdf
+  filesize:
+    -
+      value: 50253
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1758533194

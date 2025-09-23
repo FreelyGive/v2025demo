@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 408a2827-2ed9-4ab6-b5bc-b14a81994bea
+  bundle: image
+  default_langcode: en
+  depends:
+    c2728eec-4cc0-4ce4-8eae-d8fe8d7202c6: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Fashionable woman in leather jacket holding flowers, feeling joyful outdoors.'
+  created:
+    -
+      value: 1758433901
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This image is a photo featuring a fashionable woman with long, silver hair, dressed in a sleek black leather jacket. She appears to be in her 20s or 30s and exudes a joyful, vibrant energy, as evidenced by her wide smile. Her expression is open and carefree, enhancing the lively mood of the scene. The bouquet of flowers she holds aloft adds a splash of color, with blooms in subtle pastel tones like pink and yellow, wrapped in black paper. The background is blurred and predominantly gray, suggesting an urban outdoor setting with muted tones that highlight the vividness of the woman and the flowers. The composition captures a sense of freedom and happiness, making it both stylish and spirited.'
+  field_media_image:
+    -
+      alt: 'Fashionable woman in leather jacket holding flowers, feeling joyful outdoors.'
+      title: 'Anastasiya Lobanovskaya'
+      width: 2000
+      height: 3000
+      entity: c2728eec-4cc0-4ce4-8eae-d8fe8d7202c6

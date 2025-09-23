@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 0fe5d82f-ed67-4e90-843b-32a15c111d52
+  bundle: image
+  default_langcode: en
+  depends:
+    5875bdfb-0fc0-4df1-9067-91b31e263343: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A hand points a pen at business graphs on a wooden table, highlighting data analysis.'
+  created:
+    -
+      value: 1758435626
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo featuring a hand holding a blue pen pointing at colorful business graphs. The background is a light wooden table that gives a warm, natural tone to the scene. The graphs on the paper include vibrant colors like blue, red, yellow, and green, adding a dynamic touch to the overall visual. The hand appears to be of a light-skinned person, conveying focus and intent as it directs attention to specific data points. There are no visible faces or expressions, keeping the mood professional and analytical. The overall mood of the image is focused and business-oriented, emphasizing data analysis. The prominent objects in the scene are the graphs and the blue pen, which play key roles in highlighting the analytical theme.'
+  field_media_image:
+    -
+      alt: 'A hand points a pen at business graphs on a wooden table, highlighting data analysis.'
+      title: Lukas
+      width: 6144
+      height: 4069
+      entity: 5875bdfb-0fc0-4df1-9067-91b31e263343

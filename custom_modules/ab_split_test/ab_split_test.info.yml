@@ -1,0 +1,5 @@
+name: A/B Split Test
+type: module
+description: Minimal split-URL A/B test router for Drupal 11.
+core_version_requirement: ^11
+package: A/B Testing

@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 32873d2d-d8fa-45ed-9ab0-50448a5048a2
+  bundle: image
+  default_langcode: en
+  depends:
+    6e4579b3-6aac-44e5-a4e4-85e3b8cda31d: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Adorable baby wearing a yellow beanie with a heart sticker, smiling joyfully indoors.'
+  created:
+    -
+      value: 1758435496
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "The image is a photo of an adorable baby wearing a vibrant yellow beanie that matches their yellow outfit, with a heart sticker on their cheek. The baby is Caucasian, approximately under a year old, and has a joyful smile, exuding a cheerful and heartwarming mood. The background is a soft, neutral color, enhancing the bright yellow of the beanie and outfit. An adult's hand, likely a parent's, is gently holding the baby. The light is soft, creating a warm and inviting atmosphere indoors. The primary colors in the scene are yellow and the soft pastel tones of the child's skin. The expression on the baby's face captures an innocent and delightful joy."
+  field_media_image:
+    -
+      alt: 'Adorable baby wearing a yellow beanie with a heart sticker, smiling joyfully indoors.'
+      title: 'Anna Shvets'
+      width: 4000
+      height: 6000
+      entity: 6e4579b3-6aac-44e5-a4e4-85e3b8cda31d

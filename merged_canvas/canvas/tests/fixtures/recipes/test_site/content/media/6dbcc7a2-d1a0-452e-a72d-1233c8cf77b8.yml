@@ -1,0 +1,38 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 6dbcc7a2-d1a0-452e-a72d-1233c8cf77b8
+  bundle: image
+  default_langcode: en
+  depends:
+    2658e81d-1915-49bc-a88d-333ad4f73fc2: file
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Hero image'
+  created:
+    -
+      value: 1747824133
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: en
+  field_media_image:
+    -
+      entity: 2658e81d-1915-49bc-a88d-333ad4f73fc2
+      alt: 'A pub called The Princes Head surrounded by trees and two red London phone boxes'
+      title: ''
+      width: 800
+      height: 533

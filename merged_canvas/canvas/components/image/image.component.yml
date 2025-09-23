@@ -1,0 +1,50 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Image
+# ℹ️ This means the target audience is other SDC developers, not Canvas. Which means there's no need for the additional semantics Canvas requires.
+noUi: true
+props:
+  type: object
+  required:
+    - src
+  properties:
+    # ⚠️ This looks very similar to `json-schema-definitions://canvas.module/image`, but with 2 additional object properties. That's because this SDC is meant to be used by other SDCs, so putting everything under a single top-level SDC prop would yield a poor Developer Experience. Hence this intentionally does NOT use `json-schema-definitions://canvas.module/image`.
+    src:
+      title: Image URL
+      description: Relative or absolute image URL, local (internal) or remote (external), or even a stream wrapper image URI.
+      type: string
+      # ⚠️ Note this does NOT specify `$ref: json-schema-definitions://canvas.module/image-uri`, see comment above.
+      format: uri-reference
+      contentMediaType: image/*
+      examples:
+        - https://placehold.co/600x400
+        - /sites/default/files/llama.jpg
+        - public://llama.jpg
+    alt:
+      title: Alternative text
+      type: string
+      examples:
+        - Placeholder text
+    width:
+      title: Image width
+      type: integer
+      examples:
+        - 600
+    height:
+      title: Image height
+      type: integer
+      examples:
+        - 400
+    sizes:
+      title: Sizes
+      type: string
+      examples:
+        - auto 100vw
+    loading:
+      title: Loading
+      type: string
+      default: lazy
+      enum:
+        - lazy
+        - eager
+      examples:
+        - lazy

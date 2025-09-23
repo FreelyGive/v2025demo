@@ -1,0 +1,20 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: "Canvas test SDC for testing type: `Drupal\\Core\\Template\\Attribute` special casing"
+props:
+  type: object
+  required:
+    - not_attributes
+  properties:
+    not_attributes:
+      type: string
+      title: Not-attributes prop
+      examples:
+        - The not-attributes SDC prop!
+    attributes:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes
+      description: Wrapper attributes.
+    other_attributes:
+      type: Drupal\Core\Template\Attribute
+      title: Other attributes
+      description: Other attributes.

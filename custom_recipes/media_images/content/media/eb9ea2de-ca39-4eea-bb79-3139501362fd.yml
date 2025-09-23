@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: eb9ea2de-ca39-4eea-bb79-3139501362fd
+  bundle: image
+  default_langcode: en
+  depends:
+    86709738-2d5f-4415-837b-cf4f6f74163f: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Business professionals attending a seminar with a presentation on market share, highlighting diverse participation.'
+  created:
+    -
+      value: 1758523867
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "This is a photographic image depicting a seminar attended by a diverse group of business professionals. The background is a neutral palette with soft beige and gray tones, creating a professional atmosphere. An individual, whose face is not visible, is standing near a large projection screen displaying pie charts, indicating a presentation on market share. The audience consists of men and women of various ages and ethnicities, all attentively engaged, facing the presenter. The mood is focused and collaborative, reflecting an environment of learning and dialogue. A whiteboard and windows allowing natural light are visible, adding to the setting's professional ambiance. The image captures a scene of active participation and information exchange."
+  field_media_image:
+    -
+      alt: 'Business professionals attending a seminar with a presentation on market share, highlighting diverse participation.'
+      title: 'Pavel Danilyuk'
+      width: 5473
+      height: 3654
+      entity: 86709738-2d5f-4415-837b-cf4f6f74163f

@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: f50a6ad6-75f7-4900-93b9-72a14627b6ab
+  bundle: image
+  default_langcode: en
+  depends:
+    a43cecfa-f2ec-431d-bfa6-87015cbb4552: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Flat lay of calculator, cash, coins, and handwritten notes for budget planning.'
+  created:
+    -
+      value: 1758523018
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "This image is a photograph featuring a flat lay arrangement. The background is a light, neutral color, focusing on the monetary items and tools for budgeting. The central objects include a black calculator displaying the number 1902, several stacks of US hundred-dollar bills, and a small pile of coins. To the right, there's an open notebook with handwritten notes and a pen, suggesting a budgeting process in action. The overall mood is organized and practical, emphasizing financial planning and management. No people are visible in the image, keeping the focus entirely on the objects. The color palette is balanced with contrasting black, green from the cash, and metallic hues from the coins."
+  field_media_image:
+    -
+      alt: 'Flat lay of calculator, cash, coins, and handwritten notes for budget planning.'
+      title: 'olia danilevich'
+      width: 6000
+      height: 4000
+      entity: a43cecfa-f2ec-431d-bfa6-87015cbb4552

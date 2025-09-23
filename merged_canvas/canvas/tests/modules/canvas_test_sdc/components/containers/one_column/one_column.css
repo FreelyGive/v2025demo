@@ -1,0 +1,23 @@
+[data-component-id="canvas_test_sdc:one_column"] {
+  &.width-full {
+    display: flex;
+    overflow: visible;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    width: 100vw;
+    max-width: 100%;
+  }
+
+  .width-wide {
+    width: 80%;
+  }
+
+  .width-normal {
+    width: 65%;
+  }
+
+  .width-narrow {
+    width: 50%;
+  }
+}

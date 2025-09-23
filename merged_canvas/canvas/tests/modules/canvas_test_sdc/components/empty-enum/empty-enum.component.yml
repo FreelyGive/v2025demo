@@ -1,0 +1,24 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Canvas test SDC with empty enum
+props:
+  type: object
+  properties:
+    pets:
+      type: string
+      title: Pets
+      description: List of pets.
+      default: ''
+      enum:
+        - ''
+        - 'dog'
+        - 'cat'
+        - 'fish'
+        - 'rabbit'
+      examples:
+        [
+          '',
+          'dog',
+          'cat',
+          'fish',
+          'rabbit',
+        ]

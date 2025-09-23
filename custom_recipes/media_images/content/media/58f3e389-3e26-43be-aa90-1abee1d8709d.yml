@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 58f3e389-3e26-43be-aa90-1abee1d8709d
+  bundle: image
+  default_langcode: en
+  depends:
+    51f2249c-9bab-4d85-80f6-e0eef196e285: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Sleek laptop showcasing data analytics and graphs on the screen in a bright room.'
+  created:
+    -
+      value: 1758435626
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo featuring a sleek laptop prominently displaying data analytics and graphs on its screen. The scene is set in a bright room with a calming, neutral color palette, mainly featuring shades of gray and white. There is an absence of people in the image, highlighting the focus on the technology itself. The mood is professional and focused, exuding a sense of productivity and modernity. The room is well-lit with natural light adding a refreshing ambiance. The laptop is positioned on a gray couch, emphasizing a casual yet high-tech environment.'
+  field_media_image:
+    -
+      alt: 'Sleek laptop showcasing data analytics and graphs on the screen in a bright room.'
+      title: Lukas
+      width: 6144
+      height: 4069
+      entity: 51f2249c-9bab-4d85-80f6-e0eef196e285

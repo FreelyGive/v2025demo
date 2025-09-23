@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 862431fd-f189-4a26-bafc-3b097990050a
+  bundle: image
+  default_langcode: en
+  depends:
+    3156972e-332c-4530-99d9-9fdc62be346a: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Happy woman using smartphone and holding credit card in lush garden setting, enjoying online shopping.'
+  created:
+    -
+      value: 1758522806
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "This image is a vibrant photo featuring a cheerful woman in a lush garden setting, exuding a sense of joy and leisure. The background is predominantly green, with various shades from the foliage creating a rich, verdant tapestry. The main colors are bright greens from the garden and the soft blues from the woman's shirt. She appears to be young, with long, light brown hair, and is smiling while engaging with her smartphone and holding a credit card. Her expression conveys happiness and contentment, suggesting she is enjoying the online shopping experience. The mood of the image is relaxed and positive, capturing a moment of modern enjoyment in a natural environment. The key objects are the smartphone and credit card, symbolizing digital interaction and commerce."
+  field_media_image:
+    -
+      alt: 'Happy woman using smartphone and holding credit card in lush garden setting, enjoying online shopping.'
+      title: 'Leeloo The First'
+      width: 4016
+      height: 6016
+      entity: 3156972e-332c-4530-99d9-9fdc62be346a

@@ -1,0 +1,42 @@
+name: Drupal CMS Installer
+type: profile
+core_version_requirement: '^11.1'
+description: 'Provides install-time tweaks for Drupal CMS. Not to be used in production.'
+
+# Use the `distribution` key to skip the installer's profile selection step.
+distribution:
+  name: Drupal CMS
+  install:
+    finish_url: '/admin/dashboard/welcome'
+    theme: drupal_cms_installer_theme
+
+forms:
+  - '\Drupal\RecipeKit\Installer\Form\SiteNameForm'
+  - '\Drupal\RecipeKit\Installer\Form\SiteTemplateForm'
+
+recipes:
+  # The recipes to apply if the user doesn't choose a site template.
+  default:
+    - drupal/drupal_cms_starter
+
+# Explicitly provide an empty list of themes -- this prevents the installer from
+# injecting Stark into it.
+# @see install_profile_info()
+themes: []
+
+hide_messages:
+  # If installed in a language other than English, don't show these confusing
+  # technical messages about how many translations were imported.
+  # @see locale_translate_batch_finished()
+  - ['One translation file imported. %number translations were added, %update translations were updated and %delete translations were removed.', '@count translation files imported. %number translations were added, %update translations were updated and %delete translations were removed.']
+  - 'The configuration was successfully updated. There are %number configuration objects updated.'
+
+  # This appears mid-install if you install in a non-English language, which is confusing.
+  - 'Check <a href=":translate_status">available translations</a> for your language(s).'
+
+  # This appears post-install, or mid-install (when it's not actionable) if you install in a
+  # non-English language, but it's pointless since Drupal CMS does the proper set-up for you.
+  - 'Honeypot installed successfully. Please <a href=":url">configure Honeypot</a> to protect your forms from spam bots.'
+
+# The project for which to download translations from `localize.drupal.org`.
+project: cms

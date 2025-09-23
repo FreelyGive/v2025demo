@@ -1,0 +1,28 @@
+{
+    "name": "drupal/drupal_cms_starter",
+    "description": "A basic site template to get started with Drupal CMS. Bring your own design, and build what you need.",
+    "type": "drupal-recipe",
+    "license": ["GPL-2.0-or-later"],
+    "require": {
+        "drupal/automatic_updates": "^4",
+        "drupal/bpmn_io": "^3",
+        "drupal/canvas": "^1",
+        "drupal/core": "^11.2",
+        "drupal/eca": "^3.0.1",
+        "drupal/drupal_cms_admin_ui": "^2",
+        "drupal/drupal_cms_anti_spam": "^2",
+        "drupal/drupal_cms_authentication": "^2",
+        "drupal/drupal_cms_helper": "^2",
+        "drupal/drupal_cms_page": "^2",
+        "drupal/drupal_cms_privacy_basic": "^2",
+        "drupal/drupal_cms_remote_video": "^2",
+        "drupal/drupal_cms_search": "^2",
+        "drupal/drupal_cms_seo_basic": "^2",
+        "drupal/easy_email_express": "^1.0.2",
+        "drupal/gin_login": "^2.1",
+        "drupal/mercury": "1.x-dev",
+        "drupal/modeler_api": "^1",
+        "drupal/token": "^1"
+    },
+    "version": "2.x-dev"
+}

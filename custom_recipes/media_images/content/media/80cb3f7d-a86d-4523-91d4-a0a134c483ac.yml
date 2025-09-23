@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 80cb3f7d-a86d-4523-91d4-a0a134c483ac
+  bundle: image
+  default_langcode: en
+  depends:
+    cb461f44-07c4-4fb1-b839-db1db100e120: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Young boy studying at home on a laptop for online learning in a cozy room.'
+  created:
+    -
+      value: 1758434018
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo of a young boy sitting at a desk, focused on a laptop, illustrating an online learning scenario. The colors in the scene are warm and cozy, featuring a beige and light brown background that adds to the soothing ambiance. The boy, appearing to be of elementary school age, has light brown hair and is dressed casually, suggesting a comfortable, home setting. He is facing away from the camera, intently looking at the laptop screen, emphasizing concentration and engagement. The mood is calm and studious, reflecting a peaceful home study environment. In the background, there is a large green plant with a vase, adding a touch of natural decor and further enhancing the cozy atmosphere. A framed photo sits beside the laptop, suggesting a personal and inviting workspace.'
+  field_media_image:
+    -
+      alt: 'Young boy studying at home on a laptop for online learning in a cozy room.'
+      title: Valery
+      width: 6240
+      height: 4160
+      entity: cb461f44-07c4-4fb1-b839-db1db100e120

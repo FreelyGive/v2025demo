@@ -1,0 +1,22 @@
+---
+title: Code components - Props
+---
+
+Props allow the component to define inputs when an instance of them is
+used on a page. Each prop can specify its type, whether it's required, and
+provide an example value.
+
+![A form showing the Props tab of the Component Data pane in Drupal's Experience
+Builder. The form has two examples showing fields for the Prop name, Type,
+Required, and an Example value](../../../assets/images/props.webp)
+
+Props are automatically converted to camelCase when passed as parameters to the
+code component.
+
+```jsx
+const Hello = ({ firstName }) => {
+  return <div className="text-3xl">Hello, {firstName}!</div>;
+};
+
+export default Hello;
+```

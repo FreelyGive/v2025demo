@@ -1,0 +1,899 @@
+canvas.component.*:
+  type: versioned_config_entity
+  constraints:
+    FullyValidatable: ~
+  mapping:
+    label:
+      type: required_label
+      label: 'Label'
+    status:
+      # Refine `type: config_entity`'s `status`: only allow `true` for SDCs that meet the requirements.
+      constraints:
+        ComponentStatusConstraint: []
+    active_version:
+      # Refine `type: versioned_config_entity`'s `active_version`: it must match.
+      # TRICKY: it is impossible to validate old versions (any version besides the active one) if they depend on data
+      # not contained within the config entity. Examples of such code-defined rather than config-defined information
+      # that affects the version (a deterministic hash):
+      # - config schema (Block plugins), requiring both the Block plugin and its config schema to still exist on disk
+      # - which properties are required (SDCs), requiring the SDC to still exist on disk
+      # This also means that a ComponentSource plugin can evolve what information is used to deterministically compute
+      # the hash, allowing old versions (hashes) to continue to work fine, rather than becoming invalid. This is in line
+      # with the source-specific settings for old (non-active) versions: those already use `type: ignore` because the
+      # config schema for older versions might have been different.
+      constraints:
+        Callback:
+          callback: ['\Drupal\canvas\Entity\Component', validateActiveVersion]
+    id:
+      # This ID intentionally does not use `type: machine_name`, because it is a composite ID that is better validated
+      # using the `StringParts` constraint than the `RegEx` constraint.
+      type: string
+      label: 'Component'
+      constraints:
+        StringParts:
+          separator: .
+          reservedCharacters:
+            - ':'
+          reservedCharactersSubstitute: .
+          parts:
+            - '%parent.source'
+            - '%parent.source_local_id'
+        Length:
+          # @see \Drupal\Core\Config\Entity\ConfigEntityStorage::MAX_ID_LENGTH
+          max: 166
+    provider:
+      type: string
+      label: 'Name of the module or theme providing this component, or null if provided via something else'
+      nullable: true
+      constraints:
+        NotBlank:
+          allowNull: true
+        ExtensionName: []
+        Callback:
+          callback: ['\Drupal\canvas\Entity\Component', providerExists]
+    source:
+      type: string
+      label: 'Source plugin'
+      constraints:
+        Regex:
+          pattern: '/^[a-z0-9_]+$/'
+          message: 'The %value source plugin ID is not valid.'
+        PluginExists:
+          manager: Drupal\canvas\ComponentSource\ComponentSourceManager
+          interface: '\Drupal\canvas\ComponentSource\ComponentSourceInterface'
+        # @see \Drupal\canvas\Plugin\Canvas\ComponentSource\Fallback
+        # @see \Drupal\canvas\Entity\Component::getComponentSourcePluginId()
+        NotEqualTo:
+          value: 'fallback'
+          message: 'The "fallback" plugin does not provide any components; it only serves as a fallback.'
+        # @todo Remove this constraint after https://www.drupal.org/i/3520484#stable is done.
+        # 💡When developing or testing ComponentSource plugins ahead of this being a public API, install the `canvas_dev_mode` module. Thanks for helping make Drupal Canvas awesome! 😊
+        Choice:
+          # @see \Drupal\canvas\Plugin\Canvas\ComponentSource\SingleDirectoryComponent
+          - sdc
+          # @see \Drupal\canvas\Plugin\Canvas\ComponentSource\JsComponent
+          - js
+          # @see \Drupal\canvas\Plugin\Canvas\ComponentSource\BlockComponent
+          - block
+    source_local_id:
+      type: canvas.component_source_local_id.[%parent.source]
+    category:
+      type: required_label
+      label: 'Category'
+    versioned_properties:
+      sequence:
+        # There are 3 possible shapes for each sequence element:
+        # 1. the active version is the special `fallback` version: only `fallback` Component Source-specific settings → `type: canvas.component.versioned.active.fallback`
+        # 2. the active version is any other version other version is active: the Component Source-specific settings + the fallback metadata → `type: canvas.component.versioned.active.*`
+        # 3. any non-active version: Component Source-specific settings (not validatable because the implementation may have changed) + fallback metadata → `type: canvas.component.versioned.*.*`
+        type: canvas.component.versioned.[%key].[%parent.%parent.active_version]
+
+# Special case: when the active version is the special `fallback` version: it uses the Fallback source plugin.
+# @see \Drupal\canvas\Plugin\Canvas\ComponentSource\Fallback
+# @see \Drupal\canvas\Entity\Component::onDependencyRemoval()
+canvas.component.versioned.active.fallback:
+  constraints:
+    FullyValidatable: ~
+  type: mapping
+  mapping:
+    settings:
+      type: canvas.component_source_settings.fallback
+    # Note: NO `fallback_metadata`!
+
+# All other cases: key-value pairs under `versioned_properties` MUST contain both:
+# 1. the Component Source-specific settings (⚠️ which MAY be invalid against the current implementation of the component)
+# 2. the fallback metadata
+# (because both may vary from one version to the next)
+canvas.component.versioned.*.*:
+  constraints:
+    FullyValidatable: ~
+  type: mapping
+  mapping:
+    settings:
+      type: ignore
+    fallback_metadata:
+      type: mapping
+      label: 'Fallback metadata'
+      mapping:
+        # Fallback slot definitions to allow generating a fallback if the source disappears.
+        slot_definitions:
+          type: sequence
+          sequence:
+            type: canvas.slot_definition
+          # For components whose source does not implement `ComponentSourceWithSlotsInterface`.
+          # @see \Drupal\canvas\Entity\Component::preSave()
+          nullable: true
+
+# Special case: the `active` version: it uses a non-Fallback source plugin.
+# All other cases: key-value pairs under `versioned_properties` MUST contain both:
+# 1. the Component Source-specific settings (which MUST be *valid* against the current implementation of the component)
+# 2. the fallback metadata
+# (because both may vary from one version to the next)
+canvas.component.versioned.active.*:
+  constraints:
+    FullyValidatable: ~
+  type: canvas.component.versioned.*.*
+  mapping:
+    settings:
+      type: canvas.component_source_settings.[%parent.%parent.%parent.source]
+
+# The \Drupal\canvas\Entity\JavaScriptComponent config aims to provide metadata compatible with SDC.
+# Hence the data it contains consists of two parts:
+# 1. The metadata key-value pairs aim to match SDC's schema precisely, expressed in a directory's *.component.yml file.
+#    (Additional restrictions are in place, to disallow props that use types that are not yet supported.)
+# 2. The sole metadata key-value pair for metadata that SDC does not have: `status`, which tracks whether this
+#    Code Component should be available in Canvas's component library or not.
+# 3. The code key-value pairs must be able to match what SDC achieves using the directory's Twig+CSS+JS files.
+# @see \Drupal\canvas\Plugin\Validation\Constraint\JsComponentHasValidAndSupportedSdcMetadataConstraintValidator
+canvas.js_component.*:
+  type: config_entity
+  constraints:
+    FullyValidatable: ~
+  mapping:
+    # Change the label of the `status` key-value pair inherited from `type: config_entity` to track whether this
+    # component should be exposed in Drupal Canvas's component library or not. (See its ComponentSource plugin.)
+    status:
+      label: "Available in Drupal Canvas's component library"
+    # See core/assets/schemas/v1/metadata-full.schema.json#properties.machineName
+    machineName:
+      type: machine_name
+      label: 'Machine Name'
+      constraints:
+        Regex:
+          pattern: '/^[a-z]([a-zA-Z0-9_-]*[a-zA-Z0-9])*$/'
+          message: 'The %value machine name is not valid.'
+    # See core/assets/schemas/v1/metadata-full.schema.json#properties.name
+    name:
+      type: required_label
+      label: 'Name'
+    # See core/assets/schemas/v1/metadata-full.schema.json#properties.props.properties.required
+    required:
+      type: sequence
+      label: 'Required props'
+      sequence:
+        type: string
+        label: 'Prop'
+        # This MUST be one of the keys available at %parent.props. Rather than repeating that validation logic here, let
+        # the JsComponentHasValidAndSupportedSdcMetadata constraint take care of that.
+        constraints: {}
+    # See core/assets/schemas/v1/metadata-full.schema.json#properties.props
+    props:
+      type: sequence
+      sequence:
+        # Define dynamic type using config schema's "child key" functionality.
+        type: canvas.json_schema.prop.[type]
+        # Canvas has additional requirements:
+        # - not every prop shape is supported
+        # - every required prop (listed in %parent.required) MUST have >=1 example
+        # Rather than repeating that validation logic here, let the JsComponentHasValidAndSupportedSdcMetadata
+        # constraint take care of that.
+        constraints: { }
+    # See core/assets/schemas/v1/metadata-full.schema.json#properties.slots
+    slots:
+      type: sequence
+      sequence:
+        # See core/assets/schemas/v1/metadata-full.schema.json#$defs.slotDefinition
+        type: canvas.slot_definition
+    js:
+      type: canvas.compilable_code
+      label: 'JS'
+    css:
+      type: canvas.compilable_code
+      label: 'CSS'
+    dataDependencies:
+      type: mapping
+      label: 'Data dependencies'
+      mapping:
+        urls:
+          # Should be omitted when there's no URL data dependencies.
+          requiredKey: false
+          type: sequence
+          constraints:
+            # There must be >=1 dependency; otherwise the key should be omitted.
+            NotBlank: ~
+          sequence:
+            type: uri
+            label: 'URLs fetched by the component'
+        drupalSettings:
+          # Should be omitted when there's no drupalSettings data dependencies.
+          requiredKey: false
+          type: sequence
+          constraints:
+            # There must be >=1 dependency; otherwise the key should be omitted.
+            NotBlank: ~
+          sequence:
+            type: string
+            label: 'Canvas Drupal settings needed by the component'
+            constraints:
+              Choice:
+                - v0.branding
+                - v0.breadcrumbs
+                - v0.pageTitle
+                - v0.jsonapiSettings
+                - v0.baseUrl
+
+canvas.page_region.*:
+  type: config_entity
+  constraints:
+    FullyValidatable: ~
+  mapping:
+    status:
+      label: 'Editable'
+    id:
+      # This ID intentionally does not use `type: machine_name`, because it is a composite ID that is better validated
+      # using the `StringParts` constraint than the `RegEx` constraint.
+      type: string
+      label: 'ID'
+      constraints:
+        StringParts:
+          separator: .
+          reservedCharacters: []
+          parts:
+            - '%parent.theme'
+            - '%parent.region'
+        Length:
+          # @see \Drupal\Core\Config\Entity\ConfigEntityStorage::MAX_ID_LENGTH
+          max: 166
+    region:
+      type: string
+      label: 'Theme region'
+      constraints:
+        # @see https://www.drupal.org/docs/develop/theming-drupal/adding-regions-to-a-theme#s-adding-regions-to-your-info-file
+        Regex:
+          pattern: '/^[a-z]+[a-z0-9_]+$/'
+        Length:
+          max: 64
+        ThemeRegionExists: '%parent.theme'
+        # @see \Drupal\canvas\Plugin\DisplayVariant\CanvasPageVariant::MAIN_CONTENT_REGION
+        NotEqualTo:
+          value: 'content'
+          message: 'The "content" region must always render the main content (returned by the controller of the matched route) and hence cannot contain a component tree.'
+    # Regions are theme-specific.
+    theme:
+      type: string
+      label: 'Theme'
+      constraints:
+        NotBlank: [ ]
+        ExtensionName: [ ]
+        ExtensionExists: theme
+    component_tree:
+      type: canvas.component_tree
+      # A region that is left empty may be `null`.
+      nullable: true
+
+# The config equivalent of a ComponentTreeItemList, validated by the same constraints.
+# This is a list of component items in a tree, one item per component instance.
+canvas.component_tree:
+  type: sequence
+  label: 'Config-Defined Component Tree'
+  # @see \Drupal\canvas\Plugin\Field\FieldType\ComponentTreeItemListInstantiatorTrait::generateComponentTreeKeys()
+  orderby: key
+  constraints:
+    ComponentTreeStructure: []
+    ComponentTreeMeetRequirements:
+      # By default, only StaticPropSources may be used in config-defined component trees.
+      inputs:
+        absence:
+          # DynamicPropSources retrieve structured data from a content entity of a specific entity type and bundle. This
+          # is typically the content entity that contains the component tree, but could also be a dynamically loaded
+          # content entity. A config entity typically is not associated with any content entity, so require its absence
+          # by default.
+          - dynamic
+          # Not yet supported by the Canvas UI.
+          - adapter
+        presence: ~
+      tree:
+        absence: ~
+        presence: ~
+    FullyValidatable: ~
+  sequence:
+    # @todo Ensure the component instances appear in a predictable order in the exported YAML in https://www.drupal.org/i/3526127
+    type: canvas.component_tree_node
+
+# The config equivalent of a ComponentTreeItem, validated by the same constraint.
+canvas.component_tree_node:
+  type: mapping
+  label: 'Config-Defined Component Tree Item'
+  constraints:
+    ValidComponentTreeItem: ~
+    FullyValidatable: ~
+  # @see \Drupal\canvas\Plugin\Field\FieldType\ComponentTreeItem::propertyDefinitions()
+  # Each component tree node comprises a minimum of:
+  # - 'component_id' the ID of the component config entity for this item;
+  # - 'uuid' a unique identifier for this component instance
+  # - 'inputs' the inputs for this component. These could take a different form depending on the type of component.
+  #    For example, in an SDC component , each item in the sequence would be a sequence of mappings...but
+  #    for block components, each item would be a plain mapping, and there would be no easy
+  #    way to refer to other config schema types for further validation.
+  # Since the entire item, and its inputs, are all validated by the `ValidComponentTreeItem`
+  # constraint anyway, it's okay to use the `ignore` data type for `inputs`.
+  mapping:
+    parent_uuid:
+      # TRICKY: this MUST NOT use `type: uuid` because the containing `canvas.component_tree`'s
+      # `ComponentTreeStructureConstraintValidator` also performs UUID validation. Using `type: uuid` here causes
+      # duplicate error messages.
+      type: string
+      # Omitting the key is equivalent to specifying `null` — but this is more succinct.
+      requiredKey: false
+      label: 'UUID of the parent component instance'
+    slot:
+      # @todo Add validation constraints in https://drupal.org/i/3519891
+      type: string
+      # Omitting the key is equivalent to specifying `null` — but this is more succinct.
+      requiredKey: false
+      label: 'Machine name of the slot in the parent component instance'
+    uuid:
+      # TRICKY: this MUST NOT use `type: uuid` because the containing `canvas.component_tree`'s
+      # `ComponentTreeStructureConstraintValidator` also performs UUID validation. Using `type: uuid` here causes
+      # duplicate error messages.
+      type: string
+      label: 'UUID of the component instance'
+    component_id:
+      type: string
+      label: 'Component config entity ID'
+      # Note constraints here are applied by ComponentTreeStructureConstraintValidator.
+      constraints: { }
+    component_version:
+      type: string
+      label: 'Component version'
+      # Note constraints here are applied by ComponentTreeStructureConstraintValidator.
+      constraints: { }
+    # @see \Drupal\canvas\Plugin\DataType\ComponentInputs
+    inputs:
+      type: ignore
+      label: 'Input values for each component in the component tree'
+    label:
+      # This is entirely optional; provides more context for content authors.
+      requiredKey: false
+      type: required_label
+      label: 'Label of the component instance'
+      # TRICKY: this does not specify any validation constraints because because the containing
+      # `canvas.component_tree`'s `ComponentTreeStructureConstraintValidator` also validates it.
+
+# Based on core/assets/schemas/v1/metadata-full.schema.json#$defs.slotDefinition
+canvas.slot_definition:
+  type: mapping
+  label: 'A component slot definition'
+  constraints:
+    ValidSlotName: []
+    FullyValidatable: ~
+  mapping:
+    title:
+      type: required_label
+      label: 'Slot title'
+    description:
+      type: required_label
+      label: 'Slot description'
+      requiredKey: false
+    examples:
+      type: sequence
+      label: 'Examples'
+      requiredKey: false
+      sequence:
+        type: text
+        label: 'Example for slot'
+
+canvas.component_source_local_id.sdc:
+  type: canvas.component_source_local_id.*
+  label: 'Component ID'
+  # @see \Drupal\Core\Plugin\Component::$machineName
+  constraints:
+    NotBlank: []
+    Regex:
+      pattern: '/^[a-z0-9_-]+:[a-z0-9_-]+$/'
+      message: 'The %value machine name is not valid.'
+    PluginExists:
+      manager: plugin.manager.sdc
+      interface: 'Drupal\Core\Plugin\PluginBase'
+    FullyValidatable: ~
+canvas.component_source_settings.sdc:
+  constraints:
+    FullyValidatable: ~
+  type: canvas.generated_field_explicit_input_ux
+  label: 'SDC component settings'
+  mapping:
+    prop_field_definitions:
+      constraints:
+        KeyForEverySdcProp: "%parent.%parent.%parent.%parent.source_local_id"
+        NotNullValueForEveryRequiredSdcProp: '%parent.%parent.%parent.%parent.source_local_id'
+
+# Every ComponentSource plugin MUST define two config schema types:
+# 1. One for the ComponentSource-specific per-Component config entity local/intra-source ID: typically a plugin ID or a
+#    config entity ID. This must extend `type: canvas.component_source_local_id.*`.
+#    This is used for the top-level `canvas.component.*:source_local_id` Component config entity property,
+#    is both not versioned and immutable, and is used to guarantee the Component config entity ID is consistent.
+#    It MUST:
+#    1. override the label
+#    2. specify the appropriate validation constraints
+#    3. mark the new subtype as fully validatable
+# 2. One for the ComponentSource-specific per-Component config entity settings, if any. This must extend
+#    `type: canvas.component_source_settings.*`.
+#    It:
+#    1. MUST override the label
+#    2. MAY add more key-value pairs to the mapping
+#    3. MUST specify the appropriate validation constraints
+#    4. MUST mark the new subtype as fully validatable
+canvas.component_source_local_id.*:
+  label: 'The intra-source ID of this component in this source'
+  type: string
+  constraints: {}
+canvas.component_source_settings.*:
+  type: mapping
+  label: 'Source-specific component settings'
+  # No settings by default.
+  mapping: {}
+
+# @see \Drupal\canvas\Plugin\Canvas\ComponentSource\GeneratedFieldExplicitInputUxComponentSourceBase
+# Each ComponentSource that extends GeneratedFieldExplicitInputUxComponentSourceBase MUST provide an override that:
+# - MUST override the top-level label
+# - MUST add appropriate validation constraints to `local_source_id`
+# - MAY add more key-value pairs to the mapping — and then add appropriate validation constraints for those
+# - MUST mark the entire subtype as being fully validatable
+canvas.generated_field_explicit_input_ux:
+  type: canvas.component_source_settings.*
+  label: 'Baseline component settings for ComponentSource plugins that extend GeneratedFieldExplicitInputUxComponentSourceBase'
+  mapping:
+    prop_field_definitions:
+      type: sequence
+      orderby: key
+      sequence:
+        type: mapping
+        mapping:
+          field_type:
+            type: string
+            label: 'Default field type'
+            constraints:
+              PluginExists:
+                manager: plugin.manager.field.field_type
+                interface: '\Drupal\Core\Field\FieldItemInterface'
+          # TRICKY: unfortunately, `field.storage_settings.*` does not store cardinality, but the FieldStorageConfig
+          # entity does (config schema: `field.storage.*.*`). Hence the need for an additional key-value pair.
+          cardinality:
+            type: integer
+            label: 'Maximum number of values accepted by this component prop'
+            # @todo Uncomment this once Canvas requires Drupal >=11.2
+            #constraints:
+            #  AtLeastOneOf:
+            #    constraints:
+            #      - Choice:
+            #          # @see \Drupal\Core\Field\FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED
+            #          choices:
+            #            - -1
+            #      - Range:
+            #          min: 2
+            # Optional *if* the default of cardinality = 1 should be used.
+            requiredKey: false
+          field_storage_settings:
+            type: field.storage_settings.[%parent.field_type]
+            # Optional *if* the default storage settings should be used.
+            requiredKey: false
+          field_instance_settings:
+            type: field.field_settings.[%parent.field_type]
+            # Optional *if* the default instance settings should be used.
+            requiredKey: false
+          # After a field type is selected, a field widget must be picked.
+          # @todo MUCH later: widget settings.
+          field_widget:
+            type: string
+            label: 'Default field widget'
+            constraints:
+              PluginExists:
+                manager: plugin.manager.field.widget
+                interface: '\Drupal\Core\Field\WidgetInterface'
+          # Then finally, a default value must be picked for every REQUIRED prop, using the aforementioned widget.
+          # This value uses the field type's default value config schema, and will be simplified to a
+          # StaticPropSource's `value`.
+          # @see \Drupal\canvas\PropSource\StaticPropSource::denormalizeValue()
+          # @see \Drupal\canvas\PropSource\StaticPropSource::isMinimalRepresentation()
+          default_value:
+            # TRICKY: this MUST be a sequence, to allow for a multi-value default for `type: array` prop shapes.
+            type: sequence
+            label: 'Default values'
+            sequence:
+              type: field.value.[%parent.%parent.field_type]
+            # @todo Add validation constraint because this is only *conditionally* nullable: if the SDC prop is optional
+            nullable: true
+          # The default value must be retrievable
+          expression:
+            type: string
+            label: 'The expression that contains the field evaluation instructions'
+            constraints:
+              ValidStructuredDataPropExpression:
+                choices:
+                  - FieldTypePropExpression
+                  - FieldTypeObjectPropsExpression
+                  - ReferenceFieldTypePropExpression
+                message: 'The expression is valid, but not one of the allowed types: %choices.'
+
+canvas.component_source_local_id.js:
+  type: canvas.component_source_local_id.*
+  label: 'JS Component ID'
+  constraints:
+    ConfigExists:
+      prefix: canvas.js_component.
+    FullyValidatable: ~
+canvas.component_source_settings.js:
+  constraints:
+    FullyValidatable: ~
+  type: canvas.generated_field_explicit_input_ux
+  label: 'Code component settings'
+  mapping:
+    prop_field_definitions:
+      constraints:
+        # There must be a key for every `prop` in the corresponding \Drupal\canvas\Entity\JavaScriptComponent::$props.
+        SequenceKeysMustMatch:
+          configPrefix: canvas.js_component.
+          configName: '%parent.%parent.%parent.%parent.source_local_id'
+          propertyPathToSequence: props
+
+# This is similar to Block config entities, but different:
+# - Block config entities are tied to a particular theme + region (and have a weight to convey position in a region), Block-Plugins-as-Canvas-Components are not
+# - Block config entities have visibility conditions that determines the visibility of that particular "placed block", Block-Plugins-as-Canvas-Components do not
+# ⚠️ The Canvas equivalent of "visibility conditions" will be added when product requirement `41. Conditional display of components` is implemented, and it will not happen at the `Component` config entity level, but at the use/placement/instantiation level: in a component tree.
+# @see https://docs.google.com/spreadsheets/d/1OpETAzprh6DWjpTsZG55LWgldWV_D8jNe9AM73jNaZo/edit?gid=1721130122#gid=1721130122&range=B53
+# @see `type: block.block.*` in core/modules/block/config/schema/block.schema.yml
+canvas.component_source_local_id.block:
+  type: canvas.component_source_local_id.*
+  label: 'Block plugin ID'
+  constraints:
+    PluginExists:
+      manager: plugin.manager.block
+      interface: Drupal\Core\Block\BlockPluginInterface
+    FullyValidatable: ~
+canvas.component_source_settings.block:
+  constraints:
+    FullyValidatable: ~
+  type: canvas.component_source_settings.*
+  label: 'Block component settings'
+  mapping:
+    default_settings:
+      type: block.settings.[%parent.%parent.%parent.%parent.source_local_id]
+
+# The `fallback` plugin ID is the only one not required to specify a source-local ID.
+canvas.component_source_settings.fallback:
+  constraints:
+    FullyValidatable: ~
+  type: canvas.component_source_settings.*
+  label: 'Fallback component settings'
+  mapping:
+    # To retrieve the appropriate `fallback_metadata.slot_definitions`.
+    # @see `canvas.component.*:source`
+    last_active_version:
+      type: string
+
+field.value.component_tree:
+  # TRICKY: `field_config_base:default_value` defines the default value as a sequence of field item values. Hence this
+  # cannot be an entire component tree, but only a node (item/instance) in the component tree!
+  # @see `type: field_config_base`
+  # @see \Drupal\canvas\Plugin\Validation\Constraint\ComponentTreeStructureConstraintValidator::validate()
+  type: canvas.component_tree_node
+  label: 'Default value'
+  constraints:
+    # TRICKY: this constraint should actually be one level up, but that is not under Canvas's control. So the validation
+    # logic must take special care to actually apply this validation to the level *above* this. This constraint
+    # validator achieves that by detecting the presence of a single component tree item and converting to a tree.
+    # @see \Drupal\canvas\Plugin\Validation\Constraint\ComponentTreeStructureConstraintValidator::validate()
+    ComponentTreeStructure: []
+    # The options for this constraint must match the options for the `ComponentTreeMeetRequirements` set in the field
+    # type plugin.
+    # @see \Drupal\canvas\Plugin\Field\FieldType\ComponentTreeItem
+    # TRICKY: this constraint should actually be one level up, but that is not under Canvas's control. So the validation
+    # logic must take special care to actually apply this validation to the level *above* this. This constraint
+    # validator achieves that by detecting `type: field.value.component_tree` and inspecting its parent.
+    # @see \Drupal\canvas\Plugin\Validation\Constraint\ComponentTreeStructureConstraintValidator::validate()
+    ComponentTreeMeetRequirements:
+      inputs:
+        absence:
+          - dynamic
+          - adapter
+        presence: ~
+      tree:
+        absence:
+          - Drupal\Core\Block\TitleBlockPluginInterface
+          - Drupal\Core\Block\MessagesBlockPluginInterface
+        presence: ~
+    FullyValidatable: ~
+
+field.field_settings.component_tree:
+  type: field.field_settings.*
+  constraints:
+    FullyValidatable: ~
+
+canvas.pattern.*:
+  type: config_entity
+  constraints:
+    FullyValidatable: ~
+  mapping:
+    id:
+      type: machine_name
+      label: 'ID'
+    label:
+      type: required_label
+      label: 'Label'
+    # A single component tree.
+    component_tree:
+      type: canvas.component_tree
+      label: 'The component tree that represents a reusable pattern'
+      constraints:
+        ComponentTreeMeetRequirements:
+          # Only StaticPropSources may be used, because a Pattern cannot rely on an entity of a particular type
+          # and bundle to be present everywhere it is inserted/used.
+          inputs:
+            absence:
+              - dynamic
+              - adapter
+            presence: ~
+          tree:
+            absence:
+              # Components implementing either of these 2 interfaces are only
+              # allowed to live at the PageRegion level.
+              # @see \Drupal\canvas\Entity\PageRegion
+              # @see `type: canvas.page_region.*`
+              - Drupal\Core\Block\TitleBlockPluginInterface
+              - Drupal\Core\Block\MessagesBlockPluginInterface
+            presence: ~
+canvas.asset_library.*:
+  type: config_entity
+  constraints:
+    FullyValidatable: ~
+  mapping:
+    id:
+      type: machine_name
+      label: 'Asset library ID'
+      constraints:
+        Regex:
+          # ℹ️ Initially, only one such config entity is allowed. Later, one per theme. Later still, additional ones. Details TBD.
+          pattern: '/^global$/'
+          message: "The %value machine name is not valid."
+    label:
+      type: required_label
+      label: 'Human-readable label'
+    # If not `null`, will be stored on the filesystem at public://canvas/HASH.css
+    # to ensure aggregated CSS is never stale.
+    css:
+      type: canvas.compilable_code
+      label: 'CSS'
+      # The asset library may contain only JS, no CSS.
+      nullable: true
+    # If not `null`, will be stored on the filesystem at public://canvas/HASH.js
+    # to ensure aggregated JS is never stale.
+    js:
+      type: canvas.compilable_code
+      label: 'JS'
+      # The asset library may contain only CSS, no JS.
+      nullable: true
+
+canvas.compilable_code:
+  type: mapping
+  label: 'Compilable code'
+  constraints:
+    # Compilation and validation are assumed to happen on the client side. Server-side validation then is neither
+    # possible nor necessary.
+    FullyValidatable: ~
+  mapping:
+    original:
+      type: text
+      label: 'Original source code as entered by the human author'
+    compiled:
+      type: text
+      label: 'The compiled result'
+
+canvas.content_template.*.*.*:
+  type: config_entity
+  constraints:
+    FullyValidatable: ~
+  mapping:
+    id:
+      # This ID doesn't use the `machine_name` data type because it's a composite
+      # ID and is therefore better validated using the `StringParts` constraint.
+      type: string
+      label: 'ID'
+      constraints:
+        StringParts:
+          separator: .
+          reservedCharacters: [':']
+          reservedCharactersSubstitute: .
+          parts:
+            - '%parent.content_entity_type_id'
+            - '%parent.content_entity_type_bundle'
+            - '%parent.content_entity_type_view_mode'
+        Length:
+          # @see \Drupal\Core\Config\Entity\ConfigEntityStorage::MAX_ID_LENGTH
+          max: 166
+    content_entity_type_id:
+      type: string
+      label: 'Target entity type'
+      constraints:
+        PluginExists:
+          manager: entity_type.manager
+          interface: Drupal\Core\Entity\ContentEntityInterface
+        # @todo Update this in https://www.drupal.org/project/canvas/issues/3518272
+        Choice:
+          - node
+    content_entity_type_bundle:
+      type: string
+      label: 'Bundle'
+      constraints:
+        # @todo Also validate that the bundle actually fulfills Canvas's requirements.
+        # @see https://www.drupal.org/project/canvas/issues/3518272
+        EntityBundleExists: '%parent.content_entity_type_id'
+    content_entity_type_view_mode:
+      type: string
+      label: 'View mode machine name'
+      constraints:
+        # @todo Use `ConfigExists` once https://www.drupal.org/project/drupal/issues/3518273 is
+        #   fixed in core.
+        # @todo Core entity types ship with a `full` view mode, but it's not guaranteed to
+        #   exist for every content entity type. Ensure Canvas creates it when opting a content
+        #   entity bundle into Canvas rendering in https://www.drupal.org/i/3518248.
+        BetterConfigExists:
+          prefix: 'core.entity_view_mode.[%parent.content_entity_type_id].'
+    component_tree:
+      type: canvas.component_tree
+      constraints:
+        ComponentTreeMeetRequirements:
+          inputs:
+            absence:
+              - adapter
+            presence: ~
+            # @todo For now we removed the `dynamic` requirement to allow
+            #   publishing before we add UI for mapping dynamic props. This will
+            #   be re-added in https://drupal.org/i/3541057.
+          tree:
+            absence:
+              # Components implementing either of these 2 interfaces are only allowed to live at
+              # the PageRegion level.
+              # @see \Drupal\canvas\Entity\PageRegion
+              # @see `type: canvas.page_region.*`
+              - Drupal\Core\Block\TitleBlockPluginInterface
+              - Drupal\Core\Block\MessagesBlockPluginInterface
+            presence: ~
+      label: 'Component tree'
+    exposed_slots:
+      type: sequence
+      # This is ordered by key because the keys are the machine names assigned to the
+      # exposed slots. These machine names are, essentially, "aliases" for a particular
+      # slot in a particular component in the component tree.
+      orderby: key
+      # If this sequence is empty, the site builder that crafted this template has not
+      # exposed any slots to content creators, which means there's nothing for content
+      # creators to do other than enter values for the content entity form (under the
+      # "Page Data" tab in the designs).
+      sequence:
+        type: mapping
+        constraints:
+          # Exposed slots are only supported by the "canonical" view mode, which is generally
+          # assumed to be `full` (see \Drupal\Core\Entity\Controller\EntityViewController::view()
+          # for where core makes this assumption). Example:
+          #
+          # exposed_slots:
+          #  profile_bio:
+          #    label: 'Profile Bio!'
+          #    component_uuid: 28bcab26-e434-4ad4-9eaf-0520bdb32fcc
+          #    slot_name: column_two
+          #  intro:
+          #    label: 'Intro'
+          #    component_uuid: 98bcab26-e434-4ad4-9eaf-0520bdb32fcc
+          #    slot_name: body
+          ValidExposedSlot: full
+        mapping:
+          component_uuid:
+            type: uuid
+            label: 'UUID of the component instance that contains the exposed slot'
+          slot_name:
+            type: string
+            label: 'The machine name of the component slot being exposed'
+            constraints:
+              ValidSlotName: []
+          label:
+            type: required_label
+            label: 'A human-readable label for the exposed slot'
+      constraints:
+        SequenceKeysMatchRegex:
+          # Note: this is the lowercase-only subset of what slot names are allowed by Canvas: the machine names of Canvas's exposed content template slots must be simpler.
+          # @see \Drupal\canvas\Plugin\Validation\Constraint\ValidSlotNameConstraint::VALID_NAME
+          pattern: '/^[a-z0-9]+([a-z0-9_-]+)[a-z0-9]+$/'
+          message: "%value is not a valid exposed slot name."
+
+canvas.staged_config_update.*:
+  type: config_entity
+  constraints:
+    FullyValidatable: ~
+  mapping:
+    id:
+      type: machine_name
+      label: 'ID'
+    label:
+      type: required_label
+      label: 'Label'
+    target:
+      # We do not use `machine_name` since config entities have `.` in their IDs.
+      type: string
+      label: 'Target'
+      constraints:
+        NotBlank: [ ]
+        Length:
+          # @see \Drupal\Core\Config\Entity\ConfigEntityStorage::MAX_ID_LENGTH
+          max: 166
+        # @todo Use `ConfigExists` once https://www.drupal.org/project/drupal/issues/3518273 is
+        #   fixed in core.
+        BetterConfigExists:
+          prefix: ''
+    actions:
+      type: sequence
+      label: 'Actions'
+      sequence:
+        type: mapping
+        mapping:
+          name:
+            type: string
+            label: 'Action'
+            constraints:
+              NotBlank: [ ]
+              PluginExists:
+                manager: plugin.manager.config_action
+                interface: 'Drupal\Core\Config\Action\ConfigActionPluginInterface'
+          input:
+            # Config actions have no schema defined for their input.
+            type: ignore
+            label: 'Input'
+            constraints:
+              NotBlank: [ ]
+
+canvas.folder.*:
+  type: config_entity
+  constraints:
+    FullyValidatable: ~
+  mapping:
+    name:
+      type: required_label
+      label: 'Name'
+      constraints:
+        UniqueNamePerFolderTypeConstraint:
+          id: '%parent.uuid'
+          configEntityTypeId: '%parent.configEntityTypeId'
+    configEntityTypeId:
+      type: string
+      label: 'Folder type'
+      constraints:
+        # Accept only config entity types that implement FolderItemInterface.
+        PluginExists:
+          manager: entity_type.manager
+          interface: Drupal\canvas\Entity\FolderItemInterface
+    weight:
+      type: weight
+      label: 'Weight'
+    items:
+      type: sequence
+      orderby: value
+      sequence:
+        type: string
+        label: 'Folder items IDs'
+        constraints:
+          BetterConfigExists:
+            prefix: 'canvas.[%parent.%parent.configEntityTypeId].'
+          OneFolderPerItemLimitConstraint:
+            id: '%parent.%parent.uuid'
+            configEntityTypeId: '%parent.%parent.configEntityTypeId'
+      constraints:
+        Unique: ~

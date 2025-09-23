@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 4bdfc56f-e16f-4f18-9b9d-f5aae576a020
+  bundle: image
+  default_langcode: en
+  depends:
+    058f4eae-ac13-490c-9543-1f6498b290b5: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Close-up of a hand signing a formal document with a fountain pen, indicating agreement.'
+  created:
+    -
+      value: 1758435773
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "This is a photo featuring a close-up of a hand signing a document with a black fountain pen. The background is minimal, mostly consisting of a dark surface that contrasts with the crisp white paper. The hand appears to be that of an adult, and the precise, careful motion suggests a formal and serious mood. The document contains printed text, with a visible signature line, emphasizing the act of agreement. The image's overall tone is professional and businesslike, focusing on the importance of the signing moment."
+  field_media_image:
+    -
+      alt: 'Close-up of a hand signing a formal document with a fountain pen, indicating agreement.'
+      title: Pixabay
+      width: 3008
+      height: 2000
+      entity: 058f4eae-ac13-490c-9543-1f6498b290b5

@@ -1,0 +1,14 @@
+{
+  "name": "drupal/byte",
+  "description": "A site template based on Drupal CMS designed for a SaaS product website with landing pages, a blog, newsletter sign up and other features.",
+  "type": "drupal-recipe",
+  "license": ["GPL-2.0-or-later"],
+  "require": {
+    "drupal/drupal_cms_blog": "^2",
+    "drupal/drupal_cms_forms": "^2",
+    "drupal/drupal_cms_seo_tools": "^2",
+    "drupal/drupal_cms_starter": "^2",
+    "drupal/ui_icons": "^1.1"
+  },
+  "version": "1.x-dev"
+}

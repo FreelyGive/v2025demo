@@ -1,0 +1,7 @@
+name: 'Canvas Test Video Fixture'
+type: module
+description: 'Provides video media entities for automated tests.'
+package: Testing
+dependencies:
+  - drupal:media
+  - drupal:file

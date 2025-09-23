@@ -1,0 +1,53 @@
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'Smarter Security Starts with Simpler AI'
+  created:
+    -
+      value: 1739537620
+  promote:
+    -
+      value: true
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  moderation_state:
+    -
+      value: published
+  path:
+    -
+      alias: /blog/2025-07/smarter-security-starts-simpler-ai
+      langcode: en
+  field_content:
+    -
+      value: '<p>Modern enterprises face growing pressure to secure data, streamline operations, and maintain compliance—all without slowing down. At [CompanyName], we’ve developed user-friendly AI tools that meet these challenges head-on, combining simplicity with sophisticated performance to help teams work faster and safer.</p><p>Our AI-driven platform empowers users to detect potential threats, automate low-level tasks, and enforce security protocols—no advanced training required. Intuitive dashboards and guided workflows make it easy to configure, deploy, and adapt AI tools across your organization, minimizing the need for specialized support.</p><p>By eliminating manual overhead and surfacing critical insights in real-time, our platform enables teams to act decisively and consistently. From monitoring unusual behavior to enforcing role-based access, AI helps reduce vulnerabilities and drive better outcomes without compromising on speed.</p><p>We believe the future of secure operations is accessible, automated, and adaptive. Our tools are designed to grow with your needs, making enterprise-grade security and efficiency available to every team, every day.</p>'
+      format: content_format
+  field_description:
+    -
+      value: 'From monitoring unusual behavior to enforcing role-based access, AI helps reduce vulnerabilities and drive better outcomes without compromising on speed.'
+  field_featured_image:
+    -
+      entity: 917307b6-d823-42f5-b58e-66594030bc37
+  field_blog__byline:
+    -
+      value: 'Marissa Cardenas'
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 9d74889f-1873-47d4-83c1-3e4829537d75
+  bundle: blog
+  default_langcode: en
+  depends:
+    917307b6-d823-42f5-b58e-66594030bc37: media

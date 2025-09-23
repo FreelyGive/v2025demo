@@ -1,0 +1,23 @@
+.dragOverlay {
+  pointer-events: none;
+}
+
+.dragOverlay div {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  width: fit-content;
+  height: 20px;
+  padding: 1px 4px;
+  opacity: 0.8;
+  color: #fff;
+  border-radius: 2px;
+  background-color: #8e4ec6;
+  font-family: var(--default-font-family);
+  font-size: 12px;
+  line-height: 12px;
+}
+
+.dragging, .dragging * {
+  cursor: grabbing !important;
+}

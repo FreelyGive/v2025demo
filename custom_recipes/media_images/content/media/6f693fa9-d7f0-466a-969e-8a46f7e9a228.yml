@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 6f693fa9-d7f0-466a-969e-8a46f7e9a228
+  bundle: image
+  default_langcode: en
+  depends:
+    f561bd44-6bd0-4c5b-993e-2d0c3dc19d4c: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A tidy minimalist office setup featuring a laptop, desk lamp, and stationery.'
+  created:
+    -
+      value: 1758433668
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photograph depicting a minimalist office setup. The background features soft, neutral tones with light grey walls that give a calm, uncluttered feeling. A sleek, modern desk lamp with a metallic finish is positioned on the left, casting a warm light across the wooden desk. The main focus is a closed laptop in the center, accompanied by a white mug and a neat stack of stationery. Vibrant pens in a holder add a touch of color to the scene. The mood is serene and organized, creating an ideal workspace environment. There are no people in the image, emphasizing the solitary, peaceful nature of the office setup.'
+  field_media_image:
+    -
+      alt: 'A tidy minimalist office setup featuring a laptop, desk lamp, and stationery.'
+      title: Pixabay
+      width: 4872
+      height: 3248
+      entity: f561bd44-6bd0-4c5b-993e-2d0c3dc19d4c

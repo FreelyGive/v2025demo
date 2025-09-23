@@ -1,0 +1,53 @@
+uuid: a36685eb-c415-4f7c-9c03-79eea9be7f78
+langcode: en
+status: true
+dependencies:
+  enforced: {  }
+machineName: canvas_test_code_components_with_enums
+name: 'With enums'
+block_override: null
+required:
+  - name
+props:
+  favorite_color:
+    title: Favorite color
+    type: string
+    enum: [red, green, blue]
+    meta:enum:
+      red: Red
+      green: Green
+      blue: Blue
+    examples:
+      - red
+  size:
+    title: Size
+    type: string
+    enum: [small, regular, large]
+    meta:enum:
+      small: Small
+      regular: Regular
+      large: Large
+    examples:
+      - small
+slots: {  }
+js:
+  original: |-
+    const WithEnums = ({title = "With props", favorite_color, size}) =>
+      (<div>Color {favorite_color}, Size {size}.</div>);
+    export default WithEnums;
+  compiled: |
+    import { jsxs as _jsxs } from "react/jsx-runtime";
+    const WithEnums = ({ title = "With props", favorite_color, size })=>/*#__PURE__*/ _jsxs("div", {
+        children: [
+            "Color ",
+            favorite_color,
+            ", Size ",
+            size,
+            "."
+        ]
+    });
+    export default WithEnums;
+css:
+  original: 'div { font-weight: bold; }'
+  compiled: 'div{font-weight:bold;}'
+dataDependencies: []

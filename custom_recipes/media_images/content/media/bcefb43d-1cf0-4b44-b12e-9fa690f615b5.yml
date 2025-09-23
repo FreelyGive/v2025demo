@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: bcefb43d-1cf0-4b44-b12e-9fa690f615b5
+  bundle: image
+  default_langcode: en
+  depends:
+    5d5768d9-37b6-4a5b-b0c2-ed73d7338d72: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'Aerial view of a sleek laptop keyboard on a clean, white surface, ideal for tech backgrounds.'
+  created:
+    -
+      value: 1758434018
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "The image is a photo featuring an aerial view of a sleek laptop on a clean, white surface, ideal for tech backgrounds. The predominant color is a crisp white, which creates a minimalist and modern aesthetic. The laptop's keyboard is black with white lettering, giving a sharp contrast against the silver body of the laptop. There are no people in the image, maintaining a focus on technology and simplicity. The mood is professional and clean, making it suitable for use in business or tech-related contexts. The image has a contemporary and sophisticated feel, highlighting the elegance of modern technology."
+  field_media_image:
+    -
+      alt: 'Aerial view of a sleek laptop keyboard on a clean, white surface, ideal for tech backgrounds.'
+      title: JÉSHOOTS
+      width: 4000
+      height: 2682
+      entity: 5d5768d9-37b6-4a5b-b0c2-ed73d7338d72

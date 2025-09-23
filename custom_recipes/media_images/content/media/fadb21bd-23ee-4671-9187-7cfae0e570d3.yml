@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: fadb21bd-23ee-4671-9187-7cfae0e570d3
+  bundle: image
+  default_langcode: en
+  depends:
+    055bc297-2199-4b8c-b998-7a4b2af8d023: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A young woman with glasses smiling on a city street, embracing urban lifestyle.'
+  created:
+    -
+      value: 1758433766
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This photo captures a young woman with glasses, smiling warmly on a bustling city street, epitomizing an urban lifestyle. The scene is vibrant with a predominance of soft gray and blue tones, contrasting with the lively city backdrop. She appears to be in her twenties, exuding a joyful and confident mood. Her long, dark hair flows naturally, complementing her casual attire. In the background, blurred images of buildings and cars hint at a busy city atmosphere. The overall mood of the image is positive and energetic, encapsulating the essence of modern urban living. The image effectively combines an engaging personal presence with an active cityscape.'
+  field_media_image:
+    -
+      alt: 'A young woman with glasses smiling on a city street, embracing urban lifestyle.'
+      title: 'Daniel Xavier'
+      width: 6000
+      height: 4000
+      entity: 055bc297-2199-4b8c-b998-7a4b2af8d023

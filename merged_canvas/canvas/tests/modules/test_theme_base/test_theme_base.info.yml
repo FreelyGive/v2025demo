@@ -1,0 +1,4 @@
+name: Test Theme Base
+type: theme
+base theme: false
+core_version_requirement: ^11

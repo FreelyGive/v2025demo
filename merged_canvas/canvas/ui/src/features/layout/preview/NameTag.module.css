@@ -1,0 +1,24 @@
+.nameTag {
+  display: flex;
+  align-items: center;
+  height: 20px;
+  padding: 1px 4px;
+  white-space: nowrap;
+  gap: 5px;
+  color: #fff;
+  border-radius: 2px;
+  background-color: var(--color-outline-component);
+  font-size: 12px;
+
+  &.slot {
+    background-color: var(--color-outline-slot);
+  }
+
+  &.region {
+    background-color: var(--color-outline-root);
+  }
+
+  &.page {
+    background-color: var(--color-outline-page);
+  }
+}

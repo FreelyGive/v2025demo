@@ -1,0 +1,146 @@
+<div>
+  <h2>Boolean shapes</h2>
+  <dt>test_bool_default_false</dt>
+    <dd>
+      <div id="test-bool-default-false">
+  {% if test_bool_default_false %}
+    <code>true</code>
+  {% else %}
+    <code>false</code>
+  {% endif %}
+      </div>
+    </dd>
+  <dl>
+    <dt>test_bool_default_true</dt>
+    <dd>
+      <div id="test-bool-default-true">
+  {% if test_bool_default_true %}
+    <code>true</code>
+  {% else %}
+    <code>false</code>
+  {% endif %}
+      </div>
+    </dd>
+  </dl>
+  <h2>String shapes</h2>
+  <dl>
+    <dt>test_REQUIRED_string</dt>
+    <dd id="test-required-string"><code>{{ test_REQUIRED_string }}</code></dd>
+    <dt>test_string</dt>
+    <dd id="test-string"><code>{{ test_string }}</code></dd>
+    <dt>test_string_multiline</dt>
+    <dd id="test-string-multiline"><code>{{ test_string_multiline }}</code></dd>
+    <dt>test_string_enum</dt>
+    <dd id="test-string-enum"><code>{{ test_string_enum }}</code></dd>
+    <dt>test_integer_enum</dt>
+    <dd id="test-integer-enum"><code>{{ test_integer_enum }}</code></dd>
+    <dt>test_string_format_date_time</dt>
+    <dd id="test-string-format-date-time"><code>{{ test_string_format_date_time }}</code></dd>
+    <dt>test_string_format_date</dt>
+    <dd id="test-string-format-date"><code>{{ test_string_format_date }}</code></dd>
+    <dt>test_string_format_time</dt>
+    <dd id="test-string-format-time"><code>{{ test_string_format_time }}</code></dd>
+    <dt>test_string_format_email</dt>
+    <dd id="test-string-format-email"><code>{{ test_string_format_email }}</code></dd>
+    <dt>test_string_format_idn_email</dt>
+    <dd id="test-string-format-idn-email"><code>{{ test_string_format_idn_email }}</code></dd>
+    <dt>test_string_format_hostname</dt>
+    <dd id="test-string-format-hostname"><code>{{ test_string_format_hostname }}</code></dd>
+    <dt>test_string_format_idn_hostname</dt>
+    <dd id="test-string-format-idn-hostname"><code>{{ test_string_format_idn_hostname }}</code></dd>
+    <dt>test_string_format_ipv4</dt>
+    <dd id="test-string-format-ipv4"><code>{{ test_string_format_ipv4 }}</code></dd>
+    <dt>test_string_format_ipv6</dt>
+    <dd id="test-string-format-hostname-ipv6"><code>{{ test_string_format_ipv6 }}</code></dd>
+    <dt>test_string_format_uuid</dt>
+    <dd id="test-string-format-uuid"><code>{{ test_string_format_uuid }}</code></dd>
+    <dt>test_string_format_uri</dt>
+    <dd id="test-string-format-uri"><code>{{ test_string_format_uri }}</code></dd>
+    <dt>test_string_format_uri_image</dt>
+    <dd id="test-string-format-uri-image"><code>{{ test_string_format_uri_image }}</code></dd>
+    <dt>test_string_format_uri_reference</dt>
+    <dd id="test-string-format-uri-reference"><code>{{ test_string_format_uri_reference }}</code></dd>
+    <dt>test_string_format_iri</dt>
+    <dd id="test-string-format-iri"><code>{{ test_string_format_iri }}</code></dd>
+    <dt>test_string_format_iri_reference</dt>
+    <dd id="test-string-format-iri-reference"><code>{{ test_string_format_iri_reference }}</code></dd>
+    <dt>test_string_format_uri_template</dt>
+    <dd id="test-string-format-uri-template"><code>{{ test_string_format_uri_template }}</code></dd>
+    <dt>test_string_format_json_pointer</dt>
+    <dd id="test-string-format-json-pointer"><code>{{ test_string_format_json_pointer }}</code></dd>
+    <dt>test_string_format_regex</dt>
+    <dd id="test-string-format-regex"><code>{{ test_string_format_regex }}</code></dd>
+  </dl>
+  <h2>Integer shapes</h2>
+  <dl>
+    <dt>test_integer</dt>
+    <dd id="test-integer"><code>{{ test_integer }}</code></dd>
+    <dt>test_integer_range_minimum</dt>
+    <dd id="test-integer-range-minimum"><code>{{ test_integer_range_minimum }}</code></dd>
+    <dt>test_integer_range_minimum_maximum_timestamps</dt>
+    <dd id="test-integer-range-minimum-maximum-timestamps"><code>{{ test_integer_range_minimum_maximum_timestamps }}</code></dd>
+  </dl>
+  <h2>Number shapes</h2>
+  <p>None yet.</p>
+  <h2>HTML content shapes</h2>
+  <dl>
+    <dt>test_string_html_inline</dt>
+    <dd id="test-string-html-inline">{{ test_string_html_inline|raw }}</dd>
+    <dt>test_string_html_block</dt>
+    <dd id="test-string-html-block">{{ test_string_html_block|raw }}</dd>
+    <dt>test_string_html</dt>
+    <dd id="test-string-html">{{ test_string_html|raw }}</dd>
+    <dt>test_REQUIRED_string_html_inline</dt>
+    <dd id="test-required-string-html-inline">{{ test_REQUIRED_string_html_inline|raw }}</dd>
+    <dt>test_REQUIRED_string_html_block</dt>
+    <dd id="test-required-string-html-block">{{ test_REQUIRED_string_html_block|raw }}</dd>
+    <dt>test_REQUIRED_string_html</dt>
+    <dd id="test-required-string-html">{{ test_REQUIRED_string_html|raw }}</dd>
+  </dl>
+  <h2>Object shapes</h2>
+  <dl>
+    <dt>test_object_drupal_image</dt>
+    <dd>
+      <ul>
+        <li id="test-object-drupal-image--src">src: <code>{{ test_object_drupal_image.src }}</code>
+        <li id="test-object-drupal-image--alt">alt: <code>{{ test_object_drupal_image.alt }}</code>
+        <li id="test-object-drupal-image--width">width: <code>{{ test_object_drupal_image.width }}</code>
+        <li id="test-object-drupal-image--height">height: <code>{{ test_object_drupal_image.height }}</code>
+      </ul>
+    </dd>
+    <dt>test_object_drupal_date_range</dt>
+    <dd>
+      <ul>
+        <li id="test-object-drupal-date-range--from">from: <code>{{ test_object_drupal_date_range.from }}</code>
+        <li id="test-object-drupal-date-range--to">to: <code>{{ test_object_drupal_date_range.to }}</code>
+      </ul>
+    </dd>
+    <dt>test_object_drupal_video</dt>
+    <dd>
+      <ul>
+        <li id="test-object-drupal-video--src">src: <code>{{ test_object_drupal_video.src }}</code>
+        <li id="test-object-drupal-video--poster">poster: <code>{{ test_object_drupal_video.poster }}</code>
+      </ul>
+    </dd>
+  </dl>
+  <h2>Array shapes</h2>
+  <dl>
+    <dt>test_array_integer</dt>
+    <dd>
+      <div>{{ test_array_integer|length }} of unlimited</div>
+      <ul>
+        {% for key,value in test_array_integer %}
+        <li id="test_array_integer--{{ key }}">{{ key }}: <code>{{ value }}</code>
+        {% endfor %}
+      </ul>
+    </dd>
+    <dt>test_array_integer_maxItems</dt>
+    <dd>
+      <div>{{ test_array_integer_maxItems|length }} of 2</div>
+      <ul>
+        <li id="test_array_integer_maxItems--0">0: <code>{{ test_array_integer_maxItems[0] }}</code>
+        <li id="test_array_integer_maxItems--1">1: <code>{{ test_array_integer_maxItems[1] }}</code>
+      </ul>
+    </dd>
+  </dl>
+</div>

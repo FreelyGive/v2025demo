@@ -1,0 +1,51 @@
+# @cspell:ignore Gablethorp
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: bc9ab1d0-dd73-46e0-81b6-36b623ff98c4
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  owner:
+    -
+      target_id: 0
+  title:
+    -
+      value: Homepage
+  description:
+    -
+      value: 'This is the homepage'
+  components:
+    - parent_uuid: null
+      slot: null
+      uuid: b3f99df1-6f89-4cec-b57c-a29279ac4620
+      component_id: js.canvas_test_code_components_with_slots
+      component_version: 5d3d256aa45dea9e
+      inputs: '{"name":"Sir Gablethorp"}'
+    -
+      parent_uuid: b3f99df1-6f89-4cec-b57c-a29279ac4620
+      slot: description
+      uuid: 2c6e91ae-23ac-433d-9bb8-687144464b34
+      component_id: sdc.canvas_test_sdc.props-slots
+      component_version: ab4d3ddce315cf64
+      inputs: '{"heading":"Welcome to the site!"}'
+    -
+      parent_uuid: null
+      slot: null
+      uuid: 78c73c1d-4988-4f9b-ad17-f7e337d40c29
+      component_id: block.system_branding_block
+      component_version: 247a23298360adb2
+      inputs: '{"label":"","label_display":false,"use_site_logo":true,"use_site_name":true,"use_site_slogan":true}'
+
+  path:
+    -
+      alias: /homepage
+      langcode: en
+  created:
+    -
+      value: 1747999992
+  revision_translation_affected:
+    -
+      value: true

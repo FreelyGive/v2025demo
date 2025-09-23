@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+## Description: Drops your database and installs Byte.
+## Usage: install-byte
+## Example: "ddev install-byte"
+
+drush site:install drupal_cms_installer installer_site_template_form.add_ons=byte --yes

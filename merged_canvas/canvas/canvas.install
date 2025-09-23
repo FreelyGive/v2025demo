@@ -1,0 +1,91 @@
+<?php
+
+declare(strict_types=1);
+
+use Drupal\Core\Extension\ThemeInstallerInterface;
+use Drupal\canvas\AutoSave\AutoSaveManager;
+
+/**
+ * Implements hook_install().
+ */
+function canvas_install(bool $is_syncing): void {
+  if ($is_syncing) {
+    // Don't perform any actions if config is being synced.
+    return;
+  }
+  // Ensure canvas_stark is installed for the semi-coupled theme engine.
+  // @see \Drupal\canvas\Theme\CanvasThemeNegotiator
+  // @see \Drupal\Core\Theme\ThemeNegotiator::determineActiveTheme()
+  \Drupal::service(ThemeInstallerInterface::class)->install(['canvas_stark']);
+
+  // Cache flush ensures the contextual form works.
+  drupal_flush_all_caches();
+}
+
+/**
+ * Implements hook_module_preinstall().
+ */
+function canvas_module_preinstall(string $module): void {
+  if ($module !== 'canvas') {
+    return;
+  }
+
+  // Register the JSON schema definitions stream wrapper *prior* to installing
+  // default config and hence prior to config validation. Otherwise validation
+  // fails.
+  // @see \Drupal\canvas\JsonSchemaDefinitionsStreamwrapper
+  // @see \Drupal\Core\Extension\ModuleInstaller::install()
+  // @todo Remove this after https://www.drupal.org/project/drupal/issues/3352063 lands.
+  \Drupal::service('stream_wrapper_manager')->register();
+}
+
+/**
+ * Implements hook_module_preuninstall().
+ */
+function canvas_module_preuninstall(string $module, bool $is_syncing): void {
+  if ($module !== 'canvas') {
+    return;
+  }
+
+  \Drupal::service(AutoSaveManager::class)->deleteAll();
+}
+
+/**
+ * Implements hook_requirements().
+ *
+ * @todo Remove when https://www.drupal.org/project/drupal/issues/3472008 is fixed in Drupal core.
+ */
+function canvas_requirements(string $phase): array {
+  $requirements = [];
+  if ($phase === 'install' || $phase == 'runtime') {
+    $canvas_stark_enabled = \Drupal::service('theme_handler')->themeExists('canvas_stark');
+    if (!$canvas_stark_enabled) {
+      $requirements['canvas_stark'] = [
+        'title' => t('Drupal Canvas Theme'),
+        'description' => t('The required theme <code>canvas_stark</code> is no longer installed due to manually modified changes to <code>core.extension</code>. The Drupal Canvas user interface will be broken without this theme. You can install it by running <code>drush theme:install canvas_stark</code>.'),
+        'severity' => REQUIREMENT_WARNING,
+      ];
+    }
+
+    // Check if JSON:API module is enabled.
+    $json_api_enabled = \Drupal::moduleHandler()->moduleExists('jsonapi');
+    if ($json_api_enabled) {
+      $severity = REQUIREMENT_WARNING;
+      // Check if PHP assertions are enabled and update the severity.
+      // @see \Drupal\canvas\EventSubscriber\ApiMessageValidator::isProd()
+      $assertions_disabled = TRUE;
+      // @phpstan-ignore-next-line booleanNot.alwaysTrue
+      assert(!($assertions_disabled = FALSE));
+      // @phpstan-ignore-next-line booleanNot.alwaysTrue function.alreadyNarrowedType
+      if (!$assertions_disabled) {
+        $severity = REQUIREMENT_ERROR;
+      }
+      $requirements['canvas'] = [
+        'title' => t('Drupal Canvas'),
+        'description' => t("Drupal Canvas requires the <code>justinrainbow/json-schema</code> library which may impact site performance when the JSON:API module is installed and PHP assertions are enabled. See <a href=':url'>:url</a> for more information.", [':url' => 'https://www.drupal.org/project/drupal/issues/3472008']),
+        'severity' => $severity,
+      ];
+    }
+  }
+  return $requirements;
+}

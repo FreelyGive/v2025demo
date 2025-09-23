@@ -1,0 +1,4 @@
+name: Test Theme Child
+type: theme
+base theme: test_theme_base
+core_version_requirement: ^11

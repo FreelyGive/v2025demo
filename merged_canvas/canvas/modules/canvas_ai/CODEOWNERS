@@ -1,0 +1,17 @@
+# @see https://docs.gitlab.com/ee/user/project/codeowners/reference.html
+
+# Default ownership for any files not covered below
+* @tim.plunkett @Marcus_Johansson @NarendraR @Utkarsh_33 @kunal.sachdev
+
+
+# Project metadata files
+/*.*.yml @tim.plunkett @Marcus_Johansson @NarendraR @Utkarsh_33 @kunal.sachdev
+/composer.json @tim.plunkett @Marcus_Johansson @NarendraR @Utkarsh_33 @kunal.sachdev
+/readme.md @tim.plunkett @Marcus_Johansson @NarendraR @Utkarsh_33 @kunal.sachdev
+
+#
+# Server side.
+#
+
+/src/  @tim.plunkett @Marcus_Johansson @NarendraR @kunal.sachdev
+/config/ @tim.plunkett @Marcus_Johansson @NarendraR @kunal.sachdev

@@ -1,0 +1,35 @@
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: person_3.png
+  created:
+    -
+      value: 1752173962
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  field_media_image:
+    -
+      alt: 'Person 3'
+      title: ''
+      width: 100
+      height: 100
+      entity: 27f037b6-f7ef-4cff-84f4-dc957dcaa9b8
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 0f40c577-d3b2-4f5d-8609-9ffacbc39a91
+  bundle: image
+  default_langcode: en
+  depends:
+    27f037b6-f7ef-4cff-84f4-dc957dcaa9b8: file

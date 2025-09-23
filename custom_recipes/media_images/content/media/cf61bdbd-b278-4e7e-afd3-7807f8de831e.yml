@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: cf61bdbd-b278-4e7e-afd3-7807f8de831e
+  bundle: image
+  default_langcode: en
+  depends:
+    021ceeb7-bcd1-40ea-861e-80a7a39752e4: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: 'A woman using a laptop and credit card for online shopping at a cozy indoor setting.'
+  created:
+    -
+      value: 1758522806
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photograph depicting a woman engaged in online shopping in a cozy indoor setting. The background features soft, muted colors with a patterned wallpaper and light wood paneling. Dominant colors include earthy tones, creating a warm and inviting atmosphere. The woman appears to be of Asian descent, possibly in her late 20s or early 30s, with long dark hair, conveying a focused and content expression. She is casually dressed and seated at a wooden table, using a laptop with a credit card in hand. A potted plant and a framed photo add a homely touch, while a mug and other small items rest on the table. Natural light illuminates the scene, enhancing the relaxed mood.'
+  field_media_image:
+    -
+      alt: 'A woman using a laptop and credit card for online shopping at a cozy indoor setting.'
+      title: 'Antoni Shkraba Studio'
+      width: 4000
+      height: 2667
+      entity: 021ceeb7-bcd1-40ea-861e-80a7a39752e4

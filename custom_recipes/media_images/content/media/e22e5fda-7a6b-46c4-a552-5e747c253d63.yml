@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: e22e5fda-7a6b-46c4-a552-5e747c253d63
+  bundle: image
+  default_langcode: en
+  depends:
+    cb3bf8f8-d7f5-4599-8ac9-3c3a1a2103cf: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: "Group of friends celebrating New Year's Eve with festive attire and decor."
+  created:
+    -
+      value: 1758435496
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a lively photo capturing a group of four friends celebrating New Year''s Eve. The background features a retro wallpaper with a beige and brown geometric pattern, setting a festive and vintage tone. The group includes women of diverse ethnicities, dressed in glamorous and sparkling attire, suggesting a joyful and celebratory mood. One woman wears a masquerade mask, adding a playful and mysterious touch to the scene. A "Happy New Year" sign and festive decorations hang above them, enhancing the celebratory atmosphere. The women appear to be in their 20s to 30s, exuding happiness and excitement. Various drinks and party items on the table in front of them contribute to the overall festive and lively mood.'
+  field_media_image:
+    -
+      alt: "Group of friends celebrating New Year's Eve with festive attire and decor."
+      title: 'RDNE Stock project'
+      width: 3883
+      height: 5825
+      entity: cb3bf8f8-d7f5-4599-8ac9-3c3a1a2103cf
