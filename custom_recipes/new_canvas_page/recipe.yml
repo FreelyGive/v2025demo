@@ -1,3 +1,7 @@
 name: Mercury Demo Page
 type: Demo
 description: A demonstration of Drupal Canvas for Mercury
+  - pathauto
+  - canvas
+  - stark
+  - mercury

@@ -1,0 +1,8 @@
+services:
+  ab_split_test.redirect_subscriber:
+    class: Drupal\ab_split_test\EventSubscriber\AbSplitRedirectSubscriber
+    arguments:
+      - '@request_stack'
+      - '@config.factory'
+    tags:
+      - { name: event_subscriber }
