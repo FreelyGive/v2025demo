@@ -36,25 +36,24 @@ component_tree:
     slot: blog_media
     uuid: 59a40305-ae72-4f38-b1fd-19e1513faf13
     component_id: sdc.mercury.image
-    component_version: ad3d3789cf0d02e5
+    component_version: 89488ed1ef93a9e4
     inputs:
       media:
         sourceType: dynamic
         expression: 'ℹ︎␜entity:node:blog␝field_featured_image␞␟{src↝entity␜␜entity:media:image␝field_media_image␞␟entity␜␜entity:file␝uri␞␟url,alt↝entity␜␜entity:media:image␝field_media_image␞␟alt}'
-      size: 16/9
+      size: hg:aspect-16/9
   - uuid: ea40592d-2c03-45e8-9c19-a66a96a59ec9
-    component_id: sdc.mercury.grid-container
-    component_version: a86fae4588f7eab0
+    component_id: sdc.mercury.section
+    component_version: 459654892e3b3a4c
     inputs:
       columns: '100'
-      grid_header: false
-      grid_footer: false
-      margin_before: normal
-      margin_after: normal
-      width: 3/4
-      color_mode: light
+      section_header: false
+      section_footer: false
+      margin_block_start: '48'
+      margin_block_end: '48'
+      width: hg:lg:max-w-3/4
   - parent_uuid: ea40592d-2c03-45e8-9c19-a66a96a59ec9
-    slot: container_region
+    slot: main_slot
     uuid: caa1e4b2-d58b-4140-b99b-ab3e1ce55ad5
     component_id: sdc.mercury.text
     component_version: bbc797b76ac62b14
@@ -103,23 +102,23 @@ component_tree:
     slot: actions
     uuid: 766d0781-cae3-471f-8d43-0f5f27659fbb
     component_id: sdc.mercury.button
-    component_version: 6a9923be0f81dde6
+    component_version: c6067993360ffa7d
     inputs:
       variant: primary
       disabled: false
       label: 'Button Label'
-      icon: ph-arrow-left
+      icon: arrow-left
       icon_first: false
       href: false
   - parent_uuid: 4305752c-db60-48dc-837b-c7a12dd656fe
     slot: actions
     uuid: f61ffe08-6016-458e-b19f-7bef09f26382
     component_id: sdc.mercury.button
-    component_version: 6a9923be0f81dde6
+    component_version: c6067993360ffa7d
     inputs:
       variant: secondary
       disabled: false
       label: 'Button Label'
-      icon: ph-arrow-left
+      icon: arrow-left
       icon_first: false
       href: false

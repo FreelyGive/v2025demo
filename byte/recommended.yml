@@ -1,0 +1,36 @@
+drupal/drupal_cms_accessibility_tools:
+  title: 'Accessibility Tools'
+  type: recipe
+  logo: null
+  core: '^10.3 || ^11'
+  machineName: drupal_cms_accessibility_tools
+  body:
+    summary: 'Adds automated checks to help ensure content conforms to web accessibility guidelines.'
+  packageName: drupal/drupal_cms_accessibility_tools
+drupal/drupal_cms_ai:
+  title: 'AI Assistant'
+  type: recipe
+  logo: null
+  core: ^11.1.4
+  machineName: drupal_cms_ai
+  body:
+    summary: 'Adds integration with AI services, such as alt text generation and a chat bot to assist with site building. Requires an API key from Open AI or Anthropic.'
+  packageName: drupal/drupal_cms_ai
+drupal/drupal_cms_google_analytics:
+  title: 'Google Analytics'
+  type: recipe
+  logo: null
+  core: ^11.1.4
+  machineName: drupal_cms_google_analytics
+  body:
+    summary: 'Adds tracking of website traffic using Google Analytics and Google Tag Manager. Requires a Google Tag Manager ID.'
+  packageName: drupal/drupal_cms_google_analytics
+drupal/drupal_cms_search:
+  title: Search
+  type: recipe
+  logo: null
+  core: '^10.4 || ^11'
+  machineName: drupal_cms_search
+  body:
+    summary: 'Adds a search to help visitors find content.'
+  packageName: drupal/drupal_cms_search

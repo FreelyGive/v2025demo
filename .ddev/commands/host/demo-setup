@@ -22,7 +22,9 @@ rm -rf web/modules/contrib/canvas
 cp -r merged_canvas/canvas web/modules/contrib/canvas
 
 # Install
-ddev drush si -y --account-pass=admin --site-name="2025 Demo"
+ddev drush si drupal_cms_installer installer_site_template_form.add_ons=byte --account-pass=admin --site-name="2025 Demo" -y
+# Install byte
+#ddev install-byte
 # Install a empty demo page with Canvas
 ddev drush recipe ../custom_recipes/new_canvas_page
 # Composer stuff

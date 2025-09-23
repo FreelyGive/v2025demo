@@ -36,22 +36,21 @@ default:
       inputs:
         media:
           target_uuid: fbff512d-9dc6-49ba-8321-2a826ca84e10
-        size: 2/1
+        size: hg:aspect-2/1
         caption: ''
     -
       uuid: b04a754a-6a6c-44a9-b7ec-cf3df6c98ca1
-      component_id: sdc.mercury.grid-container
+      component_id: sdc.mercury.section
       inputs:
         columns: 33-33-33
-        grid_header: true
-        margin_after: normal
-        width: full
-        color_mode: dark
-        grid_footer: false
-        margin_before: extra
+        section_header: true
+        margin_block_end: '48'
+        width: hg:lg:max-w-full
+        section_footer: false
+        margin_block_start: '64'
     -
       parent_uuid: b04a754a-6a6c-44a9-b7ec-cf3df6c98ca1
-      slot: header_region
+      slot: header_slot
       uuid: b524d6a4-2ce8-4ba4-8fcd-4e38f8d98dea
       component_id: sdc.mercury.heading
       inputs:
@@ -85,7 +84,7 @@ default:
         align: center
     -
       parent_uuid: b04a754a-6a6c-44a9-b7ec-cf3df6c98ca1
-      slot: container_region
+      slot: main_slot
       uuid: 4ffb03cc-c318-4d86-9e92-5fca9e897428
       component_id: sdc.mercury.card
       inputs:
@@ -98,7 +97,7 @@ default:
         orientation: stacked
     -
       parent_uuid: b04a754a-6a6c-44a9-b7ec-cf3df6c98ca1
-      slot: container_region
+      slot: main_slot
       uuid: e6fe596f-d8b0-43e2-8e09-da7b76a1e171
       component_id: sdc.mercury.card
       inputs:
@@ -111,7 +110,7 @@ default:
         orientation: stacked
     -
       parent_uuid: b04a754a-6a6c-44a9-b7ec-cf3df6c98ca1
-      slot: container_region
+      slot: main_slot
       uuid: 1f5966a2-d6cc-48d9-8b84-a6ae9f73310b
       component_id: sdc.mercury.card
       inputs:
@@ -124,18 +123,17 @@ default:
         orientation: stacked
     -
       uuid: 9d2257b5-8da9-45c5-bbb5-46418c664574
-      component_id: sdc.mercury.grid-container
+      component_id: sdc.mercury.section
       inputs:
         columns: '100'
-        grid_header: true
-        grid_footer: true
-        margin_before: normal
-        margin_after: normal
-        width: full
-        color_mode: light
+        section_header: true
+        section_footer: true
+        margin_block_start: '48'
+        margin_block_end: '48'
+        width: hg:lg:max-w-full
     -
       parent_uuid: 9d2257b5-8da9-45c5-bbb5-46418c664574
-      slot: header_region
+      slot: header_slot
       uuid: 17e57cc1-8374-4ff5-8c26-23f7c6ada238
       component_id: sdc.mercury.heading
       inputs:
@@ -145,7 +143,7 @@ default:
         align: center
     -
       parent_uuid: 9d2257b5-8da9-45c5-bbb5-46418c664574
-      slot: container_region
+      slot: main_slot
       uuid: 934987c9-6410-4b0a-be9e-f66b41c4cb16
       component_id: sdc.mercury.logo-grid
       inputs:
@@ -180,7 +178,6 @@ default:
             required:
               - src
           componentId: sdc.mercury.tile-logo
-        color_mode: dark
     -
       parent_uuid: 934987c9-6410-4b0a-be9e-f66b41c4cb16
       slot: logos
@@ -209,7 +206,6 @@ default:
             required:
               - src
           componentId: sdc.mercury.tile-logo
-        color_mode: dark
     -
       parent_uuid: 934987c9-6410-4b0a-be9e-f66b41c4cb16
       slot: logos
@@ -238,7 +234,6 @@ default:
             required:
               - src
           componentId: sdc.mercury.tile-logo
-        color_mode: dark
     -
       parent_uuid: 934987c9-6410-4b0a-be9e-f66b41c4cb16
       slot: logos
@@ -267,7 +262,6 @@ default:
             required:
               - src
           componentId: sdc.mercury.tile-logo
-        color_mode: light
     -
       parent_uuid: 934987c9-6410-4b0a-be9e-f66b41c4cb16
       slot: logos
@@ -296,21 +290,19 @@ default:
             required:
               - src
           componentId: sdc.mercury.tile-logo
-        color_mode: light
     -
       uuid: a8b085d4-21e4-4c32-8671-90cc769fbe5b
-      component_id: sdc.mercury.grid-container
+      component_id: sdc.mercury.section
       inputs:
         columns: 50-50
-        grid_header: true
-        margin_before: normal
-        margin_after: normal
-        width: full
-        color_mode: dark
-        grid_footer: true
+        section_header: true
+        margin_block_start: '48'
+        margin_block_end: '48'
+        width: hg:lg:max-w-full
+        section_footer: true
     -
       parent_uuid: a8b085d4-21e4-4c32-8671-90cc769fbe5b
-      slot: header_region
+      slot: header_slot
       uuid: e3136585-c1ce-4f15-ab51-e1e7d4002d46
       component_id: sdc.mercury.heading
       inputs:
@@ -345,7 +337,7 @@ default:
         url: 'No URL'
     -
       parent_uuid: a8b085d4-21e4-4c32-8671-90cc769fbe5b
-      slot: container_region
+      slot: main_slot
       uuid: 48a4228e-9b70-4000-a599-7c44776b4de9
       component_id: sdc.mercury.card
       inputs:
@@ -378,7 +370,7 @@ default:
         orientation: stacked
     -
       parent_uuid: a8b085d4-21e4-4c32-8671-90cc769fbe5b
-      slot: container_region
+      slot: main_slot
       uuid: 2fcd7b86-4d7c-4ac4-9476-555d35b5782a
       component_id: sdc.mercury.card
       inputs:
@@ -411,17 +403,16 @@ default:
         orientation: stacked
     -
       uuid: 200da8bd-0f11-4396-9b4b-1a56cdc12d97
-      component_id: sdc.mercury.grid-container
+      component_id: sdc.mercury.section
       inputs:
         columns: 25-25-25-25
-        grid_header: true
-        margin_before: normal
-        margin_after: normal
-        width: full
-        color_mode: dark
+        section_header: true
+        margin_block_start: '48'
+        margin_block_end: '48'
+        width: hg:lg:max-w-full
     -
       parent_uuid: 200da8bd-0f11-4396-9b4b-1a56cdc12d97
-      slot: header_region
+      slot: header_slot
       uuid: 4b2aef0c-ee2c-4ecb-b9c8-b51d4e5c78e5
       component_id: sdc.mercury.heading
       inputs:
@@ -456,7 +447,7 @@ default:
         url: 'No URL'
     -
       parent_uuid: 200da8bd-0f11-4396-9b4b-1a56cdc12d97
-      slot: container_region
+      slot: main_slot
       uuid: 150602aa-8639-4b8a-8f67-e334f495d657
       component_id: sdc.mercury.card-testimonial
       inputs:
@@ -466,7 +457,7 @@ default:
         align: left
     -
       parent_uuid: 200da8bd-0f11-4396-9b4b-1a56cdc12d97
-      slot: container_region
+      slot: main_slot
       uuid: 3e0883f7-7c4a-4f20-a135-fb42b146e0b8
       component_id: sdc.mercury.card-testimonial
       inputs:
@@ -476,7 +467,7 @@ default:
         align: left
     -
       parent_uuid: 200da8bd-0f11-4396-9b4b-1a56cdc12d97
-      slot: container_region
+      slot: main_slot
       uuid: d67d3348-b3ab-4a62-92ca-1ab871663979
       component_id: sdc.mercury.card-testimonial
       inputs:
@@ -486,7 +477,7 @@ default:
         align: left
     -
       parent_uuid: 200da8bd-0f11-4396-9b4b-1a56cdc12d97
-      slot: container_region
+      slot: main_slot
       uuid: b9b974cf-e992-4bf1-9c98-a998ca14145d
       component_id: sdc.mercury.card-testimonial
       inputs:
@@ -496,18 +487,17 @@ default:
         align: left
     -
       uuid: da67c79d-cd2f-46c5-a926-3f28fdfef477
-      component_id: sdc.mercury.grid-container
+      component_id: sdc.mercury.section
       inputs:
         columns: '100'
-        grid_header: true
-        grid_footer: true
-        margin_before: normal
-        margin_after: normal
-        width: full
-        color_mode: light
+        section_header: true
+        section_footer: true
+        margin_block_start: '48'
+        margin_block_end: '48'
+        width: hg:lg:max-w-full
     -
       parent_uuid: da67c79d-cd2f-46c5-a926-3f28fdfef477
-      slot: header_region
+      slot: header_slot
       uuid: fb7b4197-5686-4f9a-99ce-ca2d326f69c5
       component_id: sdc.mercury.heading
       inputs:
@@ -518,7 +508,7 @@ default:
         align: center
     -
       parent_uuid: da67c79d-cd2f-46c5-a926-3f28fdfef477
-      slot: container_region
+      slot: main_slot
       uuid: 0752d4c3-6e64-4ce1-8979-86e741889d3c
       component_id: block.views_block.blog-latest
       inputs:
@@ -590,7 +580,7 @@ default:
         disabled: false
         label: 'Get started'
         size: medium
-        icon: ph-arrow-right
+        icon: arrow-right
         icon_first: false
         href: /pricing
     -
@@ -603,7 +593,7 @@ default:
         disabled: false
         label: 'Learn more'
         size: medium
-        icon: ph-arrow-right
+        icon: arrow-right
         icon_first: false
         href: /features
   path:

@@ -96,13 +96,14 @@
             "type": "path",
             "url": "recipes/drupal_cms_starter"
         },
-        "template_saas_product": {
+        "byte": {
             "type": "path",
-            "url": "recipes/drupal_cms_template_saas_product"
+            "url": "byte"
         }
     },
     "require-dev": {
         "cweagans/composer-patches": "^2",
+        "drupal/byte": "^1",
         "drupal/core-dev": "^11.2.4",
         "drupal/drupal_cms_blog": "^2",
         "drupal/drupal_cms_case_study": "^2",
@@ -110,8 +111,7 @@
         "drupal/drupal_cms_news": "^2",
         "drupal/drupal_cms_page": "^2",
         "drupal/drupal_cms_person": "^2",
-        "drupal/drupal_cms_project": "^2",
-        "drupal/drupal_cms_template_saas_product": "^1"
+        "drupal/drupal_cms_project": "^2"
     },
     "autoload-dev": {
         "classmap": [

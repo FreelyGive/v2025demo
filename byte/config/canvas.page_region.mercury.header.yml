@@ -2,8 +2,8 @@ langcode: en
 status: true
 dependencies:
   config:
+    - canvas.component.block.system_branding_block
     - canvas.component.block.system_menu_block.main
-    - canvas.component.sdc.mercury.branding
     - canvas.component.sdc.mercury.navbar
   module:
     - options
@@ -22,11 +22,15 @@ component_tree:
   -
     parent_uuid: f63929cf-c0a3-4ad1-9167-49c5f4261be5
     slot: logo
-    uuid: abd2d53c-9f57-43a5-9718-a2a2c8656d31
-    component_id: sdc.mercury.branding
-    component_version: d791b789ba159097
+    uuid: ac1533d8-c91d-4744-9815-905f865b5bf4
+    component_id: block.system_branding_block
+    component_version: 247a23298360adb2
     inputs:
-      color_mode: light
+      label: 'Site branding'
+      label_display: '0'
+      use_site_logo: false
+      use_site_name: false
+      use_site_slogan: false
   -
     parent_uuid: f63929cf-c0a3-4ad1-9167-49c5f4261be5
     slot: navigation

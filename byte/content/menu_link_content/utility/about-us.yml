@@ -12,7 +12,7 @@ default:
     -
       title: null
       options: {  }
-      target_uuid: 79a10029-a8bb-407e-becf-9f8a9bb8aad8
+      target_uuid: 66025d34-24a4-4ab9-89a3-b1654b875505
   external:
     -
       value: false
@@ -35,4 +35,4 @@ _meta:
   bundle: menu_link_content
   default_langcode: en
   depends:
-    79a10029-a8bb-407e-becf-9f8a9bb8aad8: node
+    66025d34-24a4-4ab9-89a3-b1654b875505: canvas_page

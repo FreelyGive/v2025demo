@@ -39,11 +39,11 @@ component_tree:
   -
     parent_uuid: b4ea9fb2-d3fc-428a-9114-bce92069cbab
     slot: footer_first
-    uuid: 23ee7d03-7227-4558-a489-619b59be07e0
-    component_id: block.system_menu_block.social
-    component_version: 2b669e6cee911c12
+    uuid: fdcf2eb9-c422-4a13-8467-0407d8c2f127
+    component_id: block.system_menu_block.utility
+    component_version: 78f97c64933451c0
     inputs:
-      label: Social
+      label: Utility
       label_display: '0'
       level: 1
       depth: null
@@ -51,11 +51,11 @@ component_tree:
   -
     parent_uuid: b4ea9fb2-d3fc-428a-9114-bce92069cbab
     slot: footer_first
-    uuid: fdcf2eb9-c422-4a13-8467-0407d8c2f127
-    component_id: block.system_menu_block.utility
-    component_version: 78f97c64933451c0
+    uuid: 23ee7d03-7227-4558-a489-619b59be07e0
+    component_id: block.system_menu_block.social
+    component_version: 2b669e6cee911c12
     inputs:
-      label: Utility
+      label: Social
       label_display: '0'
       level: 1
       depth: null
@@ -93,4 +93,4 @@ component_tree:
     component_version: bbc797b76ac62b14
     inputs:
       text:
-        value: '<p>Copyright 2025</p>'
+        value: '<p>© Copyright 2025</p>'

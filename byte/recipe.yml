@@ -8,6 +8,7 @@ recipes:
   - drupal_cms_starter
 install:
   - gin_login
+  - project_browser
   - ui_icons_menu
 config:
   strict: false
@@ -49,6 +50,9 @@ config:
           module: menu_ui
           key: parent
           value: 'main:'
+    project_browser.admin_settings:
+      simpleConfigUpdate:
+        enabled_sources.recommended.uri: 'https://git.drupalcode.org/api/v4/projects/157093/repository/files/byte/recommended.yml/raw?ref=HEAD'
     system.site:
       simpleConfigUpdate:
         # The Home page, built in Canvas.
