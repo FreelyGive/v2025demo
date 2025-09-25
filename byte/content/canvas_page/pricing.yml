@@ -160,7 +160,6 @@ default:
                 -
                   value: 6
                   label: '6'
-        styles: default
     -
       parent_uuid: 55398477-06b9-4fc8-95bf-e8173a1602ec
       slot: main_slot

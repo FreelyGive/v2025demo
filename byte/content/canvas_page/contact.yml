@@ -18,7 +18,6 @@ default:
       inputs:
         heading_text: 'Contact Us'
         level: 1
-        styles: default
         align: left
         url: 'No URL'
     -

@@ -1,0 +1,63 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - modeler_api
+third_party_settings:
+  modeler_api:
+    modeler_id: bpmn_io
+    data: 'hash:2778ed1598ba68e518d58bf25aa1deee'
+    label: 'Define custom breakpoints'
+    documentation: 'Defines custom breakpoints for responsive images.'
+    version: 1.0.0
+id: define_breakpoints
+weight: 0
+events:
+  eca_render__breakpoints_alter_1ni95xs:
+    plugin: 'eca_render:breakpoints_alter'
+    label: 'Alter breakpoint'
+    configuration: {  }
+    successors:
+      -
+        id: eca_render_alter_breakpoint_1ic6gni
+        condition: ''
+conditions: {  }
+gateways: {  }
+actions:
+  eca_render_alter_breakpoint_1ic6gni:
+    label: 'Define small breakpoint'
+    plugin: eca_render_alter_breakpoint
+    configuration:
+      id: custom.sm
+      definition: "label: Small\nmediaQuery: 'all and (min-width: 500px)'\nweight: 0\nmultipliers:\n  - 1x\ngroup: custom"
+    successors:
+      -
+        id: eca_render_alter_breakpoint_176hkyu
+        condition: ''
+  eca_render_alter_breakpoint_176hkyu:
+    label: 'Define medium breakpoint'
+    plugin: eca_render_alter_breakpoint
+    configuration:
+      id: custom.md
+      definition: "label: Medium\nmediaQuery: 'all and (min-width: 700px)'\nweight: 1\nmultipliers:\n  - 1x\ngroup: custom"
+    successors:
+      -
+        id: eca_render_alter_breakpoint_1k0stlk
+        condition: ''
+  eca_render_alter_breakpoint_1k0stlk:
+    label: 'Define large breakpoint'
+    plugin: eca_render_alter_breakpoint
+    configuration:
+      id: custom.lg
+      definition: "label: Large\nmediaQuery: 'all and (min-width: 1000px)'\nweight: 2\nmultipliers:\n  - 1x\ngroup: custom"
+    successors:
+      -
+        id: eca_render_alter_breakpoint_1e7fgzt
+        condition: ''
+  eca_render_alter_breakpoint_1e7fgzt:
+    label: 'Define x-large breakpoint'
+    plugin: eca_render_alter_breakpoint
+    configuration:
+      id: custom.xl
+      definition: "label: X-Large\nmediaQuery: 'all and (min-width: 1300px)'\nweight: 3\nmultipliers:\n  - 1x\ngroup: custom"
+    successors: {  }

@@ -4,13 +4,15 @@ description: Sets up base image configuration including responsive image styles,
 recipes:
   - core/recipes/image_media_type
 install:
-  # Responsive image styles are pinned to Olivero breakpoints so we require it here.
-  # We would like for people to be able to switch and disable themes without affecting image styles.
-  # See https://www.drupal.org/project/drupal_cms/issues/3491177
-  - olivero
+  - bpmn_io
+  - eca_base
+  - eca_render
+  - eca_ui
   - focal_point
+  - modeler_api
   - responsive_image
   - svg_image
+  - token
 config:
   # Treat field storages strictly since they influence the database layout.
   strict:
