@@ -80,7 +80,6 @@ default:
                 -
                   value: 6
                   label: '6'
-        styles: default
         align: center
     -
       parent_uuid: b04a754a-6a6c-44a9-b7ec-cf3df6c98ca1
@@ -139,7 +138,6 @@ default:
       inputs:
         heading_text: 'Trusted by world-class experts'
         level: 3
-        styles: default
         align: center
     -
       parent_uuid: 9d2257b5-8da9-45c5-bbb5-46418c664574
@@ -332,7 +330,6 @@ default:
                 -
                   value: 6
                   label: '6'
-        styles: default
         align: center
         url: 'No URL'
     -
@@ -442,7 +439,6 @@ default:
                 -
                   value: 6
                   label: '6'
-        styles: default
         align: center
         url: 'No URL'
     -
@@ -503,7 +499,6 @@ default:
       inputs:
         heading_text: 'Explore our blog posts'
         level: 2
-        styles: default
         url: /blog
         align: center
     -

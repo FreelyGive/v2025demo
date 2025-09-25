@@ -28,8 +28,7 @@ ddev exec bash -lc 'mkdir -p web/modules/custom && cp -a custom_modules/ab_split
 ddev drush si drupal_cms_installer installer_site_template_form.add_ons=byte --account-pass=admin --site-name="2025 Demo" -y
 # Install byte
 #ddev install-byte
-# Install a empty demo page with Canvas
-ddev drush recipe ../custom_recipes/new_canvas_page
+
 # Composer stuff
 ddev composer require 'drupal/ai:1.2.x-dev@dev' \
 'drupal/ai_agents:1.2.x-dev@dev' \

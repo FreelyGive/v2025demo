@@ -90,7 +90,7 @@ component_tree:
     slot: footer_utility_last
     uuid: a606580b-bd8b-4576-b89e-b9f97ef72d91
     component_id: sdc.mercury.text
-    component_version: bbc797b76ac62b14
+    component_version: 8b4abbab93b01319
     inputs:
       text:
         value: '<p>© Copyright 2025</p>'

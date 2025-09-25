@@ -5,8 +5,9 @@ dependencies:
     - image.style.1_1_500x500_focal_point_webp
     - image.style.1_1_600x600_focal_point_webp
     - image.style.1_1_960x960_focal_point_webp
-  theme:
-    - olivero
+  enforced:
+    config:
+      - eca.eca.define_breakpoints
 id: 1_1_large
 label: '1:1 (Square) Large'
 image_style_mappings:
@@ -18,7 +19,7 @@ image_style_mappings:
         - 1_1_500x500_focal_point_webp
         - 1_1_600x600_focal_point_webp
         - 1_1_960x960_focal_point_webp
-    breakpoint_id: olivero.sm
+    breakpoint_id: custom.sm
     multiplier: 1x
-breakpoint_group: olivero
+breakpoint_group: custom
 fallback_image_style: 1_1_500x500_focal_point_webp

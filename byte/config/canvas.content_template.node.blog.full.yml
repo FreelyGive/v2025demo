@@ -56,7 +56,7 @@ component_tree:
     slot: main_slot
     uuid: caa1e4b2-d58b-4140-b99b-ab3e1ce55ad5
     component_id: sdc.mercury.text
-    component_version: bbc797b76ac62b14
+    component_version: 8b4abbab93b01319
     inputs:
       text:
         sourceType: dynamic
