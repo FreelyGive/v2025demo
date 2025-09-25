@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 4f508b08-a596-4b41-bd55-3bcb7a0794c0
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: woman-dinner-2.png
+  uri:
+    -
+      value: 'public://2025-09/woman-dinner-2.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 2095719
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1758760864

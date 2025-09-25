@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 5005f597-1a87-4847-8d7d-76a9ef868fa2
+  bundle: image
+  default_langcode: en
+  depends:
+    d48d3cc5-5ae8-43ff-9742-a2fdcff430d8: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: findrop_phone-horizontal-lines.png
+  created:
+    -
+      value: 1758760308
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a sleek graphic featuring a smartphone at its center, displaying the word "FinDrop" and an icon of a credit card. The background is a deep black, contrasted by dynamic white horizontal lines and flowing wave patterns to the left of the phone, which provide a sense of movement and connectivity. No people are present in this image, focusing solely on the technological theme. The mood is modern and innovative, suggesting a focus on digital finance or technology. The composition emphasizes sharp contrasts and a minimalist aesthetic, enhancing the futuristic feel. This is a well-designed infographic or digital art piece highlighting themes of finance and technology synergy.'
+  field_media_image:
+    -
+      alt: '""'
+      title: ''
+      width: 1024
+      height: 1024
+      entity: d48d3cc5-5ae8-43ff-9742-a2fdcff430d8

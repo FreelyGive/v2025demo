@@ -1,14 +1,14 @@
 _meta:
   version: '1.0'
   entity_type: canvas_page
-  uuid: 99464e3a-63fa-43a3-b3c0-5110eea4ad12
+  uuid: 8027dcdf-8b10-42d4-adce-8bb5c1dedd8e
   default_langcode: en
   depends:
-    b9ca6761-d26e-4c06-9947-a78d2f37cc0c: media
-    bef8f74c-852b-4eed-984e-4bc2a75e8bd3: media
-    5005f597-1a87-4847-8d7d-76a9ef868fa2: media
+    47bc6eb6-6472-4f61-97d9-f3ee6287cbf3: media
+    bdc5e5e1-b8d9-411c-abc3-aa06d8ae34a8: media
+    d84dfd6b-d867-44d9-981a-a62e0e8e62f8: media
+    ca81f8af-dd66-4729-9bb9-72e2a2b3db95: media
     0877ac26-4545-4e19-aa1c-c275dc509af2: media
-    f4bf4e5a-32c3-440c-818b-369bc2bbbd41: media
 default:
   revision_user:
     -
@@ -21,7 +21,7 @@ default:
       target_id: 1
   title:
     -
-      value: 'Awesome Drupal Canvas Demo'
+      value: 'Awesome Drupal Canvas Demo 2'
   components:
     -
       uuid: d9d39cf4-7cab-43d7-b923-a8f4f28e3fbd
@@ -29,7 +29,7 @@ default:
       component_version: a23f4ef60e7cb469
       inputs:
         media:
-          target_uuid: b9ca6761-d26e-4c06-9947-a78d2f37cc0c
+          target_uuid: 47bc6eb6-6472-4f61-97d9-f3ee6287cbf3
         heading_text: "Stop Chasing Down Expense\_Reports & Receipts"
         text: 'Join 200+ finance leaders to discover how FinDrop cut expense processing time by 80% with virtual corporate cards and automated workflows.'
         background_position: bottom
@@ -103,10 +103,9 @@ default:
       component_version: 1cc23bba50b15c46
       inputs:
         heading_text: 'Create Cards in Seconds'
-        level: 3
         url: 'https://www.example.com'
         media:
-          target_uuid: bef8f74c-852b-4eed-984e-4bc2a75e8bd3
+          target_uuid: bdc5e5e1-b8d9-411c-abc3-aa06d8ae34a8
         text: 'Generate virtual cards instantly with custom spending limits and merchant restrictions'
         style: framed
         orientation: stacked
@@ -121,7 +120,7 @@ default:
         level: 3
         url: 'https://www.example.com'
         media:
-          target_uuid: 5005f597-1a87-4847-8d7d-76a9ef868fa2
+          target_uuid: d84dfd6b-d867-44d9-981a-a62e0e8e62f8
         text: 'Monitor all company spending in real-time with automatic receipt capture'
         style: framed
         orientation: stacked
@@ -136,7 +135,7 @@ default:
         level: 3
         url: 'https://www.example.com'
         media:
-          target_uuid: 0877ac26-4545-4e19-aa1c-c275dc509af2
+          target_uuid: ca81f8af-dd66-4729-9bb9-72e2a2b3db95
         text: 'Instantly categorizes transactions and syncs with QuickBooks, NetSuite, and 50+ platforms.'
         style: framed
         orientation: stacked
@@ -152,7 +151,7 @@ default:
         margin_block_end: '48'
         padding_block_start: '0'
         padding_block_end: '0'
-        width: 'hg:lg:max-w-1/2'
+        width: 'hg:lg:max-w-3/4'
         background: 'hg:bg-none'
     -
       parent_uuid: 4dba6548-f887-4f80-a0a4-0dcfe7f4cf92
@@ -186,7 +185,7 @@ default:
       component_version: 0caacbb3728877d3
       inputs:
         text: 'Controllers & Finance Managers'
-        description: 'Get complete visibility into company spending with automated reporting and budget controls'
+        description: 'Get complete visibility into spending with automated reporting & budget controls'
         border: true
         icon: ph-user-plus
         icon_align: 'hg:justify-center'
@@ -200,7 +199,7 @@ default:
       component_version: 0caacbb3728877d3
       inputs:
         text: 'Staff Accountants & AP Teams'
-        description: 'Eliminate manual expense report processing and month-end reconciliation chaos  '
+        description: 'Eliminate manual expense report processing and reconciliation chaos  '
         border: true
         icon: ph-user-plus
         icon_align: 'hg:justify-center'
@@ -327,12 +326,12 @@ default:
       component_version: d287c9eb7dcf48d9
       inputs:
         media:
-          target_uuid: f4bf4e5a-32c3-440c-818b-369bc2bbbd41
-        size: 'hg:aspect-4/3'
+          target_uuid: 0877ac26-4545-4e19-aa1c-c275dc509af2
         radius: 'hg:rounded-sm'
+        size: 'hg:aspect-1/1'
   path:
     -
-      alias: /demo
+      alias: /demo2
       langcode: en
   created:
     -

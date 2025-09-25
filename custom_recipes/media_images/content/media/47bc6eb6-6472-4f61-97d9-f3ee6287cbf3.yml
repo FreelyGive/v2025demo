@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 47bc6eb6-6472-4f61-97d9-f3ee6287cbf3
+  bundle: image
+  default_langcode: en
+  depends:
+    6db5169c-efd1-454b-b7ba-3b45a9eb59fd: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: woman-using-cab-london.png
+  created:
+    -
+      value: 1758760491
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photograph set inside a London cab, with warm tones capturing the soft, glowing light from the street outside. The background features a blurred view of city buildings, signaling motion and a bustling atmosphere. A woman and a man are in the foreground, with the woman holding a smartphone displaying a ride-hailing app. The woman appears to be in her 20s or 30s, with long hair, conveying a focused and composed expression, reflecting a professional mood. The man, wearing a flat cap, seems to be in a similar age range, with a profile turned towards her, possibly in conversation. Both are dressed in business attire, adding to the modern, urban feel of the image. The photograph captures an everyday moment of technology-driven urban life, emphasizing efficiency and connectivity.'
+  field_media_image:
+    -
+      alt: '""'
+      title: ''
+      width: 1024
+      height: 1024
+      entity: 6db5169c-efd1-454b-b7ba-3b45a9eb59fd

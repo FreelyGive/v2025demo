@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: d1a44cf4-fc94-45b9-b8e6-2fa76a938225
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: woman-using-app-coffee.png
+  uri:
+    -
+      value: 'public://2025-09/woman-using-app-coffee.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 2056277
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1758760914

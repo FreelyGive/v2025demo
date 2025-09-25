@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: d84dfd6b-d867-44d9-981a-a62e0e8e62f8
+  bundle: image
+  default_langcode: en
+  depends:
+    d1a44cf4-fc94-45b9-b8e6-2fa76a938225: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: woman-using-app-coffee.png
+  created:
+    -
+      value: 1758760914
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "The image is a photo set in a cozy coffee shop, with warm lighting and muted colors dominating the background, like browns and beiges. It features a woman, likely Asian, in her 20s or 30s, wearing a red shirt and displaying a focused expression as she uses a smartphone app. She's engaged in making a digital payment, with a smartwatch visible on her wrist, enhancing the modern, tech-savvy mood of the scene. The relaxed barista, in a white shirt and dark apron, stands behind the counter and interacts casually with the woman. The atmosphere feels friendly and comfortable, blending everyday life with technology. The presence of cups and coffee-making equipment adds to the authentic coffee shop setting."
+  field_media_image:
+    -
+      alt: '""'
+      title: ''
+      width: 1024
+      height: 1024
+      entity: d1a44cf4-fc94-45b9-b8e6-2fa76a938225

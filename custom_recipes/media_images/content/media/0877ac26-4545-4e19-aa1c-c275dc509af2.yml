@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 0877ac26-4545-4e19-aa1c-c275dc509af2
+  bundle: image
+  default_langcode: en
+  depends:
+    b38beb47-f637-468a-8385-a206265ed349: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: findrop_supported_apps.png
+  created:
+    -
+      value: 1758760336
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a graphic featuring a sleek, black smartphone displaying the text "FinDrop" and a card icon. It is set against a dark, grid-like background filled with numerous white and colored app icons, suggesting a tech-savvy ambiance. The icons are arranged neatly, giving a sense of organized innovation. This digital composition exudes a modern, high-tech mood, with a focus on connectivity and technology. The main colors in the scene are black, white, and some subtle greens and blues from the app icons. There are no people present, only digital elements. The overall feeling is futuristic and professional, emphasizing the support of multiple applications by FinDrop.'
+  field_media_image:
+    -
+      alt: '""'
+      title: ''
+      width: 1024
+      height: 1024
+      entity: b38beb47-f637-468a-8385-a206265ed349

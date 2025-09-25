@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: ed34d0e1-6f0f-4771-81d2-4ae0a6604370
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: woman-using-cab-coffee.png
+  uri:
+    -
+      value: 'public://2025-09/woman-using-cab-coffee.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 1864199
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1758761879

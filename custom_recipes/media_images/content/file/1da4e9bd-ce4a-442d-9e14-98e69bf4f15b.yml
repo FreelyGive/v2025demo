@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 1da4e9bd-ce4a-442d-9e14-98e69bf4f15b
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: woman-using-app.png
+  uri:
+    -
+      value: 'public://2025-09/woman-using-app.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 1714900
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1758760377

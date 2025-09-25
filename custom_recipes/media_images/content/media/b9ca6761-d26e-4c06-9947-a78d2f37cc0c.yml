@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: b9ca6761-d26e-4c06-9947-a78d2f37cc0c
+  bundle: image
+  default_langcode: en
+  depends:
+    c181bf30-cf86-4a70-bc5e-43cbdb0a9288: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: Findrop_illustration_hero-2.jpg
+  created:
+    -
+      value: 1758760426
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a graphic illustration with a predominantly black background, creating a sleek and modern look. White lines and abstract patterns emanate from a central rectangular device, creating a sense of dynamic motion and connectivity. This object is central to the composition, labeled "Findrop." The overall mood is futuristic and technological, evoking innovation and digital networks. The absence of people focuses attention on the abstract elements and the main device. The minimalist design is accentuated by the contrast between the dark background and the bright, intricate lines.'
+  field_media_image:
+    -
+      alt: '""'
+      title: ''
+      width: 3000
+      height: 1833
+      entity: c181bf30-cf86-4a70-bc5e-43cbdb0a9288

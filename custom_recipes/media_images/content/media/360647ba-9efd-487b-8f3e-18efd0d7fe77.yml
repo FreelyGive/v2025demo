@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 360647ba-9efd-487b-8f3e-18efd0d7fe77
+  bundle: image
+  default_langcode: en
+  depends:
+    ed34d0e1-6f0f-4771-81d2-4ae0a6604370: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: woman-using-cab-coffee.png
+  created:
+    -
+      value: 1758761879
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photo set in an urban environment, showcasing a scene with predominantly muted colors like grays and blues, indicative of a street filled with cars and buildings. A woman, likely of Asian descent and appearing to be in her 20s or 30s, is the focus, dressed in a smart blue blazer. She exudes a focused and business-like mood, holding a smartphone displaying a payment app. In front of her is a man in a suit, possibly of African descent, holding a portable card reader, suggesting a transaction is underway. The background features a softly blurred cityscape, adding to the busy, metropolitan atmosphere. The overall mood is professional and modern, capturing a moment of seamless, mobile technology use in everyday life.'
+  field_media_image:
+    -
+      alt: '""'
+      title: ''
+      width: 1024
+      height: 1024
+      entity: ed34d0e1-6f0f-4771-81d2-4ae0a6604370

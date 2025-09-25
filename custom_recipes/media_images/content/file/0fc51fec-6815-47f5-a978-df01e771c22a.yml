@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 0fc51fec-6815-47f5-a978-df01e771c22a
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: Findrop_many-phones.png
+  uri:
+    -
+      value: 'public://2025-09/Findrop_many-phones.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 1386758
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1758760275

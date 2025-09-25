@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 6db5169c-efd1-454b-b7ba-3b45a9eb59fd
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: woman-using-cab-london.png
+  uri:
+    -
+      value: 'public://2025-09/woman-using-cab-london.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 1919364
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1758760491

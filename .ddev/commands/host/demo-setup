@@ -50,12 +50,13 @@ ddev drush recipe ../custom_recipes/canvas_ai_setup
 ddev drush cr
 # Add all images after to make sure they are indexed correctly.
 ddev drush recipe ../custom_recipes/media_images
-
+# Add Aidan's manual pages
+ddev drush recipe ../custom_recipes/new_canvas_page
 # Always flush the cache
 ddev drush cr
 
 # Index the AI stuff
 ddev drush sapi-i
 
-echo "Visit https://v2025demo.ddev.site/canvas/canvas_page/2/editor and login with user 'admin' and password 'admin' to see the demo page."
+echo "Visit https://v2025demo.ddev.site/canvas and login with user 'admin' and password 'admin' to see the demo page."
 echo "After login, you click "New" and "New Page" to create a new page from AI."

@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: bef8f74c-852b-4eed-984e-4bc2a75e8bd3
+  bundle: image
+  default_langcode: en
+  depends:
+    0fc51fec-6815-47f5-a978-df01e771c22a: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: Findrop_many-phones.png
+  created:
+    -
+      value: 1758760275
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a graphic design with a modern and sleek aesthetic. It features a series of smartphones aligned in diminishing perspective, creating a sense of depth and infinity. The background is a deep black, highlighting the luminous white outlines of the phones. Each smartphone prominently displays the word "FinDrop" above an icon resembling a credit card. The mood is futuristic and tech-oriented, emphasizing digital connectivity and innovation. No human figures are present, making the focus entirely on the technology. The overall impression is one of sophistication and cutting-edge design.'
+  field_media_image:
+    -
+      alt: '""'
+      title: ''
+      width: 1024
+      height: 1024
+      entity: 0fc51fec-6815-47f5-a978-df01e771c22a

@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: bdc5e5e1-b8d9-411c-abc3-aa06d8ae34a8
+  bundle: image
+  default_langcode: en
+  depends:
+    fb30eb7e-6698-429e-a3b3-9bba46919d7b: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: woman-using-london.png
+  created:
+    -
+      value: 1758761939
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "The image is a photo featuring a woman inside a traditional black London taxi, absorbed in using her smartphone. She appears to be of Asian descent, wearing a professional blue suit, and seems focused and composed, suggesting a work-related activity. The driver, a middle-aged man in dark attire, is visible in the front seat, concentrating on the road. The setting is urban, with a blurred background of London architecture in neutral tones, adding a bustling city vibe. The mood is professional and modern, highlighting the use of technology in everyday life. The image's primary colors are the glossy black of the taxi and the blue of the woman's suit, contrasted by the light interior and the muted cityscape. This image conveys a sense of contemporary urban routine and connectivity."
+  field_media_image:
+    -
+      alt: '""'
+      title: ''
+      width: 1024
+      height: 1024
+      entity: fb30eb7e-6698-429e-a3b3-9bba46919d7b

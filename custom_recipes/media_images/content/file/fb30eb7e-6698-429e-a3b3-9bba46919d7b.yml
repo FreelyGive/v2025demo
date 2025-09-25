@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: fb30eb7e-6698-429e-a3b3-9bba46919d7b
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: woman-using-london.png
+  uri:
+    -
+      value: 'public://2025-09/woman-using-london.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 2096755
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1758761939

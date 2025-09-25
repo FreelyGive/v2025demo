@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: c181bf30-cf86-4a70-bc5e-43cbdb0a9288
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: Findrop_illustration_hero-2.jpg
+  uri:
+    -
+      value: 'public://2025-09/Findrop_illustration_hero-2.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 865832
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1758760426

@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: ca81f8af-dd66-4729-9bb9-72e2a2b3db95
+  bundle: image
+  default_langcode: en
+  depends:
+    4f508b08-a596-4b41-bd55-3bcb7a0794c0: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: woman-dinner-2.png
+  created:
+    -
+      value: 1758760864
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a photograph featuring a dinner setting with a wooden table as the central element. The main colors include warm browns from the table, and whites and deep reds from the plates and a wine glass. A woman, likely of Asian descent, is in the foreground, engaging with a payment device using her smartphone, suggesting a modern and tech-savvy atmosphere. The image conveys a relaxed and sociable mood, common in dining scenarios. Plates with remnants of food and a half-full glass of red wine denote a meal just concluded, adding to the sense of companionship and interaction. The presence of both cups and glasses on the table, along with salt and pepper shakers, emphasizes the dining context. The overall composition suggests an everyday, contemporary dining experience with a focus on digital transactions.'
+  field_media_image:
+    -
+      alt: '""'
+      title: ''
+      width: 1024
+      height: 1024
+      entity: 4f508b08-a596-4b41-bd55-3bcb7a0794c0
