@@ -1,0 +1,8 @@
+langcode: en
+status: true
+name: 'AI Context Tags'
+description: 'Tags to categorize AI Context documents.'
+vid: ai_context_tags
+hierarchy: 0
+weight: 0
+
