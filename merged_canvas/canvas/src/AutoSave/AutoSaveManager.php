@@ -306,7 +306,7 @@ class AutoSaveManager implements EventSubscriberInterface {
   /**
    * Gets all auto-save data.
    *
-   * @return array<string, array{data: array, owner: int, updated: int, entity_type: string, entity_id: string|int, label: string, langcode: ?string, entity: ?EntityInterface}>
+   * @return array<string, array{data: array, owner: int, updated: int, entity_type: string, entity_id: string|int, label: string, data_hash: string, client_id: ?string, langcode: ?string, entity: ?EntityInterface}>
    *   All auto-save data entries.
    */
   public function getAllAutoSaveList(bool $with_entities = FALSE): array {

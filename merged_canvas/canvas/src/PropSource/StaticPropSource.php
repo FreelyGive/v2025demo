@@ -499,8 +499,10 @@ final class StaticPropSource extends PropSourceBase {
       $field->appendItem();
     }
     // Most widgets do not need an entity context, but some do:
+    // @see \Drupal\Core\Field\FieldItemListInterface::getEntity()
     // @see \Drupal\file\Plugin\Field\FieldWidget\FileWidget
     // @see \Drupal\image\Plugin\Field\FieldWidget\ImageWidget
+    // @see \Drupal\Core\Field\Plugin\Field\FieldWidget\OptionsWidgetBase::getOptions()
     if ($host_entity) {
       $field->setContext(NULL, EntityAdapter::createFromEntity($host_entity));
     }

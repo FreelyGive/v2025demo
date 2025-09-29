@@ -18,7 +18,7 @@ describe('📸️ Code image component', () => {
       cy.loadURLandWaitForCanvasLoaded({ url: 'canvas/editor/node/2' });
       cy.openLibraryPanel();
       cy.get('.primaryPanelContent').should('contain.text', 'Components');
-      cy.get('.primaryPanelContent').findByText('CC Optional Image').click();
+      cy.insertComponent({ name: 'CC Optional Image' });
       // Check the default video src is set.
       const iframeSelector =
         '[data-test-canvas-content-initialized="true"][data-canvas-swap-active="true"]';

@@ -98,13 +98,25 @@ class AiResponseValidator {
         // Create a temp version if the component does not exist to allow
         // validation to proceed. The constraints will flag invalid components
         // later.
-        $componentVersion = Component::load($componentId)?->getActiveVersion() ?? "temp-version-$componentUuid";
+        $component = Component::load($componentId);
+        $componentVersion = $component ? $component->getActiveVersion() : "temp-version-$componentUuid";
+        if ($component instanceof Component && !empty($componentData['props'])) {
+          $source = $component->getComponentSource();
+          $clientNormalized = $component->normalizeForClientSide()->values;
+          $sources = $clientNormalized['propSources'];
+          $clientModel['source'] = $sources;
+          $clientModel['resolved'] = $componentData['props'];
+          $inputs = $source->clientModelToInput($componentUuid, $component, $clientModel, NULL);
+        }
+        else {
+          $inputs = [];
+        }
 
         $componentTreeItem = [
           'uuid' => $componentUuid,
           'component_id' => $componentId,
           'component_version' => $componentVersion,
-          'inputs' => $componentData['props'] ?? [],
+          'inputs' => $inputs,
         ];
         if ($parentUuid !== NULL) {
           $componentTreeItem['parent_uuid'] = $parentUuid;

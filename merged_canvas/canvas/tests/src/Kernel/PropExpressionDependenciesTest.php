@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Drupal\Tests\canvas\Kernel;
 
+use Drupal\canvas\TypedData\BetterEntityDataDefinition;
 use Drupal\Core\Field\FieldItemInterface;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\canvas\PropExpressions\StructuredData\FieldObjectPropsExpression;
@@ -176,6 +177,12 @@ class PropExpressionDependenciesTest extends KernelTestBase {
       'filename' => 'example.png',
     ]);
     $image_file->save();
+    $another_image_file = File::create([
+      'uuid' => 'photo-baby-jack-uuid',
+      'uri' => 'public://jack.jpg',
+      'filename' => 'jack.jpg',
+    ]);
+    $another_image_file->save();
     $image_media = Media::create([
       'name' => 'Example image',
       'bundle' => 'image',
@@ -183,6 +190,13 @@ class PropExpressionDependenciesTest extends KernelTestBase {
       'uuid' => 'some-media-uuid',
     ]);
     $image_media->save();
+    $baby_photos_media = Media::create([
+      'name' => 'Baby Jack',
+      'bundle' => 'baby_photos',
+      'field_media_image_1' => $another_image_file,
+      'uuid' => 'baby-photos-media-uuid',
+    ]);
+    $baby_photos_media->save();
     Node::create([
       'uuid' => self::NODE_1_UUID,
       'title' => 'dummy_title',
@@ -239,17 +253,41 @@ class PropExpressionDependenciesTest extends KernelTestBase {
       // Almost always, the content-aware dependencies are the same as the
       // content-unaware ones, just with the `content` key-value pair omitted,
       // if any.
-      $expected_content_unaware_dependencies = $case[3] ?? $expected_dependencies;
-      if (is_array($expected_content_unaware_dependencies)) {
-        $expected_content_unaware_dependencies = array_diff_key($expected_content_unaware_dependencies, array_flip(['content']));
-      }
+      $expected_content_unaware_dependencies = $case[3] ?? (
+        is_array($expected_dependencies)
+          ? array_diff_key($expected_dependencies, array_flip(['content']))
+          : NULL
+      );
 
       $test_case_precise_label = sprintf("%s (%s)", $test_case_label, (string) $expression);
 
       $entity_or_field = match(get_class($expression)) {
         FieldPropExpression::class, ReferenceFieldPropExpression::class, FieldObjectPropsExpression::class => $host_entity,
         FieldTypePropExpression::class, ReferenceFieldTypePropExpression::class, FieldTypeObjectPropsExpression::class => (function () use ($expression) {
-          $field_item_list = StaticPropSource::generate($expression, 1)
+          // For reference fields, ::randomizeValue() will point to incorrect
+          // entities (defaulting to the `Node` entity type!) unless the storage
+          // and instance settings passed to StaticPropSource are correct too.
+          $storage_settings = [];
+          $instance_settings = [];
+          if ($expression instanceof ReferenceFieldTypePropExpression) {
+            $target_entity_data_definition = $expression->referenced instanceof ReferenceFieldPropExpression
+              ? $expression->referenced->referencer->entityType
+              : $expression->referenced->entityType;
+            assert($target_entity_data_definition instanceof BetterEntityDataDefinition);
+            $storage_settings['target_type'] = $target_entity_data_definition->getEntityTypeId();
+            $target_bundles = $target_entity_data_definition->getBundles();
+            if ($target_bundles) {
+              $instance_settings = [
+                'handler_settings' => [
+                  'target_bundles' => array_combine($target_bundles, $target_bundles),
+                ],
+              ];
+            }
+          }
+
+          // 🪄 Conjure a randomly populated prop source to evaluate this
+          // expression.
+          $field_item_list = StaticPropSource::generate($expression, 1, $storage_settings, $instance_settings)
             ->randomizeValue()->fieldItemList;
           if ($field_item_list instanceof FileFieldItemList) {
             // Ensure that expected content dependencies always use the hardcoded

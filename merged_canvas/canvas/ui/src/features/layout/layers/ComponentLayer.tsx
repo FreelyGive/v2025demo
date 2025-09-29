@@ -157,12 +157,9 @@ const ComponentLayer: React.FC<ComponentLayerProps> = ({
                 menuType="dropdown"
               />
             }
+            indent={indent}
             leadingContent={
               <Flex>
-                <Box
-                  width={`calc(${indent} * var(--space-2))`}
-                  className="canvas-layer-indent"
-                />
                 <Box width="var(--space-4)" mr="1">
                   {component.slots.length > 0 ? (
                     <Collapsible.Trigger

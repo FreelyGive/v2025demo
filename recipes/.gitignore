@@ -1,1 +1,3 @@
-/README.txt
+# Ignore everything in this directory except for the Drupal CMS components.
+/*
+!/drupal_cms_*

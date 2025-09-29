@@ -320,7 +320,7 @@ final class Personalization extends ComponentSourceBase implements
     FormStateInterface $form_state,
     ?Component $component = NULL,
     string $component_instance_uuid = '',
-    array $client_model = [],
+    array $inputValues = [],
     ?EntityInterface $entity = NULL,
     array $settings = [],
   ): array {
@@ -342,13 +342,13 @@ final class Personalization extends ComponentSourceBase implements
         'variant_id' => [
           '#type' => 'textfield',
           '#title' => $this->t('Variant ID'),
-          '#value' => \json_encode($client_model['variant_id'], \JSON_PRETTY_PRINT & \JSON_THROW_ON_ERROR),
+          '#value' => \json_encode($inputValues['variant_id'], \JSON_PRETTY_PRINT & \JSON_THROW_ON_ERROR),
           '#disabled' => TRUE,
         ],
         'segments' => [
           '#type' => 'textfield',
           '#title' => $this->t('Segments'),
-          '#value' => \json_encode($client_model['segments'], \JSON_PRETTY_PRINT & \JSON_THROW_ON_ERROR),
+          '#value' => \json_encode($inputValues['segments'], \JSON_PRETTY_PRINT & \JSON_THROW_ON_ERROR),
           '#disabled' => TRUE,
         ],
       ],
@@ -362,7 +362,7 @@ final class Personalization extends ComponentSourceBase implements
         'variants' => [
           '#type' => 'textarea',
           '#title' => $this->t('Variants'),
-          '#value' => \json_encode($client_model['variants'], \JSON_PRETTY_PRINT & \JSON_THROW_ON_ERROR),
+          '#value' => \json_encode($inputValues['variants'], \JSON_PRETTY_PRINT & \JSON_THROW_ON_ERROR),
         ],
       ],
     };

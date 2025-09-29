@@ -252,6 +252,143 @@ const messageHandlers = [
   operationsHandler,
 ];
 
+const startPolling = (
+  requestId: string,
+  csrfToken: string,
+  chatEl: any,
+  onPollingComplete?: () => void,
+  stopSignal?: { stopped: boolean },
+) => {
+  let pollCount = 0;
+  const maxPolls = 500;
+  const itemStatuses = new Map();
+  let hasAddedInitialMessage = false;
+  let pollingMessageIndex = -1;
+
+  const getStatusIcon = (status: string) =>
+    status === 'completed'
+      ? '<span class="aiCompletedIcon"></span>'
+      : '<span class="aiLoader"></span>';
+
+  const buildHtmlContent = () => {
+    if (itemStatuses.size === 0) return '';
+
+    let htmlContent = '<div style="margin-top: 10px;">';
+
+    itemStatuses.forEach((item) => {
+      const icon = getStatusIcon(item.status);
+
+      htmlContent += `<div style="display: flex; align-items: center; padding: 8px; background-color: white;">
+        <span style="margin-right: 8px;">${icon}</span>
+        <span style="font-weight: 400;">${item.description}</span>
+      </div>`;
+
+      if (item.type === 'agent' && item.generated_text?.trim()) {
+        htmlContent += `<div style="padding: 8px; background-color: white; font-size: 14px; line-height: 1.26;">
+          ${item.generated_text.replace(/\n/g, '<br>')}
+        </div>`;
+      }
+    });
+
+    return htmlContent + '</div>';
+  };
+
+  const updateChatDisplay = () => {
+    const htmlContent = buildHtmlContent();
+    if (!chatEl) return;
+
+    const scrollContainer = chatEl.shadowRoot?.querySelector('#messages');
+    const shouldAutoScroll = scrollContainer
+      ? scrollContainer.scrollHeight -
+          scrollContainer.scrollTop -
+          scrollContainer.clientHeight <
+        5
+      : false;
+
+    if (!hasAddedInitialMessage) {
+      chatEl.addMessage({ html: htmlContent, role: 'ai' });
+      hasAddedInitialMessage = true;
+      pollingMessageIndex = chatEl.getMessages().length - 1;
+    } else {
+      try {
+        if (pollingMessageIndex >= 0) {
+          chatEl.updateMessage({ html: htmlContent }, pollingMessageIndex);
+        }
+      } catch (error) {
+        console.warn('UpdateMessage failed:', error);
+        chatEl.addMessage({ html: htmlContent, role: 'ai' });
+        pollingMessageIndex = chatEl.getMessages().length - 1;
+      }
+    }
+
+    if (scrollContainer && shouldAutoScroll) {
+      setTimeout(
+        () => (scrollContainer.scrollTop = scrollContainer.scrollHeight),
+        0,
+      );
+    }
+  };
+
+  const handlePollingComplete = () => {
+    const finalContent = buildHtmlContent();
+    if (finalContent) {
+      historyStore.addMessage({ html: finalContent, role: 'ai' });
+    }
+    onPollingComplete?.();
+  };
+
+  const poll = async () => {
+    if (stopSignal?.stopped) {
+      return;
+    }
+    try {
+      pollCount++;
+      const response = await fetch(
+        `/admin/api/canvas/ai-progress?request_id=${requestId}`,
+        {
+          method: 'GET',
+          headers: { 'X-CSRF-Token': csrfToken },
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error(`Polling HTTP error. Status: ${response.status}`);
+      }
+
+      const pollingData = await response.json();
+
+      if (pollingData.items?.length) {
+        pollingData.items.forEach((item: any) => {
+          itemStatuses.set(item.id, {
+            type: item.type,
+            description: item.description || item.name || '',
+            status: item.status,
+            generated_text: item.generated_text || '',
+          });
+        });
+      }
+
+      updateChatDisplay();
+
+      if (pollingData.is_finished) {
+        handlePollingComplete();
+        return;
+      }
+
+      if (pollCount < maxPolls) {
+        setTimeout(poll, 2000);
+      } else {
+        console.error('Polling timeout reached');
+        handlePollingComplete();
+      }
+    } catch (error) {
+      console.error('Polling request failed:', error);
+      handlePollingComplete();
+    }
+  };
+  setTimeout(poll, 1000);
+};
+
 function getHandlersForMessage(message: any) {
   return messageHandlers.filter((handler) => handler.canHandle(message));
 }
@@ -279,7 +416,6 @@ const AiWizard = () => {
   );
   let isComponentRendered = false;
   const welcomeTextRef = useRef<HTMLSpanElement>(null);
-
   // Get the current layout, selected component, and available components from Redux state
   const theLayoutModel = useAppSelector(
     (state) => state?.layoutModel?.present as LayoutModelSliceState,
@@ -310,6 +446,7 @@ const AiWizard = () => {
   const layoutUtils = drupalSettings.canvas?.layoutUtils as any;
   const componentSelectionUtils = drupalSettings.canvas
     ?.componentSelectionUtils as any;
+
   const selectedComponent = useAppSelector(
     (state) => state.ui.selection.items[0],
   );
@@ -558,10 +695,13 @@ const AiWizard = () => {
             // the values at the time the component was mounted.
             // @see https://deepchat.dev/docs/connect/#Handler
             handler: async (body, signals) => {
+              let pendingResponse: any = null;
+              const stopPolling = { stopped: false };
+
               try {
                 const hasFiles = body instanceof FormData;
                 let requestBody: FormData | string;
-                let headers: Record<string, string> = {
+                const headers: Record<string, string> = {
                   'X-CSRF-Token': csrfToken,
                 };
 
@@ -596,6 +736,10 @@ const AiWizard = () => {
                     'layout',
                     currentValuesRef.current.textPropsMapString,
                   );
+                  requestBody.append(
+                    'derived_proptypes',
+                    JSON.stringify(fixtureProps),
+                  );
                 } else {
                   requestBody = JSON.stringify({
                     ...body,
@@ -616,24 +760,71 @@ const AiWizard = () => {
                   });
                   headers['Content-Type'] = 'application/json';
                 }
-                const response = await fetch('/admin/api/canvas/ai', {
+                // Generate a unique request ID
+                const requestId = `req_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`;
+                if (hasFiles) {
+                  (requestBody as FormData).append('request_id', requestId);
+                } else {
+                  const parsedBody = JSON.parse(requestBody as string);
+                  parsedBody.request_id = requestId;
+                  requestBody = JSON.stringify(parsedBody);
+                }
+
+                // Start polling first
+                const chatEl = chatElementRef.current;
+                if (chatEl) {
+                  startPolling(
+                    requestId,
+                    csrfToken,
+                    chatEl,
+                    async () => {
+                      // Process the main response after polling completes
+                      if (pendingResponse) {
+                        const processedMessage =
+                          await receiveMessage(pendingResponse);
+                        await signals.onResponse(processedMessage);
+                        chatEl.disableSubmitButton();
+                      }
+                    },
+                    stopPolling,
+                  );
+                }
+
+                // Make the main API call but don't process the response immediately
+                fetch('/admin/api/canvas/ai', {
                   method: 'POST',
                   headers,
                   body: requestBody,
-                });
-                if (!response.ok) {
-                  throw new Error(`HTTP error. Status: ${response.status}`);
-                }
-
-                const data = await response.json();
-                const processedMessage = await receiveMessage(data);
-                signals.onResponse(processedMessage);
+                })
+                  .then(async (response) => {
+                    if (!response.ok) {
+                      throw new Error(`HTTP error. Status: ${response.status}`);
+                    }
+                    const data = await response.json();
+                    // Store the response instead of processing it
+                    pendingResponse = data;
+                  })
+                  .catch((error) => {
+                    console.error('AI request failed:', error);
+                    stopPolling.stopped = true;
+                    signals.onResponse({
+                      text: 'An error occurred while processing your request. Please try again.',
+                      role: 'error',
+                    });
+                    setTimeout(() => {
+                      chatElementRef.current?.disableSubmitButton();
+                    }, 0);
+                  });
               } catch (error) {
                 console.error('AI request failed:', error);
-                signals.onResponse({
+                stopPolling.stopped = true;
+                await signals.onResponse({
                   text: 'An error occurred while processing your request. Please try again.',
                   role: 'error',
                 });
+                setTimeout(() => {
+                  chatElementRef.current?.disableSubmitButton();
+                }, 0);
               }
               setTimeout(() => {
                 chatElementRef.current?.disableSubmitButton();
@@ -737,6 +928,42 @@ const AiWizard = () => {
             },
           }}
           auxiliaryStyle="
+          .aiLoader, .aiCompletedIcon {
+            display: inline-block;
+            box-sizing: border-box;
+            vertical-align: middle;
+            margin-right: 8px;
+          }
+          .aiLoader {
+            width: 12px;
+            height: 12px;
+            border: 2px solid #8B8D98;
+            border-bottom-color: transparent;
+            border-radius: 50%;
+            animation: ai-wizard-rotation 0.8s linear infinite;
+          }
+          @keyframes ai-wizard-rotation {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+          }
+          .aiCompletedIcon {
+            position: relative;
+            width: 12px;
+            height: 12px;
+            border: 1.5px solid #30A46C;
+            border-radius: 50%;
+          }
+          .aiCompletedIcon::after {
+            content: '';
+            position: absolute;
+            top: 0px;
+            left: 3px;
+            width: 3px;
+            height: 6px;
+            border: solid #30A46C;
+            border-width: 0 1.5px 1.5px 0;
+            transform: rotate(45deg);
+          }
           #chat-view:has(#messages:empty) {
             display: block;
           }

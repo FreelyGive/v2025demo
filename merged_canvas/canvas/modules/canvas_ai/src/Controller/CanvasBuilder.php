@@ -3,10 +3,13 @@
 namespace Drupal\canvas_ai\Controller;
 
 use Drupal\ai\AiProviderPluginManager;
+use Drupal\ai_agents\Enum\AiAgentStatusItemTypes;
 use Drupal\ai_agents\Plugin\AiFunctionCall\AiAgentWrapper;
 use Drupal\ai\OperationType\Chat\ChatInput;
 use Drupal\ai\OperationType\Chat\ChatMessage;
 use Drupal\ai\OperationType\GenericType\ImageFile;
+use Drupal\ai_agents\Service\AgentStatus\Interfaces\AiAgentStatusPollerServiceInterface;
+use Drupal\ai_agents\Service\AgentStatus\UpdateItems\TextGenerated;
 use Drupal\Component\Plugin\PluginManagerInterface;
 use Drupal\Component\Serialization\Json;
 use Drupal\Core\Access\CsrfTokenGenerator;
@@ -20,9 +23,9 @@ use Drupal\canvas_ai\Plugin\AiFunctionCall\EditComponentJs;
 use Drupal\canvas_ai\Plugin\AiFunctionCall\CreateFieldContent;
 use Drupal\canvas_ai\Plugin\AiFunctionCall\EditFieldContent;
 use Drupal\canvas_ai\Plugin\AiFunctionCall\SetAIGeneratedComponentStructure;
-use Drupal\canvas_ai\Plugin\AiFunctionCall\SetAIGeneratedTemplateData;
 use Drupal\canvas_ai\CanvasAiPageBuilderHelper;
 use Drupal\canvas_ai\CanvasAiTempStore;
+use Drupal\canvas_ai\Plugin\AiFunctionCall\SetAIGeneratedTemplateData;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,12 +34,12 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Yaml\Yaml;
 
 /**
- * Renders the Experience Builder AI calls.
+ * Renders the Drupal Canvas AI calls.
  */
 final class CanvasBuilder extends ControllerBase {
 
   /**
-   * Constructs a new XbBuilder object.
+   * Constructs a new CanvasBuilder object.
    */
   public function __construct(
     protected AiProviderPluginManager $providerService,
@@ -45,6 +48,7 @@ final class CanvasBuilder extends ControllerBase {
     protected CanvasAiPageBuilderHelper $canvasAiPageBuilderHelper,
     protected CanvasAiTempStore $canvasAiTempStore,
     protected FileSystemInterface $fileSystem,
+    protected AiAgentStatusPollerServiceInterface $poller,
   ) {}
 
   /**
@@ -58,18 +62,19 @@ final class CanvasBuilder extends ControllerBase {
       $container->get('canvas_ai.page_builder_helper'),
       $container->get('canvas_ai.tempstore'),
       $container->get('file_system'),
+      $container->get('ai_agents.agent_status_poller'),
     );
   }
 
   /**
-   * Renders the Experience Builder AI calls.
+   * Renders the Drupal Canvas AI calls.
    *
    * @param \Symfony\Component\HttpFoundation\Request $request
    *   The current request.
    */
   public function render(Request $request): JsonResponse {
     $token = $request->headers->get('X-CSRF-Token') ?? '';
-    if (!$this->csrfTokenGenerator->validate($token, 'canvas_ai.xb_builder')) {
+    if (!$this->csrfTokenGenerator->validate($token, 'canvas_ai.canvas_builder')) {
       throw new AccessDeniedHttpException('Invalid CSRF token');
     }
 
@@ -83,6 +88,7 @@ final class CanvasBuilder extends ControllerBase {
     else {
       $prompt = $request->request->all();
       $files = $request->files->all();
+      $prompt['derived_proptypes'] = Json::decode($prompt['derived_proptypes']);
     }
     // If $prompt['messages'] is missing or invalid, this code reconstructs it
     // by scanning for keys named 'message <number>', and
@@ -184,10 +190,18 @@ final class CanvasBuilder extends ControllerBase {
         break;
       }
       else {
-        $messages[] = new ChatMessage($message['role'] === 'user' ? 'user' : 'assistant', $message['text']);
+        if (!empty($message['text'])) {
+          $messages[] = new ChatMessage($message['role'] === 'user' ? 'user' : 'assistant', $message['text']);
+        }
       }
     }
     $agent->setChatHistory($messages);
+    $agent->setProgressThreadId($prompt['request_id']);
+    $agent->setDetailedProgressTracking([
+      AiAgentStatusItemTypes::Started,
+      AiAgentStatusItemTypes::TextGenerated,
+      AiAgentStatusItemTypes::Finished,
+    ]);
     $default = $this->providerService->getDefaultProviderForOperationType('chat');
     if (!is_array($default) || empty($default['provider_id']) || empty($default['model_id'])) {
       return new JsonResponse([
@@ -208,18 +222,8 @@ final class CanvasBuilder extends ControllerBase {
     $agent->setAiConfiguration([]);
     $agent->setCreateDirectly(TRUE);
     $menu_fetch_source = $this->getMenuFetchSource();
-    $agent->setTokenContexts([
-      'entity_type' => $prompt['entity_type'],
-      'entity_id' => $prompt['entity_id'],
-      'selected_component' => $prompt['selected_component'] ?? NULL,
-      'layout' => $prompt['layout'] ?? NULL,
-      'derived_proptypes' => JSON::encode($prompt['derived_proptypes']) ?? NULL,
-      'available_regions' => JSON::encode($this->canvasAiPageBuilderHelper->getAvailableRegions(Json::encode($prompt['current_layout']))) ?? NULL,
-      'page_title' => $prompt['page_title'],
-      'page_description' => $prompt['page_description'] ?? NULL,
-      'active_component_uuid' => $prompt['active_component_uuid'] ?? 'None',
-      'menu_fetch_source' => $menu_fetch_source,
-    ]);
+    $json_api_module_status = $this->moduleHandler()->moduleExists('jsonapi') ? 'enabled' : 'disabled';
+    $agent->setTokenContexts(['entity_type' => $prompt['entity_type'] ?? NULL, 'entity_id' => $prompt['entity_id'] ?? NULL, 'selected_component' => $prompt['selected_component'] ?? NULL, 'layout' => $prompt['layout'] ?? NULL, 'derived_proptypes' => isset($prompt['derived_proptypes']) ? JSON::encode($prompt['derived_proptypes']) : NULL, 'page_title' => $prompt['page_title'] ?? NULL, 'page_description' => $prompt['page_description'] ?? NULL, 'active_component_uuid' => $prompt['active_component_uuid'] ?? 'None', 'menu_fetch_source' => $menu_fetch_source, 'json_api_module_status' => $json_api_module_status]);
     $solvability = $agent->determineSolvability();
     $status = FALSE;
     $message = '';
@@ -252,7 +256,6 @@ final class CanvasBuilder extends ControllerBase {
             if ($tool instanceof $class) {
               // @todo Refactor this after https://www.drupal.org/i/3529313 is fixed.
               $output = $tool->getReadableOutput();
-
               // The SetAIGeneratedTemplateData tool returns JSON instead of
               // YAML, to reduce parsing errors.
               if ($tool instanceof SetAIGeneratedTemplateData) {
@@ -260,13 +263,12 @@ final class CanvasBuilder extends ControllerBase {
               }
               else {
                 $data = Yaml::parse($output);
-              }
-              foreach ($keys as $key) {
-                if (!empty($data[$key])) {
-                  $response[$key] = $data[$key];
+                foreach ($keys as $key) {
+                  if (!empty($data[$key])) {
+                    $response[$key] = $data[$key];
+                  }
                 }
               }
-
             }
           }
           if ($tool instanceof AiAgentWrapper) {
@@ -297,7 +299,7 @@ final class CanvasBuilder extends ControllerBase {
    *   The response object.
    */
   public function getCsrfToken(Request $request): Response {
-    return new Response($this->csrfTokenGenerator->get('canvas_ai.xb_builder'));
+    return new Response($this->csrfTokenGenerator->get('canvas_ai.canvas_builder'));
   }
 
   /**
@@ -320,6 +322,113 @@ final class CanvasBuilder extends ControllerBase {
       $menuFetchSource = 'menu_fetching_functionality_not_available';
     }
     return $menuFetchSource;
+  }
+
+  /**
+   * Poller function to get the AI progress.
+   *
+   * @param \Symfony\Component\HttpFoundation\Request $request
+   *   The current request.
+   *
+   * @return \Symfony\Component\HttpFoundation\JsonResponse
+   *   The JSON response.
+   */
+  public function getAiProgress(Request $request): JsonResponse {
+    $token = $request->headers->get('X-CSRF-Token') ?? '';
+    if (!$this->csrfTokenGenerator->validate($token, 'canvas_ai.canvas_builder')) {
+      throw new AccessDeniedHttpException('Invalid CSRF token');
+    }
+
+    $progress = $this->poller->getLatestStatusUpdates($request->get('request_id'));
+    $items = [];
+    $agent_runner_to_agent_id = [];
+    $is_finished = FALSE;
+
+    foreach ($progress->getItems() as $event) {
+      /** @var \Drupal\ai_agents\Service\AgentStatus\Interfaces\UpdateItems\StatusBaseInterface $event */
+      $event_type = $event->getType();
+      $agent_id = $event->getAgentId();
+
+      if ($event_type == AiAgentStatusItemTypes::Started) {
+        $agent_runner_id = $event->getAgentRunnerId();
+        $agent_runner_to_agent_id[$agent_runner_id] = $agent_id;
+        $items[$agent_id] = [
+          'id' => $agent_id,
+          'type' => 'agent',
+          'name' => $event->getAgentName(),
+          'description' => $this->getAgentDescription($agent_id, $event->getAgentName() ?? 'Agent'),
+          'status' => 'running',
+          'generated_text' => '',
+          'agent_runner_id' => $agent_runner_id,
+        ];
+      }
+      elseif ($event_type == AiAgentStatusItemTypes::Finished) {
+        if (isset($items[$agent_id])) {
+          $items[$agent_id]['status'] = 'completed';
+          if ($agent_id == 'canvas_ai_orchestrator') {
+            $is_finished = TRUE;
+            break;
+          }
+        }
+      }
+      elseif ($event_type == AiAgentStatusItemTypes::TextGenerated) {
+        if ($event instanceof TextGenerated) {
+          $generated_text = $event->getGeneratedText();
+          if (!empty($generated_text)) {
+            $agent_runner_id = $event->getAgentRunnerId();
+            if (isset($agent_runner_to_agent_id[$agent_runner_id])) {
+              $target_agent_id = $agent_runner_to_agent_id[$agent_runner_id];
+              if (isset($items[$target_agent_id])) {
+                $items[$target_agent_id]['generated_text'] = !empty($items[$target_agent_id]['generated_text'])
+                  ? $items[$target_agent_id]['generated_text'] . "\n\n" . $generated_text
+                  : $generated_text;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    if ($is_finished) {
+      foreach ($items as $key => $item) {
+        if ($item['status'] !== 'completed') {
+          $items[$key]['status'] = 'completed';
+        }
+      }
+    }
+
+    // If there is only one item, and it's the orchestrator, remove its
+    // generated_text to avoid duplicating the final response.
+    if (count($items) === 1 && isset($items['canvas_ai_orchestrator'])) {
+      unset($items['canvas_ai_orchestrator']['generated_text']);
+    }
+
+    return new JsonResponse([
+      'is_finished' => $is_finished,
+      'items' => array_values($items),
+    ]);
+  }
+
+  /**
+   * Function to return the agent description.
+   *
+   * @param string $agent_id
+   *   The agent ID.
+   * @param string $agent_name
+   *   The agent name.
+   *
+   * @return string
+   *   The agent description.
+   */
+  private function getAgentDescription(string $agent_id, string $agent_name): string {
+    $descriptions = [
+      'canvas_ai_orchestrator' => $this->t('Thinking'),
+      'canvas_title_generation_agent' => $this->t('Generate a title'),
+      'canvas_component_agent' => $this->t('Generate a component'),
+      'canvas_metadata_generation_agent' => $this->t('Generate metadata'),
+      'canvas_page_builder_agent' => $this->t('Building the page'),
+    ];
+    return $descriptions[$agent_id] ?? $this->t('@agentName working', ['@agentName' => $agent_name]);
   }
 
 }

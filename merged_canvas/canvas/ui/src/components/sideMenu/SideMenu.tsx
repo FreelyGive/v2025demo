@@ -14,6 +14,7 @@ import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import {
   selectActivePanel,
   setActivePanel,
+  setManageLibraryTab,
   unsetActivePanel,
 } from '@/features/ui/primaryPanelSlice';
 import { getCanvasSettings } from '@/utils/drupal-globals';
@@ -75,6 +76,7 @@ export const SideMenu: React.FC<SideMenuProps> = () => {
   useEffect(() => {
     if (isCodeEditor) {
       dispatch(setActivePanel('manageLibrary'));
+      dispatch(setManageLibraryTab('code'));
     } else if (isEditor && activePanelRef.current === 'manageLibrary') {
       // we came from the library to the editor, so switch to "library"
       dispatch(setActivePanel('library'));

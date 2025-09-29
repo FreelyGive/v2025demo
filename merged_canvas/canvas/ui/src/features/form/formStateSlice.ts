@@ -51,6 +51,7 @@ type SetFieldValuePayload = {
   formId: FormId;
   fieldName: string;
   value: any;
+  updateSource?: boolean;
 };
 
 export const formStateSlice = createSlice({
@@ -92,16 +93,41 @@ export const formStateSlice = createSlice({
       },
     ),
     setFieldValue: create.reducer(
-      (state, action: PayloadAction<SetFieldValuePayload>) => ({
-        ...state,
-        [action.payload.formId]: {
-          ...state[action.payload.formId],
-          values: {
-            ...state[action.payload.formId].values,
-            [action.payload.fieldName]: action.payload.value,
+      (state, action: PayloadAction<SetFieldValuePayload>) => {
+        const newState = {
+          ...state,
+          [action.payload.formId]: {
+            ...state[action.payload.formId],
+            values: {
+              ...state[action.payload.formId].values,
+              [action.payload.fieldName]: action.payload.value,
+            },
           },
-        },
-      }),
+        };
+        // If this is flagged to update the source, we need to update the
+        // serialized form_canvas_props value to reflect that.
+        if (action.payload.updateSource) {
+          const propsInfo = { ...state.component_instance_form.values }
+            ?.form_canvas_props;
+          try {
+            const parsedPropsInfo = propsInfo && JSON.parse(propsInfo);
+            if (parsedPropsInfo) {
+              parsedPropsInfo.source[action.payload.fieldName] =
+                action.payload.value.source;
+              parsedPropsInfo.resolved[action.payload.fieldName] =
+                action.payload.value.resolved;
+              newState.component_instance_form.values.form_canvas_props =
+                JSON.stringify(parsedPropsInfo);
+            }
+          } catch (e) {
+            console.warn(
+              'could not parse serialized canvas props, prop linking might fail',
+            );
+          }
+        }
+
+        return newState;
+      },
     ),
   }),
   selectors: {

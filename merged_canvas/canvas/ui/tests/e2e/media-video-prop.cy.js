@@ -16,12 +16,9 @@ describe('Media Library', () => {
   it('Can use a video component that uses the media library widget', () => {
     cy.drupalLogin('canvasUser', 'canvasUser');
     cy.loadURLandWaitForCanvasLoaded({ url: 'canvas/editor/canvas_page/2' });
-    cy.openLibraryPanel();
-    cy.get('.primaryPanelContent').findByText('Video').click();
-    cy.get('.primaryPanelContent').findByText('Video').click();
-    cy.get(
-      '.previewOverlay [data-canvas-component-id="sdc.canvas_test_sdc.video"]',
-    ).should('have.length', 2);
+    cy.insertComponent({ name: 'Video' });
+    cy.insertComponent({ name: 'Video' });
+    cy.waitForElementInIframe('video:nth-of-type(2)');
     cy.clickComponentInPreview('Video', 0);
     cy.waitForAjax();
     cy.get('[data-testid*="canvas-component-form-"]').as('inputForm');
@@ -90,8 +87,7 @@ describe('Media Library', () => {
   it('Can handle not immediately having a value', () => {
     cy.drupalLogin('canvasUser', 'canvasUser');
     cy.loadURLandWaitForCanvasLoaded({ url: 'canvas/editor/canvas_page/2' });
-    cy.openLibraryPanel();
-    cy.get('.primaryPanelContent').findByText('Video').click();
+    cy.insertComponent({ name: 'Video' });
     cy.waitForElementInIframe('video > source');
     cy.findByLabelText('Display width').clear();
     cy.intercept({

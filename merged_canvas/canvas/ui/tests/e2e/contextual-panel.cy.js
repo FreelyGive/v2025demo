@@ -271,7 +271,7 @@ describe('Contextual panel', () => {
     cy.openLibraryPanel();
 
     // Click Heading in the side menu
-    cy.get('.primaryPanelContent').findByText('Heading').click();
+    cy.insertComponent({ name: 'Heading' });
     // Check if heading component has been added in the preview
     cy.waitForElementContentInIframe(
       'h1[data-component-id="canvas_test_sdc:heading"]',

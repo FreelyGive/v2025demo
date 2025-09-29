@@ -633,7 +633,7 @@ export const updateExistingComponentValues =
     }
 
     let resetSelection: string | undefined = undefined;
-    const { values, componentToUpdateId } = payload;
+    const { values, componentToUpdateId, sources = {} } = payload;
     const selectionItems = state?.ui?.selection?.items;
 
     // If the component being updated is currently selected, it is temporarily
@@ -667,17 +667,20 @@ export const updateExistingComponentValues =
       ...model.resolved,
       ...values,
     };
-    // Help, how do I get the editor frame context here
 
     const type = selectEditorFrameContext(state);
     if (isEvaluatedComponentModel(model) && componentMetadata) {
+      const source = {
+        ...model.source,
+        ...sources,
+      };
       const valuePayload = {
         type,
         componentInstanceUuid: componentToUpdateId,
         componentType: `${selectedComponentType}@${version}`,
         model: {
           source: syncPropSourcesToResolvedValues(
-            model.source,
+            source,
             componentMetadata,
             resolved,
           ),

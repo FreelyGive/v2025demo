@@ -9,7 +9,6 @@ use Drupal\ai\Attribute\FunctionCall;
 use Drupal\ai\Base\FunctionCallBase;
 use Drupal\ai\Service\FunctionCalling\ExecutableFunctionCallInterface;
 use Drupal\ai\Service\FunctionCalling\FunctionCallInterface;
-use Drupal\ai\Utility\ContextDefinitionNormalizer;
 use Drupal\ai_agents\PluginInterfaces\AiAgentContextInterface;
 use Drupal\canvas\AutoSave\AutoSaveManager;
 use Drupal\canvas\Entity\JavaScriptComponent;

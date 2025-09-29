@@ -473,6 +473,47 @@ canvas.api.ui.content_template.view_modes.list:
   options:
     _format: 'json'
 
+canvas.api.usage.component.individual:
+  path: '/canvas/api/v0/usage/component/{component}'
+  defaults:
+    _controller: 'Drupal\canvas\Controller\ApiUsageControllers::component'
+    _title: 'Usage of a single Component'
+  requirements:
+    _canvas_authentication_required: TRUE
+    _canvas_ui_access: 'TRUE'
+    _format: 'json'
+  methods: [GET]
+  options:
+    parameters:
+      component:
+        type: entity:component
+
+canvas.api.usage.component.individual.details:
+  path: '/canvas/api/v0/usage/component/{component}/details'
+  defaults:
+    _controller: 'Drupal\canvas\Controller\ApiUsageControllers::componentDetails'
+    _title: 'Usage details of a single Component'
+  requirements:
+    _canvas_authentication_required: TRUE
+    _canvas_ui_access: 'TRUE'
+    _format: 'json'
+  methods: [GET]
+  options:
+    parameters:
+      component:
+        type: entity:component
+
+canvas.api.usage.component.list:
+  path: '/canvas/api/v0/usage/component'
+  defaults:
+    _controller: 'Drupal\canvas\Controller\ApiUsageControllers::componentsList'
+    _title: 'Usage of a list of Components (paginated)'
+  requirements:
+    _canvas_authentication_required: TRUE
+    _canvas_ui_access: 'TRUE'
+    _format: 'json'
+  methods: [GET]
+
 canvas.boot.empty:
   path: '/canvas'
   defaults:

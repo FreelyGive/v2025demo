@@ -157,6 +157,7 @@ services:
   Drupal\canvas\Controller\CanvasController: {}
   Drupal\canvas\Controller\ApiAutoSaveController: {}
   Drupal\canvas\Controller\ApiUiContentTemplateControllers: {}
+  Drupal\canvas\Controller\ApiUsageControllers: {}
 
   # Decorators.
   Drupal\canvas\Render\ImportMapResponseAttachmentsProcessor:

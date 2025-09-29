@@ -3,7 +3,6 @@
 namespace Drupal\canvas_ai\Plugin\AiFunctionCall;
 
 use Drupal\ai\Service\FunctionCalling\FunctionCallInterface;
-use Drupal\ai\Utility\ContextDefinitionNormalizer;
 use Drupal\Component\Serialization\Json;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Plugin\Context\ContextDefinition;

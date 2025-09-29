@@ -58,6 +58,6 @@
     "js-yaml": "^4.1.0",
     "lightningcss": "^1.30.1",
     "table": "^6.9.0",
-    "tailwindcss-in-browser": "^0.3.0"
+    "tailwindcss-in-browser": "^0.4.0"
   }
 }

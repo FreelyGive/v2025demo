@@ -693,6 +693,9 @@ class CanvasConfigEntityHttpApiTest extends HttpApiTestBase {
       'compiledJs' => '',
       'compiledCss' => '',
       'dataDependencies' => [],
+      'links' => [
+        'delete-form' => \base_path() . 'canvas/api/v0/config/js_component/disabled_js_component',
+      ],
       'default_markup' => '@todo Make something 🆒 in https://www.drupal.org/project/canvas/issues/3498889',
       'css' => '',
       'js_header' => '',
@@ -870,13 +873,17 @@ class CanvasConfigEntityHttpApiTest extends HttpApiTestBase {
       'dataDependencies' => [],
     ]);
     $this->assertSame(SAVED_NEW, $dependency_component->save());
-    $expected_dependency_component = $dependency_component->normalizeForClientSide()->values +
+    $expected_dependency_component = array_merge($dependency_component->normalizeForClientSide()->values,
     [
+      'links' => [
+        // 💡The ABSENCE of a `delete-form` link here is because this code
+        // component is a dependency of the other.
+      ],
       'default_markup' => '@todo Make something 🆒 in https://www.drupal.org/project/canvas/issues/3498889',
       'css' => '',
       'js_header' => '',
       'js_footer' => '',
-    ];
+    ]);
 
     // Create a Code Component via the Canvas HTTP API, correctly: 201.
     $code_component_to_send = [
@@ -1001,6 +1008,9 @@ class CanvasConfigEntityHttpApiTest extends HttpApiTestBase {
       'compiledJs' => 'console.log("Test")',
       'compiledCss' => '.test{display:none;}',
       'dataDependencies' => [],
+      'links' => [
+        'delete-form' => \base_path() . 'canvas/api/v0/config/js_component/test',
+      ],
       'default_markup' => '@todo Make something 🆒 in https://www.drupal.org/project/canvas/issues/3498889',
       'css' => '',
       'js_header' => '',
@@ -1162,6 +1172,7 @@ class CanvasConfigEntityHttpApiTest extends HttpApiTestBase {
       'title' => 'Title (new)',
     ] + $auto_save_data['props']['string'];
     $expected_auto_save = $expected_component;
+    unset($expected_auto_save['links']);
     $expected_auto_save['name'] = $auto_save_data['name'];
     $expected_auto_save['props']['string']['title'] = 'Title (new)';
     // Expected component has the keys in the same order as the schema, because
@@ -1256,6 +1267,7 @@ class CanvasConfigEntityHttpApiTest extends HttpApiTestBase {
       'title' => 'Title (new)',
     ] + $auto_save_data['props']['string'];
     $expected_auto_save = $expected_component;
+    unset($expected_auto_save['links']);
     $expected_auto_save['name'] = $auto_save_data['name'];
     $expected_auto_save['props']['string']['title'] = 'Title (new)';
     // Expected component has the keys in the same order as the schema, because
@@ -1280,6 +1292,37 @@ class CanvasConfigEntityHttpApiTest extends HttpApiTestBase {
     ];
     unset($expected_auto_save['css'], $expected_auto_save['default_markup'], $expected_auto_save['js_footer'], $expected_auto_save['js_header']);
     $this->performAutoSave($auto_save_data, $expected_auto_save, JavaScriptComponent::ENTITY_TYPE_ID, 'test');
+
+    $page = Page::create([
+      'title' => 'Test page',
+      'components' => [
+        [
+          'uuid' => '2c6e91ae-23ac-433d-9bb8-687144464b34',
+          'component_id' => 'js.test',
+          'inputs' => [
+            'string' => 'Hello world',
+            'integer' => 42,
+            'number' => 3.14,
+            'enum' => 'primary',
+          ],
+        ],
+      ],
+    ]);
+    self::assertCount(0, $page->validate());
+    $page->save();
+
+    // We can NOT delete the 'test' Code Component via the Canvas HTTP API because it is in use.
+    self::assertTrue(\Drupal::service(ComponentAudit::class)->hasUsages($component));
+    $body = $this->assertExpectedResponse('DELETE', Url::fromUri('base:/canvas/api/v0/config/js_component/test'), [], 403, NULL, NULL, NULL, NULL);
+
+    $this->assertSame([
+      'errors' =>
+        [
+          "This code component is in use in a default revision and cannot be deleted.",
+        ],
+    ], $body);
+
+    $page->delete();
 
     // We can delete the 'test' Code Component via the Canvas HTTP API. As it isn't
     // in use it will cascade delete the component as well.

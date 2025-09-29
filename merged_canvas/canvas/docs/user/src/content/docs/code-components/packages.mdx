@@ -110,10 +110,27 @@ const ControlDots = ({ className }) => (
   tailwindcss.com
 </LinkButton>
 
-Tailwind 4 is available to all components by default. The global CSS is added
-to all pages with a `@theme` directive.
+Tailwind 4 is available to all components by default. The global CSS is added to
+all pages with the `@import "tailwindcss"` directive included.
 
-**Do not include `@import "tailwindcss"`** as it is included automatically.
+You can use the [`@theme` directive to customize theme variables](https://tailwindcss.com/docs/theme).
+For example, you can add a new color to your project by defining a theme
+variable like `--color-drupal-blue`:
+
+```css
+@theme {
+  --color-drupal-blue: #009cde;
+}
+```
+
+Now you can use utility classes like `bg-drupal-blue`, `text-drupal-blue`, or
+`fill-drupal-blue` in your component markup:
+
+```jsx
+export default function Example() {
+  return <div className="bg-drupal-blue">Drupal Blue</div>;
+}
+```
 
 ### clsx
 

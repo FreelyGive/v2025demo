@@ -1,9 +1,7 @@
 # Drupal Canvas OAuth
 
-[OAuth 2](https://oauth.net/2) authentication for [Drupal Canvas](drupal.org/project/canvas)'s external
-HTTP API, currently covering endpoints for working with JavaScript/code components.
-
-In the rest of this document, "Drupal Canvas" will be written as "Canvas".
+[OAuth 2](https://oauth.net/2) authentication for the external HTTP API of [Drupal Canvas](drupal.org/project/canvas),
+currently covering endpoints for working with JavaScript/code components.
 
 ## 1. Requirements
 
@@ -73,8 +71,8 @@ curl -X POST https://canvas.ddev.site/oauth/token \
 The response will return the access token, which can be used with a request, e.g.:
 
 ```
-curl -H "Authorization: Bearer YOUR-ACCESS-TOKEN" \
-  https://canvas.ddev.site/canvas/api/v0/config/js_component
+curl  https://canvas.ddev.site/canvas/api/v0/config/js_component \
+  -H "Authorization: Bearer YOUR-ACCESS-TOKEN"
 ```
 
 ## 3. OAuth 2 scopes
@@ -102,7 +100,7 @@ permission.
 
 ## 4. Supported endpoints
 
-→ See more details in [Canvas's OpenAPI spec](https://git.drupalcode.org/project/canvas/-/blob/0.x/openapi.yml).
+→ See more details in [Canvas' OpenAPI spec](https://git.drupalcode.org/project/canvas/-/blob/1.x/openapi.yml).
 
 | Method                   | Endpoint                                              |
 |--------------------------|-------------------------------------------------------|

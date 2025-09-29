@@ -1,32 +1,6 @@
 # This file instructs Redocly's linter to ignore the rules contained for specific parts of your API.
 # See https://redocly.com/docs/cli/ for more information.
 openapi.yml:
-  no-required-schema-properties-undefined:
-    - '#/components/schemas/NewAssetLibrary/allOf/0/required/0'
-    - '#/components/schemas/NewAssetLibrary/allOf/0/required/1'
-    - '#/components/schemas/ExistingFolder/allOf/0/required/0'
-    - '#/components/schemas/ExistingFolder/allOf/0/required/1'
-    - '#/components/schemas/ExistingFolder/allOf/0/required/2'
-    - '#/components/schemas/ExistingFolder/allOf/0/required/3'
-    - '#/components/schemas/ExistingFolder/allOf/0/required/4'
-    - '#/components/schemas/NewFolder/allOf/0/required/0'
-    - '#/components/schemas/NewFolder/allOf/0/required/1'
-    - '#/components/schemas/NewFolder/allOf/0/required/2'
-    - '#/components/schemas/NewFolder/allOf/0/required/3'
-    - >-
-      #/paths/~1canvas~1api~1v0~1config~1folder~1{configEntityId}/patch/requestBody/content/application~1json/schema/allOf/0/required/0
-    - >-
-      #/paths/~1canvas~1api~1v0~1config~1folder~1{configEntityId}/patch/requestBody/content/application~1json/schema/allOf/0/required/1
-    - >-
-      #/paths/~1canvas~1api~1v0~1config~1folder~1{configEntityId}/patch/requestBody/content/application~1json/schema/allOf/0/required/2
-    - '#/components/schemas/NewCodeComponent/allOf/0/required/0'
-    - '#/components/schemas/NewCodeComponent/allOf/0/required/1'
-    - '#/components/schemas/NewCodeComponent/allOf/0/required/2'
-    - '#/components/schemas/NewCodeComponent/allOf/0/required/3'
-    - '#/components/schemas/NewCodeComponent/allOf/0/required/4'
-    - '#/components/schemas/NewPattern/allOf/0/required/0'
-    - '#/components/schemas/NewPattern/allOf/0/required/1'
-    - '#/components/schemas/NewPattern/allOf/0/required/2'
   struct:
     - >-
       #/paths/~1canvas~1api~1v0~1config~1asset_library/post/requestBody/content/application~1json/examples/example

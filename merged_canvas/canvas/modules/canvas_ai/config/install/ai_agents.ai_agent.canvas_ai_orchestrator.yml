@@ -1,9 +1,9 @@
-uuid: 11b01026-ee64-47da-a7fc-b941cdb02dcf
 langcode: en
 status: true
-dependencies: {  }
-_core:
-  default_config_hash: euu09e9Ue-aj8nfHvr1XrkWX9Bpk9K3nsxdaCT3Ym_Y
+dependencies:
+  enforced:
+    module:
+      - canvas_ai
 id: canvas_ai_orchestrator
 label: 'Drupal Canvas AI Orchestrator'
 description: 'This orchestration agent analyzes user input to determine the intent — content creation, content editing, metadata generation, component or layout addition/modification —and delegates the task to the corresponding specialized sub-agent. It ensures accurate routing for efficient and context-aware processing.'
@@ -66,6 +66,7 @@ system_prompt: |-
         - Even if context includes an active or selected component, or previous steps were component creation/selection, only process the new page request.
         - You are STRICTLY FORBIDDEN from mentioning, referencing, or basing any action on prior components or their selection for this type of request.
     - Use `canvas_template_builder_agent` only for template, header, or footer generation or for whenever the request requires you to touch more then one component. Pass the user request unchanged. For other page-building requests, use `canvas_page_builder_agent`.
+    - If the user's request instructs to "create", "add" or "generate" a **page** (e.g., includes phrases like "create a page", "build a landing page", "add a new page", "design a homepage", etc.), **always delegate to `canvas_page_builder_agent`**, regardless of any parameters, context, or previous agent usage.
     - If the request specifically directs creation or editing of a **component** (e.g., "create a [code] component", "update this component", "add a new button component", etc.), delegate to `canvas_component_agent`.
     - Otherwise, if the `selected_component` parameter exists in the **context** and has a value, it is a **code component creation or update request**. Delegate it to the `canvas_component_agent`, even if keywords like "update title" or "change description" are present in the request.
 
@@ -74,7 +75,7 @@ system_prompt: |-
   - If the request is for creating or updating the page title or description, assign the task to one of the following sub-agents:
     - `canvas_metadata_generation_agent`: to generate or update the description or metadata.
     - `canvas_title_generation_agent`: to generate or update the title.
-  - If the request is to add components or create sections for specific use cases of one component, it is a page-building task. Delegate it to the `canvas_page_builder_agent` sub-agent.
+  - If the request is to add components or create sections for specific use cases, it is a page-building task. Delegate it to the `canvas_page_builder_agent` sub-agent.
   - Important: When using the canvas_page_builder_agent or  `canvas_template_builder_agent` tool, always pass the complete, unaltered user request to the tool.
   If the request is a follow-up related to a previous interaction, you may add relevant context to help the tool understand it better.
   However, never modify, reword, or omit any part of the user's original request.
@@ -108,13 +109,15 @@ system_prompt: |-
     - "Add a new section with a title and description" → `canvas_page_builder_agent` even if `selected_component` is present
     - "Add a link prop to the component" → `canvas_component_agent`.
     - "Generate a landing page with a hero section, a CTA and a text" -> `canvas_template_builder_agent`.
+  ----------------------------------
+  selected_component: [canvas_ai:selected_component]
+
 secured_system_prompt: '[ai_agent:agent_instructions]'
 tools:
   'ai_agent:get_entity_information': true
   'ai_agents::ai_agent::canvas_component_agent': true
   'ai_agents::ai_agent::canvas_metadata_generation_agent': true
   'ai_agents::ai_agent::canvas_page_builder_agent': true
-  'ai_agents::ai_agent::canvas_template_builder_agent': true
   'ai_agents::ai_agent::canvas_title_generation_agent': true
 tool_settings:
   'ai_agent:get_entity_information':
@@ -137,11 +140,6 @@ tool_settings:
     description_override: ''
     progress_message: ''
     use_artifacts: 0
-  'ai_agents::ai_agent::canvas_template_builder_agent':
-    return_directly: 0
-    description_override: ''
-    progress_message: ''
-    use_artifacts: 0
   'ai_agents::ai_agent::canvas_title_generation_agent':
     return_directly: 0
     description_override: ''
@@ -150,15 +148,7 @@ tool_settings:
 orchestration_agent: true
 triage_agent: false
 max_loops: 10
-default_information_tools: |
-  get_entity_context:
-    label: 'Get entity context'
-    description: 'This context information is passed to all other sub-agents'
-    tool: 'ai_agent:get_entity_information'
-    parameters:
-      entity_type: '[canvas_ai:entity_type]'
-      entity_id: '[canvas_ai:entity_id]'
-      selected_component: '[canvas_ai:selected_component]'
+default_information_tools: ''
 tool_usage_limits:
   'ai_agent:get_entity_information':
     entity_type:
@@ -196,15 +186,6 @@ tool_usage_limits:
       hide_property: 0
       values: ''
   'ai_agents::ai_agent::canvas_page_builder_agent':
-    prompt:
-      action: ''
-      hide_property: 0
-      values: ''
-    files:
-      action: ''
-      hide_property: 0
-      values: ''
-  'ai_agents::ai_agent::canvas_template_builder_agent':
     prompt:
       action: ''
       hide_property: 0

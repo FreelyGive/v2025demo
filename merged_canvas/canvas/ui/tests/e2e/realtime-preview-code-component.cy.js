@@ -21,7 +21,7 @@ describe('⚡️ Real time code component previews', () => {
       // Wait for the component list to load.
       cy.get('.primaryPanelContent').should('contain.text', 'Components');
       // Add the 'With props' code component.
-      cy.get('.primaryPanelContent').findByText('With props').click();
+      cy.insertComponent({ name: 'With props' });
       // Check the default values display in the preview.
       cy.waitForElementContentInIframe(
         'div',

@@ -1,5 +1,8 @@
 - tabpanel "Patterns":
-  - button "Add new folder":
+  - textbox "Search content"
+  - img
+  - button "New":
+    - img
     - img
   - img
   - button "Animal Pats"
@@ -9,9 +12,11 @@
     - listitem:
       - img
       - text: Cat pattern
+      - button "Open contextual menu"
     - listitem:
       - img
       - text: Dog pattern
+      - button "Open contextual menu"
   - img
   - button "Color Patterns"
   - button "Collapse Color Patterns folder" [expanded]:
@@ -20,9 +25,11 @@
     - listitem:
       - img
       - text: Red pattern
+      - button "Open contextual menu"
     - listitem:
       - img
       - text: Yellow pattern
+      - button "Open contextual menu"
   - img
   - button "Empty Patterns"
   - button "Collapse Empty Patterns folder" [expanded]:
@@ -32,3 +39,4 @@
     - listitem:
       - img
       - text: Grid Container using pattern
+      - button "Open contextual menu"

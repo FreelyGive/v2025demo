@@ -36,12 +36,15 @@
   'form-wrapper',
 ]
 %}
-
 <fieldset{{ attributes.addClass(classes) }} data-canvas-media-library-fieldset='true'>
   <legend>
-    <canvas-text as="label" size="1" weight="medium">
-      {{ legend.title }}
-    </canvas-text>
+    <canvas-drupal-label
+        title="{{ legend.title }}"
+        {% if prop_link_data %}
+          direct_linker_data="{{ prop_link_data }}"
+        {% endif  %}
+    >
+    </canvas-drupal-label>
   </legend>
 
   {# If the prefix is the weight toggle, it is positioned above the wrapper. #}

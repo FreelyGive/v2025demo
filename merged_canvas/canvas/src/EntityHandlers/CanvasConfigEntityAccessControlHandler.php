@@ -62,7 +62,6 @@ class CanvasConfigEntityAccessControlHandler extends EntityAccessControlHandler 
 
     // Filter out dependent component entities.
     $component_config_entities = \array_filter($dependent_entities, static fn (ConfigEntityDependency $dependent_entity) => \str_starts_with($dependent_entity->getConfigDependencyName(), $component_prefix));
-    \assert(\count($component_config_entities) <= 1);
     $dependent_entities = \array_diff_key($dependent_entities, $component_config_entities);
 
     // Prevent deletion if additional dependent entities exist.

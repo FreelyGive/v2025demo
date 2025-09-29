@@ -45,7 +45,7 @@ export class CanvasEditor {
     );
 
     await expect(this.page.getByTestId('canvas-primary-panel')).toContainText(
-      /Layers|Library/,
+      /Layers|Library|Patterns/,
       {
         timeout: 15000,
       },
@@ -168,8 +168,8 @@ export class CanvasEditor {
       '[data-testid="canvas-primary-panel"] [data-canvas-type="component"]',
     );
     const count = await components.count();
-    for (let i = 0; i < count; i++) {
-      await components.nth(i).waitFor({ state: 'visible' });
+    if (count > 0) {
+      await components.nth(count - 1).waitFor({ state: 'visible' });
     }
 
     await this.page
@@ -188,6 +188,21 @@ export class CanvasEditor {
     await expect(
       this.page.locator(
         '[data-testid="canvas-primary-panel"] h4:has-text("Layers")',
+      ),
+    ).toBeVisible();
+  }
+
+  async openManageLibraryPanel() {
+    // Click the library panel first so it doesn't matter if the layers panel
+    // is already open or not.
+    await this.page.getByTestId('canvas-side-menu').getByLabel('Add').click();
+    await this.page
+      .getByTestId('canvas-side-menu')
+      .getByLabel('Manage library')
+      .click();
+    await expect(
+      this.page.locator(
+        '[data-testid="canvas-primary-panel"] h4:has-text("Manage library")',
       ),
     ).toBeVisible();
   }
@@ -240,7 +255,9 @@ export class CanvasEditor {
 
     const existingInstances = this.page.locator(previewSelector);
     const initialCount = await existingInstances.count();
-    await componentLocator.click();
+    await componentLocator.hover();
+    await componentLocator.getByLabel('Open contextual menu').click();
+    await this.page.getByText('Insert').click();
 
     expect(await this.page.locator(previewSelector).count()).toBe(
       initialCount + 1,
@@ -451,15 +468,17 @@ export class CanvasEditor {
   }
 
   async createCodeComponent(componentName: string, code: string) {
-    await this.openLibraryPanel();
+    await this.openManageLibraryPanel();
+    await this.page.getByTestId('canvas-page-list-new-button').click();
+
     await this.page
-      .locator('[data-testid="canvas-primary-panel"]')
-      .getByText('Create code component')
+      .getByTestId('canvas-library-new-code-component-button')
       .click();
+
     await this.page.fill('#componentName', componentName);
     await this.page
       .locator('.rt-BaseDialogContent button')
-      .getByText('Add')
+      .getByText('Create')
       .click();
     await expect(
       this.page.locator('[data-testid="canvas-mosaic-container"]'),

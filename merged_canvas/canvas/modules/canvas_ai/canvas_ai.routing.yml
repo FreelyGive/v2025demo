@@ -26,6 +26,8 @@ canvas_ai.setting:
   defaults:
     _title: 'Canvas AI Settings Form'
     _form: 'Drupal\canvas_ai\Form\CanvasAiSettingsForm'
+  requirements:
+    _permission: 'use Drupal Canvas AI'
 
 canvas_ai.theme_region_settings:
   path: '/admin/config/ai/canvas-ai-theme-region-settings'
@@ -34,3 +36,10 @@ canvas_ai.theme_region_settings:
     _form: 'Drupal\canvas_ai\Form\CanvasAIThemeRegionSettingsForm'
   requirements:
     _permission: 'use Drupal Canvas ai'
+
+canvas_ai.get_progress:
+  path: '/admin/api/canvas/ai-progress'
+  defaults:
+    _controller: '\Drupal\canvas_ai\Controller\CanvasBuilder::getAiProgress'
+  requirements:
+    _permission: 'use Drupal Canvas AI'

@@ -84,16 +84,17 @@ final class ApiLayoutControllerPatchTest extends ApiLayoutControllerTestBase {
     \assert($this->previewEntity instanceof Node);
     $revision_log_message = 'I always add a log message.';
     $this->previewEntity->setRevisionLogMessage($revision_log_message);
-    $updated_title = 'My dynamic title';
-    $this->previewEntity->set('title', $updated_title);
+    $preview_entity_title = 'My dynamic title';
+    $this->previewEntity->set('title', $preview_entity_title);
     $this->previewEntity->save();
     $this->setUpCurrentUser([], [self::getAdminPermission($contentTemplate)]);
 
-    $uuid = '5f71027b-d9d3-4f3d-8990-a6502c0ba676';
-    // Add a component with only static property sources.
+    $uuid1 = '5f71027b-d9d3-4f3d-8990-a6502c0ba676';
+    $uuid2 = 'e8c95423-4f22-4210-8707-08bade75ff22';
     $components = [
       [
-        'uuid' => $uuid,
+        // Add a component with only static property sources.
+        'uuid' => $uuid1,
         'component_id' => 'sdc.canvas_test_sdc.my-hero',
         'component_version' => '888412021fbcc837',
         'inputs' => [
@@ -114,23 +115,50 @@ final class ApiLayoutControllerPatchTest extends ApiLayoutControllerTestBase {
           ],
         ],
       ],
+      // Add a component with a pre-existing dynamic property source to ensure
+      // it also is rendered and resolved correctly.
+      [
+        'uuid' => $uuid2,
+        'component_id' => 'sdc.canvas_test_sdc.heading',
+        'component_version' => '8dd7b865998f53b0',
+        'inputs' => [
+          'text' => [
+            'sourceType' => 'dynamic',
+            'expression' => 'ℹ︎␜entity:node:article␝title␞␟value',
+          ],
+          'element' => 'h1',
+        ],
+      ],
     ];
     $contentTemplate->setComponentTree($components)->save();
     // @todo Remove this in favor of using ContribStrictConfigSchemaTestTrait in https://www.drupal.org/project/canvas/issues/3531679
     self::assertCount(0, $contentTemplate->getTypedData()->validate());
+
+    $assertResponse = function (Response $response, string $expected_heading, $expected_subheading, $expected_text) use ($uuid1, $uuid2) {
+      $data = $this->decodeResponse($response);
+      self::assertEquals($expected_heading, $data['model'][$uuid1]['resolved']['heading']);
+      self::assertEquals($expected_subheading, $data['model'][$uuid1]['resolved']['subheading']);
+      self::assertEquals('https://drupal.org', $data['model'][$uuid1]['resolved']['cta1href']);
+      self::assertSame($expected_text, $data['model'][$uuid2]['resolved']['text']);
+      self::assertCount(1, $this->cssSelect('[data-component-id="canvas_test_sdc:my-hero"]'));
+      self::assertSame($expected_heading, (string) $this->cssSelect('[data-component-id="canvas_test_sdc:my-hero"] h1')[0]);
+      self::assertSame($expected_subheading, (string) $this->cssSelect('[data-component-id="canvas_test_sdc:my-hero"] p')[0]);
+      self::assertCount(1, $this->cssSelect('h1[data-component-id="canvas_test_sdc:heading"]'));
+      self::assertSame($expected_text, (string) $this->cssSelect('h1[data-component-id="canvas_test_sdc:heading"]')[0]);
+    };
     $url = $this->getLayoutUrl($contentTemplate)->toString();
     $response = $this->request(Request::create($url));
-    $data = $this->decodeResponse($response);
-    self::assertEquals('hello, world!', $data['model'][$uuid]['resolved']['heading']);
-    self::assertEquals('this is a subheading', $data['model'][$uuid]['resolved']['subheading']);
-    self::assertEquals('https://drupal.org', $data['model'][$uuid]['resolved']['cta1href']);
-    self::assertSame('hello, world!', (string) $this->cssSelect('[data-component-id="canvas_test_sdc:my-hero"] h1')[0]);
-    self::assertSame('this is a subheading', (string) $this->cssSelect('[data-component-id="canvas_test_sdc:my-hero"] p')[0]);
+    $assertResponse($response, 'hello, world!', 'this is a subheading', $preview_entity_title);
 
-    // PATCH the layout updating 2 of the 3 properties to dynamic sources.
+    $preview_entity_title = 'New title for the article';
+    \assert($this->previewEntity instanceof Node);
+    $this->previewEntity->set('title', $preview_entity_title)->save();
+
+    // PATCH the model updating 2 of the 3 properties to dynamic sources.
+    $data = $this->decodeResponse($response);
     self::assertArrayHasKey('model', $data);
     self::assertIsArray($data['model']);
-    $new_model = $data['model'][$uuid];
+    $new_model = $data['model'][$uuid1];
     $new_model['source']['heading'] = [
       'sourceType' => 'dynamic',
       'expression' => 'ℹ︎␜entity:node:article␝title␞␟value',
@@ -140,36 +168,41 @@ final class ApiLayoutControllerPatchTest extends ApiLayoutControllerTestBase {
       'expression' => 'ℹ︎␜entity:node:article␝revision_log␞␟value',
     ];
     // The client should set the `resolved` value of a dynamic prop sources to
-    // NULL because it cannot resolve it.
+    // NULL because it cannot resolve them.
     $new_model['resolved']['subheading'] = NULL;
     $new_model['resolved']['heading'] = NULL;
     $updatedHeroClientData = [
       'model' => $new_model,
       'componentType' => 'sdc.canvas_test_sdc.my-hero@888412021fbcc837',
-      'componentInstanceUuid' => $uuid,
+      'componentInstanceUuid' => $uuid1,
     ] + $this->getPatchContentsDefaults([$contentTemplate]);
     $response = $this->request(Request::create($url, method: 'PATCH', content: \json_encode($updatedHeroClientData, JSON_THROW_ON_ERROR)));
-    $data = $this->decodeResponse($response);
-    // @todo The server should return back actual 'resolved' value of the
-    //   dynamic prop source in https://www.drupal.org/i/3541057/
-    self::assertNull($data['model'][$uuid]['resolved']['heading']);
-    self::assertNull($data['model'][$uuid]['resolved']['subheading']);
-    self::assertEquals('https://drupal.org', $data['model'][$uuid]['resolved']['cta1href']);
-    self::assertCount(1, $this->cssSelect('[data-component-id="canvas_test_sdc:my-hero"]'));
-    self::assertSame((string) $this->previewEntity?->label(), (string) $this->cssSelect('[data-component-id="canvas_test_sdc:my-hero"] h1')[0]);
-    self::assertSame($revision_log_message, (string) $this->cssSelect('[data-component-id="canvas_test_sdc:my-hero"] p')[0]);
+    $assertResponse($response, $preview_entity_title, $revision_log_message, $preview_entity_title);
 
     // Ensure the correct values are returned from a GET request after the PATCH
     // request.
     $url = $this->getLayoutUrl($contentTemplate)->toString();
     $response = $this->request(Request::create($url));
+    $assertResponse($response, $preview_entity_title, $revision_log_message, $preview_entity_title);
+
+    // PATCH the subheading to use a different dynamic source.
     $data = $this->decodeResponse($response);
-    self::assertSame($updated_title, $data['model'][$uuid]['resolved']['heading']);
-    self::assertSame($revision_log_message, $data['model'][$uuid]['resolved']['subheading']);
-    self::assertEquals('https://drupal.org', $data['model'][$uuid]['resolved']['cta1href']);
-    self::assertCount(1, $this->cssSelect('[data-component-id="canvas_test_sdc:my-hero"]'));
-    self::assertSame($updated_title, (string) $this->cssSelect('[data-component-id="canvas_test_sdc:my-hero"] h1')[0]);
-    self::assertSame($revision_log_message, (string) $this->cssSelect('[data-component-id="canvas_test_sdc:my-hero"] p')[0]);
+    self::assertArrayHasKey('model', $data);
+    self::assertIsArray($data['model']);
+    $new_model = $data['model'][$uuid1];
+    $new_model['source']['subheading'] = [
+      'sourceType' => 'dynamic',
+      'expression' => 'ℹ︎␜entity:node:article␝title␞␟value',
+    ];
+    $new_model['resolved']['subheading'] = NULL;
+    $new_model['resolved']['heading'] = NULL;
+    $updatedHeroClientData = [
+      'model' => $new_model,
+      'componentType' => 'sdc.canvas_test_sdc.my-hero@888412021fbcc837',
+      'componentInstanceUuid' => $uuid1,
+    ] + $this->getPatchContentsDefaults([$contentTemplate]);
+    $response = $this->request(Request::create($url, method: 'PATCH', content: \json_encode($updatedHeroClientData, JSON_THROW_ON_ERROR)));
+    $assertResponse($response, $preview_entity_title, $preview_entity_title, $preview_entity_title);
   }
 
   /**

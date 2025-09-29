@@ -9,6 +9,7 @@ canvas_ai.setting:
   description: 'Set the max image upload size.'
   parent: ai.admin_settings
   route_name: canvas_ai.setting
+
 canvas_ai.theme_region_settings:
   title: Canvas AI Theme Region Settings
   parent: ai.admin_settings

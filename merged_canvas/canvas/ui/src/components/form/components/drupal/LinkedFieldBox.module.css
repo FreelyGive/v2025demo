@@ -1,0 +1,40 @@
+.text {
+  font-size: var(--font-size-2);
+  line-height: 23px;
+}
+
+.wrapper {
+  border-radius: 4px;
+  box-shadow: 0 0 0 1px rgba(0, 9, 50, 0.12) inset;
+  background-color: #0090FF;
+  color: #FFFFFF;
+  padding: var(--space-1);
+  align-items: center;
+  display: flex;
+}
+
+.iconBox {
+  height: 24px;
+  width: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--radius-2);
+  color: #ffffff;
+}
+
+.linkIcon {
+  margin-right: var(--space-2);
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.closeIcon {
+  margin-left: auto;
+  color: #ffffff;
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+}

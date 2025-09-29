@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Drupal\Tests\canvas\Kernel;
 
+use Drupal\canvas\Entity\ContentTemplate;
 use Drupal\Component\Serialization\Json;
 use Drupal\Core\Cache\MemoryCache\MemoryCacheInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Url;
 use Drupal\canvas\AutoSave\AutoSaveManager;
@@ -258,6 +260,21 @@ final class ApiLayoutControllerPostTest extends ApiLayoutControllerTestBase {
     // Add a new component to the content region.
     $uuid = '173c4899-a5f7-442a-b008-ea8c925735be';
     $json['model'][$uuid] = self::getNewHeadingComponentModel();
+    $static_heading_text = $json['model'][$uuid]['resolved']['text'];
+    if ($entity_type === ContentTemplate::ENTITY_TYPE_ID) {
+      \assert($this->previewEntity instanceof ContentEntityInterface);
+      $preview_entity_title = (string) $this->previewEntity->label();
+      self::assertNotSame($static_heading_text, $preview_entity_title);
+      $json['model'][$uuid]['source']['text'] = [
+        'sourceType' => 'dynamic',
+        'expression' => 'ℹ︎␜entity:node:article␝title␞␟value',
+      ];
+      $json['model'][$uuid]['resolved']['text'] = NULL;
+      $expected_heading_text = $preview_entity_title;
+    }
+    else {
+      $expected_heading_text = $static_heading_text;
+    }
     unset($json['isNew'], $json['isPublished'], $json['html']);
     $json['layout'][0]['components'][] = [
       'nodeType' => 'component',
@@ -279,10 +296,21 @@ final class ApiLayoutControllerPostTest extends ApiLayoutControllerTestBase {
     \assert($node1 instanceof NodeInterface);
     self::assertCount(1, $crawler->filter(\sprintf('a[href="%s"].my-hero__cta--primary', 'https://drupal.org')));
     self::assertCount(1, $crawler->filter(\sprintf('a[href="%s"].my-hero__cta--primary', $node1->toUrl()->toString())));
+    self::assertSame($expected_heading_text, (string) $this->cssSelect('h1[data-component-id="canvas_test_sdc:heading"]')[0]);
     $this->assertResponseAutoSaves($response, [$entity]);
     self::assertFalse($autoSave->getAutoSaveEntity($entity)->isEmpty());
 
     $this->assertRequestAutoSaveConflict(Request::create($url, method: 'POST', content: $this->filterLayoutForPost($original_content)));
+
+    if ($entity_type === ContentTemplate::ENTITY_TYPE_ID) {
+      // Ensure we can update the dynamic prop source to a static source.
+      $json['model'][$uuid] = self::getNewHeadingComponentModel();
+      $json += $this->getPostContentsDefaults($entity);
+      $response = $this->request(Request::create($url, method: 'POST', content: \json_encode($json, JSON_THROW_ON_ERROR)));
+      self::assertSame($static_heading_text, (string) $this->cssSelect('h1[data-component-id="canvas_test_sdc:heading"]')[0]);
+      $this->assertResponseAutoSaves($response, [$entity]);
+      self::assertFalse($autoSave->getAutoSaveEntity($entity)->isEmpty());
+    }
 
     // Now re-fetch the layout to confirm we don't update the hash if an auto-save
     // entry already exists.

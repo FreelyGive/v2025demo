@@ -61,10 +61,9 @@ describe('Prop types editing', () => {
   beforeEach(() => {
     cy.drupalLogin('canvasUser', 'canvasUser');
     cy.loadURLandWaitForCanvasLoaded();
-    cy.get('.primaryPanelContent').findByText('Two Column').click();
+    cy.insertComponent({ name: 'Two Column' });
     cy.findByLabelText('Column Width').should('exist');
-    cy.openLibraryPanel();
-    cy.get('.primaryPanelContent').findByText('All props').click();
+    cy.insertComponent({ name: 'All props' });
     cy.openLayersPanel();
     cy.clickComponentInLayersView('All props');
     cy.findByLabelText('String — single line').should('exist');
@@ -622,8 +621,7 @@ describe('Prop types editing', () => {
       cy.loadURLandWaitForCanvasLoaded();
       cy.loadURLandWaitForCanvasLoaded({ url: 'canvas/editor/node/2' });
 
-      cy.openLibraryPanel();
-      cy.get('.primaryPanelContent').findByText('All props').click();
+      cy.insertComponent({ name: 'All props' });
       cy.findByLabelText('String with HTML formatting (block)').should('exist');
 
       const selector = '#test-string-html-block';
@@ -700,8 +698,7 @@ describe('Prop types editing', () => {
 
   it('Select prop with _none', () => {
     cy.loadURLandWaitForCanvasLoaded();
-    cy.openLibraryPanel();
-    cy.get('.primaryPanelContent').findByText('Heading').click();
+    cy.insertComponent({ name: 'Heading' });
     cy.findByLabelText('Style').should('have.value', 'primary');
     cy.findByLabelText('Style').within(() => {
       cy.get('option:selected').should('have.text', 'Primary');

@@ -12,7 +12,7 @@ system_prompt: |-
   ☢️ ABSOLUTE HARD STOP RULE (CRITICAL):
 
   - Before acting on any user request, you must check the context values:
-    1. If the entity type context is NOT exactly 'canvas_page'
+    1. If the entity_type context null.
 
   THEN:
   - Respond ONLY with:
@@ -56,6 +56,9 @@ tools:
 tool_settings:
   'ai_agent:add_metadata':
     return_directly: 0
+    description_override: ''
+    progress_message: ''
+    use_artifacts: 0
 orchestration_agent: false
 triage_agent: false
 max_loops: 5
@@ -82,3 +85,5 @@ tool_usage_limits:
       values: ''
 exclude_users_role: false
 masquerade_roles: {  }
+structured_output_enabled: false
+structured_output_schema: ''

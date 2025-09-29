@@ -1,8 +1,10 @@
 import { promises as fs } from 'fs';
 import path from 'path';
+import { compilePartialCss } from 'tailwindcss-in-browser';
 
 import { compileJS } from '../lib/compile-js';
 import { transformCss } from '../lib/transform-css';
+import { createApiService } from '../services/api';
 import { fileExists } from './utils';
 
 import type { Result } from '../types/Result';
@@ -44,13 +46,22 @@ export async function buildComponent(componentDir: string): Promise<Result> {
     });
   }
 
+  // Fetch global CSS from the API to prepare for the component CSS build.
+  const apiService = await createApiService();
+  const globalAssetLibrary = await apiService.getGlobalAssetLibrary();
+  const globalSourceCodeCss = globalAssetLibrary.css.original;
+
   // Read the CSS source and transpile it.
   try {
     const cssPath = path.join(componentDir, 'index.css');
     const cssFileExists = await fileExists(cssPath);
     if (cssFileExists) {
       const cssSource = await fs.readFile(cssPath, 'utf-8');
-      const cssTranspiled = await transformCss(cssSource);
+      const cssCompiled = await compilePartialCss(
+        cssSource,
+        globalSourceCodeCss,
+      );
+      const cssTranspiled = await transformCss(cssCompiled);
       await fs.writeFile(path.join(distDir, 'index.css'), cssTranspiled);
     }
   } catch (error) {

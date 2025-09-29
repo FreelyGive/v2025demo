@@ -128,9 +128,7 @@ const SidebarFolder: React.FC<SidebarFolderProps> = ({
       <Collapsible.Content
         className={clsx(detailsStyles.content, detailsStyles.detailsContent)}
       >
-        <Flex pl="5" direction="column">
-          {children}
-        </Flex>
+        <Flex direction="column">{children}</Flex>
       </Collapsible.Content>
     </Collapsible.Root>
   );

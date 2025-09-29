@@ -10,6 +10,7 @@ import App from '@/app/App';
 import ComponentInstanceForm from '@/components/ComponentInstanceForm';
 import { RouteErrorBoundary } from '@/components/error/ErrorBoundary';
 import ErrorCard from '@/components/error/ErrorCard';
+import ExtensionDialog from '@/components/extensions/ExtensionDialog';
 import PermissionCheck from '@/components/PermissionCheck';
 import SideMenu from '@/components/sideMenu/SideMenu';
 import PrimaryPanel from '@/components/sidePanel/PrimaryPanel';
@@ -18,6 +19,7 @@ import MosaicContainer from '@/features/code-editor/MosaicContainer';
 import Editor from '@/features/editor/Editor';
 import TemplateRoot from '@/features/editor/TemplateRoot';
 import PagePreview from '@/features/pagePreview/PagePreview';
+import PatternDialogs from '@/features/pattern/PatternDialogs';
 import SegmentDashboard from '@/features/personalization/SegmentDashboard';
 import SegmentPanel from '@/features/personalization/SegmentPanel';
 import { EditorFrameContext } from '@/features/ui/uiSlice';
@@ -48,6 +50,14 @@ const CodeEditorUi = (
   </PermissionCheck>
 );
 
+const Dialogs = () => (
+  <div style={{ position: 'absolute' }}>
+    <PatternDialogs />
+    <CodeComponentDialogs />
+    <ExtensionDialog />
+  </div>
+);
+
 const AppRoutes: React.FC<AppRoutesInterface> = ({ basePath }) => {
   const router = createBrowserRouter(
     [
@@ -75,6 +85,7 @@ const AppRoutes: React.FC<AppRoutesInterface> = ({ basePath }) => {
               <>
                 <SideMenu />
                 <Editor context={EditorFrameContext.ENTITY} />
+                <Dialogs />
               </>
             ),
             children: [
@@ -98,6 +109,7 @@ const AppRoutes: React.FC<AppRoutesInterface> = ({ basePath }) => {
               <>
                 <SideMenu />
                 <TemplateRoot />
+                <Dialogs />
               </>
             ),
           },
@@ -107,6 +119,7 @@ const AppRoutes: React.FC<AppRoutesInterface> = ({ basePath }) => {
               <>
                 <SideMenu />
                 <Editor context={EditorFrameContext.TEMPLATE} />
+                <Dialogs />
               </>
             ),
             children: [

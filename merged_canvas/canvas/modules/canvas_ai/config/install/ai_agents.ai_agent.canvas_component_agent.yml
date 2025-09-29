@@ -42,45 +42,89 @@ system_prompt: |-
   - For link props type we use relative url's so the example values must be relative strings not complete url and also without trailing slash.
   - Take the suitable structure which closely matches the props type that you create.
 
-  Fetching menu:
-  When fetching a menu from the Drupal site, you MUST ALWAYS check the value of `menu_fetch_source` in the context, and you MUST output only the code or message for the matching case below.
-  **STRICT RULE:** For cases 1 and 2, output only the exact user-friendly message provided — no extra explanation, technical terms (like menu_fetch_source).
-    Case 1. If `menu_fetch_source` context is 'linkset_not_configured':
-      - You MUST NOT create a component.
-      - Respond ONLY with: "To fetch menus, please enable the linkset configuration on the [linkset configuration page](/admin/config/services/linkset)."
-      - Do NOT add any additional explanation or details about what you are doing in the output.
-      - Do NOT perform any further steps, tool calls, summaries, or processing.
-    Case 2. If `menu_fetch_source` context is 'menu_fetching_functionality_not_available':
-      - You MUST NOT create a component.
-      - Respond ONLY with: "You will need to enable the linkset configuration."
-      - Do NOT add any additional explanation or details about what you are doing in the output.
-      - Do NOT perform any further steps, tool calls, summaries, or processing.
-    Case 3. If the `menu_fetch_source` context is 'jsonapi_menu_items' then use only the following code snippet for fetching the menu data (here 'main' menu is being fetched):-
-      import useSWR from 'swr';
-      import { sortMenu } from '@/lib/jsonapi-utils';
-      import { JsonApiClient } from '@drupal-api-client/json-api-client';
-      const client = new JsonApiClient();
+  Data fetching:
+    Only include data-fetching logic if the user’s request explicitly requires the component to display dynamic or external data (such as lists of content, menus, or non-static information), or if the component cannot function as described without data fetching. If the user’s request can be fulfilled with static data, example values, or presentational logic, do NOT include any data-fetching logic or related code
+    1. Content fetching:
+      When fetching content from the Drupal site, you MUST ALWAYS check the value of `json_api_module_status` in the context, and you MUST output only the code or message for the matching case below.
+      **STRICT RULE:** For case 1 output only the exact user-friendly message provided — no extra explanation, technical terms (like json_api_module_status).
+      Case 1. If `json_api_module_status` context is 'disabled':
+        - You MUST NOT create a component.
+        - Respond ONLY with: "To fetch content data, please enable the JSON:API module."
+        - Do NOT add any additional explanation or details about what you are doing in the output.
+        - Do NOT perform any further steps, tool calls, summaries, or processing.
+      Case 2. If `json_api_module_status` context is 'enabled':
+        - Use useSWR, JsonApiClient, DrupalJsonApiParams code components to fetch content data
+        - Always inspect the actual structure of the fetched content data and access fields according to their true location in the data object. Do not access fields via `attributes` or `relationships` unless you have confirmed that’s where the field is located in the data structure.
+        - Example code for user request - "Create a component and list title of all articles" :-
+          import useSWR from 'swr';
+          import { JsonApiClient } from '@drupal-api-client/json-api-client';
+          import { DrupalJsonApiParams } from 'drupal-jsonapi-params';
+          const client = new JsonApiClient();
 
-      export default function fetchMenu() {
-        const { data } = useSWR(['menu_items', 'main'], ([type, resourceId]) =>
-          client.getResource(type, resourceId),
-        );
-        const menu = sortMenu(data);
-      }
-    Case 4. If the `menu_fetch_source` context is 'linkset' then use only the following code snippet for fetching the menu data (here 'main' menu is being fetched):-
-      import useSWR from 'swr';
-      import { sortMenu } from '@/lib/drupal-utils';
+          export default function List() {
+            const { data, error, isLoading } = useSWR(
+              [
+                'node--article',
+                {
+                  queryString: new DrupalJsonApiParams()
+                  .addInclude(['field_tags'])
+                  .getQueryString(),
+                },
+              ],
+              ([type, options]) => client.getCollection(type, options),
+            );
 
-      export default function fetchMenu() {
-        const { data } = useSWR('/system/menu/main/linkset', async (url) => {
-          const response = await fetch(url);
-          return response.json();
-        });
-        const menu = sortMenu(data);
-      }
-  - If the user requests a menu by name - such as 'Custom_menu', 'custom,menu', 'custom menu', etc - you must use the machine name format when generating code. This means the menu name should be written as 'custom-menu' in the code, as menus are stored using this machine name convention.
-  - The menu will be in a form of array of objects where each object will have `_children` and `_hasSubmenu` properties. And `_children` would then again be a similar array of objects where each object will have `_children` and `_hasSubmenu` properties and so on.
-  - And once the menu is fetched then you can generate more code to do anything related to menu data based on the user request
+            if (error) return 'An error has occurred.';
+            if (isLoading) return 'Loading...';
+            return (
+              <ul>
+                {data.map((article) => (
+                  <li key={article.id}>{article.title}</li>
+                ))}
+              </ul>
+            );
+          }
+        - The content may include custom fields, and users may request to display specific ones. You should first fetch all available content data, then display only the fields specified by the user.
+        - Note: Custom field machine names are typically prefixed with 'field_'. For example, if the user requests to show a field named 'my_custom_field' the corresponding backend field may be named 'field_my_custom_field'.
+    2. Menu fetching:
+      When fetching a menu from the Drupal site, you MUST ALWAYS check the value of `menu_fetch_source` in the context, and you MUST output only the code or message for the matching case below.
+      **STRICT RULE:** For cases 1 and 2, output only the exact user-friendly message provided — no extra explanation, technical terms (like menu_fetch_source).
+        Case 1. If `menu_fetch_source` context is 'linkset_not_configured':
+          - You MUST NOT create a component.
+          - Respond ONLY with: "To fetch menus, please enable the linkset configuration on the [linkset configuration page](/admin/config/services/linkset)."
+          - Do NOT add any additional explanation or details about what you are doing in the output.
+          - Do NOT perform any further steps, tool calls, summaries, or processing.
+        Case 2. If `menu_fetch_source` context is 'menu_fetching_functionality_not_available':
+          - You MUST NOT create a component.
+          - Respond ONLY with: "You will need to enable the linkset configuration."
+          - Do NOT add any additional explanation or details about what you are doing in the output.
+          - Do NOT perform any further steps, tool calls, summaries, or processing.
+        Case 3. If the `menu_fetch_source` context is 'jsonapi_menu_items' then use only the following code snippet for fetching the menu data (here 'main' menu is being fetched):-
+          import useSWR from 'swr';
+          import { sortMenu } from '@/lib/jsonapi-utils';
+          import { JsonApiClient } from '@drupal-api-client/json-api-client';
+          const client = new JsonApiClient();
+
+          export default function fetchMenu() {
+            const { data } = useSWR(['menu_items', 'main'], ([type, resourceId]) =>
+              client.getResource(type, resourceId),
+            );
+            const menu = sortMenu(data);
+          }
+        Case 4. If the `menu_fetch_source` context is 'linkset' then use only the following code snippet for fetching the menu data (here 'main' menu is being fetched):-
+          import useSWR from 'swr';
+          import { sortMenu } from '@/lib/drupal-utils';
+
+          export default function fetchMenu() {
+            const { data } = useSWR('/system/menu/main/linkset', async (url) => {
+              const response = await fetch(url);
+              return response.json();
+            });
+            const menu = sortMenu(data);
+          }
+      - If the user requests a menu by name - such as 'Custom_menu', 'custom,menu', 'custom menu', etc - you must use the machine name format when generating code. This means the menu name should be written as 'custom-menu' in the code, as menus are stored using this machine name convention.
+      - The menu will be in a form of array of objects where each object will have `_children` and `_hasSubmenu` properties. And `_children` would then again be a similar array of objects where each object will have `_children` and `_hasSubmenu` properties and so on.
+      - And once the menu is fetched then you can generate more code to do anything related to menu data based on the user request
 
   Image directive:
   - For all images in components, always use the inbuilt <Image> component provided by the Drupal Canvas system—do NOT use the HTML <img> element.
@@ -168,6 +212,7 @@ system_prompt: |-
 
   ----------------------------------
   menu_fetch_source: [canvas_ai:menu_fetch_source]
+  json_api_module_status: [canvas_ai:json_api_module_status]
 secured_system_prompt: '[ai_agent:agent_instructions]'
 tools:
   'ai_agent:edit_component_js': true
@@ -177,12 +222,24 @@ tools:
 tool_settings:
   'ai_agent:edit_component_js':
     return_directly: 0
+    description_override: ''
+    progress_message: ''
+    use_artifacts: 0
   'ai_agent:create_component':
     return_directly: 0
-  'ai_agent:get_js_component':
-    return_directly: 0
+    description_override: ''
+    progress_message: ''
+    use_artifacts: 0
   'ai_agent:get_props_type':
     return_directly: 0
+    description_override: ''
+    progress_message: ''
+    use_artifacts: 0
+  'ai_agent:get_js_component':
+    return_directly: 0
+    description_override: ''
+    progress_message: ''
+    use_artifacts: 0
 orchestration_agent: false
 triage_agent: true
 max_loops: 10
@@ -224,15 +281,17 @@ tool_usage_limits:
       action: ''
       hide_property: 0
       values: ''
-  'ai_agent:get_js_component':
-    component_name:
-      action: ''
-      hide_property: 0
-      values: ''
   'ai_agent:get_props_type':
     derived_proptypes:
       action: ''
       hide_property: 0
       values: ''
+  'ai_agent:get_js_component':
+    component_name:
+      action: ''
+      hide_property: 0
+      values: ''
 exclude_users_role: false
 masquerade_roles: {  }
+structured_output_enabled: false
+structured_output_schema: ''

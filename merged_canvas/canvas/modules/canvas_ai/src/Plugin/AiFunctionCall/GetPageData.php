@@ -26,7 +26,7 @@ use Symfony\Component\Yaml\Yaml;
       data_type: 'string',
       label: new TranslatableMarkup("Page Title"),
       description: new TranslatableMarkup("The title of the page."),
-      required: TRUE
+      required: FALSE
     ),
     'page_description' => new ContextDefinition(
       data_type: 'string',
@@ -41,9 +41,9 @@ class GetPageData extends FunctionCallBase implements ExecutableFunctionCallInte
   /**
    * The page title.
    *
-   * @var string
+   * @var string|null
    */
-  protected string $pageTitle;
+  protected string|null $pageTitle;
 
   /**
    * The page description.

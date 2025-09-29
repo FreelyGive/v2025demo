@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
+use Drupal\Component\Serialization\Json;
 use Drupal\Core\File\FileUrlGeneratorInterface;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Language\LanguageManager;
+use Drupal\RecipeKit\Installer\Hooks;
 
 /**
  * Implements template_preprocess_install_page().
@@ -79,39 +81,42 @@ function drupal_cms_installer_theme_form_installer_site_template_form_alter(arra
   $form['add_ons'] += [
     '#prefix' => '<div class="cms-installer__form-group">',
     '#suffix' => '</div>',
+    '#default_value' => 'drupal_cms_starter',
   ];
+  // Put the drupal_cms_starter template before the others.
+  $form['add_ons']['drupal_cms_starter']['#weight'] = -100;
+
   $form['actions']['submit']['#attributes']['class'] = ['button--next'];
   unset($form['actions']['skip']);
 }
 
 /**
- * Implements hook_form_FORM_ID_alter() for installer_recipes_form.
+ * Implements template_preprocess_form_element() for site template choices.
  */
-function drupal_cms_installer_theme_form_installer_recipes_form_alter(array &$form): void {
-  $form['#title'] = t('Get started');
+function drupal_cms_installer_theme_preprocess_form_element(array &$variables, string $hook): void {
+  if ($hook !== 'form_element__site_template') {
+    return;
+  }
+  $path = Hooks::getRecipePath('drupal/' . $variables['element']['#return_value']);
 
-  $form['help'] = [
-    '#prefix' => '<p class="cms-installer__subhead">',
-    '#markup' => t('You can select pre-configured types of content now, or add them later.'),
-    '#suffix' => '</p>',
-    '#weight' => -100,
-  ];
-  $form['add_ons'] += [
-    '#prefix' => '<div class="cms-installer__form-group">',
-    '#suffix' => '</div>',
-  ];
-  $form['add_ons']['help'] = [
-    '#prefix' => '<p class="cms-installer__info">',
-    '#markup' => t('Don’t see what you’re looking for? You can set up customized content later.'),
-    '#suffix' => '</p>',
-    '#weight' => 100,
-  ];
-  $form['svg'] = [
-    '#theme' => 'step_svg',
-    '#id' => 'recipes',
-    '#weight' => 1000,
-  ];
-  $form['actions']['submit']['#attributes']['class'] = ['button--next'];
+  // If the site template has a screenshot, embed it as a base64-encoded data
+  // URI. We can't generate a URL to it because recipes are normally stored
+  // outside of the web root.
+  $screenshot = $path . '/screenshot.webp';
+  if (file_exists($screenshot)) {
+    $screenshot = file_get_contents($screenshot);
+    $variables['screenshot'] = sprintf('data:image/webp;base64,%s', base64_encode($screenshot));
+  }
+
+  $package_info = $path . '/composer.json';
+  if (file_exists($package_info)) {
+    $package_info = file_get_contents($package_info);
+    $package_info = Json::decode($package_info);
+    $variables['url'] = $package_info['homepage'] ?? NULL;
+  }
+
+  $variables['name'] = $variables['element']['#title'];
+  $variables['id'] = $variables['element']['#id'];
 }
 
 /**

@@ -5,15 +5,17 @@ declare(strict_types=1);
 namespace Drupal\canvas\ShapeMatcher;
 
 use Drupal\canvas\Plugin\Canvas\ComponentSource\GeneratedFieldExplicitInputUxComponentSourceBase;
+use Drupal\canvas\PropExpressions\StructuredData\StructuredDataPropExpressionInterface;
+use Drupal\canvas\PropSource\DynamicPropSource;
+use Drupal\Component\Utility\NestedArray;
+use Drupal\Component\Utility\SortArray;
+use Drupal\Core\Entity\EntityDisplayRepositoryInterface;
 use Drupal\Core\Entity\EntityFieldManagerInterface;
-use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
 use Drupal\Core\Entity\TypedData\EntityDataDefinitionInterface;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\TypedData\FieldItemDataDefinitionInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Theme\Component\ComponentMetadata;
-use Drupal\Core\TypedData\DataDefinitionInterface;
-use Drupal\Core\TypedData\DataReferenceTargetDefinition;
 use Drupal\canvas\JsonSchemaInterpreter\JsonSchemaType;
 use Drupal\canvas\Plugin\Adapter\AdapterInterface;
 use Drupal\canvas\PropExpressions\Component\ComponentPropExpression;
@@ -31,7 +33,7 @@ final class FieldForComponentSuggester {
   public function __construct(
     private readonly JsonSchemaFieldInstanceMatcher $propMatcher,
     private readonly EntityFieldManagerInterface $entityFieldManager,
-    private readonly EntityTypeBundleInfoInterface $entityTypeBundleInfo,
+    private readonly EntityDisplayRepositoryInterface $entityDisplayRepository,
   ) {}
 
   /**
@@ -63,15 +65,46 @@ final class FieldForComponentSuggester {
     foreach ($raw_matches as $cpe => $m) {
       // Instance matches: filter to the ones matching the current host entity
       // type + bundle.
-      $processed_matches[$cpe]['instances'] = [];
       if ($host_entity_type) {
-        $processed_matches[$cpe]['instances'] = array_filter(
+        $m['instances'] = array_filter(
           $m['instances'],
-          fn(FieldPropExpression|FieldObjectPropsExpression|ReferenceFieldPropExpression $e) => $e instanceof ReferenceFieldPropExpression
-            ? $e->referencer->entityType->getDataType() === $host_entity_type->getDataType()
-            : $e->entityType->getDataType() === $host_entity_type->getDataType()
+          fn($expr) => self::getHostEntityDataDefinition($expr)->getDataType() === $host_entity_type->getDataType(),
         );
       }
+
+      // Bucket the raw matches by entity type ID, bundle and field name.
+      // The field name order is determined by the form display, to ensure a
+      // familiar order for site builders.
+      $bucketed = [];
+      foreach ($m['instances'] as $expr) {
+        $expr_entity_data_definition = self::getHostEntityDataDefinition($expr);
+        $expr_entity_data_type = $expr_entity_data_definition->getDataType();
+
+        // When first encountering a new entity type + bundle, generate an empty
+        // array structure in which to fit all of the raw matches, keyed by
+        // field, in the order of the entity form display. (Later, filter away
+        // empty ones).
+        if (!array_key_exists($expr_entity_data_type, $bucketed)) {
+          assert(is_string($expr_entity_data_definition->getEntityTypeId()));
+          assert(is_array($expr_entity_data_definition->getBundles()));
+          assert(count($expr_entity_data_definition->getBundles()) === 1);
+          $expected_order = $this->entityDisplayRepository->getFormDisplay(
+            $expr_entity_data_definition->getEntityTypeId(),
+            $expr_entity_data_definition->getBundles()[0],
+          )->getComponents();
+          uasort($expected_order, SortArray::sortByWeightElement(...));
+          $bucketed[$expr_entity_data_type] = array_fill_keys(
+            array_keys($expected_order),
+            [],
+          );
+        }
+
+        // Push each expression into the right (field) bucket.
+        $bucketed[$expr_entity_data_type][self::getFieldName($expr)][] = $expr;
+      }
+      // Keep only non-empty (field) buckets.
+      $bucketed = array_map('array_filter', $bucketed);
+      $processed_matches[$cpe]['instances'] = $bucketed;
 
       // @todo filtering
       $processed_matches[$cpe]['adapters'] = $m['adapters'];
@@ -87,29 +120,17 @@ final class FieldForComponentSuggester {
       $suggestions[$cpe]['required'] = in_array($prop_name, $schema['required'] ?? [], TRUE);
 
       // Field instances.
-      // @todo Ensure these expressions do not break: https://www.drupal.org/project/canvas/issues/3452848
       $suggestions[$cpe]['instances'] = [];
-      if ($host_entity_type) {
+      if ($host_entity_type && !empty($m['instances'])) {
+        assert([$host_entity_type->getDataType()] === array_keys($m['instances']));
+        $debucketed = NestedArray::mergeDeep(...$m['instances'][$host_entity_type->getDataType()]);
         $suggestions[$cpe]['instances'] = array_combine(
           array_map(
-            function (FieldPropExpression|FieldObjectPropsExpression|ReferenceFieldPropExpression $e) use ($field_definitions, $host_entity_type_id, $host_entity_type_bundle) {
-              $field_name = $e instanceof ReferenceFieldPropExpression
-                ? $e->referencer->fieldName
-                : $e->fieldName;
-              // Even though FieldPropExpression's `fieldName` can be an array
-              // at the data structure level, it can only be a string here:
-              // because the logic in JsonSchemaFieldInstanceMatcher asses one
-              // entity type + bundle at a time.
-              assert(is_string($field_name));
+            function (FieldPropExpression|FieldObjectPropsExpression|ReferenceFieldPropExpression $e) use ($field_definitions) {
+              $field_name = self::getFieldName($e);
               $field_definition = $field_definitions[$field_name];
               assert($field_definition instanceof FieldDefinitionInterface);
               assert($field_definition->getItemDefinition() instanceof FieldItemDataDefinitionInterface);
-              // Generate a label for the suggestion:
-              // - one that points to the entity field if ALL field props are
-              //   present in the expression
-              // - one that describes the subset of the entity field otherwise,
-              //   with explicit (developer-friendly, user-overwhelming) info on
-              //   which field props are present vs absent.
               // To correctly represent this, this must take into account what
               // JsonSchemaFieldInstanceMatcher may or may not match. It will
               // never match:
@@ -118,37 +139,38 @@ final class FieldForComponentSuggester {
               //   is relevant
               // - props explicitly marked as internal
               // @see \Drupal\Core\TypedData\DataDefinition::isInternal
+              $main_property = $field_definition->getItemDefinition()->getMainPropertyName();
+              assert(is_string($main_property));
               $used_field_props = (array) static::getUsedFieldProps($e);
-              $relevant_field_props = array_filter(
-                $field_definition->getItemDefinition()->getPropertyDefinitions(),
-                // @phpstan-ignore-next-line
-                fn (DataDefinitionInterface $def) => !$def instanceof DataReferenceTargetDefinition && $def['internal'] !== TRUE,
-              );
-              return match (count($used_field_props)) {
-                count($relevant_field_props) => (string) $this->t("This @entity's @field-label", [
-                  '@entity' => $this->entityTypeBundleInfo->getBundleInfo($host_entity_type_id)[$host_entity_type_bundle]['label'],
-                  '@field-label' => $field_definition->getLabel(),
-                ]),
-                default => (string) $this->t("Subset of this @entity's @field-label: @field-prop-labels-used (@field-prop-used-count of @field-prop-total-count props — absent: @field-prop-labels-absent)", [
-                  '@entity' => $this->entityTypeBundleInfo->getBundleInfo($host_entity_type_id)[$host_entity_type_bundle]['label'],
+              return match (self::usesMainProperty($e, $field_definition)) {
+                TRUE => match ($e instanceof ReferenceFieldPropExpression) {
+                  FALSE => (string) $this->t("@field-label", [
+                    '@field-label' => $field_definition->getLabel(),
+                  ]),
+                  TRUE => (string) $this->t("@field-label → @referenced-entity-type → @referenced-field", [
+                    '@field-label' => $field_definition->getLabel(),
+                    // Only a single level of indirection is surfaced,
+                    // @phpstan-ignore-next-line property.notFound
+                    '@referenced-entity-type' => $e->referenced->entityType->getLabel(),
+                    '@referenced-field' => implode(', ', (array) self::getFieldName($e->referenced)),
+                  ]),
+                },
+                FALSE => (string) $this->t("@field-label (only @field-prop-labels-used)", [
                   '@field-label' => $field_definition->getLabel(),
                   '@field-prop-labels-used' => implode(', ', $used_field_props),
-                  '@field-prop-used-count' => count($used_field_props),
-                  '@field-prop-total-count' => count($relevant_field_props),
-                  '@field-prop-labels-absent' => implode(', ', array_diff(array_keys($relevant_field_props), $used_field_props)),
                 ])
               };
             },
-            $m['instances']
+            $debucketed
           ),
-          $m['instances']
+          $debucketed
         );
       }
 
       // Adapters.
       $suggestions[$cpe]['adapters'] = array_combine(
-        // @todo Introduce a plugin definition class that provides a guaranteed label, which will allow removing the PHPStan ignore instruction.
-        // @phpstan-ignore-next-line
+      // @todo Introduce a plugin definition class that provides a guaranteed label, which will allow removing the PHPStan ignore instruction.
+      // @phpstan-ignore-next-line
         array_map(fn (AdapterInterface $a): string => (string) $a->getPluginDefinition()['label'], $m['adapters']),
         $m['adapters']
       );
@@ -192,6 +214,106 @@ final class FieldForComponentSuggester {
     }
 
     return $raw_matches;
+  }
+
+  private static function getHostEntityDataDefinition(FieldPropExpression|FieldObjectPropsExpression|ReferenceFieldPropExpression $expr): EntityDataDefinitionInterface {
+    return $expr instanceof ReferenceFieldPropExpression
+      ? $expr->referencer->entityType
+      : $expr->entityType;
+  }
+
+  private static function getFieldName(FieldPropExpression|FieldObjectPropsExpression|ReferenceFieldPropExpression $expr): string {
+    $expr_field_name = match (get_class($expr)) {
+      ReferenceFieldPropExpression::class => $expr->referencer->fieldName,
+      FieldPropExpression::class, FieldObjectPropsExpression::class => $expr->fieldName,
+    };
+    // TRICKY: FieldPropExpression::$fieldName can be an array, but only
+    // when used in a reference.
+    // @see https://www.drupal.org/i/3530521
+    assert(is_string($expr_field_name));
+    return $expr_field_name;
+  }
+
+  private static function usesMainProperty(FieldPropExpression|FieldObjectPropsExpression|ReferenceFieldPropExpression $expr, FieldDefinitionInterface $field_definition): bool {
+    // Easiest case: a reference field's entire purpose is to reference, so
+    // following the reference definitely is considered using the main property.
+    if ($expr instanceof ReferenceFieldPropExpression) {
+      return TRUE;
+    }
+
+    assert($field_definition->getItemDefinition() instanceof FieldItemDataDefinitionInterface);
+    $main_property = $field_definition->getItemDefinition()->getMainPropertyName();
+    assert(is_string($main_property));
+
+    $used_props = (array) self::getUsedFieldProps($expr);
+    assert(count($used_props) >= 1);
+
+    // Easy case: if the main property is used directly.
+    if (in_array($main_property, $used_props, TRUE)) {
+      return TRUE;
+    }
+
+    // Otherwise, check if one of the used field properties is a computed one
+    // that depends on the main one.
+    // Drupal core does not have native support for this; Canvas adds additional
+    // metadata to be able to determine this. Any contributed field types that
+    // wish to have computed properties automatically matched/suggested, need to
+    // provide this additional metadata too.
+    // @see \Drupal\canvas\Plugin\Field\FieldTypeOverride\ImageItemOverride
+    // @see \Drupal\canvas\Plugin\DataType\ComputedUrlWithQueryString
+    foreach ($used_props as $prop_name) {
+      $property_definition = $field_definition->getItemDefinition()->getPropertyDefinition($prop_name);
+      assert($property_definition !== NULL);
+      $expr_used_by_computed_property = JsonSchemaFieldInstanceMatcher::getReferenceDependency($property_definition);
+      if ($expr_used_by_computed_property === NULL) {
+        continue;
+      }
+      // Final sanity check: the reference expression found in the computed
+      // property definition's settings MUST target the field type used by this
+      // field instance.
+      assert($expr_used_by_computed_property->referencer->fieldType === $field_definition->getType());
+      return TRUE;
+    }
+
+    return FALSE;
+  }
+
+  public static function structureSuggestionsForResponse(array $suggestions): array {
+    return array_combine(
+    // Top-level keys: the prop names of the targeted component.
+      array_map(
+        fn (string $key): string => ComponentPropExpression::fromString($key)->propName,
+        array_keys($suggestions),
+      ),
+      array_map(
+        fn (array $instances): array => array_combine(
+        // Second level keys: opaque identifiers for the suggestions to
+        // populate the component prop.
+          array_map(
+            fn (StructuredDataPropExpressionInterface $expr): string => \hash('xxh64', (string) $expr),
+            array_values($instances),
+          ),
+          // Values: objects with "label" and "source" keys, with:
+          // - "label": the human-readable label that the Content Template UI
+          //   should present to the human
+          // - "source": the array representation of the DynamicPropSource that,
+          //   if selected by the human, the client should use verbatim as the
+          //   source to populate this component instance's prop.
+          array_map(
+            function (string $label, StructuredDataPropExpressionInterface $expr) {
+              return [
+                'label' => $label,
+                // @phpstan-ignore-next-line argument.type
+                'source' => (new DynamicPropSource($expr))->toArray(),
+              ];
+            },
+            array_keys($instances),
+            array_values($instances),
+          ),
+        ),
+        array_column($suggestions, 'instances'),
+      ),
+    );
   }
 
 }

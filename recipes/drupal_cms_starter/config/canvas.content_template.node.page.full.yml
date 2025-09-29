@@ -22,18 +22,17 @@ component_tree:
   -
     uuid: f08be9dc-e328-4cb7-9499-df6db9bd8900
     component_id: sdc.mercury.heading
-    component_version: cc29b01ba3415896
+    component_version: e5a9fae10ccddfda
     inputs:
       heading_text:
         sourceType: dynamic
         expression: 'ℹ︎␜entity:node:page␝title␞␟value'
       level: 1
-      styles: default
       align: left
       url: 'No URL'
   - uuid: caa1e4b2-d58b-4140-b99b-ab3e1ce55ad5
     component_id: sdc.mercury.text
-    component_version: bbc797b76ac62b14
+    component_version: 8b4abbab93b01319
     inputs:
       text:
         sourceType: dynamic

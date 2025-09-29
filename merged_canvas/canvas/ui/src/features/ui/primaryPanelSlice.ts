@@ -21,6 +21,7 @@ export interface PrimaryPanelState {
   activePanel: string;
   isHidden: boolean;
   aiPanelOpen: boolean;
+  manageLibraryTab: string | null;
 }
 
 export enum LayoutItemType {
@@ -37,6 +38,7 @@ const initialState: PrimaryPanelState = {
   activePanel: savedState.activePanel || 'layers',
   isHidden: false,
   aiPanelOpen: false,
+  manageLibraryTab: null,
 };
 
 // Temporary workaround to persist primary panel state when switching between entities until
@@ -72,6 +74,11 @@ export const primaryPanelSlice = createAppSlice({
     setAiPanelClosed: create.reducer((state) => {
       state.aiPanelOpen = false;
     }),
+    setManageLibraryTab: create.reducer(
+      (state, action: PayloadAction<string>) => {
+        state.manageLibraryTab = action.payload;
+      },
+    ),
   }),
   selectors: {
     selectActivePanel: (primaryPanel): string => {
@@ -79,6 +86,9 @@ export const primaryPanelSlice = createAppSlice({
     },
     selectAiPanelOpen: (primaryPanel): boolean => {
       return primaryPanel.aiPanelOpen;
+    },
+    selectManageLibraryTab: (primaryPanel): string | null => {
+      return primaryPanel.manageLibraryTab;
     },
   },
 });
@@ -89,8 +99,9 @@ export const {
   unsetActivePanel,
   setAiPanelOpen,
   setAiPanelClosed,
+  setManageLibraryTab,
 } = primaryPanelSlice.actions;
 
 // Selectors returned by `slice.selectors` take the root state as their first argument.
-export const { selectActivePanel, selectAiPanelOpen } =
+export const { selectActivePanel, selectAiPanelOpen, selectManageLibraryTab } =
   primaryPanelSlice.selectors;

@@ -169,7 +169,16 @@ abstract class HttpApiTestBase extends FunctionalTestBase {
     \assert($entity instanceof EntityInterface);
     $data = $this->container->get(AutoSaveManager::class)->getAutoSaveEntity($entity)->entity;
     \assert($data instanceof CanvasHttpApiEligibleConfigEntityInterface);
-    $this->assertSame($expected_auto_save, $data->normalizeForClientSide()->values);
+
+    // Auto-save normalizations must NEVER provide links to convey available
+    // entity operations. That is for the canonical routes to provide.
+    $this->assertSame(
+      $expected_auto_save,
+      array_diff_key(
+        $data->normalizeForClientSide()->values,
+        array_flip(['links']),
+      ),
+    );
   }
 
   /**

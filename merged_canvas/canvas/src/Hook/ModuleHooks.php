@@ -28,6 +28,21 @@ class ModuleHooks {
   }
 
   /**
+   * Implements hook_theme().
+   */
+  #[Hook('theme')]
+  public function theme() : array {
+    return [
+      // We override this template, as it makes Canvas' preview in the "editor
+      // frame" and the live version of the field inconsistent if the
+      // field.html.twig template is applied.
+      'field__component_tree' => [
+        'base hook' => 'field',
+      ],
+    ];
+  }
+
+  /**
    * Implements hook_validation_constraint_alter().
    */
   #[Hook('validation_constraint_alter')]

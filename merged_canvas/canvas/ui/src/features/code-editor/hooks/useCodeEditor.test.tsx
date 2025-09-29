@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { compileCss } from 'tailwindcss-in-browser';
+import { compileCss, compilePartialCss } from 'tailwindcss-in-browser';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { act, renderHook } from '@testing-library/react';
 import AppWrapper from '@tests/vitest/components/AppWrapper';
@@ -71,6 +71,10 @@ vi.mock('@/features/code-editor/hooks/useCompileCss', () => {
           await compileCss(['test'], '@theme {}');
           return { css: '/* compiled TW CSS */' };
         }),
+      buildComponentCss: vi.fn().mockImplementation(async () => {
+        await compilePartialCss('.test { @apply mb-1; }', '@theme {}');
+        return { css: '/* compiled CSS */' };
+      }),
     }),
   };
 });

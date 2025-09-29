@@ -3,9 +3,6 @@
   inset: var(--topbar-height) 0 0 0;
   background-color: white;
 }
-.absoluteContainer {
-  position: absolute;
-}
 .canvasCalloutContainer {
   position: fixed;
   z-index: 9999;

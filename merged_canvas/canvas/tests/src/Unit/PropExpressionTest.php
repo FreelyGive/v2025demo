@@ -16,7 +16,6 @@ use Drupal\canvas\PropExpressions\StructuredData\ReferenceFieldTypePropExpressio
 use Drupal\canvas\PropExpressions\StructuredData\StructuredDataPropExpression;
 use Drupal\canvas\PropExpressions\StructuredData\StructuredDataPropExpressionInterface;
 use Drupal\canvas\TypedData\BetterEntityDataDefinition;
-use Drupal\Tests\canvas\Kernel\PropExpressionDependenciesTest;
 use Drupal\Tests\UnitTestCase;
 use Prophecy\Prophet;
 
@@ -235,38 +234,38 @@ class PropExpressionTest extends UnitTestCase {
     return [
       ['ℹ︎␜entity:node␝uid␞␟entity␜␜entity:user␝name␞␟value', new ReferenceFieldPropExpression($referencer_delta_null, new FieldPropExpression(BetterEntityDataDefinition::create('user'), 'name', NULL, 'value')),
         [
-          'module' => ['node'],
+          'module' => ['node', 'user'],
           'content' => ['user:user:some-user-uuid'],
         ],
       ],
       ['ℹ︎␜entity:node␝uid␞␟entity␜␜entity:user␝name␞0␟value', new ReferenceFieldPropExpression($referencer_delta_null, new FieldPropExpression(BetterEntityDataDefinition::create('user'), 'name', 0, 'value')),
         [
-          'module' => ['node'],
+          'module' => ['node', 'user'],
           'content' => ['user:user:some-user-uuid'],
         ],
       ],
       ['ℹ︎␜entity:node␝uid␞␟entity␜␜entity:user␝name␞99␟value', new ReferenceFieldPropExpression($referencer_delta_null, new FieldPropExpression(BetterEntityDataDefinition::create('user'), 'name', 99, 'value')),
         [
-          'module' => ['node'],
+          'module' => ['node', 'user'],
           'content' => ['user:user:some-user-uuid'],
         ],
       ],
 
       ['ℹ︎␜entity:node␝uid␞0␟entity␜␜entity:user␝name␞␟value', new ReferenceFieldPropExpression($referencer_delta_zero, new FieldPropExpression(BetterEntityDataDefinition::create('user'), 'name', NULL, 'value')),
         [
-          'module' => ['node'],
+          'module' => ['node', 'user'],
           'content' => ['user:user:some-user-uuid'],
         ],
       ],
       ['ℹ︎␜entity:node␝uid␞0␟entity␜␜entity:user␝name␞0␟value', new ReferenceFieldPropExpression($referencer_delta_zero, new FieldPropExpression(BetterEntityDataDefinition::create('user'), 'name', 0, 'value')),
         [
-          'module' => ['node'],
+          'module' => ['node', 'user'],
           'content' => ['user:user:some-user-uuid'],
         ],
       ],
       ['ℹ︎␜entity:node␝uid␞0␟entity␜␜entity:user␝name␞99␟value', new ReferenceFieldPropExpression($referencer_delta_zero, new FieldPropExpression(BetterEntityDataDefinition::create('user'), 'name', 99, 'value')),
         [
-          'module' => ['node'],
+          'module' => ['node', 'user'],
           'content' => ['user:user:some-user-uuid'],
         ],
       ],
@@ -318,7 +317,7 @@ class PropExpressionTest extends UnitTestCase {
           'width' => new FieldPropExpression(BetterEntityDataDefinition::create('node', 'article'), 'field_image', NULL, 'width'),
         ]),
         [
-          'module' => ['node', 'file', 'node', 'file'],
+          'module' => ['node', 'file', 'file', 'node', 'file'],
           'config' => [
             'node.type.article',
             'field.field.node.article.field_image',
@@ -340,8 +339,9 @@ class PropExpressionTest extends UnitTestCase {
           // 2. one (leaf) field property
           'width' => new FieldPropExpression(BetterEntityDataDefinition::create('node', 'article'), 'field_image', NULL, 'width'),
         ]),
+        // Expected content-aware dependencies.
         [
-          'module' => ['node', 'file', 'file', 'node', 'file'],
+          'module' => ['node', 'file', 'file', 'file', 'node', 'file'],
           'config' => [
             'node.type.article',
             'field.field.node.article.field_image',
@@ -352,6 +352,7 @@ class PropExpressionTest extends UnitTestCase {
           ],
           'content' => ['file:file:some-image-uuid'],
         ],
+        // Expected content-unaware dependencies.
         [
           'module' => ['node', 'file', 'node', 'file'],
           'config' => [
@@ -362,7 +363,6 @@ class PropExpressionTest extends UnitTestCase {
             'field.field.node.article.field_image',
             'image.style.canvas_parametrized_width',
           ],
-          'content' => ['file:file:some-image-uuid'],
         ],
       ],
 
@@ -384,17 +384,34 @@ class PropExpressionTest extends UnitTestCase {
           ),
         ]),
         [
-          'module' => ['node', 'media', 'node', 'media'],
+          'module' => [
+            'node',
+            'media',
+            'media',
+            'file',
+            'file',
+            'node',
+            'media',
+            'media',
+            'file',
+          ],
           'config' => [
             'node.type.article',
             'field.field.node.article.yo_ho',
             'media.type.image',
+            'media.type.image',
+            'field.field.media.image.field_media_image',
+            'image.style.canvas_parametrized_width',
             'node.type.article',
             'field.field.node.article.yo_ho',
             'media.type.image',
+            'media.type.image',
+            'field.field.media.image.field_media_image',
+            'image.style.canvas_parametrized_width',
           ],
           'content' => [
             'media:image:some-media-uuid',
+            'file:file:some-image-uuid',
             'media:image:some-media-uuid',
           ],
         ],
@@ -430,6 +447,7 @@ class PropExpressionTest extends UnitTestCase {
           'module' => [
             'image',
             'image',
+            'file',
             'file',
             'image',
           ],
@@ -472,7 +490,7 @@ class PropExpressionTest extends UnitTestCase {
           )
         ),
         [
-          'module' => ['image', 'file'],
+          'module' => ['image', 'file', 'file'],
           'content' => ['file:file:some-image-uuid'],
         ],
       ],
@@ -504,12 +522,17 @@ class PropExpressionTest extends UnitTestCase {
           ),
         ),
         [
-          'module' => ['image', 'file', 'file'],
+          'module' => ['image', 'file', 'file', 'file', 'file'],
           'content' => ['file:file:some-image-uuid'],
         ],
       ],
 
       // Reference field type that fetches a reference of a reference.
+      // ℹ️ This test case requires quite some simulating in the sibling kernel
+      // test that tests the expected dependencies. To ensure it is accurate,
+      // this particular test case also has a functional test.
+      // @see \Drupal\Tests\canvas\Kernel\PropExpressionDependenciesTest
+      // @see \Drupal\Tests\canvas\Functional\PropExpressionDependenciesTest::testIntermediateDependencies()
       [
         'ℹ︎entity_reference␟entity␜␜entity:media:baby_photos|vacation_photos␝field_media_image_1|field_media_image_2␞␟entity␜␜entity:file␝uri␞␟value',
         new ReferenceFieldTypePropExpression(
@@ -521,14 +544,26 @@ class PropExpressionTest extends UnitTestCase {
         ),
         [
           'content' => [
-            'node:article:' . PropExpressionDependenciesTest::NODE_1_UUID,
+            'media:baby_photos:baby-photos-media-uuid',
+            'file:file:photo-baby-jack-uuid',
           ],
           'module' => [
             'media',
             'file',
             'file',
+            'file',
+            'media',
+            'file',
+            'file',
+            'file',
           ],
           'config' => [
+            'media.type.baby_photos',
+            'media.type.vacation_photos',
+            'field.field.media.baby_photos.field_media_image_1',
+            'image.style.canvas_parametrized_width',
+            'field.field.media.vacation_photos.field_media_image_2',
+            'image.style.canvas_parametrized_width',
             'media.type.baby_photos',
             'media.type.vacation_photos',
             'field.field.media.baby_photos.field_media_image_1',
@@ -570,7 +605,7 @@ class PropExpressionTest extends UnitTestCase {
           'width' => new FieldTypePropExpression('image', 'width'),
         ]),
         [
-          'module' => ['image', 'file', 'image'],
+          'module' => ['image', 'file', 'file', 'image'],
           'content' => ['file:file:some-image-uuid'],
         ],
       ],

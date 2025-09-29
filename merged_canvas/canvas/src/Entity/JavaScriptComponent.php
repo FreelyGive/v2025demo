@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Drupal\canvas\Entity;
 
+use Drupal\canvas\CanvasUriDefinitions;
+use Drupal\canvas\Resource\CanvasResourceLink;
+use Drupal\canvas\Resource\CanvasResourceLinkCollection;
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
 use Drupal\Core\Config\Entity\ConfigEntityBase;
@@ -99,6 +103,33 @@ final class JavaScriptComponent extends ConfigEntityBase implements CanvasAssetI
     return $this->machineName;
   }
 
+  private function getEntityOperations(): CanvasResourceLinkCollection {
+    $links = new CanvasResourceLinkCollection([]);
+    // Link relation type => route name.
+    $possible_operations = [
+      CanvasUriDefinitions::LINK_REL_DELETE => ['route_name' => 'canvas.api.config.delete', 'op' => 'delete'],
+      // @todo Add a URL template using the CanvasUriDefinitions::LINK_REL_USAGE_DETAILS link relation type
+    ];
+    foreach ($possible_operations as $link_rel => ['route_name' => $route_name, 'op' => $entity_operation]) {
+      $access = $this->access(operation: $entity_operation, return_as_object: TRUE);
+      assert($access instanceof AccessResult);
+      if ($access->isAllowed()) {
+        $route_params = [
+          'canvas_config_entity_type_id' => self::ENTITY_TYPE_ID,
+          'canvas_config_entity' => $this->id(),
+        ];
+        $links = $links->withLink(
+          $link_rel,
+          new CanvasResourceLink($access, Url::fromRoute($route_name, $route_params), $link_rel)
+        );
+      }
+      else {
+        $links->addCacheableDependency($access);
+      }
+    }
+    return $links;
+  }
+
   /**
    * {@inheritdoc}
    *
@@ -112,6 +143,7 @@ final class JavaScriptComponent extends ConfigEntityBase implements CanvasAssetI
     // against config schema.
     assert(is_array($this->js));
     assert(is_array($this->css));
+    $linkCollection = $this->getEntityOperations();
     return ClientSideRepresentation::create(
       values: [
         'machineName' => $this->id(),
@@ -125,11 +157,14 @@ final class JavaScriptComponent extends ConfigEntityBase implements CanvasAssetI
         'compiledJs' => $this->js['compiled'] ?? '',
         'compiledCss' => $this->css['compiled'] ?? '',
         'dataDependencies' => $this->dataDependencies,
+        // @see https://jsonapi.org/format/#document-links
+        'links' => $linkCollection->asArray(),
       ],
       preview: [
         '#markup' => '@todo Make something 🆒 in https://www.drupal.org/project/canvas/issues/3498889',
       ],
-    )->addCacheableDependency($this);
+    )->addCacheableDependency($this)
+      ->addCacheableDependency($linkCollection);
   }
 
   /**

@@ -1,20 +1,23 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 import { useErrorBoundary } from 'react-error-boundary';
 
-import FolderList, {
-  folderfyComponents,
-  sortFolderList,
-} from '@/components/list/FolderList';
-import List from '@/components/list/List';
+import ListItem from '@/components/list/ListItem';
 import { LayoutItemType } from '@/features/ui/primaryPanelSlice';
 import {
   useGetComponentsQuery,
   useGetFoldersQuery,
 } from '@/services/componentAndLayout';
 
-import type { ComponentsList } from '@/types/Component';
+import LibraryItemList from './LibraryItemList';
 
-const ComponentList = () => {
+import type { CanvasComponent, ComponentsList } from '@/types/Component';
+import type { FolderData } from './FolderList';
+
+interface ComponentListProps {
+  searchTerm: string;
+}
+
+const ComponentList = ({ searchTerm }: ComponentListProps) => {
   const { data: components, error, isLoading } = useGetComponentsQuery();
   const {
     data: folders,
@@ -29,50 +32,21 @@ const ComponentList = () => {
     }
   }, [error, foldersError, showBoundary]);
 
-  const { topLevelComponents, folderComponents } = useMemo(
-    () =>
-      folderfyComponents(
-        components,
-        folders,
-        isLoading,
-        foldersLoading,
-        'component',
-      ),
-    [components, folders, isLoading, foldersLoading],
-  );
-  const folderEntries = sortFolderList(folderComponents);
+  const renderItem = (item: CanvasComponent) => {
+    return <ListItem item={item} type={LayoutItemType.COMPONENT} />;
+  };
 
   return (
-    <>
-      {/* First, render any folders and the items they contain. */}
-      {folderEntries.length > 0 &&
-        folderEntries.map((folder) => {
-          return (
-            <FolderList key={folder.id} folder={folder}>
-              <List
-                items={folder.items as ComponentsList}
-                isLoading={foldersLoading}
-                type={LayoutItemType.COMPONENT}
-                label={`Components in folder ${folder.name}`}
-                key={folder.id}
-                inFolder={true}
-              />
-            </FolderList>
-          );
-        })}
-      {/* Show if components are still loading (to show skeleton) or if there
-          are folder-less components (to display the components). */}
-      {(isLoading ||
-        foldersLoading ||
-        !!Object.keys(topLevelComponents || {}).length) && (
-        <List
-          items={topLevelComponents || {}}
-          isLoading={isLoading || foldersLoading}
-          type={LayoutItemType.COMPONENT}
-          label="Components"
-        />
-      )}
-    </>
+    <LibraryItemList<CanvasComponent>
+      items={components as ComponentsList}
+      folders={folders as FolderData}
+      isLoading={isLoading || foldersLoading}
+      searchTerm={searchTerm}
+      layoutType={LayoutItemType.COMPONENT}
+      topLevelLabel="Components"
+      itemType="component"
+      renderItem={renderItem}
+    />
   );
 };
 

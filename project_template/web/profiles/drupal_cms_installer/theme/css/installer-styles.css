@@ -47,7 +47,6 @@ body.install-page {
   min-block-size: 100%;
 
   @media (min-width: 78em) {
-    padding-block: 60px;
     padding-inline: 66px;
   }
 
@@ -71,6 +70,12 @@ body.install-page {
   @media (max-width: 78em) and (min-height: 870px) {
     margin-block-end: 2.5rem;
   }
+  @media (min-width: 1248px) {
+    max-width: 60vw;
+  }
+  @media (min-width: 1450px) {
+    max-width: 50vw;
+  }
 }
 
 .cms-installer__wrapper {
@@ -83,7 +88,7 @@ body.install-page {
   max-inline-size: 780px;
   min-block-size: 500px;
   position: relative;
-  padding-top: 2rem;
+  padding-top: 3rem;
 }
 
 .cms-installer__heading {
@@ -246,8 +251,20 @@ body.install-page {
   }
 }
 
-.cms-installer__language-switcher {
-  position: absolute;
-  right: 0;
-  top: 0;
+select.cms-installer__language-switcher {
+  z-index: 5;
+  border: none;
+  appearance: none;
+  padding-left: 0.6rem;
+  background-color: transparent;
+  line-height: 1.5;
+}
+
+.select-wrapper {
+  display: flex;
+
+  & svg {
+    display: block;
+    margin: auto;
+  }
 }

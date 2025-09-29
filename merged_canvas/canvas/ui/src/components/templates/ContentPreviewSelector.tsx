@@ -50,7 +50,7 @@ const ContentPreviewSelector: React.FC<ContentPreviewSelectorProps> = ({
   );
 
   return (
-    <div>
+    <Flex>
       {itemsCount === 0 ? (
         <Tooltip content="Preview content" side="bottom">
           <Button variant="soft" size="1" disabled color="blue">
@@ -78,7 +78,7 @@ const ContentPreviewSelector: React.FC<ContentPreviewSelectorProps> = ({
           </DropdownMenu.Content>
         </DropdownMenu.Root>
       )}
-    </div>
+    </Flex>
   );
 };
 

@@ -53,12 +53,12 @@ final class FieldInstanceSupportTest extends EcosystemSupportTestBase {
   /**
    * The current % of supported field types whose instances can be matched.
    */
-  public const COMPLETION = 0.8846153846153846;
+  public const COMPLETION = 0.8928571428571429;
 
   /**
    * The current % of supported field type props.
    */
-  public const COMPLETION_PROPS = 0.8974358974358975;
+  public const COMPLETION_PROPS = 0.9024390243902439;
 
   /**
    * Supported field types (keys), with explicitly unsupported props (values).
@@ -121,6 +121,8 @@ final class FieldInstanceSupportTest extends EcosystemSupportTestBase {
       // route:entity.node.canonical;node=1
       'uri' => FALSE,
     ],
+    'list_float' => [],
+    'list_integer' => [],
     // Note that 'password' is deliberately not here (unsupported) as we don't
     // want any of its properties to be associated with a dynamic prop source.
     'path' => [
@@ -145,9 +147,9 @@ final class FieldInstanceSupportTest extends EcosystemSupportTestBase {
   ];
 
   /**
-   * Intentionally unsupported field type instances.
+   * Intentionally unsupported field instances' field types.
    *
-   * @var string[]
+   * @var array<lowercase-string, array{class: class-string, exceptions: array<array>}>
    */
   public const INTENTIONALLY_UNSUPPORTED = JsonSchemaFieldInstanceMatcher::IGNORE_FIELD_TYPES;
 
@@ -222,7 +224,7 @@ final class FieldInstanceSupportTest extends EcosystemSupportTestBase {
       if (array_key_exists($field_type, self::SUPPORTED)) {
         $expected_supported_fields[] = $field_name;
       }
-      if (\array_key_exists($field_type, self::INTENTIONALLY_UNSUPPORTED)) {
+      if (\array_key_exists($field_type, self::INTENTIONALLY_UNSUPPORTED) && empty(self::INTENTIONALLY_UNSUPPORTED[$field_type]['exceptions'])) {
         $expected_unsupported_fields[] = $field_name;
         // Remove from expected fields.
         $expected_fields = \array_diff($expected_fields, [$field_name]);
@@ -321,7 +323,7 @@ final class FieldInstanceSupportTest extends EcosystemSupportTestBase {
     // is for.
     // 💁‍♂️️ Debugging tip: put a breakpoint here and inspect $compatible_sdc_prop_shapes_per_field and $expected_supported_field_props.
     $this->assertSame([], array_values(array_diff($expected_supported_fields, array_keys($compatible_sdc_prop_shapes_per_field))), 'The known supported field types are actually supported.');
-    self::assertCount(0, \array_intersect(\array_keys($compatible_sdc_prop_shapes_per_field), $expected_unsupported_fields), 'The known supported field types are actually supported.');
+    self::assertSame([], \array_intersect(\array_keys($compatible_sdc_prop_shapes_per_field), $expected_unsupported_fields), 'The known supported field types are actually supported.');
     $actually_supported_fields = array_intersect($expected_fields, array_keys($compatible_sdc_prop_shapes_per_field));
     $missing_fields = array_diff($expected_fields, array_keys($compatible_sdc_prop_shapes_per_field));
     $this->assertSame([], array_values(array_diff($expected_supported_fields, $actually_supported_fields)), 'Field types that were expected to be supported are NOT.');

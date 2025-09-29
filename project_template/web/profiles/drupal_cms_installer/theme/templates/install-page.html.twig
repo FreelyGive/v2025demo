@@ -14,18 +14,21 @@
     <h1 class="cms-installer__heading">
       <img src="{{ theme_path }}/images/drupal-cms-logo.svg" alt="{{ 'Drupal CMS'|t }}" />
     </h1>
-  </header>
-  <div class="cms-installer__wrapper">
-
-    <main class="cms-installer__main">
-
-      {% if languages %}
+    {% if languages %}
+     <div class="select-wrapper">
+        {% include active_theme_path() ~ "/images/translate.svg" %}
         <select name="langcode" class="cms-installer__language-switcher">
           {% for langcode, language in languages %}
             <option dir={{ language.direction }} value="{{ langcode }}">{{ language.name }}</option>
           {% endfor %}
         </select>
-      {% endif %}
+        {% include active_theme_path() ~ "/images/chevron-down.svg" %}
+      </div>
+    {% endif %}
+  </header>
+  <div class="cms-installer__wrapper">
+
+    <main class="cms-installer__main">
 
       {% if title %}
         <h2 class="cms-installer__main-heading">{{ title }}</h2>

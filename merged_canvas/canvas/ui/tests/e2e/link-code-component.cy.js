@@ -18,9 +18,8 @@ describe('♾️ Link component', () => {
       cy.loadURLandWaitForCanvasLoaded({ url: 'canvas/editor/node/2' });
       cy.openLibraryPanel();
       cy.get('.primaryPanelContent').should('contain.text', 'Components');
-      cy.get('.primaryPanelContent')
-        .findByText('My Code Component Link')
-        .click();
+      cy.insertComponent({ name: 'My Code Component Link' });
+
       const iframeSelector =
         '[data-test-canvas-content-initialized="true"][data-canvas-swap-active="true"]';
       cy.waitForElementInIframe('a[href*="/llamas"]', iframeSelector, 10000);

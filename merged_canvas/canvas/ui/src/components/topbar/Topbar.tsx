@@ -76,6 +76,10 @@ const Topbar = () => {
   const backHref =
     window.sessionStorage.getItem(PREVIOUS_URL_STORAGE_KEY) ?? '/';
 
+  // Must be wide enough to accommodate all the buttons that can appear in the top left and top right. The two
+  // columns must be the same width so that the center column is always centered to the whole window.
+  const leftRightColumnWidth = '300px';
+
   return (
     <Menubar.Root data-testid="canvas-topbar" asChild>
       <Box
@@ -84,8 +88,13 @@ const Topbar = () => {
         })}
         pr="4"
       >
-        <Grid columns="3" gap="0" width="auto" height="100%">
-          <Flex align="center" gap="2">
+        <Grid
+          columns="max-content 1fr max-content"
+          gap="0"
+          width="auto"
+          height="100%"
+        >
+          <Flex align="center" gap="2" width={leftRightColumnWidth}>
             <Tooltip content="Exit Drupal Canvas">
               <a
                 href={backHref}
@@ -149,7 +158,12 @@ const Topbar = () => {
               />
             )}
           </Flex>
-          <Flex align="center" justify="end" gap="2">
+          <Flex
+            align="center"
+            justify="end"
+            gap="2"
+            width={leftRightColumnWidth}
+          >
             <PreviewControls isPreview={isPreview} />
             <UnpublishedChanges />
           </Flex>

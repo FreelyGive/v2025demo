@@ -124,6 +124,17 @@ class ShapeMatchingHooks {
    */
   #[Hook('entity_base_field_info_alter')]
   public function entityBaseFieldInfoAlter(array &$fields, EntityTypeInterface $entity_type): void {
+    // The User entity type uses the "string" field type but then overrides its
+    // item class with a custom one, causing the `value` property string
+    // semantics to be lost. Explicitly set them again.
+    // @see \Drupal\canvas\Plugin\Field\FieldType\StringItemOverride
+    // @see \Drupal\user\UserNameItem
+    // @see \Drupal\user\Entity\User::baseFieldDefinitions()
+    // @todo Remove when \Drupal\canvas\Plugin\Field\FieldTypeOverride\StringItemOverride is merged into core.
+    if ($entity_type->id() === 'user') {
+      $fields['name']->addPropertyConstraints('value', ['StringSemantics' => StringSemanticsConstraint::PROSE]);
+    }
+
     // The File entity type's `filename` and `filemime` base fields use the
     // `string` field type but are NOT prose (which is the default semantic for
     // that field type).
@@ -134,9 +145,6 @@ class ShapeMatchingHooks {
       $fields['filename']->addPropertyConstraints('value', ['StringSemantics' => StringSemanticsConstraint::STRUCTURED]);
       $fields['filemime']->addPropertyConstraints('value', ['StringSemantics' => StringSemanticsConstraint::STRUCTURED]);
       $fields['uri']->setRequired(\TRUE);
-    }
-    if ($entity_type->id() === 'taxonomy_term') {
-      $fields['name']->addPropertyConstraints('value', ['StringSemantics' => StringSemanticsConstraint::PROSE]);
     }
   }
 

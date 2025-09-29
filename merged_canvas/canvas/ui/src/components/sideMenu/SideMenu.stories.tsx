@@ -37,6 +37,7 @@ const createMockStore = (
         activePanel,
         isHidden: false,
         aiPanelOpen: false,
+        manageLibraryTab: null,
       },
     },
   });

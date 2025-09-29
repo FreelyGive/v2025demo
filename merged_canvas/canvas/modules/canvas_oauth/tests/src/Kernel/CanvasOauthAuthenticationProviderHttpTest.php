@@ -6,14 +6,15 @@ namespace Drupal\Tests\canvas_oauth\Kernel;
 
 use Drupal\Core\Http\Exception\CacheableAccessDeniedHttpException;
 use Drupal\Core\Url;
-use Drupal\canvas\Entity\Page;
 use Drupal\Tests\canvas\Kernel\Traits\RequestTrait;
 use Drupal\Tests\canvas\Traits\CreateTestJsComponentTrait;
 use Drupal\Tests\simple_oauth\Kernel\AuthorizedRequestBase;
 use Drupal\Tests\user\Traits\UserCreationTrait;
-use Drupal\consumers\Entity\Consumer;
 use Drupal\canvas\Entity\AssetLibrary;
 use Drupal\canvas\Entity\JavaScriptComponent;
+use Drupal\canvas\Entity\Page;
+use Drupal\canvas\Entity\Pattern;
+use Drupal\consumers\Entity\Consumer;
 use Drupal\simple_oauth\Entity\Oauth2Scope;
 use Drupal\simple_oauth\Exception\OAuthUnauthorizedHttpException;
 use Drupal\simple_oauth\Oauth2ScopeInterface;
@@ -51,6 +52,12 @@ class CanvasOauthAuthenticationProviderHttpTest extends AuthorizedRequestBase {
     AssetLibrary::create([
       'id' => AssetLibrary::GLOBAL_ID,
       'label' => 'Global',
+    ])->save();
+    Pattern::create([
+      'id' => 'test-pattern',
+      'label' => 'Test pattern',
+      'status' => TRUE,
+      'component_tree' => [],
     ])->save();
     $this->installEntitySchema(Page::ENTITY_TYPE_ID);
   }
@@ -189,35 +196,62 @@ class CanvasOauthAuthenticationProviderHttpTest extends AuthorizedRequestBase {
   }
 
   /**
-   * Tests a route with access token issued for scope(s) with no permissions.
+   * Data provider for testing uncovered routes with authenticated HTTP requests.
    *
-   * @dataProvider dataProviderRoutes
+   * It's enough to test with one config entity type that's not covered. The goal
+   * of this test is to verify that the authentication provider is NOT applied
+   * to an API endpoint unless we allow it. The logic that evaluates this is
+   * being directly tested with more test cases in
+   * `\Drupal\Tests\canvas_oauth\Kernel\CanvasOauthAuthenticationProviderTest::testAppliesToRoutedRequest`.
+   *
+   * @return array<string, array{
+   *   0: string,
+   *   1: array<string>,
+   *   2: array<string>,
+   *   3: string,
+   *   4: array<string, mixed>
+   *   }> Array of test cases where:
+   *   - Index 0: Route name
+   *   - Index 1: Route parameter values for `canvas_config_entity_type_id` and
+   *     `canvas_config_entity`
+   *   - Index 2: Required permissions
+   *   - Index 3: HTTP method
+   *   - Index 4: Request body data for POST/PATCH
    */
-  public function testRouteWithTokenAndScopesWithNoPermissions(string $route_name, array $parameter_values, array $required_permissions, string $method, array $data): void {
-    // Request an access token for a scope that gets created with permission
-    // that is not sufficient for any of the operations.
-    $access_token = $this->requestAccessToken([Page::CREATE_PERMISSION]);
-    $request = $this->createRequest($route_name, $parameter_values, $method, $data);
-    if (!empty($required_permissions)) {
-      // Expect an exception because the scope doesn't provide the appropriate
-      // permission(s).
-      $exception_class = $method === 'GET' ? CacheableAccessDeniedHttpException::class : AccessDeniedHttpException::class;
-      $this->expectException($exception_class);
-      $this->expectExceptionMessage(sprintf("The '%s' permission is required.", $required_permissions[0]));
-    }
-    $request->headers->set('Authorization', 'Bearer ' . $access_token);
-    $response = $this->request($request);
-    if (empty($required_permissions)) {
-      self::assertTrue($response->isSuccessful());
-    }
+  public static function dataProviderRoutesNotCovered(): array {
+    return [
+      'INDEX patterns' => ['canvas.api.config.list', [Pattern::ENTITY_TYPE_ID], [], 'GET', []],
+      'GET pattern' => ['canvas.api.config.get', [Pattern::ENTITY_TYPE_ID, 'test-pattern'], [], 'GET', []],
+      'POST pattern' => [
+        'canvas.api.config.post',
+        [Pattern::ENTITY_TYPE_ID],
+        ['administer patterns'],
+        'POST',
+        [],
+      ],
+      'PATCH pattern' => [
+        'canvas.api.config.patch',
+        [Pattern::ENTITY_TYPE_ID, 'test-pattern'],
+        ['administer patterns'],
+        'PATCH',
+        [],
+      ],
+      'DELETE pattern' => [
+        'canvas.api.config.delete',
+        [Pattern::ENTITY_TYPE_ID, 'test-pattern'],
+        ['administer patterns'],
+        'DELETE',
+        [],
+      ],
+    ];
   }
 
   /**
-   * Tests a route with access token issued for scope(s) with proper permissions.
+   * Tests a route that is not covered by this module's auth provider.
    *
-   * @dataProvider dataProviderRoutes
+   * @dataProvider dataProviderRoutesNotCovered
    */
-  public function testRouteWithTokenAndScopesWithPermissions(string $route_name, array $parameter_values, array $required_permissions, string $method, array $data): void {
+  public function testNotCoveredRoute(string $route_name, array $parameter_values, array $required_permissions, string $method, array $data): void {
     // Request an access token for scopes that get created with the required
     // permissions.
     // In case no permissions are required, we still need to pass a permission
@@ -226,8 +260,9 @@ class CanvasOauthAuthenticationProviderHttpTest extends AuthorizedRequestBase {
     $access_token = $this->requestAccessToken([Page::CREATE_PERMISSION, ...$required_permissions]);
     $request = $this->createRequest($route_name, $parameter_values, $method, $data);
     $request->headers->set('Authorization', 'Bearer ' . $access_token);
-    $response = $this->request($request);
-    self::assertTrue($response->isSuccessful());
+    $this->expectException(AccessDeniedHttpException::class);
+    $this->expectExceptionMessage('The used authentication method is not allowed on this route.');
+    $this->request($request);
   }
 
   /**

@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace Drupal\canvas\PropSource;
 
+use Drupal\canvas\PropExpressions\StructuredData\FieldObjectPropsExpression;
+use Drupal\canvas\PropExpressions\StructuredData\FieldPropExpression;
+use Drupal\canvas\PropExpressions\StructuredData\ReferenceFieldPropExpression;
 use Drupal\Core\Entity\FieldableEntityInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\canvas\MissingHostEntityException;
 use Drupal\canvas\PropExpressions\StructuredData\Evaluator;
 use Drupal\canvas\PropExpressions\StructuredData\StructuredDataPropExpression;
-use Drupal\canvas\PropExpressions\StructuredData\StructuredDataPropExpressionInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 
 /**
  * Describes structured data to map to 1 explicit input of a component instance.
@@ -22,7 +25,7 @@ use Drupal\canvas\PropExpressions\StructuredData\StructuredDataPropExpressionInt
 final class DynamicPropSource extends PropSourceBase {
 
   public function __construct(
-    private readonly StructuredDataPropExpressionInterface $expression,
+    private readonly FieldPropExpression|ReferenceFieldPropExpression|FieldObjectPropsExpression $expression,
   ) {}
 
   /**
@@ -62,6 +65,7 @@ final class DynamicPropSource extends PropSourceBase {
     }
     assert(array_key_exists('expression', $sdc_prop_source));
 
+    // @phpstan-ignore-next-line argument.type
     return new DynamicPropSource(StructuredDataPropExpression::fromString($sdc_prop_source['expression']));
   }
 
@@ -90,6 +94,25 @@ final class DynamicPropSource extends PropSourceBase {
     // any) and fields (if any) that this expression depends on.
     // @see \Drupal\Tests\canvas\Kernel\PropExpressionDependenciesTest
     return $this->expression->calculateDependencies($host_entity);
+  }
+
+  public function label(): TranslatableMarkup|string {
+    $entity_data_definition = $this->expression instanceof ReferenceFieldPropExpression
+      ? $this->expression->referencer->entityType
+      : $this->expression->entityType;
+    $field_definitions = $entity_data_definition->getPropertyDefinitions();
+
+    $field_name = $this->expression instanceof ReferenceFieldPropExpression
+      ? $this->expression->referencer->fieldName
+      : $this->expression->fieldName;
+    // TRICKY: FieldPropExpression::$fieldName can be an array, but only
+    // when used in a reference.
+    // @see https://www.drupal.org/i/3530521
+    assert(is_string($field_name));
+
+    \assert(\array_key_exists($field_name, $field_definitions));
+    // @phpstan-ignore-next-line return.type
+    return $field_definitions[$field_name]->getLabel();
   }
 
 }

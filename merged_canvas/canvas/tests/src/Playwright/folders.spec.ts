@@ -14,7 +14,11 @@ test.describe('Folder Management', () => {
       const drupal: Drupal = new Drupal({ page, drupalSite });
       await drupal.drush('cr');
 
-      await drupal.installModules(['canvas', 'canvas_test_folders']);
+      await drupal.installModules([
+        'canvas',
+        'canvas_test_folders',
+        'canvas_dev_mode',
+      ]);
 
       // @todo remove the cache clear once https://www.drupal.org/project/drupal/issues/3534825
       // is fixed.
@@ -34,9 +38,17 @@ test.describe('Folder Management', () => {
     await canvasEditor.goToEditor();
 
     await page.click('[aria-label="Manage library"]');
+
+    await page.getByTestId('canvas-page-list-new-button').click();
+
     await expect(
-      page.locator('[data-testid="add-new-folder-button"]'),
+      page.getByTestId('canvas-library-new-folder-button'),
     ).toBeVisible();
+
+    // Close the dropdown menu
+    await page
+      .getByTestId('canvas-page-list-new-button')
+      .click({ force: true });
 
     // We begin on the Components tab.
     await expect(
@@ -114,29 +126,23 @@ test.describe('Folder Management', () => {
             '[data-testid="canvas-manage-library-add-folder-content"]',
           ),
         ).not.toBeAttached();
-        await page.click('[data-testid="add-new-folder-button"]');
-        page
-          .locator('[data-testid="canvas-manage-library-add-folder-content"]')
-          .waitFor({ state: 'visible' });
+
+        await page.getByTestId('canvas-page-list-new-button').click();
+        await page.getByTestId('canvas-library-new-folder-button').click();
+
         await expect(
           page.locator('#add-new-folder-in-tab-form'),
         ).toBeAttached();
         await expect(
-          page.locator(
-            '[data-testid="canvas-manage-library-new-folder-name-submit"]',
-          ),
+          page.getByRole('button', { name: 'Add' }),
         ).not.toBeEnabled();
         await page
           .locator('[data-testid="canvas-manage-library-new-folder-name"]')
           .fill(folderName);
-        await expect(
-          page.locator(
-            '[data-testid="canvas-manage-library-new-folder-name-submit"]',
-          ),
-        ).toBeEnabled({ timeout: 5000 });
-        await page.click(
-          '[data-testid="canvas-manage-library-new-folder-name-submit"]',
-        );
+        await expect(page.getByRole('button', { name: 'Add' })).toBeEnabled({
+          timeout: 5000,
+        });
+        await page.getByRole('button', { name: 'Add' }).click();
         await page
           .locator(`[data-canvas-folder-name="${folderName}"]`)
           .waitFor({ state: 'attached' });

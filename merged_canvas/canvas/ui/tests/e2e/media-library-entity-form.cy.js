@@ -89,7 +89,7 @@ const testMediaLibraryInEntityForm = (cy, loadOptions = {}, title) => {
   // in the contextual panel.
   cy.openLibraryPanel();
   cy.get('.primaryPanelContent').should('contain.text', 'Components');
-  cy.get('.primaryPanelContent').findByText('Hero').click();
+  cy.insertComponent({ name: 'Hero' });
   cy.findByTestId('canvas-contextual-panel').should('exist');
   cy.get(
     '[class*="contextualPanel"] [data-drupal-selector="component-instance-form"]',

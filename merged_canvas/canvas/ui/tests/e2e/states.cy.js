@@ -9,7 +9,7 @@ describe('states', () => {
     cy.loadURLandWaitForCanvasLoaded({ url: 'canvas/editor/node/2' });
     cy.openLibraryPanel();
     cy.get('.primaryPanelContent').should('contain.text', 'Components');
-    cy.get('.primaryPanelContent').findByText('Heading').click();
+    cy.insertComponent({ name: 'Heading' });
     cy.waitForElementContentInIframe('div', 'A heading element');
   });
 

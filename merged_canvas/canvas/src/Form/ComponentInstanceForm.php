@@ -26,7 +26,7 @@ final class ComponentInstanceForm extends FormBase {
   public const FORM_ID = 'component_instance_form';
 
   public function __construct(
-    // This must be protected so that DependencySerializationTrait, which is
+    // These must be protected so that DependencySerializationTrait, which is
     // used by the parent class, can access it.
     protected ComponentTreeLoader $componentTreeLoader,
     protected ThemeHandlerInterface $themeHandler,
@@ -123,7 +123,7 @@ final class ComponentInstanceForm extends FormBase {
 
     $parents = ['canvas_component_props', $component_instance_uuid];
     $sub_form = ['#parents' => $parents, '#component' => $component, '#tree' => TRUE];
-    $form['canvas_component_props'][$component_instance_uuid] = $component->getComponentSource()->buildComponentInstanceForm($sub_form, $form_state, $component, $component_instance_uuid, $inputs, $host_entity, $component->get('settings'));
+    $form['canvas_component_props'][$component_instance_uuid] = $component->getComponentSource()->buildComponentInstanceForm($sub_form, $form_state, $component, $component_instance_uuid, $inputs, $entity, $component->get('settings'));
     $form['#pre_render'][] = [FormIdPreRender::class, 'addFormId'];
     if ($request->get(AjaxResponseSubscriber::AJAX_REQUEST_PARAMETER) !== NULL) {
       // Add the data-ajax flag and manually add the form ID as pre render

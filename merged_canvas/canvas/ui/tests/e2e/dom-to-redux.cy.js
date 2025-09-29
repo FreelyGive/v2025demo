@@ -9,7 +9,7 @@ describe('DOM to Redux functionality', () => {
     cy.loadURLandWaitForCanvasLoaded({ url: 'canvas/editor/node/2' });
     cy.openLibraryPanel();
     cy.get('.primaryPanelContent').should('contain.text', 'Components');
-    cy.get('.primaryPanelContent').findByText('Test Value Update').click();
+    cy.insertComponent({ name: 'Test Value Update' });
     cy.waitForElementContentInIframe('.text-value', 'The Default!');
   });
 

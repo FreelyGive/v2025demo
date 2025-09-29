@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useErrorBoundary } from 'react-error-boundary';
 import NewTabIcon from '@assets/icons/new-tab.svg?react';
-import { ContextMenu, Flex, Skeleton, Text } from '@radix-ui/themes';
+import { ContextMenu, Flex, Skeleton } from '@radix-ui/themes';
 
 import Dialog from '@/components/Dialog';
 import SidebarFolder from '@/components/sidePanel/SidebarFolder';
@@ -34,17 +34,31 @@ const TemplateList = () => {
   }, [error, showBoundary]);
 
   return (
-    <Skeleton
-      loading={isLoading || isFetching}
-      height="1.2rem"
-      width="100%"
-      my="3"
-    >
-      {!!data?.node?.bundles &&
-        Object.entries(data.node.bundles).map(([bundleKey, bundle]) => (
-          <BundleListItem key={bundleKey} bundle={bundle} />
-        ))}
-    </Skeleton>
+    <>
+      <Skeleton
+        loading={isLoading || isFetching}
+        height="1.2rem"
+        width="100%"
+        my="3"
+      >
+        {!!data?.node?.bundles &&
+          Object.entries(data.node.bundles).map(([bundleKey, bundle]) => (
+            <BundleListItem key={bundleKey} bundle={bundle} />
+          ))}
+      </Skeleton>
+      <Skeleton
+        loading={isLoading || isFetching}
+        height="1.2rem"
+        width="100%"
+        my="3"
+      />
+      <Skeleton
+        loading={isLoading || isFetching}
+        height="1.2rem"
+        width="100%"
+        my="3"
+      />
+    </>
   );
 };
 
@@ -193,6 +207,7 @@ const TemplateListItem = ({ viewMode }: { viewMode: TemplateViewMode }) => {
               </UnifiedMenu.Content>
             }
             selected={selectedTemplateId === viewMode.id}
+            indent={2.5}
           />
         </ContextMenu.Trigger>
         <UnifiedMenu.Content

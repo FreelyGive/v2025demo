@@ -13,7 +13,11 @@ import {
   closeAllDialogs,
   selectDialogStates,
 } from '@/features/ui/codeComponentDialogSlice';
-import { validateMachineNameClientSide } from '@/features/validation/validation';
+import {
+  setActivePanel,
+  setManageLibraryTab,
+} from '@/features/ui/primaryPanelSlice';
+import { validateCodeMachineNameClientSide } from '@/features/validation/validation';
 import { useCreateCodeComponentMutation } from '@/services/componentAndLayout';
 
 const AddCodeComponentDialog = () => {
@@ -46,6 +50,8 @@ const AddCodeComponentDialog = () => {
       importedJsComponents: [],
       dataDependencies: {},
     });
+    dispatch(setManageLibraryTab('code'));
+    dispatch(setActivePanel('manageLibrary'));
   };
 
   const handleOpenChange = (open: boolean) => {
@@ -79,14 +85,14 @@ const AddCodeComponentDialog = () => {
 
   useEffect(() => {
     if (isError) {
-      console.error('Failed to add code component:', error);
+      console.error('Failed to create code component:', error);
     }
   }, [isError, error]);
 
   const handleOnChange = (newName: string) => {
     setComponentName(newName);
     setValidationError(
-      newName.trim() ? validateMachineNameClientSide(newName) : '',
+      newName.trim() ? validateCodeMachineNameClientSide(newName) : '',
     );
   };
 
@@ -94,11 +100,11 @@ const AddCodeComponentDialog = () => {
     <Dialog
       open={isAddDialogOpen}
       onOpenChange={handleOpenChange}
-      title="Add new code component"
+      title="Create new code component"
       error={
         isError
           ? {
-              title: 'Failed to add code component',
+              title: 'Failed to create code component',
               message: parse(extractErrorMessageFromApiResponse(error)),
               resetButtonText: 'Try again',
               onReset: handleSave,
@@ -107,7 +113,7 @@ const AddCodeComponentDialog = () => {
       }
       footer={{
         cancelText: 'Cancel',
-        confirmText: 'Add',
+        confirmText: 'Create',
         onConfirm: handleSave,
         isConfirmDisabled: !componentName.trim() || !!validationError,
         isConfirmLoading: isLoading,

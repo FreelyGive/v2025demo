@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Drupal\canvas\PropExpressions\StructuredData;
 
+use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\FieldableEntityInterface;
 use Drupal\Core\Field\FieldItemInterface;
@@ -30,8 +31,11 @@ final class ReferenceFieldPropExpression implements StructuredDataPropExpression
    */
   public function calculateDependencies(FieldableEntityInterface|FieldItemListInterface|null $host_entity = NULL): array {
     assert($host_entity === NULL || $host_entity instanceof FieldableEntityInterface);
-    $dependencies = $this->referencer->calculateDependencies();
-    if ($host_entity !== NULL) {
+    $dependencies = $this->referencer->calculateDependencies($host_entity);
+    if ($host_entity === NULL) {
+      $dependencies = NestedArray::mergeDeep($dependencies, $this->referenced->calculateDependencies());
+    }
+    else {
       // ⚠️ Do not require values while calculating dependencies: this MUST not
       // fail.
       $referenced_content_entities = Evaluator::evaluate($host_entity, $this->referencer, is_required: FALSE);
@@ -50,6 +54,12 @@ final class ReferenceFieldPropExpression implements StructuredDataPropExpression
           $referenced_content_entities,
         ),
       ];
+      // The referenced content entity is the starting point for the `referenced`
+      // expression, so pass it as the host entity. This is necessary to ensure
+      // content dependencies in references are identified.
+      foreach ($referenced_content_entities as $referenced_content_entity) {
+        $dependencies = NestedArray::mergeDeep($dependencies, $this->referenced->calculateDependencies($referenced_content_entity));
+      }
     }
     return $dependencies;
   }

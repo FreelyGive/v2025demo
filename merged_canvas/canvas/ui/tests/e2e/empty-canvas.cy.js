@@ -41,17 +41,10 @@ describe('Empty preview', () => {
     );
 
     cy.waitForElementInIframe('.canvas--region-empty-placeholder');
-    cy.get(
-      '[data-canvas-component-id="sdc.canvas_test_sdc.my-hero"]',
-    ).realClick();
+    cy.insertComponent({ name: 'Hero' });
 
     cy.log('The hero component is now in the iframe');
 
-    // The overlay now has a component.
-    cy.get('.canvas--viewport-overlay [data-canvas-component-id]').should(
-      'have.length',
-      1,
-    );
     cy.waitForElementContentInIframe('div', 'There goes my hero');
     cy.getIframeBody().within(() => {
       cy.get('[data-component-id="canvas_test_sdc:my-hero"]').should(
@@ -93,17 +86,8 @@ describe('Empty preview', () => {
 
     cy.waitForElementInIframe('.canvas--region-empty-placeholder');
 
-    cy.get(
-      '[data-canvas-component-id="sdc.canvas_test_sdc.my-hero"]',
-    ).realClick();
+    cy.insertComponent({ name: 'Hero' });
 
-    cy.log('The hero component is now in the iframe');
-
-    // The overlay now has a component.
-    cy.get('.canvas--viewport-overlay [data-canvas-component-id]').should(
-      'have.length',
-      1,
-    );
     cy.waitForElementContentInIframe('div', 'There goes my hero');
     cy.getIframeBody().within(() => {
       cy.get('[data-component-id="canvas_test_sdc:my-hero"]').should(

@@ -11,6 +11,7 @@ use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
 use Drupal\Core\Config\Entity\ConfigEntityInterface;
 use Drupal\Core\Entity\Attribute\ConfigEntityType;
 use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Entity\ContentEntityTypeInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Entity\EntityChangedInterface;
 use Drupal\Core\Entity\EntityStorageInterface;
@@ -19,6 +20,8 @@ use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Entity\EntityViewModeInterface;
 use Drupal\Core\Entity\FieldableEntityInterface;
 use Drupal\Core\Entity\Query\QueryInterface;
+use Drupal\Core\Entity\TypedData\EntityDataDefinition;
+use Drupal\Core\Entity\TypedData\EntityDataDefinitionInterface;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\canvas\Plugin\Field\FieldType\ComponentTreeItem;
 use Drupal\canvas\Storage\ComponentTreeLoader;
@@ -283,6 +286,29 @@ final class ContentTemplate extends ComponentTreeConfigEntityBase implements Can
    */
   public function getTargetEntityTypeId(): string {
     return (string) $this->content_entity_type_id;
+  }
+
+  public function getTargetEntityDataDefinition(): EntityDataDefinitionInterface {
+    return EntityDataDefinition::create(
+      $this->getTargetEntityTypeId(),
+      $this->getTargetBundle(),
+    );
+  }
+
+  public function createEmptyTargetEntity(): FieldableEntityInterface {
+    $entity_type_manager = \Drupal::entityTypeManager();
+    $storage = $entity_type_manager->getStorage($this->getTargetEntityTypeId());
+    $content_entity_type = $entity_type_manager->getDefinition($this->getTargetEntityTypeId());
+    assert($content_entity_type instanceof ContentEntityTypeInterface);
+
+    $empty_target_entity = $content_entity_type->hasKey('bundle')
+      ? $storage->create([
+        $content_entity_type->getKey('bundle') => $this->getTargetBundle(),
+      ])
+      : $storage->create();
+    assert($empty_target_entity instanceof FieldableEntityInterface);
+
+    return $empty_target_entity;
   }
 
   /**

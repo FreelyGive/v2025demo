@@ -84,11 +84,7 @@ test.describe('AI Features', () => {
     await page.getByRole('button', { name: 'Add' }).click();
     await expect(page).toHaveURL(/\/canvas\/editor\/canvas_page\/\d+$/);
     await canvasEditor.openLibraryPanel();
-    await page
-      .locator('div')
-      .filter({ hasText: /^HeroBanner$/ })
-      .nth(4)
-      .click();
+    await canvasEditor.addComponent({ name: 'HeroBanner' });
     await canvasEditor.clickPreviewComponent('js.herobanner');
 
     // Create a second component.

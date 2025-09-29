@@ -42,5 +42,6 @@ vi.mock('tailwindcss-in-browser', () => ({
   default: vi.fn().mockReturnValue(Promise.resolve('')),
   extractClassNameCandidates: vi.fn().mockReturnValue([]),
   compileCss: vi.fn().mockImplementation(() => Promise.resolve('')),
+  compilePartialCss: vi.fn().mockImplementation(() => Promise.resolve('')),
   transformCss: vi.fn().mockReturnValue(Promise.resolve('')),
 }));

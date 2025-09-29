@@ -8,6 +8,10 @@ import {
   selectDialogStates,
   selectSelectedCodeComponent,
 } from '@/features/ui/codeComponentDialogSlice';
+import {
+  setActivePanel,
+  setManageLibraryTab,
+} from '@/features/ui/primaryPanelSlice';
 import { selectPreviouslyEdited } from '@/features/ui/uiSlice';
 import { useUpdateCodeComponentMutation } from '@/services/componentAndLayout';
 
@@ -37,6 +41,8 @@ const AddToComponentsDialog = () => {
         status: true,
       },
     });
+    dispatch(setManageLibraryTab('components'));
+    dispatch(setActivePanel('manageLibrary'));
   };
 
   const handleOpenChange = (open: boolean) => {

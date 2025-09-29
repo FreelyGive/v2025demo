@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Drupal\canvas\Plugin\Canvas\ComponentSource;
 
+use Drupal\canvas\Entity\ContentTemplate;
 use Drupal\canvas\PropSource\DynamicPropSource;
+use Drupal\canvas\ShapeMatcher\FieldForComponentSuggester;
 use Drupal\Component\Plugin\DependentPluginInterface;
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Entity\EntityInterface;
@@ -16,6 +18,7 @@ use Drupal\Core\Plugin\Component as ComponentPlugin;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Render\Component\Exception\ComponentNotFoundException;
 use Drupal\Core\Render\Component\Exception\InvalidComponentException;
+use Drupal\Core\Render\Element;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\Theme\Component\ComponentMetadata;
@@ -95,6 +98,7 @@ abstract class GeneratedFieldExplicitInputUxComponentSourceBase extends Componen
     private readonly ComponentValidator $componentValidator,
     private readonly WidgetPluginManager $fieldWidgetPluginManager,
     protected readonly EntityTypeManagerInterface $entityTypeManager,
+    private readonly FieldForComponentSuggester $fieldForComponentSuggester,
   ) {
     assert(array_key_exists('local_source_id', $configuration));
     parent::__construct($configuration, $plugin_id, $plugin_definition);
@@ -112,6 +116,7 @@ abstract class GeneratedFieldExplicitInputUxComponentSourceBase extends Componen
       $container->get(ComponentValidator::class),
       $container->get('plugin.manager.field.widget'),
       $container->get(EntityTypeManagerInterface::class),
+      $container->get(FieldForComponentSuggester::class),
     );
   }
 
@@ -548,20 +553,31 @@ abstract class GeneratedFieldExplicitInputUxComponentSourceBase extends Componen
     FormStateInterface $form_state,
     ?Component $component = NULL,
     string $component_instance_uuid = '',
-    array $client_model = [],
+    array $inputValues = [],
     ?EntityInterface $entity = NULL,
     array $settings = [],
   ): array {
     $transforms = [];
-    assert($entity instanceof FieldableEntityInterface);
     $component_schema = $this->getMetadata()->schema ?? [];
+
+    // @todo Uncomment this once it is guaranteed that the POST request to add
+    // the component instance happens first.
+    // assert(!is_null(\Drupal::service(ComponentTreeLoader::class)->load($entity)->getComponentTreeItemByUuid($component_instance_uuid)), 'The passed $entity does not contain the component instance being edited.');
+
+    // Some field widgets need an entity object. Provide such a "parent" entity.
+    // @see \Drupal\Core\Field\FieldItemListInterface::getEntity()
+    // @see \Drupal\canvas\PropSource\StaticPropSource::formTemporaryRemoveThisExclamationExclamationExclamation()
+    $entity_object_for_field_widget = match (TRUE) {
+      $entity instanceof FieldableEntityInterface => $entity,
+      $entity instanceof ContentTemplate => $entity->createEmptyTargetEntity(),
+      default => throw new \LogicException(),
+    };
 
     // Allow form alterations specific to Canvas component instance forms (currently
     // only "static prop sources").
     $form_state->set('is_canvas_static_prop_source', TRUE);
 
     $prop_field_definitions = $settings['prop_field_definitions'];
-    $default_prop_sources = $this->getDefaultExplicitInput();
 
     // To ensure the order of the fields always matches the order of the schema
     // we loop over the properties from the schema, but first we have to
@@ -576,17 +592,23 @@ abstract class GeneratedFieldExplicitInputUxComponentSourceBase extends Componen
 
       $component_prop = ComponentPropExpression::fromString($component_prop_expression);
       $sdc_prop_name = $component_prop->propName;
-      $source = $this->uncollapse($client_model[$sdc_prop_name] ?? $default_prop_sources[$sdc_prop_name], $sdc_prop_name);
+      // Uncollapse if set; otherwise fall back to the default static prop
+      // source, but *made empty* instead of the default value.
+      // Note that ::clientModelToInput() guarantees $inputValues contains a
+      // value for every required prop, even when a required property is allowed
+      // to be empty during editing for improved usability.
+      // @see ::getDefaultExplicitInput()
+      // @see ::clientModelToInput()
+      // @see https://www.drupal.org/i/3529788
+      assert(array_key_exists($sdc_prop_name, $inputValues) || !in_array($sdc_prop_name, $this->getExplicitInputDefinitions()['required'], TRUE));
+      $source = $this->uncollapse($inputValues[$sdc_prop_name] ?? NULL, $sdc_prop_name);
       $disabled = FALSE;
-      $label_suffix = '';
+      $linked_prop_source = $source instanceof DynamicPropSource ? $source : NULL;
       if (!$source instanceof StaticPropSource) {
         // @todo Build DynamicPropSource UX in https://www.drupal.org/i/3541037. Related: https://www.drupal.org/project/canvas/issues/3459234
         // @todo Design is undefined for the AdaptedPropSource UX.
         // Fall back to the static version, disabled for now where the design is undefined.
         $disabled = !$source instanceof DefaultRelativeUrlPropSource;
-        if ($source instanceof DynamicPropSource) {
-          $label_suffix = sprintf(" — ⚠️ DISABLED because this prop is actually populated by a DynamicPropSource (%s)", $source->toArray()['expression']);
-        }
         $source = $this->getDefaultStaticPropSource($sdc_prop_name);
       }
 
@@ -601,10 +623,45 @@ abstract class GeneratedFieldExplicitInputUxComponentSourceBase extends Componen
       assert(isset($component_schema['properties'][$sdc_prop_name]['title']));
       $label = $component_schema['properties'][$sdc_prop_name]['title'];
       assert($component instanceof Component);
-      $widget = $source->getWidget($component->id(), $component->getLoadedVersion(), $sdc_prop_name, $label . $label_suffix, $field_widget_plugin_id);
+      $widget = $source->getWidget($component->id(), $component->getLoadedVersion(), $sdc_prop_name, $label, $field_widget_plugin_id);
       $is_required = isset($component_schema['required']) && in_array($sdc_prop_name, $component_schema['required'], TRUE);
-      $form[$sdc_prop_name] = $source->formTemporaryRemoveThisExclamationExclamationExclamation($widget, $sdc_prop_name, $is_required, $entity, $form, $form_state);
+      $form[$sdc_prop_name] = $source->formTemporaryRemoveThisExclamationExclamationExclamation($widget, $sdc_prop_name, $is_required, $entity_object_for_field_widget, $form, $form_state);
       $form[$sdc_prop_name]['#disabled'] = $disabled;
+
+      if ($entity instanceof ContentTemplate) {
+        $suggestions = FieldForComponentSuggester::structureSuggestionsForResponse($this->fieldForComponentSuggester->suggest(
+          $this->getSourceSpecificComponentId(),
+          $this->getMetadata(),
+          $entity->getTargetEntityDataDefinition(),
+        ));
+        $could_use_dynamic_prop_source = !empty($suggestions[$sdc_prop_name]);
+
+        // If the prop is already linked, replace the widget entirely. The
+        // replacement will show the linker by the field label, and replace the
+        // form elements with a linked field badge.
+        if ($linked_prop_source) {
+          // This full replacement of the widget ensures that the resulting form
+          // has consistent and valid html, regardless of field type and widget.
+          $form[$sdc_prop_name]['widget'] = [
+            '#type' => 'linked_prop_source',
+            '#sdc_prop_name' => $sdc_prop_name,
+            '#sdc_prop_label' => $label,
+            '#linked_prop_source' => $linked_prop_source,
+            '#field_link_suggestions' => $suggestions[$sdc_prop_name],
+            '#component' => $component,
+            '#is_required' => $is_required,
+          ];
+        }
+        // If the prop can be linked, but isn't yet, add attributes that will
+        // result in the prop linker appearing next to the field label.
+        elseif ($could_use_dynamic_prop_source) {
+          $form[$sdc_prop_name]['widget']['#prop_link_data'] = [
+            'linked' => FALSE,
+            'prop_name' => $form[$sdc_prop_name]['widget']['#field_name'],
+            'suggestions' => $suggestions[$sdc_prop_name],
+          ];
+        }
+      }
 
       $widget_definition = $this->fieldWidgetPluginManager->getDefinition($widget->getPluginId());
       if (\array_key_exists('canvas', $widget_definition) && \array_key_exists('transforms', $widget_definition['canvas'])) {
@@ -621,7 +678,41 @@ abstract class GeneratedFieldExplicitInputUxComponentSourceBase extends Componen
       }
     }
     $form['#attached']['canvas-transforms'] = $transforms;
+    if ($entity instanceof ContentTemplate) {
+      $form['#after_build'][] = [static::class, 'moveSuggestionsToLabel'];
+    }
     return $form;
+  }
+
+  public static function moveSuggestionsToLabel(array $element, FormStateInterface $form_state): array {
+    // Recursively traverse elements and add prop_link_data to title attributes
+    static::processElementTreeLinkerLabels($element);
+    return $element;
+  }
+
+  /**
+   * Recursively processes the element so labels get link suggestion data.
+   *
+   * @param array $element
+   *   The form element to process.
+   * @param array $propLinkData
+   *   Prop link data from a parent element to pass down.
+   */
+  public static function processElementTreeLinkerLabels(array &$element, array $propLinkData = []): void {
+    // If this element has prop_link_data, use it for this subtree
+    if (!empty($element['#prop_link_data'])) {
+      $propLinkData = $element['#prop_link_data'];
+    }
+
+    // If we have prop link data and this element has a title display, add the
+    // data to label attributes.
+    if (!empty($propLinkData) && isset($element['#title_display'])) {
+      $element['#label_attributes']['prop_link_data'] = $propLinkData;
+    }
+
+    foreach (Element::children($element) as $key) {
+      static::processElementTreeLinkerLabels($element[$key], $propLinkData);
+    }
   }
 
   /**
@@ -997,9 +1088,9 @@ abstract class GeneratedFieldExplicitInputUxComponentSourceBase extends Componen
 
         // @see PropSourceComponent type-script definition.
         // @see EvaluatedComponentModel type-script definition.
-        // Undo what ::inputToClientModel() did: restore the omitted `'value'`
-        // in cases where it is the same as the source value.
-        if (!\array_key_exists('value', $prop_source)) {
+        // For static props undo what ::inputToClientModel() did: restore the
+        // omitted `'value'` in cases where it is the same as the source value.
+        if (str_starts_with($prop_source['sourceType'] ?? '', StaticPropSource::getSourceTypePrefix()) && !\array_key_exists('value', $prop_source)) {
           $prop_source['value'] = $prop_value;
         }
         $source = PropSource::parse($prop_source);

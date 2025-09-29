@@ -54,7 +54,7 @@ const useSourceCode = (requestedComponentId: string): void => {
   const {
     extractClassNameCandidates,
     buildTailwindCssFromClassNameCandidates,
-    transformCss,
+    buildComponentCss,
   } = useCompileCss();
   const { isJavaScriptCompilerReady, compileJavaScript } =
     useCompileJavaScript();
@@ -187,7 +187,8 @@ const useSourceCode = (requestedComponentId: string): void => {
       const { code: compiledJsForSlots, error: compiledJsForSlotsError } =
         compileJavaScript(getJsForSlotsPreview(slots));
       // Compile the component's own CSS.
-      const compiledCss = await transformCss(sourceCodeCSS);
+      const { css: compiledCss, error: compiledCssError } =
+        await buildComponentCss(sourceCodeCSS, globalSourceCodeCSS);
 
       // Save everything to the Redux store.
       // (These updates are automatically batched since React 18+.)
@@ -231,7 +232,8 @@ const useSourceCode = (requestedComponentId: string): void => {
           compilationError:
             !!compiledJsError ||
             !!compiledJsForSlotsError ||
-            !!compiledTailwindError,
+            !!compiledTailwindError ||
+            !!compiledCssError,
           isCompiling: false,
         }),
       );
@@ -255,6 +257,7 @@ const useSourceCode = (requestedComponentId: string): void => {
     };
   }, [
     buildTailwindCssFromClassNameCandidates,
+    buildComponentCss,
     compileJavaScript,
     componentId,
     dispatch,
@@ -265,7 +268,6 @@ const useSourceCode = (requestedComponentId: string): void => {
     slots,
     sourceCodeCSS,
     sourceCodeJS,
-    transformCss,
   ]);
 };
 

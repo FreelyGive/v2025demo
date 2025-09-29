@@ -9,6 +9,7 @@ namespace Drupal\Tests\canvas\Kernel\Plugin\Canvas\ComponentSource;
 use Drupal\Component\Serialization\Json;
 use Drupal\Component\Utility\Crypt;
 use Drupal\Component\Utility\NestedArray;
+use Drupal\Core\Access\AccessResultForbidden;
 use Drupal\Core\Asset\AssetResolverInterface;
 use Drupal\Core\Asset\AttachedAssets;
 use Drupal\Core\Cache\CacheableDependencyInterface;
@@ -1681,7 +1682,19 @@ final class JsComponentTest extends ComponentSourceTestBase {
   protected function deleteConfigAndTriggerComponentFallback(ComponentInterface $used_component, ComponentInterface $unused_component): void {
     $source = $used_component->getComponentSource();
     \assert($source instanceof JsComponent);
-    $source->getJavaScriptComponent()->delete();
+
+    // Deletion is prevented by the access handler.
+    $js_component = $source->getJavaScriptComponent();
+    // @phpstan-ignore-next-line argument.type
+    $access = $js_component->access('delete', $this->createUser([JavaScriptComponent::ADMIN_PERMISSION]), return_as_object: TRUE);
+    self::assertEquals(
+      (new AccessResultForbidden('This code component is in use in a default revision and cannot be deleted.'))->addCacheContexts(['user.permissions']),
+      $access,
+    );
+
+    // However, scripts (and config management) do not check access.
+    $js_component->delete();
+
     $source = $unused_component->getComponentSource();
     \assert($source instanceof JsComponent);
     $source->getJavaScriptComponent()->delete();

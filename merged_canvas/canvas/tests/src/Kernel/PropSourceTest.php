@@ -51,6 +51,8 @@ use Drupal\user\Entity\User;
  */
 class PropSourceTest extends KernelTestBase {
 
+  private const FILE_UUID1 = 'a461c159-039a-4de2-96e5-07d1112105df';
+  private const FILE_UUID2 = '792ea357-71d6-45fa-a12b-78d029edbe4c';
   private const IMAGE_MEDIA_UUID1 = '83b145bb-d8c3-4410-bbd6-fdcd06e27c29';
   private const IMAGE_MEDIA_UUID2 = '93b145bb-d8c3-4410-bbd6-fdcd06e27c29';
   private const TEST_MEDIA = '43b145bb-d8c3-4410-bbd6-fdcd06e27c29';
@@ -111,7 +113,7 @@ class PropSourceTest extends KernelTestBase {
       $file_system->copy(\Drupal::root() . '/core/tests/fixtures/files/image-2.jpg', PublicStream::basePath(), FileExists::Replace);
     }
     $file1 = File::create([
-      'uuid' => 'a461c159-039a-4de2-96e5-07d1112105df',
+      'uuid' => self::FILE_UUID1,
       'uri' => $file_uri,
       'status' => 1,
     ]);
@@ -121,6 +123,7 @@ class PropSourceTest extends KernelTestBase {
       $file_system->copy(\Drupal::root() . '/core/tests/fixtures/files/image-3.jpg', PublicStream::basePath(), FileExists::Replace);
     }
     $file2 = File::create([
+      'uuid' => self::FILE_UUID2,
       'uri' => $file_uri,
       'status' => 1,
     ]);
@@ -478,6 +481,8 @@ class PropSourceTest extends KernelTestBase {
           'media.type.image_but_not_image_media_source',
         ],
         'content' => [
+          'file:file:' . self::FILE_UUID2,
+          'file:file:' . self::FILE_UUID1,
           'media:anything_is_possible:' . self::IMAGE_MEDIA_UUID2,
           'media:image:' . self::IMAGE_MEDIA_UUID1,
           'media:image_but_not_image_media_source:' . self::TEST_MEDIA,
@@ -626,11 +631,11 @@ class PropSourceTest extends KernelTestBase {
       'expected_evaluation_with_user_host_entity' => \DomainException::class,
       'expected_evaluation_with_node_host_entity' => 'John Doe',
       'expected_dependencies_expression_only' => [
-        'module' => ['node'],
+        'module' => ['node', 'user'],
         'config' => ['node.type.page'],
       ],
       'expected_dependencies_with_host_entity' => [
-        'module' => ['node'],
+        'module' => ['node', 'user'],
         'config' => ['node.type.page'],
         'content' => [
           'user:user:881261cd-c9e2-4dcd-b0a8-1efa2e319a13',
@@ -648,11 +653,11 @@ class PropSourceTest extends KernelTestBase {
         'machine_id' => 1,
       ],
       'expected_dependencies_expression_only' => [
-        'module' => ['node', 'node'],
+        'module' => ['node', 'user', 'node'],
         'config' => ['node.type.page', 'node.type.page'],
       ],
       'expected_dependencies_with_host_entity' => [
-        'module' => ['node', 'node'],
+        'module' => ['node', 'user', 'node'],
         'config' => ['node.type.page', 'node.type.page'],
         'content' => [
           'user:user:881261cd-c9e2-4dcd-b0a8-1efa2e319a13',
@@ -681,7 +686,8 @@ class PropSourceTest extends KernelTestBase {
     // @see \Drupal\canvas\Plugin\DataType\ComputedUrlWithQueryString
     $expected_node_1_expression_dependencies = $expected_dependencies_expression;
     $expected_node_1_expression_dependencies['module'][] = 'file';
-    $expected_node_1_expression_dependencies['content'][] = 'file:file:a461c159-039a-4de2-96e5-07d1112105df';
+    $expected_node_1_expression_dependencies['module'][] = 'file';
+    $expected_node_1_expression_dependencies['content'][] = 'file:file:' . self::FILE_UUID1;
 
     yield "Contrived multi-bundle example, with per-bundle field names *and* per-field property names" => [
       'expression' => 'ℹ︎␜entity:node:page|bio␝field_photo|field_image␞␟srcset_candidate_uri_template|src_with_alternate_widths',
@@ -717,6 +723,7 @@ class PropSourceTest extends KernelTestBase {
       ],
     ]);
 
+    // @phpstan-ignore-next-line argument.type
     $dynamic_prop_source_delta_test = new DynamicPropSource(StructuredDataPropExpression::fromString($expression));
 
     if ($expected_message !== NULL) {

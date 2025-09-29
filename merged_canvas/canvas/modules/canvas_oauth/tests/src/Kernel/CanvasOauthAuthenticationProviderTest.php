@@ -7,6 +7,7 @@ namespace Drupal\Tests\canvas_oauth\Kernel;
 use Drupal\Core\Routing\RouteObjectInterface;
 use Drupal\KernelTests\KernelTestBase;
 use Drupal\canvas\Entity\AssetLibrary;
+use Drupal\canvas\Entity\Folder;
 use Drupal\canvas\Entity\JavaScriptComponent;
 use Drupal\canvas\Entity\Pattern;
 use Drupal\canvas_oauth\Authentication\Provider\CanvasOauthAuthenticationProvider;
@@ -64,6 +65,15 @@ class CanvasOauthAuthenticationProviderTest extends KernelTestBase {
    *   - Index 2: Expected result of applies() method
    */
   public static function dataProviderRoutes(): array {
+    $generate_per_config_entity_type_test_case = function (string $config_entity_type_id, bool $expected_applies): array {
+      return [
+        ['canvas.api.config.delete', ['canvas_config_entity_type_id' => $config_entity_type_id], $expected_applies],
+        ['canvas.api.config.get', ['canvas_config_entity_type_id' => $config_entity_type_id], $expected_applies],
+        ['canvas.api.config.list', ['canvas_config_entity_type_id' => $config_entity_type_id], $expected_applies],
+        ['canvas.api.config.patch', ['canvas_config_entity_type_id' => $config_entity_type_id], $expected_applies],
+        ['canvas.api.config.post', ['canvas_config_entity_type_id' => $config_entity_type_id], $expected_applies],
+      ];
+    };
     return [
       ['entity.component.audit', [], FALSE],
       ['entity.component.delete_form', [], FALSE],
@@ -75,31 +85,17 @@ class CanvasOauthAuthenticationProviderTest extends KernelTestBase {
       ['canvas.api.config.auto-save.get.css', [], FALSE],
       ['canvas.api.config.auto-save.get.js', [], FALSE],
       ['canvas.api.config.auto-save.patch', [], FALSE],
-      ['canvas.api.config.delete', ['canvas_config_entity_type_id' => JavaScriptComponent::ENTITY_TYPE_ID], TRUE],
-      ['canvas.api.config.delete', ['canvas_config_entity_type_id' => Pattern::ENTITY_TYPE_ID], FALSE],
-      ['canvas.api.config.delete', ['canvas_config_entity_type_id' => AssetLibrary::ENTITY_TYPE_ID], TRUE],
-      ['canvas.api.config.delete', ['canvas_config_entity_type_id' => 'non-existent'], FALSE],
       ['canvas.api.config.delete', [], FALSE],
-      ['canvas.api.config.get', ['canvas_config_entity_type_id' => JavaScriptComponent::ENTITY_TYPE_ID], TRUE],
-      ['canvas.api.config.get', ['canvas_config_entity_type_id' => Pattern::ENTITY_TYPE_ID], FALSE],
-      ['canvas.api.config.get', ['canvas_config_entity_type_id' => AssetLibrary::ENTITY_TYPE_ID], TRUE],
-      ['canvas.api.config.get', ['canvas_config_entity_type_id' => 'non-existent'], FALSE],
       ['canvas.api.config.get', [], FALSE],
-      ['canvas.api.config.list', ['canvas_config_entity_type_id' => JavaScriptComponent::ENTITY_TYPE_ID], TRUE],
-      ['canvas.api.config.list', ['canvas_config_entity_type_id' => Pattern::ENTITY_TYPE_ID], FALSE],
-      ['canvas.api.config.list', ['canvas_config_entity_type_id' => AssetLibrary::ENTITY_TYPE_ID], TRUE],
-      ['canvas.api.config.list', ['canvas_config_entity_type_id' => 'non-existent'], FALSE],
       ['canvas.api.config.list', [], FALSE],
-      ['canvas.api.config.patch', ['canvas_config_entity_type_id' => JavaScriptComponent::ENTITY_TYPE_ID], TRUE],
-      ['canvas.api.config.patch', ['canvas_config_entity_type_id' => Pattern::ENTITY_TYPE_ID], FALSE],
-      ['canvas.api.config.patch', ['canvas_config_entity_type_id' => AssetLibrary::ENTITY_TYPE_ID], TRUE],
-      ['canvas.api.config.patch', ['canvas_config_entity_type_id' => 'non-existent'], FALSE],
       ['canvas.api.config.patch', [], FALSE],
-      ['canvas.api.config.post', ['canvas_config_entity_type_id' => JavaScriptComponent::ENTITY_TYPE_ID], TRUE],
-      ['canvas.api.config.post', ['canvas_config_entity_type_id' => Pattern::ENTITY_TYPE_ID], FALSE],
-      ['canvas.api.config.post', ['canvas_config_entity_type_id' => AssetLibrary::ENTITY_TYPE_ID], TRUE],
-      ['canvas.api.config.post', ['canvas_config_entity_type_id' => 'non-existent'], FALSE],
       ['canvas.api.config.post', [], FALSE],
+      ...$generate_per_config_entity_type_test_case(JavaScriptComponent::ENTITY_TYPE_ID, TRUE),
+      ...$generate_per_config_entity_type_test_case(Pattern::ENTITY_TYPE_ID, FALSE),
+      ...$generate_per_config_entity_type_test_case(Folder::ENTITY_TYPE_ID, FALSE),
+      ...$generate_per_config_entity_type_test_case(Folder::ENTITY_TYPE_ID, FALSE),
+      ...$generate_per_config_entity_type_test_case(AssetLibrary::ENTITY_TYPE_ID, TRUE),
+      ...$generate_per_config_entity_type_test_case('non-existent', FALSE),
       ['canvas.api.content.create', [], FALSE],
       ['canvas.api.content.delete', [], FALSE],
       ['canvas.api.content.list', [], FALSE],

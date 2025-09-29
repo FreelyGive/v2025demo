@@ -8,11 +8,13 @@ import {
 } from '@radix-ui/react-icons';
 import {
   AlertDialog,
+  Box,
   Button,
   Callout,
   ContextMenu,
   DropdownMenu,
   Flex,
+  Skeleton,
   TextField,
 } from '@radix-ui/themes';
 
@@ -187,7 +189,6 @@ const ContentGroup = ({
                     </UnifiedMenu.Content>
                   ) : null
                 }
-                includeDropdown={!!dropdownMenuContent}
                 onClick={onSelect ? () => onSelect(item) : undefined}
                 data-canvas-page-id={item.id}
               />
@@ -303,24 +304,44 @@ const PageList = ({
           </DropdownMenu.Root>
         )}
       </Flex>
-      {isPageItemsLoading && <p>Loading...</p>}
-      {!isPageItemsLoading && !pageItemsError && (
-        <ContentGroup
-          items={pageItems}
-          homepagePath={homepagePath}
-          selectedPageId={selectedPageId}
-          onSelect={onSelectPage}
-          onDuplicate={onDuplicatePage}
-          onSetHomepage={onSetHomepage}
-          onDelete={onDeletePage}
-        />
-      )}
-      {pageItemsError && (
-        <ErrorCard
-          title="An unexpected error has occurred while loading pages."
-          error={pageItemsError}
-        />
-      )}
+      <Skeleton
+        height="1.2rem"
+        loading={isPageItemsLoading}
+        width="100%"
+        my="3"
+      >
+        <Box>
+          {!pageItemsError && (
+            <ContentGroup
+              items={pageItems}
+              homepagePath={homepagePath}
+              selectedPageId={selectedPageId}
+              onSelect={onSelectPage}
+              onDuplicate={onDuplicatePage}
+              onSetHomepage={onSetHomepage}
+              onDelete={onDeletePage}
+            />
+          )}
+          {pageItemsError && (
+            <ErrorCard
+              title="An unexpected error has occurred while loading pages."
+              error={pageItemsError}
+            />
+          )}
+        </Box>
+      </Skeleton>
+      <Skeleton
+        loading={isPageItemsLoading}
+        height="1.2rem"
+        width="100%"
+        my="3"
+      />
+      <Skeleton
+        loading={isPageItemsLoading}
+        height="1.2rem"
+        width="100%"
+        my="3"
+      />
     </div>
   );
 };

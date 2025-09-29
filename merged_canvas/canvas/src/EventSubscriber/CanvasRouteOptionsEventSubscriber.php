@@ -11,6 +11,7 @@ use Drupal\Core\Routing\RoutingEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\Routing\Route;
 
 /**
  * Affects only Canvas-owned routes.
@@ -53,12 +54,24 @@ final class CanvasRouteOptionsEventSubscriber implements EventSubscriberInterfac
     }
   }
 
+  public function preventRouteNormalization(RouteBuildEvent $event): void {
+    foreach ($event->getRouteCollection()->getIterator() as $route_name => $route) {
+      assert($route instanceof Route);
+      // This ensures our react based routing works with redirect module enabled.
+      // @see \Drupal\canvas\PathProcessor\CanvasPathProcessor::processInbound.
+      if (str_starts_with($route_name, 'canvas.')) {
+        $route->setDefault('_disable_route_normalizer', TRUE);
+      }
+    }
+  }
+
   /**
    * {@inheritdoc}
    */
   public static function getSubscribedEvents(): array {
     $events[KernelEvents::REQUEST][] = ['transformWrapperFormatRouteOption'];
     $events[RoutingEvents::ALTER][] = ['addCsrfToken'];
+    $events[RoutingEvents::ALTER][] = ['preventRouteNormalization'];
     return $events;
   }
 

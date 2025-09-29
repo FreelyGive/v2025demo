@@ -1290,3 +1290,58 @@ Cypress.Commands.add('waitForAjax', () => {
       ),
   );
 });
+
+Cypress.Commands.add('insertComponent', (identifier, options = {}) => {
+  const { id, name } = identifier;
+  const { hasInputs = true } = options;
+
+  // Open the Library panel first.
+  cy.openLibraryPanel();
+
+  let selector, previewSelector;
+  if (id) {
+    selector = `[data-canvas-type="component"][data-canvas-component-id="${id}"]`;
+    previewSelector = `#canvasPreviewOverlay [data-canvas-component-id="${id}"]`;
+  } else if (name) {
+    selector = `[data-canvas-type="component"][data-canvas-name="${name}"]`;
+    previewSelector = `#canvasPreviewOverlay [aria-label="${name}"]`;
+  } else {
+    throw new Error("Either 'id' or 'name' must be provided.");
+  }
+
+  // Count existing instances robustly (even if zero)
+  cy.document().then((doc) => {
+    const initialCount = doc.querySelectorAll(previewSelector).length;
+
+    // Open contextual menu and click Insert
+    cy.get('[data-testid="canvas-primary-panel"]')
+      .find(selector)
+      .trigger('contextmenu');
+
+    cy.findByText('Insert').click();
+    // Assert new instance appears
+    cy.get(previewSelector).should('have.length', initialCount + 1);
+
+    // Ensure the new instance is rendered
+    cy.get(previewSelector)
+      .eq(initialCount) // Get the newly added instance
+      .should('exist');
+
+    // @todo I'm not sure but it seems like some components DON'T have size (e.g. "Canvas test SDC with optional image, without example")
+    // Wait for all instances to have size
+    // cy.get(previewSelector).each(($el) => {
+    //   cy.wrap($el).should(($el) => {
+    //     const rect = $el[0].getBoundingClientRect();
+    //     expect(rect.width).to.be.greaterThan(0);
+    //     expect(rect.height).to.be.greaterThan(0);
+    //   });
+    // });
+
+    // Optionally wait for the component input form to have any html
+    if (hasInputs) {
+      cy.get('form[data-form-id="component_instance_form"]')
+        .should('exist')
+        .should('not.be.empty');
+    }
+  });
+});

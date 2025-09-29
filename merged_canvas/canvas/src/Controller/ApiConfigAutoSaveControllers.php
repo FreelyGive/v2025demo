@@ -24,9 +24,18 @@ final class ApiConfigAutoSaveControllers extends ApiControllerBase {
   public function get(CanvasHttpApiEligibleConfigEntityInterface $canvas_config_entity): CacheableJsonResponse {
     $auto_save = $this->autoSaveManager->getAutoSaveEntity($canvas_config_entity);
     \assert($auto_save->entity === NULL || $auto_save->entity instanceof CanvasHttpApiEligibleConfigEntityInterface);
+
+    $auto_save_normalization = $auto_save->entity?->normalizeForClientSide()->values;
+    // When normalizing for auto-save, don't provide links to entity
+    // operations. Those should only provided on this config entity's
+    // canonical API route.
+    if ($auto_save_normalization !== NULL) {
+      unset($auto_save_normalization['links']);
+    }
+
     return (new CacheableJsonResponse(
       data: [
-        'data' => $auto_save->entity?->normalizeForClientSide()->values,
+        'data' => $auto_save_normalization,
         'autoSaves' => $this->getAutoSaveHashes([$canvas_config_entity]),
       ],
       status: Response::HTTP_OK,

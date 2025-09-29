@@ -14,8 +14,10 @@ use Symfony\Component\Yaml\Yaml;
 use Drupal\Component\Utility\DiffArray;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\canvas\Entity\Component;
+use Drupal\canvas\Plugin\Canvas\ComponentSource\BlockComponent;
 use Drupal\canvas\Plugin\Canvas\ComponentSource\JsComponent;
 use Drupal\canvas\Plugin\Canvas\ComponentSource\SingleDirectoryComponent;
+use Drupal\Core\Plugin\PluginWithFormsInterface;
 
 /**
  * Provides helper methods for AI page builder.
@@ -55,17 +57,33 @@ class CanvasAiPageBuilderHelper {
   public function getComponentContextForAi(): string {
     $component_context = [];
     $component_context_from_config = $this->getComponentContextFromConfig();
-    $available_components = !empty($component_context_from_config) ? $component_context_from_config : $this->getAllComponentsKeyedBySource();
+    $available_components = $this->getAllComponentsKeyedBySource();
+
+    foreach ($component_context_from_config as $components) {
+      foreach ($components as $component_id => $data) {
+        $component_context[$component_id] = $data;
+      }
+    }
+
     foreach ($available_components as $components) {
       // Component info would be under 'components' key, when not loaded from
       // config.
       if (isset($components['components'])) {
-        $component_context += $components['components'];
+        foreach ($components['components'] as $component_id => $data) {
+          // Check if the data differs from the config data.
+          if (!isset($component_context[$component_id]) || $component_context[$component_id] !== $data) {
+            // Merge the data, giving preference to the non-config data.
+            $component_context[$component_id] = ($component_context[$component_id] ?? []) + $data;
+          }
+        }
       }
       else {
-        $component_context += $components;
+        foreach ($components as $component_id => $data) {
+          if (!isset($component_context[$component_id]) || $component_context[$component_id] !== $data) {
+            $component_context[$component_id] = ($component_context[$component_id] ?? []) + $data;
+          }
+        }
       }
-
     }
     return Yaml::dump($component_context, 4, 2);
   }
@@ -238,8 +256,7 @@ class CanvasAiPageBuilderHelper {
       $available_components_response = $this->httpKernel->handle($sub_request, HttpKernelInterface::SUB_REQUEST);
       $available_components = (string) $available_components_response->getContent();
       $available_components = Json::decode($available_components);
-    }
-    catch (\Exception) {
+    } catch (\Exception) {
       return [];
     }
     if (empty($available_components)) {
@@ -264,6 +281,54 @@ class CanvasAiPageBuilderHelper {
       }
       elseif ($source === JsComponent::SOURCE_PLUGIN_ID) {
         $this->processCodeComponents($component, $output, $available_components[$component_id]);
+      }
+      elseif ($source === BlockComponent::SOURCE_PLUGIN_ID) {
+        // Block components: id, name, description (description = name)
+        $output[$source]['components'][$component_id] = [
+          'id' => $component_id,
+          'name' => $component->label(),
+          'description' => $component->label(),
+          'props' => [
+            'label' => [
+              'name' => 'label',
+              'description' => $this->t('The block title. Required.'),
+              'type' => 'string',
+              'default' => '',
+            ],
+            'label_display' => [
+              'name' => 'label_display',
+              'description' => $this->t('Whether to display the block title. Required.'),
+              'type' => 'boolean',
+              'default' => TRUE,
+            ],
+          ],
+        ];
+        // Load via the block plugin manager to get more details.
+        $block_plugin = \Drupal::service('plugin.manager.block')->createInstance($component->get('source_local_id'));
+        // Get the default configuration of the block plugin.
+        if ($block_plugin instanceof PluginWithFormsInterface) {
+          $config = $block_plugin->defaultConfiguration();
+          foreach ($config as $key => $value) {
+            // Skip the already added props.
+            if (in_array($key, ['label', 'label_display'], TRUE)) {
+              continue;
+            }
+            // Try to figure out type from default value.
+            $block_input_type = 'string';
+            if (is_bool($value)) {
+              $block_input_type = 'boolean';
+            }
+            elseif (is_numeric($value)) {
+              $block_input_type = 'number';
+            }
+            $output[$source]['components'][$component_id]['props'][$key] = [
+              'name' => $key,
+              'description' => $key . '. Is required, even if just empty.',
+              'type' => $block_input_type,
+              'default' => $value,
+            ];
+          }
+        }
       }
       else {
         // Other sources: id, name, description (description = name)
@@ -433,7 +498,6 @@ class CanvasAiPageBuilderHelper {
         }
         $component_data['slots'] = !empty($current_slots) ? $current_slots : 'No slots';
       }
-
     }
     return $has_changes;
   }
@@ -557,7 +621,7 @@ class CanvasAiPageBuilderHelper {
    * @return int
    *   The index of the slot, or 0 if not found.
    */
-  public function getSlotIndexFromSlotName(string $slot_name, string $component_id) : int {
+  public function getSlotIndexFromSlotName(string $slot_name, string $component_id): int {
     $component_context = $this->getAllComponentsKeyedBySource();
     if (empty($component_context)) {
       return 0;
@@ -605,7 +669,7 @@ class CanvasAiPageBuilderHelper {
    * @return array
    *   An array with region names as keys and their nodePathPrefix values and descriptions.
    */
-  public function getAvailableRegions(string $current_layout) : array {
+  public function getAvailableRegions(string $current_layout): array {
     $region_index_mapping = $this->getRegionIndex($current_layout);
     $region_descriptions = $this->configFactory->get('xb_ai.theme_region.settings')->get('region_descriptions') ?? [];
     $available_regions = [];
@@ -649,8 +713,7 @@ class CanvasAiPageBuilderHelper {
       // based on it.
       if ($reference_nodepath) {
         $this->processComponentsBelow($components, $reference_nodepath, $result['operations'][0]['components']);
-      }
-      else {
+      } else {
         $region_index_mapping = $this->getRegionIndex($current_layout);
 
         $component_index = 0;
@@ -722,5 +785,4 @@ class CanvasAiPageBuilderHelper {
       }
     }
   }
-
 }

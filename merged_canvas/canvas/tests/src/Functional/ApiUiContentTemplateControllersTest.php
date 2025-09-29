@@ -54,6 +54,7 @@ final class ApiUiContentTemplateControllersTest extends HttpApiTestBase {
     FieldConfig::create([
       'entity_type' => 'node',
       'field_name' => 'field_silly_image',
+      'label' => 'Silly image 🤡',
       'bundle' => 'article',
       'required' => TRUE,
     ])->save();
@@ -121,12 +122,26 @@ final class ApiUiContentTemplateControllersTest extends HttpApiTestBase {
 
   public static function providerSuggestStructuredDataForPropShapes(): \Generator {
     $choice_article_title = [
-      'label' => "This Article's Title",
+      'label' => "Title",
       'source' => ['sourceType' => 'dynamic', 'expression' => 'ℹ︎␜entity:node:article␝title␞␟value'],
     ];
     $choice_article_image = [
-      'label' => "Subset of this Article's field_silly_image: src_with_alternate_widths, alt, width, height (4 of 7 props — absent: entity, title, srcset_candidate_uri_template)",
+      'label' => "Silly image 🤡",
       'source' => ['sourceType' => 'dynamic', 'expression' => 'ℹ︎␜entity:node:article␝field_silly_image␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}'],
+    ];
+    $choice_article_author_name = [
+      'label' => 'Authored by → User → name',
+      'source' => [
+        'sourceType' => 'dynamic',
+        'expression' => 'ℹ︎␜entity:node:article␝uid␞␟entity␜␜entity:user␝name␞␟value',
+      ],
+    ];
+    $choice_article_revision_user_name = [
+      'label' => 'Revision user → User → name',
+      'source' => [
+        'sourceType' => 'dynamic',
+        'expression' => 'ℹ︎␜entity:node:article␝revision_uid␞␟entity␜␜entity:user␝name␞␟value',
+      ],
     ];
     $hash_for_choice = fn (array $choice) =>  \hash('xxh64', $choice['source']['expression']);
 
@@ -147,7 +162,15 @@ final class ApiUiContentTemplateControllersTest extends HttpApiTestBase {
       'content_entity_type_id' => 'user',
       'bundle' => 'user',
       'expected' => [
-        'text' => [],
+        'text' => [
+          '67f45d35294a49e0' => [
+            'label' => 'Name',
+            'source' => [
+              'sourceType' => 'dynamic',
+              'expression' => 'ℹ︎␜entity:user␝name␞␟value',
+            ],
+          ],
+        ],
         'style' => [],
         'element' => [],
       ],
@@ -211,32 +234,34 @@ final class ApiUiContentTemplateControllersTest extends HttpApiTestBase {
       'bundle' => 'article',
       'expected' => [
         'caption' => [
+          $hash_for_choice($choice_article_title) => $choice_article_title,
+          $hash_for_choice($choice_article_author_name) => $choice_article_author_name,
+          '7ca10058b43f4d0f' => [
+            'label' => "Revision log message",
+            'source' => [
+              'sourceType' => 'dynamic',
+              'expression' => 'ℹ︎␜entity:node:article␝revision_log␞␟value',
+            ],
+          ],
           '82ec95693bc89080' => [
-            'label' => "Subset of this Article's field_silly_image: alt (1 of 7 props — absent: entity, title, width, height, srcset_candidate_uri_template, src_with_alternate_widths)",
+            'label' => "Silly image 🤡 (only alt)",
             'source' => [
               'sourceType' => 'dynamic',
               'expression' => 'ℹ︎␜entity:node:article␝field_silly_image␞␟alt',
             ],
           ],
           '1409e675864fd2e6' => [
-            'label' => "Subset of this Article's field_silly_image: title (1 of 7 props — absent: entity, alt, width, height, srcset_candidate_uri_template, src_with_alternate_widths)",
+            'label' => "Silly image 🤡 (only title)",
             'source' => [
               'sourceType' => 'dynamic',
               'expression' => 'ℹ︎␜entity:node:article␝field_silly_image␞␟title',
             ],
           ],
-          '7ca10058b43f4d0f' => [
-            'label' => "This Article's Revision log message",
-            'source' => [
-              'sourceType' => 'dynamic',
-              'expression' => 'ℹ︎␜entity:node:article␝revision_log␞␟value',
-            ],
-          ],
-          $hash_for_choice($choice_article_title) => $choice_article_title,
+          $hash_for_choice($choice_article_revision_user_name) => $choice_article_revision_user_name,
         ],
         'images' => [
           '441f35fe6e2feefd' => [
-            'label' => "Subset of this Article's field_screenshots: src_with_alternate_widths, alt, width, height (4 of 7 props — absent: entity, title, srcset_candidate_uri_template)",
+            'label' => "field_screenshots",
             "source" => [
               'sourceType' => 'dynamic',
               'expression' => 'ℹ︎␜entity:node:article␝field_screenshots␞␟{src↠src_with_alternate_widths,alt↠alt,width↠width,height↠height}',
@@ -252,45 +277,47 @@ final class ApiUiContentTemplateControllersTest extends HttpApiTestBase {
       'bundle' => 'article',
       'expected' => [
         'text' => [
+          '256dc2b8dcec7355' => [
+            'label' => "Title",
+            'source' => [
+              'sourceType' => 'dynamic',
+              'expression' => 'ℹ︎␜entity:node:article␝title␞␟value',
+            ],
+          ],
+          $hash_for_choice($choice_article_author_name) => $choice_article_author_name,
+          '7ca10058b43f4d0f' => [
+            'label' => "Revision log message",
+            'source' => [
+              'sourceType' => 'dynamic',
+              'expression' => 'ℹ︎␜entity:node:article␝revision_log␞␟value',
+            ],
+          ],
           '82ec95693bc89080' => [
-            'label' => "Subset of this Article's field_silly_image: alt (1 of 7 props — absent: entity, title, width, height, srcset_candidate_uri_template, src_with_alternate_widths)",
+            'label' => "Silly image 🤡 (only alt)",
             'source' => [
               'sourceType' => 'dynamic',
               'expression' => 'ℹ︎␜entity:node:article␝field_silly_image␞␟alt',
             ],
           ],
           '1409e675864fd2e6' => [
-            'label' => "Subset of this Article's field_silly_image: title (1 of 7 props — absent: entity, alt, width, height, srcset_candidate_uri_template, src_with_alternate_widths)",
+            'label' => "Silly image 🤡 (only title)",
             'source' => [
               'sourceType' => 'dynamic',
               'expression' => 'ℹ︎␜entity:node:article␝field_silly_image␞␟title',
             ],
           ],
-          '7ca10058b43f4d0f' => [
-            'label' => "This Article's Revision log message",
-            'source' => [
-              'sourceType' => 'dynamic',
-              'expression' => 'ℹ︎␜entity:node:article␝revision_log␞␟value',
-            ],
-          ],
-          '256dc2b8dcec7355' => [
-            'label' => "This Article's Title",
-            'source' => [
-              'sourceType' => 'dynamic',
-              'expression' => 'ℹ︎␜entity:node:article␝title␞␟value',
-            ],
-          ],
+          $hash_for_choice($choice_article_revision_user_name) => $choice_article_revision_user_name,
         ],
         'link' => [
           '4a83ce0c963911b4' => [
-            'label' => "Subset of this Article's field_silly_image: entity (1 of 7 props — absent: alt, title, width, height, srcset_candidate_uri_template, src_with_alternate_widths)",
+            'label' => "Silly image 🤡 → File → uri",
             'source' => [
               'sourceType' => 'dynamic',
               'expression' => 'ℹ︎␜entity:node:article␝field_silly_image␞␟entity␜␜entity:file␝uri␞␟value',
             ],
           ],
           '4999dcb72722c69a' => [
-            'label' => "Subset of this Article's field_silly_image: src_with_alternate_widths (1 of 7 props — absent: entity, alt, title, width, height, srcset_candidate_uri_template)",
+            'label' => "Silly image 🤡",
             'source' => [
               'sourceType' => 'dynamic',
               'expression' => 'ℹ︎␜entity:node:article␝field_silly_image␞␟src_with_alternate_widths',

@@ -16,7 +16,7 @@
     "lint:eslint": "eslint cli tests/src/Playwright playwright.config.ts eslint.config.mjs",
     "lint:prettier": "prettier tests/src/Playwright playwright.config.ts cli eslint.config.mjs --check",
     "lint:prettier-fix": "prettier tests/src/Playwright playwright.config.ts cli eslint.config.mjs --check --write",
-    "lint:cspell": "cspell .",
+    "lint:cspell": "cspell . --no-progress",
     "test": "npx npm-run-all --parallel --continue-on-error test:*",
     "lint": "npx npm-run-all --parallel --continue-on-error lint:*"
   },

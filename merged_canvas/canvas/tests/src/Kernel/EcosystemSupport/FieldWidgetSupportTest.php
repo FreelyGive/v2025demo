@@ -47,6 +47,8 @@ final class FieldWidgetSupportTest extends EcosystemSupportTestBase {
     'path',
     'telephone',
     'text',
+    // Content Moderation dependency.
+    'workflows',
     // Modules that field widget-providing modules depend on.
     'views',
   ];

@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
-import { PlusIcon } from '@radix-ui/react-icons';
-import { Button } from '@radix-ui/themes';
+import { CodeIcon } from '@radix-ui/react-icons';
+import { DropdownMenu } from '@radix-ui/themes';
 
 import { useAppDispatch } from '@/app/hooks';
 import { openAddDialog } from '@/features/ui/codeComponentDialogSlice';
@@ -13,10 +13,13 @@ const AddCodeComponentButton = () => {
   }, [dispatch]);
 
   return (
-    <Button onClick={handleClick} variant="soft" size="1" my="2">
-      <PlusIcon />
-      Create code component
-    </Button>
+    <DropdownMenu.Item
+      onClick={handleClick}
+      data-testid="canvas-library-new-code-component-button"
+    >
+      <CodeIcon />
+      Code component
+    </DropdownMenu.Item>
   );
 };
 

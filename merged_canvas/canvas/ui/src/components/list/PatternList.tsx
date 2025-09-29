@@ -1,18 +1,21 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 import { useErrorBoundary } from 'react-error-boundary';
 
-import FolderList, {
-  folderfyComponents,
-  sortFolderList,
-} from '@/components/list/FolderList';
-import List from '@/components/list/List';
+import ListItem from '@/components/list/ListItem';
 import { LayoutItemType } from '@/features/ui/primaryPanelSlice';
 import { useGetFoldersQuery } from '@/services/componentAndLayout';
 import { useGetPatternsQuery } from '@/services/patterns';
 
-import type { PatternsList } from '@/types/Pattern';
+import LibraryItemList from './LibraryItemList';
 
-const PatternList = () => {
+import type { Pattern, PatternsList } from '@/types/Pattern';
+import type { FolderData } from './FolderList';
+
+interface PatternListProps {
+  searchTerm: string;
+}
+
+const PatternList = ({ searchTerm }: PatternListProps) => {
   const { data: patterns, error, isLoading } = useGetPatternsQuery();
   const {
     data: folders,
@@ -27,52 +30,21 @@ const PatternList = () => {
     }
   }, [error, showBoundary, foldersError]);
 
-  const {
-    topLevelComponents: topLevelPatterns,
-    folderComponents: folderPatterns,
-  } = useMemo(
-    () =>
-      folderfyComponents(
-        patterns,
-        folders,
-        isLoading,
-        foldersLoading,
-        'pattern',
-      ),
-    [patterns, folders, isLoading, foldersLoading],
-  );
-  const folderEntries = sortFolderList(folderPatterns);
+  const renderItem = (item: Pattern) => {
+    return <ListItem item={item} type={LayoutItemType.PATTERN} />;
+  };
+
   return (
-    <>
-      {/* First, render any folders and the items they contain. */}
-      {folderEntries.length > 0 &&
-        folderEntries.map((folder) => {
-          return (
-            <FolderList key={folder.id} folder={folder}>
-              <List
-                items={folder.items as PatternsList}
-                isLoading={isLoading}
-                type={LayoutItemType.PATTERN}
-                label={`Patterns in folder ${folder.name}`}
-                key={folder.id}
-                inFolder={true}
-              />
-            </FolderList>
-          );
-        })}
-      {/* Show if components are still loading (to show skeleton) or if there
-          are folder-less components (to display the components). */}
-      {(isLoading ||
-        foldersLoading ||
-        !!Object.keys(topLevelPatterns || {}).length) && (
-        <List
-          items={topLevelPatterns}
-          isLoading={isLoading || foldersLoading}
-          type={LayoutItemType.PATTERN}
-          label="Patterns"
-        />
-      )}
-    </>
+    <LibraryItemList<Pattern>
+      items={patterns as PatternsList}
+      folders={folders as FolderData}
+      isLoading={isLoading || foldersLoading}
+      searchTerm={searchTerm}
+      layoutType={LayoutItemType.PATTERN}
+      topLevelLabel="Patterns"
+      itemType="pattern"
+      renderItem={renderItem}
+    />
   );
 };
 

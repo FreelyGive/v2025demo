@@ -21,6 +21,7 @@ use Drupal\canvas\ComponentSource\UrlRewriteInterface;
 use Drupal\canvas\Entity\Component as ComponentEntity;
 use Drupal\canvas\Entity\ComponentInterface;
 use Drupal\canvas\Entity\VersionedConfigEntityBase;
+use Drupal\canvas\ShapeMatcher\FieldForComponentSuggester;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Path;
 
@@ -57,6 +58,8 @@ final class SingleDirectoryComponent extends GeneratedFieldExplicitInputUxCompon
    *   Module handler.
    * @param \Drupal\Core\Extension\ThemeHandlerInterface $themeHandler
    *   Theme handler.
+   * @param \Drupal\canvas\ShapeMatcher\FieldForComponentSuggester $fieldForComponentSuggester
+   *   Field for component suggester.
    */
   public function __construct(
     array $configuration,
@@ -68,6 +71,8 @@ final class SingleDirectoryComponent extends GeneratedFieldExplicitInputUxCompon
     private readonly ComponentPluginManager $componentPluginManager,
     private readonly ModuleHandlerInterface $moduleHandler,
     private readonly ThemeHandlerInterface $themeHandler,
+    // @phpstan-ignore-next-line property.onlyWritten
+    private readonly FieldForComponentSuggester $fieldForComponentSuggester,
   ) {
     assert(array_key_exists('local_source_id', $configuration));
     parent::__construct(
@@ -77,6 +82,7 @@ final class SingleDirectoryComponent extends GeneratedFieldExplicitInputUxCompon
       $componentValidator,
       $fieldWidgetPluginManager,
       $entityTypeManager,
+      $fieldForComponentSuggester,
     );
   }
 
@@ -94,6 +100,7 @@ final class SingleDirectoryComponent extends GeneratedFieldExplicitInputUxCompon
       $container->get(ComponentPluginManager::class),
       $container->get(ModuleHandlerInterface::class),
       $container->get(ThemeHandlerInterface::class),
+      $container->get('Drupal\canvas\ShapeMatcher\FieldForComponentSuggester'),
     );
   }
 

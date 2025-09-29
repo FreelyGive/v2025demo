@@ -1,0 +1,24 @@
+.linker {
+  cursor: pointer;
+  font-size: 1em;
+  padding-inline: 6px;
+}
+
+.default {
+  color: var(--slate-11);
+}
+
+.linkerOpen {
+  .default {
+    color: var(--blue-9);
+  }
+}
+
+.default:hover {
+  color: var(--blue-9);
+}
+
+/* Global as sometimes this class comes from a render array. */
+:global(.canvas-linked-prop-label-wrapper) {
+  display: flex;
+}

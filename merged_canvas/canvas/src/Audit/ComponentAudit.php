@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Drupal\canvas\Audit;
 
+use Drupal\canvas\AutoSave\AutoSaveManager;
 use Drupal\Component\Assertion\Inspector;
 use Drupal\Core\Config\ConfigManagerInterface;
 use Drupal\Core\Config\Entity\ConfigEntityDependency;
@@ -13,6 +14,7 @@ use Drupal\Core\Entity\EntityFieldManagerInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Entity\FieldableEntityInterface;
 use Drupal\Core\Entity\RevisionableStorageInterface;
 use Drupal\canvas\Entity\ComponentInterface;
 use Drupal\canvas\Entity\ComponentTreeEntityInterface;
@@ -27,9 +29,15 @@ final class ComponentAudit {
     private readonly ConfigManagerInterface $configManager,
     private readonly EntityTypeManagerInterface $entityTypeManager,
     private readonly EntityFieldManagerInterface $entityFieldManager,
+    private readonly AutoSaveManager $autoSaveManager,
   ) {}
 
-  public function getContentRevisionIdsUsingComponentIds(array $component_ids, array $version_ids = []): array {
+  public function getContentRevisionIdsUsingComponentIds(array $component_ids, array $version_ids = [], RevisionAuditEnum $which_revisions = RevisionAuditEnum::All): array {
+    // @see \Drupal\canvas\Audit\ComponentAudit::getAutoSavesUsingComponentIds()
+    if ($which_revisions === RevisionAuditEnum::AutoSave) {
+      throw new \LogicException();
+    }
+
     $field_map = $this->entityFieldManager->getFieldMapByFieldType(ComponentTreeItem::PLUGIN_ID);
     $dependencies = [];
     foreach ($field_map as $entity_type_id => $detail) {
@@ -41,7 +49,13 @@ final class ComponentAudit {
         ->sort((string) $entity_type->getKey('id'))
         ->accessCheck(FALSE);
       if ($entity_type->isRevisionable()) {
-        $query->allRevisions();
+        // Only check the latest revision, this is the case for code components
+        // as deletion can only happen when it is not used, checking all revisions is too restrictive.
+        match ($which_revisions) {
+          RevisionAuditEnum::All => $query->allRevisions(),
+          RevisionAuditEnum::Default => $query->currentRevision(),
+          RevisionAuditEnum::Latest => $query->latestRevision(),
+        };
       }
       $or_group = $query->orConditionGroup();
       foreach ($field_names as $field_name) {
@@ -65,8 +79,13 @@ final class ComponentAudit {
   /**
    * @return \Drupal\Core\Entity\ContentEntityInterface[]
    */
-  public function getContentRevisionsUsingComponent(ComponentInterface $component, array $version_ids = []): array {
-    $entity_ids = $this->getContentRevisionIdsUsingComponentIds([$component->id()], $version_ids);
+  public function getContentRevisionsUsingComponent(ComponentInterface $component, array $version_ids = [], RevisionAuditEnum $which_revisions = RevisionAuditEnum::All): array {
+    // @see \Drupal\canvas\Audit\ComponentAudit::getAutoSavesUsingComponentIds()
+    if ($which_revisions === RevisionAuditEnum::AutoSave) {
+      throw new \LogicException();
+    }
+
+    $entity_ids = $this->getContentRevisionIdsUsingComponentIds([$component->id()], $version_ids, $which_revisions);
     $dependencies = [];
     foreach ($entity_ids as $entity_type_id => $ids) {
       $storage = $this->entityTypeManager->getStorage($entity_type_id);
@@ -103,7 +122,12 @@ final class ComponentAudit {
     return count($this->configManager->getConfigDependencyManager()->getDependentEntities('config', $component->getConfigDependencyName()));
   }
 
-  public function hasUsages(ComponentInterface $component): bool {
+  public function hasUsages(ComponentInterface $component, RevisionAuditEnum $which_revisions = RevisionAuditEnum::All): bool {
+    // Special case: auto-saves.
+    if ($which_revisions === RevisionAuditEnum::AutoSave) {
+      return !empty($this->getAutoSavesUsingComponentIds([$component->id()]));
+    }
+
     // @todo Field config default values
     // @todo Base field definition default values
     // @todo What if there are asymmetric content translations, or the translated
@@ -118,8 +142,35 @@ final class ComponentAudit {
         return TRUE;
       }
     }
-    $usages = $this->getContentRevisionsUsingComponent($component);
+    $usages = $this->getContentRevisionsUsingComponent($component, which_revisions: $which_revisions);
     return \count($usages) > 0;
+  }
+
+  public function getAutoSavesUsingComponentIds(array $component_ids, array $version_ids = []): array {
+    if (!empty($version_ids)) {
+      // @todo Support checking specific versions of components.
+      throw new \LogicException('not yet implemented');
+    }
+    $dependencies = [];
+    foreach ($this->autoSaveManager->getAllAutoSaveList(TRUE) as $autoSave) {
+      $entity = $autoSave['entity'];
+      assert(!is_null($entity));
+      if (!$entity instanceof ComponentTreeEntityInterface) {
+        // @todo Post-1.0, the restrictions that https://www.drupal.org/i/3520487 added will be lifted, meaning node component trees can be edited again. This will then need to be expanded to use the ComponentTreeLoader when appropriate.
+        if ($entity instanceof FieldableEntityInterface) {
+          // @phpcs:ignore Drupal.Semantics.FunctionTriggerError.TriggerErrorTextLayoutRelaxed
+          trigger_error(sprintf('Not yet implemented: auto-save usages for %s entities.', $entity->getEntityTypeId()), E_USER_DEPRECATED);
+        }
+        continue;
+      }
+      if (!empty(array_intersect($component_ids, $entity->getComponentTree()->getComponentIdList()))) {
+        $entity_type_id = $autoSave['entity_type'];
+        $entity_id = $autoSave['entity_id'];
+        $simulated_revision_id = 'auto-save-' . $autoSave['data_hash'];
+        $dependencies[$entity_type_id][$simulated_revision_id] = $entity_id;
+      }
+    }
+    return $dependencies;
   }
 
 }

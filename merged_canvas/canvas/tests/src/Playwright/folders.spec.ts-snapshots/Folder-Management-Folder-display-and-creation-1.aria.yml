@@ -1,5 +1,8 @@
 - tabpanel "Components":
-  - button "Add new folder":
+  - textbox "Search content"
+  - img
+  - button "New":
+    - img
     - img
   - img
   - button "@todo"
@@ -260,3 +263,4 @@
     - listitem:
       - img
       - text: Who's new
+  - list

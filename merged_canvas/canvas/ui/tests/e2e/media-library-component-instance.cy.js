@@ -186,10 +186,9 @@ describe('Media Library component instance', () => {
     () => {
       cy.drupalLogin('canvasUser', 'canvasUser');
       cy.loadURLandWaitForCanvasLoaded({ url: 'canvas/editor/canvas_page/2' });
-      cy.openLibraryPanel();
-      cy.get('.primaryPanelContent').findByText('Test SDC Image').click();
+      cy.insertComponent({ name: 'Test SDC Image' });
 
-      cy.get('.primaryPanelContent').findByText('Test SDC Image').click();
+      cy.insertComponent({ name: 'Test SDC Image' });
       cy.get(
         '.previewOverlay [data-canvas-component-id="sdc.canvas_test_sdc.image"]',
       ).should('have.length', 2);

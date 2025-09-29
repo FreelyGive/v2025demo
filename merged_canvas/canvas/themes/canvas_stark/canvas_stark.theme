@@ -7,6 +7,7 @@
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\canvas_stark\PreRender;
+use Drupal\Component\Serialization\Json;
 
 function canvas_stark_library_info_alter(array &$libraries, string $extension): void {
   if ($extension === 'core' && isset($libraries['drupal.autocomplete'])) {
@@ -21,6 +22,28 @@ function canvas_stark_element_info_alter(array &$type): void {
   if (isset($type['table'])) {
     $type['table']['#pre_render'][] = [PreRender::class, 'table'];
   }
+}
+
+function canvas_stark_theme(array $existing, string $type, string $theme, string $path): array {
+  return [
+    // Results in a UI element that allows linking a prop to a form field.
+    'prop_linker' => [
+      'variables' => [
+        'linked' => FALSE,
+        'prop_name' => NULL,
+        'suggestions' => [],
+      ],
+      'template' => 'process_as_jsx/form/prop-linker',
+    ],
+    // Results in a box that represents a linked prop, replacing a form input.
+    'linked_field_box' => [
+      'variables' => [
+        'title' => NULL,
+        'prop_name' => NULL,
+      ],
+      'template' => 'process_as_jsx/form/linked-field-box',
+    ],
+  ];
 }
 
 function canvas_stark_form_node_form_alter(array &$form, FormStateInterface $form_state): void {
@@ -64,5 +87,13 @@ function canvas_stark_preprocess_radios(array &$vars): void {
 function canvas_stark_preprocess_form_element(array &$variables): void {
   if (isset($variables['element']['#theme']) && $variables['element']['#theme'] === 'input__number__media_library_item_weight') {
     $variables['attributes']['data-canvas-media-library-item-weight-wrapper'] = 'true';
+  }
+}
+
+function canvas_stark_preprocess_fieldset__media_library_widget(array &$variables): void {
+  // Prop link data is passed to the media library widget differently, as the
+  // label is the fieldset legend, not a label element.
+  if (isset($variables['element']['#prop_link_data'])) {
+    $variables['prop_link_data'] = Json::encode($variables['element']['#prop_link_data']);
   }
 }

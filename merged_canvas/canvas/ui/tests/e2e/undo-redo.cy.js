@@ -25,12 +25,12 @@ describe('Undo/Redo functionality', () => {
         expect(myHeroComponent.length).to.equal(3);
       },
     );
-    cy.get('.primaryPanelContent').findByText('Two Column').click();
     cy.intercept('POST', '**/canvas/api/v0/layout/node/1').as('getPreview');
+    cy.insertComponent({ name: 'Two Column' });
     cy.openLibraryPanel();
 
     // Click on the menu item with data-canvas-name="Hero" inside menu.
-    cy.get('.primaryPanelContent [data-canvas-name="Hero"]').click();
+    cy.insertComponent({ name: 'Hero' });
     cy.wait('@getPreview');
 
     cy.getIframeBody().find(

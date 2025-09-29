@@ -655,11 +655,11 @@ paths:
             schema:
               type: object
               allOf:
-                - required:
-                    - name
-                    - weight
-                    - items
                 - $ref: '#/components/schemas/Folder'
+              required:
+                - name
+                - weight
+                - items
       parameters:
         - $ref: '#/components/parameters/configEntityId'
       responses:
@@ -690,7 +690,7 @@ paths:
                 # @todo Validate the property keys match the '^\\[a-zA-Z0-9_-]$'
                 #   pattern in https://drupal.org/i/3506543.
                 additionalProperties:
-                  $ref: '#/components/schemas/CodeComponent'
+                  $ref: '#/components/schemas/ExistingCodeComponent'
     post:
       summary: Creates a new Code Component
       requestBody:
@@ -718,7 +718,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CodeComponent'
+                $ref: '#/components/schemas/ExistingCodeComponent'
         '401':
           description: Unauthorized (unauthenticated) response.
           $ref: '#/components/responses/UnauthorizedErrorResponse'
@@ -756,7 +756,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CodeComponent'
+                $ref: '#/components/schemas/ExistingCodeComponent'
         '401':
           description: Unauthorized (unauthenticated) response.
           $ref: '#/components/responses/UnauthorizedErrorResponse'
@@ -772,14 +772,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CodeComponent'
+              $ref: '#/components/schemas/UpdatedCodeComponent'
       responses:
         '200':
           description: Updated individual Code Component
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CodeComponent'
+                $ref: '#/components/schemas/ExistingCodeComponent'
         '401':
           description: Unauthorized (unauthenticated) response.
           $ref: '#/components/responses/UnauthorizedErrorResponse'
@@ -1637,7 +1637,7 @@ paths:
           $ref: '#/components/responses/AuthenticationErrorResponse'
     patch:
       summary: >
-        Updates a single component and returns a preview as well
+        Updates a single component instance and returns a preview as well
         as the updated model, entity_fields and layout. The
         new layout is stored as an auto-save entry (until such
         time as it is published)
@@ -2009,6 +2009,90 @@ paths:
                     teaser:
                       label: Teaser
                       hasTemplate: true
+  /canvas/api/v0/usage/component:
+    get:
+      summary: Get all components to see if they are in use.
+      responses:
+        '200':
+          description: See what component are in use.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - links
+                additionalProperties: false
+                properties:
+                  data:
+                    type: object
+                    additionalProperties: true
+                  links:
+                    type: object
+                    additionalProperties: false
+                    properties:
+                      prev:
+                        type: [ string, "null" ]
+                        description: URL for the previous page, or null if there is no previous page.
+                      next:
+                        type: [ string, "null" ]
+                        description: URL for the next page, or null if there is no next page.
+              examples:
+                example:
+                  value:
+                    data:
+                      sdc.canvas_test_sdc.attributes: false
+                      sdc.canvas_test_sdc.card: true
+                    links:
+                      prev: null
+                      next: '/canvas/api/v0/usage/component?page=1'
+  /canvas/api/v0/usage/component/{configEntityId}:
+    get:
+      summary: Get a specific component entities usage.
+      parameters:
+        - $ref: '#/components/parameters/configEntityId'
+      responses:
+        '200':
+          description: Get a boolean response for a component entities usage.
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /canvas/api/v0/usage/component/{configEntityId}/details:
+    get:
+      summary: Get detailed usage information for a specific component.
+      parameters:
+        - $ref: '#/components/parameters/configEntityId'
+      responses:
+        '200':
+          description: Detailed usage information for a specific component.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+                properties:
+                  configEntityId:
+                    type: array
+                    items:
+                      type: object
+                      additionalProperties: false
+                      required:
+                        - title
+                        - id
+                      properties:
+                        title:
+                          type: string
+                          description: Title of the config entity.
+                        id:
+                          type: string
+                          description: ID of the config entity.
+              examples:
+                example:
+                  value:
+                    pattern:
+                      title: Test pattern
+                      id: test_pattern
 # @see https://spec.openapis.org/oas/v3.1.0.html#components-object
 components:
   # @see https://spec.openapis.org/oas/v3.1.0.html#schema-object
@@ -2159,6 +2243,9 @@ components:
     CodeComponent:
       title: Code Component
       type: object
+      # This is intended to be combined using `allOf`, so it MUST allow additional properties.
+      # @see https://redocly.com/learn/openapi/all-of#closed-schemas-and-allof-are-invalid
+      additionalProperties: true
       properties:
         machineName:
           type: string
@@ -2212,17 +2299,38 @@ components:
               type: array
               items:
                 type: string
-    NewCodeComponent:
+    ExistingCodeComponent:
       type: object
       allOf:
-        - required:
-            - name
-            - machineName
-            - status
-            - importedJsComponents
-            - dataDependencies
         - $ref: '#/components/schemas/CodeComponent'
         - properties:
+            links:
+              type: object
+              additionalProperties:
+                type: string
+                format: uri-reference
+      required:
+        - name
+        - machineName
+        - required
+        - props
+        - slots
+        - status
+        - sourceCodeJs
+        - sourceCodeCss
+        - compiledJs
+        - compiledCss
+        - dataDependencies
+        - links
+      # @todo Additional key-value pairs should be reported as invalid by OpenAPI validation, but aren't today.
+      # @see https://github.com/thephpleague/openapi-psr7-validator/issues/124#issuecomment-1483323527
+      # @see https://github.com/thephpleague/openapi-psr7-validator/issues/163#issuecomment-2359233087
+      unevaluatedProperties: false
+    UpdatedCodeComponent:
+      allOf:
+        - $ref: '#/components/schemas/CodeComponent'
+        - type: object
+          properties:
             # `importedJsComponents` will be required if `sourceCodeJs` or
             # `compiledJs` is provided.
             # @see \Drupal\canvas\Entity\JavaScriptComponent::updateFromClientSide()
@@ -2232,6 +2340,23 @@ components:
               type: array
               items:
                 type: string
+      # @todo Sending `links` in PATCH & POST requests should be reported as invalid by OpenAPI validation, but it isn't today.
+      # @see https://github.com/thephpleague/openapi-psr7-validator/issues/124#issuecomment-1483323527
+      # @see https://github.com/thephpleague/openapi-psr7-validator/issues/163#issuecomment-2359233087
+      unevaluatedProperties: false
+    NewCodeComponent:
+      allOf:
+        - $ref: '#/components/schemas/UpdatedCodeComponent'
+      required:
+        - name
+        - machineName
+        - status
+        - importedJsComponents
+        - dataDependencies
+      # @todo Sending `links` in PATCH & POST requests should be reported as invalid by OpenAPI validation, but it isn't today.
+      # @see https://github.com/thephpleague/openapi-psr7-validator/issues/124#issuecomment-1483323527
+      # @see https://github.com/thephpleague/openapi-psr7-validator/issues/163#issuecomment-2359233087
+      unevaluatedProperties: false
     LayoutComponent:
       title: LayoutComponent
       type: object
@@ -2471,10 +2596,10 @@ components:
     NewAssetLibrary:
       type: object
       allOf:
-        - required:
-            - id
-            - label
         - $ref: '#/components/schemas/AssetLibrary'
+      required:
+        - id
+        - label
     SegmentationRule:
       title: Segmentation Rule
       type: object
@@ -2652,13 +2777,12 @@ components:
           $ref: '#/components/schemas/Model'
       additionalProperties: false
     NewPattern:
-      type: object
       allOf:
-        - required:
-            - name
-            - layout
-            - model
         - $ref: '#/components/schemas/Pattern'
+      required:
+        - name
+        - layout
+        - model
     Folder:
       title: Folder
       type: object
@@ -2690,22 +2814,22 @@ components:
     ExistingFolder:
       type: object
       allOf:
-        - required:
-            - id
-            - name
-            - type
-            - weight
-            - items
         - $ref: '#/components/schemas/Folder'
+      required:
+        - id
+        - name
+        - type
+        - weight
+        - items
     NewFolder:
       type: object
       allOf:
-        - required:
-            - name
-            - type
-            - weight
-            - items
         - $ref: '#/components/schemas/Folder'
+      required:
+        - name
+        - type
+        - weight
+        - items
     StagedConfigUpdate:
       title: Staged Config Update
       type: object

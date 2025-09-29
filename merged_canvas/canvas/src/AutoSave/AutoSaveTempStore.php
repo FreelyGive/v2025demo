@@ -20,7 +20,7 @@ final class AutoSaveTempStore extends SharedTempStore {
   /**
    * Gets all auto-saved items from storage.
    *
-   * @return array<string, object{data: array{data: array, entity_type: string, entity_id: string|int, label: string, langcode: ?string}, updated: int, owner: string}>
+   * @return array<string, object{data: array{data: array, entity_type: string, entity_id: string|int, label: string, data_hash: string, client_id: ?string, langcode: ?string}, updated: int, owner: string}>
    *   All saved items.
    */
   public function getAll(): array {

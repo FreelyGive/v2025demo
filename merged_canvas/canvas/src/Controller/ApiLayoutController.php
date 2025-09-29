@@ -32,6 +32,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @phpstan-import-type ComponentConfigEntityId from \Drupal\canvas\Entity\Component
+ * @phpstan-import-type SingleComponentInputArray from \Drupal\canvas\Plugin\DataType\ComponentInputs
  * @phpstan-type ComponentClientStructureArray array{nodeType: 'component', uuid: string, type: ComponentConfigEntityId, slots: array<int, mixed>}
  * @phpstan-type RegionClientStructureArray array{nodeType: 'region', id: string, name: string, components: array<int, ComponentClientStructureArray>}
  * @phpstan-type LayoutClientStructureArray array<int, RegionClientStructureArray>
@@ -123,7 +124,7 @@ final class ApiLayoutController {
       $data['isPublished'] = $entity->isPublished();
       $data['entity_form_fields'] = $this->getFilteredEntityData($entity);
     }
-    return new PreviewEnvelope($this->buildPreviewRenderable($data, $entity, FALSE, $preview_entity), $data);
+    return new PreviewEnvelope($this->buildPreviewRenderable($entity, $preview_entity), $data);
   }
 
   private function buildRegion(string $id, ?ComponentTreeItemList $items = NULL, ?array &$model = NULL, ?FieldableEntityInterface $preview_entity = NULL): array {
@@ -207,7 +208,7 @@ final class ApiLayoutController {
   }
 
   /**
-   * PATCH request updates the auto-saved model and returns a preview.
+   * PATCH request updates a single component instance in the auto-saved model and returns a preview.
    */
   public function patch(Request $request, FieldableEntityInterface|ContentTemplate $entity, ?ContentEntityInterface $preview_entity = NULL): PreviewEnvelope {
     assert(!$entity instanceof ContentTemplate || !is_null($preview_entity));
@@ -235,22 +236,10 @@ final class ApiLayoutController {
       'clientInstanceId' => $clientInstanceId,
     ] = $body;
 
-    // @todo Currently ::validateAutoSaves() validates all page regions as well
-    //   as `$entity`, determine if here we should only validate the entity
-    //   containing the component in https://drupal.org/i/3532056 or implement
-    //   concurrent editing in https://drupal.org/i/3492065.
-    $this->validateAutoSaves(array_merge([$entity], self::getEditableRegions()), $autoSaves, $clientInstanceId);
-
-    $data = $this->getLastStoredData($entity, includeAllRegions: TRUE);
-    if (!\array_key_exists('model', $data)) {
-      throw new NotFoundHttpException('Missing model');
-    }
-    if (!\array_key_exists($componentInstanceUuid, $data['model'])) {
-      throw new NotFoundHttpException('No such component in model: ' . $componentInstanceUuid);
-    }
     if (!str_contains($componentTypeAndVersion, '@')) {
       throw new NotFoundHttpException(\sprintf('Missing version for component %s', $componentTypeAndVersion));
     }
+
     [$componentType, $version] = \explode('@', $componentTypeAndVersion);
     $component = $this->entityTypeManager->getStorage(Component::ENTITY_TYPE_ID)->load($componentType);
     \assert($component instanceof Component || $component === NULL);
@@ -264,129 +253,131 @@ final class ApiLayoutController {
       throw new NotFoundHttpException(\sprintf('No such version %s for component %s', $version, $componentType));
     }
 
-    // Validate that we have access to the page region of this component.
-    $page_regions = PageRegion::loadForActiveThemeByClientSideId();
-    if (!empty($page_regions)) {
-      $regionForComponentId = $this->getRegionForComponentInstance($data['layout'], $componentInstanceUuid);
-      if ($regionForComponentId !== CanvasPageVariant::MAIN_CONTENT_REGION && NULL !== $regionForComponentId) {
-        if (!$page_regions[$regionForComponentId]->access('edit')) {
-          throw new AccessDeniedHttpException(sprintf('Access denied for region %s', $regionForComponentId));
-        }
-      }
+    // @todo Currently ::validateAutoSaves() validates all page regions as well
+    //   as `$entity` even though below we will only auto-save the entity
+    //   containing the component, determine if here we should only validate
+    //   that entity in https://drupal.org/i/3532056 or implement concurrent
+    //   editing in https://drupal.org/i/3492065.
+    $this->validateAutoSaves(array_merge([$entity], self::getEditableRegions()), $autoSaves, $clientInstanceId);
+
+    // Determine which entity to PATCH.
+    $entity = $this->getAutoSavedVersionIfAvailable([$entity])[$entity->id()];
+    \assert($entity instanceof FieldableEntityInterface || $entity instanceof ContentTemplate);
+    $regions = $this->getAutoSavedVersionIfAvailable(PageRegion::loadForActiveTheme());
+    $entity_to_patch = $this->getEntityWithComponentInstance([$entity, ...$regions], $componentInstanceUuid);
+
+    // Route-level access checks already verified `edit` access to $entity. Only
+    // perform an additional `edit` access check if $entity_to_patch is not
+    // $entity, but a PageRegion entity.
+    if ($entity_to_patch instanceof PageRegion && !$entity_to_patch->access('edit')) {
+      throw new AccessDeniedHttpException(sprintf('Access denied for region %s', $entity_to_patch->get('region')));
     }
-    $data['model'][$componentInstanceUuid] = $model;
-    $data['clientInstanceId'] = $clientInstanceId;
-    return new PreviewEnvelope($this->buildPreviewRenderable($data, $entity, TRUE, $preview_entity), $data + [
-      // Add the auto-save hashes. We do this after building the preview
-      // render array, because the auto-save entry is written during building
-      // the preview.
-      'autoSaves' => $this->getAutoSaveHashes(array_merge([$entity], self::getEditableRegions())),
-    ]);
+
+    // Update the entity & auto-save it.
+    $this->updateComponentInstance($entity_to_patch, $componentInstanceUuid, $model, $preview_entity);
+    $this->autoSaveManager->saveEntity($entity_to_patch, $clientInstanceId);
+
+    // Inform the UI of the updated reality.
+    $data = $this->buildLayoutAndModel($entity, $regions, preview_entity: $preview_entity);
+    assert(['layout', 'model'] === array_keys($data));
+    if ($entity instanceof FieldableEntityInterface) {
+      $data['entity_form_fields'] = $this->getFilteredEntityData($entity);
+    }
+    $data['autoSaves'] = $this->getAutoSaveHashes(array_merge([$entity], self::getEditableRegions()));
+    return new PreviewEnvelope(
+      $this->buildPreviewRenderable($entity, $preview_entity),
+      additionalData: $data
+    );
   }
 
   /**
-   * POST request returns a preview, but does not update any stored data.
+   * POST request returns a preview, and updates the auto-saved layout, model and entity form fields.
    *
    * @todo Remove this in https://drupal.org/i/3492065
    */
   public function post(Request $request, FieldableEntityInterface|ContentTemplate $entity, ?ContentEntityInterface $preview_entity = NULL): PreviewEnvelope {
     assert(!$entity instanceof ContentTemplate || !is_null($preview_entity));
     $body = json_decode($request->getContent(), TRUE);
-    \assert(\array_key_exists('model', $body));
-    \assert(\array_key_exists('layout', $body));
-    if ($entity instanceof ContentEntityInterface) {
-      \assert(\array_key_exists('entity_form_fields', $body));
+    if (!\array_key_exists('model', $body)) {
+      throw new BadRequestHttpException('Missing model');
     }
-    \assert(\array_key_exists('clientInstanceId', $body));
-    \assert(\array_key_exists('autoSaves', $body));
-    $this->validateAutoSaves(array_merge([$entity], self::getEditableRegions()), $body['autoSaves'], $body['clientInstanceId']);
+    if (!\array_key_exists('layout', $body)) {
+      throw new BadRequestHttpException('Missing layout');
+    }
+    if (!\array_key_exists('autoSaves', $body)) {
+      throw new BadRequestHttpException('Missing autoSaves');
+    }
+    if (!\array_key_exists('clientInstanceId', $body)) {
+      throw new BadRequestHttpException('Missing clientInstanceId');
+    }
+    [
+      'layout' => $layout,
+      'model' => $model,
+      'autoSaves' => $autoSaves,
+      'clientInstanceId' => $clientInstanceId,
+    ] = $body;
 
+    if ($entity instanceof FieldableEntityInterface) {
+      if (!\array_key_exists('entity_form_fields', $body)) {
+        throw new BadRequestHttpException('Missing entity_form_fields');
+      }
+      $entity_form_fields = $body['entity_form_fields'];
+    }
+    else {
+      $entity_form_fields = NULL;
+    }
+
+    $this->validateAutoSaves(array_merge([$entity], self::getEditableRegions()), $autoSaves, $clientInstanceId);
+
+    // Route-level access checks already verified `edit` access to $entity. But
+    // any PageRegion entities present in the layout provided by the client
+    // still need their `edit` access checked.
     $regions = PageRegion::loadForActiveThemeByClientSideId();
-    if (!empty($regions)) {
-      foreach ($body['layout'] as $region) {
-        if ($region['id'] !== CanvasPageVariant::MAIN_CONTENT_REGION) {
-          // Check access to regions if any component was added or removed from them.
-          if (!$regions[$region['id']]->access('edit')) {
-            throw new AccessDeniedHttpException(sprintf('Access denied for region %s', $region['id']));
-          }
-        }
+    $region_layouts = self::getRegionLayoutNodesKeyedByClientSideId($layout);
+    \assert(\array_key_exists(CanvasPageVariant::MAIN_CONTENT_REGION, $region_layouts));
+    // The main content region's component tree is for the edited entity.
+    $main_content_layout = $region_layouts[CanvasPageVariant::MAIN_CONTENT_REGION];
+    unset($region_layouts[CanvasPageVariant::MAIN_CONTENT_REGION]);
+    $missing_regions = array_diff_key($region_layouts, $regions);
+    if ($missing_regions) {
+      throw new NotFoundHttpException('Unknown regions: ' . implode(', ', array_keys($missing_regions)));
+    }
+    foreach (array_keys($region_layouts) as $client_side_region_id) {
+      // Check access to regions if any component was added or removed from them.
+      if (!$regions[$client_side_region_id]->access('edit')) {
+        throw new AccessDeniedHttpException(sprintf('Access denied for region %s', $client_side_region_id));
       }
     }
-    $autoSave = $this->autoSaveManager->getAutoSaveEntity($entity);
-    if (!$autoSave->isEmpty()) {
-      \assert($autoSave->entity instanceof $entity);
-      // We want to work with the auto-save entity from this point so that any
-      // previously saved values from e.g. another user are respected.
-      $entity = $autoSave->entity;
-      // AutoSaveManager::getAutoSaveEntity calls ::create which makes the
-      // entity appear new. There are some form widgets that check if the entity
-      // is new when constructing their form element. The auto-save entity is
-      // never new so we enforce that to avoid issues with form widgets.
-      // @see \Drupal\path\Plugin\Field\FieldWidget\PathWidget::formElement
-      $entity->enforceIsNew(FALSE);
-      // We also need to record the loaded revision ID as the auto-save manager
-      // does not do this for us and some widgets make use of this information
-      // to load a particular revision.
-      // @see \Drupal\content_moderation\Plugin\Field\FieldWidget\ModerationStateWidget::formElement
-      if ($entity instanceof RevisionableInterface) {
-        $entity->updateLoadedRevisionId();
-      }
+
+    // We want to work with the auto-save entity from this point so that any
+    // previously saved values from e.g. another user are respected.
+    $entity = $this->getAutoSavedVersionIfAvailable([$entity])[$entity->id()];
+    $regions = $this->getAutoSavedVersionIfAvailable($regions);
+
+    // Update the entity & auto-save it. This can update both:
+    // - the component tree in the entity (using `layout` and `model`)
+    // - the fields in the entity, if any (using `entity_form_fields`)
+    $this->updateEntity($entity, $main_content_layout, $model, $entity_form_fields, $preview_entity);
+    $this->autoSaveManager->saveEntity($entity, $clientInstanceId);
+
+    // Update all PageRegions' component trees.
+    foreach ($region_layouts as $client_side_region_id => $region_layout) {
+      $regions[$client_side_region_id] = $regions[$client_side_region_id]->forAutoSaveData([
+        'layout' => $region_layout['components'],
+        'model' => self::extractModelForSubtree($region_layout, (array) $model),
+      ], validate: FALSE);
+      $this->autoSaveManager->saveEntity($regions[$client_side_region_id], $clientInstanceId);
     }
-    return new PreviewEnvelope($this->buildPreviewRenderable($body, $entity, TRUE, $preview_entity), [
-      'autoSaves' => $this->getAutoSaveHashes(array_merge([$entity], self::getEditableRegions())),
-    ]);
+
+    return new PreviewEnvelope(
+      $this->buildPreviewRenderable($entity, $preview_entity),
+      additionalData: [
+        'autoSaves' => $this->getAutoSaveHashes([$entity, ...self::getEditableRegions()]),
+      ],
+    );
   }
 
-  private function buildPreviewRenderable(array $body, EntityInterface $entity, bool $updateAutoSave, ?FieldableEntityInterface $preview_entity = NULL): array {
-    ['layout' => $layout, 'model' => $model] = $body;
-
-    $page_regions = PageRegion::loadForActiveThemeByClientSideId();
-    foreach ($layout as $region_node) {
-      $client_side_region_id = $region_node['id'];
-      if ($client_side_region_id === CanvasPageVariant::MAIN_CONTENT_REGION) {
-        $content = $region_node;
-      }
-      // Save the global region if it has a corresponding enabled PageRegion.
-      elseif ($updateAutoSave && array_key_exists($client_side_region_id, $page_regions)) {
-        $page_region = $page_regions[$client_side_region_id]->forAutoSaveData([
-          'layout' => $region_node['components'],
-          'model' => self::extractModelForSubtree($region_node, (array) $model),
-        ], validate: FALSE);
-        $this->autoSaveManager->saveEntity($page_region, $body['clientInstanceId']);
-      }
-    }
-
-    assert(isset($content));
-    \assert($entity instanceof FieldableEntityInterface || ($entity instanceof ContentTemplate && !is_null($preview_entity)));
-
-    $data = [
-      'layout' => $content,
-      // An empty model needs to be represented as \stdClass so that it is
-      // correctly json encoded. But we need to convert it to an array before
-      // we can extract it.
-      'model' => (array) $model,
-    ];
-
-    // Store the auto-save entry.
-    if ($updateAutoSave) {
-      if ($entity instanceof FieldableEntityInterface) {
-        // If we are not auto-saving there is no reason to convert the
-        // 'entity_form_fields'. This can cause access issue for just viewing the
-        // preview. This runs the conversion as if the user had no access to edit
-        // the entity fields which is all the that is necessary when not
-        // auto-saving.
-        $data['entity_form_fields'] = $body['entity_form_fields'];
-      }
-      if ($entity instanceof FieldableEntityInterface) {
-        $this->converter->convert($data, $entity, validate: FALSE);
-      }
-      else {
-        // @todo Use \Drupal\canvas\ClientDataToEntityConverter here
-        //   as well in https://drupal.org/i/3543197.
-        $entity->setComponentTree(self::convertClientToServer($content['components'], (array) $model, $preview_entity, FALSE));
-      }
-      $this->autoSaveManager->saveEntity($entity, $body['clientInstanceId']);
-    }
+  private function buildPreviewRenderable(ContentTemplate|FieldableEntityInterface $entity, ?FieldableEntityInterface $preview_entity = NULL): array {
     $renderable = $entity instanceof ContentTemplate
       // @phpstan-ignore-next-line
       ? $entity->build($preview_entity, isPreview: TRUE)
@@ -437,105 +428,20 @@ final class ApiLayoutController {
     return $node_model;
   }
 
-  /**
-   * Get last stored data, taking auto-saved data into account if any.
-   */
-  private function getLastStoredData(EntityInterface $entity, bool $includeAllRegions = FALSE): array {
-    assert($entity instanceof FieldableEntityInterface || $entity instanceof ContentTemplate);
-    $data = NULL;
-    $build_entity = $entity;
-    $autoSaveData = $this->autoSaveManager->getAutoSaveEntity($entity);
-    if (!$autoSaveData->isEmpty()) {
-      // There are no changes (everything is published), read back the original
-      // model.
-      \assert($autoSaveData->entity instanceof FieldableEntityInterface || $entity instanceof ContentTemplate);
-      $build_entity = $autoSaveData->entity;
-    }
-    $data['model'] = [];
-    if ($build_entity instanceof FieldableEntityInterface) {
-      $data['entity_form_fields'] = $this->getFilteredEntityData($build_entity);
-    }
+  private function buildLayoutAndModel(FieldableEntityInterface|ContentTemplate $entity, array $regions, ?FieldableEntityInterface $preview_entity = NULL): array {
+    $data = ['layout' => [], 'model' => []];
     // Build the content region.
-    assert($build_entity instanceof ComponentTreeEntityInterface || $build_entity instanceof FieldableEntityInterface);
-    $tree = $this->componentTreeLoader->load($build_entity);
-    $data['layout'] = [$this->buildRegion(CanvasPageVariant::MAIN_CONTENT_REGION, $tree, $data['model'])];
+    $tree = $this->componentTreeLoader->load($entity);
+    $data['layout'] = [$this->buildRegion(CanvasPageVariant::MAIN_CONTENT_REGION, $tree, $data['model'], $preview_entity)];
     assert(is_array($data['model']));
-
-    $regions = PageRegion::loadForActiveTheme();
-    if (!empty($regions)) {
-      $this->addGlobalRegions($regions, $data['model'], $data['layout'], $includeAllRegions);
-      $layout_keyed_by_region = array_combine(array_map(static fn($region) => $region['id'], $data['layout']), $data['layout']);
-      // Reorder the layout to match theme order.
-      $data['layout'] = array_values(array_replace(
-        array_intersect_key(array_flip($this->regionsClientSideIds), $layout_keyed_by_region),
-        $layout_keyed_by_region
-      ));
-    }
+    $this->addGlobalRegions($regions, $data['model'], $data['layout'], includeAllRegions: TRUE);
+    $layout_keyed_by_region = array_combine(array_map(static fn($region) => $region['id'], $data['layout']), $data['layout']);
+    // Reorder the layout to match theme order.
+    $data['layout'] = array_values(array_replace(
+      array_intersect_key(array_flip($this->regionsClientSideIds), $layout_keyed_by_region),
+      $layout_keyed_by_region
+    ));
     return $data;
-  }
-
-  /**
-   * @param LayoutClientStructureArray $layout
-   * @param string $componentInstanceUuid
-   * @return string|null
-   */
-  private function getRegionForComponentInstance(array $layout, string $componentInstanceUuid): ?string {
-    foreach ($layout as $layout_region) {
-      assert(count(array_intersect(['nodeType', 'id', 'name', 'components'], array_keys($layout_region))) === 4);
-      assert($layout_region['nodeType'] === 'region');
-      assert(is_array($layout_region['components']));
-    }
-
-    // Validate that we have access to the page region of this component.
-    $regions = PageRegion::loadForActiveTheme();
-    if (empty($regions)) {
-      return NULL;
-    }
-
-    $layout_by_client_side_ids = array_combine(array_map(static fn($region) => $region['id'], $layout), $layout);
-    $regionForComponent = array_filter(
-      $layout_by_client_side_ids,
-      function ($item) use ($componentInstanceUuid) {
-        foreach ($item['components'] as $componentData) {
-          if ($this->componentInstanceExistInComponentData($componentData, $componentInstanceUuid)) {
-            return TRUE;
-          }
-        }
-        return FALSE;
-      }
-    );
-
-    // @todo Fix in https://drupal.org/i/3535435 (Review and remove NULL if necessary).
-    return (count($regionForComponent) === 1) ? (string) key($regionForComponent) : NULL;
-  }
-
-  /**
-   * Check if a componentUuid is present in a component or slot and its children.
-   *
-   * @param array $componentData
-   *   The component data array.
-   * @param string $componentInstanceUuid
-   *   The componentInstanceUuid to search.
-   *
-   * @return bool
-   */
-  private function componentInstanceExistInComponentData(array $componentData, string $componentInstanceUuid): bool {
-    if ($componentData['uuid'] === $componentInstanceUuid) {
-      // This is the successful _base case_ of this recursive function.
-      return TRUE;
-    }
-    foreach ($componentData['slots'] as $slotData) {
-      foreach ($slotData['components'] as $slotComponentData) {
-        if (!empty($slotComponentData['slots'])) {
-          if ($this->componentInstanceExistInComponentData($slotComponentData, $componentInstanceUuid)) {
-            // This maps the successful base case return. Otherwise, we must return nothing.
-            return TRUE;
-          }
-        }
-      }
-    }
-    // If nothing has found, the unsuccessful base case.
-    return FALSE;
   }
 
   /**
@@ -544,6 +450,132 @@ final class ApiLayoutController {
    */
   private static function getEditableRegions(): array {
     return array_filter(PageRegion::loadForActiveTheme(), fn(PageRegion $region) => $region->access('update'));
+  }
+
+  /**
+   * @param LayoutClientStructureArray $page_layout
+   *   A complete page layout: for the "main content" region, plus PageRegions,
+   *   if enabled.
+   *
+   * @return array<string, RegionClientStructureArray>
+   *   Keys: client-side region IDs, values: the "region" layout node and its
+   *   contents.
+   */
+  private static function getRegionLayoutNodesKeyedByClientSideId(array $page_layout): array {
+    $keyed_region_nodes = [];
+    foreach ($page_layout as $region_node) {
+      assert($region_node['nodeType'] === 'region');
+      $client_side_region_id = $region_node['id'];
+      $keyed_region_nodes[$client_side_region_id] = $region_node;
+    }
+    return $keyed_region_nodes;
+  }
+
+  private function getAutoSavedVersionIfAvailable(array $entities): array {
+    $result = [];
+    foreach ($entities as $key => $stored_entity) {
+      $autoSaveData = $this->autoSaveManager->getAutoSaveEntity($stored_entity);
+      if (!$autoSaveData->isEmpty()) {
+        \assert($autoSaveData->entity instanceof $stored_entity);
+        $stored_entity = $autoSaveData->entity;
+        // AutoSaveManager::getAutoSaveEntity calls ::create which makes the
+        // entity appear new. There are some form widgets that check if the entity
+        // is new when constructing their form element. The auto-save entity is
+        // never new so we enforce that to avoid issues with form widgets.
+        // @see \Drupal\path\Plugin\Field\FieldWidget\PathWidget::formElement
+        $stored_entity->enforceIsNew(FALSE);
+        // We also need to record the loaded revision ID as the auto-save manager
+        // does not do this for us and some widgets make use of this information
+        // to load a particular revision.
+        // @see \Drupal\content_moderation\Plugin\Field\FieldWidget\ModerationStateWidget::formElement
+        if ($stored_entity instanceof RevisionableInterface) {
+          $stored_entity->updateLoadedRevisionId();
+        }
+      }
+      // If keys are specified, use those (e.g. client-side IDs), otherwise re-
+      // key by entity ID.
+      $key = array_is_list($entities) ? $stored_entity->id() : $key;
+      $result[$key] = $stored_entity;
+    }
+    return $result;
+  }
+
+  private function getEntityWithComponentInstance(array $entities, string $componentInstanceUuid): ComponentTreeEntityInterface|FieldableEntityInterface {
+    foreach ($entities as $entity) {
+      $tree = $this->componentTreeLoader->load($entity);
+      if ($tree->getComponentTreeItemByUuid($componentInstanceUuid)) {
+        return $entity;
+      }
+    }
+    throw new NotFoundHttpException('No such component in model: ' . $componentInstanceUuid);
+  }
+
+  /**
+   * Updates a single component instance in the given entity's component tree.
+   *
+   * @param \Drupal\canvas\Entity\ComponentTreeEntityInterface|FieldableEntityInterface $entity
+   * @param string $componentInstanceUuid
+   * @param array{source: SingleComponentInputArray, resolved: array<string, mixed>} $client_model
+   * @param \Drupal\Core\Entity\FieldableEntityInterface|null $host_entity
+   *
+   * @return void
+   */
+  private function updateComponentInstance(ComponentTreeEntityInterface|FieldableEntityInterface $entity, string $componentInstanceUuid, array $client_model, ?FieldableEntityInterface $host_entity): void {
+    $tree = $this->componentTreeLoader->load($entity);
+    if ($item = $tree->getComponentTreeItemByUuid($componentInstanceUuid)) {
+      $component = $item->getComponent();
+      \assert($component instanceof Component);
+      $item->setInput(
+        $component->getComponentSource()->clientModelToInput(
+          $componentInstanceUuid,
+          $component,
+          $client_model,
+          $host_entity
+        )
+      );
+      if ($entity instanceof ComponentTreeEntityInterface) {
+        // This might be dangling item list so we should update explicitly.
+        $entity->setComponentTree($tree->getValue());
+      }
+    }
+  }
+
+  /**
+   * Updates the entire component tree in the given entity (+ fields if any).
+   *
+   * @param \Drupal\canvas\Entity\ContentTemplate|\Drupal\Core\Entity\FieldableEntityInterface $entity
+   *   The entity that is updated by reference: its fields (if any) and its
+   *   component tree.
+   * @param RegionClientStructureArray $layout
+   * @param array<string, array{source: SingleComponentInputArray, resolved: array<string, mixed>}> $model
+   * @param ?array $entity_form_fields
+   *   Entity form fields. Required only if $entity is fieldable.
+   * @param \Drupal\Core\Entity\FieldableEntityInterface|null $preview_entity
+   *   Preview entity. Required only if $entity is a ContentTemplates.
+   */
+  private function updateEntity(ContentTemplate|FieldableEntityInterface $entity, array $layout, array $model, ?array $entity_form_fields, ?FieldableEntityInterface $preview_entity): void {
+    if ($entity instanceof FieldableEntityInterface) {
+      \assert(!is_null($entity_form_fields));
+      // If we are not auto-saving there is no reason to convert the
+      // 'entity_form_fields'. This can cause access issue for just viewing the
+      // preview. This runs the conversion as if the user had no access to edit
+      // the entity fields which is all the that is necessary when not
+      // auto-saving.
+      $this->converter->convert([
+        'layout' => $layout,
+        'model' => $model,
+        'entity_form_fields' => $entity_form_fields,
+      ], $entity, validate: FALSE);
+    }
+    else {
+      \assert(is_null($entity_form_fields));
+      \assert(!is_null($preview_entity));
+      // @todo Use \Drupal\canvas\ClientDataToEntityConverter here
+      //   as well in https://drupal.org/i/3543197.
+      // @todo Remove php-stan-ignore in https://drupal.org/i/3548273.
+      // @phpstan-ignore-next-line argument.type
+      $entity->setComponentTree(self::convertClientToServer($layout['components'], $model, $preview_entity, FALSE));
+    }
   }
 
 }

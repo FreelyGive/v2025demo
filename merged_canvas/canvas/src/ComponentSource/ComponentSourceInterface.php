@@ -192,8 +192,9 @@ interface ComponentSourceInterface extends PluginInspectionInterface, Derivative
    *   The component configuration entity.
    * @param string $component_instance_uuid
    *   The component instance UUID.
-   * @param array $client_model
-   *   Current client model values for the component from the incoming request.
+   * @param array $inputValues
+   *   Current client model values for the component from the incoming request,
+   *   as returned by ::clientModelToInput().
    * @param \Drupal\Core\Entity\EntityInterface|null $entity
    *   The host entity (for evaluated input).
    * @param array $settings
@@ -211,7 +212,7 @@ interface ComponentSourceInterface extends PluginInspectionInterface, Derivative
     FormStateInterface $form_state,
     ?Component $component = NULL,
     string $component_instance_uuid = '',
-    array $client_model = [],
+    array $inputValues = [],
     ?EntityInterface $entity = NULL,
     array $settings = [],
   ): array;

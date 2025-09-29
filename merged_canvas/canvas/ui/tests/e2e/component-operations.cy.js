@@ -51,8 +51,7 @@ describe.skip('Perform CRUD operations on components', () => {
   it('Can handle empty heading prop in hero component', () => {
     // Load the page and add hero component
     cy.loadURLandWaitForCanvasLoaded({ url: 'canvas/editor/node/2' });
-    cy.openLibraryPanel();
-    cy.get('.primaryPanelContent').findByText('Hero').click();
+    cy.insertComponent({ name: 'Hero' });
 
     // Wait for hero to be added and default content to appear
     cy.waitForElementContentInIframe(
@@ -282,7 +281,7 @@ describe.skip('Perform CRUD operations on components', () => {
     cy.get('.primaryPanelContent').should('contain.text', 'Components');
     // Click the "Hero" SDC-sourced Component.
     // @see \Drupal\canvas\Plugin\Canvas\ComponentSource\SingleDirectoryComponent
-    cy.get('.primaryPanelContent').findByText('Hero').click();
+    cy.insertComponent({ name: 'Hero' });
     cy.waitForElementContentInIframe('div', 'There goes my hero');
     cy.testInIframe(
       '[data-component-id="canvas_test_sdc:my-hero"]',
@@ -352,10 +351,10 @@ describe.skip('Perform CRUD operations on components', () => {
     cy.findByTestId('canvas-primary-panel').within(() => {
       cy.findAllByText('Two Column').should('have.length', 1);
     });
-    cy.get('.primaryPanelContent').findByText('Two Column').click();
+    cy.insertComponent({ name: 'Two Column' });
     cy.openLibraryPanel();
     // Click on Two Column inside menu.
-    cy.get('.primaryPanelContent').findByText('Two Column').click();
+    cy.insertComponent({ name: 'Two Column' });
     cy.log(
       'There should be 2 new drop zones - 2 added columns in addition to the original',
     );
@@ -379,9 +378,7 @@ describe.skip('Perform CRUD operations on components', () => {
 
     cy.waitForComponentNotInPreview('Test SDC Image');
 
-    cy.openLibraryPanel();
-
-    cy.get('.primaryPanelContent').findByText('Test SDC Image').click();
+    cy.insertComponent({ name: 'Test SDC Image' });
 
     cy.intercept('POST', '**/canvas/api/v0/layout/node/1').then(cy.log);
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\canvas\PathProcessor;
 
 use Drupal\Core\PathProcessor\InboundPathProcessorInterface;
@@ -19,11 +21,12 @@ class CanvasPathProcessor implements InboundPathProcessorInterface {
   /**
    * {@inheritdoc}
    */
-  public function processInbound($path, Request $request) {
-    // Only rewrite if not /canvas/api and starts with /canvas/
+  public function processInbound($path, Request $request): string {
+    // Only rewrite if not /canvas/api and starts with /canvas/.
+    // For this to work, our routes require that no route normalization happens
+    // when the redirect module is enabled.
+    // @see \Drupal\canvas\EventSubscriber\CanvasRouteOptionsEventSubscriber::preventRouteNormalization.
     if (str_starts_with($path, '/canvas/') && !str_starts_with($path, '/canvas/api')) {
-      // This ensures our routing works with redirect module enabled.
-      $request->attributes->set('_disable_route_normalizer', TRUE);
       return '/canvas';
     }
     return $path;

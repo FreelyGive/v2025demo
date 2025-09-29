@@ -1,7 +1,6 @@
 import SidebarFolder from '@/components/sidePanel/SidebarFolder';
 
 import type { ReactNode } from 'react';
-import type { FolderCodeComponent } from '@/features/code-editor/CodeComponentList';
 import type { CodeComponentSerialized } from '@/types/CodeComponent';
 import type {
   ComponentsList,
@@ -23,7 +22,7 @@ const FolderList = ({
   folder,
   children,
 }: {
-  folder: FolderInList | FolderCodeComponent;
+  folder: FolderInList;
   children: ReactNode;
 }) => {
   // Determine the length of items in the folder, be it object or array.
@@ -60,7 +59,7 @@ export const folderfyComponents = (
   foldersLoading: boolean,
   type: string,
 ): FolderComponentsResult => {
-  if (isLoading || foldersLoading || !folders || !components) {
+  if (isLoading || foldersLoading || (!folders && !components)) {
     return { folderComponents: {}, topLevelComponents: {} };
   }
 
@@ -68,7 +67,7 @@ export const folderfyComponents = (
   const topLevelComponents: Record<string, any> = {};
 
   Object.entries(components || {}).forEach(([id, component]) => {
-    if (folders.componentIndexedFolders[id]) {
+    if (folders && folders.componentIndexedFolders[id]) {
       const folderId = folders.componentIndexedFolders[id];
       if (!folderComponents[folderId]) {
         folderComponents[folderId] = {
@@ -83,7 +82,7 @@ export const folderfyComponents = (
       topLevelComponents[id] = component;
     }
   });
-  Object.entries(folders.folders).forEach(([id, folder]) => {
+  Object.entries(folders?.folders || []).forEach(([id, folder]) => {
     if (folder.items.length === 0 && folder.type === type) {
       folderComponents[id] = {
         id,
@@ -115,5 +114,7 @@ export const sortFolderList = (
       ) as FoldersInList)
     : [];
 };
+
+export type { FolderData };
 
 export default FolderList;

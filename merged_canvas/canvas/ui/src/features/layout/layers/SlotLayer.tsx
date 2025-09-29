@@ -88,12 +88,9 @@ const SlotLayer: React.FC<SlotLayerProps> = ({
           variant="slot"
           open={!isCollapsed}
           disabled={disableDrop}
+          indent={indent}
           leadingContent={
             <Flex>
-              <Box
-                width={`calc(${indent} * var(--space-2))`}
-                className="canvas-layer-indent"
-              />
               <Box width="var(--space-4)" mr="1">
                 {slot.components.length > 0 ? (
                   <Box>

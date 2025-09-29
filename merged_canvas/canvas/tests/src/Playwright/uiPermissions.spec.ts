@@ -65,21 +65,25 @@ test.describe('Canvas UI Permissions', () => {
     await page.locator('body').click(); // Dismiss the context menu
     await expect(contextMenu).not.toBeAttached();
 
-    await canvasEditor.openLibraryPanel();
-    // Check that a button with the text "Add new" exists inside canvas-primary-panel
-    const primaryPanel = page.getByTestId('canvas-primary-panel');
+    await canvasEditor.openManageLibraryPanel();
+    // Open the "New" dropdown
+    await page.getByTestId('canvas-page-list-new-button').click();
+
+    // The add new code component button should be visible
     await expect(
-      primaryPanel.getByRole('button', { name: 'Create code component' }),
+      page.getByTestId('canvas-library-new-code-component-button'),
     ).toBeVisible();
+
+    // Close the dropdown
+    await page
+      .getByTestId('canvas-page-list-new-button')
+      .click({ force: true });
 
     // Make a change to the page
     await expect(page.getByText('No changes')).toBeAttached();
 
-    await page
-      .locator('[aria-label="Draggable component Hero"]')
-      .first()
-      .click();
-    await page.waitForTimeout(500);
+    await canvasEditor.addComponent({ name: 'Hero' });
+
     await expect(page.getByLabel('Sub-heading')).toBeAttached();
     await page.getByLabel('Sub-heading').fill('New Heading');
     await expect(page.getByLabel('Sub-heading')).toHaveValue('New Heading');
@@ -156,13 +160,22 @@ test.describe('Canvas UI Permissions', () => {
     await expect(contextMenu).not.toBeAttached();
 
     // Open the library panel
-    await canvasEditor.openLibraryPanel();
+    await canvasEditor.openManageLibraryPanel();
 
-    // Check that a button with the text "Add new" does not exist inside canvas-primary-panel
-    const primaryPanel = page.getByTestId('canvas-primary-panel');
+    // Open the "New" dropdown
+    await page.getByTestId('canvas-page-list-new-button').click();
+
+    // The add new code component button should not be visible
     await expect(
-      primaryPanel.getByRole('button', { name: 'Create code component' }),
+      page.getByTestId('canvas-library-new-code-component-button'),
     ).not.toBeAttached();
+
+    // Close the dropdown
+    await page
+      .getByTestId('canvas-page-list-new-button')
+      .click({ force: true });
+
+    const primaryPanel = page.getByTestId('canvas-primary-panel');
     await expect(
       primaryPanel.getByRole('button', { name: 'Code' }),
     ).not.toBeAttached();
@@ -172,7 +185,8 @@ test.describe('Canvas UI Permissions', () => {
       primaryPanel.getByTestId('canvas-manage-library-patterns-tab-select'),
     ).toBeAttached();
 
-    // A change to the page was made in the previous test, so it should be visible.
+    // ⚠️️️️️⚠️️️️️⚠️️️️️⚠️️️️️⚠️️️️️ ️A change to the page was made in the PREVIOUS test, so that change should be visible here but
+    // means there might be implications for parallelization later.
     await page.getByText('Review 1 change').click();
     await page.getByTestId('canvas-publish-review-select-all').click();
     // but the user should not be able to publish changes.

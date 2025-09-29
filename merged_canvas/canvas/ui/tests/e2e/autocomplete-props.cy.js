@@ -36,18 +36,8 @@ describe('Prop with autocomplete', () => {
 
   it('Works with link fields', () => {
     cy.loadURLandWaitForCanvasLoaded();
-    cy.openLibraryPanel();
-    cy.get('.primaryPanelContent').should('contain.text', 'Components');
-    cy.get('.primaryPanelContent')
-      .findByText('Hero', { timeout: 6000 })
-      .click();
-    cy.waitForElementContentInIframe('div', 'There goes my hero');
-    cy.testInIframe(
-      '[data-component-id="canvas_test_sdc:my-hero"]',
-      (myHeroComponent) => {
-        expect(myHeroComponent.length).to.equal(4);
-      },
-    );
+    cy.insertComponent({ name: 'Hero' });
+
     cy.findByLabelText('CTA 1 link')
       .as('linkField')
       .should('have.value', 'https://example.com')

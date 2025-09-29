@@ -69,7 +69,7 @@ test.describe('Basic accessibility', () => {
     expect(libraryScan.violations).toEqual([]);
 
     // Props Panel.
-    canvasEditor.addComponent({ id: 'sdc.canvas_test_sdc.my-hero' });
+    await canvasEditor.addComponent({ id: 'sdc.canvas_test_sdc.my-hero' });
     const propsScan = await new AxeBuilder({ page })
       .disableRules(baseline)
       .analyze();

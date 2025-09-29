@@ -356,13 +356,13 @@ final class BlockComponent extends ComponentSourceBase implements ContainerFacto
     FormStateInterface $form_state,
     ?ComponentEntity $component = NULL,
     string $component_instance_uuid = '',
-    array $client_model = [],
+    array $inputValues = [],
     ?EntityInterface $entity = NULL,
     array $settings = [],
   ): array {
     $blockPlugin = $this->getBlockPlugin();
-    if ($client_model) {
-      $blockPlugin->setConfiguration($client_model);
+    if ($inputValues) {
+      $blockPlugin->setConfiguration($inputValues);
     }
     // Mirror the sub-form logic from the Block config entity form.
     // @see \Drupal\block\BlockForm::form

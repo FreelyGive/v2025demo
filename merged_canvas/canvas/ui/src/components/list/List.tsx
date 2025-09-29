@@ -1,13 +1,10 @@
-import { useMemo, useRef } from 'react';
+import React, { useRef } from 'react';
 import clsx from 'clsx';
-import { InfoCircledIcon } from '@radix-ui/react-icons';
-import { Box, Callout, Flex, Skeleton } from '@radix-ui/themes';
+import { Flex } from '@radix-ui/themes';
 
-import { useAppSelector } from '@/app/hooks';
 import ListItem from '@/components/list/ListItem';
-import { selectDragging } from '@/features/ui/uiSlice';
+import { ListIndentContext } from '@/components/sidePanel/ListIndentContext';
 
-import type React from 'react';
 import type { LayoutItemType } from '@/features/ui/primaryPanelSlice';
 import type { ComponentsList } from '@/types/Component';
 import type { PatternsList } from '@/types/Pattern';
@@ -16,63 +13,41 @@ import styles from './List.module.css';
 
 export interface ListProps {
   items: ComponentsList | PatternsList | undefined;
-  isLoading: boolean;
   type:
     | LayoutItemType.COMPONENT
     | LayoutItemType.PATTERN
     | LayoutItemType.DYNAMIC;
-  label: string;
-  inFolder?: boolean;
+  renderItem: (item: any) => React.ReactNode;
+  indent?: number;
 }
 
 const List: React.FC<ListProps> = (props) => {
-  const { items, isLoading, type, label, inFolder } = props;
+  const { items, type, indent, renderItem } = props;
   const listElRef = useRef<HTMLDivElement>(null);
-  const { isDragging } = useAppSelector(selectDragging);
 
-  // Sort items and convert to array.
-  const sortedItems = useMemo(() => {
-    return items
-      ? Object.entries(items).sort(([, a], [, b]) =>
-          a.name.localeCompare(b.name),
-        )
-      : [];
-  }, [items]);
-
-  if ((!items || !Object.keys(items).length) && !isLoading && !inFolder) {
-    return (
-      <Callout.Root size="1" variant="soft" color="gray" my="3">
-        <Flex align="center" gapX="2">
-          <Callout.Icon>
-            <InfoCircledIcon />
-          </Callout.Icon>
-          <Callout.Text size="1">No items to show in {label}</Callout.Text>
-        </Flex>
-      </Callout.Root>
-    );
-  }
-
-  return (
+  const content = (
     <div className={clsx('listContainer', styles.listContainer)}>
-      <Box className={isDragging ? 'list-dragging' : ''}>
-        <Skeleton
-          data-testid="canvas-components-library-loading"
-          loading={isLoading}
-          height="1.2rem"
-          width="100%"
-          my="3"
-        >
-          <Flex direction="column" width="100%" ref={listElRef} role="list">
-            {sortedItems &&
-              sortedItems.map(([id, item]) => (
-                <ListItem item={item} key={id} type={type} />
-              ))}
-          </Flex>
-        </Skeleton>
-        <Skeleton loading={isLoading} height="1.2rem" width="100%" my="3" />
-        <Skeleton loading={isLoading} height="1.2rem" width="100%" my="3" />
-      </Box>
+      <Flex direction="column" width="100%" ref={listElRef} role="list">
+        {items &&
+          Object.entries(items).map(([id, item]) =>
+            renderItem ? (
+              <React.Fragment key={id}>{renderItem(item)}</React.Fragment>
+            ) : (
+              <ListItem item={item} key={id} type={type} />
+            ),
+          )}
+      </Flex>
     </div>
+  );
+
+  // If indent is provided, wrap content in IndentContext.Provider so that the SidebarNode can consume it
+  // without needing to pass the value down through multiple layers of components.
+  return indent !== undefined ? (
+    <ListIndentContext.Provider value={indent}>
+      {content}
+    </ListIndentContext.Provider>
+  ) : (
+    content
   );
 };
 

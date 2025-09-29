@@ -3,7 +3,7 @@ import parse from 'html-react-parser';
 import { PlusIcon } from '@radix-ui/react-icons';
 import { Box, Button, Flex, Select, Text } from '@radix-ui/themes';
 
-import Dialog from '@/components/Dialog';
+import Dialog, { DialogFieldLabel } from '@/components/Dialog';
 import ErrorBoundary from '@/components/error/ErrorBoundary';
 import {
   AccordionDetails,
@@ -190,7 +190,7 @@ const AddTemplateDialog = ({
     >
       <Flex
         direction="column"
-        data-testid="xb-manage-library-add-template-content"
+        data-testid="canvas-manage-library-add-template-content"
         p="0"
         gap="2"
         mb="2"
@@ -204,15 +204,16 @@ const AddTemplateDialog = ({
         {!contentType && (
           <Flex direction="column" gap="2">
             <Box>
-              <Text as="label" htmlFor="content-type" size="1" weight="bold">
+              <DialogFieldLabel htmlFor="content-type">
                 Content type
-              </Text>
+              </DialogFieldLabel>
             </Box>
             <Select.Root
               name="content-type"
               required
               value={selectedContentType || undefined}
               onValueChange={(value) => setSelectedContentType(value as string)}
+              size="1"
             >
               <Select.Trigger
                 id="content-type"
@@ -232,9 +233,9 @@ const AddTemplateDialog = ({
         )}
         <Flex direction="column" gap="2">
           <Box>
-            <Text as="label" htmlFor="template-name" size="1" weight="bold">
+            <DialogFieldLabel htmlFor="template-name">
               Template
-            </Text>
+            </DialogFieldLabel>
           </Box>
           <Select.Root
             name="template name"
@@ -242,13 +243,14 @@ const AddTemplateDialog = ({
             disabled={!selectedContentType}
             value={selectedViewMode || ''}
             onValueChange={(value) => setSelectedViewMode(value)}
+            size="1"
           >
             <Select.Trigger
               id="template-name"
               placeholder={
                 availableTemplates === 0
                   ? 'No more available templates'
-                  : 'Existing templates…'
+                  : 'Available templates…'
               }
               style={{ width: '100%' }}
               disabled={!selectedContentType}

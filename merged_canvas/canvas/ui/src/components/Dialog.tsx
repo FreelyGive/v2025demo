@@ -97,7 +97,12 @@ const Dialog = ({
       {headerClose && (
         <Box className={styles.headerCloseButton}>
           <ThemedDialog.Close>
-            <IconButton variant="ghost" size="1" aria-label="Close">
+            <IconButton
+              variant="ghost"
+              size="1"
+              aria-label="Close"
+              onClick={(e) => handleOpenChange(false)}
+            >
               <span className="visually-hidden">Close</span>
               <Cross2Icon color="black" />
             </IconButton>

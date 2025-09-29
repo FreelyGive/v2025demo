@@ -81,10 +81,23 @@ class ApiLayoutControllerGetTest extends ApiLayoutControllerTestBase {
     $contentTemplate = $this->getTestEntity(ContentTemplate::ENTITY_TYPE_ID);
     \assert($contentTemplate instanceof ContentTemplate);
 
+    $top_level_component_uuid = '5f71027b-d9d3-4f3d-8990-a6502c0ba676';
+    $nested_component_uuid = '8caf6e23-8fb4-4524-bdb6-f57a2a6e7859';
     // Add a heading populated by a dynamic prop source using the `title` field.
     $components = [
       [
-        'uuid' => '5f71027b-d9d3-4f3d-8990-a6502c0ba676',
+        'uuid' => $top_level_component_uuid,
+        'component_id' => 'sdc.canvas_test_sdc.props-slots',
+        'component_version' => 'ab4d3ddce315cf64',
+        'inputs' => [
+          'heading' => [
+            'sourceType' => 'dynamic',
+            'expression' => 'ℹ︎␜entity:node:article␝title␞␟value',
+          ],
+        ],
+      ],
+      [
+        'uuid' => $nested_component_uuid,
         'component_id' => 'sdc.canvas_test_sdc.props-no-slots',
         'component_version' => '95f4f1d5ee47663b',
         'inputs' => [
@@ -93,11 +106,13 @@ class ApiLayoutControllerGetTest extends ApiLayoutControllerTestBase {
             'expression' => 'ℹ︎␜entity:node:article␝title␞␟value',
           ],
         ],
+        'slot' => 'the_body',
+        'parent_uuid' => $top_level_component_uuid,
       ],
     ];
     $contentTemplate->setComponentTree($components)->save();
     // @todo Remove this in favor of using ContribStrictConfigSchemaTestTrait in https://www.drupal.org/project/canvas/issues/3531679
-    self::assertCount(0, $contentTemplate->getTypedData()->validate());
+    self::assertCount(0, $contentTemplate->getTypedData()->validate(), (string) $contentTemplate->getTypedData()->validate());
     $get_layout_api_request = Request::create($this->getLayoutUrl($contentTemplate)->toString());
     $this->setUpCurrentUser([], [self::getAdminPermission($contentTemplate)]);
 
@@ -105,14 +120,20 @@ class ApiLayoutControllerGetTest extends ApiLayoutControllerTestBase {
     // - entity label
     // - `model` in API response
     // - `html` in API
-    $title_matches_resolved_and_html = function (string $expected_title, JsonResponse $response) {
+    $title_matches_resolved_and_html = function (string $expected_title, JsonResponse $response) use ($top_level_component_uuid, $nested_component_uuid) {
       // Current preview entity label MUST match the expected title.
       self::assertSame($expected_title, $this->previewEntity?->label());
       // The `model` of the layout API response MUST contain the expected title.
-      self::assertSame($expected_title, static::decodeResponse($response)['model']['5f71027b-d9d3-4f3d-8990-a6502c0ba676']['resolved']['heading']);
-      // The `html` of the layout API response MUST render the expected title.
-      self::assertCount(1, $this->cssSelect('[data-component-id="canvas_test_sdc:props-no-slots"]'));
-      self::assertSame($expected_title, (string) $this->cssSelect('[data-component-id="canvas_test_sdc:props-no-slots"] h1')[0]);
+      self::assertSame($expected_title, static::decodeResponse($response)['model'][$top_level_component_uuid]['resolved']['heading']);
+      self::assertSame($expected_title, static::decodeResponse($response)['model'][$nested_component_uuid]['resolved']['heading']);
+      // The `html` of the layout API response MUST render the expected title in
+      // the both the top-level and nested component.
+      self::assertCount(1, $this->cssSelect('[data-component-id="canvas_test_sdc:props-slots"]'));
+      // Make sure we match only the h1 that is direct the child of the component
+      // so don't match the one in the nested component.
+      self::assertSame($expected_title, (string) $this->cssSelect('[data-component-id="canvas_test_sdc:props-slots"] > h1')[0]);
+      self::assertCount(1, $this->cssSelect('[data-component-id="canvas_test_sdc:props-slots"] [data-component-id="canvas_test_sdc:props-no-slots"]'));
+      self::assertSame($expected_title, (string) $this->cssSelect('[data-component-id="canvas_test_sdc:props-slots"] [data-component-id="canvas_test_sdc:props-no-slots"] > h1')[0]);
     };
 
     // Assert the original resolved dynamic prop source + resulting HTML.
