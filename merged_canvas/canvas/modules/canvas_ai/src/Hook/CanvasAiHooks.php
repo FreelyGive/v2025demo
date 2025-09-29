@@ -71,6 +71,10 @@ class CanvasAiHooks {
             'name' => $this->t('Menu Fetch Source'),
             'description' => $this->t('Returns the source for menu fetching.'),
           ],
+          'available_regions' => [
+            'name' => $this->t('Available Regions'),
+            'description' => $this->t('Returns the available regions in experience builder.'),
+          ],
           'json_api_module_status' => [
             'name' => $this->t('JSON API Module status'),
             'description' => $this->t('Returns the status of JSON API module.'),
@@ -124,6 +128,10 @@ class CanvasAiHooks {
 
           case 'menu_fetch_source':
             $replacements[$original] = !empty($data['menu_fetch_source']) ? $data['menu_fetch_source'] : NULL;
+            break;
+
+          case 'available_regions':
+            $replacements[$original] = !empty($data['available_regions']) ? $data['available_regions'] : NULL;
             break;
 
           case 'json_api_module_status':
