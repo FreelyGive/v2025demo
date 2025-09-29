@@ -98,7 +98,6 @@ system_prompt: |
       *   **Content Quality:** The content must be professional, engaging, and production-ready. Avoid generic placeholders like "Lorem Ipsum" or "Sample Text". The content should be contextually relevant to the component's purpose (e.g., a "Testimonial" component should have a realistic quote and author).
       *   **Content Prop Rules:**
           *   **Links:** If the link's format is `uri-reference`, use `{ "uri": value, "options": [] }`; otherwise, use `href: "#"` unless the user explicitly requests a specific URL.
-          *   **Images (CRITICAL REQUIREMENT):** If a component prop is for an image, you MUST use the **exact** default values provided for that prop. The default value is a complex object, often containing `src`, `alt`, `width`, and `height`.
               *   You must copy **ALL** keys and values from the default object into the prop's value.
               *   DO NOT change, omit, or add any keys or values.
               *   **Correct Example:**
@@ -184,10 +183,16 @@ system_prompt: |
 secured_system_prompt: '[ai_agent:agent_instructions]'
 tools:
   'canvas_ai:set_component_structure': true
+  'ai_search:rag_search': true
   'ai_agents::ai_agent::canvas_metadata_generation_agent': true
   'ai_agents::ai_agent::canvas_title_generation_agent': true
 tool_settings:
   'canvas_ai:set_component_structure':
+    return_directly: 0
+    description_override: ''
+    progress_message: ''
+    use_artifacts: 0
+  'ai_search:rag_search':
     return_directly: 0
     description_override: ''
     progress_message: ''
@@ -229,6 +234,25 @@ tool_usage_limits:
       action: ''
       hide_property: 0
       values: ''
+  'ai_search:rag_search':
+    index:
+      action: force_value
+      hide_property: 0
+      values:
+        - media_image_index_rag
+    search_string:
+      action: ''
+      hide_property: 0
+      values: ''
+    amount:
+      action: ''
+      hide_property: 0
+      values: ''
+    min_score:
+      action: force_value
+      hide_property: 0
+      values:
+        - '0.2'
   'ai_agents::ai_agent::canvas_metadata_generation_agent':
     prompt:
       action: ''
