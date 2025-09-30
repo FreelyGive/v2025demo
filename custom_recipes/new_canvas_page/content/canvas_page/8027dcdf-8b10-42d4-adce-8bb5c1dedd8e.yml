@@ -24,19 +24,8 @@ default:
       value: 'Awesome Drupal Canvas Demo 2'
   components:
     -
-      uuid: d9d39cf4-7cab-43d7-b923-a8f4f28e3fbd
-      component_id: sdc.mercury.hero-billboard
-      component_version: a23f4ef60e7cb469
-      inputs:
-        media:
-          target_uuid: 47bc6eb6-6472-4f61-97d9-f3ee6287cbf3
-        heading_text: "Stop Chasing Down Expense\_Reports & Receipts"
-        text: 'Join 200+ finance leaders to discover how FinDrop cut expense processing time by 80% with virtual corporate cards and automated workflows.'
-        background_position: bottom
-    -
       uuid: b102920a-fa39-4ccc-8a85-90f6e225246e
       component_id: sdc.mercury.section
-      component_version: 459654892e3b3a4c
       inputs:
         columns: '100'
         section_header: false
@@ -52,18 +41,16 @@ default:
       slot: main_slot
       uuid: 753ccbf4-3c96-4764-9503-ce5e53c05d89
       component_id: sdc.mercury.group
-      component_version: f9fbff552f9aa8be
       inputs:
         flex_direction: column
         radius: none
         background: 'hg:bg-none'
-        flex_align: 'hg:self-center'
+        flex_align: 'center'
     -
       parent_uuid: 753ccbf4-3c96-4764-9503-ce5e53c05d89
       slot: group_slot
       uuid: 3edeb2c4-d827-4cd8-a855-982a0a34acc6
       component_id: sdc.mercury.button
-      component_version: c6067993360ffa7d
       inputs:
         variant: primary
         disabled: false
@@ -77,7 +64,6 @@ default:
       slot: group_slot
       uuid: b9174a0b-416b-43d3-9d69-d79289b3d340
       component_id: sdc.mercury.text
-      component_version: 8b4abbab93b01319
       inputs:
         text:
           value: '<p>Tuesday, Nov 28, 2025 at 2 PM EST</p>'
@@ -85,7 +71,6 @@ default:
     -
       uuid: 34ad3993-4f6c-4a43-b8ad-44384dbe47c9
       component_id: sdc.mercury.section
-      component_version: 459654892e3b3a4c
       inputs:
         columns: 33-33-33
         section_header: false
@@ -100,7 +85,6 @@ default:
       slot: main_slot
       uuid: 5e4c1b5c-7f56-4a86-a523-680b2fdff05f
       component_id: sdc.mercury.card
-      component_version: 1cc23bba50b15c46
       inputs:
         heading_text: 'Create Cards in Seconds'
         url: 'https://www.example.com'
@@ -114,7 +98,6 @@ default:
       slot: main_slot
       uuid: c1795556-6c2f-4a1c-a071-a57a64215e3f
       component_id: sdc.mercury.card
-      component_version: 1cc23bba50b15c46
       inputs:
         heading_text: 'See Every Transaction Live '
         level: 3
@@ -129,7 +112,6 @@ default:
       slot: main_slot
       uuid: ef3ab555-f33e-41c0-8e04-6f9a9a1ecd8b
       component_id: sdc.mercury.card
-      component_version: 1cc23bba50b15c46
       inputs:
         heading_text: 'Works With Your Current Stack'
         level: 3
@@ -142,7 +124,6 @@ default:
     -
       uuid: 4dba6548-f887-4f80-a0a4-0dcfe7f4cf92
       component_id: sdc.mercury.section
-      component_version: 459654892e3b3a4c
       inputs:
         columns: 50-50
         section_header: true
@@ -158,11 +139,10 @@ default:
       slot: header_slot
       uuid: 26dd2bf9-2042-4257-9f94-c202a3c78bd0
       component_id: sdc.mercury.group
-      component_version: f9fbff552f9aa8be
       inputs:
         flex_direction: column
         flex_gap: none
-        flex_align: 'hg:self-center'
+        flex_align: 'center'
         radius: none
         padding: sm
         background: 'hg:bg-none'
@@ -171,7 +151,6 @@ default:
       slot: group_slot
       uuid: 2a246858-3963-4b80-96bb-c97d72b07ba9
       component_id: sdc.mercury.heading
-      component_version: ba5083e2b0fb8b9e
       inputs:
         heading_text: 'Who should attend?'
         level: 2
@@ -182,7 +161,6 @@ default:
       slot: main_slot
       uuid: ae65ab05-9292-4309-9f8a-18fe1a5d14a8
       component_id: sdc.mercury.tile-icon
-      component_version: 0caacbb3728877d3
       inputs:
         text: 'Controllers & Finance Managers'
         description: 'Get complete visibility into spending with automated reporting & budget controls'
@@ -196,7 +174,6 @@ default:
       slot: main_slot
       uuid: 74551848-a349-493e-ae23-a69e4baef774
       component_id: sdc.mercury.tile-icon
-      component_version: 0caacbb3728877d3
       inputs:
         text: 'Staff Accountants & AP Teams'
         description: 'Eliminate manual expense report processing and reconciliation chaos  '
@@ -210,7 +187,6 @@ default:
       slot: main_slot
       uuid: 6e7e71ad-11ad-4b66-9041-e5d09544a213
       component_id: sdc.mercury.tile-icon
-      component_version: 0caacbb3728877d3
       inputs:
         text: 'Project Managers'
         description: 'Track project expenses in real-time and stay within budget with automated alerts'
@@ -224,7 +200,6 @@ default:
       slot: main_slot
       uuid: 3be4c380-dd71-41d6-a81d-27d57061e301
       component_id: sdc.mercury.tile-icon
-      component_version: 0caacbb3728877d3
       inputs:
         text: 'IT & Ops Teams'
         description: 'Manage software subscriptions and vendor payments with dedicated virtual cards'
@@ -236,7 +211,6 @@ default:
     -
       uuid: 9120eda7-5e5b-4af9-aeeb-763636cc2c1e
       component_id: sdc.mercury.section
-      component_version: 459654892e3b3a4c
       inputs:
         columns: 50-50
         section_header: true
@@ -252,11 +226,10 @@ default:
       slot: main_slot
       uuid: 2f6d7406-a2e7-4b6e-8c25-a2771a7d5f07
       component_id: sdc.mercury.group
-      component_version: f9fbff552f9aa8be
       inputs:
         flex_direction: column
         flex_gap: sm
-        flex_align: 'hg:self-center'
+        flex_align: 'center'
         radius: none
         padding: none
         background: 'hg:bg-none'
@@ -265,7 +238,6 @@ default:
       slot: group_slot
       uuid: f021f802-2ad1-4443-8778-674c7c70a05b
       component_id: sdc.mercury.text
-      component_version: 8b4abbab93b01319
       inputs:
         text:
           value: '<p>&nbsp;Tuesday, October 15th at 2 PM EST</p>'
@@ -276,7 +248,6 @@ default:
       slot: group_slot
       uuid: 76a7015a-b0f4-47a8-ba87-29805646c634
       component_id: sdc.mercury.heading
-      component_version: ba5083e2b0fb8b9e
       inputs:
         heading_text: "Reserve Your Spot: Exclusive Webinar with FinDrop' CEO"
         level: 2
@@ -287,7 +258,6 @@ default:
       slot: group_slot
       uuid: e011f7d2-5ea4-484e-a79d-0e193adb6015
       component_id: sdc.mercury.text
-      component_version: 8b4abbab93b01319
       inputs:
         text:
           value: '<p>Learn how TechFlow reduced their expense processing time by 80% using virtual corporate cards</p>'
@@ -298,7 +268,6 @@ default:
       slot: group_slot
       uuid: 312d3058-1978-4811-81e6-0fdc5417dfb3
       component_id: sdc.mercury.button
-      component_version: c6067993360ffa7d
       inputs:
         variant: primary
         disabled: false
@@ -312,7 +281,6 @@ default:
       slot: group_slot
       uuid: 8cccbe89-4e59-46b9-9cd1-a7f322871e4b
       component_id: sdc.mercury.text
-      component_version: 8b4abbab93b01319
       inputs:
         text:
           value: "<p><em>Limited to 200 attendees. Can't attend live? Register to receive the recording.</em></p>"
@@ -323,7 +291,6 @@ default:
       slot: main_slot
       uuid: 28f0d32e-7b19-4c9b-83a9-2a80c88ed2da
       component_id: sdc.mercury.image
-      component_version: d287c9eb7dcf48d9
       inputs:
         media:
           target_uuid: 0877ac26-4545-4e19-aa1c-c275dc509af2
