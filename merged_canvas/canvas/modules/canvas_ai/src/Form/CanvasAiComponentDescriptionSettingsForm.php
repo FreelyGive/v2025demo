@@ -99,6 +99,7 @@ final class CanvasAiComponentDescriptionSettingsForm extends ConfigFormBase {
         if (isset($available_components[$source]['components'][$component_id])) {
           // Replace the component description.
           $available_components[$source]['components'][$component_id]['description'] = $component_data_from_form['description'];
+          $available_components[$source]['components'][$component_id]['hidden'] = $component_data_from_form['hidden'];
 
           // Replace the props descriptions.
           if (isset($available_components[$source]['components'][$component_id]['props']) && is_array($available_components[$source]['components'][$component_id]['props'])) {
@@ -156,11 +157,20 @@ final class CanvasAiComponentDescriptionSettingsForm extends ConfigFormBase {
           '#title' => $component_data['name'],
         ];
 
+        $default_values = $this->getDefaultValues($source, $component_id);
+
+        $form[$source]['components'][$component_id]['hidden'] = [
+          '#type' => 'checkbox',
+          '#title' => $this->t('Hide Component for AI'),
+          '#description' => $this->t('If checked, this component will be hidden from the AI and not suggested for use.'),
+          '#default_value' => $default_values['hidden'] ?? FALSE,
+        ];
+
         // Component description element.
         $form[$source]['components'][$component_id]['description'] = [
           '#type' => 'textarea',
           '#title' => $this->t('Description'),
-          '#default_value' => is_null($this->getDefaultValue($source, $component_id)) ? $component_data['description'] : $this->getDefaultValue($source, $component_id),
+          '#default_value' => $default_values['description'] ?? $component_data['description'],
         ];
 
         // Description elements for each prop.
@@ -172,11 +182,12 @@ final class CanvasAiComponentDescriptionSettingsForm extends ConfigFormBase {
           ];
 
           foreach ($component_data['props'] as $prop_id => $prop_data) {
+            $prop_values = $this->getDefaultValues($source, $component_id, $prop_id, 'props');
             // @phpstan-ignore-next-line
             $form[$source]['components'][$component_id]['props'][$prop_id]['description'] = [
               '#type' => 'textarea',
               '#title' => $prop_data['name'],
-              '#default_value' => is_null($this->getDefaultValue($source, $component_id, $prop_id, 'props')) ? $prop_data['description'] : $this->getDefaultValue($source, $component_id, $prop_id, 'props'),
+              '#default_value' => $prop_values['description'] ?? $prop_data['description'],
             ];
           }
         }
@@ -189,16 +200,17 @@ final class CanvasAiComponentDescriptionSettingsForm extends ConfigFormBase {
           ];
 
           foreach ($component_data['slots'] as $slot_id => $slot_data) {
+            $slot_values = $this->getDefaultValues($source, $component_id, $slot_id, 'slots');
+
             // @phpstan-ignore-next-line
             $form[$source]['components'][$component_id]['slots'][$slot_id]['description'] = [
               '#type' => 'textarea',
               '#title' => $slot_data['name'],
-              '#default_value' => is_null($this->getDefaultValue($source, $component_id, $slot_id, 'slots')) ? $slot_data['description'] : $this->getDefaultValue($source, $component_id, $slot_id, 'slots'),
+              '#default_value' => $slot_values['description'] ?? $slot_data['description'],
             ];
           }
         }
       }
-
     }
     return $form;
   }
@@ -238,24 +250,23 @@ final class CanvasAiComponentDescriptionSettingsForm extends ConfigFormBase {
    * @param string $type
    *   The type: 'props' or 'slots'.
    *
-   * @return string|null
-   *   The default description value for the component, prop, or slot.
+   * @return array|null
+   *   The default data value for the component, prop, or slot.
    */
-  private function getDefaultValue(string $source, string $component_id, string $identifier = '', string $type = ''): ?string {
+  private function getDefaultValues(string $source, string $component_id, string $identifier = '', string $type = ''): ?array {
     $component_context_decoded = $this->getComponentContextData($source);
     if ($component_context_decoded) {
       if ($type && $identifier) {
-        // If type and identifier are provided, return the description for that
+        // If type and identifier are provided, return the data for that
         // specific prop or slot.
-        if (isset($component_context_decoded[$component_id][$type][$identifier]['description'])) {
-          return $component_context_decoded[$component_id][$type][$identifier]['description'];
+        if (isset($component_context_decoded[$component_id][$type][$identifier])) {
+          return $component_context_decoded[$component_id][$type][$identifier];
         }
-      }
-      else {
-        // If type and identifier are not provided, return the description for
+      } else {
+        // If type and identifier are not provided, return the data for
         // the component.
-        if (isset($component_context_decoded[$component_id]['description'])) {
-          return $component_context_decoded[$component_id]['description'];
+        if (isset($component_context_decoded[$component_id])) {
+          return $component_context_decoded[$component_id];
         }
       }
     }

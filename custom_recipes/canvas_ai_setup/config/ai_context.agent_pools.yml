@@ -5,12 +5,15 @@ agents:
     id: canvas_component_agent
     contexts: {  }
     always_include:
+      - component_generation
       - our_company
   -
     id: canvas_template_builder_agent
     contexts:
+      - component_generation
       - our_company
     always_include:
+      - component_generation
       - our_company
   -
     id: pexels_agent

@@ -1,0 +1,10 @@
+uuid: c4544927-fef9-4a05-a1c5-e3c195086494
+langcode: en
+status: true
+dependencies: {  }
+id: component_generation
+label: 'Component Generation'
+description: 'Some background of what to think about when generating components.'
+content: "IMPORTANT: When using sections - the columns/cards/group etc always goes into the main_slot, the header_slot only takes headings and the footer_slot only takes text. And always set the the sections header_slot to empty array `[]`, even when you want nothing in it.\r\n\r\nWhen you can choose different background colors or styles, choose the dark style. Specifically Accend Dark if available.\r\n\r\nWhen creating hero components use first a \"Hero billboard\", followed by a 1 (100) column padding-less section, with a vertical group with no padding inside the main slot, that has a button and a text under it. The button should be a clear CTA and the text instructions.\r\n\r\nWhen using cards, always put them in a section, and always set the columns to an even setting. So if you put 3 cards in main, use 33-33-33, if you put 4 use either 50-50 or 25-25-25-25.\r\n\r\nCards in sections should always use the framed style. Card should never be in a group in a section - it should be directly in the sections.\r\n\r\nWhen using icons, put them in a section component with 2 columns (50-50), make sure the section has padding top and bottom. The icons should be in the main slot. Always set a heading component in the header slot. \r\n\r\nButtons should always use primary variant."
+tags:
+  - '2'

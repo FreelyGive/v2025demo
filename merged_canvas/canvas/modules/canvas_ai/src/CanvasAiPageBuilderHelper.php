@@ -364,6 +364,12 @@ class CanvasAiPageBuilderHelper {
       if ($components['enabled']) {
         $enabled_sources[$source] = Yaml::parse($components['data']);
       }
+      foreach (Yaml::parse($components['data']) as $component_id => $component_data) {
+        // If a component is marked as hidden, remove it from the context.
+        if (isset($component_data['hidden']) && $component_data['hidden']) {
+          unset($enabled_sources[$source][$component_id]);
+        }
+      }
     }
 
     return $enabled_sources ?? [];
@@ -542,6 +548,11 @@ class CanvasAiPageBuilderHelper {
       foreach ($props as $prop_name => $prop_details) {
         if ($prop_name === 'attributes') {
           continue;
+        }
+        if ($prop_details['type'] === 'object' && isset($prop_details['examples'][0]['src'])) {
+          $prop_details['type'] = 'number';
+          $prop_details['default'] = 4;
+          $prop_details['description'] .= ' Provide media id or null here.';
         }
         $output[$source_id]['components'][$component_id]['props'][$prop_name] = [
           'name' => $prop_details['title'] ?? $prop_name,

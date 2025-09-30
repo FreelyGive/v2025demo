@@ -10,7 +10,7 @@ description: 'This sub-agent specializes in building templates for entire pages 
 system_prompt: |-
   You are an AI assistant specialized in creating complete web page templates by strategically placing available Components into designated regions. Your role encompasses creating page body content and optionally headers/footers when explicitly requested.
 
-  You are a looping agent meaning you can run multiple times till you get enough information to generate the required response and save the page template.
+  You are a looping agent meaning you can run multiple times till you get enough information to generate the required response and save the page template. YOU MUST ALWAYS SAVE A PAGE TEMPLATE, NOT GIVE SUGGESTIONS BACK.
 
   ## Core Responsibilities
 
@@ -19,6 +19,7 @@ system_prompt: |-
   - **Information Finder**: If there is a short explanation from the user on what to create, you can use the information finder tool to get more information by giving it semantic search words. You may use this as many times as necessary.
   - **Placeholder/Mockup Data**: If the user has requested you specifically to make up the text, then do so.
   - **Text provided**: If there is clear data provided on how to create the texts, you do neither have to do follow up questions or search for context.
+  - **Webforms**: If the user asks to create an webform, only allow the webform ids you know about and see if there is something similar to what they are asking for. If so, set this on the webform_id on the webform component.
 
   ### 1. Component Placement Strategy
   - **Primary Focus**: Place components in the 'content' region as the main page body structure
@@ -135,6 +136,7 @@ system_prompt: |-
   - DO NOT return the YAML in your output.
   - ALWAYS use the `set_template_data` tool to pass the YAML.
   - The `set_template_data` tool will return a JSON structure corresponding to the YAML when the template data is successfully saved.
+  - DO NOT assume the user is asking for information on what should be in the template. ALWAYS use the `set_template_data` tool at least once.
   - Treat the successful JSON response from the tool as confirmation that the template has been saved correctly.
   - If there are problems with the YAML reported by the tool, correct them and repeat the cycle until you receive the successful JSON response.
   - AFTER receiving the successful JSON response from the tool, output a short summary message in 1-2 sentences in plain text.
@@ -158,18 +160,12 @@ system_prompt: |-
 secured_system_prompt: '[ai_agent:agent_instructions]'
 tools:
   'canvas_ai:set_template_data': true
-  'ai_agent:list_config_entities': true
   'ai_search:rag_search': true
   'ai_agents::ai_agent::information_finder': true
 tool_settings:
   'canvas_ai:set_template_data':
     return_directly: 0
     description_override: ''
-    progress_message: ''
-    use_artifacts: 0
-  'ai_agent:list_config_entities':
-    return_directly: 0
-    description_override: 'Use this to list webform entities if needed to setup a webform.'
     progress_message: ''
     use_artifacts: 0
   'ai_search:rag_search':
@@ -196,13 +192,29 @@ default_information_tools: |
     description: 'These are the Components available to use'
     tool: 'canvas_ai:get_component_context'
     parameters: {  }
-  get_context:
-    label: 'Extra Context'
+  webforms:
+    label: 'Available Webforms'
+    description: 'These are the available webforms, if the end user wants to use webforms.'
+    tool: 'ai_agent:list_config_entities'
+    parameters:
+      entity_type: webform
+      fields:
+        - id
+        - title
+  get_context_company:
+    label: 'Extra Context Company'
     description: 'This is extra context to take into account'
     tool: 'ai_context:get_relevant_contexts'
     parameters:
       agent_id: canvas_template_builder_agent
       task: 'our company'
+  get_context_component:
+    label: 'Extra Context Component Generation'
+    description: 'This is extra context to take into account'
+    tool: 'ai_context:get_relevant_contexts'
+    parameters:
+      agent_id: canvas_template_builder_agent
+      task: component_generation
 tool_usage_limits:
   'canvas_ai:set_template_data':
     component_structure:
@@ -210,32 +222,6 @@ tool_usage_limits:
       hide_property: 0
       values: ''
     reference_component_nodepath:
-      action: ''
-      hide_property: 0
-      values: ''
-  'ai_agent:list_config_entities':
-    entity_type:
-      action: force_value
-      hide_property: 0
-      values:
-        - webform
-    amount:
-      action: ''
-      hide_property: 0
-      values: ''
-    offset:
-      action: ''
-      hide_property: 0
-      values: ''
-    fields:
-      action: ''
-      hide_property: 0
-      values: ''
-    sort_field:
-      action: ''
-      hide_property: 0
-      values: ''
-    sort_order:
       action: ''
       hide_property: 0
       values: ''
