@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies: {  }
 _core:
-  default_config_hash: S7R_19Lvwd3Eho_QOmfHAgiOmzzAarcX89r23ZJybrs
+  default_config_hash: r9ae9EempjEjy8oZybHGBn2aN6RMwB4aV1CFrZ5cdec
 id: canvas_template_builder_agent
 label: 'Canvas Template Builder Agent'
 description: 'This sub-agent specializes in building templates for entire pages using available components. It can also be used to generate headers and footers for pages. Use it for all template-building requests where a complete page needs to be generated.'
@@ -158,12 +158,18 @@ system_prompt: |-
 secured_system_prompt: '[ai_agent:agent_instructions]'
 tools:
   'canvas_ai:set_template_data': true
+  'ai_agent:list_config_entities': true
   'ai_search:rag_search': true
   'ai_agents::ai_agent::information_finder': true
 tool_settings:
   'canvas_ai:set_template_data':
     return_directly: 0
     description_override: ''
+    progress_message: ''
+    use_artifacts: 0
+  'ai_agent:list_config_entities':
+    return_directly: 0
+    description_override: 'Use this to list webform entities if needed to setup a webform.'
     progress_message: ''
     use_artifacts: 0
   'ai_search:rag_search':
@@ -204,6 +210,32 @@ tool_usage_limits:
       hide_property: 0
       values: ''
     reference_component_nodepath:
+      action: ''
+      hide_property: 0
+      values: ''
+  'ai_agent:list_config_entities':
+    entity_type:
+      action: force_value
+      hide_property: 0
+      values:
+        - webform
+    amount:
+      action: ''
+      hide_property: 0
+      values: ''
+    offset:
+      action: ''
+      hide_property: 0
+      values: ''
+    fields:
+      action: ''
+      hide_property: 0
+      values: ''
+    sort_field:
+      action: ''
+      hide_property: 0
+      values: ''
+    sort_order:
       action: ''
       hide_property: 0
       values: ''

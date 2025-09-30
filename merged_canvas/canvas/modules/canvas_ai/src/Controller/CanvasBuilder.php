@@ -439,6 +439,8 @@ final class CanvasBuilder extends ControllerBase {
       'canvas_component_agent' => $this->t('Generate a component'),
       'canvas_metadata_generation_agent' => $this->t('Generate metadata'),
       'canvas_page_builder_agent' => $this->t('Building the page'),
+      'information_finder' => $this->t('Looking for information'),
+      'canvas_template_builder_agent' => $this->t('Building the template'),
     ];
     return $descriptions[$agent_id] ?? $this->t('@agentName working', ['@agentName' => $agent_name]);
   }

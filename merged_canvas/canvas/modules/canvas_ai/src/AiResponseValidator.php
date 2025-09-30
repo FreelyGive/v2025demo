@@ -100,7 +100,11 @@ class AiResponseValidator {
         // later.
         $component = Component::load($componentId);
         $componentVersion = $component ? $component->getActiveVersion() : "temp-version-$componentUuid";
-        if ($component instanceof Component && !empty($componentData['props'])) {
+        if ($component instanceof Component && $component->get('source') === 'block' && !empty($componentData['props']['block_uuid'])) {
+          $componentVersion = Component::load($componentId)?->getActiveVersion() ?? "temp-version-$componentUuid";
+          $inputs = $componentData['props'] ?? [];
+        }
+        elseif ($component instanceof Component && !empty($componentData['props'])) {
           $source = $component->getComponentSource();
           $clientNormalized = $component->normalizeForClientSide()->values;
           $sources = $clientNormalized['propSources'];

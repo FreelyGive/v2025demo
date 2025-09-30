@@ -42,7 +42,7 @@ ddev composer require 'drupal/ai:1.2.x-dev@dev' \
 git clone git@git.drupal.org:project/ai_context.git web/modules/contrib/ai_context
 
 # Install simple AB split test
-ddev drush en ab_split_test page_cache_exclusion
+ddev drush en -y ab_split_test page_cache_exclusion
 
 ddev drush cr
 # Install the AI stuff.

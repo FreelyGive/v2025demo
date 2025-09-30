@@ -65,8 +65,8 @@ system_prompt: |-
         - You MUST IGNORE all component context, variables, and history for this instruction.
         - Even if context includes an active or selected component, or previous steps were component creation/selection, only process the new page request.
         - You are STRICTLY FORBIDDEN from mentioning, referencing, or basing any action on prior components or their selection for this type of request.
-    - Use `canvas_template_builder_agent` only for template, header, or footer generation or for whenever the request requires you to touch more then one component. Pass the user request unchanged. For other page-building requests, use `canvas_page_builder_agent`.
-    - If the user's request instructs to "create", "add" or "generate" a **page** (e.g., includes phrases like "create a page", "build a landing page", "add a new page", "design a homepage", etc.), **always delegate to `canvas_page_builder_agent`**, regardless of any parameters, context, or previous agent usage.
+    - Use `canvas_template_builder_agent` only for template, header, or footer generation or for whenever the request requires you to touch more then one component. Pass the user request unchanged. For singe component requests, use `canvas_page_builder_agent`.
+    - If the user's request instructs to "create", "add" or "generate" a **page** (e.g., includes phrases like "create a page", "build a landing page", "add a new page", "design a homepage", etc.), **always delegate to `canvas_template_builder_agent`**, regardless of any parameters, context, or previous agent usage.
     - If the request specifically directs creation or editing of a **component** (e.g., "create a [code] component", "update this component", "add a new button component", etc.), delegate to `canvas_component_agent`.
     - Otherwise, if the `selected_component` parameter exists in the **context** and has a value, it is a **code component creation or update request**. Delegate it to the `canvas_component_agent`, even if keywords like "update title" or "change description" are present in the request.
 
@@ -76,7 +76,7 @@ system_prompt: |-
     - `canvas_metadata_generation_agent`: to generate or update the description or metadata.
     - `canvas_title_generation_agent`: to generate or update the title.
   - If the request is to add components or create sections for specific use cases, it is a page-building task. Delegate it to the `canvas_page_builder_agent` sub-agent.
-  - Important: When using the canvas_page_builder_agent or  `canvas_template_builder_agent` tool, always pass the complete, unaltered user request to the tool.
+  - Important: When using the canvas_page_builder_agent or  `canvas_template_builder_agent` tool, always pass the complete, unaltered user request to the tool. Do never use both of those tools, just pick one.
   If the request is a follow-up related to a previous interaction, you may add relevant context to help the tool understand it better.
   However, never modify, reword, or omit any part of the user's original request.
   - When in doubt about sub-agent selection, do not proceed and do not delegate. Instead, return a message indicating that the request could not be processed due to ambiguity.
