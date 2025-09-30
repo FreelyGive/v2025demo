@@ -36,7 +36,7 @@ component_tree:
     slot: blog_media
     uuid: 59a40305-ae72-4f38-b1fd-19e1513faf13
     component_id: sdc.mercury.image
-    component_version: 89488ed1ef93a9e4
+    component_version: d287c9eb7dcf48d9
     inputs:
       media:
         sourceType: dynamic
@@ -56,7 +56,7 @@ component_tree:
     slot: main_slot
     uuid: caa1e4b2-d58b-4140-b99b-ab3e1ce55ad5
     component_id: sdc.mercury.text
-    component_version: 8b4abbab93b01319
+    component_version: 68cbd40758003975
     inputs:
       text:
         sourceType: dynamic

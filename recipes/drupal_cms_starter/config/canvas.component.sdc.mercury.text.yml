@@ -8,7 +8,7 @@ dependencies:
     - text
   theme:
     - mercury
-active_version: 8b4abbab93b01319
+active_version: 68cbd40758003975
 versioned_properties:
   active:
     settings:
@@ -51,4 +51,4 @@ id: sdc.mercury.text
 provider: mercury
 source: sdc
 source_local_id: 'mercury:text'
-category: Components
+category: Base

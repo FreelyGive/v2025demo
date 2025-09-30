@@ -22,7 +22,7 @@ component_tree:
   -
     uuid: f08be9dc-e328-4cb7-9499-df6db9bd8900
     component_id: sdc.mercury.heading
-    component_version: e5a9fae10ccddfda
+    component_version: 452a1d7184fbf28f
     inputs:
       heading_text:
         sourceType: dynamic
@@ -32,7 +32,7 @@ component_tree:
       url: 'No URL'
   - uuid: caa1e4b2-d58b-4140-b99b-ab3e1ce55ad5
     component_id: sdc.mercury.text
-    component_version: 8b4abbab93b01319
+    component_version: 68cbd40758003975
     inputs:
       text:
         sourceType: dynamic

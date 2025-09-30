@@ -2,16 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Drupal\Tests\drupal_cms_template_saas_product\Functional;
+namespace Drupal\Tests\byte\Functional;
 
 use Composer\InstalledVersions;
 use Drupal\canvas\JsonSchemaDefinitionsStreamwrapper;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\FunctionalTests\Core\Recipe\RecipeTestTrait;
 use Drupal\Tests\BrowserTestBase;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\IgnoreDeprecations;
 
-#[Group('drupal_cms_template_saas_product')]
+#[Group('byte')]
 #[IgnoreDeprecations]
 final class SiteTemplateTest extends BrowserTestBase {
 
@@ -22,8 +23,16 @@ final class SiteTemplateTest extends BrowserTestBase {
    */
   protected $defaultTheme = 'stark';
 
+  /**
+   * {@inheritdoc}
+   */
+  protected static $configSchemaCheckerExclusions = [
+    // Sitemap module has a config schema problem that is not yet resolved.
+    'canvas.component.block.sitemap_syndicate',
+  ];
+
   public function testSiteTemplate(): void {
-    $dir = InstalledVersions::getInstallPath('drupal/drupal_cms_template_saas_product');
+    $dir = InstalledVersions::getInstallPath('drupal/byte');
     // This is a site template, and therefore meant to be applied only once.
     $this->applyRecipe($dir);
 
@@ -34,6 +43,16 @@ final class SiteTemplateTest extends BrowserTestBase {
       $this->drupalGet($path);
       $assert_session->statusCodeEquals(200);
     });
+
+    // Ensure all content is renderable without errors.
+    $content = $this->container->get(EntityTypeManagerInterface::class)
+      ->getStorage('node')
+      ->loadMultiple();
+    /** @var \Drupal\node\NodeInterface $node */
+    foreach ($content as $node) {
+      $this->drupalGet($node->toUrl());
+      $this->assertLessThan(500, $this->getSession()->getStatusCode());
+    }
   }
 
   /**
