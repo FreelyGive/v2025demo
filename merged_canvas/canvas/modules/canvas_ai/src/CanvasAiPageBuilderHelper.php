@@ -789,7 +789,7 @@ class CanvasAiPageBuilderHelper {
               $slot_index,
               $components,
               $global_index,
-              array_merge($node_path, [array_search($slot_name, array_keys($component_data['slots']))])
+              array_merge($node_path, [$this->getSlotIndexFromSlotName($slot_name, $component_type)])
             );
           }
         }
