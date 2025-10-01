@@ -4,9 +4,15 @@ _meta:
   uuid: 99464e3a-63fa-43a3-b3c0-5110eea4ad12
   default_langcode: en
   depends:
+    c181bf30-cf86-4a70-bc5e-43cbdb0a9288: file
+    b9ca6761-d26e-4c06-9947-a78d2f37cc0c: media
+    0fc51fec-6815-47f5-a978-df01e771c22a: file
     bef8f74c-852b-4eed-984e-4bc2a75e8bd3: media
+    d48d3cc5-5ae8-43ff-9742-a2fdcff430d8: file
     5005f597-1a87-4847-8d7d-76a9ef868fa2: media
+    b38beb47-f637-468a-8385-a206265ed349: file
     0877ac26-4545-4e19-aa1c-c275dc509af2: media
+    1da4e9bd-ce4a-442d-9e14-98e69bf4f15b: file
     f4bf4e5a-32c3-440c-818b-369bc2bbbd41: media
 default:
   revision_user:
@@ -20,34 +26,52 @@ default:
       target_id: 1
   title:
     -
-      value: 'Awesome Drupal Canvas Demo'
+      value: 'Virtual Summit Registration '
   components:
     -
-      uuid: b102920a-fa39-4ccc-8a85-90f6e225246e
-      component_id: sdc.mercury.section
+      uuid: 5a8be225-8a7c-45dd-8dda-42036cc01bbf
+      component_id: sdc.mercury.hero-billboard
       inputs:
-        columns: '100'
-        section_header: false
-        section_footer: false
-        margin_block_start: '0'
-        margin_block_end: '96'
-        padding_block_start: '0'
-        padding_block_end: '64'
-        width: 'hg:lg:max-w-full'
-        background: 'hg:bg-accent-dark'
+        height: 'hg:h-dvh'
+        flex_position: 'hg:justify-end'
+        overlay_opacity: 'hg:bg-black/40'
+        object_position: 'hg:object-center'
+        media:
+          target_id: '157'
     -
-      parent_uuid: b102920a-fa39-4ccc-8a85-90f6e225246e
-      slot: main_slot
-      uuid: 753ccbf4-3c96-4764-9503-ce5e53c05d89
-      component_id: sdc.mercury.group
+      parent_uuid: 5a8be225-8a7c-45dd-8dda-42036cc01bbf
+      slot: hero_slot
+      uuid: 1d5b01f4-fc00-48e3-ac2e-857f951a618e
+      component_id: sdc.mercury.text
       inputs:
-        flex_direction: column
-        radius: none
-        background: 'hg:bg-none'
-        flex_align: 'center'
+        text:
+          value: '<p><strong>Virtual Summit 2025</strong></p>'
+        font_size_multiplier: text-scale-150
+        font_color: text-inherit
     -
-      parent_uuid: 753ccbf4-3c96-4764-9503-ce5e53c05d89
-      slot: group_slot
+      parent_uuid: 5a8be225-8a7c-45dd-8dda-42036cc01bbf
+      slot: hero_slot
+      uuid: ba211fed-33f6-4a0d-b084-2902862e5b29
+      component_id: sdc.mercury.heading
+      inputs:
+        heading_text: "Stop Chasing Down Expense Reports &\_Receipts"
+        level: 1
+        font_size: default
+        font_color: text-inherit
+        align: left
+    -
+      parent_uuid: 5a8be225-8a7c-45dd-8dda-42036cc01bbf
+      slot: hero_slot
+      uuid: 1793e362-fa29-4d4a-ba05-e8b37fe54b4c
+      component_id: sdc.mercury.text
+      inputs:
+        text:
+          value: '<p>Join 200+ finance leaders to discover how FinDrop cut expense processing time by 80% with virtual corporate cards and automated workflows.</p>'
+        font_size_multiplier: text-scale-150
+        font_color: text-inherit
+    -
+      parent_uuid: 5a8be225-8a7c-45dd-8dda-42036cc01bbf
+      slot: hero_slot
       uuid: 3edeb2c4-d827-4cd8-a855-982a0a34acc6
       component_id: sdc.mercury.button
       inputs:
@@ -55,12 +79,12 @@ default:
         disabled: false
         label: 'Reserve Your Spot'
         size: large
-        icon: user-plus
+        icon: download
         icon_first: true
         href: '#register'
     -
-      parent_uuid: 753ccbf4-3c96-4764-9503-ce5e53c05d89
-      slot: group_slot
+      parent_uuid: 5a8be225-8a7c-45dd-8dda-42036cc01bbf
+      slot: hero_slot
       uuid: b9174a0b-416b-43d3-9d69-d79289b3d340
       component_id: sdc.mercury.text
       inputs:
@@ -87,9 +111,9 @@ default:
       inputs:
         heading_text: 'Create Cards in Seconds'
         level: 3
-        url: 'https://www.example.com'
+        url: '#'
         media:
-          target_uuid: bef8f74c-852b-4eed-984e-4bc2a75e8bd3
+          target_id: '165'
         text: 'Generate virtual cards instantly with custom spending limits and merchant restrictions'
         style: framed
         orientation: stacked
@@ -101,9 +125,9 @@ default:
       inputs:
         heading_text: 'See Every Transaction Live '
         level: 3
-        url: 'https://www.example.com'
+        url: '#'
         media:
-          target_uuid: 5005f597-1a87-4847-8d7d-76a9ef868fa2
+          target_id: '79'
         text: 'Monitor all company spending in real-time with automatic receipt capture'
         style: framed
         orientation: stacked
@@ -113,11 +137,11 @@ default:
       uuid: ef3ab555-f33e-41c0-8e04-6f9a9a1ecd8b
       component_id: sdc.mercury.card
       inputs:
-        heading_text: 'Works With Your Current Stack'
+        heading_text: 'Works in Your Current Stack'
         level: 3
-        url: 'https://www.example.com'
+        url: '#'
         media:
-          target_uuid: 0877ac26-4545-4e19-aa1c-c275dc509af2
+          target_id: '23'
         text: 'Instantly categorizes transactions and syncs with QuickBooks, NetSuite, and 50+ platforms.'
         style: framed
         orientation: stacked
@@ -132,8 +156,7 @@ default:
         margin_block_end: '48'
         padding_block_start: '0'
         padding_block_end: '0'
-        width: 'hg:lg:max-w-1/2'
-        background: 'hg:bg-none'
+        width: 'hg:lg:max-w-3/4'
     -
       parent_uuid: 4dba6548-f887-4f80-a0a4-0dcfe7f4cf92
       slot: header_slot
@@ -142,7 +165,7 @@ default:
       inputs:
         flex_direction: column
         flex_gap: none
-        flex_align: 'center'
+        flex_align: center
         radius: none
         padding: sm
         background: 'hg:bg-none'
@@ -162,26 +185,32 @@ default:
       uuid: ae65ab05-9292-4309-9f8a-18fe1a5d14a8
       component_id: sdc.mercury.tile-icon
       inputs:
-        text: 'Controllers & Finance Managers'
-        description: 'Get complete visibility into company spending with automated reporting and budget controls'
+        text: "Controllers &\_Finance\_Managers"
+        description:
+          value: 'Get complete visibility into company spending with automated reporting and budget controls'
         border: true
-        icon: ph-user-plus
+        icon: chart-line
         icon_align: 'hg:justify-center'
-        tile_size: 'hg:aspect-4/3'
-        url: '#'
+        tile_size: 'hg:aspect-16/9'
+        background: true
+        icon_size: 'hg:text-6xl'
+        border_radius: 'hg:rounded-[24px] hg:md:rounded-[32px]'
     -
       parent_uuid: 4dba6548-f887-4f80-a0a4-0dcfe7f4cf92
       slot: main_slot
       uuid: 74551848-a349-493e-ae23-a69e4baef774
       component_id: sdc.mercury.tile-icon
       inputs:
-        text: 'Staff Accountants & AP Teams'
-        description: 'Eliminate manual expense report processing and month-end reconciliation chaos  '
+        text: "Staff Accountants &\_AP\_Teams"
+        description:
+          value: 'Eliminate manual expense report processing and month-end reconciliation chaos  '
         border: true
-        icon: ph-user-plus
+        icon: invoice
         icon_align: 'hg:justify-center'
-        tile_size: 'hg:aspect-4/3'
-        url: '#'
+        tile_size: 'hg:aspect-16/9'
+        background: true
+        icon_size: 'hg:text-6xl'
+        border_radius: 'hg:rounded-[24px] hg:md:rounded-[32px]'
     -
       parent_uuid: 4dba6548-f887-4f80-a0a4-0dcfe7f4cf92
       slot: main_slot
@@ -189,12 +218,15 @@ default:
       component_id: sdc.mercury.tile-icon
       inputs:
         text: 'Project Managers'
-        description: 'Track project expenses in real-time and stay within budget with automated alerts'
+        description:
+          value: 'Track project expenses in real-time and stay within budget with automated alerts'
         border: true
-        icon: ph-user-plus
+        icon: gauge
         icon_align: 'hg:justify-center'
-        tile_size: 'hg:aspect-4/3'
-        url: '#'
+        tile_size: 'hg:aspect-16/9'
+        background: true
+        icon_size: 'hg:text-6xl'
+        border_radius: 'hg:rounded-[24px] hg:md:rounded-[32px]'
     -
       parent_uuid: 4dba6548-f887-4f80-a0a4-0dcfe7f4cf92
       slot: main_slot
@@ -202,50 +234,40 @@ default:
       component_id: sdc.mercury.tile-icon
       inputs:
         text: 'IT & Ops Teams'
-        description: 'Manage software subscriptions and vendor payments with dedicated virtual cards'
+        description:
+          value: 'Manage software subscriptions and vendor payments with dedicated virtual cards'
         border: true
-        icon: ph-user-plus
+        icon: cpu
         icon_align: 'hg:justify-center'
-        tile_size: 'hg:aspect-4/3'
-        url: '#'
+        tile_size: 'hg:aspect-16/9'
+        background: true
+        icon_size: 'hg:text-6xl'
+        border_radius: 'hg:rounded-[24px] hg:md:rounded-[32px]'
     -
       uuid: 9120eda7-5e5b-4af9-aeeb-763636cc2c1e
       component_id: sdc.mercury.section
       inputs:
         columns: 50-50
         section_header: true
-        section_footer: true
+        section_footer: false
         margin_block_start: '96'
         margin_block_end: '48'
-        padding_block_start: '32'
-        padding_block_end: '32'
-        width: 'hg:lg:max-w-full'
-        background: 'hg:bg-accent-dark'
+        padding_block_start: '64'
+        padding_block_end: '64'
+        width: 'hg:lg:max-w-3/4'
     -
       parent_uuid: 9120eda7-5e5b-4af9-aeeb-763636cc2c1e
-      slot: main_slot
-      uuid: 2f6d7406-a2e7-4b6e-8c25-a2771a7d5f07
-      component_id: sdc.mercury.group
-      inputs:
-        flex_direction: column
-        flex_gap: sm
-        flex_align: 'center'
-        radius: none
-        padding: none
-        background: 'hg:bg-none'
-    -
-      parent_uuid: 2f6d7406-a2e7-4b6e-8c25-a2771a7d5f07
-      slot: group_slot
+      slot: header_slot
       uuid: f021f802-2ad1-4443-8778-674c7c70a05b
       component_id: sdc.mercury.text
       inputs:
         text:
-          value: '<p>&nbsp;Tuesday, October 15th at 2 PM EST</p>'
+          value: '<p><strong>&nbsp;Tuesday, October 15th at 2 PM EST</strong></p>'
         font_size_multiplier: text-scale-150
         font_color: text-inherit
     -
-      parent_uuid: 2f6d7406-a2e7-4b6e-8c25-a2771a7d5f07
-      slot: group_slot
+      parent_uuid: 9120eda7-5e5b-4af9-aeeb-763636cc2c1e
+      slot: header_slot
       uuid: 76a7015a-b0f4-47a8-ba87-29805646c634
       component_id: sdc.mercury.heading
       inputs:
@@ -254,28 +276,39 @@ default:
         font_size: default
         align: left
     -
-      parent_uuid: 2f6d7406-a2e7-4b6e-8c25-a2771a7d5f07
-      slot: group_slot
-      uuid: e011f7d2-5ea4-484e-a79d-0e193adb6015
+      parent_uuid: 9120eda7-5e5b-4af9-aeeb-763636cc2c1e
+      slot: header_slot
+      uuid: 5411b52d-87f6-43a3-8399-9f9e29288f88
       component_id: sdc.mercury.text
       inputs:
         text:
-          value: '<p>Learn how TechFlow reduced their expense processing time by 80% using virtual corporate cards</p>'
+          value: '<p>Learn how to reduce expense processing time by 80% using virtual corporate cards.</p>'
         font_size_multiplier: text-scale-150
         font_color: text-inherit
     -
+      parent_uuid: 9120eda7-5e5b-4af9-aeeb-763636cc2c1e
+      slot: main_slot
+      uuid: 2f6d7406-a2e7-4b6e-8c25-a2771a7d5f07
+      component_id: sdc.mercury.group
+      inputs:
+        flex_direction: column
+        flex_gap: sm
+        flex_align: start
+        radius: none
+        padding: none
+        background: 'hg:bg-none'
+    -
       parent_uuid: 2f6d7406-a2e7-4b6e-8c25-a2771a7d5f07
       slot: group_slot
-      uuid: 312d3058-1978-4811-81e6-0fdc5417dfb3
-      component_id: sdc.mercury.button
+      uuid: f73170ef-0b25-4d7f-92ec-8005e5a43080
+      component_id: block.webform_block
       inputs:
-        variant: primary
-        disabled: false
-        label: 'Reserve Your Spot'
-        size: large
-        icon: user-plus
-        icon_first: true
-        href: '#register'
+        label: Webform
+        label_display: '0'
+        webform_id: virtualfintechsummit2025
+        default_data: ''
+        redirect: false
+        lazy: false
     -
       parent_uuid: 2f6d7406-a2e7-4b6e-8c25-a2771a7d5f07
       slot: group_slot
@@ -289,16 +322,28 @@ default:
     -
       parent_uuid: 9120eda7-5e5b-4af9-aeeb-763636cc2c1e
       slot: main_slot
+      uuid: ddef1349-0e75-4917-b2d9-de59761b92b4
+      component_id: sdc.mercury.group
+      inputs:
+        flex_direction: column
+        flex_gap: none
+        flex_align: start
+        radius: none
+        padding: none
+        background: 'hg:bg-none'
+    -
+      parent_uuid: ddef1349-0e75-4917-b2d9-de59761b92b4
+      slot: group_slot
       uuid: 28f0d32e-7b19-4c9b-83a9-2a80c88ed2da
       component_id: sdc.mercury.image
       inputs:
         media:
-          target_uuid: f4bf4e5a-32c3-440c-818b-369bc2bbbd41
-        size: 'hg:aspect-4/3'
+          target_id: '201'
+        size: 'hg:aspect-1/1'
         radius: 'hg:rounded-sm'
   path:
     -
-      alias: /demo
+      alias: /virtual-summit-registration
       langcode: en
   created:
     -
@@ -306,3 +351,6 @@ default:
   revision_translation_affected:
     -
       value: true
+  metatags:
+    -
+      value: '{"description":"[canvas_page:description]","title":"[canvas_page:title] | [site:name]"}'

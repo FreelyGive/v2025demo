@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: d48d3cc5-5ae8-43ff-9742-a2fdcff430d8
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: findrop_phone-horizontal-lines.png
+  uri:
+    -
+      value: 'public://2025-09/findrop_phone-horizontal-lines.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 1545651
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1758760308

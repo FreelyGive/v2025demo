@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 38a6be95-32ac-4439-add5-34906e771c51
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: FIDrop_product_mockup.png
+  uri:
+    -
+      value: 'public://2025-09/FIDrop_product_mockup.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 1768001
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1759286773

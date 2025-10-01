@@ -99,3 +99,5 @@ patches.lock.json
 .DS_Store
 eca.model.*.yml
 /.ddev/milvus
+
+/test

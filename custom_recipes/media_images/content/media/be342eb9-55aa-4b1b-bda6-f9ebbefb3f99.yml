@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: be342eb9-55aa-4b1b-bda6-f9ebbefb3f99
+  bundle: image
+  default_langcode: en
+  depends:
+    38a6be95-32ac-4439-add5-34906e771c51: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: FIDrop_product_mockup.png
+  created:
+    -
+      value: 1759286773
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'The image is a realistic photo of a modern office setting featuring a person sitting in the background, possibly working, with their focus directed away from the camera. This individual appears young, with short dark hair, and dressed in a dark sweater, contributing to a professional and concentrated mood. The foreground is dominated by a large computer monitor displaying a rich blue and green-themed product interface titled "FinDrop", showcasing various financial data visuals such as charts and graphs. The background consists of a softly lit office space, with large windows casting natural light and creating a calm and efficient atmosphere. On the desk, there are two small potted plants, enhancing the workspace''s modern and clean aesthetic. This combination of vibrant digital graphics against a sleek office backdrop creates a dynamic yet professional ambiance.'
+  field_media_image:
+    -
+      alt: 'A detailed FinDrop product dashboard mockup displayed on an iMac screen in a modern, open-concept office setting.'
+      title: ''
+      width: 1024
+      height: 1024
+      entity: 38a6be95-32ac-4439-add5-34906e771c51

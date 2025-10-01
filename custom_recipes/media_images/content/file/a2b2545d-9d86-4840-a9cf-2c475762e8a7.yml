@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: a2b2545d-9d86-4840-a9cf-2c475762e8a7
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: FinDrop_Report_angle_cover_blue-black-background.png
+  uri:
+    -
+      value: 'public://2025-09/FinDrop_Report_angle_cover_blue-black-background.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 1518907
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1759272770

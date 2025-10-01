@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: c16d0d1d-e751-4af9-b1ee-bf533723bf96
+  bundle: image
+  default_langcode: en
+  depends:
+    62cbbf8c-85c8-4373-9d0d-da025a96976f: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: woman-reading-report.png
+  created:
+    -
+      value: 1759272530
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: "The image is a photo depicting a woman reading a report in an office setting. The background is composed of neutral tones, predominantly white and grey, lending a professional and calm atmosphere. The woman appears to be of Asian descent, dressed in a dark suit, and is focused on the report, suggesting concentration and engagement. The report has a dark cover with a modern design, indicating it's a business or corporate document. In the background, there are colleagues seated at desks, hinting at a collaborative work environment. The overall mood is serious yet productive, capturing a typical day in a professional office space. The presence of laptops and office desks further emphasizes the workplace context."
+  field_media_image:
+    -
+      alt: 'Woman Reading The State of Corporate Spend Management Report'
+      title: ''
+      width: 1024
+      height: 1024
+      entity: 62cbbf8c-85c8-4373-9d0d-da025a96976f

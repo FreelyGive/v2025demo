@@ -1,0 +1,41 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 7c191da5-f092-43cd-980b-794a555a8f53
+  bundle: image
+  default_langcode: en
+  depends:
+    a2b2545d-9d86-4840-a9cf-2c475762e8a7: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: FinDrop_Report_angle_cover_blue-black-background.png
+  created:
+    -
+      value: 1759272770
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  ai_automator_status:
+    -
+      value: finished
+  field_image_description:
+    -
+      value: 'This image is a sleek graphic design, featuring a dark blue and black background that creates a professional and modern atmosphere. The central focus is on a glossy report cover titled "The State of Corporate Spend Management 2026 Research Report," suggesting a theme of finance and business. The cover showcases dynamic, flowing lines in teal, hinting at data flow or network connections, adding a sense of innovation and technology. No people are present in the image, keeping the focus entirely on the report and its contents. The overall mood is serious and informative, aimed at a corporate audience. The composition is clean and minimalist, emphasizing professionalism.'
+  field_media_image:
+    -
+      alt: 'Book with text: The State of Corporate Spend Management 2026 Research Report'
+      title: ''
+      width: 1024
+      height: 1024
+      entity: a2b2545d-9d86-4840-a9cf-2c475762e8a7

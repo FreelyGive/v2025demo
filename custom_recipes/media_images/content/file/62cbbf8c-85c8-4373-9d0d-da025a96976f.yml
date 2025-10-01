@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 62cbbf8c-85c8-4373-9d0d-da025a96976f
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: woman-reading-report.png
+  uri:
+    -
+      value: 'public://2025-09/woman-reading-report.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 1808717
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1759272530

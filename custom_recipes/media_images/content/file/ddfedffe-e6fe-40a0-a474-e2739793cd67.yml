@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: ddfedffe-e6fe-40a0-a474-e2739793cd67
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: sarah_michel.png
+  uri:
+    -
+      value: 'public://2025-09/sarah_michel.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 1921584
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1759287110
