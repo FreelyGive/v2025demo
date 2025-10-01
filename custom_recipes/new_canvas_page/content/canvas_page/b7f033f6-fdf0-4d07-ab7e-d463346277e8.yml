@@ -37,7 +37,7 @@ default:
         slot_flex_direction: 'hg:flex-col'
         slot_flex_gap: 'hg:gap-4'
         media:
-          target_id: '208'
+          target_uuid: 7c191da5-f092-43cd-980b-794a555a8f53
     -
       parent_uuid: 2349538d-0c0d-4a0b-a898-c5f8bba2852b
       slot: hero_slot
@@ -428,7 +428,7 @@ default:
       component_id: sdc.mercury.image
       inputs:
         media:
-          target_id: '206'
+          target_uuid: c16d0d1d-e751-4af9-b1ee-bf533723bf96
         size: 'hg:aspect-1/1'
         radius: 'hg:rounded-sm'
   path:

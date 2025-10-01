@@ -1,7 +1,7 @@
 _meta:
   version: '1.0'
   entity_type: file
-  uuid: ddfedffe-e6fe-40a0-a474-e2739793cd67
+  uuid: 881306db-f10d-4a85-bdea-e86c618e288b
   default_langcode: en
 default:
   uid:
@@ -9,19 +9,19 @@ default:
       target_id: 1
   filename:
     -
-      value: sarah_michel.png
+      value: sarah-michel.jpg
   uri:
     -
-      value: 'public://2025-09/sarah_michel.png'
+      value: 'public://2025-10/sarah-michel.jpg'
   filemime:
     -
-      value: image/png
+      value: image/jpeg
   filesize:
     -
-      value: 1921584
+      value: 60026
   status:
     -
       value: true
   created:
     -
-      value: 1759287110
+      value: 1759311165

@@ -6,7 +6,6 @@ _meta:
   depends:
     c181bf30-cf86-4a70-bc5e-43cbdb0a9288: file
     b9ca6761-d26e-4c06-9947-a78d2f37cc0c: media
-    ddfedffe-e6fe-40a0-a474-e2739793cd67: file
     1e2d803f-d28c-415c-8cc7-4c4e90632c76: media
     38a6be95-32ac-4439-add5-34906e771c51: file
     be342eb9-55aa-4b1b-bda6-f9ebbefb3f99: media
@@ -33,7 +32,7 @@ default:
         overlay_opacity: 'hg:bg-black/40'
         object_position: 'hg:object-center'
         media:
-          target_id: '157'
+          target_uuid: b9ca6761-d26e-4c06-9947-a78d2f37cc0c
     -
       parent_uuid: 6d27f4a4-ee88-48e1-86f0-7a825ef95fbc
       slot: hero_slot
@@ -184,7 +183,7 @@ default:
         cite_text: 'CFO, TechFlow '
         align: center
         media:
-          src: '210'
+          target_uuid: 1e2d803f-d28c-415c-8cc7-4c4e90632c76
     -
       uuid: 9120eda7-5e5b-4af9-aeeb-763636cc2c1e
       component_id: sdc.mercury.section
@@ -282,7 +281,7 @@ default:
       component_id: sdc.mercury.image
       inputs:
         media:
-          target_id: '209'
+          target_uuid: be342eb9-55aa-4b1b-bda6-f9ebbefb3f99
         radius: 'hg:rounded-sm'
   path:
     -

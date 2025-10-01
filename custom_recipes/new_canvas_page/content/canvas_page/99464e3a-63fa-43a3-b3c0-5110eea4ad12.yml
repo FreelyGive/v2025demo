@@ -37,7 +37,7 @@ default:
         overlay_opacity: 'hg:bg-black/40'
         object_position: 'hg:object-center'
         media:
-          target_id: '157'
+          target_uuid: b9ca6761-d26e-4c06-9947-a78d2f37cc0c
     -
       parent_uuid: 5a8be225-8a7c-45dd-8dda-42036cc01bbf
       slot: hero_slot
@@ -113,7 +113,7 @@ default:
         level: 3
         url: '#'
         media:
-          target_id: '165'
+          target_uuid: bef8f74c-852b-4eed-984e-4bc2a75e8bd3
         text: 'Generate virtual cards instantly with custom spending limits and merchant restrictions'
         style: framed
         orientation: stacked
@@ -127,7 +127,7 @@ default:
         level: 3
         url: '#'
         media:
-          target_id: '79'
+          target_uuid: 5005f597-1a87-4847-8d7d-76a9ef868fa2
         text: 'Monitor all company spending in real-time with automatic receipt capture'
         style: framed
         orientation: stacked
@@ -141,7 +141,7 @@ default:
         level: 3
         url: '#'
         media:
-          target_id: '23'
+          target_uuid: 0877ac26-4545-4e19-aa1c-c275dc509af2
         text: 'Instantly categorizes transactions and syncs with QuickBooks, NetSuite, and 50+ platforms.'
         style: framed
         orientation: stacked
@@ -338,7 +338,7 @@ default:
       component_id: sdc.mercury.image
       inputs:
         media:
-          target_id: '201'
+          target_uuid: f4bf4e5a-32c3-440c-818b-369bc2bbbd41
         size: 'hg:aspect-1/1'
         radius: 'hg:rounded-sm'
   path:
