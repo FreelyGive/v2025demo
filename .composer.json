@@ -1,0 +1,258 @@
+{
+    "name": "drupal/cms",
+    "version": "2.x-dev",
+    "description": "Drupal CMS is a ready-to-use platform built on Drupal core, offering smart defaults to get started quickly and enterprise-grade tools for marketers, designers, and content creators.",
+    "type": "project",
+    "license": "GPL-2.0-or-later",
+    "homepage": "https://www.drupal.org/project/cms",
+    "support": {
+        "docs": "https://new.drupal.org/docs/drupal-cms",
+        "chat": "https://drupal.org/node/314178"
+    },
+    "repositories": {
+        "accessibility_tools": {
+            "type": "path",
+            "url": "recipes/drupal_cms_accessibility_tools"
+        },
+        "admin_ui": {
+            "type": "path",
+            "url": "recipes/drupal_cms_admin_ui"
+        },
+        "ai": {
+            "type": "path",
+            "url": "recipes/drupal_cms_ai"
+        },
+        "anti_spam": {
+            "type": "path",
+            "url": "recipes/drupal_cms_anti_spam"
+        },
+        "authentication": {
+            "type": "path",
+            "url": "recipes/drupal_cms_authentication"
+        },
+        "blog": {
+            "type": "path",
+            "url": "recipes/drupal_cms_blog"
+        },
+        "case_study": {
+            "type": "path",
+            "url": "recipes/drupal_cms_case_study"
+        },
+        "content_type_base": {
+            "type": "path",
+            "url": "recipes/drupal_cms_content_type_base"
+        },
+        "events": {
+            "type": "path",
+            "url": "recipes/drupal_cms_events"
+        },
+        "forms": {
+            "type": "path",
+            "url": "recipes/drupal_cms_forms"
+        },
+        "google_analytics": {
+            "type": "path",
+            "url": "recipes/drupal_cms_google_analytics"
+        },
+        "helper": {
+            "type": "path",
+            "url": "drupal_cms_helper"
+        },
+        "image": {
+            "type": "path",
+            "url": "recipes/drupal_cms_image"
+        },
+        "news": {
+            "type": "path",
+            "url": "recipes/drupal_cms_news"
+        },
+        "page": {
+            "type": "path",
+            "url": "recipes/drupal_cms_page"
+        },
+        "person": {
+            "type": "path",
+            "url": "recipes/drupal_cms_person"
+        },
+        "privacy_basic": {
+            "type": "path",
+            "url": "recipes/drupal_cms_privacy_basic"
+        },
+        "project": {
+            "type": "path",
+            "url": "recipes/drupal_cms_project"
+        },
+        "remote_video": {
+            "type": "path",
+            "url": "recipes/drupal_cms_remote_video"
+        },
+        "search": {
+            "type": "path",
+            "url": "recipes/drupal_cms_search"
+        },
+        "seo_basic": {
+            "type": "path",
+            "url": "recipes/drupal_cms_seo_basic"
+        },
+        "seo_tools": {
+            "type": "path",
+            "url": "recipes/drupal_cms_seo_tools"
+        },
+        "starter": {
+            "type": "path",
+            "url": "recipes/drupal_cms_starter"
+        },
+        "byte": {
+            "type": "path",
+            "url": "byte"
+        },
+        "drupal": {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        }
+    },
+    "require": {
+        "composer/composer": "^2.8",
+        "composer/installers": "^2.3",
+        "drupal/ai": "1.2.x-dev@dev",
+        "drupal/ai_agents": "1.2.x-dev@dev",
+        "drupal/ai_provider_openai": "1.2.x-dev@dev",
+        "drupal/ai_simple_pdf_to_text": "^1.0@alpha",
+        "drupal/ai_vdb_provider_milvus": "1.1.x-dev@dev",
+        "drupal/canvas": "@alpha",
+        "drupal/core-composer-scaffold": "^11.2.4",
+        "drupal/core-project-message": "^11.2.4",
+        "drupal/core-recipe-unpack": "^11.2.4",
+        "drupal/core-recommended": "^11.2.4",
+        "drupal/core-vendor-hardening": "^11.2.4",
+        "drupal/drupal_cms_accessibility_tools": "^2",
+        "drupal/drupal_cms_ai": "^2",
+        "drupal/drupal_cms_forms": "^2",
+        "drupal/drupal_cms_google_analytics": "^2",
+        "drupal/drupal_cms_seo_tools": "^2",
+        "drupal/drupal_cms_starter": "^2",
+        "drupal/page_cache_exclusion": "^1.0",
+        "drupal/pexels_ai": "^1.0@alpha",
+        "drupal/project_browser": "@beta",
+        "drupal/recipe_installer_kit": "1.x-dev@dev",
+        "drupal/webform": "^6.3.0-beta3@beta",
+        "jfcherng/php-diff": "^6.0"
+    },
+    "require-dev": {
+        "drush/drush": "^13.6.1",
+        "cweagans/composer-patches": "^2",
+        "drupal/byte": "^1",
+        "drupal/core-dev": "^11.2.4",
+        "drupal/drupal_cms_blog": "^2",
+        "drupal/drupal_cms_case_study": "^2",
+        "drupal/drupal_cms_events": "^2",
+        "drupal/drupal_cms_news": "^2",
+        "drupal/drupal_cms_page": "^2",
+        "drupal/drupal_cms_person": "^2",
+        "drupal/drupal_cms_project": "^2"
+    },
+    "conflict": {
+        "drupal/drupal": "*"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true,
+            "drupal/core-composer-scaffold": true,
+            "drupal/core-project-message": true,
+            "drupal/core-recipe-unpack": true,
+            "drupal/core-vendor-hardening": true,
+            "php-http/discovery": true,
+            "cweagans/composer-patches": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "phpstan/extension-installer": true,
+            "tbachert/spi": true
+        },
+        "bin-dir": "vendor/bin",
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "extra": {
+        "drupal-scaffold": {
+            "locations": {
+                "web-root": "web/"
+            }
+        },
+        "installer-paths": {
+            "web/core": [
+                "type:drupal-core"
+            ],
+            "web/libraries/{$name}": [
+                "type:drupal-library"
+            ],
+            "web/modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "web/profiles/contrib/{$name}": [
+                "type:drupal-profile"
+            ],
+            "web/themes/contrib/{$name}": [
+                "type:drupal-theme"
+            ],
+            "./drush/Commands/contrib/{$name}": [
+                "type:drupal-drush"
+            ],
+            "web/modules/custom/{$name}": [
+                "type:drupal-custom-module"
+            ],
+            "web/profiles/custom/{$name}": [
+                "type:drupal-custom-profile"
+            ],
+            "./recipes/{$name}": [
+                "type:drupal-recipe"
+            ],
+            "web/themes/custom/{$name}": [
+                "type:drupal-custom-theme"
+            ]
+        },
+        "drupal-core-project-message": {
+            "include-keys": [
+                "homepage",
+                "support"
+            ],
+            "post-create-project-cmd-message": [
+                "<bg=blue;fg=white>                                                   </>",
+                "<bg=blue;fg=white>  Congratulations, you\u2019ve installed Drupal CMS!    </>",
+                "<bg=blue;fg=white>                                                   </>",
+                "",
+                "<bg=yellow;fg=black>Next steps</>:",
+                "  * Read the user guide: https://www.drupal.org/docs/user_guide/en/index.html",
+                "  * Get support: https://drupal.org/support",
+                "  * Get involved with the Drupal community: https://drupal.org/getting-involved"
+            ]
+        },
+        "drupal-core-vendor-hardening": {
+            "composer/composer": false
+        },
+        "patches": {
+            "drupal/core": {
+                "#3530597: There is no config schema for the `value` property of `datetime` fields": "./patches/core/date-field-default-value.patch",
+                "Add content export": "./patches/core/content-export.patch"
+            }
+        }
+    },
+    "scripts": {
+        "post-update-cmd": [
+            "@php -r \"@unlink('vendor/bin/composer');\""
+        ],
+        "dev:recommend": "Scripts::recommend"
+    },
+    "_info": [
+        "This file contains internal development dependencies and patches for Drupal CMS.",
+        "Do NOT use it to build a real site!"
+    ],
+    "autoload-dev": {
+        "classmap": [
+            "Scripts.php"
+        ]
+    },
+    "scripts-descriptions": {
+        "dev:recommend": "Adds an installed package to the curated list of recommended projects."
+    }
+}
