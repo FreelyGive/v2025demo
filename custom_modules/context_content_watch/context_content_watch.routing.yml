@@ -1,0 +1,8 @@
+context_content_watch.hcc:
+  path: '/admin/human-control-center'
+  defaults:
+    _controller: '\Drupal\context_content_watch\Controller\HumanControlCenter::content'
+    _title: 'Human Control Center'
+  requirements:
+    _permission: 'administer hcc'
+

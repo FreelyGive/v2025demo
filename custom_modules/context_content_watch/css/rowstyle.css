@@ -1,0 +1,28 @@
+.row-pair-even {
+  background-color: #f9f9f9;
+  border: none;
+}
+
+.row-pair-odd {
+  background-color: #ffffff;
+}
+
+.main-row {
+  border-top: 2px solid #ccc;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.main-row td {
+  padding-bottom: 0;
+}
+
+.message-row {
+  border-top: none;
+  border-bottom: 2px solid #ddd;
+}
+
+.message-row td {
+  padding-top: 0;
+  font-family: monospace;
+}

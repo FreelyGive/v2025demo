@@ -1,0 +1,5 @@
+administer hcc:
+  title: 'Administer Human Control Center'
+  description: 'Manage the Human Control Center settings and view suggested content changes.'
+  restrict access: true
+

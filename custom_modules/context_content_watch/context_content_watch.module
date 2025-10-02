@@ -106,8 +106,12 @@ function context_content_watch_cron() {
         ->accessCheck(FALSE)
         ->execute();
 
+      $total = 0;
+
       // Trigger agent to review each page.
+      $context_data = [];
       foreach ($page_ids as $page_id) {
+        $total++;
         // For the demo.
         if ($page_id < 8) {
           // Skip front page and about page.
@@ -121,11 +125,13 @@ function context_content_watch_cron() {
           new ChatMessage('user', 'Diff: ' . $diff_string),
         ]);
 
+        $current_time = \Drupal::time()->getRequestTime();
         $agent->setChatInput($input);
         $agent->determineSolvability();
         $output = $agent->solve();
         $data = Json::decode($output);
         if (is_array($data) && $data['should_report']) {
+          $count = 0;
           $page = \Drupal::entityTypeManager()->getStorage('canvas_page')->load($data['id']);
           $current_changes = $auto_save_manager->getClientAutoSaveData($page);
           if (!empty($current_changes['hash'])) {
@@ -140,6 +146,24 @@ function context_content_watch_cron() {
               $changes = $change['human_readable'] . "<br>";
               $mail[$page_id]['changes'][] = $changes;
               $mail[$page_id]['url'] = $data['url'];
+
+              if (!isset($context_data['canvas_page__' . $page_id])) {
+                $context_data['canvas_page__' . $page_id] = [
+                  'entity_type' => 'canvas_page',
+                  'id' => $page_id,
+                  'label' => $page->label(),
+                  'agent' => 'context_based_content_review_agent',
+                  'status' => 'draft',
+                  'url' => $data['url'],
+                  'change' => [
+                    $changes,
+                  ],
+                  'timestamp' => $current_time,
+                ];
+              }
+              else {
+                $context_data['canvas_page__' . $page_id]['change'][] = $changes;
+              }
 
               foreach ($components as $component_key => $component) {
                 if ($component['uuid'] === $change['uuid']) {
@@ -172,20 +196,32 @@ function context_content_watch_cron() {
         $module = 'context_content_watch';
         $key = 'content_change_report';
         $to = \Drupal::config('system.site')->get('mail');
-        $params['subject'] = 'Content Change Report';
-        $params['message'] = "<p>The following content changes were detected and reported by the AI agent, please review each draft to publish it:</p>";
+        $params['subject'] = 'Content Change Suggested by AI Agent';
+        $params['message'] = "<p>The AI agent suggests to make the following changes to improve your website based on updates in the Context Control Center.</p>";
+        $params['message'] .= "<p>To see all suggested changes, please visit the <a href=\"" . $host . "/admin/human-control-center\">Human Control Center</a>.</p>";
         foreach ($mail as $page_id => $report) {
           $page = \Drupal::entityTypeManager()->getStorage('canvas_page')->load($page_id);
-          $params['message'] .= "<h4>Page ID: {$page_id} (Title: " . $page->label() . ")</h4>";
+          $count++;
+          $params['message'] .= "<h4>" . $page->label() . " (<a href=\"" . $report['url'] . "\">View</a> | <a href=\"" . $host . '/canvas/editor/canvas_page/' . $page_id . "\">Edit and Publish</a>)</h4>";
           // Check if a auto save already exist, and tell so then.
-          foreach ($report['changes'] as $change) {
-            $params['message'] .= "<li>{$change}</li>";
+          if (count($report['changes']) > 1) {
+            $params['message'] .= "<ul>";
           }
-          $params['message'] .= "<strong>Edit link to current draft: </strong><br>" . $host . '/canvas/editor/canvas_page/' . $page_id . "<br>";
-          $params['message'] .= "<strong>View link to original: </strong><br>" . $report['url'] . "<br>";
+          foreach ($report['changes'] as $change) {
+            if (count($report['changes']) > 1) {
+              $params['message'] .= "<li>{$change}</li>";
+            }
+            else {
+              $params['message'] .= "<p>{$change}</p>";
+            }
+          }
+          if (count($report['changes']) > 1) {
+            $params['message'] .= "</ul>";
+          }
           $params['message'] .= "\n";
         }
-        $params['message'] .= "End of report.\n";
+        // Get a count of the pages changed.
+        $params['message'] .= "<p>Total pages suggested for changes: {$count} out of {$total} checked pages.</p>";
         $langcode = \Drupal::currentUser()->getPreferredLangcode();
         $send = TRUE;
         $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
@@ -197,8 +233,12 @@ function context_content_watch_cron() {
         }
       }
       // Delete the state variable and diff file.
-      \Drupal::state()->delete('context_content_watch.diff_file');
-      unlink($filepath);
+      //\Drupal::state()->delete('context_content_watch.diff_file');
+      //unlink($filepath);
+    }
+    if (!empty($context_data)) {
+      // Save context data to state for use in other places.
+      \Drupal::state()->set('context_content_watch.context_data', $context_data);
     }
   }
 }
