@@ -1,0 +1,125 @@
+<?php
+
+use Drupal\ai\OperationType\Chat\ChatInput;
+use Drupal\ai\OperationType\Chat\ChatMessage;
+use Drupal\Core\Entity\EntityInterface;
+use Jfcherng\Diff\DiffHelper;
+use Jfcherng\Diff\Renderer\RendererConstant;
+
+/**
+ * Implements hook_entity_presave().
+ */
+function context_content_watch_entity_presave(EntityInterface $entity) {
+  // Only proceed if AI context entity has been updated.
+  if ($entity->getEntityTypeId() !== 'ai_context') {
+    return;
+  }
+
+  // Get original and new context content.
+  $original_context = $entity->isNew() ? '' : $entity->getOriginal()->get('content');
+  $new_context = $entity->get('content');
+  $diff = '';
+
+  // Compare original and new context content.
+  if ($original_context !== $new_context) {
+    $diff = context_content_watch_diff($original_context, $new_context);
+  }
+
+  // Store diff in a file.
+  if (!empty($diff)) {
+    $filename = 'ai_context_' . $entity->id() . '_' . \Drupal::time()->getRequestTime() . '.txt';
+    $filepath = 'public://' . $filename;
+    $fd = fopen($filepath, 'w');
+    fwrite($fd, $diff);
+    fclose($fd);
+
+    // Add a state variable with the file name of the latest diff.
+    \Drupal::state()->set('context_content_watch.diff_file', $filename);
+  }
+}
+
+/**
+ * Generates a unified diff between two strings of text.
+ *
+ * This helper uses jfcherng/php-diff to calculate differences between the original and new values, returning a unified
+ * diff format string. It is typically used to highlight changes in AI context content.
+ *
+ * @param string $original
+ *   The original text value to compare.
+ * @param string $new
+ *   The new text value to compare against the original.
+ *
+ * @return string
+ *   A unified diff representation of the changes.
+ */
+function context_content_watch_diff($original, $new) {
+  $renderer_name = 'Unified';
+
+  $differ_options = [
+    'context' => 3,
+    'ignoreCase' => TRUE,
+    'ignoreLineEnding' => TRUE,
+    'ignoreWhitespace' => TRUE,
+    'fullContextIfIdentical' => FALSE,
+  ];
+
+  $renderer_options = [
+    'detailLevel' => 'line',
+    'lineNumbers' => TRUE,
+    'separateBlock' => TRUE,
+    'showHeader' => TRUE,
+    'spacesToNbsp' => FALSE,
+    'tabSize' => 4,
+    'mergeThreshold' => 0.8,
+    'cliColorization' => RendererConstant::CLI_COLOR_AUTO,
+    'resultForIdenticals' => NULL,
+    'wrapperClasses' => ['diff-wrapper'],
+  ];
+
+  return DiffHelper::calculate($original, $new, $renderer_name, $differ_options, $renderer_options);
+}
+
+/**
+ * Implements hook_cron().
+ */
+function context_content_watch_cron() {
+  // Check if there is a latest diff stored in state.
+  $filename = \Drupal::state()->get('context_content_watch.diff_file');
+  if ($filename) {
+    // Get the diff as a string from the file.
+    $filepath = 'public://' . $filename;
+
+    if (file_exists($filepath)) {
+      // Load the context diff from the file.
+      $diff_string = file_get_contents($filepath);
+
+      // Load all Canvas pages.
+      $page_ids = \Drupal::entityTypeManager()->getStorage('canvas_page')->getQuery()
+        ->condition('status', 1)
+        ->accessCheck(FALSE)
+        ->execute();
+
+      // Trigger agent to review each page.
+      foreach ($page_ids as $page_id) {
+        $agent = \Drupal::service('plugin.manager.ai_agents')->createInstance('context_based_content_review_agent');
+
+        // Set agent inputs.
+        $input = new ChatInput([
+          new ChatMessage('user', 'Page ID: ' . $page_id),
+          new ChatMessage('user', 'Diff: ' . $diff_string),
+        ]);
+
+        $agent->setChatHistory([$input]);
+        // TODO: This gives an error saying "Call to undefined method Drupal\ai\OperationType\Chat\ChatInput::getText() in Drupal\ai_provider_openai\Plugin\AiProvider\OpenAiProvider->chat()".
+        $agent->determineSolvability();
+        $output = $agent->solve();
+
+        // TODO: Use the output to update the page and notify user.
+
+        // Delete the state variable and diff file.
+        \Drupal::state()->delete('context_content_watch.diff_file');
+        unlink($filepath);
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+    "name": "drupal/context_content_watch",
+    "type": "drupal-module",
+    "description": "Monitors AI context changes and cascades updates to affected site content..",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "jfcherng/php-diff": "^6.0"
+    }
+}
