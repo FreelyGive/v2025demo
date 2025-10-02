@@ -33,7 +33,7 @@ component_tree:
     inputs:
       label: 'Site branding'
       label_display: '0'
-      use_site_logo: false
+      use_site_logo: true
       use_site_name: false
       use_site_slogan: false
   -
@@ -90,7 +90,7 @@ component_tree:
     slot: footer_utility_last
     uuid: a606580b-bd8b-4576-b89e-b9f97ef72d91
     component_id: sdc.mercury.text
-    component_version: 68cbd40758003975
+    component_version: f2cb7daf1d400e89
     inputs:
       text:
         value: '<p>© Copyright 2025</p>'

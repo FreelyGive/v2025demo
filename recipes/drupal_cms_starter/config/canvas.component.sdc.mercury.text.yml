@@ -8,7 +8,7 @@ dependencies:
     - text
   theme:
     - mercury
-active_version: 68cbd40758003975
+active_version: f2cb7daf1d400e89
 versioned_properties:
   active:
     settings:

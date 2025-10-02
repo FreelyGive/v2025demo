@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: d268e225-d467-4c90-adc3-2c262db8ca3a
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: logo-light.svg
+  uri:
+    -
+      value: 'public://byte-logo.svg'
+  filemime:
+    -
+      value: image/svg+xml
+  filesize:
+    -
+      value: 6806
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1759251883

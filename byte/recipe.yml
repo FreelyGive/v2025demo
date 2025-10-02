@@ -29,6 +29,9 @@ config:
     mercury.settings:
       simpleConfigUpdate:
         scheme: byte-dark
+        logo:
+          use_default: false
+          path: 'public://byte-logo.svg'
     # Only show basic metatag fields on Canvas pages.
     metatag.settings:
       simpleConfigUpdate:

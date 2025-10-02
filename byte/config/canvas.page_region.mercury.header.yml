@@ -28,7 +28,7 @@ component_tree:
     inputs:
       label: 'Site branding'
       label_display: '0'
-      use_site_logo: false
+      use_site_logo: true
       use_site_name: false
       use_site_slogan: false
   -
