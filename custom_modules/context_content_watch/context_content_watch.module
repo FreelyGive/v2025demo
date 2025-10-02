@@ -113,11 +113,12 @@ function context_content_watch_cron() {
       foreach ($page_ids as $page_id) {
         $total++;
         // For the demo.
-        if ($page_id < 8) {
-          // Skip front page and about page.
-          continue;
-        }
-        $agent = \Drupal::service('plugin.manager.ai_agents')->createInstance('context_based_content_review_agent');
+        // Update 10/2: Commented out this continue block because page IDs in the current demo only go from 1 - 5.
+        // if ($page_id < 8) {
+        // // Skip front page and about page.
+        //  continue;
+        //  }
+        $agent = \Drupal::service('plugin.manager.ai_agents')->createInstance('content_review_agent');
 
         // Set agent inputs.
         $input = new ChatInput([
@@ -152,7 +153,7 @@ function context_content_watch_cron() {
                   'entity_type' => 'canvas_page',
                   'id' => $page_id,
                   'label' => $page->label(),
-                  'agent' => 'context_based_content_review_agent',
+                  'agent' => 'content_review_agent',
                   'status' => 'draft',
                   'url' => $data['url'],
                   'change' => [
@@ -198,11 +199,11 @@ function context_content_watch_cron() {
         $to = \Drupal::config('system.site')->get('mail');
         $params['subject'] = 'Content Change Suggested by AI Agent';
         $params['message'] = "<p>The AI agent suggests to make the following changes to improve your website based on updates in the Context Control Center.</p>";
-        $params['message'] .= "<p>To see all suggested changes, please visit the <a href=\"" . $host . "/admin/human-control-center\">Human Control Center</a>.</p>";
+        $params['message'] .= "<p>To see all suggested changes, please visit the <a href=\"" . $host . "/admin/config/ai/suggestion-review\">AI Suggestion Review</a> page.</p>";
         foreach ($mail as $page_id => $report) {
           $page = \Drupal::entityTypeManager()->getStorage('canvas_page')->load($page_id);
           $count++;
-          $params['message'] .= "<h4>" . $page->label() . " (<a href=\"" . $report['url'] . "\">View</a> | <a href=\"" . $host . '/canvas/editor/canvas_page/' . $page_id . "\">Edit and Publish</a>)</h4>";
+          $params['message'] .= "<h4>" . $page->label() . " (<a href=\"" . $report['url'] . "\">View</a> | <a href=\"" . $host . '/canvas/editor/canvas_page/' . $page_id . "\">Review and Publish</a>)</h4>";
           // Check if a auto save already exist, and tell so then.
           if (count($report['changes']) > 1) {
             $params['message'] .= "<ul>";

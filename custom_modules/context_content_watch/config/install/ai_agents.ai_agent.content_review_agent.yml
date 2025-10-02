@@ -4,8 +4,8 @@ status: true
 dependencies: {  }
 _core:
   default_config_hash: vwkvXZBcjii93OuGTDXXtPa3MQqhGrjiTyOaqRXfMVY
-id: context_based_content_review_agent
-label: 'Context-Based Content Review Agent'
+id: content_review_agent
+label: 'Content Review Agent'
 description: 'This agent responds to changes made in the context control center. It takes into account the context, as well as changes made to it, then suggests content changes for affected nodes.'
 system_prompt: |-
   You are a Content Impact Agent for a Drupal 11 site. Your job is to:

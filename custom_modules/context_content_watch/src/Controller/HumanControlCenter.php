@@ -44,7 +44,7 @@ class HumanControlCenter extends ControllerBase {
           'agent' => $agent_definition['label'],
           'status' => $data['status'] ?? 'N/A',
           'last_updated' => \Drupal::service('date.formatter')->format($data['timestamp']),
-          'operations' => Link::createFromRoute($this->t('View Draft'), 'canvas.boot.entity', [
+          'operations' => Link::createFromRoute($this->t('Review and Publish'), 'canvas.boot.entity', [
             'entity_type' => $data['entity_type'],
             'entity' => $data['id'],
           ])->toString(),

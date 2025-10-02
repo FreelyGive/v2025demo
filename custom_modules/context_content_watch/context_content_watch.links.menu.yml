@@ -1,0 +1,5 @@
+context_content_watch.ai_suggestion_review:
+  title: 'AI Suggestion Review'
+  description: 'Review AI-powered suggestions for context-based content updates.'
+  parent: ai.admin_settings
+  route_name: context_content_watch.ai_suggestion_review
