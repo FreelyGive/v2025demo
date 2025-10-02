@@ -233,8 +233,8 @@ function context_content_watch_cron() {
         }
       }
       // Delete the state variable and diff file.
-      //\Drupal::state()->delete('context_content_watch.diff_file');
-      //unlink($filepath);
+      \Drupal::state()->delete('context_content_watch.diff_file');
+      unlink($filepath);
     }
     if (!empty($context_data)) {
       // Save context data to state for use in other places.
