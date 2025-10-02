@@ -1,0 +1,113 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_ai_function_call_info_alter().
+ */
+function ai_context_ai_function_call_info_alter(array &$definitions): void {
+  // Swap the class used for sub-agent tools that have pools configured.
+  $config = \Drupal::config('ai_context.agent_pools');
+  $agents = (array) ($config->get('agents') ?? []);
+  if (empty($agents)) {
+    return;
+  }
+  $agentsWithPools = [];
+  foreach ($agents as $map) {
+    if (!empty($map['id']) && !empty($map['contexts'])) {
+      $agentsWithPools['ai_agents::ai_agent::' . $map['id']] = TRUE;
+    }
+  }
+  if (!$agentsWithPools) {
+    return;
+  }
+  foreach ($definitions as $id => &$def) {
+    if (!empty($agentsWithPools[$id]) && !empty($def['class']) && $def['class'] === 'Drupal\\ai_agents\\Plugin\\AiFunctionCall\\AiAgentWrapper') {
+      $def['class'] = 'Drupal\\ai_context\\Plugin\\AiFunctionCall\\AiAgentWrapperWithContext';
+    }
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function ai_context_form_alter(array &$form, FormStateInterface $form_state, string $form_id): void {
+  $form_object = $form_state->getFormObject();
+  if ($form_object instanceof \Drupal\ai_agents\Form\AiAgentForm) {
+    // Build options list of ai_context entities.
+    $storage = \Drupal::entityTypeManager()->getStorage('ai_context');
+    $options = [];
+    foreach ($storage->loadMultiple() as $ctx) {
+      $options[$ctx->id()] = $ctx->label();
+    }
+
+    $form['ai_context_pool'] = [
+      '#type' => 'details',
+      '#title' => t('AI Context Pool'),
+      '#open' => FALSE,
+      '#weight' => 90,
+    ];
+
+    $agent_id_default = $form['id']['#default_value'] ?? '';
+    $current_map = [];
+    $config = \Drupal::config('ai_context.agent_pools');
+    foreach ((array) $config->get('agents') as $map) {
+      if (($map['id'] ?? '') === $agent_id_default) {
+        $current_map = $map;
+        break;
+      }
+    }
+
+    $form['ai_context_pool']['ai_context_pool__contexts'] = [
+      '#type' => 'select',
+      '#title' => t('Assigned AI Contexts'),
+      '#multiple' => TRUE,
+      '#options' => $options,
+      '#default_value' => (array) ($current_map['contexts'] ?? []),
+      '#description' => t('Select reusable context documents to form this agent’s pool. At runtime the system selects the most relevant ones to inject.'),
+    ];
+    $form['ai_context_pool']['ai_context_pool__always_include'] = [
+      '#type' => 'select',
+      '#title' => t('Always include contexts'),
+      '#multiple' => TRUE,
+      '#options' => $options,
+      '#default_value' => (array) ($current_map['always_include'] ?? []),
+      '#description' => t('Selected contexts will always be included first, before filling remaining slots with relevant items.'),
+    ];
+
+    // Submit handler to persist mapping in ai_context.agent_pools.
+    $form['actions']['submit']['#submit'][] = 'ai_context_ai_agent_form_submit_pool';
+  }
+}
+
+/**
+ * Submit handler to persist AI Context pool assignments for agents.
+ */
+function ai_context_ai_agent_form_submit_pool(array $form, FormStateInterface $form_state): void {
+  $values = $form_state->getValues();
+  $agent_id = (string) ($values['id'] ?? '');
+  if ($agent_id === '') {
+    return;
+  }
+  $contexts = array_values(array_filter((array) ($values['ai_context_pool__contexts'] ?? [])));
+  $always = array_values(array_filter((array) ($values['ai_context_pool__always_include'] ?? [])));
+  $config = \Drupal::service('config.factory')->getEditable('ai_context.agent_pools');
+  $agents = (array) ($config->get('agents') ?? []);
+  $found = FALSE;
+  foreach ($agents as &$map) {
+    if (($map['id'] ?? '') === $agent_id) {
+      $map['contexts'] = $contexts;
+      $map['always_include'] = $always;
+      $found = TRUE;
+      break;
+    }
+  }
+  if (!$found) {
+    $agents[] = [
+      'id' => $agent_id,
+      'contexts' => $contexts,
+      'always_include' => $always,
+    ];
+  }
+  $config->set('agents', $agents)->save();
+}

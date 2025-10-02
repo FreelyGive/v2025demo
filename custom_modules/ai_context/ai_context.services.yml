@@ -1,0 +1,35 @@
+services:
+  logger.channel.ai_context:
+    class: Drupal\Core\Logger\LoggerChannel
+    factory: ['@logger.factory', get]
+    arguments: ['ai_context']
+
+  ai_context.router:
+    class: Drupal\ai_context\Service\AiContextRouter
+    arguments:
+      - '@config.factory'
+      - '@entity_type.manager'
+      - '@ai.tokenizer'
+      - '@logger.channel.ai_context'
+      - '@ai.provider'
+
+  ai_context.renderer:
+    class: Drupal\ai_context\Service\AiContextRenderer
+    arguments:
+      - '@entity_type.manager'
+      - '@ai.text_chunker'
+
+  ai_context.selector:
+    class: Drupal\ai_context\Service\AiContextSelector
+    arguments:
+      - '@config.factory'
+      - '@entity_type.manager'
+      - '@ai_context.router'
+      - '@ai_context.renderer'
+
+  ai_context.system_prompt_subscriber:
+    class: Drupal\ai_context\EventSubscriber\SystemPromptSubscriber
+    arguments: ['@logger.channel.ai_context']
+    tags:
+      - { name: event_subscriber }
+

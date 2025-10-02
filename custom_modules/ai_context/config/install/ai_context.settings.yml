@@ -1,0 +1,6 @@
+strategy: keyword
+max_contexts: 3
+max_tokens: 1200
+provider_id: ''
+model_id: ''
+

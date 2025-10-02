@@ -1,0 +1,69 @@
+ai_context.ai_context.*:
+  type: config_entity
+  label: 'AI Context'
+  mapping:
+    id:
+      type: string
+      label: 'Machine name'
+    uuid:
+      type: string
+      label: 'UUID'
+    label:
+      type: label
+      label: 'Label'
+    description:
+      type: text
+      label: 'Description'
+    content:
+      type: text
+      label: 'Content (Markdown)'
+    tags:
+      type: sequence
+      label: 'Tags (term IDs)'
+      sequence:
+        type: string
+        label: 'Term ID'
+
+ai_context.settings:
+  type: config_object
+  label: 'AI Context settings'
+  mapping:
+    strategy:
+      type: string
+      label: 'Selection strategy'
+    max_contexts:
+      type: integer
+      label: 'Max contexts to inject'
+    max_tokens:
+      type: integer
+      label: 'Max token budget'
+    provider_id:
+      type: string
+      label: 'Provider ID (LLM strategy)'
+    model_id:
+      type: string
+      label: 'Model ID (LLM strategy)'
+
+ai_context.agent_pools:
+  type: config_object
+  label: 'AI Context agent pools'
+  mapping:
+    agents:
+      type: sequence
+      sequence:
+        type: mapping
+        mapping:
+          id:
+            type: string
+            label: 'Agent ID'
+          contexts:
+            type: sequence
+            sequence:
+              type: string
+              label: 'AI Context ID'
+          always_include:
+            type: sequence
+            label: 'Always-include context IDs'
+            sequence:
+              type: string
+              label: 'AI Context ID'

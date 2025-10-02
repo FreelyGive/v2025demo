@@ -1,0 +1,5 @@
+administer ai context:
+  title: 'Administer AI Context'
+  description: 'Manage AI Context entities, settings, and pools.'
+  restrict access: true
+

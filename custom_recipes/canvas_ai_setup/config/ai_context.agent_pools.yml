@@ -7,14 +7,17 @@ agents:
     always_include:
       - component_generation
       - our_company
+      - writing_style_guide
   -
     id: canvas_template_builder_agent
     contexts:
       - component_generation
       - our_company
+      - writing_style_guide
     always_include:
       - component_generation
       - our_company
+      - writing_style_guide
   -
     id: pexels_agent
     contexts: {  }

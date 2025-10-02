@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies: {  }
 _core:
-  default_config_hash: r9ae9EempjEjy8oZybHGBn2aN6RMwB4aV1CFrZ5cdec
+  default_config_hash: D8WZc3drEuWT_NfQwwWniwy3q0qTfQAs7buQHopYFT4
 id: canvas_template_builder_agent
 label: 'Canvas Template Builder Agent'
 description: 'This sub-agent specializes in building templates for entire pages using available components. It can also be used to generate headers and footers for pages. Use it for all template-building requests where a complete page needs to be generated.'
@@ -19,7 +19,7 @@ system_prompt: |-
   - **Information Finder**: If there is a short explanation from the user on what to create, you can use the information finder tool to get more information by giving it semantic search words. You may use this as many times as necessary.
   - **Placeholder/Mockup Data**: If the user has requested you specifically to make up the text, then do so.
   - **Text provided**: If there is clear data provided on how to create the texts, you do neither have to do follow up questions or search for context.
-  - **Webforms**: If the user asks to create an webform, only allow the webform ids you know about and see if there is something similar to what they are asking for. If so, set this on the webform_id on the webform component.
+  - **Webforms**: If the user asks to create an webform, only allow the webform ids you know about and see if there is something similar to what they are asking for. If so, set the title of the webform on the webform_id on the webform component.
 
   ### 1. Component Placement Strategy
   - **Primary Focus**: Place components in the 'content' region as the main page body structure
@@ -199,22 +199,14 @@ default_information_tools: |
     parameters:
       entity_type: webform
       fields:
-        - id
         - title
-  get_context_company:
-    label: 'Extra Context Company'
-    description: 'This is extra context to take into account'
+  context_our_company:
+    label: 'Contexts'
+    description: 'This shows some important contexts for the agent to pick its choices'
     tool: 'ai_context:get_relevant_contexts'
     parameters:
+      task: fun
       agent_id: canvas_template_builder_agent
-      task: 'our company'
-  get_context_component:
-    label: 'Extra Context Component Generation'
-    description: 'This is extra context to take into account'
-    tool: 'ai_context:get_relevant_contexts'
-    parameters:
-      agent_id: canvas_template_builder_agent
-      task: component_generation
 tool_usage_limits:
   'canvas_ai:set_template_data':
     component_structure:

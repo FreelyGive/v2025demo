@@ -39,7 +39,7 @@ ddev composer require 'drupal/ai:1.2.x-dev@dev' \
 'drupal/pexels_ai:^1.0@alpha'
 
 # AI Context via git.
-git clone git@git.drupal.org:project/ai_context.git web/modules/contrib/ai_context
+cp -r custom_modules/ai_context web/modules/contrib/ai_context
 
 # Install simple AB split test
 ddev drush en -y ab_split_test page_cache_exclusion

@@ -1,0 +1,17 @@
+ai_context.collection_tab:
+  route_name: entity.ai_context.collection
+  title: 'Contexts'
+  base_route: entity.ai_context.collection
+  weight: 10
+
+ai_context.pools_tab:
+  route_name: ai_context.pools
+  title: 'Context Pools'
+  base_route: entity.ai_context.collection
+  weight: 20
+
+ai_context.settings_tab:
+  route_name: ai_context.settings
+  title: 'Settings'
+  base_route: entity.ai_context.collection
+  weight: 30

@@ -1,0 +1,57 @@
+ai_context.settings:
+  path: '/admin/config/ai/ai-context/settings'
+  defaults:
+    _form: '\Drupal\ai_context\Form\AiContextSettingsForm'
+    _title: 'AI Context Settings'
+  requirements:
+    _permission: 'administer ai context'
+
+ai_context.pools:
+  path: '/admin/config/ai/ai-context/pools'
+  defaults:
+    _form: '\Drupal\ai_context\Form\AiContextPoolsForm'
+    _title: 'AI Context Pools'
+  requirements:
+    _permission: 'administer ai context'
+
+ai_context.agent_pool_edit:
+  path: '/admin/config/ai/ai-context/pools/{ai_agent}/edit'
+  defaults:
+    _form: '\Drupal\ai_context\Form\AiAgentContextPoolForm'
+    _title_callback: '\Drupal\ai_context\Form\AiAgentContextPoolForm::getTitle'
+  requirements:
+    _permission: 'administer ai context'
+    ai_agent: '[a-zA-Z0-9_]+'
+
+# AI Context entity routes
+entity.ai_context.collection:
+  path: '/admin/config/ai/contexts'
+  defaults:
+    _entity_list: 'ai_context'
+    _title: 'AI Contexts'
+  requirements:
+    _permission: 'administer ai context'
+
+entity.ai_context.add_form:
+  path: '/admin/config/ai/contexts/add'
+  defaults:
+    _entity_form: 'ai_context.add'
+    _title: 'Add AI Context'
+  requirements:
+    _entity_create_access: 'ai_context'
+
+entity.ai_context.edit_form:
+  path: '/admin/config/ai/contexts/{ai_context}'
+  defaults:
+    _entity_form: 'ai_context.edit'
+    _title_callback: '\Drupal\Core\Entity\Controller\EntityController::title'
+  requirements:
+    _entity_access: 'ai_context.update'
+
+entity.ai_context.delete_form:
+  path: '/admin/config/ai/contexts/{ai_context}/delete'
+  defaults:
+    _entity_form: 'ai_context.delete'
+    _title: 'Delete'
+  requirements:
+    _entity_access: 'ai_context.delete'

@@ -552,6 +552,7 @@ class CanvasAiPageBuilderHelper {
         if ($prop_details['type'] === 'object' && isset($prop_details['examples'][0]['src'])) {
           $prop_details['type'] = 'number';
           $prop_details['default'] = 4;
+          $prop_details['description'] = $prop_details['description'] ?? '';
           $prop_details['description'] .= ' Provide media id or null here.';
         }
         $output[$source_id]['components'][$component_id]['props'][$prop_name] = [

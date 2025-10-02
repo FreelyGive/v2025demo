@@ -1,0 +1,10 @@
+uuid: 42e2577f-2685-4cfa-ae1a-9a74f82d237b
+langcode: en
+status: true
+dependencies: {  }
+id: writing_style_guide
+label: 'Writing Style Guide'
+description: 'The writing style guide has information about words or phrases that we usually use.'
+content: "* When refering to a meeting, conference or webinar, mention it as exclusive.\r\n* Always refer to seconds, when mentioning how fast we create cards.\r\n* Cards can be used as a singular word, but should be followed up with \"virtual card\"\r\n* All transactions should be refered to as live.\r\n* We can sync with Quickbooks, Netsuite and 50+ platforms. Other platforms should not be mentioned outside of documentation.\r\n* Always refer to it as \"expense processing time\" and that we can cut down 80% of it. Not other terms should be used.\r\n* When describing who should use the product, the main four personas are \"Controllers & Finance Managers\", \"Staff Accountants & AP Teams\", \"Project Managers\", \"IT & Ops Team\". Only refer to something else, if instructed to.\r\n\r\n"
+tags:
+  - '2'

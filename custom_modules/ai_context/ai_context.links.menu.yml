@@ -1,0 +1,6 @@
+ai_context.collection:
+  title: 'AI Context'
+  description: 'Create and manage reusable AI Context documents.'
+  route_name: entity.ai_context.collection
+  parent: ai.admin_settings
+  weight: 0

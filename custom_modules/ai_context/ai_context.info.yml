@@ -1,0 +1,11 @@
+name: AI Context
+type: module
+description: Provides site-specific AI context entities and dynamic routing for sub-agents.
+core_version_requirement: ^10.3 || ^11
+package: AI
+
+dependencies:
+  - ai:ai
+  - ai_agents:ai_agents
+  - taxonomy:taxonomy
+

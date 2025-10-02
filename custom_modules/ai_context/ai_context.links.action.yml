@@ -1,0 +1,5 @@
+ai_context.add:
+  route_name: entity.ai_context.add_form
+  title: 'Add AI Context'
+  appears_on:
+    - entity.ai_context.collection
