@@ -6,11 +6,13 @@ use Drupal\ai\Attribute\FunctionCall;
 use Drupal\ai\Base\FunctionCallBase;
 use Drupal\ai\Service\FunctionCalling\ExecutableFunctionCallInterface;
 use Drupal\ai\Service\FunctionCalling\FunctionCallInterface;
-use Drupal\Core\Database\Connection;
+use Drupal\canvas_ai\CanvasAiPermissions;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Plugin\Context\ContextDefinition;
+use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * Plugin implementation of the getting canvas content function.
@@ -33,14 +35,14 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class GetCanvasContent extends FunctionCallBase implements ExecutableFunctionCallInterface {
 
   /**
-   * The database connection.
-   */
-  protected Connection $connection;
-
-  /**
    * The entity type manager.
    */
   protected EntityTypeManagerInterface $entityTypeManager;
+
+  /**
+   * The current user.
+   */
+  protected AccountProxyInterface $currentUser;
 
   /**
    * {@inheritdoc}
@@ -53,7 +55,8 @@ class GetCanvasContent extends FunctionCallBase implements ExecutableFunctionCal
       $container->get('ai.context_definition_normalizer'),
       $container->get('plugin.manager.ai_data_type_converter'),
     );
-    $instance->connection = $container->get('database');
+    $instance->entityTypeManager = $container->get('entity_type.manager');
+    $instance->currentUser = $container->get('current_user');
     return $instance;
   }
 
@@ -63,23 +66,20 @@ class GetCanvasContent extends FunctionCallBase implements ExecutableFunctionCal
   public function execute(): void {
     // Collect the context values.
     $page_id = $this->getContextValue('page_id');
-
-    // Query all component content for the given page ID.
-    $components = $this->connection->select('canvas_page__components', 'c')
-      ->fields('c', ['components_inputs'])
-      ->condition('entity_id', $page_id)
-      ->execute()
-      ->fetchCol();
+    // Permissions, turned off for demo. We would need to upcast the user.
 
     $page = $this->entityTypeManager->getStorage('canvas_page')->load($page_id);
-
     // Return a structured payload.
-    $this->setStructuredOutput([
-      'id' => $page_id,
+    $output = [
+      'id' => $page->id(),
       'title' => $page->label(),
-      'url' => $page->getUrl()->toString(),
-      'component_content' => $components,
-    ]);
+      'status' => $page->isPublished() ? 'published' : 'unpublished',
+      'metatags' => $page->get('metatags')->getValue(),
+      'url' => $page->toUrl()->setAbsolute()->toString(),
+      'components' => $page->get('components')->getValue(),
+    ];
+    $this->setStructuredOutput($output);
+    $this->setOutput("```yaml\n" . Yaml::dump($output, 10, 2, Yaml::DUMP_MULTI_LINE_LITERAL_BLOCK) . "\n```");
   }
 
 }

@@ -2,6 +2,8 @@
 
 use Drupal\ai\OperationType\Chat\ChatInput;
 use Drupal\ai\OperationType\Chat\ChatMessage;
+use Drupal\canvas\AutoSave\AutoSaveManager;
+use Drupal\Component\Serialization\Json;
 use Drupal\Core\Entity\EntityInterface;
 use Jfcherng\Diff\DiffHelper;
 use Jfcherng\Diff\Renderer\RendererConstant;
@@ -86,10 +88,15 @@ function context_content_watch_cron() {
   // Check if there is a latest diff stored in state.
   $filename = \Drupal::state()->get('context_content_watch.diff_file');
   if ($filename) {
+    $auto_save_manager = \Drupal::service(AutoSaveManager::class);
     // Get the diff as a string from the file.
     $filepath = 'public://' . $filename;
 
+    // Get the hostname to use in the URL.
+    $host = \Drupal::request()->getSchemeAndHttpHost();
+
     if (file_exists($filepath)) {
+      $mail = [];
       // Load the context diff from the file.
       $diff_string = file_get_contents($filepath);
 
@@ -101,6 +108,11 @@ function context_content_watch_cron() {
 
       // Trigger agent to review each page.
       foreach ($page_ids as $page_id) {
+        // For the demo.
+        if ($page_id < 8) {
+          // Skip front page and about page.
+          continue;
+        }
         $agent = \Drupal::service('plugin.manager.ai_agents')->createInstance('context_based_content_review_agent');
 
         // Set agent inputs.
@@ -109,17 +121,96 @@ function context_content_watch_cron() {
           new ChatMessage('user', 'Diff: ' . $diff_string),
         ]);
 
-        $agent->setChatHistory([$input]);
-        // TODO: This gives an error saying "Call to undefined method Drupal\ai\OperationType\Chat\ChatInput::getText() in Drupal\ai_provider_openai\Plugin\AiProvider\OpenAiProvider->chat()".
+        $agent->setChatInput($input);
         $agent->determineSolvability();
         $output = $agent->solve();
+        $data = Json::decode($output);
+        if (is_array($data) && $data['should_report']) {
+          $page = \Drupal::entityTypeManager()->getStorage('canvas_page')->load($data['id']);
+          $current_changes = $auto_save_manager->getClientAutoSaveData($page);
+          if (!empty($current_changes['hash'])) {
+            $mail[$page_id]['changes'][] = "<strong>Note:</strong> A draft already exists for this page, please review the existing draft before making further changes. But this page should be changed as well.<br>";
+            $mail[$page_id]['url'] = $data['url'];
+          }
+          else {
+            // Lets do changes!
+            $components = $page->get('components')->getValue();
 
-        // TODO: Use the output to update the page and notify user.
+            foreach ($data['change_descriptions'] as $change) {
+              $changes = $change['human_readable'] . "<br>";
+              $mail[$page_id]['changes'][] = $changes;
+              $mail[$page_id]['url'] = $data['url'];
 
-        // Delete the state variable and diff file.
-        \Drupal::state()->delete('context_content_watch.diff_file');
-        unlink($filepath);
+              foreach ($components as $component_key => $component) {
+                if ($component['uuid'] === $change['uuid']) {
+                  // Use AI to figure out what to change, instead of writing a depth parser for the demo.
+                  $ai_provider = \Drupal::service('ai.provider')->createInstance('openai');
+                  $instructions = "You are an AI assistant helping to edit content for a CMS for one row. You will be given a JSON object representing an input and an input key that might use js notation and a change. Please output the changed JSON object. Do not add any greeting or any other text, just the JSON object. Here is the JSON object:\n\n" . $component['inputs'] . "\n\nThe input key is:\n\n" . $change['input'] . "\n\nThe change to make is:\n\n" . $change['changed_data'] . "\n\nRemember to only output the changed JSON object.";
+                  $chat_input = new ChatInput([
+                    new ChatMessage('system', $instructions),
+                  ]);
+                  $response = $ai_provider->chat($chat_input, 'gpt-4.1');
+                  $new_input = $response->getNormalized()->getText();
+                  // Make sure you get valid JSON back.
+                  $new_input_json = Json::decode($new_input);
+                  if (is_array($new_input_json)) {
+                    // We save the input back to the component.
+                    $components[$component_key]['inputs'] = $new_input;
+                  }
+                }
+              }
+              // Save the new components as a draft.
+              $page->set('components', $components);
+              $auto_save_manager->saveEntity($page);
+            }
+          }
+        }
       }
+      // If there are any reports, send an email.
+      if (!empty($mail)) {
+        $mailManager = \Drupal::service('plugin.manager.mail');
+        $module = 'context_content_watch';
+        $key = 'content_change_report';
+        $to = \Drupal::config('system.site')->get('mail');
+        $params['subject'] = 'Content Change Report';
+        $params['message'] = "<p>The following content changes were detected and reported by the AI agent, please review each draft to publish it:</p>";
+        foreach ($mail as $page_id => $report) {
+          $page = \Drupal::entityTypeManager()->getStorage('canvas_page')->load($page_id);
+          $params['message'] .= "<h4>Page ID: {$page_id} (Title: " . $page->label() . ")</h4>";
+          // Check if a auto save already exist, and tell so then.
+          foreach ($report['changes'] as $change) {
+            $params['message'] .= "<li>{$change}</li>";
+          }
+          $params['message'] .= "<strong>Edit link to current draft: </strong><br>" . $host . '/canvas/editor/canvas_page/' . $page_id . "<br>";
+          $params['message'] .= "<strong>View link to original: </strong><br>" . $report['url'] . "<br>";
+          $params['message'] .= "\n";
+        }
+        $params['message'] .= "End of report.\n";
+        $langcode = \Drupal::currentUser()->getPreferredLangcode();
+        $send = TRUE;
+        $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
+        if ($result['result'] !== TRUE) {
+          \Drupal::logger('context_content_watch')->error('There was a problem sending the content change report email to %email.', ['%email' => $to]);
+        }
+        else {
+          \Drupal::logger('context_content_watch')->notice('Content change report email sent to %email.', ['%email' => $to]);
+        }
+      }
+      // Delete the state variable and diff file.
+      \Drupal::state()->delete('context_content_watch.diff_file');
+      unlink($filepath);
     }
+  }
+}
+
+/**
+ * Implements hook_mail().
+ */
+function context_content_watch_mail($key, &$message, $params) {
+  switch ($key) {
+    case 'content_change_report':
+      $message['subject'] = $params['subject'];
+      $message['body'][] = $params['message'];
+      break;
   }
 }

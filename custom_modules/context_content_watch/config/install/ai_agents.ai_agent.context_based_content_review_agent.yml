@@ -1,6 +1,9 @@
+uuid: 230dc8ca-f7eb-4590-b92a-0423e93f5b1d
 langcode: en
 status: true
 dependencies: {  }
+_core:
+  default_config_hash: vwkvXZBcjii93OuGTDXXtPa3MQqhGrjiTyOaqRXfMVY
 id: context_based_content_review_agent
 label: 'Context-Based Content Review Agent'
 description: 'This agent responds to changes made in the context control center. It takes into account the context, as well as changes made to it, then suggests content changes for affected nodes.'
@@ -16,7 +19,7 @@ system_prompt: |-
   1. Page ID: A Drupal Canvas page, containing content components.
   2. Diff: A string in unified diff format, representing the changes that were made to the context.
 
-  Observe the current context contents and the diff string. Use both of these pieces of information to identify what content needs to change in each page. For each node, propose minimal surgical edit to the text content of the page. For each edit, provide replacement text and a succinct revision message explaining the “why”. Do not alter unrelated text. Preserve formatting, links, tokens, and entity references. Maintain tone and style.
+  Observe the current context contents and the diff string. Use both of these pieces of information to identify what content needs to change in each page and each component. For each node, propose minimal surgical edit to the text content of the page. For each edit, provide a human readable change text that goes into a mail, the uuid of the component to change and the change that you want to make.
 
   You have the following tools available.
   1. get_canvas_content: Given a Canvas page ID, this provides the page ID, title, URL and component content on the page. The component content is structured as an array of JSON-encoded strings. This is the content you will be reviewing for potential changes.
@@ -65,4 +68,4 @@ tool_usage_limits:
 exclude_users_role: false
 masquerade_roles: {  }
 structured_output_enabled: true
-structured_output_schema: "{\r\n  \"name\": \"structured_content_report\",\r\n  \"description\": \"Summarize structured content changes into a reportable format.\",\r\n  \"parameters\": {\r\n    \"type\": \"object\",\r\n    \"properties\": {\r\n      \"should_report\": {\r\n        \"type\": \"boolean\",\r\n        \"description\": \"Whether the change should be reported.\"\r\n      },\r\n      \"title\": {\r\n        \"type\": \"string\",\r\n        \"description\": \"The title of the content item.\"\r\n      },\r\n      \"url\": {\r\n        \"type\": \"string\",\r\n        \"description\": \"The canonical URL of the content item.\"\r\n      },\r\n      \"change_descriptions\": {\r\n        \"type\": \"array\",\r\n        \"description\": \"List of descriptions of the changes detected in the content.\",\r\n        \"items\": {\r\n          \"type\": \"string\"\r\n        }\r\n      }\r\n    },\r\n    \"required\": [\"should_report\", \"title\", \"url\", \"change_descriptions\"]\r\n  }\r\n}"
+structured_output_schema: "{\r\n  \"name\": \"structured_content_report\",\r\n  \"description\": \"Summarize structured content changes into a reportable format.\",\r\n  \"schema\": {\r\n    \"type\": \"object\",\r\n    \"properties\": {\r\n      \"should_report\": {\r\n        \"type\": \"boolean\",\r\n        \"description\": \"Whether the change should be reported.\"\r\n      },\r\n      \"id\": {\r\n        \"type\": \"number\",\r\n        \"description\": \"The id of the content item.\"\r\n      },\r\n      \"title\": {\r\n        \"type\": \"string\",\r\n        \"description\": \"The title of the content item.\"\r\n      },\r\n      \"url\": {\r\n        \"type\": \"string\",\r\n        \"description\": \"The canonical URL of the content item.\"\r\n      },\r\n      \"change_descriptions\": {\r\n        \"type\": \"array\",\r\n        \"description\": \"Detailed descriptions of the changes detected in the content.\",\r\n        \"items\": {\r\n          \"type\": \"object\",\r\n          \"properties\": {\r\n            \"human_readable\": {\r\n              \"type\": \"string\",\r\n              \"description\": \"A human-readable description of the change.\"\r\n            },\r\n            \"uuid\": {\r\n              \"type\": \"string\",\r\n              \"description\": \"The UUID of the element that was changed.\"\r\n            },\r\n            \"input\": {\r\n              \"type\": \"string\",\r\n              \"description\": \"The input field or slot that was changed.\"\r\n            },\r\n            \"changed_data\": {\r\n              \"type\": \"string\",\r\n              \"description\": \"The new value or data after the change.\"\r\n            }\r\n          },\r\n          \"required\": [\"human_readable\", \"uuid\", \"input\", \"changed_data\"]\r\n        }\r\n      }\r\n    },\r\n    \"required\": [\"should_report\", \"title\", \"url\", \"change_descriptions\"]\r\n  }\r\n}\r\n"
