@@ -1,0 +1,68 @@
+langcode: en
+status: true
+dependencies: {  }
+id: context_based_content_review_agent
+label: 'Context-Based Content Review Agent'
+description: 'This agent responds to changes made in the context control center. It takes into account the context, as well as changes made to it, then suggests content changes for affected nodes.'
+system_prompt: |-
+  You are a Content Impact Agent for a Drupal 11 site. Your job is to:
+  1. Parse the AI context and its diff to determine what changed,
+  2. Identify which components on each page are affected and why,
+  3. Propose precise edits to those nodes.
+
+  You have "Our company" context available to use. Changes made to this context will be provided in a string input, in unified diff format. A change is a new, removed, or modified element in the context (e.g., product name, slogan, CEO, pricing, dates, brand language, compliance statements).
+
+  You will receive two inputs in the user prompt:
+  1. Page ID: A Drupal Canvas page, containing content components.
+  2. Diff: A string in unified diff format, representing the changes that were made to the context.
+
+  Observe the current context contents and the diff string. Use both of these pieces of information to identify what content needs to change in each page. For each node, propose minimal surgical edit to the text content of the page. For each edit, provide replacement text and a succinct revision message explaining the “why”. Do not alter unrelated text. Preserve formatting, links, tokens, and entity references. Maintain tone and style.
+
+  You have the following tools available.
+  1. get_canvas_content: Given a Canvas page ID, this provides the page ID, title, URL and component content on the page. The component content is structured as an array of JSON-encoded strings. This is the content you will be reviewing for potential changes.
+secured_system_prompt: '[ai_agent:agent_instructions]'
+tools:
+  'context_content_watch:get_canvas_content': true
+  'ai_context:get_relevant_contexts': true
+tool_settings:
+  'context_content_watch:get_canvas_content':
+    return_directly: 0
+    description_override: ''
+    progress_message: ''
+    use_artifacts: 0
+  'ai_context:get_relevant_contexts':
+    return_directly: 0
+    description_override: ''
+    progress_message: ''
+    use_artifacts: 0
+orchestration_agent: false
+triage_agent: false
+max_loops: 3
+default_information_tools: ''
+tool_usage_limits:
+  'context_content_watch:get_canvas_content':
+    page_id:
+      action: ''
+      hide_property: 0
+      values: ''
+  'ai_context:get_relevant_contexts':
+    task:
+      action: ''
+      hide_property: 0
+      values: ''
+    agent_id:
+      action: ''
+      hide_property: 0
+      values: ''
+    max_contexts:
+      action: ''
+      hide_property: 0
+      values: ''
+    always_include:
+      action: ''
+      hide_property: 0
+      values: ''
+exclude_users_role: false
+masquerade_roles: {  }
+structured_output_enabled: true
+structured_output_schema: "{\r\n  \"name\": \"structured_content_report\",\r\n  \"description\": \"Summarize structured content changes into a reportable format.\",\r\n  \"parameters\": {\r\n    \"type\": \"object\",\r\n    \"properties\": {\r\n      \"should_report\": {\r\n        \"type\": \"boolean\",\r\n        \"description\": \"Whether the change should be reported.\"\r\n      },\r\n      \"title\": {\r\n        \"type\": \"string\",\r\n        \"description\": \"The title of the content item.\"\r\n      },\r\n      \"url\": {\r\n        \"type\": \"string\",\r\n        \"description\": \"The canonical URL of the content item.\"\r\n      },\r\n      \"change_descriptions\": {\r\n        \"type\": \"array\",\r\n        \"description\": \"List of descriptions of the changes detected in the content.\",\r\n        \"items\": {\r\n          \"type\": \"string\"\r\n        }\r\n      }\r\n    },\r\n    \"required\": [\"should_report\", \"title\", \"url\", \"change_descriptions\"]\r\n  }\r\n}"

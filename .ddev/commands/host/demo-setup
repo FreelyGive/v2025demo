@@ -22,7 +22,7 @@ rm -rf web/modules/contrib/canvas
 cp -r merged_canvas/canvas web/modules/contrib/canvas
 
 # Copy custom AB split test module
-ddev exec bash -lc 'mkdir -p web/modules/custom && cp -a custom_modules/ab_split_test web/modules/custom/'
+ddev exec bash -lc 'mkdir -p web/modules/custom && cp -a custom_modules/. web/modules/custom/'
 
 # Install
 ddev drush si drupal_cms_installer installer_site_template_form.add_ons=byte --account-pass=admin --site-name="2025 Demo" -y
@@ -36,13 +36,14 @@ ddev composer require 'drupal/ai:1.2.x-dev@dev' \
 'drupal/ai_simple_pdf_to_text:^1.0@alpha' \
 'drupal/ai_vdb_provider_milvus:1.1.x-dev@dev' \
 'drupal/page_cache_exclusion:^1.0' \
-'drupal/pexels_ai:^1.0@alpha'
+'drupal/pexels_ai:^1.0@alpha' \
+'jfcherng/php-diff:^6.0'
 
 # AI Context via git.
 git clone git@git.drupal.org:project/ai_context.git web/modules/contrib/ai_context
 
-# Install simple AB split test
-ddev drush en -y ab_split_test page_cache_exclusion
+# Install modules.
+ddev drush en -y ab_split_test page_cache_exclusion context_content_watch
 
 ddev drush cr
 # Install the AI stuff.
