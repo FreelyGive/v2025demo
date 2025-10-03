@@ -1,0 +1,5 @@
+context_content_watch.ai_suggestion_review:
+  route_name: context_content_watch.ai_suggestion_review
+  title: AI Suggestion Review
+  base_route: system.admin_content
+  weight: 10

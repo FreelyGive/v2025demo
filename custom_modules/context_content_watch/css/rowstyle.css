@@ -23,6 +23,9 @@
 }
 
 .message-row td {
-  padding-top: 0;
-  font-family: monospace;
+  padding-top: 5px;
+}
+
+table .main-row td:last-child {
+  white-space: nowrap;
 }

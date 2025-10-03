@@ -113,11 +113,10 @@ function context_content_watch_cron() {
       foreach ($page_ids as $page_id) {
         $total++;
         // For the demo.
-        // Update 10/2: Commented out this continue block because page IDs in the current demo only go from 1 - 5.
-        // if ($page_id < 8) {
-        // // Skip front page and about page.
-        //  continue;
-        //  }
+        if ($page_id < 8) {
+          // Skip front page and about page.
+          continue;
+        }
         $agent = \Drupal::service('plugin.manager.ai_agents')->createInstance('content_review_agent');
 
         // Set agent inputs.
@@ -197,32 +196,9 @@ function context_content_watch_cron() {
         $module = 'context_content_watch';
         $key = 'content_change_report';
         $to = \Drupal::config('system.site')->get('mail');
-        $params['subject'] = 'Content Change Suggested by AI Agent';
-        $params['message'] = "<p>The AI agent suggests to make the following changes to improve your website based on updates in the Context Control Center.</p>";
-        $params['message'] .= "<p>To see all suggested changes, please visit the <a href=\"" . $host . "/admin/config/ai/suggestion-review\">AI Suggestion Review</a> page.</p>";
-        foreach ($mail as $page_id => $report) {
-          $page = \Drupal::entityTypeManager()->getStorage('canvas_page')->load($page_id);
-          $count++;
-          $params['message'] .= "<h4>" . $page->label() . " (<a href=\"" . $report['url'] . "\">View</a> | <a href=\"" . $host . '/canvas/editor/canvas_page/' . $page_id . "\">Review and Publish</a>)</h4>";
-          // Check if a auto save already exist, and tell so then.
-          if (count($report['changes']) > 1) {
-            $params['message'] .= "<ul>";
-          }
-          foreach ($report['changes'] as $change) {
-            if (count($report['changes']) > 1) {
-              $params['message'] .= "<li>{$change}</li>";
-            }
-            else {
-              $params['message'] .= "<p>{$change}</p>";
-            }
-          }
-          if (count($report['changes']) > 1) {
-            $params['message'] .= "</ul>";
-          }
-          $params['message'] .= "\n";
-        }
-        // Get a count of the pages changed.
-        $params['message'] .= "<p>Total pages suggested for changes: {$count} out of {$total} checked pages.</p>";
+        $params['subject'] = 'Your Content Review Agent has new content improvement recommendations';
+        $params['message'] = "<p>Your Content Review Agent has identified opportunities to improve your website content. These recommendations are based on recent updates in the Context Control Center.</p>";
+        $params['message'] .= "<p>To view, review and publish suggested changes, please visit the <a href=\"" . $host . "/admin/content/ai-suggestion-review\">AI Suggestion Review</a> page.</p>";
         $langcode = \Drupal::currentUser()->getPreferredLangcode();
         $send = TRUE;
         $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
