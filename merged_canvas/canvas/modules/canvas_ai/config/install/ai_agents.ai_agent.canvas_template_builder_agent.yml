@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies: {  }
 _core:
-  default_config_hash: D8WZc3drEuWT_NfQwwWniwy3q0qTfQAs7buQHopYFT4
+  default_config_hash: YNoCOD0-jPBQJ6ZpD4LgN0AYSq_NCEP2J0wWT96KYHg
 id: canvas_template_builder_agent
 label: 'Canvas Template Builder Agent'
 description: 'This sub-agent specializes in building templates for entire pages using available components. It can also be used to generate headers and footers for pages. Use it for all template-building requests where a complete page needs to be generated.'
@@ -165,16 +165,19 @@ tools:
 tool_settings:
   'canvas_ai:set_template_data':
     return_directly: 0
+    require_usage: 1
     description_override: ''
     progress_message: ''
     use_artifacts: 0
   'ai_search:rag_search':
     return_directly: 0
+    require_usage: 1
     description_override: ''
     progress_message: ''
     use_artifacts: 0
   'ai_agents::ai_agent::information_finder':
     return_directly: 0
+    require_usage: 0
     description_override: ''
     progress_message: ''
     use_artifacts: 0
@@ -201,7 +204,7 @@ default_information_tools: |
       fields:
         - title
   context_our_company:
-    label: 'Contexts'
+    label: Contexts
     description: 'This shows some important contexts for the agent to pick its choices'
     tool: 'ai_context:get_relevant_contexts'
     parameters:
