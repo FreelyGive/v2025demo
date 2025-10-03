@@ -15,8 +15,9 @@ A demo Drupal 11 for the V 2025 project. This will install:
 * DDEV 1.24+
 
 ## To install
+* On Mac, make sure to run in bash and not zsh.
 * `cp .ddev/.env.template .ddev/.env` and set your OpenAI key in the file.
-* `ddev demo-setup`
+* From the root of the project `ddev demo-setup`
 
 **Note** Everytime you run `ddev demo-setup` it will delete everything and start from scratch.
 

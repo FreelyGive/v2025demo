@@ -1,12 +1,22 @@
+uuid: 786a1700-1f99-402b-95d7-ee6e6a0f7acb
 langcode: en
 status: true
 dependencies:
   enforced:
     module:
       - canvas_ai
+_core:
+  default_config_hash: YBi_aIL6c6RTlXGausyag0gC-m-y_6b6M8uNHwZR7Hc
 id: canvas_component_agent
 label: 'Drupal Canvas Component Agent'
 description: 'This agent can manipulate things in Drupal Canvas. Since it outputs a very specific JSON format, please do not use this in other contexts.'
+default_information_tools: |
+  get_prop_context:
+    label: 'Get props context'
+    description: 'This context information is for Drupal Canvas prop types'
+    tool: 'ai_agent:get_props_type'
+    parameters:
+      derived_proptypes: '[canvas_ai:derived_proptypes]'
 system_prompt: |-
   You are an expert agent on the Drupal Canvas system. Drupal Canvas is a system where you can add, edit and remove components from a view in Drupal. You are a looping agent, meaning that you can use the tools you have available over and over, until you have an answer.
 
@@ -219,37 +229,6 @@ tools:
   'ai_agent:create_component': true
   'ai_agent:get_props_type': true
   'ai_agent:get_js_component': true
-tool_settings:
-  'ai_agent:edit_component_js':
-    return_directly: 0
-    description_override: ''
-    progress_message: ''
-    use_artifacts: 0
-  'ai_agent:create_component':
-    return_directly: 0
-    description_override: ''
-    progress_message: ''
-    use_artifacts: 0
-  'ai_agent:get_props_type':
-    return_directly: 0
-    description_override: ''
-    progress_message: ''
-    use_artifacts: 0
-  'ai_agent:get_js_component':
-    return_directly: 0
-    description_override: ''
-    progress_message: ''
-    use_artifacts: 0
-orchestration_agent: false
-triage_agent: true
-max_loops: 10
-default_information_tools: |
-  get_prop_context:
-    label: 'Get props context'
-    description: 'This context information is for Drupal Canvas prop types'
-    tool: 'ai_agent:get_props_type'
-    parameters:
-      derived_proptypes: '[canvas_ai:derived_proptypes]'
 tool_usage_limits:
   'ai_agent:edit_component_js':
     javascript:
@@ -291,7 +270,31 @@ tool_usage_limits:
       action: ''
       hide_property: 0
       values: ''
-exclude_users_role: false
+tool_settings:
+  'ai_agent:edit_component_js':
+    return_directly: 0
+    description_override: ''
+    progress_message: ''
+    use_artifacts: 0
+  'ai_agent:create_component':
+    return_directly: 0
+    description_override: ''
+    progress_message: ''
+    use_artifacts: 0
+  'ai_agent:get_props_type':
+    return_directly: 0
+    description_override: ''
+    progress_message: ''
+    use_artifacts: 0
+  'ai_agent:get_js_component':
+    return_directly: 0
+    description_override: ''
+    progress_message: ''
+    use_artifacts: 0
+orchestration_agent: false
+triage_agent: true
+max_loops: 10
 masquerade_roles: {  }
+exclude_users_role: false
 structured_output_enabled: false
 structured_output_schema: ''
