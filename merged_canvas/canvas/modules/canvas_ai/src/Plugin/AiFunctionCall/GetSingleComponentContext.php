@@ -16,32 +16,31 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Yaml\Yaml;
 
 /**
- * Function call plugin to get component context.
+ * Function call plugin to get single component context.
  *
- * This plugin retrieves information about all available components in the site
+ * This plugin retrieves information about one component in the site
  * using the CanvasPageBuilderHelper service. The information can be used by AI
  * agents to understand available components and their capabilities.
  *
  * @internal
  */
 #[FunctionCall(
-  id: 'canvas_ai:get_component_context',
-  function_name: 'get_component_context',
-  name: 'Get Component Context',
-  description: 'This method gets information about all available components in the site.',
+  id: 'canvas_ai:get_single_component_context',
+  function_name: 'get_single_component_context',
+  name: 'Get Single Component Context',
+  description: 'This method gets information about a specific component in the site.',
   group: 'information_tools',
   module_dependencies: ['canvas_ai'],
   context_definitions: [
-    'verbose' => new ContextDefinition(
-      data_type: 'boolean',
-      label: new TranslatableMarkup("Verbose"),
-      description: new TranslatableMarkup("If this is true, the output will include all information about each component, including configuration options. If false, only the name and description will be included."),
-      default_value: TRUE,
+    'component' => new ContextDefinition(
+      data_type: 'string',
+      label: new TranslatableMarkup("Component"),
+      description: new TranslatableMarkup("Optional id of a specific component to get information about. If not provided, information about all components will be returned."),
       required: FALSE,
     ),
   ],
 )]
-final class GetComponentContext extends FunctionCallBase implements ExecutableFunctionCallInterface, AiAgentContextInterface {
+final class GetSingleComponentContext extends FunctionCallBase implements ExecutableFunctionCallInterface, AiAgentContextInterface {
 
   /**
    * The Canvas page builder helper service.
@@ -77,23 +76,20 @@ final class GetComponentContext extends FunctionCallBase implements ExecutableFu
    */
   public function execute(): void {
     // Get the context values.
-    $verbose = $this->getContextValue('verbose');
+    $component = $this->getContextValue('component') ?? '';
     // Make sure that the user has the right permissions.
     if (!$this->currentUser->hasPermission(CanvasAiPermissions::USE_CANVAS_AI)) {
       throw new \Exception('The current user does not have the right permissions to run this tool.');
     }
     $data = Yaml::parse($this->pageBuilderHelper->getComponentContextForAi());
-    if (!$verbose) {
-      // If not verbose, only include name and description.
-      foreach ($data as $id => $component) {
-        $data[$id] = [
-          'id' => $component['id'],
-          'name' => $component['name'],
-          'description' => $component['description'],
-        ];
+    if (!empty($component)) {
+      // If a specific component is requested, filter to just that one.
+      foreach ($data as $id => $component_data) {
+        if ($component_data['id'] !== $component) {
+          unset($data[$id]);
+        }
       }
     }
     $this->setOutput(Yaml::dump($data, 10, 2));
   }
-
 }

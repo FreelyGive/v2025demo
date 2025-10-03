@@ -1,491 +1,2437 @@
 _core:
-  default_config_hash: Va7bcT5SD4kDVsQuCP6ntDrhUAcz20uxE5m3hwn53jg
+  default_config_hash: Fa_HlLpKBn-rj5nOHQ-x8u8On1AtUHEU0beukLpAGuo
 component_context:
   block:
     enabled: 1
     data: |
       block.announce_block:
-          id: block.announce_block
-          name: 'Announcements Feed'
-          description: 'Announcements Feed'
-          props: 'No props'
-          hidden: 1
+        id: block.announce_block
+        name: 'Announcements Feed'
+        description: 'Announcements Feed'
+        props:
+          label:
+            name: label
+            description: 'The block title. Required.'
+            type: string
+            default: ''
+          label_display:
+            name: label_display
+            description: 'Whether to display the block title. Required.'
+            type: boolean
+            default: true
+        hidden: 1
       block.dashboard_site_status:
-          id: block.dashboard_site_status
-          name: 'Site Status'
-          description: 'Site Status'
-          props: 'No props'
-          hidden: 1
+        id: block.dashboard_site_status
+        name: 'Site Status'
+        description: 'Site Status'
+        props:
+          label:
+            name: label
+            description: 'The block title. Required.'
+            type: string
+            default: ''
+          label_display:
+            name: label_display
+            description: 'Whether to display the block title. Required.'
+            type: boolean
+            default: true
+        hidden: 1
       block.local_actions_block:
-          id: block.local_actions_block
-          name: 'Primary admin actions'
-          description: 'Primary admin actions'
-          props: 'No props'
-          hidden: 1
+        id: block.local_actions_block
+        name: 'Primary admin actions'
+        description: 'Primary admin actions'
+        props:
+          label:
+            name: label
+            description: 'The block title. Required.'
+            type: string
+            default: ''
+          label_display:
+            name: label_display
+            description: 'Whether to display the block title. Required.'
+            type: boolean
+            default: true
+        hidden: 1
       block.local_tasks_block:
-          id: block.local_tasks_block
-          name: Tabs
-          description: Tabs
-          props: { primary: { name: primary, description: 'primary. Is required, even if just empty.', type: boolean, default: true }, secondary: { name: secondary, description: 'secondary. Is required, even if just empty.', type: boolean, default: true } }
-          hidden: 1
+        id: block.local_tasks_block
+        name: Tabs
+        description: Tabs
+        props:
+          label:
+            name: label
+            description: 'The block title. Required.'
+            type: string
+            default: ''
+          label_display:
+            name: label_display
+            description: 'Whether to display the block title. Required.'
+            type: boolean
+            default: true
+          primary:
+            name: primary
+            description: 'primary. Is required, even if just empty.'
+            type: boolean
+            default: true
+          secondary:
+            name: secondary
+            description: 'secondary. Is required, even if just empty.'
+            type: boolean
+            default: true
+        hidden: 1
       block.navigation_dashboard:
-          id: block.navigation_dashboard
-          name: 'Navigation Dashboard'
-          description: 'Navigation Dashboard'
-          props: 'No props'
-          hidden: 1
+        id: block.navigation_dashboard
+        name: 'Navigation Dashboard'
+        description: 'Navigation Dashboard'
+        props:
+          label:
+            name: label
+            description: 'The block title. Required.'
+            type: string
+            default: ''
+          label_display:
+            name: label_display
+            description: 'Whether to display the block title. Required.'
+            type: boolean
+            default: true
+        hidden: 1
       block.navigation_link:
-          id: block.navigation_link
-          name: Link
-          description: Link
-          props: { title: { name: title, description: 'title. Is required, even if just empty.', type: string, default: '' }, uri: { name: uri, description: 'uri. Is required, even if just empty.', type: string, default: '' }, icon_class: { name: icon_class, description: 'icon_class. Is required, even if just empty.', type: string, default: '' } }
-          hidden: 1
+        id: block.navigation_link
+        name: Link
+        description: Link
+        props:
+          label:
+            name: label
+            description: 'The block title. Required.'
+            type: string
+            default: ''
+          label_display:
+            name: label_display
+            description: 'Whether to display the block title. Required.'
+            type: boolean
+            default: true
+          title:
+            name: title
+            description: 'title. Is required, even if just empty.'
+            type: string
+            default: ''
+          uri:
+            name: uri
+            description: 'uri. Is required, even if just empty.'
+            type: string
+            default: ''
+          icon_class:
+            name: icon_class
+            description: 'icon_class. Is required, even if just empty.'
+            type: string
+            default: ''
+        hidden: 1
       block.navigation_shortcuts:
-          id: block.navigation_shortcuts
-          name: 'Navigation Shortcuts'
-          description: 'Navigation Shortcuts'
-          props: 'No props'
-          hidden: 1
+        id: block.navigation_shortcuts
+        name: 'Navigation Shortcuts'
+        description: 'Navigation Shortcuts'
+        props:
+          label:
+            name: label
+            description: 'The block title. Required.'
+            type: string
+            default: ''
+          label_display:
+            name: label_display
+            description: 'Whether to display the block title. Required.'
+            type: boolean
+            default: true
+        hidden: 1
       block.navigation_user:
-          id: block.navigation_user
-          name: User
-          description: User
-          props: 'No props'
-          hidden: 1
+        id: block.navigation_user
+        name: User
+        description: User
+        props:
+          label:
+            name: label
+            description: 'The block title. Required.'
+            type: string
+            default: ''
+          label_display:
+            name: label_display
+            description: 'Whether to display the block title. Required.'
+            type: boolean
+            default: true
+        hidden: 1
       block.page_title_block:
-          id: block.page_title_block
-          name: 'Page title'
-          description: 'Page title'
-          props: 'No props'
-          hidden: 1
+        id: block.page_title_block
+        name: 'Page title'
+        description: 'Page title'
+        props:
+          label:
+            name: label
+            description: 'The block title. Required.'
+            type: string
+            default: ''
+          label_display:
+            name: label_display
+            description: 'Whether to display the block title. Required.'
+            type: boolean
+            default: true
+        hidden: 1
       block.project_browser_block.drupalorg_jsonapi:
-          id: block.project_browser_block.drupalorg_jsonapi
-          name: 'Contrib modules'
-          description: 'Contrib modules'
-          props: { paginate: { name: paginate, description: 'paginate. Is required, even if just empty.', type: boolean, default: true }, page_sizes: { name: page_sizes, description: 'page_sizes. Is required, even if just empty.', type: string, default: '12, 24, 36, 48' }, sort_options: { name: sort_options, description: 'sort_options. Is required, even if just empty.', type: string, default: null }, default_sort: { name: default_sort, description: 'default_sort. Is required, even if just empty.', type: string, default: null }, filters: { name: filters, description: 'filters. Is required, even if just empty.', type: string, default: null } }
-          hidden: 1
+        id: block.project_browser_block.drupalorg_jsonapi
+        name: 'Contrib modules'
+        description: 'Contrib modules'
+        props:
+          label:
+            name: label
+            description: 'The block title. Required.'
+            type: string
+            default: ''
+          label_display:
+            name: label_display
+            description: 'Whether to display the block title. Required.'
+            type: boolean
+            default: true
+          paginate:
+            name: paginate
+            description: 'paginate. Is required, even if just empty.'
+            type: boolean
+            default: true
+          page_sizes:
+            name: page_sizes
+            description: 'page_sizes. Is required, even if just empty.'
+            type: string
+            default: '12, 24, 36, 48'
+          sort_options:
+            name: sort_options
+            description: 'sort_options. Is required, even if just empty.'
+            type: string
+            default: null
+          default_sort:
+            name: default_sort
+            description: 'default_sort. Is required, even if just empty.'
+            type: string
+            default: null
+          filters:
+            name: filters
+            description: 'filters. Is required, even if just empty.'
+            type: string
+            default: null
+        hidden: 1
       block.project_browser_block.recipes:
-          id: block.project_browser_block.recipes
-          name: Recipes
-          description: Recipes
-          props: 'No props'
-          hidden: 1
+        id: block.project_browser_block.recipes
+        name: Recipes
+        description: Recipes
+        props:
+          label:
+            name: label
+            description: 'The block title. Required.'
+            type: string
+            default: ''
+          label_display:
+            name: label_display
+            description: 'Whether to display the block title. Required.'
+            type: boolean
+            default: true
+        hidden: 1
       block.project_browser_block.recommended:
-          id: block.project_browser_block.recommended
-          name: 'Recommended add-ons'
-          description: 'Recommended add-ons'
-          props: { paginate: { name: paginate, description: 'paginate. Is required, even if just empty.', type: boolean, default: true }, page_sizes: { name: page_sizes, description: 'page_sizes. Is required, even if just empty.', type: string, default: '12, 24, 36, 48' }, sort_options: { name: sort_options, description: 'sort_options. Is required, even if just empty.', type: string, default: null }, default_sort: { name: default_sort, description: 'default_sort. Is required, even if just empty.', type: string, default: null }, filters: { name: filters, description: 'filters. Is required, even if just empty.', type: string, default: null } }
-          hidden: 1
+        id: block.project_browser_block.recommended
+        name: 'Recommended add-ons'
+        description: 'Recommended add-ons'
+        props:
+          label:
+            name: label
+            description: 'The block title. Required.'
+            type: string
+            default: ''
+          label_display:
+            name: label_display
+            description: 'Whether to display the block title. Required.'
+            type: boolean
+            default: true
+          paginate:
+            name: paginate
+            description: 'paginate. Is required, even if just empty.'
+            type: boolean
+            default: true
+          page_sizes:
+            name: page_sizes
+            description: 'page_sizes. Is required, even if just empty.'
+            type: string
+            default: '12, 24, 36, 48'
+          sort_options:
+            name: sort_options
+            description: 'sort_options. Is required, even if just empty.'
+            type: string
+            default: null
+          default_sort:
+            name: default_sort
+            description: 'default_sort. Is required, even if just empty.'
+            type: string
+            default: null
+          filters:
+            name: filters
+            description: 'filters. Is required, even if just empty.'
+            type: string
+            default: null
+        hidden: 1
       block.sitemap:
-          id: block.sitemap
-          name: Sitemap
-          description: Sitemap
-          props: 'No props'
-          hidden: 1
+        id: block.sitemap
+        name: Sitemap
+        description: Sitemap
+        props:
+          label:
+            name: label
+            description: 'The block title. Required.'
+            type: string
+            default: ''
+          label_display:
+            name: label_display
+            description: 'Whether to display the block title. Required.'
+            type: boolean
+            default: true
+        hidden: 1
       block.sitemap_syndicate:
-          id: block.sitemap_syndicate
-          name: 'Syndicate (sitemap)'
-          description: 'Syndicate (sitemap)'
-          props: { cache: { name: cache, description: 'cache. Is required, even if just empty.', type: string, default: { max_age: 0 } } }
-          hidden: 1
+        id: block.sitemap_syndicate
+        name: 'Syndicate (sitemap)'
+        description: 'Syndicate (sitemap)'
+        props:
+          label:
+            name: label
+            description: 'The block title. Required.'
+            type: string
+            default: ''
+          label_display:
+            name: label_display
+            description: 'Whether to display the block title. Required.'
+            type: boolean
+            default: true
+          cache:
+            name: cache
+            description: 'cache. Is required, even if just empty.'
+            type: string
+            default:
+              max_age: 0
+        hidden: 1
       block.system_branding_block:
-          id: block.system_branding_block
-          name: 'Site branding'
-          description: 'Site branding'
-          props: { use_site_logo: { name: use_site_logo, description: 'use_site_logo. Is required, even if just empty.', type: boolean, default: true }, use_site_name: { name: use_site_name, description: 'use_site_name. Is required, even if just empty.', type: boolean, default: true }, use_site_slogan: { name: use_site_slogan, description: 'use_site_slogan. Is required, even if just empty.', type: boolean, default: true } }
-          hidden: 1
+        id: block.system_branding_block
+        name: 'Site branding'
+        description: 'Site branding'
+        props:
+          label:
+            name: label
+            description: 'The block title. Required.'
+            type: string
+            default: ''
+          label_display:
+            name: label_display
+            description: 'Whether to display the block title. Required.'
+            type: boolean
+            default: true
+          use_site_logo:
+            name: use_site_logo
+            description: 'use_site_logo. Is required, even if just empty.'
+            type: boolean
+            default: true
+          use_site_name:
+            name: use_site_name
+            description: 'use_site_name. Is required, even if just empty.'
+            type: boolean
+            default: true
+          use_site_slogan:
+            name: use_site_slogan
+            description: 'use_site_slogan. Is required, even if just empty.'
+            type: boolean
+            default: true
+        hidden: 1
       block.system_breadcrumb_block:
-          id: block.system_breadcrumb_block
-          name: Breadcrumbs
-          description: Breadcrumbs
-          props: 'No props'
-          hidden: 1
+        id: block.system_breadcrumb_block
+        name: Breadcrumbs
+        description: Breadcrumbs
+        props:
+          label:
+            name: label
+            description: 'The block title. Required.'
+            type: string
+            default: ''
+          label_display:
+            name: label_display
+            description: 'Whether to display the block title. Required.'
+            type: boolean
+            default: true
+        hidden: 1
       block.system_clear_cache_block:
-          id: block.system_clear_cache_block
-          name: 'Clear cache'
-          description: 'Clear cache'
-          props: 'No props'
-          hidden: 1
+        id: block.system_clear_cache_block
+        name: 'Clear cache'
+        description: 'Clear cache'
+        props:
+          label:
+            name: label
+            description: 'The block title. Required.'
+            type: string
+            default: ''
+          label_display:
+            name: label_display
+            description: 'Whether to display the block title. Required.'
+            type: boolean
+            default: true
+        hidden: 1
       block.system_menu_block.account:
-          id: block.system_menu_block.account
-          name: 'User account menu'
-          description: 'User account menu'
-          props: { level: { name: level, description: 'level. Is required, even if just empty.', type: number, default: 1 }, depth: { name: depth, description: 'depth. Is required, even if just empty.', type: string, default: null }, expand_all_items: { name: expand_all_items, description: 'expand_all_items. Is required, even if just empty.', type: boolean, default: false } }
-          hidden: 1
+        id: block.system_menu_block.account
+        name: 'User account menu'
+        description: 'User account menu'
+        props:
+          label:
+            name: label
+            description: 'The block title. Required.'
+            type: string
+            default: ''
+          label_display:
+            name: label_display
+            description: 'Whether to display the block title. Required.'
+            type: boolean
+            default: true
+          level:
+            name: level
+            description: 'level. Is required, even if just empty.'
+            type: number
+            default: 1
+          depth:
+            name: depth
+            description: 'depth. Is required, even if just empty.'
+            type: string
+            default: null
+          expand_all_items:
+            name: expand_all_items
+            description: 'expand_all_items. Is required, even if just empty.'
+            type: boolean
+            default: false
+        hidden: 1
       block.system_menu_block.admin:
-          id: block.system_menu_block.admin
-          name: Administration
-          description: Administration
-          props: { level: { name: level, description: 'level. Is required, even if just empty.', type: number, default: 1 }, depth: { name: depth, description: 'depth. Is required, even if just empty.', type: string, default: null }, expand_all_items: { name: expand_all_items, description: 'expand_all_items. Is required, even if just empty.', type: boolean, default: false } }
-          hidden: 1
+        id: block.system_menu_block.admin
+        name: Administration
+        description: Administration
+        props:
+          label:
+            name: label
+            description: 'The block title. Required.'
+            type: string
+            default: ''
+          label_display:
+            name: label_display
+            description: 'Whether to display the block title. Required.'
+            type: boolean
+            default: true
+          level:
+            name: level
+            description: 'level. Is required, even if just empty.'
+            type: number
+            default: 1
+          depth:
+            name: depth
+            description: 'depth. Is required, even if just empty.'
+            type: string
+            default: null
+          expand_all_items:
+            name: expand_all_items
+            description: 'expand_all_items. Is required, even if just empty.'
+            type: boolean
+            default: false
+        hidden: 1
       block.system_menu_block.content:
-          id: block.system_menu_block.content
-          name: Content
-          description: Content
-          props: { level: { name: level, description: 'level. Is required, even if just empty.', type: number, default: 1 }, depth: { name: depth, description: 'depth. Is required, even if just empty.', type: string, default: null }, expand_all_items: { name: expand_all_items, description: 'expand_all_items. Is required, even if just empty.', type: boolean, default: false } }
-          hidden: 1
+        id: block.system_menu_block.content
+        name: Content
+        description: Content
+        props:
+          label:
+            name: label
+            description: 'The block title. Required.'
+            type: string
+            default: ''
+          label_display:
+            name: label_display
+            description: 'Whether to display the block title. Required.'
+            type: boolean
+            default: true
+          level:
+            name: level
+            description: 'level. Is required, even if just empty.'
+            type: number
+            default: 1
+          depth:
+            name: depth
+            description: 'depth. Is required, even if just empty.'
+            type: string
+            default: null
+          expand_all_items:
+            name: expand_all_items
+            description: 'expand_all_items. Is required, even if just empty.'
+            type: boolean
+            default: false
+        hidden: 1
       block.system_menu_block.footer:
-          id: block.system_menu_block.footer
-          name: Footer
-          description: Footer
-          props: { level: { name: level, description: 'level. Is required, even if just empty.', type: number, default: 1 }, depth: { name: depth, description: 'depth. Is required, even if just empty.', type: string, default: null }, expand_all_items: { name: expand_all_items, description: 'expand_all_items. Is required, even if just empty.', type: boolean, default: false } }
-          hidden: 1
+        id: block.system_menu_block.footer
+        name: Footer
+        description: Footer
+        props:
+          label:
+            name: label
+            description: 'The block title. Required.'
+            type: string
+            default: ''
+          label_display:
+            name: label_display
+            description: 'Whether to display the block title. Required.'
+            type: boolean
+            default: true
+          level:
+            name: level
+            description: 'level. Is required, even if just empty.'
+            type: number
+            default: 1
+          depth:
+            name: depth
+            description: 'depth. Is required, even if just empty.'
+            type: string
+            default: null
+          expand_all_items:
+            name: expand_all_items
+            description: 'expand_all_items. Is required, even if just empty.'
+            type: boolean
+            default: false
+        hidden: 1
       block.system_menu_block.main:
-          id: block.system_menu_block.main
-          name: 'Main navigation'
-          description: 'Main navigation'
-          props: { level: { name: level, description: 'level. Is required, even if just empty.', type: number, default: 1 }, depth: { name: depth, description: 'depth. Is required, even if just empty.', type: string, default: null }, expand_all_items: { name: expand_all_items, description: 'expand_all_items. Is required, even if just empty.', type: boolean, default: false } }
-          hidden: 1
+        id: block.system_menu_block.main
+        name: 'Main navigation'
+        description: 'Main navigation'
+        props:
+          label:
+            name: label
+            description: 'The block title. Required.'
+            type: string
+            default: ''
+          label_display:
+            name: label_display
+            description: 'Whether to display the block title. Required.'
+            type: boolean
+            default: true
+          level:
+            name: level
+            description: 'level. Is required, even if just empty.'
+            type: number
+            default: 1
+          depth:
+            name: depth
+            description: 'depth. Is required, even if just empty.'
+            type: string
+            default: null
+          expand_all_items:
+            name: expand_all_items
+            description: 'expand_all_items. Is required, even if just empty.'
+            type: boolean
+            default: false
+        hidden: 1
       block.system_menu_block.navigation-user-links:
-          id: block.system_menu_block.navigation-user-links
-          name: 'Navigation user links'
-          description: 'Navigation user links'
-          props: { level: { name: level, description: 'level. Is required, even if just empty.', type: number, default: 1 }, depth: { name: depth, description: 'depth. Is required, even if just empty.', type: string, default: null }, expand_all_items: { name: expand_all_items, description: 'expand_all_items. Is required, even if just empty.', type: boolean, default: false } }
-          hidden: 1
+        id: block.system_menu_block.navigation-user-links
+        name: 'Navigation user links'
+        description: 'Navigation user links'
+        props:
+          label:
+            name: label
+            description: 'The block title. Required.'
+            type: string
+            default: ''
+          label_display:
+            name: label_display
+            description: 'Whether to display the block title. Required.'
+            type: boolean
+            default: true
+          level:
+            name: level
+            description: 'level. Is required, even if just empty.'
+            type: number
+            default: 1
+          depth:
+            name: depth
+            description: 'depth. Is required, even if just empty.'
+            type: string
+            default: null
+          expand_all_items:
+            name: expand_all_items
+            description: 'expand_all_items. Is required, even if just empty.'
+            type: boolean
+            default: false
+        hidden: 1
       block.system_menu_block.social:
-          id: block.system_menu_block.social
-          name: Social
-          description: Social
-          props: { level: { name: level, description: 'level. Is required, even if just empty.', type: number, default: 1 }, depth: { name: depth, description: 'depth. Is required, even if just empty.', type: string, default: null }, expand_all_items: { name: expand_all_items, description: 'expand_all_items. Is required, even if just empty.', type: boolean, default: false } }
-          hidden: 1
+        id: block.system_menu_block.social
+        name: Social
+        description: Social
+        props:
+          label:
+            name: label
+            description: 'The block title. Required.'
+            type: string
+            default: ''
+          label_display:
+            name: label_display
+            description: 'Whether to display the block title. Required.'
+            type: boolean
+            default: true
+          level:
+            name: level
+            description: 'level. Is required, even if just empty.'
+            type: number
+            default: 1
+          depth:
+            name: depth
+            description: 'depth. Is required, even if just empty.'
+            type: string
+            default: null
+          expand_all_items:
+            name: expand_all_items
+            description: 'expand_all_items. Is required, even if just empty.'
+            type: boolean
+            default: false
+        hidden: 1
       block.system_menu_block.tools:
-          id: block.system_menu_block.tools
-          name: Tools
-          description: Tools
-          props: { level: { name: level, description: 'level. Is required, even if just empty.', type: number, default: 1 }, depth: { name: depth, description: 'depth. Is required, even if just empty.', type: string, default: null }, expand_all_items: { name: expand_all_items, description: 'expand_all_items. Is required, even if just empty.', type: boolean, default: false } }
-          hidden: 1
+        id: block.system_menu_block.tools
+        name: Tools
+        description: Tools
+        props:
+          label:
+            name: label
+            description: 'The block title. Required.'
+            type: string
+            default: ''
+          label_display:
+            name: label_display
+            description: 'Whether to display the block title. Required.'
+            type: boolean
+            default: true
+          level:
+            name: level
+            description: 'level. Is required, even if just empty.'
+            type: number
+            default: 1
+          depth:
+            name: depth
+            description: 'depth. Is required, even if just empty.'
+            type: string
+            default: null
+          expand_all_items:
+            name: expand_all_items
+            description: 'expand_all_items. Is required, even if just empty.'
+            type: boolean
+            default: false
+        hidden: 1
       block.system_menu_block.top-tasks:
-          id: block.system_menu_block.top-tasks
-          name: 'Top tasks'
-          description: 'Top tasks'
-          props: { level: { name: level, description: 'level. Is required, even if just empty.', type: number, default: 1 }, depth: { name: depth, description: 'depth. Is required, even if just empty.', type: string, default: null }, expand_all_items: { name: expand_all_items, description: 'expand_all_items. Is required, even if just empty.', type: boolean, default: false } }
-          hidden: 1
+        id: block.system_menu_block.top-tasks
+        name: 'Top tasks'
+        description: 'Top tasks'
+        props:
+          label:
+            name: label
+            description: 'The block title. Required.'
+            type: string
+            default: ''
+          label_display:
+            name: label_display
+            description: 'Whether to display the block title. Required.'
+            type: boolean
+            default: true
+          level:
+            name: level
+            description: 'level. Is required, even if just empty.'
+            type: number
+            default: 1
+          depth:
+            name: depth
+            description: 'depth. Is required, even if just empty.'
+            type: string
+            default: null
+          expand_all_items:
+            name: expand_all_items
+            description: 'expand_all_items. Is required, even if just empty.'
+            type: boolean
+            default: false
+        hidden: 1
       block.system_menu_block.utility:
-          id: block.system_menu_block.utility
-          name: Utility
-          description: Utility
-          props: { level: { name: level, description: 'level. Is required, even if just empty.', type: number, default: 1 }, depth: { name: depth, description: 'depth. Is required, even if just empty.', type: string, default: null }, expand_all_items: { name: expand_all_items, description: 'expand_all_items. Is required, even if just empty.', type: boolean, default: false } }
-          hidden: 1
+        id: block.system_menu_block.utility
+        name: Utility
+        description: Utility
+        props:
+          label:
+            name: label
+            description: 'The block title. Required.'
+            type: string
+            default: ''
+          label_display:
+            name: label_display
+            description: 'Whether to display the block title. Required.'
+            type: boolean
+            default: true
+          level:
+            name: level
+            description: 'level. Is required, even if just empty.'
+            type: number
+            default: 1
+          depth:
+            name: depth
+            description: 'depth. Is required, even if just empty.'
+            type: string
+            default: null
+          expand_all_items:
+            name: expand_all_items
+            description: 'expand_all_items. Is required, even if just empty.'
+            type: boolean
+            default: false
+        hidden: 1
       block.system_messages_block:
-          id: block.system_messages_block
-          name: Messages
-          description: Messages
-          props: 'No props'
-          hidden: 1
+        id: block.system_messages_block
+        name: Messages
+        description: Messages
+        props:
+          label:
+            name: label
+            description: 'The block title. Required.'
+            type: string
+            default: ''
+          label_display:
+            name: label_display
+            description: 'Whether to display the block title. Required.'
+            type: boolean
+            default: true
+        hidden: 1
       block.system_powered_by_block:
-          id: block.system_powered_by_block
-          name: 'Powered by Drupal'
-          description: 'Powered by Drupal'
-          props: 'No props'
-          hidden: 1
+        id: block.system_powered_by_block
+        name: 'Powered by Drupal'
+        description: 'Powered by Drupal'
+        props:
+          label:
+            name: label
+            description: 'The block title. Required.'
+            type: string
+            default: ''
+          label_display:
+            name: label_display
+            description: 'Whether to display the block title. Required.'
+            type: boolean
+            default: true
+        hidden: 1
       block.user_login_block:
-          id: block.user_login_block
-          name: 'User login'
-          description: 'User login'
-          props: 'No props'
-          hidden: 1
+        id: block.user_login_block
+        name: 'User login'
+        description: 'User login'
+        props:
+          label:
+            name: label
+            description: 'The block title. Required.'
+            type: string
+            default: ''
+          label_display:
+            name: label_display
+            description: 'Whether to display the block title. Required.'
+            type: boolean
+            default: true
+        hidden: 1
       block.views_block.blog-all:
-          id: block.views_block.blog-all
-          name: 'Blog: All blog posts'
-          description: 'Blog: All blog posts'
-          props: { views_label: { name: views_label, description: 'views_label. Is required, even if just empty.', type: string, default: '' }, items_per_page: { name: items_per_page, description: 'items_per_page. Is required, even if just empty.', type: string, default: null } }
-          hidden: 1
+        id: block.views_block.blog-all
+        name: 'Blog: All blog posts'
+        description: 'Blog: All blog posts'
+        props:
+          label:
+            name: label
+            description: 'The block title. Required.'
+            type: string
+            default: ''
+          label_display:
+            name: label_display
+            description: 'Whether to display the block title. Required.'
+            type: boolean
+            default: true
+          views_label:
+            name: views_label
+            description: 'views_label. Is required, even if just empty.'
+            type: string
+            default: ''
+          items_per_page:
+            name: items_per_page
+            description: 'items_per_page. Is required, even if just empty.'
+            type: string
+            default: null
+        hidden: 1
       block.views_block.blog-latest:
-          id: block.views_block.blog-latest
-          name: 'Blog: Latest blog posts'
-          description: 'Blog: Latest blog posts'
-          props: { views_label: { name: views_label, description: 'views_label. Is required, even if just empty.', type: string, default: '' }, items_per_page: { name: items_per_page, description: 'items_per_page. Is required, even if just empty.', type: string, default: null } }
-          hidden: 1
+        id: block.views_block.blog-latest
+        name: 'Blog: Latest blog posts'
+        description: 'Blog: Latest blog posts'
+        props:
+          label:
+            name: label
+            description: 'The block title. Required.'
+            type: string
+            default: ''
+          label_display:
+            name: label_display
+            description: 'Whether to display the block title. Required.'
+            type: boolean
+            default: true
+          views_label:
+            name: views_label
+            description: 'views_label. Is required, even if just empty.'
+            type: string
+            default: ''
+          items_per_page:
+            name: items_per_page
+            description: 'items_per_page. Is required, even if just empty.'
+            type: string
+            default: null
+        hidden: 1
       block.views_block.blog-related:
-          id: block.views_block.blog-related
-          name: 'Blog: Related blog posts'
-          description: 'Blog: Related blog posts'
-          props: { views_label: { name: views_label, description: 'views_label. Is required, even if just empty.', type: string, default: '' }, items_per_page: { name: items_per_page, description: 'items_per_page. Is required, even if just empty.', type: string, default: null } }
-          hidden: 1
+        id: block.views_block.blog-related
+        name: 'Blog: Related blog posts'
+        description: 'Blog: Related blog posts'
+        props:
+          label:
+            name: label
+            description: 'The block title. Required.'
+            type: string
+            default: ''
+          label_display:
+            name: label_display
+            description: 'Whether to display the block title. Required.'
+            type: boolean
+            default: true
+          views_label:
+            name: views_label
+            description: 'views_label. Is required, even if just empty.'
+            type: string
+            default: ''
+          items_per_page:
+            name: items_per_page
+            description: 'items_per_page. Is required, even if just empty.'
+            type: string
+            default: null
+        hidden: 1
       block.views_block.canvas_pages-block_1:
-          id: block.views_block.canvas_pages-block_1
-          name: Pages
-          description: Pages
-          props: { views_label: { name: views_label, description: 'views_label. Is required, even if just empty.', type: string, default: '' }, items_per_page: { name: items_per_page, description: 'items_per_page. Is required, even if just empty.', type: string, default: null } }
-          hidden: 1
+        id: block.views_block.canvas_pages-block_1
+        name: Pages
+        description: Pages
+        props:
+          label:
+            name: label
+            description: 'The block title. Required.'
+            type: string
+            default: ''
+          label_display:
+            name: label_display
+            description: 'Whether to display the block title. Required.'
+            type: boolean
+            default: true
+          views_label:
+            name: views_label
+            description: 'views_label. Is required, even if just empty.'
+            type: string
+            default: ''
+          items_per_page:
+            name: items_per_page
+            description: 'items_per_page. Is required, even if just empty.'
+            type: string
+            default: null
+        hidden: 1
       block.views_block.latest-latest:
-          id: block.views_block.latest-latest
-          name: Latest
-          description: Latest
-          props: { views_label: { name: views_label, description: 'views_label. Is required, even if just empty.', type: string, default: '' }, items_per_page: { name: items_per_page, description: 'items_per_page. Is required, even if just empty.', type: string, default: null } }
-          hidden: 1
+        id: block.views_block.latest-latest
+        name: Latest
+        description: Latest
+        props:
+          label:
+            name: label
+            description: 'The block title. Required.'
+            type: string
+            default: ''
+          label_display:
+            name: label_display
+            description: 'Whether to display the block title. Required.'
+            type: boolean
+            default: true
+          views_label:
+            name: views_label
+            description: 'views_label. Is required, even if just empty.'
+            type: string
+            default: ''
+          items_per_page:
+            name: items_per_page
+            description: 'items_per_page. Is required, even if just empty.'
+            type: string
+            default: null
+        hidden: 1
       block.views_block.publishing_content-block_drafts:
-          id: block.views_block.publishing_content-block_drafts
-          name: 'My drafts'
-          description: 'My drafts'
-          props: { views_label: { name: views_label, description: 'views_label. Is required, even if just empty.', type: string, default: '' }, items_per_page: { name: items_per_page, description: 'items_per_page. Is required, even if just empty.', type: string, default: null } }
-          hidden: 1
+        id: block.views_block.publishing_content-block_drafts
+        name: 'My drafts'
+        description: 'My drafts'
+        props:
+          label:
+            name: label
+            description: 'The block title. Required.'
+            type: string
+            default: ''
+          label_display:
+            name: label_display
+            description: 'Whether to display the block title. Required.'
+            type: boolean
+            default: true
+          views_label:
+            name: views_label
+            description: 'views_label. Is required, even if just empty.'
+            type: string
+            default: ''
+          items_per_page:
+            name: items_per_page
+            description: 'items_per_page. Is required, even if just empty.'
+            type: string
+            default: null
+        hidden: 1
       block.views_block.publishing_content-block_scheduled:
-          id: block.views_block.publishing_content-block_scheduled
-          name: Scheduled
-          description: Scheduled
-          props: { views_label: { name: views_label, description: 'views_label. Is required, even if just empty.', type: string, default: '' }, items_per_page: { name: items_per_page, description: 'items_per_page. Is required, even if just empty.', type: string, default: null } }
-          hidden: 1
+        id: block.views_block.publishing_content-block_scheduled
+        name: Scheduled
+        description: Scheduled
+        props:
+          label:
+            name: label
+            description: 'The block title. Required.'
+            type: string
+            default: ''
+          label_display:
+            name: label_display
+            description: 'Whether to display the block title. Required.'
+            type: boolean
+            default: true
+          views_label:
+            name: views_label
+            description: 'views_label. Is required, even if just empty.'
+            type: string
+            default: ''
+          items_per_page:
+            name: items_per_page
+            description: 'items_per_page. Is required, even if just empty.'
+            type: string
+            default: null
+        hidden: 1
       block.views_block.recent_content-block_recent_content:
-          id: block.views_block.recent_content-block_recent_content
-          name: 'Recent content'
-          description: 'Recent content'
-          props: { views_label: { name: views_label, description: 'views_label. Is required, even if just empty.', type: string, default: '' }, items_per_page: { name: items_per_page, description: 'items_per_page. Is required, even if just empty.', type: string, default: null } }
-          hidden: 1
+        id: block.views_block.recent_content-block_recent_content
+        name: 'Recent content'
+        description: 'Recent content'
+        props:
+          label:
+            name: label
+            description: 'The block title. Required.'
+            type: string
+            default: ''
+          label_display:
+            name: label_display
+            description: 'Whether to display the block title. Required.'
+            type: boolean
+            default: true
+          views_label:
+            name: views_label
+            description: 'views_label. Is required, even if just empty.'
+            type: string
+            default: ''
+          items_per_page:
+            name: items_per_page
+            description: 'items_per_page. Is required, even if just empty.'
+            type: string
+            default: null
+        hidden: 1
       block.webform_block:
-          id: block.webform_block
-          name: Webform
-          description: Webform
-          props: { webform_id: { name: webform_id, description: 'webform_id. Is required, even if just empty.', type: string, default: '' }, default_data: { name: default_data, description: 'default_data. Is required, even if just empty.', type: string, default: '' }, redirect: { name: redirect, description: 'redirect. Is required, even if just empty.', type: boolean, default: false }, lazy: { name: lazy, description: 'lazy. Is required, even if just empty.', type: boolean, default: false } }
-          hidden: 0
+        id: block.webform_block
+        name: Webform
+        description: Webform
+        props:
+          label:
+            name: label
+            description: 'The block title. Required.'
+            type: string
+            default: ''
+          label_display:
+            name: label_display
+            description: 'Whether to display the block title. Required.'
+            type: boolean
+            default: true
+          webform_id:
+            name: webform_id
+            description: 'webform_id. Is required, even if just empty.'
+            type: string
+            default: ''
+          default_data:
+            name: default_data
+            description: 'default_data. Is required, even if just empty.'
+            type: string
+            default: ''
+          redirect:
+            name: redirect
+            description: 'redirect. Is required, even if just empty.'
+            type: boolean
+            default: false
+          lazy:
+            name: lazy
+            description: 'lazy. Is required, even if just empty.'
+            type: boolean
+            default: false
+        hidden: 0
   sdc:
     enabled: 1
     data: |
       sdc.mercury.accordion-container:
-          id: sdc.mercury.accordion-container
-          name: 'Accordion Container'
-          description: 'A container for any content, only one of whose Collapsible Sections may be open at at time.'
-          group: Components/Expandable
-          props: 'No props'
-          slots: { accordion_content: { name: 'Accordion Content', description: 'Child content, only one of whose Collapsible Sections can be open at a time.' } }
-          hidden: 0
+        id: sdc.mercury.accordion-container
+        name: 'Accordion Container'
+        description: 'A container for any content, only one of whose Collapsible Sections may be open at at time.'
+        group: Components/Expandable
+        props: 'No props'
+        slots:
+          accordion_content:
+            name: 'Accordion Content'
+            description: 'Child content, only one of whose Collapsible Sections can be open at a time.'
+        hidden: 1
+      sdc.mercury.anchor:
+        id: sdc.mercury.anchor
+        name: Anchor
+        description: 'An invisible element with an ID you can link to with a URL fragment (e.g. \#intro)'
+        group: Components
+        props:
+          id:
+            name: 'Anchor ID'
+            description: 'String to use in the URL. Should begin with a letter and contain only lowercase letters, numerals, and hyphens.'
+            type: string
+            default: anchor-id
+            required: true
+          tag:
+            name: 'HTML tag'
+            description: 'Element type to use for the anchor.'
+            type: string
+            default: span
+            required: true
+            enum:
+              - span
+              - div
+              - a
+        slots: 'No slots'
+        hidden: 1
       sdc.mercury.badge:
-          id: sdc.mercury.badge
-          name: Badge
-          description: Badge
-          group: Base
-          props: { label: { name: 'Link text', description: 'The text for the link.', type: string, default: 'Badge text' }, url: { name: Link, description: 'The URL to link to. If provided, the badge will be rendered as a link.', type: string, default: null }, style: { name: Style, description: 'Define badge style.', type: string, default: primary, enum: [primary, secondary] }, icon: { name: Icon, description: 'Select an Icon.', type: string, default: newspaper-clipping, enum: [newspaper-clipping, alien, robot, rocket] }, icon_first: { name: 'Icon first?', description: 'Icon can display before or after label.', type: boolean, default: true } }
-          slots: { badge_content: { name: Content, description: 'Content of the badge' } }
-          hidden: 0
+        id: sdc.mercury.badge
+        name: Badge
+        description: Badge
+        group: Base
+        props:
+          label:
+            name: 'Link text'
+            description: 'The text for the link.'
+            type: string
+            default: 'Badge text'
+          url:
+            name: Link
+            description: 'The URL to link to. If provided, the badge will be rendered as a link.'
+            type: string
+            default: null
+          style:
+            name: Style
+            description: 'Define badge style.'
+            type: string
+            default: primary
+            enum:
+              - primary
+              - secondary
+          icon:
+            name: Icon
+            description: 'Select an Icon.'
+            type: string
+            default: newspaper-clipping
+            enum:
+              - newspaper-clipping
+              - alien
+              - robot
+              - rocket
+          icon_first:
+            name: 'Icon first'
+            description: 'Icon can display before or after label.'
+            type: boolean
+            default: true
+        slots:
+          badge_content:
+            name: Content
+            description: 'Content of the badge'
+        hidden: 1
       sdc.mercury.blockquote:
-          id: sdc.mercury.blockquote
-          name: Blockquote
-          description: Blockquote
-          group: Base
-          props: { text: { name: 'Quotation text', description: 'The blockquote text.', type: string, default: '“To confine our attention to terrestrial matters would be to limit the human spirit.”' }, cite_name: { name: 'Citation name', description: 'The cite name.', type: string, default: 'Isiah Julio' }, cite_text: { name: 'Citation text', description: 'The cite text.', type: string, default: 'Engineer, Technical Services' }, cite_url: { name: 'Citation link', description: 'The cite url.', type: string, default: null } }
-          slots: 'No slots'
-          hidden: 0
+        id: sdc.mercury.blockquote
+        name: Blockquote
+        description: Blockquote
+        group: Base
+        props:
+          text:
+            name: 'Quotation text'
+            description: 'The blockquote text.'
+            type: string
+            default: '“To confine our attention to terrestrial matters would be to limit the human spirit.”'
+          cite_name:
+            name: 'Citation name'
+            description: 'The cite name.'
+            type: string
+            default: 'Isiah Julio'
+          cite_text:
+            name: 'Citation text'
+            description: 'The cite text.'
+            type: string
+            default: 'Engineer, Technical Services'
+          cite_url:
+            name: 'Citation link'
+            description: 'The cite url.'
+            type: string
+            default: null
+        slots: 'No slots'
+        hidden: 1
       sdc.mercury.button:
-          id: sdc.mercury.button
-          name: Button
-          description: 'A versatile button component that can be rendered as a button or link with various styles and sizes.'
-          group: Base
-          props: { variant: { name: Variant, description: 'The style of button.', type: string, default: primary, enum: [primary, primary-accent, secondary, secondary-accent, negative] }, disabled: { name: Disabled, description: 'Whether the button is disabled.', type: boolean, default: false }, label: { name: 'Button text', description: 'The text content of the button.', type: string, default: 'Button Label' }, size: { name: Size, description: 'Set Button Size.', type: string, default: medium, enum: [small, medium, large] }, icon: { name: Icon, description: 'Select an Icon.', type: string, default: arrow-right, enum: [arrow-right, arrow-left, caret-right, caret-left, download, user-plus] }, icon_first: { name: 'Display Icon First', description: 'By default, the icon is displayed after the label. If you want to display the icon first, set this to true.', type: boolean, default: false }, href: { name: Link, description: 'The URL to link to. If provided, the button will be rendered as a link.', type: string, default: null } }
-          slots: 'No slots'
-          hidden: 0
+        id: sdc.mercury.button
+        name: Button
+        description: 'A versatile button component that can be rendered as a button or link with various styles and sizes.'
+        group: Base
+        props:
+          variant:
+            name: Variant
+            description: 'The style of button.'
+            type: string
+            default: primary
+            enum:
+              - primary
+              - primary-accent
+              - secondary
+              - secondary-accent
+              - negative
+          disabled:
+            name: Disabled
+            description: 'Whether the button is disabled.'
+            type: boolean
+            default: false
+          label:
+            name: 'Button text'
+            description: 'The text content of the button.'
+            type: string
+            default: 'Button Label'
+          size:
+            name: Size
+            description: 'Set Button Size.'
+            type: string
+            default: medium
+            enum:
+              - small
+              - medium
+              - large
+          icon:
+            name: Icon
+            description: 'Select an Icon.'
+            type: string
+            default: arrow-right
+            enum:
+              - arrow-right
+              - arrow-left
+              - caret-right
+              - caret-left
+              - download
+              - user-plus
+          icon_first:
+            name: 'Display Icon First'
+            description: 'By default, the icon is displayed after the label. If you want to display the icon first, set this to true.'
+            type: boolean
+            default: false
+          href:
+            name: Link
+            description: 'The URL to link to. If provided, the button will be rendered as a link.'
+            type: string
+            default: null
+        slots: 'No slots'
+        hidden: 0
       sdc.mercury.card:
-          id: sdc.mercury.card
-          name: Card
-          description: 'This component is a versatile content container used to display a snapshot of information in a visually distinct block. It typically includes an image, a heading, and some descriptive text, often linking to a more detailed page. Its appearance can be customized with different styles and layouts, making it suitable for lists of articles, products, or features. Dont use it as a standalone component. Always add it inside grid component'
-          group: Components/Cards
-          props: { heading_text: { name: 'Heading Text', description: 'No description available', type: string, default: 'This is my title eu torquent suscipit' }, level: { name: 'Heading Level', description: 'No description available', type: number, default: 3, enum: [2, 3, 4] }, url: { name: Link, description: 'No description available', type: string, default: 'https://www.example.com' }, media: { name: 'Card Media', description: 'Media and Alt for the card. Provide media id or null here.', type: number, default: 4 }, text: { name: Text, description: 'Teaser text', type: string, default: 'Quaerat laborum rerum dolores dolores dolor qui. Laudantium itaque sint aut culpa omnis eius pariatur. Quia laborum commodi excepturi neque tempore. Fuga dolor dolores perspiciatis.' }, style: { name: 'Card Style', description: 'No description available', type: string, default: framed, enum: [default, framed, featured] }, orientation: { name: Orientation, description: 'Set card to horz or vert.', type: string, default: stacked, enum: [stacked, landscape] } }
-          slots: 'No slots'
-          hidden: 0
+        id: sdc.mercury.card
+        name: Card
+        description: 'This component is a versatile content container used to display a snapshot of information in a visually distinct block. It typically includes an image, a heading, and some descriptive text, often linking to a more detailed page. Its appearance can be customized with different styles and layouts, making it suitable for lists of articles, products, or features. Dont use it as a standalone component. Always add it inside grid component'
+        group: Components/Cards
+        props:
+          heading_text:
+            name: 'Heading Text'
+            description: 'No description available'
+            type: string
+            default: 'This is my title eu torquent suscipit'
+          level:
+            name: 'Heading Level'
+            description: 'No description available'
+            type: number
+            default: 3
+            enum:
+              - 2
+              - 3
+              - 4
+          url:
+            name: Link
+            description: 'No description available'
+            type: string
+            default: 'https://www.example.com'
+          media:
+            name: 'Card Media'
+            description: 'Media and Alt for the card. Provide media id or null here.'
+            type: number
+            default: 4
+          text:
+            name: Text
+            description: 'Teaser text'
+            type: string
+            default: 'Quaerat laborum rerum dolores dolores dolor qui. Laudantium itaque sint aut culpa omnis eius pariatur. Quia laborum commodi excepturi neque tempore. Fuga dolor dolores perspiciatis.'
+          style:
+            name: 'Card Style'
+            description: 'No description available'
+            type: string
+            default: framed
+            enum:
+              - default
+              - framed
+              - featured
+          orientation:
+            name: Orientation
+            description: 'Set card to horz or vert.'
+            type: string
+            default: stacked
+            enum:
+              - stacked
+              - landscape
+        slots: 'No slots'
+        hidden: 0
       sdc.mercury.card-events:
-          id: sdc.mercury.card-events
-          name: Event
-          description: "This component is designed to display information about a specific event in a compact card format. It neatly presents essential details like the event's title, date, location, and a brief description. Use this component to create listings for conferences, webinars, meetups, or any time-based occasion. Dont use it as a standalone component. Always add it inside grid component"
-          group: Components/Cards
-          props: { title: { name: 'Heading Text', description: 'No description available', type: string, default: 'Enter name of event' }, event_date: { name: 'Event Date', description: 'No description available', type: string, default: '2026-01-01' }, description: { name: Description, description: 'No description available', type: string, default: 'Atque libero fuga blanditiis quo qui impedit debitis. Aut ut nam unde velit.' }, place: { name: Place, description: 'Place of the event', type: string, default: 'Add location' } }
-          slots: 'No slots'
-          hidden: 0
+        id: sdc.mercury.card-events
+        name: Event
+        description: "This component is designed to display information about a specific event in a compact card format. It neatly presents essential details like the event's title, date, location, and a brief description. Use this component to create listings for conferences, webinars, meetups, or any time-based occasion. Dont use it as a standalone component. Always add it inside grid component"
+        group: Components/Cards
+        props:
+          title:
+            name: 'Heading Text'
+            description: 'No description available'
+            type: string
+            default: 'Enter name of event'
+          event_date:
+            name: 'Event Date'
+            description: 'No description available'
+            type: string
+            default: '2026-01-01'
+          description:
+            name: Description
+            description: 'No description available'
+            type: string
+            default: 'Atque libero fuga blanditiis quo qui impedit debitis. Aut ut nam unde velit.'
+          place:
+            name: Place
+            description: 'Place of the event'
+            type: string
+            default: 'Add location'
+        slots: 'No slots'
+        hidden: 1
       sdc.mercury.card-pricing:
-          id: sdc.mercury.card-pricing
-          name: Pricing
-          description: "This component is designed to display a single pricing tier or subscription plan in a card format. It effectively communicates the plan's name, description, price, and a list of features, guiding the user with a clear call-to-action button. Use this component, typically repeated within a grid, to construct a pricing comparison table for products or services. Dont use it as a standalone component. Always add it inside grid component"
-          group: Components/Cards
-          props: { heading_text: { name: 'Heading Text', description: 'No description available', type: string, default: 'Gold Plan' }, description: { name: Description, description: 'No description available', type: string, default: 'Curabitur nascetur non potenti pede luctus vivamus' }, price: { name: Price, description: Price, type: string, default: '159.00' }, currency_code: { name: 'Currency Code', description: 'No description available', type: string, default: USD }, currency_symbol: { name: 'Currency Symbol', description: 'No description available', type: string, default: $ }, symbol_position: { name: 'Symbol Position', description: 'No description available', type: string, default: [before], enum: [before, after] }, text: { name: Text, description: 'Rich Text', type: string, default: '<ul> <li>Enter rich text</li> <li>Facilisis dictumst letius in</li> <li>Diam mus est faucibus ornare ut consectetuer metus</li> </ul>' }, button_url: { name: Link, description: 'CTA link the card', type: string, default: 'https://www.example.com' }, button_label: { name: 'Button Label', description: 'CTA label for the card', type: string, default: 'Choose this plan' }, promote: { name: 'Promote card', description: 'Visually feature card.', type: boolean, default: false } }
-          slots: 'No slots'
-          hidden: 0
+        id: sdc.mercury.card-pricing
+        name: Pricing
+        description: "This component is designed to display a single pricing tier or subscription plan in a card format. It effectively communicates the plan's name, description, price, and a list of features, guiding the user with a clear call-to-action button. Use this component, typically repeated within a grid, to construct a pricing comparison table for products or services. Dont use it as a standalone component. Always add it inside grid component"
+        group: Components/Cards
+        props:
+          heading_text:
+            name: 'Heading Text'
+            description: 'No description available'
+            type: string
+            default: 'Gold Plan'
+          description:
+            name: Description
+            description: 'No description available'
+            type: string
+            default: 'Curabitur nascetur non potenti pede luctus vivamus'
+          price:
+            name: Price
+            description: Price
+            type: string
+            default: '159.00'
+          currency_code:
+            name: 'Currency Code'
+            description: 'No description available'
+            type: string
+            default: USD
+          currency_symbol:
+            name: 'Currency Symbol'
+            description: 'No description available'
+            type: string
+            default: $
+          symbol_position:
+            name: 'Symbol Position'
+            description: 'No description available'
+            type: string
+            default:
+              - before
+            enum:
+              - before
+              - after
+          text:
+            name: Text
+            description: 'Rich Text'
+            type: string
+            default: '<ul> <li>Enter rich text</li> <li>Facilisis dictumst letius in</li> <li>Diam mus est faucibus ornare ut consectetuer metus</li> </ul>'
+          button_url:
+            name: Link
+            description: 'CTA link the card'
+            type: string
+            default: 'https://www.example.com'
+          button_label:
+            name: 'Button Label'
+            description: 'CTA label for the card'
+            type: string
+            default: 'Choose this plan'
+          promote:
+            name: 'Promote card'
+            description: 'Visually feature card.'
+            type: boolean
+            default: false
+        slots: 'No slots'
+        hidden: 0
       sdc.mercury.card-profile:
-          id: sdc.mercury.card-profile
-          name: Profile
-          description: "This component is a card designed to display a person's profile information. It combines a photo, name, and job title into a compact, visually appealing format, often linking to a more detailed biography. It is ideal for use in 'meet the team' sections, author bios, or lists of event speakers. Dont use it as a standalone component. Always add it inside grid component"
-          group: Components/Cards
-          props: { name: { name: Name, description: 'No description available', type: string, default: 'Chloe Bennett' }, job_title: { name: 'Job title', description: "The person's job title", type: string, default: 'Operations Manager' }, url: { name: Link, description: 'No description available', type: string, default: null }, media: { name: 'Card Media', description: 'Media and Alt for the card. Provide media id or null here.', type: number, default: 4 } }
-          slots: 'No slots'
-          hidden: 0
+        id: sdc.mercury.card-profile
+        name: Profile
+        description: "This component is a card designed to display a person's profile information. It combines a photo, name, and job title into a compact, visually appealing format, often linking to a more detailed biography. It is ideal for use in 'meet the team' sections, author bios, or lists of event speakers. Dont use it as a standalone component. Always add it inside grid component"
+        group: Components/Cards
+        props:
+          name:
+            name: Name
+            description: 'No description available'
+            type: string
+            default: 'Chloe Bennett'
+          job_title:
+            name: 'Job title'
+            description: "The person's job title"
+            type: string
+            default: 'Operations Manager'
+          url:
+            name: Link
+            description: 'No description available'
+            type: string
+            default: null
+          media:
+            name: 'Card Media'
+            description: 'Media and Alt for the card. Provide media id or null here.'
+            type: number
+            default: 4
+        slots: 'No slots'
+        hidden: 1
       sdc.mercury.card-project:
-          id: sdc.mercury.card-project
-          name: Project
-          description: "This component is a card designed to display a person's profile information. It combines a photo, name, and job title into a compact, visually appealing format, often linking to a more detailed biography. It is ideal for use in 'meet the team' sections, author bios, or lists of event speakers. Dont use it as a standalone component. Always add it inside grid component. Do not use inside a section component."
-          group: Components/Cards
-          props: { heading_text: { name: 'Heading Text', description: 'No description available', type: string, default: 'Stillhouse Spirits Co.' }, level: { name: 'Heading Level', description: 'The heading level (h2-h6) for the component title.', type: number, default: 3, enum: [2, 3, 4, 5, 6] }, url: { name: Link, description: 'No description available', type: string, default: null }, media: { name: 'Media Image', description: 'Media image for the card. Provide media id or null here.', type: number, default: 4 }, text: { name: Text, description: 'Teaser text', type: string, default: 'Lorem ipsum dolor sit amet suspendisse consectetur sociosqu dapibus ridiculus etiam malesuada. Luctus inceptos dictumst pede commodo donec bibendum blandit. Egestas molestie litora pulvinar justo quam porta pede bibendum consectetur. Efficitur suspendisse cubilia nibh turpis egestas montes sed.' }, layout: { name: Layout, description: 'Set hero layout', type: string, default: media-first, enum: [media-first, media-last] } }
-          slots: 'No slots'
-          hidden: 0
+        id: sdc.mercury.card-project
+        name: Project
+        description: "This component is a card designed to display a person's profile information. It combines a photo, name, and job title into a compact, visually appealing format, often linking to a more detailed biography. It is ideal for use in 'meet the team' sections, author bios, or lists of event speakers. Dont use it as a standalone component. Always add it inside grid component. Do not use inside a section component."
+        group: Components/Cards
+        props:
+          heading_text:
+            name: 'Heading Text'
+            description: 'No description available'
+            type: string
+            default: 'Stillhouse Spirits Co.'
+          level:
+            name: 'Heading Level'
+            description: 'The heading level (h2-h6) for the component title.'
+            type: number
+            default: 3
+            enum:
+              - 2
+              - 3
+              - 4
+              - 5
+              - 6
+          url:
+            name: Link
+            description: 'No description available'
+            type: string
+            default: null
+          media:
+            name: 'Media Image'
+            description: 'Media image for the card. Provide media id or null here.'
+            type: number
+            default: 4
+          text:
+            name: Text
+            description: 'Teaser text'
+            type: string
+            default: 'Lorem ipsum dolor sit amet suspendisse consectetur sociosqu dapibus ridiculus etiam malesuada. Luctus inceptos dictumst pede commodo donec bibendum blandit. Egestas molestie litora pulvinar justo quam porta pede bibendum consectetur. Efficitur suspendisse cubilia nibh turpis egestas montes sed.'
+          layout:
+            name: Layout
+            description: 'Set hero layout'
+            type: string
+            default: media-first
+            enum:
+              - media-first
+              - media-last
+        slots: 'No slots'
+        hidden: 1
       sdc.mercury.card-testimonial:
-          id: sdc.mercury.card-testimonial
-          name: Testimonial
-          description: 'A testimonial card component with quote, author information, and optional media.'
-          group: Components/Cards
-          props: { text: { name: 'Blockquote text', description: 'The blockquote text.', type: string, default: 'My career’s guidance was crucial in helping me understand the tech industry landscape and ultimately secure my role.' }, cite_name: { name: 'Citation name', description: 'The cite name.', type: string, default: 'Isiah Julio' }, cite_text: { name: 'Citation text', description: 'The cite text.', type: string, default: 'Engineer, Technical Services' }, cite_url: { name: 'Citation link', description: 'The cite url.', type: string, default: null }, align: { name: 'Text alignment', description: 'Set alignment of text.', type: string, default: center, enum: [center, left] }, media: { name: 'Card Media', description: 'Media and Alt for the card. Provide media id or null here.', type: number, default: 4 } }
-          slots: 'No slots'
-          hidden: 0
+        id: sdc.mercury.card-testimonial
+        name: Testimonial
+        description: 'A testimonial card component with quote, author information, and optional media.'
+        group: Components/Cards
+        props:
+          text:
+            name: 'Blockquote text'
+            description: 'The blockquote text.'
+            type: string
+            default: 'My career’s guidance was crucial in helping me understand the tech industry landscape and ultimately secure my role.'
+          cite_name:
+            name: 'Citation name'
+            description: 'The cite name.'
+            type: string
+            default: 'Isiah Julio'
+          cite_text:
+            name: 'Citation text'
+            description: 'The cite text.'
+            type: string
+            default: 'Engineer, Technical Services'
+          cite_url:
+            name: 'Citation link'
+            description: 'The cite url.'
+            type: string
+            default: null
+          align:
+            name: 'Text alignment'
+            description: 'Set alignment of text.'
+            type: string
+            default: center
+            enum:
+              - center
+              - left
+          media:
+            name: 'Card Media'
+            description: 'Media and Alt for the card. Provide media id or null here.'
+            type: number
+            default: 4
+        slots: 'No slots'
+        hidden: 0
       sdc.mercury.collapsible-section:
-          id: sdc.mercury.collapsible-section
-          name: 'Collapsible Section'
-          description: 'A single section of content than can be collapsed and expanded. Put several of these in an Accordion Container to prevent more than one from being opened at a time.'
-          group: Components/Expandable
-          props: { title: { name: 'Section Title', description: 'No description available', type: string, default: 'Collapsible Section' }, heading_level: { name: 'Heading level for title', description: 'No description available', type: number, default: 3, enum: [2, 3, 4, 5, 6] }, open_by_default: { name: 'Open by default?', description: 'No description available', type: boolean, default: false } }
-          slots: { collapsible_content: { name: 'Collapsible Content', description: 'Elements to collapse away.' } }
-          hidden: 0
+        id: sdc.mercury.collapsible-section
+        name: 'Collapsible Section'
+        description: 'A single section of content than can be collapsed and expanded. Put several of these in an Accordion Container to prevent more than one from being opened at a time.'
+        group: Components/Expandable
+        props:
+          title:
+            name: 'Section Title'
+            description: 'No description available'
+            type: string
+            default: 'Collapsible Section'
+          heading_level:
+            name: 'Heading level for title'
+            description: 'No description available'
+            type: number
+            default: 3
+            enum:
+              - 2
+              - 3
+              - 4
+              - 5
+              - 6
+          open_by_default:
+            name: 'Open by default'
+            description: 'No description available'
+            type: boolean
+            default: false
+        slots:
+          collapsible_content:
+            name: 'Collapsible Content'
+            description: 'Elements to collapse away.'
+        hidden: 1
       sdc.mercury.cta:
-          id: sdc.mercury.cta
-          name: CTA
-          description: 'This component creates a Call to Action (CTA) section, designed to prompt users to perform a specific action. It combines a heading and descriptive text, which can be aligned as needed, over an optional background image. Use this component to drive user engagement towards key conversions or important navigation paths. This works together with one or more button component(s) in the buttons slots and possibly a text slot. If you want a CTA with an image, wrap this inside the main slot of the section component together with an image component.'
-          group: Components
-          props: { heading_text: { name: Heading, description: 'The main heading of the cta', type: string, default: 'Lorem ipsum dolor sit amet finibus aliquam pharetra' }, level: { name: 'Heading Level', description: 'No description available', type: number, default: 2, enum: [1, 2, 3, 4, 5, 6] }, text: { name: Text, description: 'No description available', type: string, default: 'Lorem ipsum dolor sit amet finibus aliquam pharetra mauris aenean pellentesque enim mus.' }, text_align: { name: 'Text alignment', description: 'Set alignment of text', type: string, default: center, enum: [center, left, right] }, media: { name: 'Background Image', description: 'The background image for the cta. Provide media id or null here.', type: number, default: 4 }, has_background_image: { name: 'Show Background image', description: 'Set if the background image is used.', type: boolean, default: false } }
-          slots: { actions: { name: Buttons, description: "place one or more 'Button' components within this slot to provide clear next steps for the user" } }
-          hidden: 0
+        id: sdc.mercury.cta
+        name: CTA
+        description: 'This component creates a Call to Action (CTA) section, designed to prompt users to perform a specific action. It combines a heading and descriptive text, which can be aligned as needed, over an optional background image. Use this component to drive user engagement towards key conversions or important navigation paths. This works together with one or more button component(s) in the buttons slots and possibly a text slot. If you want a CTA with an image, wrap this inside the main slot of the section component together with an image component.'
+        group: Components
+        props:
+          heading_text:
+            name: Heading
+            description: 'The main heading of the cta'
+            type: string
+            default: 'Lorem ipsum dolor sit amet finibus aliquam pharetra'
+          level:
+            name: 'Heading Level'
+            description: 'No description available'
+            type: number
+            default: 2
+            enum:
+              - 1
+              - 2
+              - 3
+              - 4
+              - 5
+              - 6
+          text:
+            name: Text
+            description: 'No description available'
+            type: string
+            default: 'Lorem ipsum dolor sit amet finibus aliquam pharetra mauris aenean pellentesque enim mus.'
+          text_align:
+            name: 'Text alignment'
+            description: 'Set alignment of text'
+            type: string
+            default: center
+            enum:
+              - center
+              - left
+              - right
+          media:
+            name: 'Background Image'
+            description: 'The background image for the cta. Provide media id or null here.'
+            type: number
+            default: 4
+          has_background_image:
+            name: 'Show Background image'
+            description: 'Set if the background image is used.'
+            type: boolean
+            default: false
+        slots:
+          actions:
+            name: Buttons
+            description: "place one or more 'Button' components within this slot to provide clear next steps for the user"
+        hidden: 1
       sdc.mercury.footer:
-          id: sdc.mercury.footer
-          name: Footer
-          description: 'The site footer assembled'
-          group: Layout
-          props: { align: { name: 'Display links in row?', description: 'Align links in row or stack', type: boolean, default: true } }
-          slots: { footer_first: { name: 'Branding & Social', description: 'Add the site branding block  or Branding component in this slot' }, footer_last: { name: 'Call to action', description: 'Add the newsletter component here' }, footer_utility_first: { name: 'Utility links', description: 'Place the footer block in this slot which already contains footer navigation links' }, footer_utility_last: { name: 'Copyright text', description: "Add a text component with legal/copyright text in the format '<p>Copyright ©2025 Starshot. All rights reserved.</p>'" } }
-          hidden: 0
+        id: sdc.mercury.footer
+        name: Footer
+        description: 'The site footer assembled'
+        group: Layout
+        props:
+          align:
+            name: 'Display links horizontally'
+            description: 'Align links in row or stack'
+            type: boolean
+            default: true
+        slots:
+          footer_first:
+            name: 'Branding & Social'
+            description: 'Add the site branding block  or Branding component in this slot'
+          footer_last:
+            name: 'Call to action'
+            description: 'Add the newsletter component here'
+          footer_utility_first:
+            name: 'Utility links'
+            description: 'Place the footer block in this slot which already contains footer navigation links'
+          footer_utility_last:
+            name: 'Copyright text'
+            description: "Add a text component with legal/copyright text in the format '<p>Copyright ©2025 Starshot. All rights reserved.</p>'"
+        hidden: 1
       sdc.mercury.group:
-          id: sdc.mercury.group
-          name: Group
-          description: 'A group for nested components. This can be used inside sections to controlt the padding if needed.'
-          group: Layout
-          props: { flex_direction: { name: 'Item direction', description: 'No description available', type: string, default: column, enum: [column, row, column-reverse, row-reverse] }, flex_gap: { name: 'Extra space between items', description: 'No description available', type: string, default: none, enum: [none, sm, md, lg, xl] }, flex_align: { name: 'Alignment within parent component', description: 'No description available', type: string, default: center, enum: [start, center, end] }, radius: { name: 'Rounded corners', description: 'No description available', type: string, default: none, enum: [none, sm, md, lg, xl] }, padding: { name: Padding, description: 'No description available', type: string, default: none, enum: [none, sm, md, lg, xl] }, background: { name: 'Background color', description: 'No description available', type: string, default: 'hg:bg-none', enum: ['hg:bg-none', 'hg:bg-brand', 'hg:bg-brand-light', 'hg:bg-brand-dark', 'hg:bg-accent', 'hg:bg-accent-light', 'hg:bg-accent-dark'] } }
-          slots: { group_slot: { name: 'Group items', description: 'No description available' } }
-          hidden: 0
+        id: sdc.mercury.group
+        name: Group
+        description: 'A group for nested components. This can be used inside sections to controlt the padding if needed.'
+        group: Layout
+        props:
+          flex_direction:
+            name: 'Item direction'
+            description: 'No description available'
+            type: string
+            default: column
+            enum:
+              - column
+              - row
+              - column-reverse
+              - row-reverse
+          flex_gap:
+            name: 'Extra space between items'
+            description: 'No description available'
+            type: string
+            default: none
+            enum:
+              - none
+              - sm
+              - md
+              - lg
+              - xl
+          flex_align:
+            name: 'Alignment within parent component'
+            description: 'No description available'
+            type: string
+            default: center
+            enum:
+              - start
+              - center
+              - end
+          radius:
+            name: 'Rounded corners'
+            description: 'No description available'
+            type: string
+            default: none
+            enum:
+              - none
+              - sm
+              - md
+              - lg
+              - xl
+          padding:
+            name: Padding
+            description: 'No description available'
+            type: string
+            default: none
+            enum:
+              - none
+              - sm
+              - md
+              - lg
+              - xl
+          background:
+            name: 'Background color'
+            description: 'No description available'
+            type: string
+            default: 'hg:bg-none'
+            enum:
+              - 'hg:bg-none'
+              - 'hg:bg-brand'
+              - 'hg:bg-brand-light'
+              - 'hg:bg-brand-dark'
+              - 'hg:bg-accent'
+              - 'hg:bg-accent-light'
+              - 'hg:bg-accent-dark'
+        slots:
+          group_slot:
+            name: 'Group items'
+            description: 'No description available'
+        hidden: 0
       sdc.mercury.heading:
-          id: sdc.mercury.heading
-          name: Heading
-          description: 'Text wrapped in a heading tag'
-          group: Base
-          props: { heading_text: { name: 'Heading Text', description: 'The heading text.', type: string, default: 'Enter title' }, level: { name: 'Heading Level', description: 'The heading level (h1-h6).', type: number, default: 2, enum: [1, 2, 3, 4, 5, 6] }, font_size: { name: 'Font Size', description: 'Select Font Size', type: string, default: default, enum: [default, heading-responsive-8xl, heading-responsive-7xl, heading-responsive-6xl, heading-responsive-5xl, heading-responsive-4xl, heading-responsive-3xl, heading-responsive-2xl, heading-responsive-xl] }, font_color: { name: 'Font Color', description: 'Select Font Color', type: string, default: text-inherit, enum: [text-inherit, 'hg:text-body-text-dark', 'hg:text-white', 'hg:text-brand'] }, align: { name: 'Text Alignment', description: 'The heading alignment.', type: string, default: left, enum: [left, center, right] }, url: { name: Link, description: 'The url for the heading.', type: string, default: null } }
-          slots: 'No slots'
-          hidden: 0
+        id: sdc.mercury.heading
+        name: Heading
+        description: 'Text wrapped in a heading tag'
+        group: Base
+        props:
+          heading_text:
+            name: 'Heading Text'
+            description: 'The heading text.'
+            type: string
+            default: 'Enter title'
+          level:
+            name: 'Heading Level'
+            description: 'The heading level (h1-h6).'
+            type: number
+            default: 2
+            enum:
+              - 1
+              - 2
+              - 3
+              - 4
+              - 5
+              - 6
+          font_size:
+            name: 'Font Size'
+            description: 'Select Font Size'
+            type: string
+            default: default
+            enum:
+              - default
+              - heading-responsive-8xl
+              - heading-responsive-7xl
+              - heading-responsive-6xl
+              - heading-responsive-5xl
+              - heading-responsive-4xl
+              - heading-responsive-3xl
+              - heading-responsive-2xl
+              - heading-responsive-xl
+          font_color:
+            name: 'Font Color'
+            description: 'Select Font Color'
+            type: string
+            default: text-inherit
+            enum:
+              - text-inherit
+              - 'hg:text-body-text-dark'
+              - 'hg:text-white'
+              - 'hg:text-brand'
+          align:
+            name: 'Text Alignment'
+            description: 'The heading alignment.'
+            type: string
+            default: left
+            enum:
+              - left
+              - center
+              - right
+          url:
+            name: Link
+            description: 'The url for the heading.'
+            type: string
+            default: null
+        slots: 'No slots'
+        hidden: 0
       sdc.mercury.hero:
-          id: sdc.mercury.hero
-          name: Hero
-          description: 'Hero with side by side slots for media and content.'
-          group: Layout
-          props: { hero_flex_gap: { name: 'Hero flex gap', description: 'No description available', type: string, default: 'hg:gap-4 hg:md:gap-6 hg:xl:gap-8', enum: ['hg:gap-0', 'hg:gap-4 hg:md:gap-6 hg:xl:gap-8', 'hg:gap-16 hg:md:gap-24 hg:xl:gap-32'] }, hero_flex_direction_mobile: { name: 'Hero flex direction (mobile)', description: 'No description available', type: string, default: 'hg:flex-col', enum: ['hg:flex-col', 'hg:flex-col-reverse'] }, background: { name: 'Background color', description: 'No description available', type: string, default: ['hg:bg-none'], enum: ['hg:bg-none', 'hg:bg-brand', 'hg:bg-brand-light', 'hg:bg-brand-dark', 'hg:bg-accent', 'hg:bg-accent-light', 'hg:bg-accent-dark'] }, padding_block_start: { name: 'Padding top', description: 'No description available', type: string, default: '0', enum: ['0', '16', '32', '64'] }, padding_block_end: { name: 'Padding bottom', description: 'No description available', type: string, default: '0', enum: ['0', '16', '32', '64'] }, image_size: { name: 'Hero image size', description: 'Set image aspect ratio', type: string, default: 'hg:aspect-4/3', enum: ['hg:aspect-2/1', 'hg:aspect-16/9', 'hg:aspect-3/2', 'hg:aspect-4/3', 'hg:aspect-1/1'] }, image_position: { name: 'Hero image position', description: 'Set image position', type: string, default: 'hg:md:flex-row', enum: ['hg:md:flex-row', 'hg:md:flex-row-reverse'] }, image_radius: { name: 'Image radius', description: 'Image corner radius', type: string, default: 'hg:rounded-sm', enum: ['hg:rounded-none', 'hg:rounded-sm', 'hg:rounded-xl hg:md:rounded-2xl', 'hg:rounded-[24px] hg:md:rounded-[32px]'] }, slot_flex_align: { name: 'Slot align content', description: 'No description available', type: string, default: 'hg:md:self-center', enum: ['hg:md:self-start', 'hg:md:self-center', 'hg:md:self-end'] }, slot_flex_direction: { name: 'Slot flex direction', description: 'No description available', type: string, default: 'hg:flex-col', enum: ['hg:flex-col', 'hg:flex-col-reverse'] }, slot_flex_gap: { name: 'Slot flex gap', description: 'No description available', type: string, default: 'hg:gap-4', enum: ['hg:gap-0', 'hg:gap-4', 'hg:gap-6 hg:md:gap-8', 'hg:gap-12 hg:md:gap-16'] }, media: { name: 'Media Image', description: 'Media image for the hero. Provide media id or null here.', type: number, default: 4 } }
-          slots: { hero_slot: { name: Content, description: 'No description available' } }
-          hidden: 0
+        id: sdc.mercury.hero
+        name: Hero
+        description: 'Hero with side by side slots for media and content.'
+        group: Layout
+        props:
+          hero_flex_gap:
+            name: 'Hero flex gap'
+            description: 'No description available'
+            type: string
+            default: 'hg:gap-4 hg:md:gap-6 hg:xl:gap-8'
+            enum:
+              - 'hg:gap-0'
+              - 'hg:gap-4 hg:md:gap-6 hg:xl:gap-8'
+              - 'hg:gap-16 hg:md:gap-24 hg:xl:gap-32'
+          hero_flex_direction_mobile:
+            name: 'Hero flex direction (mobile)'
+            description: 'No description available'
+            type: string
+            default: 'hg:flex-col'
+            enum:
+              - 'hg:flex-col'
+              - 'hg:flex-col-reverse'
+          background:
+            name: 'Background color'
+            description: 'No description available'
+            type: string
+            default:
+              - 'hg:bg-none'
+            enum:
+              - 'hg:bg-none'
+              - 'hg:bg-brand'
+              - 'hg:bg-brand-light'
+              - 'hg:bg-brand-dark'
+              - 'hg:bg-accent'
+              - 'hg:bg-accent-light'
+              - 'hg:bg-accent-dark'
+          padding_block_start:
+            name: 'Padding top'
+            description: 'No description available'
+            type: string
+            default: '0'
+            enum:
+              - '0'
+              - '16'
+              - '32'
+              - '64'
+          padding_block_end:
+            name: 'Padding bottom'
+            description: 'No description available'
+            type: string
+            default: '0'
+            enum:
+              - '0'
+              - '16'
+              - '32'
+              - '64'
+          image_size:
+            name: 'Hero image size'
+            description: 'Set image aspect ratio'
+            type: string
+            default: 'hg:aspect-4/3'
+            enum:
+              - 'hg:aspect-2/1'
+              - 'hg:aspect-16/9'
+              - 'hg:aspect-3/2'
+              - 'hg:aspect-4/3'
+              - 'hg:aspect-1/1'
+          image_position:
+            name: 'Hero image position'
+            description: 'Set image position'
+            type: string
+            default: 'hg:md:flex-row'
+            enum:
+              - 'hg:md:flex-row'
+              - 'hg:md:flex-row-reverse'
+          image_radius:
+            name: 'Image radius'
+            description: 'Image corner radius'
+            type: string
+            default: 'hg:rounded-sm'
+            enum:
+              - 'hg:rounded-none'
+              - 'hg:rounded-sm'
+              - 'hg:rounded-xl hg:md:rounded-2xl'
+              - 'hg:rounded-[24px] hg:md:rounded-[32px]'
+          slot_flex_align:
+            name: 'Slot align content'
+            description: 'No description available'
+            type: string
+            default: 'hg:md:self-center'
+            enum:
+              - 'hg:md:self-start'
+              - 'hg:md:self-center'
+              - 'hg:md:self-end'
+          slot_flex_direction:
+            name: 'Slot flex direction'
+            description: 'No description available'
+            type: string
+            default: 'hg:flex-col'
+            enum:
+              - 'hg:flex-col'
+              - 'hg:flex-col-reverse'
+          slot_flex_gap:
+            name: 'Slot flex gap'
+            description: 'No description available'
+            type: string
+            default: 'hg:gap-4'
+            enum:
+              - 'hg:gap-0'
+              - 'hg:gap-4'
+              - 'hg:gap-6 hg:md:gap-8'
+              - 'hg:gap-12 hg:md:gap-16'
+          media:
+            name: 'Media Image'
+            description: 'Media image for the hero. Provide media id or null here.'
+            type: number
+            default: 4
+        slots:
+          hero_slot:
+            name: Content
+            description: 'No description available'
+        hidden: 1
       sdc.mercury.hero-2:
-          id: sdc.mercury.hero-2
-          name: 'Hero - Side-by-side'
-          description: 'This component creates a hero section with a two-column layout, placing a media element alongside a text block containing a heading and a paragraph. It is highly versatile for introductions or feature showcases on various pages. The arrangement of media and text can be easily swapped to best suit the page design'
-          group: Layouts/Heroes
-          props: { layout: { name: Layout, description: 'Set hero layout', type: string, default: 'media-first (default)', enum: ['media-first (default)', media-last] }, heading_text: { name: 'Heading Text', description: 'No description available', type: string, default: 'Launching What Comes Next' }, level: { name: 'Heading Level', description: 'No description available', type: number, default: 1, enum: [1, 2, 3] }, text: { name: 'Heading Text', description: 'No description available', type: string, default: 'Lorem ipsum dolor sit amet himenaeos letius praesent mollis tempor nunc aliquam pede si eros habitant eleifend ac gravida.' }, media: { name: 'Media Image', description: 'Media image for the hero. Provide media id or null here.', type: number, default: 4 } }
-          slots: 'No slots'
-          hidden: 0
+        id: sdc.mercury.hero-2
+        name: 'Hero side-by-side'
+        description: 'This component creates a hero section with a two-column layout, placing a media element alongside a text block containing a heading and a paragraph. It is highly versatile for introductions or feature showcases on various pages. The arrangement of media and text can be easily swapped to best suit the page design'
+        group: Layout
+        props:
+          layout:
+            name: Layout
+            description: 'Set hero layout'
+            type: string
+            default: 'media-first (default)'
+            enum:
+              - 'media-first (default)'
+              - media-last
+          heading_text:
+            name: 'Heading Text'
+            description: 'No description available'
+            type: string
+            default: 'Launching What Comes Next'
+          level:
+            name: 'Heading Level'
+            description: 'No description available'
+            type: number
+            default: 1
+            enum:
+              - 1
+              - 2
+              - 3
+          text:
+            name: 'Heading Text'
+            description: 'No description available'
+            type: string
+            default: 'Lorem ipsum dolor sit amet himenaeos letius praesent mollis tempor nunc aliquam pede si eros habitant eleifend ac gravida.'
+          media:
+            name: 'Media Image'
+            description: 'Media image for the hero. Provide media id or null here.'
+            type: number
+            default: 4
+        slots: 'No slots'
+        hidden: 1
       sdc.mercury.hero-3:
-          id: sdc.mercury.hero-3
-          name: 'Hero - Full width'
-          description: 'This component creates a full-width hero section that pairs a large media element with a prominent heading. It is designed for high-impact page introductions or section headers where a strong visual is key. The layout allows for the media to be placed either before or after the heading.'
-          group: Layouts/Heroes
-          props: { layout: { name: Layout, description: 'Set hero layout', type: string, default: 'media-first (default)', enum: ['media-first (default)', media-last] }, heading_text: { name: 'Heading Text', description: 'No description available', type: string, default: 'From One Small Push to a Bold New Orbit' }, level: { name: 'Heading Level', description: 'No description available', type: number, default: 1, enum: [1, 2, 3] }, styles: { name: 'Heading Styles', description: 'No description available', type: string, default: alt, enum: [default, alt] }, media: { name: 'Media Image', description: 'Media image for the hero. Provide media id or null here.', type: number, default: 4 } }
-          slots: 'No slots'
-          hidden: 0
+        id: sdc.mercury.hero-3
+        name: 'Hero full-width'
+        description: 'This component creates a full-width hero section that pairs a large media element with a prominent heading. It is designed for high-impact page introductions or section headers where a strong visual is key. The layout allows for the media to be placed either before or after the heading.'
+        group: Layout
+        props:
+          layout:
+            name: Layout
+            description: 'Set hero layout'
+            type: string
+            default: 'media-first (default)'
+            enum:
+              - 'media-first (default)'
+              - media-last
+          heading_text:
+            name: 'Heading Text'
+            description: 'No description available'
+            type: string
+            default: 'From One Small Push to a Bold New Orbit'
+          level:
+            name: 'Heading Level'
+            description: 'No description available'
+            type: number
+            default: 1
+            enum:
+              - 1
+              - 2
+              - 3
+          styles:
+            name: 'Heading Styles'
+            description: 'No description available'
+            type: string
+            default: alt
+            enum:
+              - default
+              - alt
+          media:
+            name: 'Media Image'
+            description: 'Media image for the hero. Provide media id or null here.'
+            type: number
+            default: 4
+        slots: 'No slots'
+        hidden: 1
       sdc.mercury.hero-billboard:
-          id: sdc.mercury.hero-billboard
-          name: 'Hero billboard'
-          description: 'This component is a very visual striking hero section that has a large image, together with a title and a sub heading. When people ask for a hero section, without any more detail, assume that this is the one to use. If you want a CTA on the component, you should follow this with a section, with a group in main and then a button component and possible information text in a text component.'
-          group: Layout
-          props: { height: { name: 'Hero height', description: 'No description available', type: string, default: 'hg:h-dvh', enum: ['hg:h-dvh', 'hg:h-3/4 hg:min-h-[500px] hg:md:max-h-[600px] hg:xl:max-h-[800px]', 'hg:h-1/2 hg:md:min-h-[400px] hg:md:max-h-[450px] hg:xl:max-h-[600px]'] }, flex_position: { name: 'Content position', description: 'No description available', type: string, default: 'hg:justify-center-safe', enum: ['hg:justify-start', 'hg:justify-center-safe', 'hg:justify-end', hero-center] }, overlay_opacity: { name: 'Overlay opacity', description: 'Set overlay opacity', type: string, default: 'hg:bg-black/40', enum: ['hg:bg-black/0', 'hg:bg-black/20', 'hg:bg-black/40', 'hg:bg-black/60', 'hg:bg-black/75'] }, object_position: { name: 'Background image position', description: 'No description available', type: string, default: 'hg:object-center', enum: ['hg:object-top', 'hg:object-center', 'hg:object-bottom'] }, media: { name: 'Background image', description: 'Media image for the hero. Provide media id or null here.', type: number, default: 4 } }
-          slots: { hero_slot: { name: 'Hero Content', description: 'No description available' } }
-          hidden: 0
+        id: sdc.mercury.hero-billboard
+        name: 'Hero billboard'
+        description: 'This component is a very visual striking hero section that has a large image, together with a title and a sub heading. When people ask for a hero section, without any more detail, assume that this is the one to use. If you want a CTA on the component, you should follow this with a section, with a group in main and then a button component and possible information text in a text component.'
+        group: Layout
+        props:
+          height:
+            name: 'Hero height'
+            description: 'No description available'
+            type: string
+            default: 'hg:h-dvh'
+            enum:
+              - 'hg:h-dvh'
+              - 'hg:h-3/4 hg:min-h-[500px] hg:md:max-h-[600px] hg:xl:max-h-[800px]'
+              - 'hg:h-1/2 hg:md:min-h-[400px] hg:md:max-h-[450px] hg:xl:max-h-[600px]'
+          flex_position:
+            name: 'Content position'
+            description: 'No description available'
+            type: string
+            default: 'hg:justify-center-safe'
+            enum:
+              - 'hg:justify-start'
+              - 'hg:justify-center-safe'
+              - 'hg:justify-end'
+              - hero-center
+          overlay_opacity:
+            name: 'Overlay opacity'
+            description: 'Set overlay opacity'
+            type: string
+            default: 'hg:bg-black/40'
+            enum:
+              - 'hg:bg-black/0'
+              - 'hg:bg-black/20'
+              - 'hg:bg-black/40'
+              - 'hg:bg-black/60'
+              - 'hg:bg-black/75'
+          object_position:
+            name: 'Background image position'
+            description: 'No description available'
+            type: string
+            default: 'hg:object-center'
+            enum:
+              - 'hg:object-top'
+              - 'hg:object-center'
+              - 'hg:object-bottom'
+          media:
+            name: 'Background image'
+            description: 'Media image for the hero. Provide media id or null here.'
+            type: number
+            default: 4
+        slots:
+          hero_slot:
+            name: 'Hero Content'
+            description: 'No description available'
+        hidden: 0
       sdc.mercury.hero-blog:
-          id: sdc.mercury.hero-blog
-          name: 'Hero blog'
-          description: 'This component is designed as a prominent header for article or blog post pages. It combines a main heading, publication date, and author information with a large visual media element. Use this component at the top of a page to create an engaging and informative introduction for readers.'
-          group: Layout
-          props: { heading_text: { name: 'Heading Text', description: 'No description available', type: string, default: 'Enter the title' }, level: { name: 'Heading Level', description: 'No description available', type: integer, default: 1, enum: [1, 2, 3, 4, 5, 6] }, date: { name: 'Published Date', description: 'No description available', type: integer, default: 1770856866 }, author: { name: Author, description: 'No description available', type: string, default: 'John Smith' }, author_url: { name: 'Author link', description: 'No description available', type: string, default: '' }, media: { name: 'Media Image', description: 'Media image for the hero. Provide media id or null here.', type: number, default: 4 } }
-          slots: { blog_media: { name: 'Place Image', description: "This slot is intended to hold the primary visual for the hero section. You should place an 'Image' component or a similar media-rendering component in this slot to serve as the feature image for the blog post" } }
-          hidden: 0
+        id: sdc.mercury.hero-blog
+        name: 'Hero blog'
+        description: 'This component is designed as a prominent header for article or blog post pages. It combines a main heading, publication date, and author information with a large visual media element. Use this component at the top of a page to create an engaging and informative introduction for readers.'
+        group: Layout
+        props:
+          heading_text:
+            name: 'Heading Text'
+            description: 'No description available'
+            type: string
+            default: 'Enter the title'
+          level:
+            name: 'Heading Level'
+            description: 'No description available'
+            type: integer
+            default: 1
+            enum:
+              - 1
+              - 2
+              - 3
+              - 4
+              - 5
+              - 6
+          date:
+            name: 'Published Date'
+            description: 'No description available'
+            type: integer
+            default: 1770856866
+          author:
+            name: Author
+            description: 'No description available'
+            type: string
+            default: 'John Smith'
+          author_url:
+            name: 'Author link'
+            description: 'No description available'
+            type: string
+            default: ''
+          media:
+            name: 'Media Image'
+            description: 'Media image for the hero. Provide media id or null here.'
+            type: number
+            default: 4
+        slots:
+          blog_media:
+            name: 'Place Image'
+            description: "This slot is intended to hold the primary visual for the hero section. You should place an 'Image' component or a similar media-rendering component in this slot to serve as the feature image for the blog post"
+        hidden: 1
       sdc.mercury.image:
-          id: sdc.mercury.image
-          name: Image
-          description: 'An image component.'
-          group: Base
-          props: { media: { name: Image, description: 'Media and Alt for the card. Provide media id or null here.', type: number, default: 4 }, size: { name: 'Aspect ratio', description: 'Set the aspect-ratio of the image container', type: string, default: 'hg:aspect-4/3', enum: ['hg:aspect-2/1', 'hg:aspect-16/9', 'hg:aspect-3/2', 'hg:aspect-4/3', 'hg:aspect-1/1'] }, radius: { name: 'Image radius', description: 'Image corner radius', type: string, default: 'hg:rounded-sm', enum: ['hg:rounded-none', 'hg:rounded-sm', 'hg:rounded-xl hg:md:rounded-2xl', 'hg:rounded-[24px] hg:md:rounded-[32px]'] }, caption: { name: Caption, description: 'Set optional caption', type: string, default: null } }
-          slots: 'No slots'
-          hidden: 0
+        id: sdc.mercury.image
+        name: Image
+        description: 'An image component.'
+        group: Base
+        props:
+          media:
+            name: Image
+            description: 'Media and Alt for the card. Provide media id or null here.'
+            type: number
+            default: 4
+          size:
+            name: 'Aspect ratio'
+            description: 'Set the aspect-ratio of the image container'
+            type: string
+            default: 'hg:aspect-4/3'
+            enum:
+              - 'hg:aspect-2/1'
+              - 'hg:aspect-16/9'
+              - 'hg:aspect-3/2'
+              - 'hg:aspect-4/3'
+              - 'hg:aspect-1/1'
+          radius:
+            name: 'Image radius'
+            description: 'Image corner radius'
+            type: string
+            default: 'hg:rounded-sm'
+            enum:
+              - 'hg:rounded-none'
+              - 'hg:rounded-sm'
+              - 'hg:rounded-xl hg:md:rounded-2xl'
+              - 'hg:rounded-[24px] hg:md:rounded-[32px]'
+          caption:
+            name: Caption
+            description: 'Set optional caption'
+            type: string
+            default: null
+        slots: 'No slots'
+        hidden: 0
       sdc.mercury.logo-grid:
-          id: sdc.mercury.logo-grid
-          name: 'Logo Grid'
-          description: 'A component showing its children in a grid on desktop and (optionally) in a horizontally-scrolling line on mobile.'
-          group: Layout
-          props: { behavior_desktop: { name: 'Desktop behavior', description: 'How to display the grid on desktop', type: string, default: '4', enum: ['1', '2', '3', '4', '5', '6', scroll] }, behavior_tablet: { name: 'Tablet behavior', description: 'No description available', type: string, default: '2', enum: [scroll, '1', '2', '3', '4', '5', '6'] }, behavior_mobile: { name: 'Mobile behavior', description: 'No description available', type: string, default: scroll, enum: [scroll, '1', '2', '3', '4'] } }
-          slots: { logos: { name: 'Logo components', description: 'Components to arrange in a grid or horizontal scroller.' } }
-          hidden: 0
+        id: sdc.mercury.logo-grid
+        name: 'Logo Grid'
+        description: 'A component showing its children in a grid on desktop and (optionally) in a horizontally-scrolling line on mobile.'
+        group: Layout
+        props:
+          behavior_desktop:
+            name: 'Desktop behavior'
+            description: 'How to display the grid on desktop'
+            type: string
+            default: '4'
+            enum:
+              - '1'
+              - '2'
+              - '3'
+              - '4'
+              - '5'
+              - '6'
+              - scroll
+          behavior_tablet:
+            name: 'Tablet behavior'
+            description: 'No description available'
+            type: string
+            default: '2'
+            enum:
+              - scroll
+              - '1'
+              - '2'
+              - '3'
+              - '4'
+              - '5'
+              - '6'
+          behavior_mobile:
+            name: 'Mobile behavior'
+            description: 'No description available'
+            type: string
+            default: scroll
+            enum:
+              - scroll
+              - '1'
+              - '2'
+              - '3'
+              - '4'
+        slots:
+          logos:
+            name: 'Logo components'
+            description: 'Components to arrange in a grid or horizontal scroller.'
+        hidden: 1
       sdc.mercury.navbar:
-          id: sdc.mercury.navbar
-          name: Navbar
-          description: "This component serves as the primary navigation bar for a website, typically positioned at the top of the page. It structures the header by providing distinct areas for the site's logo, the main navigation menu, and other miscellaneous links or call-to-action buttons. The alignment of the menu can be customized for different visual layouts."
-          group: Navigation
-          props: { menu_align: { name: 'Menu alignment', description: 'No description available', type: string, default: center, enum: [left, center, right] } }
-          slots: { logo: { name: 'Site Logo', description: 'Add the site branding block  or Branding component in this slot' }, navigation: { name: 'Navigation menu', description: 'Add main navigation menu here which already contains main navigation links.' }, links: { name: 'Misc. CTAs', description: 'Add 2 Buttons with suitable CTA text.' } }
-          hidden: 0
+        id: sdc.mercury.navbar
+        name: Navbar
+        description: "This component serves as the primary navigation bar for a website, typically positioned at the top of the page. It structures the header by providing distinct areas for the site's logo, the main navigation menu, and other miscellaneous links or call-to-action buttons. The alignment of the menu can be customized for different visual layouts."
+        group: Navigation
+        props:
+          menu_align:
+            name: 'Menu alignment'
+            description: 'No description available'
+            type: string
+            default: center
+            enum:
+              - left
+              - center
+              - right
+        slots:
+          logo:
+            name: 'Site Logo'
+            description: 'Add the site branding block  or Branding component in this slot'
+          navigation:
+            name: 'Navigation menu'
+            description: 'Add main navigation menu here which already contains main navigation links.'
+          links:
+            name: 'Misc. CTAs'
+            description: 'Add 2 Buttons with suitable CTA text.'
+        hidden: 1
       sdc.mercury.navbar-search:
-          id: sdc.mercury.navbar-search
-          name: 'Search Block'
-          description: 'A search form component for the navbar, styled for Drupal search integration.'
-          group: UI
-          props: { action: { name: 'Form Action', description: 'The form action URL.', type: string, default: /search/node }, method: { name: 'Form Method', description: 'The form method.', type: string, default: get }, label: { name: 'Input Label', description: 'The label for the search input.', type: string, default: Search }, buttonLabel: { name: 'Button Label', description: 'The label for the submit button.', type: string, default: Search } }
-          slots: 'No slots'
-          hidden: 0
+        id: sdc.mercury.navbar-search
+        name: 'Search Block'
+        description: 'A search form component for the navbar, styled for Drupal search integration.'
+        group: UI
+        props:
+          action:
+            name: 'Form Action'
+            description: 'The form action URL.'
+            type: string
+            default: /search/node
+          method:
+            name: 'Form Method'
+            description: 'The form method.'
+            type: string
+            default: get
+          label:
+            name: 'Input Label'
+            description: 'The label for the search input.'
+            type: string
+            default: Search
+          buttonLabel:
+            name: 'Button Label'
+            description: 'The label for the submit button.'
+            type: string
+            default: Search
+        slots: 'No slots'
+        hidden: 1
       sdc.mercury.pager:
-          id: sdc.mercury.pager
-          name: Pager
-          description: 'A pagination component for navigating through multiple pages of content'
-          group: Navigation
-          props: 'No props'
-          slots: 'No slots'
-          hidden: 0
+        id: sdc.mercury.pager
+        name: Pager
+        description: 'A pagination component for navigating through multiple pages of content'
+        group: Navigation
+        props: 'No props'
+        slots: 'No slots'
+        hidden: 1
       sdc.mercury.section:
-          id: sdc.mercury.section
-          name: Section
-          description: 'A section for components in a column. This can set in between 1 to 4 columns in different ratios. Note that the main slot is where the columns can be set. Header and footer always is 100% width. ALWAYS PUT THE COMPONENTS IN THE main_slot '
-          group: Layout
-          props: { columns: { name: 'Content layout', description: 'No description available', type: string, default: [50-50], enum: ['100', 50-50, 33-33-33, 75-25, 25-75, 67-33, 33-67, 50-25-25, 25-25-50, 25-25-25-25] }, width: { name: 'Section width', description: 'No description available', type: string, default: 'hg:lg:max-w-full', enum: ['hg:lg:max-w-full', 'hg:lg:max-w-9/10', 'hg:lg:max-w-8/10', 'hg:lg:max-w-3/4', 'hg:lg:max-w-1/2'] }, margin_block_start: { name: 'Margin top', description: 'No description available', type: string, default: '48', enum: ['0', '8', '20', '32', '48', '64', '96', '128'] }, margin_block_end: { name: 'Margin bottom', description: 'No description available', type: string, default: '48', enum: ['0', '8', '20', '32', '48', '64', '96', '128'] }, padding_block_start: { name: 'Padding top', description: 'No description available', type: string, default: '0', enum: ['0', '16', '32', '64'] }, padding_block_end: { name: 'Padding bottom', description: 'No description available', type: string, default: '0', enum: ['0', '16', '32', '64'] }, background_color: { name: 'Background color', description: 'No description available', type: string, default: ['hg:bg-none'], enum: ['hg:bg-none', 'hg:bg-black/50', 'hg:bg-brand', 'hg:bg-brand-light', 'hg:bg-brand-dark', 'hg:bg-accent', 'hg:bg-accent-light', 'hg:bg-accent-dark'] }, background_media: { name: 'Background image', description: 'The background image for section.', type: object, default: null }, section_header: { name: 'Show header region', description: 'No description available', type: boolean, default: [true] }, section_footer: { name: 'Show footer region', description: 'No description available', type: boolean, default: [true] } }
-          slots: { header_slot: { name: Header, description: 'This is an optional header before the columns. Do not put cards or any other component in here. Just text or headings.' }, main_slot: { name: Grid, description: 'This is where the different elements that should be next to each other goes. Cards fits very well here for instance.' }, footer_slot: { name: Footer, description: 'This is an optional header after the columns. Do not put cards or any other component in here. Just text or headings.' } }
-          hidden: 0
+        id: sdc.mercury.section
+        name: Section
+        description: 'A section for components in a column. This can set in between 1 to 4 columns in different ratios. Note that the main slot is where the columns can be set. Header and footer always is 100% width. ALWAYS PUT THE COMPONENTS IN THE main_slot '
+        group: Layout
+        props:
+          columns:
+            name: 'Content layout'
+            description: 'No description available'
+            type: string
+            default:
+              - 50-50
+            enum:
+              - '100'
+              - 50-50
+              - 33-33-33
+              - 75-25
+              - 25-75
+              - 67-33
+              - 33-67
+              - 50-25-25
+              - 25-25-50
+              - 25-25-25-25
+          width:
+            name: 'Section width'
+            description: 'No description available'
+            type: string
+            default: 'hg:lg:max-w-full'
+            enum:
+              - 'hg:lg:max-w-full'
+              - 'hg:lg:max-w-9/10'
+              - 'hg:lg:max-w-8/10'
+              - 'hg:lg:max-w-3/4'
+              - 'hg:lg:max-w-1/2'
+          margin_block_start:
+            name: 'Margin top'
+            description: 'No description available'
+            type: string
+            default: '48'
+            enum:
+              - '0'
+              - '8'
+              - '20'
+              - '32'
+              - '48'
+              - '64'
+              - '96'
+              - '128'
+          margin_block_end:
+            name: 'Margin bottom'
+            description: 'No description available'
+            type: string
+            default: '48'
+            enum:
+              - '0'
+              - '8'
+              - '20'
+              - '32'
+              - '48'
+              - '64'
+              - '96'
+              - '128'
+          padding_block_start:
+            name: 'Padding top'
+            description: 'No description available'
+            type: string
+            default: '0'
+            enum:
+              - '0'
+              - '16'
+              - '32'
+              - '64'
+          padding_block_end:
+            name: 'Padding bottom'
+            description: 'No description available'
+            type: string
+            default: '0'
+            enum:
+              - '0'
+              - '16'
+              - '32'
+              - '64'
+          background_color:
+            name: 'Background color'
+            description: 'No description available'
+            type: string
+            default:
+              - 'hg:bg-none'
+            enum:
+              - 'hg:bg-none'
+              - 'hg:bg-black/50'
+              - 'hg:bg-brand'
+              - 'hg:bg-brand-light'
+              - 'hg:bg-brand-dark'
+              - 'hg:bg-accent'
+              - 'hg:bg-accent-light'
+              - 'hg:bg-accent-dark'
+          background_media:
+            name: 'Background image'
+            description: 'The background image for section.'
+            type: object
+            default: null
+          section_header:
+            name: 'Show header region'
+            description: 'No description available'
+            type: boolean
+            default:
+              - true
+          section_footer:
+            name: 'Show footer region'
+            description: 'No description available'
+            type: boolean
+            default:
+              - true
+        slots:
+          header_slot:
+            name: Header
+            description: 'This is an optional header before the columns. Do not put cards or any other component in here. Just text or headings.'
+          main_slot:
+            name: Grid
+            description: 'This is where the different elements that should be next to each other goes. Cards fits very well here for instance.'
+          footer_slot:
+            name: Footer
+            description: 'This is an optional header after the columns. Do not put cards or any other component in here. Just text or headings.'
+        hidden: 0
       sdc.mercury.text:
-          id: sdc.mercury.text
-          name: Text
-          description: 'This component serves as a flexible container for rendering blocks of rich text content. It accepts HTML, allowing for formatted content such as headings (eg: `<h3>`), paragraphs (`<p>`), lists (`<ul>`, `<li>`), and links (`<a>`). Use this component for any section of a page that requires structured textual information, like an article body or a detailed description.'
-          group: Components
-          props: { text: { name: 'Rich text', description: 'The rich text.', type: string, default: '<h2>This is a heading</h2><p> This is placeholder text. Lorem ipsum dolor sit amet tristique pretium pellentesque semper enim aliquam. Vestibulum elit facilisi ridiculus netus blandit diam turpis tempor eleifend vehicula ligula. Elit neque nam morbi viverra congue maximus. </p> <h3>This is a subheading</h3> <p> This is placeholder text. Lorem ipsum dolor sit amet tristique pretium pellentesque semper enim aliquam. Vestibulum elit facilisi ridiculus netus blandit diam turpis tempor eleifend vehicula ligula. Elit neque nam morbi viverra congue maximus. </p> <h4>This is a subheading</h4> <p> This is placeholder text. Lorem ipsum dolor sit amet tristique pretium pellentesque semper enim aliquam. Vestibulum elit facilisi ridiculus netus blandit diam turpis tempor eleifend vehicula ligula. Elit neque nam morbi viverra congue maximus. </p> <h5>This is a subheading</h5> <p> This is placeholder text. Lorem ipsum dolor sit amet tristique pretium pellentesque semper enim aliquam. Vestibulum elit facilisi ridiculus netus blandit diam turpis tempor eleifend vehicula ligula. Elit neque nam morbi viverra congue maximus. </p> <h6>This is a subheading</h6> <p> This is placeholder text. Lorem ipsum dolor sit amet tristique pretium pellentesque semper enim aliquam. Vestibulum elit facilisi ridiculus netus blandit diam turpis tempor eleifend vehicula ligula. Elit neque nam morbi viverra congue maximus. </p> <p> This is placeholder text. Lorem ipsum dolor sit amet tristique pretium pellentesque semper enim aliquam. Vestibulum elit facilisi ridiculus netus blandit diam turpis tempor eleifend vehicula ligula. Elit neque nam morbi viverra congue maximus. </p> <ul> <li>This is a list item</li> <li>This is a list item</li> </ul>' }, font_size_multiplier: { name: 'Font Size Multiplier', description: 'Scale all font sizes by a percentage', type: string, default: normal, enum: [text-scale-75, text-scale-87, normal, text-scale-112, text-scale-125, text-scale-137, text-scale-150] }, font_color: { name: 'Font Color', description: 'Select Font Color', type: string, default: text-inherit, enum: [text-inherit, 'hg:text-body-text-dark', 'hg:text-white', 'hg:text-brand', 'hg:text-brand-light', 'hg:text-accent', 'hg:text-accent-light'] } }
-          slots: 'No slots'
-          hidden: 0
+        id: sdc.mercury.text
+        name: Text
+        description: 'This component serves as a flexible container for rendering blocks of rich text content. It accepts HTML, allowing for formatted content such as headings (eg: `<h3>`), paragraphs (`<p>`), lists (`<ul>`, `<li>`), and links (`<a>`). Use this component for any section of a page that requires structured textual information, like an article body or a detailed description.'
+        group: Base
+        props:
+          text:
+            name: 'Rich text'
+            description: 'The rich text.'
+            type: string
+            default: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tristique pretium pellentesque semper enim aliquam. Vestibulum elit facilisi ridiculus netus blandit diam turpis tempor eleifend vehicula ligula. Elit neque nam morbi viverra congue maximus.</p>'
+          font_size_multiplier:
+            name: 'Font Size Multiplier'
+            description: 'Scale all font sizes by a percentage'
+            type: string
+            default: normal
+            enum:
+              - text-scale-75
+              - text-scale-87
+              - normal
+              - text-scale-112
+              - text-scale-125
+              - text-scale-137
+              - text-scale-150
+          font_color:
+            name: 'Font Color'
+            description: 'Select Font Color'
+            type: string
+            default: text-inherit
+            enum:
+              - text-inherit
+              - 'hg:text-body-text-dark'
+              - 'hg:text-white'
+              - 'hg:text-brand'
+              - 'hg:text-brand-light'
+              - 'hg:text-accent'
+              - 'hg:text-accent-light'
+        slots: 'No slots'
+        hidden: 0
       sdc.mercury.tile-icon:
-          id: sdc.mercury.tile-icon
-          name: Icon
-          description: 'A component showing its children in a grid on desktop and in a horizontally-scrolling line on mobile.'
-          group: Components/Tiles
-          props: { text: { name: 'Tile heading', description: 'No description available', type: string, default: Heading }, description: { name: 'Tile description', description: 'No description available', type: string, default: '<p> This is placeholder text. </p>' }, icon_align: { name: 'Tile alignment', description: 'No description available', type: string, default: ['hg:justify-center'], enum: ['hg:justify-start', 'hg:justify-end', 'hg:justify-center'] }, tile_size: { name: 'Tile size', description: 'No description available', type: string, default: ['hg:aspect-none'], enum: ['hg:aspect-none', 'hg:aspect-square', 'hg:aspect-4/3', 'hg:aspect-16/9'] }, url: { name: 'Tile Link (optional)', description: 'No description available', type: string, default: null }, icon: { name: 'Icon name (exclude prefix)', description: 'No description available', type: string, default: rocket }, icon_size: { name: 'Icon size', description: 'No description available', type: string, default: ['hg:text-4xl'], enum: ['hg:text-2xl', 'hg:text-4xl', 'hg:text-6xl'] }, border: { name: 'Show border', description: 'Add a border to the tile.', type: boolean, default: true }, border_radius: { name: 'Rounded Corners', description: 'Set rounded corner radius', type: string, default: 'hg:rounded-sm', enum: ['hg:rounded-none', 'hg:rounded-sm', 'hg:rounded-xl hg:md:rounded-2xl', 'hg:rounded-[24px] hg:md:rounded-[32px]'] }, background: { name: 'Show background', description: 'Add a background to the tile.', type: boolean, default: false } }
-          slots: 'No slots'
-          hidden: 0
+        id: sdc.mercury.tile-icon
+        name: 'Icon Tile'
+        description: 'A component showing its children in a grid on desktop and in a horizontally-scrolling line on mobile.'
+        group: Components
+        props:
+          tile_size:
+            name: 'Tile aspect ratio'
+            description: 'No description available'
+            type: string
+            default:
+              - 'hg:aspect-none'
+            enum:
+              - 'hg:aspect-none'
+              - 'hg:aspect-square'
+              - 'hg:aspect-4/3'
+              - 'hg:aspect-16/9'
+          flex_align:
+            name: Alignment
+            description: 'No description available'
+            type: string
+            default:
+              - center
+            enum:
+              - start
+              - center
+              - end
+              - between
+          border:
+            name: Border
+            description: 'Add a border to the tile.'
+            type: boolean
+            default: true
+          border_radius:
+            name: 'Border radius'
+            description: 'Set rounded corner radius'
+            type: string
+            default: 'hg:rounded-sm'
+            enum:
+              - 'hg:rounded-none'
+              - 'hg:rounded-sm'
+              - 'hg:rounded-xl hg:md:rounded-2xl'
+              - 'hg:rounded-[24px] hg:md:rounded-[32px]'
+          background:
+            name: Background
+            description: 'Add a background to the tile.'
+            type: boolean
+            default: false
+          text:
+            name: 'Heading text'
+            description: 'No description available'
+            type: string
+            default: Heading
+          description:
+            name: 'Paragraph text'
+            description: 'No description available'
+            type: string
+            default: '<p>This is placeholder text.</p>'
+          text_align:
+            name: 'Text alignment'
+            description: 'No description available'
+            type: string
+            default:
+              - 'hg:text-center'
+            enum:
+              - 'hg:text-start'
+              - 'hg:text-center'
+              - 'hg:text-end'
+          url:
+            name: 'Link tile'
+            description: 'No description available'
+            type: string
+            default: null
+          icon:
+            name: 'Icon name (exclude prefix)'
+            description: 'No description available'
+            type: string
+            default: rocket
+          icon_size:
+            name: 'Icon size'
+            description: 'No description available'
+            type: string
+            default:
+              - 'hg:text-4xl'
+            enum:
+              - 'hg:text-2xl'
+              - 'hg:text-4xl'
+              - 'hg:text-6xl'
+          icon_align:
+            name: 'Icon alignment'
+            description: 'No description available'
+            type: string
+            default:
+              - 'hg:justify-center'
+            enum:
+              - 'hg:justify-start'
+              - 'hg:justify-end'
+              - 'hg:justify-center'
+        slots: 'No slots'
+        hidden: 0
       sdc.mercury.tile-logo:
-          id: sdc.mercury.tile-logo
-          name: Logo
-          description: 'A single logo that can be placed in the Logo grid. Dont use as standalone component. Dont use it in Navbar'
-          group: Components/Tiles
-          props: { media: { name: Logo, description: ' Provide media id or null here.', type: number, default: 4 } }
-          slots: 'No slots'
-          hidden: 0
+        id: sdc.mercury.tile-logo
+        name: Logo
+        description: 'A single logo that can be placed in the Logo grid. Dont use as standalone component. Dont use it in Navbar'
+        group: Components/Tiles
+        props:
+          media:
+            name: Logo
+            description: ' Provide media id or null here.'
+            type: number
+            default: 4
+        slots: 'No slots'
+        hidden: 0
       sdc.mercury.webform-newsletter:
-          id: sdc.mercury.webform-newsletter
-          name: Newsletter
-          description: 'Not an actual component.'
-          group: Components/Newsletter
-          props: 'No props'
-          slots: 'No slots'
-          hidden: 0
+        id: sdc.mercury.webform-newsletter
+        name: Newsletter
+        description: 'Not an actual component.'
+        group: Webform
+        props: 'No props'
+        slots: 'No slots'
+        hidden: 1
       sdc.navigation.title:
-          id: sdc.navigation.title
-          name: Title
-          description: Title
-          group: ''
-          props: { modifiers: { name: 'Modifier classes.', description: 'Title modifiers. https://en.bem.info/methodology/css/#modifiers', type: array, default: null }, extra_classes: { name: 'Extra classes.', description: 'External modifiers added from the placement context. https://en.bem.info/methodology/css/#mixes', type: array, default: null }, html_tag: { name: 'HTML tag for title', description: 'No description available', type: string, default: h2, enum: [h1, h2, h3, h4, h5, h6, span] }, icon: { name: Icon, description: 'No description available', type: string, default: null } }
-          slots: { content: { name: Content, description: 'Content of title.' } }
-          hidden: 0
+        id: sdc.navigation.title
+        name: Title
+        description: Title
+        group: ''
+        props:
+          modifiers:
+            name: 'Modifier classes.'
+            description: 'Title modifiers. https://en.bem.info/methodology/css/#modifiers'
+            type: array
+            default: null
+          extra_classes:
+            name: 'Extra classes.'
+            description: 'External modifiers added from the placement context. https://en.bem.info/methodology/css/#mixes'
+            type: array
+            default: null
+          html_tag:
+            name: 'HTML tag for title'
+            description: 'No description available'
+            type: string
+            default: h2
+            enum:
+              - h1
+              - h2
+              - h3
+              - h4
+              - h5
+              - h6
+              - span
+          icon:
+            name: Icon
+            description: 'No description available'
+            type: string
+            default: null
+        slots:
+          content:
+            name: Content
+            description: 'Content of title.'
+        hidden: 1

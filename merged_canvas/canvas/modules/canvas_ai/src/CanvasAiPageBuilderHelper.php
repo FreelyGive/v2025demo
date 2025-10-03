@@ -71,7 +71,7 @@ class CanvasAiPageBuilderHelper {
       if (isset($components['components'])) {
         foreach ($components['components'] as $component_id => $data) {
           // Check if the data differs from the config data.
-          if (!isset($component_context[$component_id]) || $component_context[$component_id] !== $data) {
+          if (isset($component_context[$component_id]) && $component_context[$component_id] !== $data) {
             // Merge the data, giving preference to the non-config data.
             $component_context[$component_id] = ($component_context[$component_id] ?? []) + $data;
           }
@@ -79,7 +79,7 @@ class CanvasAiPageBuilderHelper {
       }
       else {
         foreach ($components as $component_id => $data) {
-          if (!isset($component_context[$component_id]) || $component_context[$component_id] !== $data) {
+          if (isset($component_context[$component_id]) && $component_context[$component_id] !== $data) {
             $component_context[$component_id] = ($component_context[$component_id] ?? []) + $data;
           }
         }

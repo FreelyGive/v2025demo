@@ -2,6 +2,6 @@ _core:
   default_config_hash: NM9MWiq2xee0sLJE0Mo3yw7o0-Z3hTn4rYn5CJzL3z8
 strategy: llm
 max_contexts: 3
-max_tokens: 5000
+max_tokens: 10000
 provider_id: openai
 model_id: gpt-4.1

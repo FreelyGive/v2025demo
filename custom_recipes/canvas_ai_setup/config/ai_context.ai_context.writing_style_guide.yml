@@ -2,6 +2,8 @@ uuid: 42e2577f-2685-4cfa-ae1a-9a74f82d237b
 langcode: en
 status: true
 dependencies: {  }
+_core:
+  default_config_hash: udOt0L9Bqrduxt_wMZ2hmrnIXse4p6Z0wiFgY6PFNCw
 id: writing_style_guide
 label: 'Writing Style Guide'
 description: 'The writing style guide has information about words or phrases that we usually use.'
