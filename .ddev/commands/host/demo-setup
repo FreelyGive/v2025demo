@@ -12,14 +12,14 @@ fi
 
 # Delete garbage
 ddev delete -O -y
-rm -rf vendor web composer.* patches.lock.json
+ddev exec bash -lc 'rm -rf vendor web composer.* patches.lock.json'
 
 # Drupal CMS
 ddev start
 
 # Overwrite canvas with our version
-rm -rf web/modules/contrib/canvas
-cp -r merged_canvas/canvas web/modules/contrib/canvas
+ddev exec bash -lc 'rm -rf web/modules/contrib/canvas'
+ddev exec bash -lc 'cp -r merged_canvas/canvas web/modules/contrib/canvas'
 
 # Copy custom AB split test module
 ddev exec bash -lc 'mkdir -p web/modules/custom && cp -a custom_modules/. web/modules/custom/'
@@ -40,7 +40,7 @@ ddev composer require 'drupal/ai:1.2.x-dev@dev' \
 'jfcherng/php-diff:^6.0'
 
 # AI Context via git.
-cp -r custom_modules/ai_context web/modules/contrib/ai_context
+ddev exec bash -lc 'cp -r custom_modules/ai_context web/modules/contrib/ai_context'
 
 ddev drush cr
 # Install the AI stuff.
@@ -60,4 +60,4 @@ ddev drush en -y ab_split_test page_cache_exclusion context_content_watch
 ddev drush sapi-i
 
 echo "Visit https://v2025demo.ddev.site/canvas and login with user 'admin' and password 'admin' to see the demo page."
-echo "After login, you click "New" and "New Page" to create a new page from AI."
+echo "After login, you click New and New Page to create a new page from AI."
