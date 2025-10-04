@@ -24,6 +24,9 @@ ddev exec bash -lc 'cp -r merged_canvas/canvas web/modules/contrib/canvas'
 # Copy custom AB split test module
 ddev exec bash -lc 'mkdir -p web/modules/custom && cp -a custom_modules/. web/modules/custom/'
 
+# Sleep because Mutagen is slow to notice changes.
+sleep 5
+
 # Install
 ddev drush si drupal_cms_installer installer_site_template_form.add_ons=byte --account-pass=admin --site-name="2025 Demo" -y
 # Install byte
