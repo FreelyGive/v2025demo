@@ -1,5 +1,5 @@
 context_content_watch.ai_suggestion_review:
-  path: '/admin/config/ai/suggestion-review'
+  path: '/admin/content/ai-suggestion-review'
   defaults:
     _controller: '\Drupal\context_content_watch\Controller\HumanControlCenter::content'
     _title: 'AI Suggestion Review'
