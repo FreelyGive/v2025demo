@@ -7,7 +7,7 @@ index b37de481..c6347902 100644
          $component = Component::load($componentId);
          $componentVersion = $component ? $component->getActiveVersion() : "temp-version-$componentUuid";
 -        if ($component instanceof Component && !empty($componentData['props'])) {
-+        if ($component instanceof Component && $component->get('source') === 'block' && !empty($componentData['props']['block_uuid'])) {
++        if ($component instanceof Component && $component->get('source') === 'block') {
 +          $componentVersion = Component::load($componentId)?->getActiveVersion() ?? "temp-version-$componentUuid";
 +          $inputs = $componentData['props'] ?? [];
 +        }
