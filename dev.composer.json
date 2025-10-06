@@ -139,7 +139,9 @@
                 "Add content export": "./patches/core/content-export.patch"
             },
             "drupal/canvas": {
-                "#3533079: Template Agent": "./patches/canvas/template-agent.patch"
+                "#3533079: Template Agent": "./patches/canvas/template-agent.patch",
+                "Block Selection PoC": "./patches/canvas/block-selection.patch",
+                "#3549432: Hide selected components": "./patches/canvas/hidden-components.patch"
             }
         }
     },
