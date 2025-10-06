@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies: {  }
 _core:
-  default_config_hash: YNoCOD0-jPBQJ6ZpD4LgN0AYSq_NCEP2J0wWT96KYHg
+  default_config_hash: 8Hl1huwLt4lsg9APpDViru3uUreHeRpfnBnSsM1YD7g
 id: canvas_template_builder_agent
 label: 'Canvas Template Builder Agent'
 description: 'This sub-agent specializes in building templates for entire pages using available components. It can also be used to generate headers and footers for pages. Use it for all template-building requests where a complete page needs to be generated.'
@@ -19,15 +19,12 @@ system_prompt: |-
   - **Information Finder**: If there is a short explanation from the user on what to create, you can use the information finder tool to get more information by giving it semantic search words. You may use this as many times as necessary.
   - **Placeholder/Mockup Data**: If the user has requested you specifically to make up the text, then do so.
   - **Text provided**: If there is clear data provided on how to create the texts, you do neither have to do follow up questions or search for context.
-  - **Webforms**: If the user asks to create an webform, only allow the webform ids you know about and see if there is something similar to what they are asking for. If so, set the title of the webform on the webform_id on the webform component.
+  - **Webforms**: If the user asks to create an webform, only allow the webform ids you know about and see if there is something similar to what they are asking for. If so, set the id of the webform on the webform_id on the webform component.
 
   ### 1. Component Placement Strategy
   - **Primary Focus**: Place components in the 'content' region as the main page body structure
-  - **Minimum Content Requirement**: Generate minimum 5 well-structured sections for the page body
-  - **Region Restriction**: ONLY use the 'content' region for page body components unless explicitly asked by the user to use other regions
-  - **Header/Footer Generation**: Generate header and footer components ONLY when user explicitly requests to include header and footer
-  - **Standalone Header/Footer**: If the request is specifically for generating only header or only footer, generate ONLY that component without creating the complete template
   - **Region Awareness**: When generating headers/footers, utilize respective header/footer or any similar regions if available, adapting to varying region names based on the active theme. If no dedicated regions are available, use the 'content' region.
+  - **Content Region**: Simply, always use the 'content' region. Not header, meta, footer.
 
   ### 2. Component Selection and Configuration
   - **Strict Adherence**: Only use components explicitly provided in the context
@@ -93,7 +90,7 @@ system_prompt: |-
   **3. Images:**
   * Look at how many image props you have to fill in - these are the "$ref: json-schema-definitions://canvas.module/image" objects.
   * Use the rag search tool, to search for approriate images. If the user has not asked for specific images, try to figure out what to search for, to find matching images.
-  * Always get at least 10 images per search so you have enough images on the topic to place. Its ok to do this over multiple loops and up to 10 searches, until you have enough images.
+  * Always get at least 10 images per search so you have enough images on the topic to place. Its ok to do this over multiple loops and up to 10 searches, until you have enough images. Use around 0.1 as min_score to make sure you get many images back.
   * Use the media id from the returned image as the value(s) in the prop.
   * So for example - if you get ID 32 back and pick this and the prop key is "images", you should set `"images": {"target_id": 32}`
   * **IMPORTANT** - Always search enough times so you have enough images to fill out all the different components. Its better you use images that are not that connected then putting no images.
@@ -197,19 +194,12 @@ default_information_tools: |
     parameters: {  }
   webforms:
     label: 'Available Webforms'
-    description: 'These are the available webforms, if the end user wants to use webforms.'
+    description: 'These are the available webforms, if the end user wants to use webforms, you should use one of these ids.'
     tool: 'ai_agent:list_config_entities'
     parameters:
       entity_type: webform
       fields:
         - title
-  context_our_company:
-    label: Contexts
-    description: 'This shows some important contexts for the agent to pick its choices'
-    tool: 'ai_context:get_relevant_contexts'
-    parameters:
-      task: fun
-      agent_id: canvas_template_builder_agent
 tool_usage_limits:
   'canvas_ai:set_template_data':
     component_structure:
@@ -223,7 +213,7 @@ tool_usage_limits:
   'ai_search:rag_search':
     index:
       action: force_value
-      hide_property: 0
+      hide_property: 1
       values:
         - media_image_index_rag
     search_string:
@@ -235,10 +225,9 @@ tool_usage_limits:
       hide_property: 0
       values: ''
     min_score:
-      action: force_value
-      hide_property: 0
-      values:
-        - '0.1'
+      action: ''
+      hide_property: 1
+      values: ''
   'ai_agents::ai_agent::information_finder':
     prompt:
       action: ''

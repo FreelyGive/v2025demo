@@ -2,7 +2,7 @@ diff --git a/modules/canvas_ai/src/AiResponseValidator.php b/modules/canvas_ai/s
 index b37de481..c6347902 100644
 --- a/modules/canvas_ai/src/AiResponseValidator.php
 +++ b/modules/canvas_ai/src/AiResponseValidator.php
-@@ -100,7 +100,11 @@ class AiResponseValidator {
+@@ -100,7 +100,22 @@ class AiResponseValidator {
          // later.
          $component = Component::load($componentId);
          $componentVersion = $component ? $component->getActiveVersion() : "temp-version-$componentUuid";
@@ -10,6 +10,17 @@ index b37de481..c6347902 100644
 +        if ($component instanceof Component && $component->get('source') === 'block') {
 +          $componentVersion = Component::load($componentId)?->getActiveVersion() ?? "temp-version-$componentUuid";
 +          $inputs = $componentData['props'] ?? [];
++          if (isset($inputs['webform_id'])) {
++            // Load the webform on its name.
++            $webform = \Drupal::entityTypeManager()->getStorage('webform')->loadByProperties(['title' => $inputs['webform_id']]);
++            if (!$webform) {
++              $inputs['webform_id'] = 'contact';
++            }
++            else {
++              // Use the first matching webform.
++              $inputs['webform_id'] = reset($webform)->id();
++            }
++          }
 +        }
 +        elseif ($component instanceof Component && !empty($componentData['props'])) {
            $source = $component->getComponentSource();
@@ -55,7 +66,7 @@ index 750788f6..3e127f19 100644
 +        // Load via the block plugin manager to get more details.
 +        $block_plugin = \Drupal::service('plugin.manager.block')->createInstance($component->get('source_local_id'));
 +        // Get the default configuration of the block plugin.
-+        if ($block_plugin instanceof PluginWithFormsInterface) {
++        if ($block_plugin instanceof \Drupal\Core\Plugin\PluginWithFormsInterface) {
 +          $config = $block_plugin->defaultConfiguration();
 +          foreach ($config as $key => $value) {
 +            // Skip the already added props.

@@ -2,16 +2,19 @@ uuid: 31c00981-43f9-484e-92ab-f468dd81e4e6
 langcode: en
 status: true
 dependencies: {  }
+_core:
+  default_config_hash: zW39wOMvC3kMb9EFMBqnCFg9wnkbwPZlqUj9ybKjwDc
 id: information_finder
 label: 'Information Finder'
 description: 'This tool/function call, just find information on a specific topic. Just give it the semantic search words to search on.'
-system_prompt: 'You will be given a prompt on what to search on, just use the RAG tool on this search.'
+system_prompt: 'You will be given a prompt on what to search on, just use the RAG tool on this search. Use min_score of 0.3.'
 secured_system_prompt: '[ai_agent:agent_instructions]'
 tools:
   'ai_search:rag_search': true
 tool_settings:
   'ai_search:rag_search':
     return_directly: 1
+    require_usage: 0
     description_override: ''
     progress_message: ''
     use_artifacts: 0
@@ -23,7 +26,7 @@ tool_usage_limits:
   'ai_search:rag_search':
     index:
       action: force_value
-      hide_property: 0
+      hide_property: 1
       values:
         - media_document_index_rag
     search_string:
@@ -35,10 +38,9 @@ tool_usage_limits:
       hide_property: 0
       values: ''
     min_score:
-      action: force_value
+      action: ''
       hide_property: 0
-      values:
-        - '0.3'
+      values: ''
 exclude_users_role: false
 masquerade_roles: {  }
 structured_output_enabled: false

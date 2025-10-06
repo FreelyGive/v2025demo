@@ -5,7 +5,7 @@
 ## Example: "ddev demo-setup"
 
 # If its running confirm delete
-if [ "$(ddev list | grep v2025demo | grep OK)" ]; then
+if ddev list | grep -q "v2025demo" | grep -q "OK"; then
   echo "The v2025demo is running. It will be deleted and recreated. Press ENTER to continue or CTRL-C to abort."
   read x
   # Delete garbage

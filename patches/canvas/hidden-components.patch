@@ -1,8 +1,46 @@
 diff --git a/modules/canvas_ai/src/CanvasAiPageBuilderHelper.php b/modules/canvas_ai/src/CanvasAiPageBuilderHelper.php
-index 750788f6d019225a81d491fb6bc9e0dffd95c134..8edd3268d7ac67d823a7e69403daaacafe0efdc7 100644
+index 750788f6d019225a81d491fb6bc9e0dffd95c134..5b3e8753d6affa9cb44ff13ded9ae4533fad0457 100644
 --- a/modules/canvas_ai/src/CanvasAiPageBuilderHelper.php
 +++ b/modules/canvas_ai/src/CanvasAiPageBuilderHelper.php
-@@ -331,6 +331,12 @@ class CanvasAiPageBuilderHelper {
+@@ -62,17 +62,33 @@ class CanvasAiPageBuilderHelper {
+   public function getComponentContextForAi(): string {
+     $component_context = [];
+     $component_context_from_config = $this->getComponentContextFromConfig();
+-    $available_components = !empty($component_context_from_config) ? $component_context_from_config : $this->getAllComponentsKeyedBySource();
++    $available_components = $this->getAllComponentsKeyedBySource();
++
++    foreach ($component_context_from_config as $components) {
++      foreach ($components as $component_id => $data) {
++        $component_context[$component_id] = $data;
++      }
++    }
++
+     foreach ($available_components as $components) {
+       // Component info would be under 'components' key, when not loaded from
+       // config.
+       if (isset($components['components'])) {
+-        $component_context += $components['components'];
++        foreach ($components['components'] as $component_id => $data) {
++          // Check if the data differs from the config data.
++          if (isset($component_context[$component_id]) && $component_context[$component_id] !== $data) {
++            // Merge the data, giving preference to the non-config data.
++            $component_context[$component_id] = ($component_context[$component_id] ?? []) + $data;
++          }
++        }
+       }
+       else {
+-        $component_context += $components;
++        foreach ($components as $component_id => $data) {
++          if (isset($component_context[$component_id]) && $component_context[$component_id] !== $data) {
++            $component_context[$component_id] = ($component_context[$component_id] ?? []) + $data;
++          }
++        }
+       }
+-
+     }
+     return Yaml::dump($component_context, 4, 2);
+   }
+@@ -331,6 +347,12 @@ class CanvasAiPageBuilderHelper {
        if ($components['enabled']) {
          $enabled_sources[$source] = Yaml::parse($components['data']);
        }
