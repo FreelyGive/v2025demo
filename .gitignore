@@ -52,6 +52,11 @@
 /web/robots.txt
 /web/update.php
 /web/web.config
+/web/libraries
+/web/profiles
+/web/sites
+/web/themes
+
 
 # Ignore vendor dependencies and scripts
 /vendor
@@ -77,7 +82,6 @@
 /patches.lock.json
 /private/
 /vendor/
-/web/
 /.ddev/.env
 
 LICENSE
@@ -93,7 +97,6 @@ node_modules
 patches.json
 patches.lock.json
 /vendor
-/web
 /.editorconfig
 /.gitattributes
 .DS_Store

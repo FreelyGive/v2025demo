@@ -16,12 +16,13 @@ install:
   - ai_api_explorer
   - ai_context
   - ai_simple_pdf_to_text
+  - context_content_watch
 config:
   import:
     ai_agents: '*'
-    canvas_ai: '*'
     key: '*'
     ai_automators: '*'
+    context_content_watch: '*'
   actions:
     mercury.settings:
       simpleConfigUpdate:

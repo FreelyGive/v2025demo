@@ -8,6 +8,7 @@ use Composer\InstalledVersions;
 use Drupal\canvas\Entity\Component;
 use Drupal\canvas\JsonSchemaDefinitionsStreamwrapper;
 use Drupal\FunctionalTests\Core\Recipe\RecipeTestTrait;
+use Drupal\linkit\Entity\Profile;
 use Drupal\Tests\BrowserTestBase;
 use Drupal\Tests\drupal_cms_content_type_base\Traits\ContentModelTestTrait;
 use PHPUnit\Framework\Attributes\Group;
@@ -89,6 +90,33 @@ class ComponentValidationTest extends BrowserTestBase {
     $dir = InstalledVersions::getInstallPath('drupal/drupal_cms_search');
     $this->applyRecipe($dir);
     $this->assertTrue(Component::load('block.simple_search_form_block')?->status());
+
+    $disabled_components = Component::loadMultiple([
+      'block.project_browser_block.drupalorg_jsonapi',
+      'block.project_browser_block.recommended',
+      'block.system_menu_block.admin',
+      'block.system_menu_block.navigation-user-links',
+      'block.system_menu_block.tools',
+      'block.system_menu_block.top-tasks',
+      'block.navigation_dashboard',
+      'block.navigation_link',
+      'block.navigation_shortcuts',
+      'block.navigation_user',
+      'block.announce_block',
+      'block.dashboard_site_status',
+      'block.local_actions_block',
+      'block.local_tasks_block',
+      'block.views_block.publishing_content-block_drafts',
+      'block.views_block.publishing_content-block_scheduled',
+      'block.views_block.canvas_pages-block_1',
+    ]);
+    foreach ($disabled_components as $id => $component) {
+      $this->assertFalse($component->status(), "Component $id is enabled but it shouldn't be.");
+    }
+
+    // Our LinkIt profile should be able to match Canvas pages.
+    $matcher = Profile::load('default')?->getMatcherByEntityType('canvas_page');
+    $this->assertIsObject($matcher);
   }
 
 }

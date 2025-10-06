@@ -1,6 +1,0 @@
-name: Canvas Entity Test
-description: 'Test hooks for test entities'
-type: module
-package: Testing
-dependencies:
-  - canvas:canvas

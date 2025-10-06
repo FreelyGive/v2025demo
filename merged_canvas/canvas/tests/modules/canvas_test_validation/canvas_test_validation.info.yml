@@ -1,6 +1,0 @@
-name: Test Validation
-type: module
-description: Helps test certain aspects of validation in Drupal Canvas.
-package: Testing
-dependencies:
-  - canvas:canvas

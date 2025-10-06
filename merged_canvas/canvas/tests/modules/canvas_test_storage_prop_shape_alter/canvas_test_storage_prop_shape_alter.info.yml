@@ -1,6 +1,0 @@
-name: 'Test hook_storage_prop_shape_alter()'
-type: module
-dependencies:
-  - canvas:canvas
-  - drupal:link
-package: Testing

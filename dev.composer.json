@@ -137,6 +137,9 @@
             "drupal/core": {
                 "#3530597: There is no config schema for the `value` property of `datetime` fields": "./patches/core/date-field-default-value.patch",
                 "Add content export": "./patches/core/content-export.patch"
+            },
+            "drupal/canvas": {
+                "#3533079: Template Agent": "./patches/canvas/template-agent.patch"
             }
         }
     },

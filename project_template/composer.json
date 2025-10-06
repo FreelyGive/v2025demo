@@ -18,7 +18,7 @@
     "require": {
         "composer/composer": "^2.8",
         "composer/installers": "^2.3",
-        "drupal/canvas": "@alpha",
+        "drupal/canvas": "@beta",
         "drupal/core-composer-scaffold": "^11.2.4",
         "drupal/core-project-message": "^11.2.4",
         "drupal/core-recipe-unpack": "^11.2.4",
@@ -31,7 +31,7 @@
         "drupal/drupal_cms_seo_tools": "^2",
         "drupal/drupal_cms_starter": "^2",
         "drupal/project_browser": "@beta",
-        "drupal/recipe_installer_kit": "1.x-dev@dev",
+        "drupal/recipe_installer_kit": "1.x-dev#57545308c602ea012911987e0f3eae7820c5c865",
         "drupal/webform": "^6.3.0-beta3@beta"
     },
     "require-dev": {

@@ -1,8 +1,0 @@
-name: 'Drupal Canvas Personalization'
-type: module
-# Note: this may be folded into the main module when that's more pragmatic. We're starting it as its own module, as a "feature flag".
-description: 'Provides Personalization features for Drupal Canvas'
-core_version_requirement: ^11.2
-php: 8.3
-dependencies:
-  - canvas:canvas

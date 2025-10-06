@@ -1,7 +1,0 @@
-.overlay {
-  position: absolute;
-  background-color: #FFF;
-  z-index: 100;
-  opacity: 0.7;
-  inset: 0;
-}

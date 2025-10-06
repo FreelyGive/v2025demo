@@ -1,6 +1,0 @@
-name: Canvas Test block form
-description: 'Test blocks that need form submission and validation'
-type: module
-dependencies:
-  - canvas:canvas
-package: Testing

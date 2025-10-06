@@ -1,5 +1,0 @@
-services:
-  # Twig.
-  Drupal\canvas_test_sdc\Extension\SdcTestExtension:
-    tags:
-      - { name: twig.extension }

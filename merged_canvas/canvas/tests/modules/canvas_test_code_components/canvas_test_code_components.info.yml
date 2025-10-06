@@ -1,6 +1,0 @@
-name: Canvas test code components
-description: 'Hand-crafted code components like your Mother used to make, purpose built for e2e testing'
-package: Testing
-type: module
-dependencies:
-  - canvas:canvas

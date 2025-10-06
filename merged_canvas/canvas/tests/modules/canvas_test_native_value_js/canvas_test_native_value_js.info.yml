@@ -1,6 +1,0 @@
-name: 'Test updating form via DOM value property'
-type: module
-dependencies:
-  - canvas:canvas
-  - canvas:canvas_test_state_api
-package: Testing
