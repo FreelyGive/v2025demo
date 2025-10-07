@@ -27,6 +27,9 @@ config:
     mercury.settings:
       simpleConfigUpdate:
         scheme: byte-dark
+        logo:
+          path: 'public://2025-09/FinDrop_logo-outline.svg'
+          use_default: false
     core.entity_form_display.media.image.default:
       setComponents:
         -
