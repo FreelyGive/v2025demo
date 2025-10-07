@@ -4,16 +4,8 @@
 ## Usage: demo-setup
 ## Example: "ddev demo-setup"
 
-# If its running confirm delete
-if ddev list | grep -q "v2025demo" | grep -q "OK"; then
-  echo "The v2025demo is running. It will be deleted and recreated. Press ENTER to continue or CTRL-C to abort."
-  read x
-  # Delete garbage
-  ddev exec bash -lc 'rm -rf vendor composer.* patches.lock.json'
-  # Delete all in the web directory except the custom modules directory.
-  ddev exec bash -lc "find web -type f ! -path 'web/modules/*' -delete && find web -mindepth 1 -type d ! -path 'web/modules' ! -path 'web/modules/custom' ! -path 'web/modules/custom/*' -exec rm -rf {} +"
-  ddev delete -O -y
-fi
+# Always delete
+ddev delete -O -y
 
 # Drupal CMS
 ddev start
