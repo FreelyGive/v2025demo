@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies: {  }
 _core:
-  default_config_hash: 8Hl1huwLt4lsg9APpDViru3uUreHeRpfnBnSsM1YD7g
+  default_config_hash: Ai6VD1cSBDvfpD8aPBoAcV9wOMNHdVcISiS85qPhKAE
 id: canvas_template_builder_agent
 label: 'Canvas Template Builder Agent'
 description: 'This sub-agent specializes in building templates for entire pages using available components. It can also be used to generate headers and footers for pages. Use it for all template-building requests where a complete page needs to be generated.'
@@ -181,7 +181,7 @@ tool_settings:
 orchestration_agent: false
 triage_agent: false
 max_loops: 10
-default_information_tools: |
+default_information_tools: |-
   current_layout:
     label: 'Current layout'
     description: 'The current layout of the page is:'
@@ -200,6 +200,13 @@ default_information_tools: |
       entity_type: webform
       fields:
         - title
+  available_contexts:
+    label: 'Available contexts'
+    description: 'These are the Components available to use'
+    tool: 'ai_context:get_relevant_contexts'
+    parameters:
+      task: components
+      agent_id: canvas_template_builder_agent
 tool_usage_limits:
   'canvas_ai:set_template_data':
     component_structure:
