@@ -38,7 +38,7 @@ default:
         slot_flex_direction: 'hg:flex-col'
         slot_flex_gap: 'hg:gap-4'
         media:
-          target_id: '108'
+          target_uuid: 7c191da5-f092-43cd-980b-794a555a8f53
     -
       parent_uuid: 50ac3601-ed46-434b-b323-df287d6dfaed
       slot: hero_slot
