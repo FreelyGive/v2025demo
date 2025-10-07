@@ -3,13 +3,13 @@ prompt_logging_tags: ''
 default_providers:
   chat:
     provider_id: openai
-    model_id: gpt-4o
+    model_id: gpt-4.1
   chat_with_complex_json:
     provider_id: openai
-    model_id: gpt-4o
+    model_id: gpt-4.1
   chat_with_image_vision:
     provider_id: openai
-    model_id: gpt-4o
+    model_id: gpt-4.1
   chat_with_structured_response:
     provider_id: openai
     model_id: gpt-4.1
