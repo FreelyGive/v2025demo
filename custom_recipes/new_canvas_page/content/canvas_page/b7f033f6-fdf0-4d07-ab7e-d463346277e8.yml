@@ -23,25 +23,26 @@ default:
       value: '2026 Research Report Download'
   components:
     -
-      uuid: 2349538d-0c0d-4a0b-a898-c5f8bba2852b
-      component_id: sdc.mercury.hero
+      uuid: 50ac3601-ed46-434b-b323-df287d6dfaed
+      component_id: sdc.mercury.hero-side-by-side
       inputs:
         hero_flex_gap: 'hg:gap-4 hg:md:gap-6 hg:xl:gap-8'
         hero_flex_direction_mobile: 'hg:flex-col'
         background: 'hg:bg-accent-dark'
         padding_block_start: '64'
         padding_block_end: '64'
+        image_size: 'hg:aspect-4/3'
         image_position: 'hg:md:flex-row-reverse'
         image_radius: 'hg:rounded-sm'
         slot_flex_align: 'hg:md:self-center'
         slot_flex_direction: 'hg:flex-col'
         slot_flex_gap: 'hg:gap-4'
         media:
-          target_uuid: 7c191da5-f092-43cd-980b-794a555a8f53
+          target_id: '108'
     -
-      parent_uuid: 2349538d-0c0d-4a0b-a898-c5f8bba2852b
+      parent_uuid: 50ac3601-ed46-434b-b323-df287d6dfaed
       slot: hero_slot
-      uuid: 1d5b01f4-fc00-48e3-ac2e-857f951a618e
+      uuid: 9fb5f68d-0722-4e7c-8179-1cfbcca051ba
       component_id: sdc.mercury.text
       inputs:
         text:
@@ -49,9 +50,9 @@ default:
         font_size_multiplier: normal
         font_color: text-inherit
     -
-      parent_uuid: 2349538d-0c0d-4a0b-a898-c5f8bba2852b
+      parent_uuid: 50ac3601-ed46-434b-b323-df287d6dfaed
       slot: hero_slot
-      uuid: ba211fed-33f6-4a0d-b084-2902862e5b29
+      uuid: 3f6ea20e-a10f-45b7-8982-4808b5fb6443
       component_id: sdc.mercury.heading
       inputs:
         heading_text: 'The State of Corporate Spend Management'
@@ -60,9 +61,9 @@ default:
         font_color: text-inherit
         align: left
     -
-      parent_uuid: 2349538d-0c0d-4a0b-a898-c5f8bba2852b
+      parent_uuid: 50ac3601-ed46-434b-b323-df287d6dfaed
       slot: hero_slot
-      uuid: 1793e362-fa29-4d4a-ba05-e8b37fe54b4c
+      uuid: 521343f2-0da9-4edf-9e1b-4b6edd0258ed
       component_id: sdc.mercury.text
       inputs:
         text:
@@ -70,9 +71,9 @@ default:
         font_size_multiplier: normal
         font_color: text-inherit
     -
-      parent_uuid: 2349538d-0c0d-4a0b-a898-c5f8bba2852b
+      parent_uuid: 50ac3601-ed46-434b-b323-df287d6dfaed
       slot: hero_slot
-      uuid: 3edeb2c4-d827-4cd8-a855-982a0a34acc6
+      uuid: e880e78a-e892-4eb0-8a08-ab30175a00d5
       component_id: sdc.mercury.button
       inputs:
         variant: primary
@@ -80,8 +81,7 @@ default:
         label: 'Download Free Report'
         size: large
         icon: download
-        icon_first: true
-        href: '#register'
+        icon_first: false
     -
       uuid: 34ad3993-4f6c-4a43-b8ad-44384dbe47c9
       component_id: sdc.mercury.section
@@ -429,6 +429,7 @@ default:
       inputs:
         media:
           target_uuid: c16d0d1d-e751-4af9-b1ee-bf533723bf96
+          target_id: '166'
         size: 'hg:aspect-1/1'
         radius: 'hg:rounded-sm'
   path:

@@ -32,12 +32,11 @@ default:
       uuid: 5a8be225-8a7c-45dd-8dda-42036cc01bbf
       component_id: sdc.mercury.hero-billboard
       inputs:
-        height: 'hg:h-dvh'
         flex_position: 'hg:justify-end'
         overlay_opacity: 'hg:bg-black/40'
         object_position: 'hg:object-center'
         media:
-          target_uuid: 47bc6eb6-6472-4f61-97d9-f3ee6287cbf3
+          target_id: '67'
     -
       parent_uuid: 5a8be225-8a7c-45dd-8dda-42036cc01bbf
       slot: hero_slot
@@ -79,7 +78,7 @@ default:
         disabled: false
         label: 'Reserve Your Spot'
         size: large
-        icon: download
+        icon: user-plus
         icon_first: true
         href: '#register'
     -
@@ -191,7 +190,7 @@ default:
         border: true
         icon: chart-line
         icon_align: 'hg:justify-center'
-        tile_size: 'hg:aspect-16/9'
+        tile_size: 'hg:aspect-none'
         background: true
         icon_size: 'hg:text-6xl'
         border_radius: 'hg:rounded-[24px] hg:md:rounded-[32px]'
@@ -207,7 +206,7 @@ default:
         border: true
         icon: invoice
         icon_align: 'hg:justify-center'
-        tile_size: 'hg:aspect-16/9'
+        tile_size: 'hg:aspect-none'
         background: true
         icon_size: 'hg:text-6xl'
         border_radius: 'hg:rounded-[24px] hg:md:rounded-[32px]'
@@ -223,7 +222,7 @@ default:
         border: true
         icon: gauge
         icon_align: 'hg:justify-center'
-        tile_size: 'hg:aspect-16/9'
+        tile_size: 'hg:aspect-none'
         background: true
         icon_size: 'hg:text-6xl'
         border_radius: 'hg:rounded-[24px] hg:md:rounded-[32px]'
@@ -239,7 +238,7 @@ default:
         border: true
         icon: cpu
         icon_align: 'hg:justify-center'
-        tile_size: 'hg:aspect-16/9'
+        tile_size: 'hg:aspect-none'
         background: true
         icon_size: 'hg:text-6xl'
         border_radius: 'hg:rounded-[24px] hg:md:rounded-[32px]'

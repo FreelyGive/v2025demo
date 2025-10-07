@@ -2,6 +2,8 @@ uuid: 21bc827b-77ef-4722-b595-3b40e893cc39
 langcode: en
 status: open
 dependencies: {  }
+_core:
+  default_config_hash: M1WY-lIs_-Tj0YeMORdk0J3zLMBrq_G6QLHtlXgUU9Y
 weight: 0
 open: null
 close: null
@@ -16,22 +18,18 @@ elements: |-
   name:
     '#type': textfield
     '#title': Name
-    '#description': '<p>Your first and last name.</p>'
     '#required': true
   organization_company:
     '#type': textfield
     '#title': Organization/Company
-    '#description': '<p>The organization or company that you work for.</p>'
     '#required': true
   e_mail:
     '#type': email
     '#title': E-Mail
-    '#description': '<p>Please add your e-mail for the registration.</p>'
     '#required': true
   telephone:
     '#type': tel
     '#title': Telephone
-    '#description': '<p>A telephone number we can reach you on.</p>'
 css: ''
 javascript: ''
 settings:

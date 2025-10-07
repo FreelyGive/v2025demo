@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies: {  }
 _core:
-  default_config_hash: wztN-RAtSfOgEJv0A2N0bzDJJPunndsw2pKAnul-2I8
+  default_config_hash: cLgeO2wYXI3rQWjBgeUdJGn8BqVarbaIlDBDfgBTjrU
 id: component_generation
 label: 'Component Usage'
 description: 'Some background of what to think about when using components.'

@@ -7,16 +7,11 @@ agents:
     always_include: {  }
   -
     id: canvas_template_builder_agent
-    contexts:
-      - component_generation
-      - findrop_key_facts_value_propositions
-      - landing_page_funnel_rules
-      - our_company
+    contexts: {  }
     always_include:
       - component_generation
       - findrop_key_facts_value_propositions
       - landing_page_funnel_rules
-      - our_company
   -
     id: pexels_agent
     contexts: {  }

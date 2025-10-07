@@ -191,7 +191,7 @@ default:
         border: true
         icon: chart-line
         icon_align: 'hg:justify-center'
-        tile_size: 'hg:aspect-16/9'
+        tile_size: 'hg:aspect-none'
         background: true
         icon_size: 'hg:text-6xl'
         border_radius: 'hg:rounded-[24px] hg:md:rounded-[32px]'
@@ -207,7 +207,7 @@ default:
         border: true
         icon: invoice
         icon_align: 'hg:justify-center'
-        tile_size: 'hg:aspect-16/9'
+        tile_size: 'hg:aspect-none'
         background: true
         icon_size: 'hg:text-6xl'
         border_radius: 'hg:rounded-[24px] hg:md:rounded-[32px]'
@@ -223,7 +223,7 @@ default:
         border: true
         icon: gauge
         icon_align: 'hg:justify-center'
-        tile_size: 'hg:aspect-16/9'
+        tile_size: 'hg:aspect-none'
         background: true
         icon_size: 'hg:text-6xl'
         border_radius: 'hg:rounded-[24px] hg:md:rounded-[32px]'
@@ -239,7 +239,7 @@ default:
         border: true
         icon: cpu
         icon_align: 'hg:justify-center'
-        tile_size: 'hg:aspect-16/9'
+        tile_size: 'hg:aspect-none'
         background: true
         icon_size: 'hg:text-6xl'
         border_radius: 'hg:rounded-[24px] hg:md:rounded-[32px]'

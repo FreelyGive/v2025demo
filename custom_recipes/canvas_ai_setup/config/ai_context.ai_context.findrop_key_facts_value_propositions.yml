@@ -2,6 +2,8 @@ uuid: 17c7c8ab-d5fa-4b7b-ab72-5c0671cc95b7
 langcode: en
 status: true
 dependencies: {  }
+_core:
+  default_config_hash: LYW-Hgl-SBFYk2DyHxmrb4HP3ahqrdUjCMekeFj38d0
 id: findrop_key_facts_value_propositions
 label: 'FinDrop Key Facts & Value Propositions'
 description: 'These are the FinDrop Key Facts & Value Propositions'
