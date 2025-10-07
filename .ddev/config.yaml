@@ -17,7 +17,9 @@ hooks:
   post-start:
     # If needed, regenerate `composer.json` and install dependencies.
     # @see homeadditions/bin/generate-composer-json
-    - exec: 'test -f composer.lock || (generate-composer-json > composer.json && composer install)'
+    - exec: 'test -f composer.lock || (generate-composer-json > composer.json)'
+    # Alwaays run composer install to make sure dependencies are in place.
+    - exec: 'composer install'
     # The installer is part of the project template, so symlink it into the web root.
     # It needs to be a relative symlink, or it will break Package Manager.
     - exec: 'ln -s -f $(realpath -s --relative-to=$DDEV_DOCROOT/profiles project_template/$DDEV_DOCROOT/profiles/drupal_cms_installer) $DDEV_DOCROOT/profiles'
