@@ -31,7 +31,7 @@ default:
       value: finished
   field_image_description:
     -
-      value: 'The image is a photo set in an urban environment, showcasing a scene with predominantly muted colors like grays and blues, indicative of a street filled with cars and buildings. A woman, likely of Asian descent and appearing to be in her 20s or 30s, is the focus, dressed in a smart blue blazer. She exudes a focused and business-like mood, holding a smartphone displaying a payment app. In front of her is a man in a suit, possibly of African descent, holding a portable card reader, suggesting a transaction is underway. The background features a softly blurred cityscape, adding to the busy, metropolitan atmosphere. The overall mood is professional and modern, capturing a moment of seamless, mobile technology use in everyday life. She is using the Findrop app.'
+      value: 'The image is a photo set in an urban environment, showcasing a scene with predominantly muted colors like grays and blues, indicative of a street filled with cars and buildings. A woman, likely of Asian descent and appearing to be in her 20s or 30s, is the focus, dressed in a smart blue blazer. She exudes a focused and business-like mood, holding a smartphone displaying a payment app. In front of her is a man in a suit, possibly of African descent, holding a portable card reader, suggesting a transaction is underway. The background features a softly blurred cityscape, adding to the busy, metropolitan atmosphere. The overall mood is professional and modern, capturing a moment of seamless, mobile technology use in everyday life. She is using the Findrop app. This is part of the Cindy Liu, September 2025 photoshoot.'
   field_media_image:
     -
       alt: '""'

@@ -31,7 +31,7 @@ default:
       value: finished
   field_image_description:
     -
-      value: 'The image is a graphic illustration with a predominantly black background, creating a sleek and modern look. White lines and abstract patterns emanate from a central rectangular device, creating a sense of dynamic motion and connectivity. This object is central to the composition, labeled "Findrop." The overall mood is futuristic and technological, evoking innovation and digital networks. The absence of people focuses attention on the abstract elements and the main device. The minimalist design is accentuated by the contrast between the dark background and the bright, intricate lines.'
+      value: 'The image is a graphic illustration with a predominantly black background, creating a sleek and modern look. White lines and abstract patterns emanate from a central rectangular device, creating a sense of dynamic motion and connectivity. This object is central to the composition, labeled "Findrop." The overall mood is futuristic and technological, evoking innovation and digital networks. The absence of people focuses attention on the abstract elements and the main device. The minimalist design is accentuated by the contrast between the dark background and the bright, intricate lines. FinDrop custom illustration artwork.'
   field_media_image:
     -
       alt: '""'

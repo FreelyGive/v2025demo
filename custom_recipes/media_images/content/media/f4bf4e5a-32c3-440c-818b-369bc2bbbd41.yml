@@ -31,7 +31,7 @@ default:
       value: finished
   field_image_description:
     -
-      value: 'The image is a photo depicting a woman using a mobile app at an airport. The background features a large window with a view of an airport runway and a plane, bathed in soft, natural light. The scene is dominated by neutral tones, with a warm glow from the sunlight. The woman appears to be of adult age, her hands are visible holding a smartphone displaying an app named "FinDrop." She is wearing a watch and a light-colored sweater, suggesting a casual yet sophisticated style. The mood of the image conveys calmness and focus, with an emphasis on technology and travel. The overall composition highlights a modern, tech-savvy lifestyle. She is using the Findrop app.'
+      value: 'The image is a photo depicting a woman using a mobile app at an airport. The background features a large window with a view of an airport runway and a plane, bathed in soft, natural light. The scene is dominated by neutral tones, with a warm glow from the sunlight. The woman appears to be of adult age, her hands are visible holding a smartphone displaying an app named "FinDrop." She is wearing a watch and a light-colored sweater, suggesting a casual yet sophisticated style. The mood of the image conveys calmness and focus, with an emphasis on technology and travel. The overall composition highlights a modern, tech-savvy lifestyle. She is using the Findrop app. This is part of the Cindy Liu, September 2025 photoshoot.'
   field_media_image:
     -
       alt: 'Woman using App in Airport'
