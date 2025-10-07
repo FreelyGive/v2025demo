@@ -17,7 +17,7 @@ final class AiContextListBuilder extends ConfigEntityListBuilder {
    */
   public function buildHeader(): array {
     $header['label'] = $this->t('Label');
-    $header['id'] = $this->t('Machine name');
+    $header['description'] = $this->t('Description');
     $header['tags'] = $this->t('Tags');
     return $header + parent::buildHeader();
   }
@@ -28,7 +28,7 @@ final class AiContextListBuilder extends ConfigEntityListBuilder {
   public function buildRow(EntityInterface $entity): array {
     /** @var \Drupal\ai_context\Entity\AiContext $entity */
     $row['label'] = $entity->label();
-    $row['id'] = $entity->id();
+    $row['description'] = $entity->get('description');
 
     // Load tag labels instead of showing IDs
     $tag_ids = $entity->get('tags') ?? [];
