@@ -5,5 +5,5 @@
 ## Example: "ddev remove-ccc"
 
 ddev drush pm:un -y ai_context
-ddev drush cim --partial --source=../custom_modules/disable_context/config -y
+ddev drush cim --partial --source=../custom_recipes/disable_context/config -y
 ddev drush config:delete canvas_ai.component_description.settings

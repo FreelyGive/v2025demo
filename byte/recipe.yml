@@ -16,6 +16,10 @@ config:
     system:
       - system.menu.footer
   actions:
+    # Sitemap blocks aren't really useful for page building; the sitemap is
+    # available at its own page anyway.
+    canvas.component.block.sitemap:
+      disable: []
     # Blog posts cannot render properly without a featured image, so
     # make the field required.
     field.field.node.blog.field_featured_image:

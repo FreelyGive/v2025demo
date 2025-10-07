@@ -114,16 +114,6 @@ config:
         additional_trusted_composer_plugins:
           # This is indirectly added by `drupal/core-dev`.
           - tbachert/spi
-    project_browser.admin_settings:
-      simpleConfigUpdate:
-        enabled_sources:
-          recommended:
-            uri: 'https://git.drupalcode.org/api/v4/projects/167158/repository/files/recommended.yml/raw?ref=HEAD'
-            ttl: 1
-          drupalorg_jsonapi: []
-        default_source: recommended
-        allow_ui_install: true
-        max_selections: 1
     system.site:
       simpleConfigUpdate:
         page.404: '/404'
@@ -171,6 +161,16 @@ config:
           weight: 0
           expanded: false
           enabled: false
+    project_browser.admin_settings:
+      simpleConfigUpdate:
+        enabled_sources:
+          recommended:
+            uri: 'https://git.drupalcode.org/api/v4/projects/167158/repository/files/recommended.yml/raw?ref=HEAD'
+            ttl: 1
+          drupalorg_jsonapi: []
+        default_source: recommended
+        allow_ui_install: true
+        max_selections: 1
     automatic_updates.settings:
       simpleConfigUpdate:
         allow_core_minor_updates: true
@@ -185,14 +185,23 @@ config:
     update.settings:
       simpleConfigUpdate:
         check.disabled_extensions: true
-    # Enable LinkIt for Canvas's included filter formats and editors. This
-    # needs to be done after the theme has been set so that the CKEditor 5
-    # module can properly resolve library and plugin definitions.
+    # Enable LinkIt and alignment for Canvas's included filter formats and
+    # editors. This needs to be done after the theme has been set so that the
+    # CKEditor 5 module can properly resolve library and plugin definitions.
     editor.editor.canvas_html_block:
+      addItemToToolbar:
+        item_name: alignment
+        position: 3
       setProperties:
         settings.plugins.linkit_extension:
           linkit_enabled: true
           linkit_profile: default
+        settings.plugins.ckeditor5_alignment:
+          enabled_alignments:
+            - center
+            - justify
+            - left
+            - right
     editor.editor.canvas_html_inline:
       setProperties:
         settings.plugins.linkit_extension:
@@ -207,7 +216,7 @@ config:
             status: true
             weight: 0
             settings:
-              allowed_html: '<strong> <em> <u> <a href data-entity-type data-entity-uuid data-entity-substitution> <p> <br> <ul> <ol> <li>'
+              allowed_html: '<strong> <em> <u> <a href data-entity-type data-entity-uuid data-entity-substitution> <p class="text-align-left text-align-center text-align-right text-align-justify"> <br> <ul> <ol> <li>'
               filter_html_help: false
               filter_html_nofollow: false
         - instance_id: linkit
@@ -238,3 +247,56 @@ config:
             weight: 0
             settings:
               title: false
+    # Add a Linkit matcher for Canvas pages.
+    linkit.linkit_profile.default:
+      addMatcher:
+        id: 'entity:canvas_page'
+        settings:
+          metadata: '[canvas_page:title]'
+          bundles: null
+          group_by_bundle: null
+          substitution_type: canonical
+          limit: 100
+        weight: -10
+    # Disable authenticated and administrator-facing menu blocks in Canvas.
+    canvas.component.block.system_menu_block.admin:
+      disable: []
+    canvas.component.block.system_menu_block.navigation-user-links:
+      disable: []
+    canvas.component.block.system_menu_block.tools:
+      disable: []
+    canvas.component.block.system_menu_block.top-tasks:
+      disable: []
+    # Don't expose any Navigation blocks to Canvas.
+    canvas.component.block.navigation_dashboard:
+      disable: []
+    canvas.component.block.navigation_link:
+      disable: []
+    canvas.component.block.navigation_shortcuts:
+      disable: []
+    canvas.component.block.navigation_user:
+      disable: []
+    # The announcements feed and dashboard site status blocks are fundamentally
+    # administrative, so hide them in Canvas.
+    canvas.component.block.announce_block:
+      disable: []
+    canvas.component.block.dashboard_site_status:
+      disable: []
+    # Local tasks and local actions are not needed in Canvas, because we are
+    # using Navigation and its top bar for that.
+    canvas.component.block.local_actions_block:
+      disable: []
+    canvas.component.block.local_tasks_block:
+      disable: []
+    # Disable administrative content views in Canvas.
+    canvas.component.block.views_block.publishing_content-block_drafts:
+      disable: []
+    canvas.component.block.views_block.publishing_content-block_scheduled:
+      disable: []
+    canvas.component.block.views_block.canvas_pages-block_1:
+      disable: []
+    # Project Browser blocks should not be available in Canvas.
+    canvas.component.block.project_browser_block.recommended:
+      disable: []
+    canvas.component.block.project_browser_block.drupalorg_jsonapi:
+      disable: []

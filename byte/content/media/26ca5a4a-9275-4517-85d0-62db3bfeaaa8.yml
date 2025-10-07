@@ -1,0 +1,38 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: 26ca5a4a-9275-4517-85d0-62db3bfeaaa8
+  bundle: image
+  default_langcode: en
+  depends:
+    06491ccd-1033-4218-aaf3-9caea57e37c0: file
+default:
+  revision_user:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: awmleer-nCgosM9lsTE-unsplash_1.jpg
+  created:
+    -
+      value: 1759439037
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      langcode: en
+      alias: null
+  field_media_image:
+    -
+      alt: 'A closeup of the inside of a computer, with a focus on the circuit board, in blue light.'
+      title: ''
+      width: 2400
+      height: 1600
+      entity: 06491ccd-1033-4218-aaf3-9caea57e37c0

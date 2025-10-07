@@ -1,7 +1,18 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: ae1dee6e-ca38-49c5-aa37-9f2a8ec9af15
+  default_langcode: en
+  depends:
+    34d807cc-dffb-4db2-918d-e88ce9760297: file
+    f27e8623-bbc7-43c1-8223-809648bfd188: media
+    e40ff4e9-3fc3-4d68-b8bc-9438ff0ac7ed: file
+    b3cfd8ef-fdf8-496e-b7a6-a113ecd5a907: media
+    27f037b6-f7ef-4cff-84f4-dc957dcaa9b8: file
+    0f40c577-d3b2-4f5d-8609-9ffacbc39a91: media
+    d013ca24-ff82-4b6f-98f9-914d7c160472: file
+    68b83394-2582-4c2b-a25e-dbe1ba370dc9: media
 default:
-  revision_user:
-    -
-      target_id: 1
   status:
     -
       value: true
@@ -19,40 +30,44 @@ default:
         columns: 25-25-25-25
         section_header: true
         section_footer: true
-        margin_block_start: '48'
+        margin_block_start: '96'
         margin_block_end: '48'
-        width: hg:lg:max-w-full
+        width: 'hg:lg:max-w-full'
     -
       parent_uuid: 69e8db89-269e-4561-bd73-efb825352224
       slot: header_slot
-      uuid: a766814e-ed80-470b-852f-e32fb637bd9c
-      component_id: sdc.mercury.cta
+      uuid: 33318a49-581f-4288-96ed-2fce0c21f48c
+      component_id: sdc.mercury.section
       inputs:
-        heading_text: 'Lorem ipsum dolor sit amet finibus aliquam pharetra'
-        level: '2'
-        text: 'Lorem ipsum dolor sit amet finibus aliquam pharetra mauris aenean pellentesque enim mus.'
-        media:
-          sourceType: default-relative-url
-          value:
-            src: assets/256381.jpg
-            alt: 'Photo by pixabay'
-          jsonSchema:
-            type: object
-            properties:
-              src:
-                type: string
-                format: uri-reference
-                pattern: '^(/|https?://)?.*\.([Pp][Nn][Gg]|[Gg][Ii][Ff]|[Jj][Pp][Gg]|[Jj][Pp][Ee][Gg]|[Ww][Ee][Bb][Pp]|[Aa][Vv][Ii][Ff])(\?.*)?(#.*)?$'
-              alt:
-                type: string
-              width:
-                type: integer
-              height:
-                type: integer
-            required:
-              - src
-          componentId: sdc.mercury.cta
-        text_align: center
+        columns: '100'
+        width: 'hg:lg:max-w-8/10'
+        margin_block_start: '48'
+        margin_block_end: '48'
+        padding_block_start: '0'
+        padding_block_end: '0'
+        background_color: 'hg:bg-none'
+        section_header: true
+        section_footer: true
+    -
+      parent_uuid: 33318a49-581f-4288-96ed-2fce0c21f48c
+      slot: main_slot
+      uuid: 02aeb867-431d-49da-b29f-65349e903cac
+      component_id: sdc.mercury.heading
+      inputs:
+        heading_text: 'Enterprise solutions for every price range'
+        level: 1
+        font_size: default
+        align: center
+    -
+      parent_uuid: 33318a49-581f-4288-96ed-2fce0c21f48c
+      slot: main_slot
+      uuid: 91d24fb8-cfe1-4afb-9f83-125c2d916d42
+      component_id: sdc.mercury.text
+      inputs:
+        text:
+          value: '<p class="text-align-center">Choose the best plan for your business.<br>Any questions? <a href="/contact">Get in touch with us</a> to find out more.</p>'
+        font_size_multiplier: normal
+        font_color: text-inherit
     -
       parent_uuid: 69e8db89-269e-4561-bd73-efb825352224
       slot: main_slot
@@ -109,6 +124,7 @@ default:
       slot: main_slot
       uuid: d9b9e7a4-85c2-49c7-b845-80f54a2b451a
       component_id: sdc.mercury.card-pricing
+
       inputs:
         heading_text: Enterprise
         description: 'Curabitur nascetur non potenti pede luctus vivamus'
@@ -120,18 +136,240 @@ default:
         button_label: 'Contact us'
         promote: false
     -
-      uuid: 55398477-06b9-4fc8-95bf-e8173a1602ec
+      parent_uuid: 69e8db89-269e-4561-bd73-efb825352224
+      slot: footer_slot
+      uuid: 75e051cb-880a-4291-9014-2455ee90ff83
       component_id: sdc.mercury.section
       inputs:
         columns: 25-25-25-25
         section_header: true
         margin_block_start: '48'
         margin_block_end: '48'
-        width: hg:lg:max-w-full
+        width: 'hg:lg:max-w-full'
     -
-      parent_uuid: 55398477-06b9-4fc8-95bf-e8173a1602ec
+      parent_uuid: 75e051cb-880a-4291-9014-2455ee90ff83
       slot: header_slot
-      uuid: 2baff9cc-d1a2-43b1-8c59-a3fe04d2344d
+      uuid: bbbea8b3-f638-4be3-83b6-4907783afcb0
+      component_id: sdc.mercury.section
+      inputs:
+        columns: '100'
+        section_header: true
+        section_footer: true
+        margin_block_start: '48'
+        margin_block_end: '48'
+        width: 'hg:lg:max-w-full'
+    -
+      parent_uuid: bbbea8b3-f638-4be3-83b6-4907783afcb0
+      slot: header_slot
+      uuid: 036878f3-3e8a-4adb-81c1-4c4725349d97
+      component_id: sdc.mercury.heading
+      inputs:
+        heading_text: 'Trusted by world-class experts'
+        level: 2
+        align: center
+        font_size: heading-responsive-5xl
+    -
+      parent_uuid: bbbea8b3-f638-4be3-83b6-4907783afcb0
+      slot: main_slot
+      uuid: d101ff24-d569-4236-b684-329ca721ac6d
+      component_id: sdc.mercury.logo-grid
+      inputs:
+        behavior_desktop: '6'
+        behavior_tablet: '6'
+        behavior_mobile: '3'
+    -
+      parent_uuid: d101ff24-d569-4236-b684-329ca721ac6d
+      slot: logos
+      uuid: 49752e04-c548-4c7d-bdc0-3253adbfa84d
+      component_id: sdc.mercury.tile-logo
+      inputs:
+        media:
+          sourceType: default-relative-url
+          value:
+            src: assets/dark.png
+            alt: 'Placeholder brand logo'
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.mercury.tile-logo
+    -
+      parent_uuid: d101ff24-d569-4236-b684-329ca721ac6d
+      slot: logos
+      uuid: c06f8ef9-e5e1-46f8-af3c-f1a7a76d2e22
+      component_id: sdc.mercury.tile-logo
+      inputs:
+        media:
+          sourceType: default-relative-url
+          value:
+            src: assets/dark.png
+            alt: 'Placeholder brand logo'
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.mercury.tile-logo
+    -
+      parent_uuid: d101ff24-d569-4236-b684-329ca721ac6d
+      slot: logos
+      uuid: 1bba22d4-8285-4d11-b81a-3cce75592a8c
+      component_id: sdc.mercury.tile-logo
+      inputs:
+        media:
+          sourceType: default-relative-url
+          value:
+            src: assets/dark.png
+            alt: 'Placeholder brand logo'
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.mercury.tile-logo
+    -
+      parent_uuid: d101ff24-d569-4236-b684-329ca721ac6d
+      slot: logos
+      uuid: 3d940330-54c8-4fc1-8664-ec4f769d7ef0
+      component_id: sdc.mercury.tile-logo
+      inputs:
+        media:
+          sourceType: default-relative-url
+          value:
+            src: assets/dark.png
+            alt: 'Placeholder brand logo'
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.mercury.tile-logo
+    -
+      parent_uuid: d101ff24-d569-4236-b684-329ca721ac6d
+      slot: logos
+      uuid: 74ef2229-f50f-45d0-94ef-c6d055854930
+      component_id: sdc.mercury.tile-logo
+      inputs:
+        media:
+          sourceType: default-relative-url
+          value:
+            src: assets/dark.png
+            alt: 'Placeholder brand logo'
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.mercury.tile-logo
+    -
+      parent_uuid: d101ff24-d569-4236-b684-329ca721ac6d
+      slot: logos
+      uuid: f0af6666-973d-40b0-a817-3c6730effcaa
+      component_id: sdc.mercury.tile-logo
+      inputs:
+        media:
+          sourceType: default-relative-url
+          value:
+            src: assets/dark.png
+            alt: 'Placeholder brand logo'
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                x-allowed-schemes:
+                  - http
+                  - https
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.mercury.tile-logo
+    -
+      uuid: 200da8bd-0f11-4396-9b4b-1a56cdc12d97
+      component_id: sdc.mercury.section
+      inputs:
+        columns: 25-25-25-25
+        section_header: true
+        margin_block_start: '48'
+        margin_block_end: '48'
+        width: 'hg:lg:max-w-full'
+    -
+      parent_uuid: 200da8bd-0f11-4396-9b4b-1a56cdc12d97
+      slot: header_slot
+      uuid: 4b2aef0c-ee2c-4ecb-b9c8-b51d4e5c78e5
       component_id: sdc.mercury.heading
       inputs:
         heading_text: 'See what people are saying about our technology'
@@ -160,46 +398,56 @@ default:
                 -
                   value: 6
                   label: '6'
+        align: center
+        url: 'No URL'
     -
-      parent_uuid: 55398477-06b9-4fc8-95bf-e8173a1602ec
+      parent_uuid: 200da8bd-0f11-4396-9b4b-1a56cdc12d97
       slot: main_slot
-      uuid: 67330eb0-b4e1-48d3-ac08-4df514234b0a
+      uuid: 150602aa-8639-4b8a-8f67-e334f495d657
       component_id: sdc.mercury.card-testimonial
       inputs:
-        text: '“My career coach’s guidance was crucial in helping me understand the tech industry landscape and ultimately secure my role.”'
+        text: '"Their team''s expertise and responsiveness made our cloud migration seamless, with minimal downtime and a smooth transition for our users."'
         media:
           target_uuid: f27e8623-bbc7-43c1-8223-809648bfd188
         align: left
+        cite_name: 'Sarah Chen'
+        cite_text: 'Director of Engineering'
     -
-      parent_uuid: 55398477-06b9-4fc8-95bf-e8173a1602ec
+      parent_uuid: 200da8bd-0f11-4396-9b4b-1a56cdc12d97
       slot: main_slot
-      uuid: 38a5ffb9-4396-424e-8b30-754c72412ef8
+      uuid: 3e0883f7-7c4a-4f20-a135-fb42b146e0b8
       component_id: sdc.mercury.card-testimonial
       inputs:
-        text: '“My career coach’s guidance was crucial in helping me understand the tech industry landscape and ultimately secure my role.”'
+        text: '"Working with them has streamlined our development process and significantly reduced our time-to-market for new features and products."'
         media:
           target_uuid: b3cfd8ef-fdf8-496e-b7a6-a113ecd5a907
         align: left
+        cite_name: 'Jennifer Walsh'
+        cite_text: 'VP of Operations'
     -
-      parent_uuid: 55398477-06b9-4fc8-95bf-e8173a1602ec
+      parent_uuid: 200da8bd-0f11-4396-9b4b-1a56cdc12d97
       slot: main_slot
-      uuid: d7ce6c6a-151d-4a1c-b744-5f3c57caa1d1
+      uuid: d67d3348-b3ab-4a62-92ca-1ab871663979
       component_id: sdc.mercury.card-testimonial
       inputs:
-        text: '“My career coach’s guidance was crucial in helping me understand the tech industry landscape and ultimately secure my role.”'
+        text: '"The solutions they implemented have transformed our infrastructure, giving us the scalability and reliability we need to grow our business."'
         media:
           target_uuid: 0f40c577-d3b2-4f5d-8609-9ffacbc39a91
         align: left
+        cite_name: 'Marc Rodriguez'
+        cite_text: 'Head of Technology'
     -
-      parent_uuid: 55398477-06b9-4fc8-95bf-e8173a1602ec
+      parent_uuid: 200da8bd-0f11-4396-9b4b-1a56cdc12d97
       slot: main_slot
-      uuid: 5f34f253-71e5-4c10-a0e6-bcc20199941a
+      uuid: b9b974cf-e992-4bf1-9c98-a998ca14145d
       component_id: sdc.mercury.card-testimonial
       inputs:
-        text: '“My career coach’s guidance was crucial in helping me understand the tech industry landscape and ultimately secure my role.”'
+        text: '"Their proactive support and deep technical knowledge have been invaluable in keeping our systems running efficiently and securely."'
         media:
           target_uuid: 68b83394-2582-4c2b-a25e-dbe1ba370dc9
         align: left
+        cite_name: 'Isiah Julio'
+        cite_text: 'Engineer, Technical Services'
   path:
     -
       alias: /pricing
@@ -210,13 +458,3 @@ default:
   revision_translation_affected:
     -
       value: true
-_meta:
-  version: '1.0'
-  entity_type: canvas_page
-  uuid: ae1dee6e-ca38-49c5-aa37-9f2a8ec9af15
-  default_langcode: en
-  depends:
-    f27e8623-bbc7-43c1-8223-809648bfd188: media
-    b3cfd8ef-fdf8-496e-b7a6-a113ecd5a907: media
-    0f40c577-d3b2-4f5d-8609-9ffacbc39a91: media
-    68b83394-2582-4c2b-a25e-dbe1ba370dc9: media

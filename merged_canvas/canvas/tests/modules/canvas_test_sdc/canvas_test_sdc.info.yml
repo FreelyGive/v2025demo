@@ -1,5 +1,0 @@
-name: 'Test SDC Components'
-type: module
-dependencies:
-  - canvas:canvas
-package: Testing

@@ -1,5 +1,0 @@
-name: 'Export media'
-type: module
-description: 'Helper to export to recipes.'
-package: 'help'
-core_version_requirement: ^10 || ^11

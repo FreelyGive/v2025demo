@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Drupal\Tests\byte\Functional;
 
 use Composer\InstalledVersions;
+use Drupal\canvas\Entity\Component;
 use Drupal\canvas\JsonSchemaDefinitionsStreamwrapper;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\FunctionalTests\Core\Recipe\RecipeTestTrait;
@@ -52,6 +53,23 @@ final class SiteTemplateTest extends BrowserTestBase {
     foreach ($content as $node) {
       $this->drupalGet($node->toUrl());
       $this->assertLessThan(500, $this->getSession()->getStatusCode());
+    }
+
+    $disabled_components = Component::loadMultiple([
+      'block.sitemap',
+      'block.sitemap_syndicate',
+    ]);
+    foreach ($disabled_components as $id => $component) {
+      $this->assertFalse($component->status(), "Component $id is enabled but it shouldn't be.");
+    }
+
+    $enabled_components = Component::loadMultiple([
+      'block.system_menu_block.social',
+      'block.system_menu_block.utility',
+    ]);
+    $this->assertCount(2, $enabled_components);
+    foreach ($enabled_components as $id => $component) {
+      $this->assertTrue($component->status(), "Component $id is disabled but it shouldn't be.");
     }
   }
 

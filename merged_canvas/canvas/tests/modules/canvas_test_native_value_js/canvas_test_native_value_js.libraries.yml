@@ -1,6 +1,0 @@
-test:
-  js:
-    js/test-value-updates.js: {}
-  dependencies:
-    - core/drupal
-    - core/once

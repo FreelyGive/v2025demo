@@ -1,0 +1,94 @@
+diff --git a/modules/canvas_ai/src/AiResponseValidator.php b/modules/canvas_ai/src/AiResponseValidator.php
+index b37de481..c6347902 100644
+--- a/modules/canvas_ai/src/AiResponseValidator.php
++++ b/modules/canvas_ai/src/AiResponseValidator.php
+@@ -100,7 +100,22 @@ class AiResponseValidator {
+         // later.
+         $component = Component::load($componentId);
+         $componentVersion = $component ? $component->getActiveVersion() : "temp-version-$componentUuid";
+-        if ($component instanceof Component && !empty($componentData['props'])) {
++        if ($component instanceof Component && $component->get('source') === 'block') {
++          $componentVersion = Component::load($componentId)?->getActiveVersion() ?? "temp-version-$componentUuid";
++          $inputs = $componentData['props'] ?? [];
++          if (isset($inputs['webform_id'])) {
++            // Load the webform on its name.
++            $webform = \Drupal::entityTypeManager()->getStorage('webform')->loadByProperties(['title' => $inputs['webform_id']]);
++            if (!$webform) {
++              $inputs['webform_id'] = 'contact';
++            }
++            else {
++              // Use the first matching webform.
++              $inputs['webform_id'] = reset($webform)->id();
++            }
++          }
++        }
++        elseif ($component instanceof Component && !empty($componentData['props'])) {
+           $source = $component->getComponentSource();
+           $clientNormalized = $component->normalizeForClientSide()->values;
+           $sources = $clientNormalized['propSources'];
+diff --git a/modules/canvas_ai/src/CanvasAiPageBuilderHelper.php b/modules/canvas_ai/src/CanvasAiPageBuilderHelper.php
+index 750788f6..3e127f19 100644
+--- a/modules/canvas_ai/src/CanvasAiPageBuilderHelper.php
++++ b/modules/canvas_ai/src/CanvasAiPageBuilderHelper.php
+@@ -15,6 +15,7 @@ use Drupal\Component\Utility\DiffArray;
+ use Drupal\Component\Uuid\UuidInterface;
+ use Drupal\Core\Config\ConfigFactoryInterface;
+ use Drupal\canvas\Entity\Component;
++use Drupal\canvas\Plugin\Canvas\ComponentSource\BlockComponent;
+ use Drupal\canvas\Plugin\Canvas\ComponentSource\JsComponent;
+ use Drupal\canvas\Plugin\Canvas\ComponentSource\SingleDirectoryComponent;
+
+@@ -297,6 +298,53 @@ class CanvasAiPageBuilderHelper {
+       elseif ($source === JsComponent::SOURCE_PLUGIN_ID) {
+         $this->processCodeComponents($component, $output, $available_components[$component_id]);
+       }
++      elseif ($source === BlockComponent::SOURCE_PLUGIN_ID) {
++        // Block components: id, name, description (description = name)
++        $output[$source]['components'][$component_id] = [
++          'id' => $component_id,
++          'name' => $component->label(),
++          'description' => $component->label(),
++          'props' => [
++            'label' => [
++              'name' => 'label',
++              'description' => $this->t('The block title. Required.'),
++              'type' => 'string',
++              'default' => '',
++            ],
++            'label_display' => [
++              'name' => 'label_display',
++              'description' => $this->t('Whether to display the block title. Required.'),
++              'type' => 'boolean',
++              'default' => TRUE,
++            ],
++          ],
++        ];
++        // Load via the block plugin manager to get more details.
++        $block_plugin = \Drupal::service('plugin.manager.block')->createInstance($component->get('source_local_id'));
++        // Get the default configuration of the block plugin.
++        if ($block_plugin instanceof \Drupal\Core\Plugin\PluginWithFormsInterface) {
++          $config = $block_plugin->defaultConfiguration();
++          foreach ($config as $key => $value) {
++            // Skip the already added props.
++            if (in_array($key, ['label', 'label_display'], TRUE)) {
++              continue;
++            }
++            // Try to figure out type from default value.
++            $block_input_type = 'string';
++            if (is_bool($value)) {
++              $block_input_type = 'boolean';
++            } elseif (is_numeric($value)) {
++              $block_input_type = 'number';
++            }
++            $output[$source]['components'][$component_id]['props'][$key] = [
++              'name' => $key,
++              'description' => $key . '. Is required, even if just empty.',
++              'type' => $block_input_type,
++              'default' => $value,
++            ];
++          }
++        }
++      }
+       else {
+         // Other sources: id, name, description (description = name)
+         $output[$source]['components'][$component_id] = [

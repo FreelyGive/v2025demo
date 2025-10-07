@@ -1,9 +1,0 @@
-name: Drupal Canvas AI
-type: module
-description: 'AI for the Drupal Canvas'
-package: AI Tools
-hidden: true
-core_version_requirement: ^10 | ^11
-dependencies:
-  - canvas:canvas
-  - ai_agents:ai_agents

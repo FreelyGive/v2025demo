@@ -85,6 +85,7 @@ function drupal_cms_installer_theme_form_installer_site_template_form_alter(arra
   ];
   // Put the drupal_cms_starter template before the others.
   $form['add_ons']['drupal_cms_starter']['#weight'] = -100;
+  $form['add_ons']['#required'] = TRUE;
 
   $form['actions']['submit']['#attributes']['class'] = ['button--next'];
   unset($form['actions']['skip']);

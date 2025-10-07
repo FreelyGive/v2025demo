@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 06491ccd-1033-4218-aaf3-9caea57e37c0
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: awmleer-nCgosM9lsTE-unsplash_1.jpg
+  uri:
+    -
+      value: 'public://2025-10/awmleer-nCgosM9lsTE-unsplash_1.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 386049
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1759439037

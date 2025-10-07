@@ -1,7 +1,19 @@
+_meta:
+  version: '1.0'
+  entity_type: canvas_page
+  uuid: 20354d7a-e4fe-47af-8ff6-187bca92f3f7
+  default_langcode: en
+  depends:
+    26ca5a4a-9275-4517-85d0-62db3bfeaaa8: media
+    2f5a9129-21b9-410b-b197-2fac4a9ab4b3: media
+    8247692c-5c63-4e79-bf9b-734189b56e1e: media
+    640d837b-b682-4503-aa95-2b7583e3b08a: media
+    fbff512d-9dc6-49ba-8321-2a826ca84e10: media
+    f27e8623-bbc7-43c1-8223-809648bfd188: media
+    b3cfd8ef-fdf8-496e-b7a6-a113ecd5a907: media
+    0f40c577-d3b2-4f5d-8609-9ffacbc39a91: media
+    68b83394-2582-4c2b-a25e-dbe1ba370dc9: media
 default:
-  revision_user:
-    -
-      target_id: 1
   status:
     -
       value: true
@@ -13,41 +25,57 @@ default:
       value: Home
   components:
     -
-      uuid: 687e03ec-dbc6-4238-b663-427ee91c69a9
-      component_id: sdc.mercury.cta
+      uuid: 94d465ed-7fa8-4c82-98e9-02c6d15d90ca
+      component_id: sdc.mercury.hero-billboard
+      inputs:
+        height: 'hg:h-dvh'
+        flex_position: 'hg:justify-center-safe'
+        overlay_opacity: 'hg:bg-black/60'
+        media:
+          target_uuid: 26ca5a4a-9275-4517-85d0-62db3bfeaaa8
+    -
+      parent_uuid: 94d465ed-7fa8-4c82-98e9-02c6d15d90ca
+      slot: hero_slot
+      uuid: 99d857a6-132f-4c64-94de-91eb944aaa79
+      component_id: sdc.mercury.heading
       inputs:
         heading_text: 'Powerful solutions to scale your business'
-        text: 'Discover how our innovative AI tools can transform operations, enhance efficiency, and drive growth.'
-        text_align: center
+        level: 1
+        font_size: heading-responsive-8xl
+        align: left
     -
-      parent_uuid: 687e03ec-dbc6-4238-b663-427ee91c69a9
-      slot: actions
-      uuid: 753d4a8e-5df0-4727-8388-26f05295b154
+      parent_uuid: 94d465ed-7fa8-4c82-98e9-02c6d15d90ca
+      slot: hero_slot
+      uuid: 87e92248-c547-4110-a5d3-fbcbd71da457
+      component_id: sdc.mercury.text
+      inputs:
+        text:
+          value: '<p>Discover how our innovative AI tools can transform operations, enhance efficiency, and drive growth.</p>'
+        font_size_multiplier: text-scale-125
+        font_color: text-inherit
+    -
+      parent_uuid: 94d465ed-7fa8-4c82-98e9-02c6d15d90ca
+      slot: hero_slot
+      uuid: ea53ed67-c426-4c8d-9db6-88a2283e28c4
       component_id: sdc.mercury.button
       inputs:
         variant: primary
-        label: "Let's get started"
         disabled: false
+        label: "Let's get started"
+        size: medium
+        icon: arrow-right
         icon_first: false
         href: /pricing
-    -
-      uuid: ff7d1c90-d6f5-49a0-9e28-14e665ff571a
-      component_id: sdc.mercury.image
-      inputs:
-        media:
-          target_uuid: fbff512d-9dc6-49ba-8321-2a826ca84e10
-        size: hg:aspect-2/1
-        caption: ''
     -
       uuid: b04a754a-6a6c-44a9-b7ec-cf3df6c98ca1
       component_id: sdc.mercury.section
       inputs:
         columns: 33-33-33
         section_header: true
-        margin_block_end: '48'
-        width: hg:lg:max-w-full
+        margin_block_end: '128'
+        width: 'hg:lg:max-w-full'
         section_footer: false
-        margin_block_start: '64'
+        margin_block_start: '128'
     -
       parent_uuid: b04a754a-6a6c-44a9-b7ec-cf3df6c98ca1
       slot: header_slot
@@ -89,7 +117,7 @@ default:
       inputs:
         heading_text: 'Advanced tools'
         level: 3
-        url: 'https://www.example.com'
+        url: '#'
         media:
           target_uuid: 2f5a9129-21b9-410b-b197-2fac4a9ab4b3
         style: featured
@@ -102,7 +130,7 @@ default:
       inputs:
         heading_text: 'Scalable solutions'
         level: 3
-        url: 'https://www.example.com'
+        url: '#'
         media:
           target_uuid: 8247692c-5c63-4e79-bf9b-734189b56e1e
         style: featured
@@ -115,9 +143,9 @@ default:
       inputs:
         heading_text: 'Reliable solutions'
         level: 3
-        url: 'https://www.example.com'
+        url: '#'
         media:
-          target_uuid: 640d837b-b682-4503-aa95-2b7583e3b08a
+          target_uuid: 4d48928a-cd65-4f32-aa27-dd9ff703208f
         style: featured
         orientation: stacked
     -
@@ -127,9 +155,9 @@ default:
         columns: '100'
         section_header: true
         section_footer: true
-        margin_block_start: '48'
-        margin_block_end: '48'
-        width: hg:lg:max-w-full
+        margin_block_start: '128'
+        margin_block_end: '128'
+        width: 'hg:lg:max-w-full'
     -
       parent_uuid: 9d2257b5-8da9-45c5-bbb5-46418c664574
       slot: header_slot
@@ -137,7 +165,7 @@ default:
       component_id: sdc.mercury.heading
       inputs:
         heading_text: 'Trusted by world-class experts'
-        level: 3
+        level: 2
         align: center
     -
       parent_uuid: 9d2257b5-8da9-45c5-bbb5-46418c664574
@@ -145,13 +173,41 @@ default:
       uuid: 934987c9-6410-4b0a-be9e-f66b41c4cb16
       component_id: sdc.mercury.logo-grid
       inputs:
-        behavior_desktop: '5'
-        behavior_tablet: scroll
-        behavior_mobile: scroll
+        behavior_desktop: '6'
+        behavior_tablet: '6'
+        behavior_mobile: '3'
     -
       parent_uuid: 934987c9-6410-4b0a-be9e-f66b41c4cb16
       slot: logos
       uuid: f4c1ac46-6901-43c8-9d50-1857f070325c
+      component_id: sdc.mercury.tile-logo
+      inputs:
+        media:
+          sourceType: default-relative-url
+          value:
+            src: assets/dark.png
+            alt: 'Placeholder brand logo'
+          jsonSchema:
+            type: object
+            properties:
+              src:
+                type: string
+                contentMediaType: 'image/*'
+                format: uri-reference
+                pattern: '^(/|https?://)?(?!.*\://)[^\s]+$'
+              alt:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+            required:
+              - src
+          componentId: sdc.mercury.tile-logo
+    -
+      parent_uuid: 934987c9-6410-4b0a-be9e-f66b41c4cb16
+      slot: logos
+      uuid: 90eb9ee2-a7dc-45e0-9cbf-554541aa9c0b
       component_id: sdc.mercury.tile-logo
       inputs:
         media:
@@ -294,9 +350,9 @@ default:
       inputs:
         columns: 50-50
         section_header: true
-        margin_block_start: '48'
-        margin_block_end: '48'
-        width: hg:lg:max-w-full
+        margin_block_start: '128'
+        margin_block_end: '128'
+        width: 'hg:lg:max-w-full'
         section_footer: true
     -
       parent_uuid: a8b085d4-21e4-4c32-8671-90cc769fbe5b
@@ -340,73 +396,35 @@ default:
       inputs:
         heading_text: 'Service automation'
         level: 3
-        url: 'https://www.example.com'
+        url: '#'
         media:
-          sourceType: default-relative-url
-          value:
-            src: assets/277628-911758.jpg
-            alt: 'Photo by gdtography: https://www.pexels.com/photo/long-exposure-photography-white-dome-building-interior-911758/'
-          jsonSchema:
-            type: object
-            properties:
-              src:
-                type: string
-                contentMediaType: 'image/*'
-                format: uri-reference
-                pattern: '^(/|https?://)?(?!.*\://)[^\s]+$'
-              alt:
-                type: string
-              width:
-                type: integer
-              height:
-                type: integer
-            required:
-              - src
-          componentId: sdc.mercury.card
+          target_uuid: fbff512d-9dc6-49ba-8321-2a826ca84e10
         style: featured
         orientation: stacked
+        text: 'Service automation streamlines repetitive tasks and workflows, freeing your team to focus on strategic initiatives that drive business growth.'
     -
       parent_uuid: a8b085d4-21e4-4c32-8671-90cc769fbe5b
       slot: main_slot
       uuid: 2fcd7b86-4d7c-4ac4-9476-555d35b5782a
       component_id: sdc.mercury.card
       inputs:
-        heading_text: 'User-centric solutionizing'
+        heading_text: 'User-centric solutions'
         level: 3
-        url: 'https://www.example.com'
+        url: '#'
         media:
-          sourceType: default-relative-url
-          value:
-            src: assets/277628-911758.jpg
-            alt: 'Photo by gdtography: https://www.pexels.com/photo/long-exposure-photography-white-dome-building-interior-911758/'
-          jsonSchema:
-            type: object
-            properties:
-              src:
-                type: string
-                contentMediaType: 'image/*'
-                format: uri-reference
-                pattern: '^(/|https?://)?(?!.*\://)[^\s]+$'
-              alt:
-                type: string
-              width:
-                type: integer
-              height:
-                type: integer
-            required:
-              - src
-          componentId: sdc.mercury.card
+          target_uuid: 640d837b-b682-4503-aa95-2b7583e3b08a
         style: featured
         orientation: stacked
+        text: 'We design solutions with your end users in mind, creating intuitive experiences that drive adoption, increase productivity, and deliver measurable business value.'
     -
       uuid: 200da8bd-0f11-4396-9b4b-1a56cdc12d97
       component_id: sdc.mercury.section
       inputs:
         columns: 25-25-25-25
         section_header: true
-        margin_block_start: '48'
-        margin_block_end: '48'
-        width: hg:lg:max-w-full
+        margin_block_start: '128'
+        margin_block_end: '128'
+        width: 'hg:lg:max-w-full'
     -
       parent_uuid: 200da8bd-0f11-4396-9b4b-1a56cdc12d97
       slot: header_slot
@@ -447,40 +465,48 @@ default:
       uuid: 150602aa-8639-4b8a-8f67-e334f495d657
       component_id: sdc.mercury.card-testimonial
       inputs:
-        text: '“My career coach’s guidance was crucial in helping me understand the tech industry landscape and ultimately secure my role.”'
+        text: '"Their team''s expertise and responsiveness made our cloud migration seamless, with minimal downtime and a smooth transition for our users."'
         media:
           target_uuid: f27e8623-bbc7-43c1-8223-809648bfd188
         align: left
+        cite_name: 'Sarah Chen'
+        cite_text: 'Director of Engineering'
     -
       parent_uuid: 200da8bd-0f11-4396-9b4b-1a56cdc12d97
       slot: main_slot
       uuid: 3e0883f7-7c4a-4f20-a135-fb42b146e0b8
       component_id: sdc.mercury.card-testimonial
       inputs:
-        text: '“My career coach’s guidance was crucial in helping me understand the tech industry landscape and ultimately secure my role.”'
+        text: '"Working with them has streamlined our development process and significantly reduced our time-to-market for new features and products."'
         media:
           target_uuid: b3cfd8ef-fdf8-496e-b7a6-a113ecd5a907
         align: left
+        cite_name: 'Jennifer Walsh'
+        cite_text: 'VP of Operations'
     -
       parent_uuid: 200da8bd-0f11-4396-9b4b-1a56cdc12d97
       slot: main_slot
       uuid: d67d3348-b3ab-4a62-92ca-1ab871663979
       component_id: sdc.mercury.card-testimonial
       inputs:
-        text: '“My career coach’s guidance was crucial in helping me understand the tech industry landscape and ultimately secure my role.”'
+        text: '"The solutions they implemented have transformed our infrastructure, giving us the scalability and reliability we need to grow our business."'
         media:
           target_uuid: 0f40c577-d3b2-4f5d-8609-9ffacbc39a91
         align: left
+        cite_name: 'Marc Rodriguez'
+        cite_text: 'Head of Technology'
     -
       parent_uuid: 200da8bd-0f11-4396-9b4b-1a56cdc12d97
       slot: main_slot
       uuid: b9b974cf-e992-4bf1-9c98-a998ca14145d
       component_id: sdc.mercury.card-testimonial
       inputs:
-        text: '“My career coach’s guidance was crucial in helping me understand the tech industry landscape and ultimately secure my role.”'
+        text: '"Their proactive support and deep technical knowledge have been invaluable in keeping our systems running efficiently and securely."'
         media:
           target_uuid: 68b83394-2582-4c2b-a25e-dbe1ba370dc9
         align: left
+        cite_name: 'Isiah Julio'
+        cite_text: 'Engineer, Technical Services'
     -
       uuid: da67c79d-cd2f-46c5-a926-3f28fdfef477
       component_id: sdc.mercury.section
@@ -488,16 +514,16 @@ default:
         columns: '100'
         section_header: true
         section_footer: true
-        margin_block_start: '48'
-        margin_block_end: '48'
-        width: hg:lg:max-w-full
+        margin_block_start: '128'
+        margin_block_end: '0'
+        width: 'hg:lg:max-w-full'
     -
       parent_uuid: da67c79d-cd2f-46c5-a926-3f28fdfef477
       slot: header_slot
       uuid: fb7b4197-5686-4f9a-99ce-ca2d326f69c5
       component_id: sdc.mercury.heading
       inputs:
-        heading_text: 'Explore our blog posts'
+        heading_text: 'Explore our blog'
         level: 2
         url: /blog
         align: center
@@ -514,6 +540,7 @@ default:
     -
       uuid: 71f11827-ac09-4360-b6e7-a5625eefeefe
       component_id: sdc.mercury.cta
+      component_version: 9ce538831167d86c
       inputs:
         heading_text: 'Get ready to transform your operations'
         level:
@@ -565,6 +592,7 @@ default:
               - src
           componentId: sdc.mercury.cta
         text_align: center
+        has_background_image: false
     -
       parent_uuid: 71f11827-ac09-4360-b6e7-a5625eefeefe
       slot: actions
@@ -601,17 +629,3 @@ default:
   revision_translation_affected:
     -
       value: true
-_meta:
-  version: '1.0'
-  entity_type: canvas_page
-  uuid: 20354d7a-e4fe-47af-8ff6-187bca92f3f7
-  default_langcode: en
-  depends:
-    fbff512d-9dc6-49ba-8321-2a826ca84e10: media
-    2f5a9129-21b9-410b-b197-2fac4a9ab4b3: media
-    8247692c-5c63-4e79-bf9b-734189b56e1e: media
-    640d837b-b682-4503-aa95-2b7583e3b08a: media
-    f27e8623-bbc7-43c1-8223-809648bfd188: media
-    b3cfd8ef-fdf8-496e-b7a6-a113ecd5a907: media
-    0f40c577-d3b2-4f5d-8609-9ffacbc39a91: media
-    68b83394-2582-4c2b-a25e-dbe1ba370dc9: media

@@ -9,7 +9,7 @@ default:
       target_id: 1
   filename:
     -
-      value: 'hero-image-dark.png'
+      value: 'hero image dark.png'
   uri:
     -
       value: 'public://2025-06/hero-image-dark.png'

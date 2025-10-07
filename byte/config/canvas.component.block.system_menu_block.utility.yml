@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.utility
+  module:
+    - system
+active_version: 78f97c64933451c0
+versioned_properties:
+  active:
+    settings:
+      default_settings:
+        id: 'system_menu_block:utility'
+        label: Utility
+        label_display: '0'
+        provider: system
+        level: 1
+        depth: null
+        expand_all_items: false
+    fallback_metadata:
+      slot_definitions: null
+label: Utility
+id: block.system_menu_block.utility
+provider: system
+source: block
+source_local_id: 'system_menu_block:utility'
+category: Menus
