@@ -73,8 +73,6 @@
 /.editorconfig
 /.gitattributes
 /.vscode/
-/composer.json
-/composer.lock
 /config/
 /launch-drupal-cms.sh
 /logs/
@@ -90,8 +88,6 @@ LICENSE
 
 /.cache
 /.phpunit.result.cache
-/composer.json
-/composer.lock
 /cypress
 node_modules
 patches.json
