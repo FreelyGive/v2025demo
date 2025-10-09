@@ -2489,17 +2489,17 @@
         },
         {
             "name": "drupal/canvas",
-            "version": "1.0.0-beta1",
+            "version": "1.0.0-beta2",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/canvas.git",
-                "reference": "1.0.0-beta1"
+                "reference": "1.0.0-beta2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/canvas-1.0.0-beta1.zip",
-                "reference": "1.0.0-beta1",
-                "shasum": "dc760915d21973485c3b4bbc6a62a1ae94ce5d13"
+                "url": "https://ftp.drupal.org/files/projects/canvas-1.0.0-beta2.zip",
+                "reference": "1.0.0-beta2",
+                "shasum": "8570984dc23698e6d6849b0900f1fe6eed616e65"
             },
             "require": {
                 "drupal/core": "^11.2",
@@ -2521,8 +2521,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "1.0.0-beta1",
-                    "datestamp": "1759408338",
+                    "version": "1.0.0-beta2",
+                    "datestamp": "1760011666",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Beta releases are not covered by Drupal security advisories."
