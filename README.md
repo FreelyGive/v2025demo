@@ -1,27 +1,26 @@
-v2025demo
+# Driesnote Vienna 2025 try out yourself demo
+
+## Requirements
+* **IMPORTANT:** An OpenAI account on [tier 4](https://platform.openai.com/docs/guides/rate-limits/usage-tiers) at least.
+* DDEV 1.24+
 
 ## Description
 
-A demo Drupal 11 for the V 2025 project. This will install:
-* Drupal CMS
-* Canvas
-* Mercury Theme
+A demo Drupal 11 for you to try out what Dries showed on stage. This will install:
+* Drupal CMS+Mercury+Canvas
 * Canvas AI with OpenAI provider configured
-* Milvus configured (coming)
+* Milvus configured
 * Medias to pick from
-* Changes needed for Canvas AI to work well
+* Patches needed for Canvas AI to work well
 
-## Requirements
-* DDEV 1.24+
+## Notes
+
+This is to try it out, this goes without saying but don't use this for production or any other purposes than trying it out.
 
 ## To install
-* On Mac, make sure to run in bash and not zsh.
+* On Mac, make sure to run in bash and not zsh and use the latest version of OrbStack.
 * `cp .ddev/.env.template .ddev/.env` and set your OpenAI key in the file.
 * From the root of the project `ddev demo-setup`
 
 **Note** Everytime you run `ddev demo-setup` it will delete everything and start from scratch.
 
-## Keep in sync with origin
-We should later use create-project, but that is failing for now due to dependency issues.
-
-For now the `extra_files` is used to keep track of changes in the demo repo and it will be synced with https://git.drupalcode.org/project/drupal_cms from time to time.
