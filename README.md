@@ -10,8 +10,8 @@ A demo Drupal 11 for you to try out what Dries showed on stage. This will instal
 * Drupal CMS+Mercury+Canvas
 * Canvas AI with OpenAI provider configured
 * Milvus configured
-* Medias to pick from
-* Patches needed for Canvas AI to work well
+* Medias to pick from (from Pexels and AI Generated)
+* Patches needed for Canvas AI to work well - these have issues in the issue queue to be committed.
 
 ## Notes
 
