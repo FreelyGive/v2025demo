@@ -29,10 +29,9 @@ final class DefaultContentSubscriber implements EventSubscriberInterface {
    * {@inheritdoc}
    */
   public static function getSubscribedEvents(): array {
-    if (class_exists(PreExportEvent::class)) {
-      return [PreExportEvent::class => 'preExport'];
-    }
-    return [];
+    return [
+      PreExportEvent::class => 'preExport',
+    ];
   }
 
   public function preExport(PreExportEvent $event): void {
@@ -50,9 +49,11 @@ final class DefaultContentSubscriber implements EventSubscriberInterface {
             $metadata->addDependency($dependency);
           }
         }
-
         // Don't export any empty properties; they're not valid for import.
         $values = array_filter($item->getValue());
+
+        // The component version is not necessary in exported content.
+        unset($values['component_version']);
 
         // Export the inputs as an array, since that's much easier to read and
         // edit manually if needed.

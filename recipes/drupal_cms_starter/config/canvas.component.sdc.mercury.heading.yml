@@ -5,12 +5,13 @@ dependencies:
     - options
   theme:
     - mercury
-active_version: 452a1d7184fbf28f
+active_version: 265899d143af583a
 versioned_properties:
   active:
     settings:
       prop_field_definitions:
         align:
+          required: false
           field_type: list_string
           field_storage_settings:
             allowed_values_function: canvas_load_allowed_values_for_component_prop
@@ -21,6 +22,7 @@ versioned_properties:
               value: left
           expression: ℹ︎list_string␟value
         font_color:
+          required: false
           field_type: list_string
           field_storage_settings:
             allowed_values_function: canvas_load_allowed_values_for_component_prop
@@ -31,6 +33,7 @@ versioned_properties:
               value: text-inherit
           expression: ℹ︎list_string␟value
         font_size:
+          required: false
           field_type: list_string
           field_storage_settings:
             allowed_values_function: canvas_load_allowed_values_for_component_prop
@@ -41,6 +44,7 @@ versioned_properties:
               value: default
           expression: ℹ︎list_string␟value
         heading_text:
+          required: false
           field_type: string
           field_storage_settings: {  }
           field_instance_settings: {  }
@@ -50,6 +54,7 @@ versioned_properties:
               value: 'One Giant Leap for Open Source'
           expression: ℹ︎string␟value
         level:
+          required: false
           field_type: list_float
           field_storage_settings:
             allowed_values_function: canvas_load_allowed_values_for_component_prop
@@ -60,57 +65,7 @@ versioned_properties:
               value: '2'
           expression: ℹ︎list_float␟value
         url:
-          field_type: string
-          field_storage_settings: {  }
-          field_instance_settings: {  }
-          field_widget: string_textfield
-          default_value: null
-          expression: ℹ︎string␟value
-    fallback_metadata:
-      slot_definitions: {  }
-  e5a9fae10ccddfda:
-    settings:
-      prop_field_definitions:
-        align:
-          field_type: list_string
-          field_storage_settings:
-            allowed_values_function: canvas_load_allowed_values_for_component_prop
-          field_instance_settings: {  }
-          field_widget: options_select
-          default_value:
-            -
-              value: left
-          expression: ℹ︎list_string␟value
-        font_size:
-          field_type: list_string
-          field_storage_settings:
-            allowed_values_function: canvas_load_allowed_values_for_component_prop
-          field_instance_settings: {  }
-          field_widget: options_select
-          default_value:
-            -
-              value: default
-          expression: ℹ︎list_string␟value
-        heading_text:
-          field_type: string
-          field_storage_settings: {  }
-          field_instance_settings: {  }
-          field_widget: string_textfield
-          default_value:
-            -
-              value: 'One Giant Leap for Open Source'
-          expression: ℹ︎string␟value
-        level:
-          field_type: list_float
-          field_storage_settings:
-            allowed_values_function: canvas_load_allowed_values_for_component_prop
-          field_instance_settings: {  }
-          field_widget: options_select
-          default_value:
-            -
-              value: '2'
-          expression: ℹ︎list_float␟value
-        url:
+          required: false
           field_type: string
           field_storage_settings: {  }
           field_instance_settings: {  }

@@ -43,6 +43,9 @@ default:
   field_blog__byline:
     -
       value: 'Omer Potter'
+  field_tags:
+    -
+      entity: eb00eaac-ad10-4bdb-9a31-7612c47c6484
 _meta:
   version: '1.0'
   entity_type: node
@@ -51,3 +54,4 @@ _meta:
   default_langcode: en
   depends:
     27825763-8d04-4620-8eae-3901c10e306d: media
+    eb00eaac-ad10-4bdb-9a31-7612c47c6484: taxonomy_term

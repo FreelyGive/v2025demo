@@ -6,7 +6,7 @@
     "require": {
         "drupal/bpmn_io": "^3",
         "drupal/core": "^10.4 || ^11",
-        "drupal/eca": "^3.0.1",
+        "drupal/eca": "^3.0.5",
         "drupal/field_group": "^3.6 || ^4",
         "drupal/focal_point": "^2.1",
         "drupal/metatag": "^2",

@@ -1,6 +1,9 @@
-# A curated list of recommended add-ons. This file is part of Drupal CMS's API and should
-# not be renamed or removed unless you know precisely what you're doing. Its canonical URL
-# is https://git.drupalcode.org/api/v4/projects/167158/repository/files/recommended.yml/raw?ref=HEAD
+#
+# A curated list of recommended add-ons. This file is part of Drupal CMS's API and
+# should not be renamed or removed unless you know precisely what you're doing. Its
+# canonical URL is:
+# https://git.drupalcode.org/api/v4/projects/167158/repository/files/recommended.yml/raw?ref=HEAD
+#
 drupal/drupal_cms_accessibility_tools:
   title: 'Accessibility Tools'
   type: recipe
@@ -10,6 +13,7 @@ drupal/drupal_cms_accessibility_tools:
   body:
     summary: 'Adds automated checks to help ensure content conforms to web accessibility guidelines.'
   packageName: drupal/drupal_cms_accessibility_tools
+
 drupal/drupal_cms_ai:
   title: 'AI Assistant'
   type: recipe
@@ -19,6 +23,7 @@ drupal/drupal_cms_ai:
   body:
     summary: 'Adds integration with AI services, such as alt text generation and a chat bot to assist with site building. Requires an API key from Open AI or Anthropic.'
   packageName: drupal/drupal_cms_ai
+
 drupal/drupal_cms_blog:
   title: Blog
   type: recipe
@@ -28,6 +33,7 @@ drupal/drupal_cms_blog:
   body:
     summary: 'Adds a blog post content type and listing page.'
   packageName: drupal/drupal_cms_blog
+
 drupal/drupal_cms_case_study:
   title: 'Case Studies'
   type: recipe
@@ -37,6 +43,7 @@ drupal/drupal_cms_case_study:
   body:
     summary: 'Adds a case study content type and listing page.'
   packageName: drupal/drupal_cms_case_study
+
 drupal/drupal_cms_events:
   title: Events
   type: recipe
@@ -46,6 +53,7 @@ drupal/drupal_cms_events:
   body:
     summary: 'Adds an event content type and listing page.'
   packageName: drupal/drupal_cms_events
+
 drupal/drupal_cms_forms:
   title: Forms
   type: recipe
@@ -55,6 +63,7 @@ drupal/drupal_cms_forms:
   body:
     summary: 'Adds a simple contact form, and tools for building forms.'
   packageName: drupal/drupal_cms_forms
+
 drupal/drupal_cms_google_analytics:
   title: 'Google Analytics'
   type: recipe
@@ -64,6 +73,7 @@ drupal/drupal_cms_google_analytics:
   body:
     summary: 'Adds tracking of website traffic using Google Analytics and Google Tag Manager. Requires a Google Tag Manager ID.'
   packageName: drupal/drupal_cms_google_analytics
+
 drupal/drupal_cms_news:
   title: News
   type: recipe
@@ -73,6 +83,7 @@ drupal/drupal_cms_news:
   body:
     summary: 'Adds a news content type and listing page.'
   packageName: drupal/drupal_cms_news
+
 drupal/drupal_cms_person:
   title: 'Person Profiles'
   type: recipe
@@ -82,6 +93,7 @@ drupal/drupal_cms_person:
   body:
     summary: 'Adds a person profile content type.'
   packageName: drupal/drupal_cms_person
+
 drupal/drupal_cms_project:
   title: Projects
   type: recipe
@@ -91,6 +103,7 @@ drupal/drupal_cms_project:
   body:
     summary: 'Adds a project content type and listing page.'
   packageName: drupal/drupal_cms_project
+
 drupal/drupal_cms_search:
   title: Search
   type: recipe
@@ -100,6 +113,7 @@ drupal/drupal_cms_search:
   body:
     summary: 'Adds a search to help visitors find content.'
   packageName: drupal/drupal_cms_search
+
 drupal/drupal_cms_seo_tools:
   title: 'SEO Tools'
   type: recipe

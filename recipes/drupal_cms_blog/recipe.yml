@@ -4,7 +4,6 @@ description: Adds a blog post content type and listing page.
 recipes:
   - drupal_cms_page
 install:
-  - add_content_by_bundle
   - menu_link_content
   - selective_better_exposed_filters
 config:

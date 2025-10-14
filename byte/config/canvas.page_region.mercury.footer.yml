@@ -21,7 +21,7 @@ component_tree:
   -
     uuid: b4ea9fb2-d3fc-428a-9114-bce92069cbab
     component_id: sdc.mercury.footer
-    component_version: 34b6bb1472f3ce4b
+    component_version: d696cea1796b650e
     inputs:
       align: true
   -
@@ -90,7 +90,7 @@ component_tree:
     slot: footer_utility_last
     uuid: a606580b-bd8b-4576-b89e-b9f97ef72d91
     component_id: sdc.mercury.text
-    component_version: f2cb7daf1d400e89
+    component_version: e6b639a22eda306d
     inputs:
       text:
         value: '<p>© Copyright 2025</p>'

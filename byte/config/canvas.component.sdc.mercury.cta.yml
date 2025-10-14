@@ -14,12 +14,13 @@ dependencies:
     - options
   theme:
     - mercury
-active_version: 9ce538831167d86c
+active_version: 1d9567c8b9a6c352
 versioned_properties:
   active:
     settings:
       prop_field_definitions:
         has_background_image:
+          required: false
           field_type: boolean
           field_storage_settings: {  }
           field_instance_settings: {  }
@@ -27,6 +28,7 @@ versioned_properties:
           default_value: null
           expression: ℹ︎boolean␟value
         heading_text:
+          required: false
           field_type: string
           field_storage_settings: {  }
           field_instance_settings: {  }
@@ -36,6 +38,7 @@ versioned_properties:
               value: 'Lorem ipsum dolor sit amet finibus aliquam pharetra'
           expression: ℹ︎string␟value
         level:
+          required: false
           field_type: list_float
           field_storage_settings:
             allowed_values_function: canvas_load_allowed_values_for_component_prop
@@ -46,6 +49,7 @@ versioned_properties:
               value: '2'
           expression: ℹ︎list_float␟value
         media:
+          required: false
           field_type: entity_reference
           field_storage_settings:
             target_type: media
@@ -59,6 +63,7 @@ versioned_properties:
           default_value: {  }
           expression: 'ℹ︎entity_reference␟{src↝entity␜␜entity:media:image|svg_image␝field_media_image|field_media_svg_image␞␟src_with_alternate_widths,alt↝entity␜␜entity:media:image|svg_image␝field_media_image|field_media_svg_image␞␟alt,width↝entity␜␜entity:media:image|svg_image␝field_media_image|field_media_svg_image␞␟width,height↝entity␜␜entity:media:image|svg_image␝field_media_image|field_media_svg_image␞␟height}'
         text:
+          required: false
           field_type: string
           field_storage_settings: {  }
           field_instance_settings: {  }
@@ -68,6 +73,7 @@ versioned_properties:
               value: 'Lorem ipsum dolor sit amet finibus aliquam pharetra mauris aenean pellentesque enim mus.'
           expression: ℹ︎string␟value
         text_align:
+          required: false
           field_type: list_string
           field_storage_settings:
             allowed_values_function: canvas_load_allowed_values_for_component_prop

@@ -14,12 +14,13 @@ dependencies:
     - options
   theme:
     - mercury
-active_version: ed79609ef8eafcd6
+active_version: a4c43b6991ac3b53
 versioned_properties:
   active:
     settings:
       prop_field_definitions:
         background_color:
+          required: false
           field_type: list_string
           field_storage_settings:
             allowed_values_function: canvas_load_allowed_values_for_component_prop
@@ -30,6 +31,7 @@ versioned_properties:
               value: 'hg:bg-none'
           expression: ℹ︎list_string␟value
         background_media:
+          required: false
           field_type: entity_reference
           field_storage_settings:
             target_type: media
@@ -43,6 +45,7 @@ versioned_properties:
           default_value: {  }
           expression: 'ℹ︎entity_reference␟{src↝entity␜␜entity:media:image|svg_image␝field_media_image|field_media_svg_image␞␟src_with_alternate_widths,alt↝entity␜␜entity:media:image|svg_image␝field_media_image|field_media_svg_image␞␟alt,width↝entity␜␜entity:media:image|svg_image␝field_media_image|field_media_svg_image␞␟width,height↝entity␜␜entity:media:image|svg_image␝field_media_image|field_media_svg_image␞␟height}'
         columns:
+          required: false
           field_type: list_string
           field_storage_settings:
             allowed_values_function: canvas_load_allowed_values_for_component_prop
@@ -53,6 +56,7 @@ versioned_properties:
               value: 50-50
           expression: ℹ︎list_string␟value
         margin_block_end:
+          required: false
           field_type: list_string
           field_storage_settings:
             allowed_values_function: canvas_load_allowed_values_for_component_prop
@@ -63,6 +67,7 @@ versioned_properties:
               value: '48'
           expression: ℹ︎list_string␟value
         margin_block_start:
+          required: false
           field_type: list_string
           field_storage_settings:
             allowed_values_function: canvas_load_allowed_values_for_component_prop
@@ -73,6 +78,7 @@ versioned_properties:
               value: '48'
           expression: ℹ︎list_string␟value
         padding_block_end:
+          required: false
           field_type: list_string
           field_storage_settings:
             allowed_values_function: canvas_load_allowed_values_for_component_prop
@@ -83,6 +89,7 @@ versioned_properties:
               value: '0'
           expression: ℹ︎list_string␟value
         padding_block_start:
+          required: false
           field_type: list_string
           field_storage_settings:
             allowed_values_function: canvas_load_allowed_values_for_component_prop
@@ -93,6 +100,7 @@ versioned_properties:
               value: '0'
           expression: ℹ︎list_string␟value
         section_footer:
+          required: false
           field_type: boolean
           field_storage_settings: {  }
           field_instance_settings: {  }
@@ -102,6 +110,7 @@ versioned_properties:
               value: true
           expression: ℹ︎boolean␟value
         section_header:
+          required: false
           field_type: boolean
           field_storage_settings: {  }
           field_instance_settings: {  }
@@ -111,6 +120,7 @@ versioned_properties:
               value: true
           expression: ℹ︎boolean␟value
         width:
+          required: false
           field_type: list_string
           field_storage_settings:
             allowed_values_function: canvas_load_allowed_values_for_component_prop

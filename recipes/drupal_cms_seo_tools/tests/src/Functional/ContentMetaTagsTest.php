@@ -26,6 +26,14 @@ class ContentMetaTagsTest extends BrowserTestBase {
    */
   protected $defaultTheme = 'stark';
 
+  /**
+   * {@inheritdoc}
+   */
+  protected static $configSchemaCheckerExclusions = [
+    // This ECA model uses actions which don't have config schema in ECA yet.
+    'eca.eca.setup_seo_fields',
+  ];
+
   private function generateImage(string $extension): Media {
     $random = $this->getRandomGenerator();
 

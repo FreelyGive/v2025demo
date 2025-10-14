@@ -16,7 +16,7 @@ component_tree:
   -
     uuid: f63929cf-c0a3-4ad1-9167-49c5f4261be5
     component_id: sdc.mercury.navbar
-    component_version: 9ec613a71e35c291
+    component_version: 4cb76d8e624cfcb8
     inputs:
       menu_align: right
   -

@@ -7,7 +7,6 @@ dependencies:
     - node.type.blog
     - taxonomy.vocabulary.tags
   module:
-    - add_content_by_bundle
     - better_exposed_filters
     - node
     - taxonomy
@@ -547,21 +546,7 @@ display:
         filter_groups: false
         header: false
       display_description: ''
-      header:
-        add_content_by_bundle:
-          id: add_content_by_bundle
-          table: views
-          field: add_content_by_bundle
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: add_content_by_bundle
-          label: 'Add a blog post'
-          empty: true
-          bundle: blog
-          class: button
-          target: ''
-          width: 600
+      header: {  }
       display_extenders: {  }
     cache_metadata:
       max-age: -1

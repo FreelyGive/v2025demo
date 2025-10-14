@@ -43,6 +43,9 @@ default:
   field_blog__byline:
     -
       value: 'Trystan Leach'
+  field_tags:
+    -
+      entity: eb00eaac-ad10-4bdb-9a31-7612c47c6484
 _meta:
   version: '1.0'
   entity_type: node
@@ -51,3 +54,4 @@ _meta:
   default_langcode: en
   depends:
     4d48928a-cd65-4f32-aa27-dd9ff703208f: media
+    eb00eaac-ad10-4bdb-9a31-7612c47c6484: taxonomy_term

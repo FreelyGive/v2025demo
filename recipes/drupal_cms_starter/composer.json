@@ -6,7 +6,7 @@
     "require": {
         "drupal/automatic_updates": "^4",
         "drupal/bpmn_io": "^3",
-        "drupal/canvas": "^1-beta2",
+        "drupal/canvas": "1-rc1",
         "drupal/core": "^11.2",
         "drupal/eca": "^3.0.1",
         "drupal/drupal_cms_admin_ui": "^2",

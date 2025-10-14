@@ -37,27 +37,27 @@ component_tree:
   1:
     uuid: 4e32407b-d45c-4b49-bfa6-33716f9bd4d2
     component_id: sdc.mercury.hero-blog
-    component_version: 7eb8d71e894ba201
+    component_version: 05e599bf4ee454d5
     inputs: '{"heading_text":{"sourceType":"dynamic","expression":"\u2139\ufe0e\u241centity:node:blog\u241dtitle\u241e\u241fvalue"},"level":1,"date":{"sourceType":"dynamic","expression":"\u2139\ufe0e\u241centity:node:blog\u241dcreated\u241e\u241fvalue"},"author":{"sourceType":"dynamic","expression":"\u2139\ufe0e\u241centity:node:blog\u241dfield_blog__byline\u241e\u241fvalue"}}'
   '1:blog_media:0':
     parent_uuid: 4e32407b-d45c-4b49-bfa6-33716f9bd4d2
     slot: blog_media
     uuid: 59a40305-ae72-4f38-b1fd-19e1513faf13
     component_id: sdc.mercury.image
-    component_version: d287c9eb7dcf48d9
+    component_version: 8c50f237c3d844bc
     inputs: '{"media":{"sourceType":"dynamic","expression":"\u2139\ufe0e\u241centity:node:blog\u241dfield_featured_image\u241e\u241f{src\u219dentity\u241c\u241centity:media:image\u241dfield_media_image\u241e\u241fentity\u241c\u241centity:file\u241duri\u241e\u241furl,alt\u219dentity\u241c\u241centity:media:image\u241dfield_media_image\u241e\u241falt}"},"size":"hg:aspect-16\/9"}'
   2:
     uuid: ea40592d-2c03-45e8-9c19-a66a96a59ec9
     component_id: sdc.mercury.section
-    component_version: ed79609ef8eafcd6
-    inputs: '{"columns":"100","section_header":false,"section_footer":false,"margin_block_start":"48","margin_block_end":"48","width":"hg:lg:max-w-3\/4"}'
+    component_version: a4c43b6991ac3b53
+    inputs: '{"columns":"100","section_header":true,"section_footer":true,"margin_block_start":"0","margin_block_end":"48","width":"hg:lg:max-w-3\/4","padding_block_end":"64","background_color":"hg:bg-brand-light"}'
   '2:main_slot:0':
     parent_uuid: ea40592d-2c03-45e8-9c19-a66a96a59ec9
     slot: main_slot
     uuid: caa1e4b2-d58b-4140-b99b-ab3e1ce55ad5
     component_id: sdc.mercury.text
-    component_version: f2cb7daf1d400e89
-    inputs: '{"text":{"sourceType":"dynamic","expression":"\u2139\ufe0e\u241centity:node:blog\u241dfield_content\u241e\u241fprocessed"}}'
+    component_version: e6b639a22eda306d
+    inputs: '{"text":{"sourceType":"dynamic","expression":"\u2139\ufe0e\u241centity:node:blog\u241dfield_content\u241e\u241fprocessed"},"font_color":"hg:text-body-text-dark"}'
   3:
     uuid: 0ab08fa6-8f5f-40f5-a662-cb824f8893f2
     component_id: block.views_block.blog-related
@@ -66,20 +66,20 @@ component_tree:
   4:
     uuid: 4305752c-db60-48dc-837b-c7a12dd656fe
     component_id: sdc.mercury.cta
-    component_version: 9ce538831167d86c
-    inputs: '{"heading_text":"Lorem ipsum dolor sit amet finibus aliquam pharetra","level":2,"text":"Turn this into a pattern","media":{"sourceType":"default-relative-url","value":{"src":"assets\/256381.jpg","alt":"Photo by pixabay"},"jsonSchema":{"type":"object","properties":{"src":{"type":"string","format":"uri-reference","pattern":"^(\/|https?:\/\/)?.*\\.([Pp][Nn][Gg]|[Gg][Ii][Ff]|[Jj][Pp][Gg]|[Jj][Pp][Ee][Gg]|[Ww][Ee][Bb][Pp]|[Aa][Vv][Ii][Ff])(\\?.*)?(#.*)?$"},"alt":{"type":"string"},"width":{"type":"integer"},"height":{"type":"integer"}},"required":["src"]},"componentId":"sdc.mercury.cta"},"text_align":"center"}'
+    component_version: 1d9567c8b9a6c352
+    inputs: '{"heading_text":"Get ready to transform your operations","level":2,"text":"Sign up for a free trial and discover a world of possibilities to elevate your outreach and engagement strategies","media":{"sourceType":"default-relative-url","value":{"src":"assets\/256381.jpg","alt":"Photo by pixabay"},"jsonSchema":{"type":"object","properties":{"src":{"type":"string","format":"uri-reference","pattern":"^(\/|https?:\/\/)?.*\\.([Pp][Nn][Gg]|[Gg][Ii][Ff]|[Jj][Pp][Gg]|[Jj][Pp][Ee][Gg]|[Ww][Ee][Bb][Pp]|[Aa][Vv][Ii][Ff])(\\?.*)?(#.*)?$"},"alt":{"type":"string"},"width":{"type":"integer"},"height":{"type":"integer"}},"required":["src"]},"componentId":"sdc.mercury.cta"},"text_align":"center"}'
   '4:actions:0':
     parent_uuid: 4305752c-db60-48dc-837b-c7a12dd656fe
     slot: actions
     uuid: 766d0781-cae3-471f-8d43-0f5f27659fbb
     component_id: sdc.mercury.button
-    component_version: c6067993360ffa7d
-    inputs: '{"variant":"primary","disabled":false,"label":"Button Label","icon":"arrow-right","icon_first":false}'
+    component_version: a71f15732e351c5a
+    inputs: '{"variant":"primary","disabled":false,"label":"Get started","icon":"arrow-right","icon_first":false}'
   '4:actions:1':
     parent_uuid: 4305752c-db60-48dc-837b-c7a12dd656fe
     slot: actions
     uuid: f61ffe08-6016-458e-b19f-7bef09f26382
     component_id: sdc.mercury.button
-    component_version: c6067993360ffa7d
-    inputs: '{"variant":"secondary","disabled":false,"label":"Button Label","icon":"arrow-right","icon_first":false}'
+    component_version: a71f15732e351c5a
+    inputs: '{"variant":"secondary","disabled":false,"label":"Learn more","icon":"arrow-right","icon_first":false}'
 exposed_slots: {  }

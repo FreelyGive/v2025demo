@@ -1,5 +1,5 @@
 diff --git a/modules/canvas_ai/canvas_ai.links.menu.yml b/modules/canvas_ai/canvas_ai.links.menu.yml
-index 3f77b376c9d665bc9f43b0add2db14e7a4de2e7e..82f45338a17c6620e6221ac8c3fa5aa2b3971fb9 100644
+index 3f77b376..82f45338 100644
 --- a/modules/canvas_ai/canvas_ai.links.menu.yml
 +++ b/modules/canvas_ai/canvas_ai.links.menu.yml
 @@ -9,3 +9,7 @@ canvas_ai.setting:
@@ -11,12 +11,12 @@ index 3f77b376c9d665bc9f43b0add2db14e7a4de2e7e..82f45338a17c6620e6221ac8c3fa5aa2
 +  parent: ai.admin_settings
 +  route_name: canvas_ai.theme_region_settings
 diff --git a/modules/canvas_ai/canvas_ai.routing.yml b/modules/canvas_ai/canvas_ai.routing.yml
-index 9a66bb78a790d5bd24b721c76d46a13071d5cf55..38b9a84bd034b7cad62cf5ad581983a03c459284 100644
+index 9a66bb78..38b9a84b 100644
 --- a/modules/canvas_ai/canvas_ai.routing.yml
 +++ b/modules/canvas_ai/canvas_ai.routing.yml
 @@ -14,7 +14,7 @@ canvas_ai.csrf_token:
      _method: 'POST'
-
+ 
  canvas_ai.component_description_settings:
 -  path: '/admin/config/system/canvas-ai-component-description-settings'
 +  path: '/admin/config/ai/canvas-ai-component-description-settings'
@@ -35,9 +35,9 @@ index 9a66bb78a790d5bd24b721c76d46a13071d5cf55..38b9a84bd034b7cad62cf5ad581983a0
 +    _form: 'Drupal\canvas_ai\Form\CanvasAIThemeRegionSettingsForm'
    requirements:
      _permission: 'use Drupal Canvas AI'
-
+ 
 diff --git a/modules/canvas_ai/config/schema/canvas_ai.schema.yml b/modules/canvas_ai/config/schema/canvas_ai.schema.yml
-index 28dd23134674ceebf5d7201bf905d0caba3ac9cc..db8a120d84fa63b27f4cfb25d60656c6cdf16d9c 100644
+index 28dd2313..db8a120d 100644
 --- a/modules/canvas_ai/config/schema/canvas_ai.schema.yml
 +++ b/modules/canvas_ai/config/schema/canvas_ai.schema.yml
 @@ -37,3 +37,15 @@ component_source_entry:
@@ -57,13 +57,13 @@ index 28dd23134674ceebf5d7201bf905d0caba3ac9cc..db8a120d84fa63b27f4cfb25d60656c6
 +          type: text
 +          label: 'Description'
 diff --git a/modules/canvas_ai/src/CanvasAiPageBuilderHelper.php b/modules/canvas_ai/src/CanvasAiPageBuilderHelper.php
-index 750788f6d019225a81d491fb6bc9e0dffd95c134..aa83d4a3bc1959572b410a424e8d6a7e543b4e5f 100644
+index 750788f6..aa83d4a3 100644
 --- a/modules/canvas_ai/src/CanvasAiPageBuilderHelper.php
 +++ b/modules/canvas_ai/src/CanvasAiPageBuilderHelper.php
 @@ -1185,4 +1185,93 @@ class CanvasAiPageBuilderHelper {
      return !empty($node[$slot_name]);
    }
-
+ 
 +  /**
 +   * Gets the region indices from the current layout.
 +   *
@@ -155,7 +155,7 @@ index 750788f6d019225a81d491fb6bc9e0dffd95c134..aa83d4a3bc1959572b410a424e8d6a7e
 +
  }
 diff --git a/modules/canvas_ai/src/Controller/CanvasBuilder.php b/modules/canvas_ai/src/Controller/CanvasBuilder.php
-index 3111edda965b14be1dcda84fca2201f13fac46bf..b939ab69578ece9b48c69b53937c94cf4864eb4b 100644
+index 3834e0b2..59724fef 100644
 --- a/modules/canvas_ai/src/Controller/CanvasBuilder.php
 +++ b/modules/canvas_ai/src/Controller/CanvasBuilder.php
 @@ -22,9 +22,10 @@ use Drupal\canvas_ai\Plugin\AiFunctionCall\CreateComponent;
@@ -188,10 +188,10 @@ index 3111edda965b14be1dcda84fca2201f13fac46bf..b939ab69578ece9b48c69b53937c94cf
 +      'menu_fetch_source' => $menu_fetch_source,
 +      'json_api_module_status' => $json_api_module_status,
 +    ]);
-     $solvability = $agent->determineSolvability();
-     $status = FALSE;
-     $message = '';
-@@ -247,6 +260,7 @@ final class CanvasBuilder extends ControllerBase {
+     try {
+       $solvability = $agent->determineSolvability();
+     }
+@@ -255,6 +268,7 @@ final class CanvasBuilder extends ControllerBase {
          EditFieldContent:: class => ['refined_text'],
          AddMetadata::class => ['metadata'],
          SetAIGeneratedComponentStructure::class => ['operations'],
@@ -199,7 +199,7 @@ index 3111edda965b14be1dcda84fca2201f13fac46bf..b939ab69578ece9b48c69b53937c94cf
        ];
        if (!empty($tools)) {
          foreach ($tools as $tool) {
-@@ -255,19 +269,18 @@ final class CanvasBuilder extends ControllerBase {
+@@ -263,19 +277,18 @@ final class CanvasBuilder extends ControllerBase {
                // @todo Refactor this after https://www.drupal.org/i/3529313 is fixed.
                $output = $tool->getReadableOutput();
                try {
@@ -227,7 +227,7 @@ index 3111edda965b14be1dcda84fca2201f13fac46bf..b939ab69578ece9b48c69b53937c94cf
                  }
                }
                catch (\Throwable) {
-@@ -278,7 +291,7 @@ final class CanvasBuilder extends ControllerBase {
+@@ -286,7 +299,7 @@ final class CanvasBuilder extends ControllerBase {
            if ($tool instanceof AiAgentWrapper) {
              $response['message'] = $tool->getReadableOutput();
            }
@@ -236,134 +236,8 @@ index 3111edda965b14be1dcda84fca2201f13fac46bf..b939ab69578ece9b48c69b53937c94cf
              $this->canvasAiTempStore->deleteData(CanvasAiTempStore::CURRENT_LAYOUT_KEY);
            }
          }
-diff --git a/modules/canvas_ai/src/Form/CanvasAIThemeRegionSettingsForm.php b/modules/canvas_ai/src/Form/CanvasAIThemeRegionSettingsForm.php
-new file mode 100644
-index 0000000000000000000000000000000000000000..e0732de4d332109e6ea8e6e42717f3e81c4b332e
---- /dev/null
-+++ b/modules/canvas_ai/src/Form/CanvasAIThemeRegionSettingsForm.php
-@@ -0,0 +1,120 @@
-+<?php
-+
-+declare(strict_types=1);
-+
-+namespace Drupal\canvas_ai\Form;
-+
-+use Drupal\Core\Form\ConfigFormBase;
-+use Drupal\Core\Form\FormStateInterface;
-+use Drupal\canvas\Entity\PageRegion;
-+
-+/**
-+ * Configure Canvas AI settings for this site.
-+ */
-+final class CanvasAIThemeRegionSettingsForm extends ConfigFormBase {
-+
-+  /**
-+   * {@inheritdoc}
-+   */
-+  public function getFormId(): string {
-+    return 'canvas_ai_theme_region_settings';
-+  }
-+
-+  /**
-+   * {@inheritdoc}
-+   */
-+  protected function getEditableConfigNames(): array {
-+    return ['canvas_ai.theme_region.settings'];
-+  }
-+
-+  /**
-+   * {@inheritdoc}
-+   */
-+  public function buildForm(array $form, FormStateInterface $form_state): array {
-+    $config = $this->config('canvas_ai.theme_region.settings');
-+    $active_regions = $this->getActiveRegions();
-+    $form['#tree'] = TRUE;
-+
-+    if (empty($active_regions)) {
-+      $form['message'] = [
-+        '#type' => 'markup',
-+        '#markup' => $this->t("You don't have any global regions enabled in your theme."),
-+      ];
-+      return $form;
-+    }
-+
-+    $form['message'] = [
-+      '#type' => 'markup',
-+      '#markup' => $this->t('Use this form to give proper descriptions for all the Global regions, which will be used by AI to generate content for those regions.'),
-+    ];
-+
-+    $descriptions = $config->get('region_descriptions') ?? [];
-+
-+    foreach ($active_regions as $region) {
-+      $region_id = $this->getRegionId($region);
-+      $form[$region_id] = [
-+        '#type' => 'details',
-+        '#title' => $region->label(),
-+        '#open' => TRUE,
-+      ];
-+      $form[$region_id]['description'] = [
-+        '#type' => 'textarea',
-+        '#title' => $this->t('Description'),
-+        '#description' => $this->t('Provide a description for what kind of content should be placed in this region.'),
-+        '#default_value' => $descriptions[$region_id] ?? '',
-+      ];
-+    }
-+
-+    return parent::buildForm($form, $form_state);
-+  }
-+
-+  /**
-+   * {@inheritdoc}
-+   */
-+  public function submitForm(array &$form, FormStateInterface $form_state): void {
-+    $active_regions = $this->getActiveRegions();
-+
-+    $descriptions = [];
-+    foreach ($active_regions as $region) {
-+      $region_id = $this->getRegionId($region);
-+      $descriptions[$region_id] = $form_state->getValue([$region_id, 'description']);
-+    }
-+
-+    $this->config('canvas_ai.theme_region.settings')
-+      ->set('region_descriptions', $descriptions)
-+      ->save();
-+
-+    parent::submitForm($form, $form_state);
-+  }
-+
-+  /**
-+   * Get active theme regions.
-+   *
-+   * @return array
-+   *   An array of active theme regions.
-+   */
-+  protected function getActiveRegions(): array {
-+    $regions = PageRegion::loadMultiple();
-+    return array_filter($regions, fn($region) => $region->status());
-+  }
-+
-+  /**
-+   * Get region ID.
-+   *
-+   * @param \Drupal\canvas\Entity\PageRegion $region
-+   *   The page region.
-+   *
-+   * @return string
-+   *   The region ID.
-+   */
-+  protected function getRegionId(PageRegion $region): string {
-+    $region_id = $region->id();
-+    // Remove the theme prefix.
-+    if (str_contains($region_id, '.')) {
-+      $parts = explode('.', $region_id, 2);
-+      return $parts[1] ?? $region_id;
-+    }
-+    return $region_id;
-+  }
-+
-+}
 diff --git a/modules/canvas_ai/src/Hook/CanvasAiHooks.php b/modules/canvas_ai/src/Hook/CanvasAiHooks.php
-index ab0267e2b54c76f237be4a255647141a92353b01..21ef1ca6a30b9022e6af0ed5d7d52b068cf7fe28 100644
+index ab0267e2..21ef1ca6 100644
 --- a/modules/canvas_ai/src/Hook/CanvasAiHooks.php
 +++ b/modules/canvas_ai/src/Hook/CanvasAiHooks.php
 @@ -75,6 +75,10 @@ class CanvasAiHooks {
@@ -388,435 +262,3 @@ index ab0267e2b54c76f237be4a255647141a92353b01..21ef1ca6a30b9022e6af0ed5d7d52b06
          }
        }
      }
-diff --git a/modules/canvas_ai/src/Plugin/AiFunctionCall/SetAIGeneratedTemplateData.php b/modules/canvas_ai/src/Plugin/AiFunctionCall/SetAIGeneratedTemplateData.php
-new file mode 100644
-index 0000000000000000000000000000000000000000..fa1bd0b15d67bda8199592a1c88e3f71f0891462
---- /dev/null
-+++ b/modules/canvas_ai/src/Plugin/AiFunctionCall/SetAIGeneratedTemplateData.php
-@@ -0,0 +1,158 @@
-+<?php
-+
-+namespace Drupal\canvas_ai\Plugin\AiFunctionCall;
-+
-+use Drupal\Core\Plugin\Context\ContextDefinition;
-+use Drupal\Core\StringTranslation\TranslatableMarkup;
-+use Drupal\ai\Attribute\FunctionCall;
-+use Drupal\ai\Base\FunctionCallBase;
-+use Drupal\ai\Service\FunctionCalling\ExecutableFunctionCallInterface;
-+use Drupal\ai\Service\FunctionCalling\FunctionCallInterface;
-+use Drupal\ai_agents\PluginInterfaces\AiAgentContextInterface;
-+use Drupal\Component\Serialization\Json;
-+use Drupal\Component\Serialization\Yaml;
-+use Symfony\Component\DependencyInjection\ContainerInterface;
-+use Drupal\Core\Logger\LoggerChannelFactoryInterface;
-+use Drupal\Core\Session\AccountProxyInterface;
-+use Drupal\canvas_ai\AiResponseValidator;
-+use Drupal\canvas_ai\CanvasAiPageBuilderHelper;
-+use Drupal\canvas_ai\CanvasAiPermissions;
-+use Drupal\canvas_ai\CanvasAiTempStore;
-+
-+/**
-+ * Function call plugin to set the component structure generated by AI.
-+ */
-+#[FunctionCall(
-+  id: 'canvas_ai:set_template_data',
-+  function_name: 'set_template_data',
-+  name: 'Set Template Data',
-+  description: 'This tool is used to add components across various regions of the page to build the desired templates, headers, or footers. The component structure must be provided in valid YAML format.',
-+  group: 'modification_tools',
-+  context_definitions: [
-+    'component_structure' => new ContextDefinition(
-+      data_type: 'string',
-+      label: new TranslatableMarkup("Component structure in yml format"),
-+      description: new TranslatableMarkup("The component structure to store in YAML format."),
-+      required: TRUE,
-+    ),
-+    'reference_component_nodepath' => new ContextDefinition(
-+      data_type: 'string',
-+      label: new TranslatableMarkup("The nodePath of the reference component"),
-+      description: new TranslatableMarkup("The nodePath of the component after which the generated footer components must be placed."),
-+      required: FALSE,
-+    ),
-+  ],
-+)]
-+final class SetAIGeneratedTemplateData extends FunctionCallBase implements ExecutableFunctionCallInterface, AiAgentContextInterface {
-+
-+  /**
-+   * The Canvas page builder helper service.
-+   *
-+   * @var \Drupal\canvas_ai\CanvasAiPageBuilderHelper
-+   */
-+  protected CanvasAiPageBuilderHelper $pageBuilderHelper;
-+
-+  /**
-+   * The logger factory.
-+   *
-+   * @var \Drupal\Core\Logger\LoggerChannelFactoryInterface
-+   */
-+  protected LoggerChannelFactoryInterface $loggerFactory;
-+
-+  /**
-+   * The current user.
-+   *
-+   * @var \Drupal\Core\Session\AccountProxyInterface
-+   */
-+  protected AccountProxyInterface $currentUser;
-+
-+  /**
-+   * The Canvas AI temp store service.
-+   *
-+   * @var \Drupal\canvas_ai\CanvasAiTempStore
-+   */
-+  protected CanvasAiTempStore $tempStore;
-+
-+  /**
-+   * The AI response validator service.
-+   *
-+   * @var \Drupal\canvas_ai\AiResponseValidator
-+   */
-+  protected AiResponseValidator $responseValidator;
-+
-+  /**
-+   * Load from dependency injection container.
-+   */
-+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition): FunctionCallInterface | static {
-+    $instance = new static(
-+      $configuration,
-+      $plugin_id,
-+      $plugin_definition,
-+      $container->get('ai.context_definition_normalizer'),
-+    );
-+    $instance->pageBuilderHelper = $container->get('canvas_ai.page_builder_helper');
-+    $instance->loggerFactory = $container->get('logger.factory');
-+    $instance->currentUser = $container->get('current_user');
-+    $instance->tempStore = $container->get('canvas_ai.tempstore');
-+    $instance->responseValidator = $container->get('canvas_ai.response_validator');
-+    return $instance;
-+  }
-+
-+  /**
-+   * {@inheritdoc}
-+   */
-+  public function execute(): void {
-+    // Make sure that the user has the right permissions.
-+    if (!$this->currentUser->hasPermission(CanvasAiPermissions::USE_CANVAS_AI)) {
-+      throw new \Exception('The current user does not have the right permissions to run this tool.');
-+    }
-+    try {
-+      // Get reference component uuid.
-+      $reference_nodepath = !empty($this->getContextValue('reference_component_nodepath')) ? $this->getContextValue('reference_component_nodepath') : [];
-+      // Convert the reference nodepath to an array.
-+      if (!is_array($reference_nodepath)) {
-+        $reference_nodepath = Json::decode($reference_nodepath);
-+      }
-+      // If reference nodepath is provided, ensure that it is valid by checking
-+      // if there are even number of elements.
-+      if (!empty($reference_nodepath) && count($reference_nodepath) % 2 !== 0) {
-+        throw new \Exception(sprintf('The reference nodepath %s is incomplete and missing elements. Provide the complete nodepath from current layout.', implode(', ', $reference_nodepath)));
-+      }
-+      $component_structure = $this->getContextValue('component_structure');
-+      // Try to decode the YAML structure.
-+      try {
-+        $component_structure_array = Yaml::decode($component_structure);
-+      }
-+      catch (\Exception $e) {
-+        throw new \Exception('Invalid YAML format provided.');
-+      }
-+
-+      // Validate if regions are correct.
-+      $current_layout = $this->tempStore->getData(CanvasAiTempStore::CURRENT_LAYOUT_KEY) ?? '';
-+      $layout_regions = $this->pageBuilderHelper->getRegionIndex($current_layout);
-+      foreach (array_keys($component_structure_array) as $region) {
-+        if (!array_key_exists($region, $layout_regions)) {
-+          $available_regions = implode(', ', array_keys($layout_regions));
-+          throw new \Exception(sprintf(
-+            'Region "%s" does not exist. Available regions are: %s.',
-+            $region,
-+            $available_regions
-+          ));
-+        }
-+      }
-+
-+      // Validate the component structure for each region.
-+      foreach ($component_structure_array as $components) {
-+        $this->responseValidator->validateComponentStructure($components);
-+      }
-+      // Process the YAML structure for UI representation.
-+      $processed_structure = $this->pageBuilderHelper->processTemplateYmlForUi($component_structure_array, $current_layout, $reference_nodepath);
-+      $this->setOutput($processed_structure);
-+    }
-+    catch (\Exception $e) {
-+      $this->loggerFactory->get('canvas_ai')->error($e->getMessage());
-+      $this->setOutput(sprintf('Failed to save: %s', $e->getMessage()));
-+    }
-+  }
-+
-+}
-diff --git a/modules/canvas_ai/tests/src/Kernel/Plugin/AiFunctionCall/SetAIGeneratedTemplateDataTest.php b/modules/canvas_ai/tests/src/Kernel/Plugin/AiFunctionCall/SetAIGeneratedTemplateDataTest.php
-new file mode 100644
-index 0000000000000000000000000000000000000000..3a1c9912044a6819f7eea1fa6e22b5696628f907
---- /dev/null
-+++ b/modules/canvas_ai/tests/src/Kernel/Plugin/AiFunctionCall/SetAIGeneratedTemplateDataTest.php
-@@ -0,0 +1,262 @@
-+<?php
-+
-+declare(strict_types=1);
-+
-+namespace Drupal\Tests\canvas_ai\Kernel\Plugin\AiFunctionCall;
-+
-+use Drupal\ai\Service\FunctionCalling\ExecutableFunctionCallInterface;
-+use Drupal\Core\Session\AccountInterface;
-+use Drupal\KernelTests\KernelTestBase;
-+use Drupal\Tests\user\Traits\UserCreationTrait;
-+use Drupal\user\Entity\User;
-+use Drupal\canvas_ai\CanvasAiPermissions;
-+use Drupal\canvas_ai\CanvasAiTempStore;
-+use Drupal\Core\Extension\ModuleInstallerInterface;
-+
-+/**
-+ * Tests for the SetAIGeneratedTemplateData function call plugin.
-+ *
-+ * @group canvas_ai
-+ */
-+final class SetAIGeneratedTemplateDataTest extends KernelTestBase {
-+
-+  use UserCreationTrait;
-+
-+  /**
-+   * The function call plugin manager.
-+   *
-+   * @var \Drupal\Component\Plugin\PluginManagerInterface
-+   */
-+  protected $functionCallManager;
-+
-+  /**
-+   * A test user with AI permissions.
-+   *
-+   * @var \Drupal\Core\Session\AccountInterface
-+   */
-+  protected AccountInterface $privilegedUser;
-+
-+  /**
-+   * A test user without AI permissions.
-+   *
-+   * @var \Drupal\Core\Session\AccountInterface
-+   */
-+  protected AccountInterface $unprivilegedUser;
-+
-+  /**
-+   * The Canvas AI temp store service mock.
-+   *
-+   * @var \Drupal\canvas_ai\CanvasAiTempStore|\PHPUnit\Framework\MockObject\MockObject
-+   */
-+  protected $mockTempStore;
-+
-+  /**
-+   * {@inheritdoc}
-+   */
-+  protected static $modules = [
-+    'ai',
-+    'ai_agents',
-+    'system',
-+    'user',
-+    'canvas',
-+    'canvas_ai',
-+  ];
-+
-+  /**
-+   * {@inheritdoc}
-+   */
-+  protected function setUp(): void {
-+    parent::setUp();
-+    $this->installEntitySchema('user');
-+
-+    $this->functionCallManager = $this->container->get('plugin.manager.ai.function_calls');
-+    $privileged_user = $this->createUser([CanvasAiPermissions::USE_CANVAS_AI]);
-+    $unprivileged_user = $this->createUser();
-+    if (!$privileged_user instanceof User || !$unprivileged_user instanceof User) {
-+      throw new \Exception('Failed to create test users');
-+    }
-+    $this->privilegedUser = $privileged_user;
-+    $this->unprivilegedUser = $unprivileged_user;
-+    $this->container->get(ModuleInstallerInterface::class)->install(['canvas_test_sdc']);
-+    $this->container->get('theme_installer')->install(['stark']);
-+    $this->container->get('config.factory')
-+      ->getEditable('system.theme')
-+      ->set('default', 'stark')
-+      ->save();
-+    $this->mockTempStore = $this->createMock(CanvasAiTempStore::class);
-+    $this->container->set('canvas_ai.tempstore', $this->mockTempStore);
-+  }
-+
-+  /**
-+   * Tests the tool output.
-+   */
-+  public function testSetTemplateDataTool(): void {
-+    $this->container->get('current_user')->setAccount($this->privilegedUser);
-+
-+    $valid_yaml = <<<YAML
-+content:
-+  - sdc.canvas_test_sdc.my-hero:
-+      props:
-+        heading: 'My Hero'
-+        subheading: 'SubSnub'
-+        cta1: 'View it!'
-+        cta1href: 'https://canvas-example.com'
-+        cta2: 'Click it!'
-+sidebar:
-+  - sdc.canvas_test_sdc.heading:
-+      props:
-+        text: 'Some text'
-+        element: 'h1'
-+YAML;
-+
-+    $mock_layout = [
-+      "regions" => [
-+        "content" => [
-+          "nodePathPrefix" => [0],
-+          "components" => [],
-+        ],
-+        "sidebar" => [
-+          "nodePathPrefix" => [1],
-+          "components" => [],
-+        ],
-+      ],
-+    ];
-+    $layout_json = \json_encode($mock_layout);
-+
-+    $this->mockTempStore->expects($this->once())
-+      ->method('getData')
-+      ->with(CanvasAiTempStore::CURRENT_LAYOUT_KEY)
-+      ->willReturn($layout_json);
-+
-+    $expected_output = [
-+      'operations' => [
-+        [
-+          'operation' => 'ADD',
-+          'components' => [
-+            [
-+              'id' => 'sdc.canvas_test_sdc.my-hero',
-+              'nodePath' => [0, 0],
-+              'fieldValues' => [
-+                'heading' => 'My Hero',
-+                'subheading' => 'SubSnub',
-+                'cta1' => 'View it!',
-+                'cta1href' => 'https://canvas-example.com',
-+                'cta2' => 'Click it!',
-+              ],
-+            ],
-+            [
-+              'id' => 'sdc.canvas_test_sdc.heading',
-+              'nodePath' => [1, 0],
-+              'fieldValues' => ['text' => 'Some text', 'element' => 'h1'],
-+            ],
-+          ],
-+        ],
-+      ],
-+    ];
-+
-+    $tool = $this->functionCallManager->createInstance('canvas_ai:set_template_data');
-+    $this->assertInstanceOf(ExecutableFunctionCallInterface::class, $tool);
-+
-+    $tool->setContextValue('component_structure', $valid_yaml);
-+    $tool->execute();
-+
-+    $result = $tool->getReadableOutput();
-+    $this->assertEquals(
-+      json_encode($expected_output),
-+      $result,
-+      "The component structure was not processed correctly"
-+    );
-+  }
-+
-+  /**
-+   * Tests the tool output when reference nodepath is given.
-+   */
-+  public function testSetTemplateDataToolWithReferenceNodepath(): void {
-+    $this->container->get('current_user')->setAccount($this->privilegedUser);
-+
-+    $valid_yaml = <<<YAML
-+content:
-+  - sdc.canvas_test_sdc.card:
-+      props:
-+        title: 'Test Card'
-+        content: 'Test content'
-+        loading: 'lazy'
-+        image:
-+          src: /modules/contrib/canvas/tests/modules/canvas_test_sdc/components/card/balloons.png
-+          alt: 'Hot air balloons'
-+          width: 640
-+          height: 427
-+  - sdc.canvas_test_sdc.heading:
-+      props:
-+        text: 'Some text'
-+        element: 'h1'
-+YAML;
-+
-+    $mock_layout = [
-+      "regions" => [
-+        "content" => [
-+          "nodePathPrefix" => [0],
-+          "components" => [
-+            [
-+              "name" => "sdc.canvas_test_sdc.card",
-+              "uuid" => "9cadf75e-7116-444a-9d05-e3c86483d178",
-+              "nodePath" => [0, 0],
-+            ],
-+            [
-+              "name" => "sdc.canvas_test_sdc.card",
-+              "uuid" => "ab9b70d7-554d-421a-8303-725f4f6a6b9c",
-+              "nodePath" => [0, 1],
-+            ],
-+          ],
-+        ],
-+      ],
-+    ];
-+
-+    $this->mockTempStore->expects($this->once())
-+      ->method('getData')
-+      ->with(CanvasAiTempStore::CURRENT_LAYOUT_KEY)
-+      ->willReturn(\json_encode($mock_layout));
-+
-+    $expected_output = [
-+      'operations' => [
-+        [
-+          'operation' => 'ADD',
-+          'components' => [
-+            [
-+              'id' => 'sdc.canvas_test_sdc.card',
-+              'nodePath' => [0, 2],
-+              'fieldValues' => [
-+                'title' => 'Test Card',
-+                'content' => 'Test content',
-+                'loading' => 'lazy',
-+                'image' => [
-+                  'src' => '/modules/contrib/canvas/tests/modules/canvas_test_sdc/components/card/balloons.png',
-+                  'alt' => 'Hot air balloons',
-+                  'width' => 640,
-+                  'height' => 427,
-+                ],
-+              ],
-+            ],
-+            [
-+              'id' => 'sdc.canvas_test_sdc.heading',
-+              'nodePath' => [0, 3],
-+              'fieldValues' => ['text' => 'Some text', 'element' => 'h1'],
-+            ],
-+          ],
-+        ],
-+      ],
-+    ];
-+
-+    $tool = $this->functionCallManager->createInstance('canvas_ai:set_template_data');
-+    $this->assertInstanceOf(ExecutableFunctionCallInterface::class, $tool);
-+
-+    $tool->setContextValue('component_structure', $valid_yaml);
-+    // Set the reference nodepath.
-+    $tool->setContextValue('reference_component_nodepath', [0, 1]);
-+    $tool->execute();
-+
-+    $result = $tool->getReadableOutput();
-+    $this->assertEquals(\json_encode($expected_output), $result);
-+  }
-+
-+}

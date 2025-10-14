@@ -1,39 +1,45 @@
-id: node.page.full
+langcode: en
 status: true
+dependencies:
+  config:
+    - canvas.component.block.system_breadcrumb_block
+    - canvas.component.sdc.mercury.heading
+    - canvas.component.sdc.mercury.section
+    - canvas.component.sdc.mercury.text
+    - core.entity_view_mode.node.full
+    - field.field.node.page.field_content
+    - filter.format.content_format
+    - node.type.page
+  module:
+    - node
+    - options
+id: node.page.full
 content_entity_type_id: node
 content_entity_type_bundle: page
 content_entity_type_view_mode: full
-dependencies:
-  module:
-    - node
-  config:
-    - canvas.component.sdc.mercury.heading
-    - canvas.component.sdc.mercury.text
-    - canvas.component.block.system_breadcrumb_block
-    - node.type.page
-    - core.entity_view_mode.node.full
 component_tree:
-  - uuid: 92e68054-9f78-4420-8752-96ec693d2fa9
+  0:
+    uuid: 92e68054-9f78-4420-8752-96ec693d2fa9
     component_id: block.system_breadcrumb_block
     component_version: cec23aa503e2a02f
-    inputs:
-      label: Breadcrumbs
-      label_display: '0'
-  -
+    inputs: '{"label":"Breadcrumbs","label_display":"0"}'
+  1:
+    uuid: b436211b-95ef-40ea-987a-e7b0f5782e33
+    component_id: sdc.mercury.section
+    component_version: a4c43b6991ac3b53
+    inputs: '{"columns":"100","width":"hg:lg:max-w-3\/4","margin_block_start":"48","margin_block_end":"48","padding_block_start":"0","padding_block_end":"0","background_color":"hg:bg-none","section_header":true,"section_footer":true}'
+  '1:header_slot:0':
+    parent_uuid: b436211b-95ef-40ea-987a-e7b0f5782e33
+    slot: header_slot
     uuid: f08be9dc-e328-4cb7-9499-df6db9bd8900
     component_id: sdc.mercury.heading
-    component_version: 452a1d7184fbf28f
-    inputs:
-      heading_text:
-        sourceType: dynamic
-        expression: 'ℹ︎␜entity:node:page␝title␞␟value'
-      level: 1
-      align: left
-      url: 'No URL'
-  - uuid: caa1e4b2-d58b-4140-b99b-ab3e1ce55ad5
+    component_version: 265899d143af583a
+    inputs: '{"heading_text":{"sourceType":"dynamic","expression":"\u2139\ufe0e\u241centity:node:page\u241dtitle\u241e\u241fvalue"},"level":1,"align":"left","url":"No URL"}'
+  '1:main_slot:0':
+    parent_uuid: b436211b-95ef-40ea-987a-e7b0f5782e33
+    slot: main_slot
+    uuid: caa1e4b2-d58b-4140-b99b-ab3e1ce55ad5
     component_id: sdc.mercury.text
-    component_version: f2cb7daf1d400e89
-    inputs:
-      text:
-        sourceType: dynamic
-        expression: 'ℹ︎␜entity:node:page␝field_content␞␟processed'
+    component_version: e6b639a22eda306d
+    inputs: '{"text":{"sourceType":"dynamic","expression":"\u2139\ufe0e\u241centity:node:page\u241dfield_content\u241e\u241fprocessed"}}'
+exposed_slots: {  }

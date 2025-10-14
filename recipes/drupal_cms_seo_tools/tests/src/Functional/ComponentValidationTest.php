@@ -6,6 +6,7 @@ namespace Drupal\Tests\drupal_cms_seo_tools\Functional;
 
 use Drupal\Core\Config\Config;
 use Drupal\Core\Config\ConfigInstallerInterface;
+use Drupal\Core\Entity\EntityDisplayRepositoryInterface;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\FunctionalTests\Core\Recipe\RecipeTestTrait;
 use Drupal\menu_link_content\Entity\MenuLinkContent;
@@ -34,10 +35,18 @@ class ComponentValidationTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
+  protected static $configSchemaCheckerExclusions = [
+    // This ECA model uses actions which don't have config schema in ECA yet.
+    'eca.eca.setup_seo_fields',
+  ];
+
+  /**
+   * {@inheritdoc}
+   */
   protected function setUp(): void {
     parent::setUp();
     // Create a content type so we can test the changes made by the recipe.
-    $this->drupalCreateContentType(['type' => 'test'])->id();
+    $this->drupalCreateContentType(['type' => 'test']);
   }
 
   private function applyRecipe(mixed ...$arguments): void {
@@ -51,20 +60,58 @@ class ComponentValidationTest extends BrowserTestBase {
     // Apply it again to prove that it is idempotent.
     $this->applyRecipe();
 
-    // There should be an SEO image field on our test content type, referencing
-    // image media.
-    $field_settings = FieldConfig::loadByName('node', 'test', 'field_seo_image')?->getSettings();
-    $this->assertIsArray($field_settings);
-    $this->assertSame('default:media', $field_settings['handler']);
-    $this->assertContains('image', $field_settings['handler_settings']['target_bundles']);
+    // SEO fields should have been created on the extant content type.
+    $this->assertSeoFieldsExist('test');
+    // If we create a new content type, the SEO fields should be automatically
+    // created by ECA. The current user needs to have the `administer site
+    // configuration` permission in order to execute config actions via ECA;
+    // additionally, the ECA model switches to user 1 (relying on the
+    // frowned-upon super user access policy, which we should fix at some point)
+    // so we need to ensure that the root user is, in fact, user 1.
+    // @see \Drupal\eca_config\Plugin\Action\ConfigAction::access()
+    $this->assertSame(1, $this->rootUser->id());
+    $this->assertTrue($this->rootUser->hasPermission('administer site configuration'));
+    $this->setCurrentUser($this->rootUser);
+    $this->assertSeoFieldsExist($this->drupalCreateContentType()->id());
 
-    // Check sitemap works as expected for anonymous users.
+    // Check that the sitemap works as expected for anonymous users.
     $this->checkSitemap();
 
     // Check sitemap works as expected for authenticated users too.
     $authenticated = $this->createUser();
     $this->drupalLogin($authenticated);
     $this->checkSitemap();
+  }
+
+  /**
+   * Asserts the presence of standard SEO fields on a content type.
+   *
+   * @param string $node_type
+   *   The machine name of a content type.
+   */
+  private function assertSeoFieldsExist(string $node_type): void {
+    // There should be an SEO image field on the content type, referencing
+    // image media.
+    $field_settings = FieldConfig::loadByName('node', $node_type, 'field_seo_image')?->getSettings();
+    $this->assertIsArray($field_settings);
+    $this->assertSame('default:media', $field_settings['handler']);
+    $this->assertContains('image', $field_settings['handler_settings']['target_bundles']);
+
+    // The other SEO fields should exist as well.
+    $this->assertIsObject(FieldConfig::loadByName('node', $node_type, 'field_seo_description'));
+    $this->assertIsObject(FieldConfig::loadByName('node', $node_type, 'field_seo_title'));
+    $this->assertIsObject(FieldConfig::loadByName('node', $node_type, 'field_seo_analysis'));
+
+    // Ensure the fields are visible on the form, in a field group.
+    $form_display = $this->container->get(EntityDisplayRepositoryInterface::class)
+      ->getFormDisplay('node', $node_type);
+    $group = $form_display->getThirdPartySetting('field_group', 'group_seo');
+    $this->assertIsArray($group);
+    $this->assertSame(['field_seo_title', 'field_seo_description', 'field_seo_image', 'field_seo_analysis'], $group['children']);
+    $this->assertIsArray($form_display->getComponent('field_seo_analysis'));
+    $this->assertIsArray($form_display->getComponent('field_seo_description'));
+    $this->assertIsArray($form_display->getComponent('field_seo_title'));
+    $this->assertIsArray($form_display->getComponent('field_seo_image'));
   }
 
   public function testAutomaticSitemapSettings(): void {

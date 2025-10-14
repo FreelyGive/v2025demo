@@ -14,12 +14,13 @@ dependencies:
     - options
   theme:
     - mercury
-active_version: 7eb8d71e894ba201
+active_version: 05e599bf4ee454d5
 versioned_properties:
   active:
     settings:
       prop_field_definitions:
         author:
+          required: false
           field_type: string
           field_storage_settings: {  }
           field_instance_settings: {  }
@@ -29,6 +30,7 @@ versioned_properties:
               value: 'John Smith'
           expression: ℹ︎string␟value
         author_url:
+          required: false
           field_type: string
           field_storage_settings: {  }
           field_instance_settings: {  }
@@ -36,6 +38,7 @@ versioned_properties:
           default_value: null
           expression: ℹ︎string␟value
         date:
+          required: false
           field_type: integer
           field_storage_settings: {  }
           field_instance_settings: {  }
@@ -45,6 +48,7 @@ versioned_properties:
               value: 1770856866
           expression: ℹ︎integer␟value
         heading_text:
+          required: false
           field_type: string
           field_storage_settings: {  }
           field_instance_settings: {  }
@@ -54,6 +58,7 @@ versioned_properties:
               value: 'Vivamus curae metus neque mollis orci ipsum sapien velit cursus'
           expression: ℹ︎string␟value
         level:
+          required: false
           field_type: list_integer
           field_storage_settings:
             allowed_values_function: canvas_load_allowed_values_for_component_prop
@@ -64,6 +69,7 @@ versioned_properties:
               value: 1
           expression: ℹ︎list_integer␟value
         media:
+          required: false
           field_type: entity_reference
           field_storage_settings:
             target_type: media

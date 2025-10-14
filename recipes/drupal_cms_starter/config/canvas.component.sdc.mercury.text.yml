@@ -8,12 +8,13 @@ dependencies:
     - text
   theme:
     - mercury
-active_version: f2cb7daf1d400e89
+active_version: e6b639a22eda306d
 versioned_properties:
   active:
     settings:
       prop_field_definitions:
         font_color:
+          required: false
           field_type: list_string
           field_storage_settings:
             allowed_values_function: canvas_load_allowed_values_for_component_prop
@@ -24,6 +25,7 @@ versioned_properties:
               value: text-inherit
           expression: ℹ︎list_string␟value
         font_size_multiplier:
+          required: false
           field_type: list_string
           field_storage_settings:
             allowed_values_function: canvas_load_allowed_values_for_component_prop
@@ -34,6 +36,7 @@ versioned_properties:
               value: normal
           expression: ℹ︎list_string␟value
         text:
+          required: false
           field_type: text_long
           field_storage_settings: {  }
           field_instance_settings:
@@ -43,7 +46,8 @@ versioned_properties:
           default_value:
             -
               value: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tristique pretium pellentesque semper enim aliquam. Vestibulum elit facilisi ridiculus netus blandit diam turpis tempor eleifend vehicula ligula. Elit neque nam morbi viverra congue maximus.</p>'
-          expression: ℹ︎text_long␟value
+              format: canvas_html_block
+          expression: ℹ︎text_long␟processed
     fallback_metadata:
       slot_definitions: {  }
 label: Text

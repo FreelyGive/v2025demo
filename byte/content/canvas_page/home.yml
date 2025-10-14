@@ -540,7 +540,6 @@ default:
     -
       uuid: 71f11827-ac09-4360-b6e7-a5625eefeefe
       component_id: sdc.mercury.cta
-      component_version: 9ce538831167d86c
       inputs:
         heading_text: 'Get ready to transform your operations'
         level:

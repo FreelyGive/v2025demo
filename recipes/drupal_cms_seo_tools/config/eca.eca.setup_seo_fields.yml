@@ -1,0 +1,228 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_seo_analysis
+    - field.storage.node.field_seo_description
+    - field.storage.node.field_seo_image
+    - field.storage.node.field_seo_title
+  module:
+    - eca_base
+    - eca_config
+    - eca_content
+    - eca_misc
+    - eca_user
+    - modeler_api
+third_party_settings:
+  modeler_api:
+    modeler_id: bpmn_io
+    data: 'hash:c74045238da755ee6d79a3ff7d38544e'
+    label: 'Set up SEO fields'
+    documentation: 'Initializes SEO fields on new and existing content types.'
+    version: 1.0.0
+id: setup_seo_fields
+weight: 0
+events:
+  drupal__recipe_applied_1_1:
+    plugin: 'drupal:recipe_applied'
+    label: 'SEO Tools recipe applied'
+    configuration:
+      recipe_base_path: drupal_cms_seo_tools
+    successors:
+      -
+        id: eca_switch_account_0ef7w95
+        condition: ''
+  content_entity__bundlecreate_1_1:
+    plugin: 'content_entity:bundlecreate'
+    label: 'Content type created'
+    configuration:
+      type: 'node _all'
+    successors:
+      -
+        id: eca_token_set_value_18gj2sf
+        condition: ''
+conditions:
+  eca_count_0nzu2kw:
+    plugin: eca_count
+    label: 'List not empty?'
+    configuration:
+      negate: false
+      left: content_types
+      right: '0'
+      operator: greaterthan
+      type: numeric
+      case: false
+gateways:
+  Gateway_1jeiwyv:
+    type: 0
+    successors:
+      -
+        id: eca_list_remove_02x83vs
+        condition: eca_count_0nzu2kw
+actions:
+  eca_token_set_value_18gj2sf:
+    label: 'Rename token'
+    plugin: eca_token_set_value
+    configuration:
+      token_name: content_type
+      token_value: '[event:bundle]'
+      use_yaml: false
+      validate_yaml: false
+    successors:
+      -
+        id: eca_config_action_0yj4bqb
+        condition: ''
+  eca_get_bundle_list_009fgt1:
+    label: 'Find all content types'
+    plugin: eca_get_bundle_list
+    configuration:
+      token_name: content_types
+      type: node
+      mode: ids
+    successors:
+      -
+        id: Gateway_1jeiwyv
+        condition: ''
+  eca_list_remove_02x83vs:
+    label: 'For each content type...'
+    plugin: eca_list_remove
+    configuration:
+      value: ''
+      token_name: content_type
+      method: first
+      index: ''
+      list_token: content_types
+    successors:
+      -
+        id: eca_config_action_0yj4bqb
+        condition: ''
+  eca_config_action_06zpaqh:
+    label: 'Group SEO fields on form'
+    plugin: eca_config_action
+    configuration:
+      action_id: 'entity_method:core.entity_form_display:setThirdPartySetting'
+      config_name: 'core.entity_form_display.node.[content_type].default'
+      data: "module: field_group\nkey: group_seo\nvalue:\n  children:\n    - field_seo_title\n    - field_seo_description\n    - field_seo_image\n    - field_seo_analysis\n  label: 'Search Engine Optimization (SEO) Information'\n  region: content\n  parent_name: ''\n  weight: 50\n  format_type: details\n  format_settings:\n    classes: ''\n    show_empty_fields: false\n    id: group_seo\n    label_as_html: false\n    open: false\n    description: ''\n    required_fields: false"
+    successors:
+      -
+        id: Gateway_1jeiwyv
+        condition: ''
+  eca_config_action_0sr2qee:
+    label: 'Show field_seo_analysis on form'
+    plugin: eca_config_action
+    configuration:
+      action_id: 'entity_method:core.entity_form_display:setComponent'
+      config_name: 'core.entity_form_display.node.[content_type].default'
+      data: "name: field_seo_analysis\noptions:\n  type: yoast_seo_widget\n  weight: 18\n  region: content\n  settings:\n    render_theme: NULL\n    render_view_mode: default\n    edit_title: 0\n    edit_description: 0"
+    successors:
+      -
+        id: eca_config_action_1wxj5ei
+        condition: ''
+  eca_config_action_1wxj5ei:
+    label: 'Show field_seo_description on form'
+    plugin: eca_config_action
+    configuration:
+      action_id: 'entity_method:core.entity_form_display:setComponent'
+      config_name: 'core.entity_form_display.node.[content_type].default'
+      data: "name: field_seo_description\noptions:\n  type: string_textarea\n  weight: 16\n  region: content\n  settings:\n    rows: 5\n    placeholder: ''"
+    successors:
+      -
+        id: eca_config_action_0x21fxa
+        condition: ''
+  eca_config_action_0x21fxa:
+    label: 'Show field_seo_image on form'
+    plugin: eca_config_action
+    configuration:
+      action_id: 'entity_method:core.entity_form_display:setComponent'
+      config_name: 'core.entity_form_display.node.[content_type].default'
+      data: "name: field_seo_image\noptions:\n  type: media_library_widget\n  weight: 17\n  region: content\n  settings:\n    media_types: {  }"
+    successors:
+      -
+        id: eca_config_action_1wh8d86
+        condition: ''
+  eca_config_action_1wh8d86:
+    label: 'Show field_seo_title on form'
+    plugin: eca_config_action
+    configuration:
+      action_id: 'entity_method:core.entity_form_display:setComponent'
+      config_name: 'core.entity_form_display.node.[content_type].default'
+      data: "name: field_seo_title\noptions:\n  type: string_textfield\n  weight: 15\n  region: content\n  settings:\n    size: 60\n    placeholder: ''"
+    successors:
+      -
+        id: eca_config_action_06zpaqh
+        condition: ''
+  eca_config_action_0yj4bqb:
+    label: 'Create field_seo_analysis'
+    plugin: eca_config_action
+    configuration:
+      action_id: 'field_storage_config:addToAllBundles'
+      config_name: field.storage.node.field_seo_analysis
+      data: "label: 'SEO analysis'\ndescription: 'Pick the main keyword this page is about.'"
+    successors:
+      -
+        id: eca_config_action_1v4877e
+        condition: ''
+  eca_config_action_1v4877e:
+    label: 'Create field_seo_image'
+    plugin: eca_config_action
+    configuration:
+      action_id: 'field_storage_config:addToAllBundles'
+      config_name: field.storage.node.field_seo_image
+      data: "label: 'SEO image'\ndescription: 'Upload an image to be used when the page is shared on social media sites.'"
+    successors:
+      -
+        id: eca_config_action_0r92fy7
+        condition: ''
+  eca_config_action_0r92fy7:
+    label: 'Configure field_seo_image'
+    plugin: eca_config_action
+    configuration:
+      action_id: 'entity_method:field.field:setSettings'
+      config_name: 'field.field.node.[content_type].field_seo_image'
+      data: "handler: 'default:media'\nhandler_settings:\n  target_bundles:\n    image: image"
+    successors:
+      -
+        id: eca_config_action_1x3vm8l
+        condition: ''
+  eca_config_action_1x3vm8l:
+    label: 'Create field_seo_description'
+    plugin: eca_config_action
+    configuration:
+      action_id: 'field_storage_config:addToAllBundles'
+      config_name: field.storage.node.field_seo_description
+      data: "label: 'SEO description'\ndescription: 'Write a description for search engines and social media sites.'"
+    successors:
+      -
+        id: eca_config_action_1immo8n
+        condition: ''
+  eca_config_action_1immo8n:
+    label: 'Create field_seo_title'
+    plugin: eca_config_action
+    configuration:
+      action_id: 'field_storage_config:addToAllBundles'
+      config_name: field.storage.node.field_seo_title
+      data: "label: 'SEO title'\ndescription: 'Use this field to overwrite the default HTML page title for SEO.'"
+    successors:
+      -
+        id: eca_config_action_1jcz6wj
+        condition: ''
+  eca_config_action_1jcz6wj:
+    label: 'Create form display'
+    plugin: eca_config_action
+    configuration:
+      action_id: 'entity_create:createIfNotExists'
+      config_name: 'core.entity_form_display.node.[content_type].default'
+      data: "targetEntityType: node\nbundle: '[content_type]'\nmode: default\nstatus: true"
+    successors:
+      -
+        id: eca_config_action_0sr2qee
+        condition: ''
+  eca_switch_account_0ef7w95:
+    label: 'Temporarily become administrator'
+    plugin: eca_switch_account
+    configuration:
+      user_id: '1'
+    successors:
+      -
+        id: eca_get_bundle_list_009fgt1
+        condition: ''

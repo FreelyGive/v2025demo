@@ -35,8 +35,6 @@ class ComponentValidationTest extends BrowserTestBase {
     $this->applyRecipe($dir);
     // Apply it again to prove that it is idempotent.
     $this->applyRecipe($dir);
-
-    $this->ensureFileExists('4bb02092-717b-44c8-9147-be3821c244c6');
   }
 
   public function testEditForm(): void {

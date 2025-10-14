@@ -4,10 +4,11 @@ description: 'Designed for a SaaS product website, this template includes landin
 recipes:
   - drupal_cms_blog
   - drupal_cms_forms
-  - drupal_cms_seo_tools
   - drupal_cms_starter
+  # Put SEO tools last so that it adds its fields to whatever content types were
+  # created by the preceding recipes.
+  - drupal_cms_seo_tools
 install:
-  - gin_login
   - project_browser
   - ui_icons_menu
 config:
@@ -59,7 +60,8 @@ config:
           value: 'main:'
     project_browser.admin_settings:
       simpleConfigUpdate:
-        enabled_sources.recommended.uri: 'https://git.drupalcode.org/api/v4/projects/157093/repository/files/byte/recommended.yml/raw?ref=HEAD'
+        # @see recommended.yml
+        enabled_sources.recommended.uri: 'https://git.drupalcode.org/api/v4/projects/157093/repository/files/byte%2Frecommended.yml/raw?ref=HEAD'
     system.site:
       simpleConfigUpdate:
         # The Home page, built in Canvas.
@@ -98,3 +100,6 @@ config:
     webform.webform.contact_form:
       setProperties:
         settings.confirmation_type: modal
+extra:
+  recipe_installer_kit:
+    finish_url: '/admin/dashboard/welcome'

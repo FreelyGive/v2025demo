@@ -5,12 +5,13 @@ dependencies:
     - options
   theme:
     - mercury
-active_version: c6067993360ffa7d
+active_version: a71f15732e351c5a
 versioned_properties:
   active:
     settings:
       prop_field_definitions:
         disabled:
+          required: false
           field_type: boolean
           field_storage_settings: {  }
           field_instance_settings: {  }
@@ -20,6 +21,7 @@ versioned_properties:
               value: false
           expression: ℹ︎boolean␟value
         href:
+          required: false
           field_type: string
           field_storage_settings: {  }
           field_instance_settings: {  }
@@ -27,6 +29,7 @@ versioned_properties:
           default_value: null
           expression: ℹ︎string␟value
         icon:
+          required: false
           field_type: list_string
           field_storage_settings:
             allowed_values_function: canvas_load_allowed_values_for_component_prop
@@ -37,6 +40,7 @@ versioned_properties:
               value: arrow-right
           expression: ℹ︎list_string␟value
         icon_first:
+          required: false
           field_type: boolean
           field_storage_settings: {  }
           field_instance_settings: {  }
@@ -46,6 +50,7 @@ versioned_properties:
               value: false
           expression: ℹ︎boolean␟value
         label:
+          required: false
           field_type: string
           field_storage_settings: {  }
           field_instance_settings: {  }
@@ -55,6 +60,7 @@ versioned_properties:
               value: 'Button Label'
           expression: ℹ︎string␟value
         size:
+          required: false
           field_type: list_string
           field_storage_settings:
             allowed_values_function: canvas_load_allowed_values_for_component_prop
@@ -65,6 +71,7 @@ versioned_properties:
               value: medium
           expression: ℹ︎list_string␟value
         variant:
+          required: false
           field_type: list_string
           field_storage_settings:
             allowed_values_function: canvas_load_allowed_values_for_component_prop

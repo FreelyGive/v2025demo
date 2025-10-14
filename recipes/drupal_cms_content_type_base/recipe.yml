@@ -66,6 +66,7 @@ config:
       - system.action.node_save_action
       - system.action.node_unpromote_action
       - system.action.node_unpublish_action
+      - views.view.content
     taxonomy: '*'
     trash: '*'
     scheduler: '*'

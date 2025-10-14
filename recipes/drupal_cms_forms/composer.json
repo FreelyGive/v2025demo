@@ -7,7 +7,7 @@
         "drupal/drupal_cms_anti_spam": "^2",
         "drupal/drupal_cms_page": "^2",
         "drupal/core": "^10.4 || ^11",
-        "drupal/webform": "^6.3-beta1"
+        "drupal/webform": "^6.3-beta3"
     },
     "version": "2.x-dev"
 }

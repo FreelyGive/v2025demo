@@ -43,6 +43,9 @@ default:
   field_blog__byline:
     -
       value: 'Maia Hardy'
+  field_tags:
+    -
+      entity: eb00eaac-ad10-4bdb-9a31-7612c47c6484
 _meta:
   version: '1.0'
   entity_type: node
@@ -51,3 +54,4 @@ _meta:
   default_langcode: en
   depends:
     dec03bb0-2670-45bc-969e-24153cff9146: media
+    eb00eaac-ad10-4bdb-9a31-7612c47c6484: taxonomy_term

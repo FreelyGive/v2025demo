@@ -1501,6 +1501,7 @@
                 "issues": "https://github.com/doctrine/annotations/issues",
                 "source": "https://github.com/doctrine/annotations/tree/2.0.2"
             },
+            "abandoned": true,
             "time": "2024-09-05T10:17:24+00:00"
         },
         {
@@ -1700,7 +1701,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/ai.git",
-                "reference": "e889e596efe4c01e9e331872a07d067a612770d2"
+                "reference": "ac78e7abf1785f335832f14aa626fdd21b89d30d"
             },
             "require": {
                 "drupal/core": "^10.4 || ^11",
@@ -1730,8 +1731,8 @@
                     "dev-1.2.x": "1.2.x-dev"
                 },
                 "drupal": {
-                    "version": "1.2.0-rc1+13-dev",
-                    "datestamp": "1759843424",
+                    "version": "1.2.0-rc2+6-dev",
+                    "datestamp": "1760340283",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
@@ -1804,10 +1805,10 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/ai_agents.git",
-                "reference": "65f8e3d275eb51e13f56b27edeee39066bc3f9e2"
+                "reference": "d64093eebe074057cb4e64f25c183d867d2e98bf"
             },
             "require": {
-                "drupal/ai": "^1.1.0",
+                "drupal/ai": "^1.2.0",
                 "drupal/core": "^10.2 || ^11",
                 "drupal/modeler_api": "^1.0.3"
             },
@@ -1825,8 +1826,8 @@
                     "dev-1.2.x": "1.2.x-dev"
                 },
                 "drupal": {
-                    "version": "1.2.0-beta1+4-dev",
-                    "datestamp": "1759486333",
+                    "version": "1.2.0-beta1+7-dev",
+                    "datestamp": "1760347028",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
@@ -1935,29 +1936,28 @@
         },
         {
             "name": "drupal/ai_provider_anthropic",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/ai_provider_anthropic.git",
-                "reference": "1.1.0"
+                "reference": "1.2.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/ai_provider_anthropic-1.1.0.zip",
-                "reference": "1.1.0",
-                "shasum": "2c010c2a97f1d62f413dc3c2f17f724a944c96c9"
+                "url": "https://ftp.drupal.org/files/projects/ai_provider_anthropic-1.2.0.zip",
+                "reference": "1.2.0",
+                "shasum": "be4540bfc26333776a5c8d84335ff0130d838bc7"
             },
             "require": {
-                "drupal/ai": "^1.1.0",
+                "drupal/ai": "^1.2.0",
                 "drupal/core": "^10.3 || ^11",
-                "drupal/key": "^1.18",
-                "openai-php/client": ">=v0.10.1"
+                "drupal/key": "^1.18"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "1.1.0",
-                    "datestamp": "1749732163",
+                    "version": "1.2.0",
+                    "datestamp": "1760354204",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -2006,10 +2006,10 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/ai_provider_openai.git",
-                "reference": "5432dd02bba3cde1ca03c287927cd7fc842ac0cc"
+                "reference": "fe34426a21d745b5ed0862ca856d38e69f5c5b01"
             },
             "require": {
-                "drupal/ai": "1.2.x-dev",
+                "drupal/ai": "^1.2.0",
                 "drupal/core": "^10.3 || ^11",
                 "drupal/key": "^1.18"
             },
@@ -2019,8 +2019,8 @@
                     "dev-1.2.x": "1.2.x-dev"
                 },
                 "drupal": {
-                    "version": "1.2.0-alpha1+1-dev",
-                    "datestamp": "1757576081",
+                    "version": "1.2.0-rc1+2-dev",
+                    "datestamp": "1760347269",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
@@ -2065,17 +2065,17 @@
         },
         {
             "name": "drupal/ai_search",
-            "version": "1.1.5",
+            "version": "1.2.0",
             "require": {
                 "drupal/ai": "*",
-                "drupal/core": "^10.2 || ^11",
+                "drupal/core": "^10.4 || ^11",
                 "drupal/search_api": "*"
             },
             "type": "metapackage",
             "extra": {
                 "drupal": {
-                    "version": "1.1.5",
-                    "datestamp": "1759308529",
+                    "version": "1.2.0",
+                    "datestamp": "1760354048",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -2489,17 +2489,17 @@
         },
         {
             "name": "drupal/canvas",
-            "version": "1.0.0-beta2",
+            "version": "1.0.0-rc1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/canvas.git",
-                "reference": "1.0.0-beta2"
+                "reference": "1.0.0-rc1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/canvas-1.0.0-beta2.zip",
-                "reference": "1.0.0-beta2",
-                "shasum": "8570984dc23698e6d6849b0900f1fe6eed616e65"
+                "url": "https://ftp.drupal.org/files/projects/canvas-1.0.0-rc1.zip",
+                "reference": "1.0.0-rc1",
+                "shasum": "8c1ff0b0279ee2656afe6233982fb86fd5ee000d"
             },
             "require": {
                 "drupal/core": "^11.2",
@@ -2521,24 +2521,16 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "1.0.0-beta2",
-                    "datestamp": "1760011666",
+                    "version": "1.0.0-rc1",
+                    "datestamp": "1760137380",
                     "security-coverage": {
                         "status": "not-covered",
-                        "message": "Beta releases are not covered by Drupal security advisories."
+                        "message": "RC releases are not covered by Drupal security advisories."
                     }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Drupal\\renamer\\Rename\\": "scripts/src"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "scripts": {
-                "rename": [
-                    "Drupal\\renamer\\Rename\\ConverterCommand"
-                ],
                 "composer-root": [
                     "d=.; i=0; while [ $i -lt 10 ]; do if [ -f \"$d/composer.json\" ] && cat \"$d/composer.json\" | grep -q '\"type\"' && cat \"$d/composer.json\" | grep -q '\"project\"'; then readlink -f \"$d\"; break; fi; d=\"../$d\"; i=$((i+1)); done"
                 ],
@@ -3706,13 +3698,13 @@
             "dist": {
                 "type": "path",
                 "url": "recipes/drupal_cms_forms",
-                "reference": "142cab36141a6526de24f8617882ddb54eae5e5f"
+                "reference": "90db5750b6b662585fecb4bcac14d971639778bd"
             },
             "require": {
                 "drupal/core": "^10.4 || ^11",
                 "drupal/drupal_cms_anti_spam": "^2",
                 "drupal/drupal_cms_page": "^2",
-                "drupal/webform": "^6.3-beta1"
+                "drupal/webform": "^6.3-beta3"
             },
             "type": "drupal-recipe",
             "license": [
@@ -3865,7 +3857,7 @@
             "dist": {
                 "type": "path",
                 "url": "recipes/drupal_cms_search",
-                "reference": "4842e2d04a0661dd707677cae4758b5e71389f4c"
+                "reference": "139964ba81af67a6aedf20abf8b56c11525cdf36"
             },
             "require": {
                 "drupal/core": "^10.4 || ^11",
@@ -3873,7 +3865,7 @@
                 "drupal/search_api": "^1.39",
                 "drupal/search_api_autocomplete": "^1.9",
                 "drupal/search_api_exclude": "^2",
-                "drupal/simple_search_form": "^1.7"
+                "drupal/simple_search_form": "^1.8"
             },
             "type": "drupal-recipe",
             "license": [
@@ -3919,12 +3911,12 @@
             "dist": {
                 "type": "path",
                 "url": "recipes/drupal_cms_seo_tools",
-                "reference": "91a45fb9191d6ec81a6962895c596d59e55497cb"
+                "reference": "b316475eaab7ca6ccecff7b5190522bf6b09e145"
             },
             "require": {
                 "drupal/bpmn_io": "^3",
                 "drupal/core": "^10.4 || ^11",
-                "drupal/eca": "^3.0.1",
+                "drupal/eca": "^3.0.5",
                 "drupal/field_group": "^3.6 || ^4",
                 "drupal/focal_point": "^2.1",
                 "drupal/metatag": "^2",
@@ -3955,12 +3947,12 @@
             "dist": {
                 "type": "path",
                 "url": "recipes/drupal_cms_starter",
-                "reference": "f2546be2ac615bbad8dad8a995623ece12c65974"
+                "reference": "d91b0fafb5da4ef3c1c63c890d91bf6b5e3614c1"
             },
             "require": {
                 "drupal/automatic_updates": "^4",
                 "drupal/bpmn_io": "^3",
-                "drupal/canvas": "^1-beta1",
+                "drupal/canvas": "1-rc1",
                 "drupal/core": "^11.2",
                 "drupal/drupal_cms_admin_ui": "^2",
                 "drupal/drupal_cms_anti_spam": "^2",
@@ -4366,17 +4358,17 @@
         },
         {
             "name": "drupal/eca",
-            "version": "3.0.4",
+            "version": "3.0.5",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/eca.git",
-                "reference": "3.0.4"
+                "reference": "3.0.5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/eca-3.0.4.zip",
-                "reference": "3.0.4",
-                "shasum": "23e41742e5e04cf24d497767888be1f23a983e2f"
+                "url": "https://ftp.drupal.org/files/projects/eca-3.0.5.zip",
+                "reference": "3.0.5",
+                "shasum": "2713af7a16fbe13e49f67bf24e1fb3a9b6646b04"
             },
             "require": {
                 "dragonmantank/cron-expression": "^3.1",
@@ -4402,8 +4394,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "3.0.4",
-                    "datestamp": "1758633703",
+                    "version": "3.0.5",
+                    "datestamp": "1760110544",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -4719,17 +4711,17 @@
         },
         {
             "name": "drupal/gin",
-            "version": "5.0.4",
+            "version": "5.0.5",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/gin.git",
-                "reference": "5.0.4"
+                "reference": "5.0.5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/gin-5.0.4.zip",
-                "reference": "5.0.4",
-                "shasum": "d89e7a9b2369076efd2c0fbc6109c235cd978977"
+                "url": "https://ftp.drupal.org/files/projects/gin-5.0.5.zip",
+                "reference": "5.0.5",
+                "shasum": "5d38d3b5c11bdd1ed77846276e094fc8fc6b4a8a"
             },
             "require": {
                 "drupal/core": "^11.2",
@@ -4738,8 +4730,8 @@
             "type": "drupal-theme",
             "extra": {
                 "drupal": {
-                    "version": "5.0.4",
-                    "datestamp": "1759588043",
+                    "version": "5.0.5",
+                    "datestamp": "1760186640",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -5380,30 +5372,26 @@
         },
         {
             "name": "drupal/linkit",
-            "version": "7.0.9",
+            "version": "7.0.10",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/linkit.git",
-                "reference": "7.0.9"
+                "reference": "7.0.10"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/linkit-7.0.9.zip",
-                "reference": "7.0.9",
-                "shasum": "fa75d31583a5866c8dd1f0455b7b5d19642c6f34"
+                "url": "https://ftp.drupal.org/files/projects/linkit-7.0.10.zip",
+                "reference": "7.0.10",
+                "shasum": "10a7d4bce0038e887e597911b60919496c640f41"
             },
             "require": {
                 "drupal/core": "^10.1 || ^11"
             },
-            "require-dev": {
-                "drupal/ckeditor": "*",
-                "drupal/imce": "*"
-            },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "7.0.9",
-                    "datestamp": "1757621287",
+                    "version": "7.0.10",
+                    "datestamp": "1759925018",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -5887,22 +5875,25 @@
         },
         {
             "name": "drupal/pathauto",
-            "version": "1.13.0",
+            "version": "1.14.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/pathauto.git",
-                "reference": "8.x-1.13"
+                "reference": "8.x-1.14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/pathauto-8.x-1.13.zip",
-                "reference": "8.x-1.13",
-                "shasum": "e64b5a82cf1b8ab48bce400b21ae6fc99c8078fd"
+                "url": "https://ftp.drupal.org/files/projects/pathauto-8.x-1.14.zip",
+                "reference": "8.x-1.14",
+                "shasum": "07f0d2efcf0bfb450e2ab69a43921fa39dc5f25b"
             },
             "require": {
-                "drupal/core": "^9.4 || ^10 || ^11",
+                "drupal/core": "^10 || ^11",
                 "drupal/ctools": "*",
                 "drupal/token": "*"
+            },
+            "conflict": {
+                "drush/drush": "<12.5.1"
             },
             "require-dev": {
                 "drupal/forum": "*"
@@ -5913,16 +5904,11 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.13",
-                    "datestamp": "1739552840",
+                    "version": "8.x-1.14",
+                    "datestamp": "1759838097",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
-                    }
-                },
-                "drush": {
-                    "services": {
-                        "drush.services.yml": "^9 || ^10"
                     }
                 }
             },
@@ -6106,7 +6092,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://git.drupalcode.org/api/v4/projects/project%2Frecipe_installer_kit/repository/archive.zip?sha=57545308c602ea012911987e0f3eae7820c5c865",
+                "url": "https://git.drupalcode.org/api/v4/projects/project%2Frecipe_installer_kit/repository/archive.zip?sha=505c073d724e9c498d82afc9a0b24ce9e97ed05b",
                 "reference": "57545308c602ea012911987e0f3eae7820c5c865",
                 "shasum": ""
             },
@@ -6128,7 +6114,7 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/recipe_installer_kit/-/tree/1.x"
             },
-            "time": "2025-09-25T18:11:08+00:00"
+            "time": "2025-10-09T09:13:08+00:00"
         },
         {
             "name": "drupal/redirect",
@@ -6712,17 +6698,17 @@
         },
         {
             "name": "drupal/simple_search_form",
-            "version": "1.7.0",
+            "version": "1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/simple_search_form.git",
-                "reference": "8.x-1.7"
+                "reference": "8.x-1.8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/simple_search_form-8.x-1.7.zip",
-                "reference": "8.x-1.7",
-                "shasum": "5592a3bf24dd60df7e692c74520441751da66f9d"
+                "url": "https://ftp.drupal.org/files/projects/simple_search_form-8.x-1.8.zip",
+                "reference": "8.x-1.8",
+                "shasum": "ba1a1c711971c56f5df39c0841dfd53483f76116"
             },
             "require": {
                 "drupal/core": "^8.8 || ^9 || ^10 || ^11"
@@ -6730,8 +6716,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.7",
-                    "datestamp": "1755001399",
+                    "version": "8.x-1.8",
+                    "datestamp": "1760340205",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -8407,16 +8393,16 @@
         },
         {
             "name": "justinrainbow/json-schema",
-            "version": "6.5.2",
+            "version": "6.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jsonrainbow/json-schema.git",
-                "reference": "ac0d369c09653cf7af561f6d91a705bc617a87b8"
+                "reference": "68ba7677532803cc0c5900dd5a4d730537f2b2f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jsonrainbow/json-schema/zipball/ac0d369c09653cf7af561f6d91a705bc617a87b8",
-                "reference": "ac0d369c09653cf7af561f6d91a705bc617a87b8",
+                "url": "https://api.github.com/repos/jsonrainbow/json-schema/zipball/68ba7677532803cc0c5900dd5a4d730537f2b2f3",
+                "reference": "68ba7677532803cc0c5900dd5a4d730537f2b2f3",
                 "shasum": ""
             },
             "require": {
@@ -8476,9 +8462,9 @@
             ],
             "support": {
                 "issues": "https://github.com/jsonrainbow/json-schema/issues",
-                "source": "https://github.com/jsonrainbow/json-schema/tree/6.5.2"
+                "source": "https://github.com/jsonrainbow/json-schema/tree/6.6.0"
             },
-            "time": "2025-09-09T09:42:27+00:00"
+            "time": "2025-10-10T11:34:09+00:00"
         },
         {
             "name": "laravel/prompts",
@@ -9041,16 +9027,16 @@
         },
         {
             "name": "mck89/peast",
-            "version": "v1.17.2",
+            "version": "v1.17.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mck89/peast.git",
-                "reference": "465810689c477fbba17f4f949b75e4d0bdab13ea"
+                "reference": "c6a63f32410d2e4ee2cd20fe94b35af147fb852d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mck89/peast/zipball/465810689c477fbba17f4f949b75e4d0bdab13ea",
-                "reference": "465810689c477fbba17f4f949b75e4d0bdab13ea",
+                "url": "https://api.github.com/repos/mck89/peast/zipball/c6a63f32410d2e4ee2cd20fe94b35af147fb852d",
+                "reference": "c6a63f32410d2e4ee2cd20fe94b35af147fb852d",
                 "shasum": ""
             },
             "require": {
@@ -9063,7 +9049,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.17.2-dev"
+                    "dev-master": "1.17.4-dev"
                 }
             },
             "autoload": {
@@ -9084,9 +9070,9 @@
             "description": "Peast is PHP library that generates AST for JavaScript code",
             "support": {
                 "issues": "https://github.com/mck89/peast/issues",
-                "source": "https://github.com/mck89/peast/tree/v1.17.2"
+                "source": "https://github.com/mck89/peast/tree/v1.17.4"
             },
-            "time": "2025-07-01T09:30:45+00:00"
+            "time": "2025-10-10T12:53:17+00:00"
         },
         {
             "name": "mtownsend/xml-to-array",
@@ -9352,16 +9338,16 @@
         },
         {
             "name": "openai-php/client",
-            "version": "v0.17.0",
+            "version": "v0.17.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/openai-php/client.git",
-                "reference": "e79ab01f1237b9b8e69fdcacdaaabf81b1a2a6f3"
+                "reference": "f7d3150159a7b840fe144568bede1c072f768343"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/openai-php/client/zipball/e79ab01f1237b9b8e69fdcacdaaabf81b1a2a6f3",
-                "reference": "e79ab01f1237b9b8e69fdcacdaaabf81b1a2a6f3",
+                "url": "https://api.github.com/repos/openai-php/client/zipball/f7d3150159a7b840fe144568bede1c072f768343",
+                "reference": "f7d3150159a7b840fe144568bede1c072f768343",
                 "shasum": ""
             },
             "require": {
@@ -9423,7 +9409,7 @@
             ],
             "support": {
                 "issues": "https://github.com/openai-php/client/issues",
-                "source": "https://github.com/openai-php/client/tree/v0.17.0"
+                "source": "https://github.com/openai-php/client/tree/v0.17.1"
             },
             "funding": [
                 {
@@ -9439,7 +9425,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-10-02T10:29:48+00:00"
+            "time": "2025-10-09T10:35:54+00:00"
         },
         {
             "name": "pear/archive_tar",
@@ -15336,10 +15322,9 @@
             "dist": {
                 "type": "path",
                 "url": "recipes/drupal_cms_blog",
-                "reference": "6c56d88b94d55886c83ed764c845b0302a474424"
+                "reference": "167cd013601b0985d3110430aa98a07e3a2c5b9d"
             },
             "require": {
-                "drupal/add_content_by_bundle": "^1.2.2",
                 "drupal/better_exposed_filters": "^7",
                 "drupal/core": "^10.4 || ^11",
                 "drupal/drupal_cms_page": "^2",
@@ -16078,16 +16063,16 @@
         },
         {
             "name": "itamair/geophp",
-            "version": "1.7",
+            "version": "1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/itamair/geoPHP.git",
-                "reference": "c8cf587256cdd1a72a732f59138ee3bfa3372956"
+                "reference": "9e464b5f65a2694789505adc5b8845d51ba2a365"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itamair/geoPHP/zipball/c8cf587256cdd1a72a732f59138ee3bfa3372956",
-                "reference": "c8cf587256cdd1a72a732f59138ee3bfa3372956",
+                "url": "https://api.github.com/repos/itamair/geoPHP/zipball/9e464b5f65a2694789505adc5b8845d51ba2a365",
+                "reference": "9e464b5f65a2694789505adc5b8845d51ba2a365",
                 "shasum": ""
             },
             "require-dev": {
@@ -16118,9 +16103,10 @@
             "description": "GeoPHP is a open-source native PHP library for doing geometry operations. It is written entirely in PHP and can therefore run on shared hosts. It can read and write a wide variety of formats: WKT (including EWKT), WKB (including EWKB), GeoJSON, KML, GPX, GeoRSS). It works with all Simple-Feature geometries (Point, LineString, Polygon, GeometryCollection etc.) and can be used to get centroids, bounding-boxes, area, and a wide variety of other useful information.",
             "homepage": "https://github.com/itamair/geoPHP",
             "support": {
-                "source": "https://github.com/itamair/geoPHP/tree/1.7"
+                "issues": "https://github.com/itamair/geoPHP/issues",
+                "source": "https://github.com/itamair/geoPHP/tree/1.8"
             },
-            "time": "2025-05-31T05:12:53+00:00"
+            "time": "2025-10-03T07:54:28+00:00"
         },
         {
             "name": "lullabot/mink-selenium2-driver",
@@ -17516,30 +17502,31 @@
         },
         {
             "name": "phpspec/prophecy",
-            "version": "v1.22.0",
+            "version": "v1.23.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "35f1adb388946d92e6edab2aa2cb2b60e132ebd5"
+                "reference": "8cce4df9a20660cdc671e8f45ac61959ecdde8e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/35f1adb388946d92e6edab2aa2cb2b60e132ebd5",
-                "reference": "35f1adb388946d92e6edab2aa2cb2b60e132ebd5",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/8cce4df9a20660cdc671e8f45ac61959ecdde8e8",
+                "reference": "8cce4df9a20660cdc671e8f45ac61959ecdde8e8",
                 "shasum": ""
             },
             "require": {
                 "doctrine/instantiator": "^1.2 || ^2.0",
-                "php": "^7.4 || 8.0.* || 8.1.* || 8.2.* || 8.3.* || 8.4.*",
+                "php": "8.2.* || 8.3.* || 8.4.*",
                 "phpdocumentor/reflection-docblock": "^5.2",
                 "sebastian/comparator": "^3.0 || ^4.0 || ^5.0 || ^6.0 || ^7.0",
-                "sebastian/recursion-context": "^3.0 || ^4.0 || ^5.0 || ^6.0 || ^7.0"
+                "sebastian/recursion-context": "^3.0 || ^4.0 || ^5.0 || ^6.0 || ^7.0",
+                "symfony/deprecation-contracts": "^2.5 || ^3.1"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.40",
-                "phpspec/phpspec": "^6.0 || ^7.0",
+                "friendsofphp/php-cs-fixer": "^3.88",
+                "phpspec/phpspec": "^6.0 || ^7.0 || ^8.0",
                 "phpstan/phpstan": "^2.1.13",
-                "phpunit/phpunit": "^8.0 || ^9.0 || ^10.0"
+                "phpunit/phpunit": "^11.0 || ^12.0"
             },
             "type": "library",
             "extra": {
@@ -17580,9 +17567,9 @@
             ],
             "support": {
                 "issues": "https://github.com/phpspec/prophecy/issues",
-                "source": "https://github.com/phpspec/prophecy/tree/v1.22.0"
+                "source": "https://github.com/phpspec/prophecy/tree/v1.23.0"
             },
-            "time": "2025-04-29T14:58:06+00:00"
+            "time": "2025-10-08T08:50:26+00:00"
         },
         {
             "name": "phpspec/prophecy-phpunit",
@@ -17736,11 +17723,11 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.1.30",
+            "version": "2.1.31",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/a4a7f159927983dd4f7c8020ed227d80b7f39d7d",
-                "reference": "a4a7f159927983dd4f7c8020ed227d80b7f39d7d",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/ead89849d879fe203ce9292c6ef5e7e76f867b96",
+                "reference": "ead89849d879fe203ce9292c6ef5e7e76f867b96",
                 "shasum": ""
             },
             "require": {
@@ -17785,7 +17772,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-10-02T16:07:52+00:00"
+            "time": "2025-10-10T14:14:11+00:00"
         },
         {
             "name": "phpstan/phpstan-deprecation-rules",

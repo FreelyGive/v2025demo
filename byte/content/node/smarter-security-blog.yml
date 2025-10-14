@@ -43,6 +43,9 @@ default:
   field_blog__byline:
     -
       value: 'Marissa Cardenas'
+  field_tags:
+    -
+      entity: eb00eaac-ad10-4bdb-9a31-7612c47c6484
 _meta:
   version: '1.0'
   entity_type: node
@@ -51,3 +54,4 @@ _meta:
   default_langcode: en
   depends:
     917307b6-d823-42f5-b58e-66594030bc37: media
+    eb00eaac-ad10-4bdb-9a31-7612c47c6484: taxonomy_term
